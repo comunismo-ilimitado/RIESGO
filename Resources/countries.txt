@@ -1,0 +1,43 @@
+0:Alaska
+1:Northwest territory
+2:Greenland
+3:Alberta
+4:Ontario
+5:Quebec
+6:Western United States
+7:Eastern United States
+8:Central America
+9:Venezuela
+10:Peru
+11:Brazil
+12:Argentina
+13:Iceland
+14:Scandinavia
+15:Ukraine
+16:Great Britain
+17:Northern Europe
+18:Western Europe
+19:Southern Europe
+20:North Africa
+21:Egypt
+22:Congo
+23:East Africa
+24:South Africa
+25:Madagaskar
+26:Ural
+27:Siberia
+28:Yakutsk
+29:Kamichatka
+30:Irkutsk
+31:Mongolia
+32:Japan
+33:Afghanistan
+34:China
+35:Middle East
+36:India
+37:Siam
+38:Indonesia
+39:New Guinea
+40:Western Australia
+41:Eastern Australia
+41:Eastern Australia

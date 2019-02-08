@@ -84,8 +84,8 @@ public class Country {
 				public void setNeighbors(List<Country> Neighbors) {
 					this.Neighbors = Neighbors;
 				}
-				public void addNeighbors(Country neighbor) {
-					this.Neighbors.add(neighbor);
+				public void addNeighbors(Country Neighbor) {
+					this.Neighbors.add(Neighbor);
 				}
 				
 				//Gets armies

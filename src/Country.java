@@ -56,7 +56,7 @@ public class Country {
 		}
 		
 		//Gets Owned Player
-				public Player getPlayer() {
+				public Player getOwner() {
 					return OwnedPlayer;
 				}
 					

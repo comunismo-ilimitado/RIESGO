@@ -8,13 +8,13 @@ import java.util.HashMap;
 
 public class ReadingFiles {
 	String temp = "";
-	HashMap<Integer, String> CountryIdName, ContinentIdName;
-	HashMap<String, Player> playerObject;
-	HashMap<Integer, Player> playerId;
+	public static HashMap<Integer, String> CountryIdName, ContinentIdName;
+	public static HashMap<String, Player> playerObject;
+	public static HashMap<Integer, Player> playerId;
 
-	ArrayList<String> CountriesNames, ContinentNames; // List of countries Strings
+	public static ArrayList<String> CountriesNames, ContinentNames; // List of countries Strings
 
-	HashMap<String, Country> CountryNameObject, ContinentNameObject; // HashMAp COntaining Country name as key and
+	public static HashMap<String, Country> CountryNameObject, ContinentNameObject; // HashMAp COntaining Country name as key and
 																		// returns country object
 
 	public void Reads() throws IOException {

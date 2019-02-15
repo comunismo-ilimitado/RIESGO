@@ -50,16 +50,15 @@ public class ReadingFiles {
 
 		// ContinentFile
 		StringBuffer  buffer=new StringBuffer();
-		FileReader file3 = new FileReader("Resources/continents.txt");
+		FileReader file3 = new FileReader("Resources/Asia.map");
 		BufferedReader bufferedReader3 = new BufferedReader(file3);
 		System.out.println(bufferedReader3.toString());
 		while ((temp = bufferedReader3.readLine()) != null) {
 			buffer.append(temp);
 		}
 		bufferedReader3.close();
-		System.out.println(buffer);
 
-	
+		System.out.println(buffer.toString().split("[.]")[0]);
 		@SuppressWarnings("unchecked")
 		ArrayList<String> CountriesNames2 =  (ArrayList<String>) CountriesNames.clone();
 		Collections.shuffle(CountriesNames2);

@@ -10,56 +10,26 @@ import java.io.*;
 //Write a check before calling rolldice(not before getNoOfDice method because after starting 
 //attack you cannot change no.of dice) method if the no.of armies is zero or not
 //If the player clicks continue attack button go to step-1 and continue
-public void attackButtonCLick(Country attacker, Country defender) {
-	int attackerDice=setNoOfDice(attacker);
-	int defenderDice=setNoOfDice(defender);
-	String winner="";
-	while(attacker.getNoOfArmies()!=0 && defender.getNoOfArmies()!=0) {
-		winner=attack(attackerDice, defenderDice);
-		if(winner.equals("Attacker"))
-			updateArmies(defender);
-		else
-			updateArmies(attacker);
-	}
-	if(attacker.getNoOfArmies()==0 && defender.getNoOfArmies()!=0) 
-		updateOwner(defender.getOwner(), attacker);
-	else if(defender.getNoOfArmies()==0 && attacker.getNoOfArmies()!=0)
-		updateOwner(attacker.getOwner(), defender);
-	else
-	{
-		updateOwner(null, attacker);
-		updateOwner(null, defender);
-	}
-}
 /**
  * AttackController has all the methods needed in attack phase of the game
  * @author Bhargav Raghavendra
  * @version 1.0.0
  */
 public class AttackController {
-	/**
-	 * Sets number of dice based on armies before rolling dice
-	 * Only call this method once before attack
-	 * @param country
-	 * @return
-	 */
-	public int setNoOfDice(Country country) {
-		return getNoOfDice(country);
-	}
-	/**
-	 * Returns the winner of each dice roll as a string, either "Attacker" or "Defender"
-	 * @param attackerDice
-	 * @param defenderDice
-	 * @return
-	 */
-	public String attack(int attackerDice, int defenderDice) {
-		int attackerSum=rollDice(attackerDice);
-		int defenderSum=rollDice(defenderDice);
-		if(attackerSum<=defenderSum)
-			return "Defender";
-		else
-			return "Attacker";
-	}
+//	/**
+//	 * Returns the winner of each dice roll as a string, either "Attacker" or "Defender"
+//	 * @param attackerDice
+//	 * @param defenderDice
+//	 * @return
+//	 */
+//	public String attack(int attackerDice, int defenderDice) {
+//		int attackerSum=rollDice(attackerDice);
+//		int defenderSum=rollDice(defenderDice);
+//		if(attackerSum<=defenderSum)
+//			return "Defender";
+//		else
+//			return "Attacker";
+//	}
 	/**
 	 * Gets a list of countries that the player owns
 	 * @param player
@@ -100,10 +70,8 @@ public class AttackController {
 	 * @param country
 	 * @return
 	 */
-	public int updateArmies(Country country) {
-		int armies=country.getNoOfArmies();
-		country.setNoOfArmies(armies-1);
-		return armies-1;
+	public void updateArmies(Country country) {
+		country.setNoOfArmies(country.getNoOfArmies()-1);
 	}
 	/**
 	 * Update owner of the country if the opponent wins
@@ -119,40 +87,31 @@ public class AttackController {
 	 * @param country
 	 * @return Number of Dice 
 	 */
-	public int getNoOfDice(Country country)
+	public int setNoOfDice(Country country, String ad)
 	{
-		if(country.getNoOfArmies()==2)
-			return 2;
-		else if(country.getNoOfArmies()>=3)
-			return 3;
-		else
-			return 0;
+		if(ad.equals("A")){
+			if(country.getNoOfArmies()==2)
+				return 1;
+			else if(country.getNoOfArmies()==3)
+				return 2;
+			else
+				return 3;
+		}
+		else {
+			if(country.getNoOfArmies()==1)
+				return 1;
+			else
+				return 2;
+		}
 	}
 	/**
 	 * Rolls dice as required depending on number of armies
 	 * @param noOfDice
 	 * @return sum
 	 */
-	public int rollDice(int noOfDice){
-		if(noOfDice==1)
-		{
-		    int sum=(int)(Math.random()*6+1);
-		    return sum;
-		}
-		else if(noOfDice==2)
-		{
-		    int sum=(int)(Math.random()*6+1);
-		    sum=sum+(int)(Math.random()*6+1);
-		    return sum;
-		}
-		else if(noOfDice>=3)
-		{
-			int sum=(int)(Math.random()*6+1);
-		    sum=sum+(int)(Math.random()*6+1);
-		    sum=sum+(int)(Math.random()*6+1);
-		    return sum;
-		}
-		return 0;
+	public int rollDice(){
+			int number=(int)(Math.random()*6+1);
+		    return number;
 	}
 	/**
 	 * Check if the country has any armies to attack before rolling the dice

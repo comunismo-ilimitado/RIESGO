@@ -9,6 +9,7 @@ public class MapSelection {
 
 	private JFrame MapFrame;
 	private JLabel HeaderLabel;
+	private JLabel HeaderLabel2;
 	private static JButton SelectButton;
 	private static JComboBox MapCombobox;
 	private static String MapSelected;
@@ -33,11 +34,14 @@ public class MapSelection {
   *Setting up frame components
   */
  public void setUpScreen() {
-	 MapFrame = new JFrame("Step 1");
+	 MapFrame = new JFrame("Start-up phase");
 	 MapFrame.setSize(500, 500);
 	 
 	 HeaderLabel = new JLabel("Choose the map");
-	 HeaderLabel.setBounds(120,80,150,50);
+	 HeaderLabel.setBounds(120,100,150,50);
+	 
+	 HeaderLabel2 = new JLabel("STEP 1: MAP SELECTION ");
+	 HeaderLabel2.setBounds(90,40,150,50);
    	 
    	 String Maps[]=MapFiles.toArray(new String[0]);
    	MapCombobox= new JComboBox(Maps);
@@ -47,9 +51,11 @@ public class MapSelection {
    	 SelectButton.setBounds(175, 200, 90, 20);
    	 
    	MapFrame.add(HeaderLabel);
+   	MapFrame.add(HeaderLabel2);
    	MapFrame.add(MapCombobox);
    	MapFrame.add(SelectButton);
    	HeaderLabel.setVisible(true);
+   	HeaderLabel2.setVisible(true);
    	MapCombobox.setVisible(true);
    	 SelectButton.setVisible(true);
    	 

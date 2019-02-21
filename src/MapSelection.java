@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class MapSelection {
 
-	private JFrame MapFrame;
+	private static JFrame MapFrame;
 	private JLabel HeaderLabel;
 	private JLabel HeaderLabel2;
 	private static JButton SelectButton;
@@ -57,7 +57,7 @@ public class MapSelection {
    	HeaderLabel.setVisible(true);
    	HeaderLabel2.setVisible(true);
    	MapCombobox.setVisible(true);
-   	 SelectButton.setVisible(true);
+    SelectButton.setVisible(true);
    	 
    	MapFrame.setLayout(null);
    	MapFrame.setVisible(true);
@@ -84,7 +84,9 @@ public class MapSelection {
 			MapSelected= (String) MapCombobox.getSelectedItem();
 			System.out.print(MapSelected);
 			//invoke next screen here i.e Load Maps
-			//LoadSelectedMap.loadMap();
+			MapFrame.dispose();
+			LoadSelectedMap.loadMap();
+			//jumps to new Window
 		}
    	 });
 	 return MapSelected;

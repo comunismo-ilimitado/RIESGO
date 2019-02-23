@@ -59,8 +59,8 @@ public class AttackController {
 		{
 			if(neighbors.get(i).getOwner().equals(country.getOwner()))
 				neighbors.remove(i);
-			else
-				continue;
+			if(neighbors.get(i).getNoOfArmies()<2) 
+				neighbors.remove(i);
 		}
 		return neighbors;
 	}

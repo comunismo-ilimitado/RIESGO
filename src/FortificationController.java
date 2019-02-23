@@ -59,9 +59,9 @@ public class FortificationController {
 			return false;
 		}
 		public void addNodes() {
-			for(Map.Entry m:ReadingFiles.CountryNameObject.entrySet())
+			for(Map.Entry<String, Country> m:ReadingFiles.CountryNameObject.entrySet())
 			{
-				nodeLookUp.add(new Node((Country) m.getValue()));
+				nodeLookUp.add(new Node(m.getValue()));
 			}
 		}
 		public void addEdges() {

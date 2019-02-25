@@ -1,41 +1,95 @@
+import java.awt.Color;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 public class ReadingFiles {
-	String temp = "";
-	HashMap<Integer, String> countrieNumber;
-	HashMap<String, Country> countryObjects;
-	public void Reads() throws IOException {
-		countrieNumber = new HashMap<>();
-		countryObjects = new HashMap<>();
-		FileReader file = new FileReader("Resources/countries.txt");
+//	public static HashMap<String, Player> playerObject;
+	public static HashMap<Integer, Player> playerId;
+	public static ArrayList<Integer> players;
+	public static ArrayList<String> CountriesNames, ContinentNames; // List of countries Strings
+	public static HashMap<String, Country> CountryNameObject;
+	public static HashMap<String, Continent> ContinentNameObject; // HashMAp COntaining Country name as // // key and
+	// returns country object
+
+	public static void Reads() throws IOException {
+		CountryNameObject = new HashMap<>();
+		CountriesNames = new ArrayList<>();
+		ContinentNames = new ArrayList<>();
+		ContinentNameObject = new HashMap<>();
+		// Reading Country File
+		FileReader file = new FileReader("Resources/Asia.map");
 		BufferedReader bufferedReader = new BufferedReader(file);
+		String temp = "";
+		StringBuffer buffer = new StringBuffer();
 		while ((temp = bufferedReader.readLine()) != null) {
-			String[] a = temp.split(":");
-			countrieNumber.put(Integer.parseInt(a[0]), a[1]);
-			countryObjects.put(a[1], new Country(Integer.parseInt(a[0]),a[1]));
+			buffer.append(temp + "\n");
 		}
-		System.out.println(countrieNumber.size());
-		FileReader file2 = new FileReader("Resources/connections.txt");
-		BufferedReader bufferedReader2 = new BufferedReader(file2);
-		while ((temp = bufferedReader2.readLine()) != null) {
-			String[] neighbours1 = temp.split(":");
-			String[] neighbours2 = neighbours1[1].split(",");
-			Country mainCountry = countryObjects.get(countrieNumber.get(Integer.parseInt(neighbours1[0])));
-			for (int i = 0; i < neighbours2.length; i++) {
-				mainCountry.addNeighbors(countryObjects.get(countrieNumber.get(Integer.parseInt(neighbours2[i]))));
+		bufferedReader.close();
+		String string = "\\[.*]";
+		String[] aaa = buffer.toString().trim().replaceAll("\n+", "\n").split(string);
+		String InfoString = aaa[1].trim();
+		String ContinentsString = aaa[2].trim();
+		String CountriesString = aaa[3].trim();
+		String[] tempInfoArray = ContinentsString.split("\n");
+
+		for (int i = 0; i < tempInfoArray.length; i++) {
+			String temporary = tempInfoArray[i].split("=")[0].trim().toUpperCase();
+			int value = Integer.parseInt(tempInfoArray[i].split("=")[1].trim());
+			ContinentNames.add(temporary);
+			ContinentNameObject.put(temporary, new Continent(value, temporary));
+		}
+		String[] tempCountryArray = CountriesString.split("\n");
+		for (int i = 0; i < tempCountryArray.length; i++) {
+			String a = tempCountryArray[i].split(",")[0].trim();
+			CountriesNames.add(a);
+			CountryNameObject.put(a, new Country(a));
+		}
+		System.out.println(CountriesString);
+		for (int i = 0; i < tempCountryArray.length; i++) {
+		String[] a = tempCountryArray[i].split(",");
+		System.out.println(a[3]);
+		System.out.println(a[0]);
+
+
+		Country temp1 = CountryNameObject.get(a[0].trim());
+			Continent temp2 = ContinentNameObject.get(a[3].trim().toUpperCase());
+
+			temp2.addCountrie(temp1);
+			for (int j = 4; j < a.length; j++) {
+				temp1.addNeighbors(CountryNameObject.get(a[j].trim()));
 			}
 		}
+		ArrayList<String> CountriesNames2 =  (ArrayList<String>) CountriesNames.clone();
+		Collections.shuffle(CountriesNames2);
 
-	List<Country> xyz = countryObjects.get("Ukraine").getNeighbors();
-	for(int i=0;i<xyz.size();i++) {
-		System.out.println(xyz.get(i).getName());
+//		playerObject = new HashMap<>();
+		players=new ArrayList<>();
+		playerId = new HashMap<>();
+		ArrayList<Color> arrayListc = new ArrayList<>();
+		arrayListc.add(Color.cyan);
+		arrayListc.add(Color.GREEN);
+		arrayListc.add(Color.YELLOW);
+
+		for (int i = 0; i < 3; i++) {
+			Player player = new Player(i);
+			player.setPlayerColor(arrayListc.get(i));
+			playerId.put(i, player);
+			players.add(i);
+		}
+		try {
+			for (int i = 0; i < CountriesNames2.size(); i++) {
+				playerId.get(0).addCountriesOccupied(CountryNameObject.get(CountriesNames2.get(i)));
+				playerId.get(1).addCountriesOccupied(CountryNameObject.get(CountriesNames2.get(i + 1)));
+				playerId.get(2).addCountriesOccupied(CountryNameObject.get(CountriesNames2.get(i + 2)));
+				i = i + 2;
+			}
+		} catch (Exception e) {
+		}
+
 	}
-	}
-	
 }

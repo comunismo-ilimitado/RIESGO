@@ -4,6 +4,14 @@ import java.util.*;
 //Represents a continent
 public class Continent {
 	
+	public Continent(int ControlValue,String name) {
+		this.ContinentId =ContinentId;
+		this.Countries = new ArrayList<>();
+		this.Name=name;
+		this.ControlValue = ControlValue;
+	}
+
+	
 	//Continent ID
 	private int ContinentId;
 	
@@ -46,6 +54,10 @@ public class Continent {
 		this.Countries = Countries;
 	}
 	
+	public void addCountrie(Country Countrie) {
+		this.Countries.add(Countrie);
+	}
+
 	//Gets continent's ID
 	public int getControlValue() {
 		return ControlValue;

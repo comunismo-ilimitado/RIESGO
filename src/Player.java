@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.*;
 
 //Represents a player in the game
@@ -18,6 +19,9 @@ public class Player {
 		//Total number of armies a player owns
 		private List<Country> TotalCountriesOccupied;
 		
+		
+		private List<Country> CountriesOccupied;
+		
 		//Number of Continents occupied
 		private List<Continent> ContinentsOccupied;
 		
@@ -25,13 +29,14 @@ public class Player {
 		private List<CardTypes> Cards;
 		
 		//Color to represent player owned countries
-		private String MyColor;
+		private Color MyColor;
 		
 		
 		//Default Constructor
 		public Player(int playerId) {
 			this.PlayerId = PlayerId;
 			this.TotalCountriesOccupied = new ArrayList<>();
+			this.CountriesOccupied = new ArrayList<>();
 			this.Cards = new ArrayList<>();
 		}
 	
@@ -85,6 +90,10 @@ public class Player {
 		public void setTotalCountriesOccupied(List<Country> TotalCountriesOccupied) {
 			this.TotalCountriesOccupied = TotalCountriesOccupied;
 		}
+		public void addCountriesOccupied(Country countrieOccupied) {
+			this.TotalCountriesOccupied.add(countrieOccupied);
+		}
+
 		
 		//Gets Continents Occupied
 		public List<Continent> getContinentsOccupied() {
@@ -105,12 +114,12 @@ public class Player {
 		}
 		
 		//Gets player color
-		public String getPlayerColor() {
+		public Color getPlayerColor() {
 			return MyColor;
 		}
 			
 		//Sets player color
-		public void setPlayerColor(String MyColor) {
-			this.MyColor = MyColor;
+		public void setPlayerColor(Color color) {
+			this.MyColor = color;
 		}			
 }

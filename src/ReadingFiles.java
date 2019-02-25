@@ -74,7 +74,7 @@ public class ReadingFiles {
 		arrayListc.add(Color.decode("#FF6600"));
 		arrayListc.add(Color.WHITE);
 		arrayListc.add(Color.decode("#CCFF00"));
-		int noofplayers=Integer.parseInt( AssignCountries.NumberOfPlayers);
+		int noofplayers=AssignCountries.NumberOfPlayers;
 		for (int i = 0; i < noofplayers; i++) {
 			Player player = new Player(i);
 			player.setPlayerColor(arrayListc.get(i));

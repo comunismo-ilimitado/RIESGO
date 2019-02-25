@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -10,14 +11,42 @@ public class AssignCountries {
 
 	private static JComboBox PNumberJCombo;
 	private static JButton OKButton;
-	static String NumberOfPlayers;
+	private static JFrame Frame1;
+	static int NumberOfPlayers=2;
 	public static void main(String[] args) {
 		AssignCountries temp= new AssignCountries();
 		temp.assignCountries();
 		NumberOfPlayers=temp.getNumberOfPlayer();
 	}
+	/**
+	 * returns the number of player chooses as integer
+	 * @return int
+	 */
+	public static int getNumberOfPlayer() {
+		OKButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//jumps to new window here
+				 NumberOfPlayers = Integer.parseInt((String) PNumberJCombo.getSelectedItem());	
+				 System.out.print("returns" + NumberOfPlayers);
+				 Frame1.dispose();
+				 MainControll mc;
+				try {
+					mc = new MainControll();
+					mc.Function();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				 
+			} 
+			
+		});
+		return NumberOfPlayers;
+	}
 	public static void assignCountries() {
-		JFrame Frame1= new JFrame("Map");
+		Frame1= new JFrame("Map");
 		Frame1.setSize(500, 500);
 		
 		JLabel Label1 = new JLabel("STEP 2:    Select number of Players ");
@@ -27,7 +56,7 @@ public class AssignCountries {
 		OKButton.setBounds(290,190,100,30);
 		
 
-		String[] select= {"1", "2", "3"};
+		String[] select= {"2", "3", "4"};
 		PNumberJCombo= new JComboBox(select);
 		PNumberJCombo.setBounds(120,150,200,20);
 	   	
@@ -43,18 +72,6 @@ public class AssignCountries {
 	   	Frame1.setVisible(true);
 	}
 	
-	public static String getNumberOfPlayer() {
-		OKButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//jumps to new window here
-				 NumberOfPlayers = (String) PNumberJCombo.getSelectedItem();	
-				 System.out.print("returns" + NumberOfPlayers );
-			}
-			
-		});
-		return NumberOfPlayers;
-	}
+	
 
 }

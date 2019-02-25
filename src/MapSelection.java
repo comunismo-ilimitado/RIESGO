@@ -20,7 +20,7 @@ public class MapSelection {
  public static void main(String args[]) {
 	 MapSelection screen1= new MapSelection();
 	// Use following method to add Maps to the Displayed List
-	 screen1.addMap("World1.txt");
+	 screen1.addMap("World1.map");
 	 screen1.addMap("World2.txt");
 	 screen1.addMap("World3.txt");
 	 screen1.addMap("World4.txt");
@@ -33,6 +33,17 @@ public class MapSelection {
  /**
   *Setting up frame components
   */
+ public void MapSelection() {
+	 MapSelection screen1= new MapSelection();
+		// Use following method to add Maps to the Displayed List
+		 screen1.addMap("World1.map");
+		 screen1.addMap("World2.txt");
+		 screen1.addMap("World3.txt");
+		 screen1.addMap("World4.txt");
+		 screen1.addMap("World5.txt");
+		 screen1.setUpScreen();
+		 String temp=screen1.getSelectedMap();
+ }
  public void setUpScreen() {
 	 MapFrame = new JFrame("Start-up phase");
 	 MapFrame.setSize(500, 500);

@@ -56,7 +56,7 @@ public class Country {
 		}
 		
 		//Gets Owned Player
-				public Player getPlayer() {
+				public Player getOwner() {
 					return OwnedPlayer;
 				}
 					
@@ -107,4 +107,6 @@ public class Country {
 				this.ContinentId=0;
 				this.Color="grey";
 			}
+
+			
 }

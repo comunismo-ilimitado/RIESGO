@@ -10,6 +10,8 @@ import java.io.*;
 //Write a check before calling rolldice(not before getNoOfDice method because after starting 
 //attack you cannot change no.of dice) method if the no.of armies is zero or not
 //If the player clicks continue attack button go to step-1 and continue
+
+
 public void attackButtonCLick(Country attacker, Country defender) {
 	int attackerDice=setNoOfDice(attacker);
 	int defenderDice=setNoOfDice(defender);

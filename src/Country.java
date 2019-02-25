@@ -98,8 +98,7 @@ public class Country {
 					this.NoOfArmies=NoOfArmies;
 				}
 	//Default Constructor
-			public Country(int CountryId,String name) {
-				this.CountryId = CountryId;
+			public Country(String name) {
 				this.NoOfArmies = 0;
 				this.Neighbors = new ArrayList<>();
 				this.Name=name;

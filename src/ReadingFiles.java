@@ -3,68 +3,72 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
 public class ReadingFiles {
-	String temp = "";
-	public static HashMap<Integer, String> CountryIdName, ContinentIdName;
-	public static HashMap<String, Player> playerObject;
+//	public static HashMap<String, Player> playerObject;
 	public static HashMap<Integer, Player> playerId;
-
+	public static ArrayList<Integer> players;
 	public static ArrayList<String> CountriesNames, ContinentNames; // List of countries Strings
+	public static HashMap<String, Country> CountryNameObject;
+	public static HashMap<String, Continent> ContinentNameObject; // HashMAp COntaining Country name as // // key and
+	// returns country object
 
-	public static HashMap<String, Country> CountryNameObject, ContinentNameObject; // HashMAp COntaining Country name as key and
-																		// returns country object
-
-	public void Reads() throws IOException {
-		CountryIdName = new HashMap<>();
+	public static void Reads() throws IOException {
 		CountryNameObject = new HashMap<>();
 		CountriesNames = new ArrayList<>();
 		ContinentNames = new ArrayList<>();
 		ContinentNameObject = new HashMap<>();
-		ContinentIdName = new HashMap<>();
-
 		// Reading Country File
-		FileReader file = new FileReader("Resources/countries.txt");
+		FileReader file = new FileReader("Resources/Asia.map");
 		BufferedReader bufferedReader = new BufferedReader(file);
+		String temp = "";
+		StringBuffer buffer = new StringBuffer();
 		while ((temp = bufferedReader.readLine()) != null) {
-			String[] a = temp.split(":");
-			CountryIdName.put(Integer.parseInt(a[0]), a[1]);
-			CountriesNames.add(a[1]);
-			CountryNameObject.put(a[1], new Country(Integer.parseInt(a[0]), a[1]));
+			buffer.append(temp + "\n");
 		}
 		bufferedReader.close();
-		// Connection Between Countries
-		FileReader file2 = new FileReader("Resources/connections.txt");
-		BufferedReader bufferedReader2 = new BufferedReader(file2);
-		while ((temp = bufferedReader2.readLine()) != null) {
-			String[] neighbours1 = temp.split(":");
-			String[] neighbours2 = neighbours1[1].split(",");
-			Country mainCountry = CountryNameObject.get(CountryIdName.get(Integer.parseInt(neighbours1[0])));
-			for (int i = 0; i < neighbours2.length; i++) {
-				mainCountry.addNeighbors(CountryNameObject.get(CountryIdName.get(Integer.parseInt(neighbours2[i]))));
+		String string = "\\[.*]";
+		String[] aaa = buffer.toString().trim().replaceAll("\n+", "\n").split(string);
+		String InfoString = aaa[1].trim();
+		String ContinentsString = aaa[2].trim();
+		String CountriesString = aaa[3].trim();
+		String[] tempInfoArray = ContinentsString.split("\n");
+
+		for (int i = 0; i < tempInfoArray.length; i++) {
+			String temporary = tempInfoArray[i].split("=")[0].trim().toUpperCase();
+			int value = Integer.parseInt(tempInfoArray[i].split("=")[1].trim());
+			ContinentNames.add(temporary);
+			ContinentNameObject.put(temporary, new Continent(value, temporary));
+		}
+		String[] tempCountryArray = CountriesString.split("\n");
+		for (int i = 0; i < tempCountryArray.length; i++) {
+			String a = tempCountryArray[i].split(",")[0].trim();
+			CountriesNames.add(a);
+			CountryNameObject.put(a, new Country(a));
+		}
+		System.out.println(CountriesString);
+		for (int i = 0; i < tempCountryArray.length; i++) {
+		String[] a = tempCountryArray[i].split(",");
+		System.out.println(a[3]);
+		System.out.println(a[0]);
+
+
+		Country temp1 = CountryNameObject.get(a[0].trim());
+			Continent temp2 = ContinentNameObject.get(a[3].trim().toUpperCase());
+
+			temp2.addCountrie(temp1);
+			for (int j = 4; j < a.length; j++) {
+				temp1.addNeighbors(CountryNameObject.get(a[j].trim()));
 			}
 		}
-		bufferedReader2.close();
-
-		// ContinentFile
-		StringBuffer  buffer=new StringBuffer();
-		FileReader file3 = new FileReader("Resources/Asia.map");
-		BufferedReader bufferedReader3 = new BufferedReader(file3);
-		System.out.println(bufferedReader3.toString());
-		while ((temp = bufferedReader3.readLine()) != null) {
-			buffer.append(temp);
-		}
-		bufferedReader3.close();
-
-		System.out.println(buffer.toString().split("[.]")[0]);
-		@SuppressWarnings("unchecked")
 		ArrayList<String> CountriesNames2 =  (ArrayList<String>) CountriesNames.clone();
 		Collections.shuffle(CountriesNames2);
 
-		// Temporary
-		playerObject = new HashMap<>();
+//		playerObject = new HashMap<>();
+		players=new ArrayList<>();
 		playerId = new HashMap<>();
 		ArrayList<Color> arrayListc = new ArrayList<>();
 		arrayListc.add(Color.cyan);
@@ -75,6 +79,7 @@ public class ReadingFiles {
 			Player player = new Player(i);
 			player.setPlayerColor(arrayListc.get(i));
 			playerId.put(i, player);
+			players.add(i);
 		}
 		try {
 			for (int i = 0; i < CountriesNames2.size(); i++) {
@@ -86,10 +91,5 @@ public class ReadingFiles {
 		} catch (Exception e) {
 		}
 
-		/*
-		 * List<Country> xyz = CountryNameObject.get("Ukraine").getNeighbors(); for(int
-		 * i=0;i<xyz.size();i++) { System.out.println(xyz.get(i).getName()); }
-		 */
 	}
-
 }

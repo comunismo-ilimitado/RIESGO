@@ -10,7 +10,7 @@ public class AssignCountries {
 
 	private static JComboBox PNumberJCombo;
 	private static JButton OKButton;
-	static String NumberOfPlayers;
+	static String NumberOfPlayers="6";
 	public static void main(String[] args) {
 		AssignCountries temp= new AssignCountries();
 		temp.assignCountries();
@@ -27,7 +27,7 @@ public class AssignCountries {
 		OKButton.setBounds(290,190,100,30);
 		
 
-		String[] select= {"1", "2", "3"};
+		String[] select= {"2", "3", "4","5", "6"};
 		PNumberJCombo= new JComboBox(select);
 		PNumberJCombo.setBounds(120,150,200,20);
 	   	

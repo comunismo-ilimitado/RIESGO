@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class ReadingFiles {
-//	public static HashMap<String, Player> playerObject;
+	// public static HashMap<String, Player> playerObject;
 	public static HashMap<Integer, Player> playerId;
 	public static ArrayList<Integer> players;
 	public static ArrayList<String> CountriesNames, ContinentNames; // List of countries Strings
@@ -35,11 +35,11 @@ public class ReadingFiles {
 		String InfoString = aaa[1].trim();
 		String ContinentsString = aaa[2].trim();
 		String CountriesString = aaa[3].trim();
-		String[] tempInfoArray = ContinentsString.split("\n");
+		String[] tempContinentArray = ContinentsString.split("\n");
 
-		for (int i = 0; i < tempInfoArray.length; i++) {
-			String temporary = tempInfoArray[i].split("=")[0].trim().toUpperCase();
-			int value = Integer.parseInt(tempInfoArray[i].split("=")[1].trim());
+		for (int i = 0; i < tempContinentArray.length; i++) {
+			String temporary = tempContinentArray[i].split("=")[0].trim().toLowerCase();
+			int value = Integer.parseInt(tempContinentArray[i].split("=")[1].trim());
 			ContinentNames.add(temporary);
 			ContinentNameObject.put(temporary, new Continent(value, temporary));
 		}
@@ -52,12 +52,9 @@ public class ReadingFiles {
 		System.out.println(CountriesString);
 		for (int i = 0; i < tempCountryArray.length; i++) {
 		String[] a = tempCountryArray[i].split(",");
-		System.out.println(a[3]);
-		System.out.println(a[0]);
-
-
 		Country temp1 = CountryNameObject.get(a[0].trim());
-			Continent temp2 = ContinentNameObject.get(a[3].trim().toUpperCase());
+			Continent temp2 = ContinentNameObject.get(a[3].trim().toLowerCase());
+			temp1.setContinent(temp2);
 
 			temp2.addCountrie(temp1);
 			for (int j = 4; j < a.length; j++) {
@@ -73,20 +70,27 @@ public class ReadingFiles {
 		ArrayList<Color> arrayListc = new ArrayList<>();
 		arrayListc.add(Color.cyan);
 		arrayListc.add(Color.GREEN);
-		arrayListc.add(Color.YELLOW);
-
-		for (int i = 0; i < 3; i++) {
+		arrayListc.add(Color.decode("#ffff00"));
+		arrayListc.add(Color.decode("#FF6600"));
+		arrayListc.add(Color.WHITE);
+		arrayListc.add(Color.decode("#CCFF00"));
+		int noofplayers=Integer.parseInt( AssignCountries.NumberOfPlayers);
+		for (int i = 0; i < noofplayers; i++) {
 			Player player = new Player(i);
 			player.setPlayerColor(arrayListc.get(i));
 			playerId.put(i, player);
 			players.add(i);
 		}
 		try {
-			for (int i = 0; i < CountriesNames2.size(); i++) {
-				playerId.get(0).addCountriesOccupied(CountryNameObject.get(CountriesNames2.get(i)));
-				playerId.get(1).addCountriesOccupied(CountryNameObject.get(CountriesNames2.get(i + 1)));
-				playerId.get(2).addCountriesOccupied(CountryNameObject.get(CountriesNames2.get(i + 2)));
-				i = i + 2;
+			int n=noofplayers;
+		for (int i = 0; i < CountriesNames2.size(); i++) {
+				for (int j = 0; j < noofplayers; j++) {
+					Country temp1=CountryNameObject.get(CountriesNames2.get(i+j));
+					Player tempPlayer=playerId.get(j);
+					temp1.setPlayer(tempPlayer);
+					tempPlayer.addCountriesOccupied(temp1);
+				}
+				i=i+n-1;
 			}
 		} catch (Exception e) {
 		}

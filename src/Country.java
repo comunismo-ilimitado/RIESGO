@@ -8,7 +8,7 @@ public class Country {
 	private int CountryId;
 	
 	//Continent which it belongs to
-	private int ContinentId;
+	private Continent Continent;
 
 	//Country occupied by
 	private Player OwnedPlayer;
@@ -46,13 +46,13 @@ public class Country {
 		}
 		
 		//Gets Continent ID
-		public int getContinentId() {
-			return ContinentId;
+		public Continent getContinent() {
+			return Continent;
 		}
 			
 		//Set Continent ID
-		public void setContinentId(int ContinentId) {
-			this.ContinentId=ContinentId;
+		public void setContinent(Continent Continent) {
+			this.Continent=Continent;
 		}
 		
 		//Gets Owned Player
@@ -103,7 +103,6 @@ public class Country {
 				this.Neighbors = new ArrayList<>();
 				this.Name=name;
 				this.OwnedPlayer=new Player(0);
-				this.ContinentId=0;
 				this.Color="grey";
 			}
 }

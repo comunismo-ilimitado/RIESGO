@@ -6,7 +6,7 @@ import java.util.*;
 
 /**
  * This class contains all the information about any particular country
- * @author Navjot kaur
+ * @author Team 1
  * @version 1.0.0
  */
 public class Country {
@@ -17,6 +17,8 @@ public class Country {
 	 */
 	private int CountryId;
 	
+	//Continent which it belongs to
+	private Continent Continent;
 	
 	/**
 	 * ContinentId This contains unique id of the continent of type integer
@@ -87,7 +89,15 @@ public class Country {
 			this.CountryId=CountryId;
 		}
 		
-		
+		//Gets Continent ID
+		public Continent getContinent() {
+			return Continent;
+		}
+			
+		//Set Continent ID
+		public void setContinent(Continent Continent) {
+			this.Continent=Continent;
+		}	
 		/**
 		 * Get the id of the continent
 		 * @return ContinentId Id of the continent of type Integer
@@ -103,7 +113,7 @@ public class Country {
 		 */
 		public void setContinentId(int ContinentId) {
 			this.ContinentId=ContinentId;
-		}
+}
 		
 		
 		/**
@@ -190,11 +200,10 @@ public class Country {
 				 * @param name It takes the name of the country of type String
 				 */
 			public Country(String name) {
-				this.NoOfArmies = 0;
+				this.NoOfArmies = 4;
 				this.Neighbors = new ArrayList<>();
 				this.Name=name;
 				this.OwnedPlayer=new Player(0);
-				this.ContinentId=0;
 				this.Color="grey";
 			}
 

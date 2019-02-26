@@ -14,7 +14,7 @@ import java.io.*;
 /**
  * AttackController has all the methods needed in attack phase of the game
  * 
- * @author Bhargav Raghavendra
+ * @author Team 1
  * @version 1.0.0
  */
 public class AttackController {
@@ -58,13 +58,20 @@ public class AttackController {
 	 */
 	public List<Country> getMyNeighborsForAttack(Country country) {
 		List<Country> neighbors = country.getNeighbors();
-		int total = neighbors.size();
-		for (int i = 0; i < total; i++) {
-			if (neighbors.get(i).getOwner().equals(country.getOwner()))
-				neighbors.remove(i);
+		//int total = neighbors.size();
+		List<Country> temp = new ArrayList<Country>();
+		for(int i=0;i<neighbors.size();i++) {
+			if (neighbors.get(i).getOwner().equals(country.getOwner())) {
+				temp.add(neighbors.get(i));}
 			if (neighbors.get(i).getNoOfArmies() < 2)
-				neighbors.remove(i);
+				temp.add(neighbors.get(i));
 		}
+/*		for(int i=0;i<temp.size();i++) {
+			neighbors.remove(neighbors.indexOf(temp.get(i)));
+		}
+		
+		
+*/		neighbors.removeAll(temp);
 		return neighbors;
 	}
 

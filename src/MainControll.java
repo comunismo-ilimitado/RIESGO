@@ -2,45 +2,86 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class MainControll   {
+public class MainControll {
 	ReadingFiles files;
 	MFrame frame;
 	Player player;
-	Reinforcement reinforcement;
-	
-	public  MainControll() throws IOException {
-			 
+	MyActionListner reinforcement;
+	AttackController attackController;
+
+	public MainControll() throws IOException {
+
 	}
-	
-public void Function() throws IOException {
-	files=new ReadingFiles();
-	 reinforcement=new Reinforcement(this);
 
-	 frame=new MFrame(reinforcement);
-	 files.Reads();
-	 frame.fun();	
-	 frame.SetButtons(countriesNames());
-	 repaintAndRevalidate();
-	 for(int i=0;i<files.players.size();i++) {
-		 frame.SetColorToAll(neighbours(i), files.playerId.get(i));
-	 }
-}
-	
+	public void Function() throws IOException {
+		files = new ReadingFiles();
+		reinforcement = new MyActionListner(this);
+		frame = new MFrame(reinforcement);
+		attackController = new AttackController();
+		files.Reads();
+		frame.fun();
 
-	
-public ArrayList<String> countriesNames(){
-	return files.CountriesNames;
-}
-	
-public void repaintAndRevalidate() {
-	 frame.revalidate();
-	 frame.repaint();
-}
+		SetButtons();
+		// OnlyNeeded( attackController.getMyCountries(files.playerId.get(0)));
+		PaintCountries();
+		
+		reinforcement.ReinforcementPhase();
+		repaintAndRevalidate();
+	}
 
-public List<Country> neighbours(Integer id){
-	return files.playerId.get(id).getTotalCountriesOccupied();
-}
-	
+	public void AddArmies(int no) {
+			OnlyNeeded(neighbours(no));
+		
+	}
+
+	public void SetButtons() throws IOException {
+		frame.SetButtons(countryObjects());
+	}
+
+	public void RefreshButtons() throws IOException {
+		frame.Refresh(countryObjects());
+		PaintCountries();
+		repaintAndRevalidate();
+
+	}
+
+	public List<String> countriesNames() {
+		return files.CountriesNames;
+	}
+
+	public void repaintAndRevalidate() {
+		frame.revalidate();
+		frame.repaint();
+	}
+
+	public List<Country> neighbours(Integer id) {
+		return files.playerId.get(id).getTotalCountriesOccupied();
+	}
+
+	public HashMap<String, Country> countryObjects() {
+		return files.CountryNameObject;
+	}
+
+	public void PaintCountries() {
+		frame.SetColorToAll(countryObjects());
+	}
+
+	public void OnlyNeeded(List<Country> country) {
+		frame.OnlyNeeded(country);
+	}
+
+	public int PlayerNo() {
+		return files.playerId.size();
+	}
+
+	public void ChangePlayerCountry(String Cname) throws IOException {
+		Country country = countryObjects().get(Cname);
+		country.setPlayer(files.playerId.get(0));
+		RefreshButtons();
+
+	}
+
 }

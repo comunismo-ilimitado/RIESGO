@@ -43,13 +43,33 @@ import javax.swing.*;
 	}
 	
 	
-	/*public List<Continent> playerOwnsContinent(Player player, Country country, Continent continent )
-	{
-		for()
-		
-		
-		
-	}*/
+	public List<Continent> playerOwnsContinent(Player player) {
+		List<Continent> continents = new ArrayList<Continent>();
+		for (Map.Entry<String, Continent> entry : ReadingFiles.ContinentNameObject.entrySet()) {
+			List<Country> temp = entry.getValue().getCountries();
+			int counter = 0;
+			for (int i = 0; i < entry.getValue().getCountries().size(); i++) {
+				if (entry.getValue().getCountries().get(i).getOwner().equals(player))
+					counter++;
+				else
+					continue;
+			}
+			if (temp.size() == counter)
+				continents.add(entry.getValue());
+			else
+				continue;
+		}
+		return continents;
+	}
+
+	public int calcArmiesByControlValue(Player player) {
+		List<Continent> continents = playerOwnsContinent(player);
+		int armies = 0;
+		for (int i = 0; i < continents.size(); i++) {
+			armies = armies + continents.get(i).getControlValue();
+		}
+		return armies;
+	}
 	
 	public void updateValue(Player player, Country country )
 	{

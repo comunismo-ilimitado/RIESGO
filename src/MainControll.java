@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainControll {
+public class MainControll{
 	ReadingFiles files;
 	MFrame frame;
 	Player player;
-	Reinforcement reinforcement;
+	MyActionListner reinforcement;
 
 	public MainControll() throws IOException {
 
@@ -17,8 +17,7 @@ public class MainControll {
 
 	public void Function() throws IOException {
 		files = new ReadingFiles();
-		reinforcement = new Reinforcement(this);
-
+		reinforcement = new MyActionListner(this);
 		frame = new MFrame(reinforcement);
 		files.Reads();
 		frame.fun();
@@ -57,10 +56,21 @@ public class MainControll {
 
 	public void PaintCountries() {
 		frame.SetColorToAll(countryObjects());
-		/*
-		 * for (int i = 0; i < files.players.size(); i++) {
-		 * frame.SetColorToAll(neighbours(i), files.playerId.get(i)); }
-		 */
+	}
+	
+	public void OnlyNeeded(ArrayList<Country> country) {
+		frame.OnlyNeeded(country);
+	}
+	
+	
+	
+	
+	
+	public void ChangePlayerCountry(String Cname) throws IOException {
+		Country country = countryObjects().get(Cname);
+		country.setPlayer(files.playerId.get(0));
+		RefreshButtons();
+
 	}
 
 }

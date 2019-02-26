@@ -31,17 +31,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javafx.scene.layout.Border;
 
-public class MFrame extends JFrame implements ActionListener {
+public class MFrame extends JFrame {
 	private JButton[] button;
 	JPanel jPanel2;
 	HashMap<String, JButton> hashButton;
-	Reinforcement reinforcement;
+	MyActionListner reinforcement;
 	String playerTurn, noArmiesLeft, AAA, BBB, CCC;
 
 	/*
 	 * ReadingFiles files; Reinforcement reinforcement; MainControll controll;
 	 */
-	public MFrame(Reinforcement reinforcement) {
+	public MFrame(MyActionListner reinforcement) {
 		// TODO Auto-generated constructor stub
 		super("PAzim");
 		this.reinforcement = reinforcement;
@@ -161,10 +161,7 @@ public class MFrame extends JFrame implements ActionListener {
 
 	public void OnlyNeeded(List<Country> arrayList) {
 
-		/*
-		 * for(int i=0;i<button.length;i++) { button[i].setEnabled(false);
-		 * button[i].setBackground(Color.GRAY); }
-		 */
+
 
 		List<String> temp = new ArrayList<>(hashButton.keySet());
 		for (int i = 0; i < arrayList.size(); i++) {
@@ -176,18 +173,6 @@ public class MFrame extends JFrame implements ActionListener {
 			tempb.setBackground(Color.GRAY);
 		}
 
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		/*
-		 * // TODO Auto-generated method stub JButton b =
-		 * hashButton.get(e.getActionCommand().split("\n")[0]); String abc =
-		 * e.getActionCommand().split("\n")[0].trim(); List<Country> cntries =
-		 * reinforcement.playerPlaying.getTotalCountriesOccupied(); String[] name =
-		 * b.getText().split("\n"); b.setText(name[0] + "" + (Integer.parseInt(name[1])
-		 * + 1));
-		 */
 	}
 
 }

@@ -49,7 +49,6 @@ public class ReadingFiles {
 			CountriesNames.add(a);
 			CountryNameObject.put(a, new Country(a));
 		}
-		System.out.println(CountriesString);
 		for (int i = 0; i < tempCountryArray.length; i++) {
 		String[] a = tempCountryArray[i].split(",");
 		Country temp1 = CountryNameObject.get(a[0].trim());

@@ -51,28 +51,6 @@ public class Country {
 	
 	
 	/**
-	 * Color This represents the color of the country that will be shown on the UI
-	 */
-	private String Color;
-	
-	/**
-	 * Gets country color
-	 * @return Color This is the color of this country of type String
-	 */
-	public String getColor() {
-		return Color;
-	}
-				
-	/**
-	 * Sets country color
-	 * @param Color color of this country of type String
-	 */
-	public void setId(String Color) {
-		this.Color = Color;
-	}
-	
-	
-	/**
 	 * Get the id of the country
 	 * @return CountryId Id of the country of type Integer 
 	 */
@@ -204,7 +182,6 @@ public class Country {
 				this.Neighbors = new ArrayList<>();
 				this.Name=name;
 				this.OwnedPlayer=new Player(0);
-				this.Color="grey";
 			}
 
 			

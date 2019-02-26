@@ -107,7 +107,7 @@ public class MFrame extends JFrame {
 	}
 
 	public void SetButtons(HashMap<String, Country> countryObjects) throws IOException {
-		ArrayList<String> count = new ArrayList<>(countryObjects.keySet());
+		List<String> count = new ArrayList<>(countryObjects.keySet());
 		button = new JButton[count.size()];
 		Random random = new Random();
 
@@ -136,7 +136,7 @@ public class MFrame extends JFrame {
 	 * }
 	 */
 	public void SetColorToAll(HashMap<String, Country> countryObjects) {
-		ArrayList<String> count = new ArrayList<>(countryObjects.keySet());
+		List<String> count = new ArrayList<>(countryObjects.keySet());
 		for (int i = 0; i < count.size(); i++) {
 			hashButton.get(count.get(i)).setBackground(countryObjects.get(count.get(i)).getOwner().getPlayerColor());
 		}
@@ -144,8 +144,7 @@ public class MFrame extends JFrame {
 	}
 
 	public void Refresh(HashMap<String, Country> countryObjects) throws IOException {
-		ArrayList<String> count = new ArrayList<>(countryObjects.keySet());
-
+		List<String> count = new ArrayList<>(countryObjects.keySet());
 		for (int i = 0; i < count.size(); i++) {
 			button[i].setText(count.get(i) + " | " + countryObjects.get(count.get(i)).getNoOfArmies() + " | "
 					+ countryObjects.get(count.get(i)).getContinent().getName());
@@ -170,7 +169,6 @@ public class MFrame extends JFrame {
 		for (int i = 0; i < temp.size(); i++) {
 			JButton tempb = hashButton.get(temp.get(i));
 			tempb.setEnabled(false);
-			tempb.setBackground(Color.GRAY);
 		}
 
 	}

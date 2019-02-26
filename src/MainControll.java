@@ -10,6 +10,7 @@ public class MainControll{
 	MFrame frame;
 	Player player;
 	MyActionListner reinforcement;
+	AttackController attackController;
 
 	public MainControll() throws IOException {
 
@@ -19,9 +20,13 @@ public class MainControll{
 		files = new ReadingFiles();
 		reinforcement = new MyActionListner(this);
 		frame = new MFrame(reinforcement);
+		attackController =new AttackController();
 		files.Reads();
 		frame.fun();
 		SetButtons();
+//	OnlyNeeded(	 attackController.getMyCountries(files.playerId.get(0)));
+    repaintAndRevalidate();
+		
 		PaintCountries();
 		repaintAndRevalidate();
 	}
@@ -37,7 +42,7 @@ public class MainControll{
 
 	}
 
-	public ArrayList<String> countriesNames() {
+	public List<String> countriesNames() {
 		return files.CountriesNames;
 	}
 
@@ -58,7 +63,7 @@ public class MainControll{
 		frame.SetColorToAll(countryObjects());
 	}
 	
-	public void OnlyNeeded(ArrayList<Country> country) {
+	public void OnlyNeeded(List<Country> country) {
 		frame.OnlyNeeded(country);
 	}
 	

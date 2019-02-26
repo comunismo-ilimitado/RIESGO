@@ -200,7 +200,7 @@ public class Country {
 				 * @param name It takes the name of the country of type String
 				 */
 			public Country(String name) {
-				this.NoOfArmies = 0;
+				this.NoOfArmies = 4;
 				this.Neighbors = new ArrayList<>();
 				this.Name=name;
 				this.OwnedPlayer=new Player(0);

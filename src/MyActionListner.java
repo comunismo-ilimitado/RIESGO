@@ -21,7 +21,6 @@ public class MyActionListner implements ActionListener {
 	 */
 
 	public void dosomething(JButton button) throws IOException {
-		
 
 	}
 
@@ -31,28 +30,12 @@ public class MyActionListner implements ActionListener {
 		// TODO Auto-generated method stub
 		if (e.getSource() == "") {
 		} else {
-			try {
-
-				String Cname = e.getActionCommand().split(" | ")[0];
-				JButton temp = controll.frame.hashButton.get(Cname);
-				dosomething(temp);
-				
-				controll.ChangePlayerCountry(Cname);
-				
-
-				
-				
-				
-				
-				
-				
-				
-				
-				
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			String Cname = e.getActionCommand().split(" | ")[0];
+			JButton temp = controll.frame.hashButton.get(Cname);
+			Country temp2=controll.countryObjects().get(Cname);
+			
+			controll.OnlyNeeded(
+			controll.attackController.getMyNeighborsForAttack(temp2));
 		}
 
 		// System.out.println(country.getOwner().getPlayerId());

@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 public class ReadingFiles {
 	// public static HashMap<String, Player> playerObject;
 	public static HashMap<Integer, Player> playerId;
-	public static ArrayList<Integer> players;
-	public static ArrayList<String> CountriesNames, ContinentNames; // List of countries Strings
+	public static List<Integer> players;
+	public static List<String> CountriesNames, ContinentNames; // List of countries Strings
 	public static HashMap<String, Country> CountryNameObject;
 	public static HashMap<String, Continent> ContinentNameObject; // HashMAp COntaining Country name as // // key and
 	// returns country object
@@ -54,19 +55,19 @@ public class ReadingFiles {
 		Country temp1 = CountryNameObject.get(a[0].trim());
 			Continent temp2 = ContinentNameObject.get(a[3].trim().toLowerCase());
 			temp1.setContinent(temp2);
-
 			temp2.addCountrie(temp1);
 			for (int j = 4; j < a.length; j++) {
 				temp1.addNeighbors(CountryNameObject.get(a[j].trim()));
 			}
 		}
-		ArrayList<String> CountriesNames2 =  (ArrayList<String>) CountriesNames.clone();
+		
+		List<String> CountriesNames2 =  new ArrayList<String>(CountryNameObject.keySet());
 		Collections.shuffle(CountriesNames2);
 
 //		playerObject = new HashMap<>();
 		players=new ArrayList<>();
 		playerId = new HashMap<>();
-		ArrayList<Color> arrayListc = new ArrayList<>();
+		List<Color> arrayListc = new ArrayList<>();
 		arrayListc.add(Color.cyan);
 		arrayListc.add(Color.GREEN);
 		arrayListc.add(Color.decode("#ffff00"));

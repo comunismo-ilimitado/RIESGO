@@ -7,6 +7,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
+/**
+ * This class reads the text files
+ * @author Navjot kaur
+ * @version 1.0.0
+ */
+
 public class ReadingFiles {
 //	public static HashMap<String, Player> playerObject;
 	public static HashMap<Integer, Player> playerId;
@@ -15,6 +21,11 @@ public class ReadingFiles {
 	public static HashMap<String, Country> CountryNameObject;
 	public static HashMap<String, Continent> ContinentNameObject; // HashMAp COntaining Country name as // // key and
 	// returns country object
+	
+	/**
+	 * 
+	 * @throws IOException
+	 */
 
 	public static void Reads() throws IOException {
 		CountryNameObject = new HashMap<>();

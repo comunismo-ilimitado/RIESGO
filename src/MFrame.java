@@ -34,17 +34,19 @@ import javafx.scene.layout.Border;
 public class MFrame extends JFrame {
 	private JButton[] button;
 	JPanel jPanel2;
+	JButton nextAction;
+	String Phases[] = { "Finish Reinforcement", "Finish Attack", "Finish Fortification" };
 	HashMap<String, JButton> hashButton;
-	MyActionListner reinforcement;
-	String playerTurn, noArmiesLeft, AAA, BBB, CCC;
+	MyActionListner myActionListner;
+	int playerTurn, noArmiesLeft, AAA, BBB, CCC;
 
 	/*
 	 * ReadingFiles files; Reinforcement reinforcement; MainControll controll;
 	 */
-	public MFrame(MyActionListner reinforcement) {
+	public MFrame(MyActionListner myActionListner) {
 		// TODO Auto-generated constructor stub
 		super("PAzim");
-		this.reinforcement = reinforcement;
+		this.myActionListner = myActionListner;
 	}
 
 	public void fun() throws IOException {
@@ -69,8 +71,8 @@ public class MFrame extends JFrame {
 		jPanel4.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		JPanel jPanel5 = new JPanel();
-		JButton nextAction = new JButton("TEXTTTT");
-		nextAction.addActionListener(reinforcement);
+		nextAction = new JButton("Finish Reinforcement");
+		nextAction.addActionListener(myActionListner);
 		jPanel5.add(nextAction);
 
 		JLabel jLabel = new JLabel("Turn For:- " + playerTurn);
@@ -122,7 +124,7 @@ public class MFrame extends JFrame {
 			 * butto.setBackground(Color.RED);
 			 * 
 			 */
-			button[i].addActionListener(reinforcement);
+			button[i].addActionListener(myActionListner);
 		}
 
 	}
@@ -159,8 +161,6 @@ public class MFrame extends JFrame {
 	}
 
 	public void OnlyNeeded(List<Country> arrayList) {
-
-
 
 		List<String> temp = new ArrayList<>(hashButton.keySet());
 		for (int i = 0; i < arrayList.size(); i++) {

@@ -14,7 +14,7 @@ public class MyActionListner implements ActionListener {
 	List<String> Phases;
 	String currentPhase;
 	int players = 6;
-	int tem=10;
+	int tem = 10;
 	int currentPlayer = 0;
 
 	public MyActionListner(MainControll controll) throws IOException {
@@ -33,16 +33,27 @@ public class MyActionListner implements ActionListener {
 			currentPlayer++;
 	}
 
+	public void ReinforcementPhase2(Country country) {
+		// controll.AddArmies(currentPlayer);
+		String message=controll.reinforcementController.addarmies(country);
+		if(!message.equals(""))
+		controll.frame.error(message);
+	}
+
 	public void ReinforcementPhase() {
-		controll.AddArmies(currentPlayer);
+		// controll.AddArmies(currentPlayer);
+		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
+		controll.reinforcementController.calculateReinforcementArmies(controll.playerObjet(currentPlayer));
+		System.out.println(controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed());
 	}
 
 	public void FortificationPhase() {
+		
 		playerUpdate();
-
 	}
 
 	public void AttackPhase() {
+
 
 	}
 
@@ -68,18 +79,18 @@ public class MyActionListner implements ActionListener {
 			JButton temp = controll.frame.hashButton.get(Cname);
 			Country temp2 = controll.countryObjects().get(Cname);
 			if (currentPhase.equals("Finish Reinforcement")) {
-				temp2.setNoOfArmies(temp2.getNoOfArmies()+1);
+				// temp2.setNoOfArmies(temp2.getNoOfArmies()+1);
+				ReinforcementPhase2(temp2);
 				try {
 					controll.RefreshButtons();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			
+
 			}
 
-			// controll.OnlyNeeded(controll.attackController.getMyNeighborsForAttack(temp2));
-
+	
 		}
 
 	}

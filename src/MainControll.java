@@ -9,8 +9,9 @@ public class MainControll {
 	ReadingFiles files;
 	MFrame frame;
 	Player player;
-	MyActionListner reinforcement;
+	MyActionListner myActionListner;
 	AttackController attackController;
+	ReinforcementController reinforcementController;
 
 	public MainControll() throws IOException {
 
@@ -18,8 +19,9 @@ public class MainControll {
 
 	public void Function() throws IOException {
 		files = new ReadingFiles();
-		reinforcement = new MyActionListner(this);
-		frame = new MFrame(reinforcement);
+		reinforcementController=new ReinforcementController();
+		myActionListner = new MyActionListner(this);
+		frame = new MFrame(myActionListner);
 		attackController = new AttackController();
 		files.Reads();
 		frame.fun();
@@ -28,7 +30,7 @@ public class MainControll {
 		// OnlyNeeded( attackController.getMyCountries(files.playerId.get(0)));
 		PaintCountries();
 		
-		reinforcement.ReinforcementPhase();
+		myActionListner.ReinforcementPhase();
 		repaintAndRevalidate();
 	}
 
@@ -75,6 +77,9 @@ public class MainControll {
 
 	public int PlayerNo() {
 		return files.playerId.size();
+	}
+	public Player playerObjet(int id) {
+		return files.playerId.get(id);
 	}
 
 	public void ChangePlayerCountry(String Cname) throws IOException {

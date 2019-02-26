@@ -27,6 +27,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javafx.scene.layout.Border;
@@ -159,6 +160,12 @@ public class MFrame extends JFrame {
 		revalidate();
 		repaint();
 	}
+	
+	public void error(String string) {
+		JOptionPane.showMessageDialog(null, string);
+
+	}
+	public void updateArmies() {}
 
 	public void OnlyNeeded(List<Country> arrayList) {
 

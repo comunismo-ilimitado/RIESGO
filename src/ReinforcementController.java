@@ -8,12 +8,14 @@ import java.util.*;
  * @version 1.1
  */
 class ReinforcementController {
-	public void addarmies(Player player, Country country) {
+	public String addarmies(Country country) {
+		 Player player=country.getOwner();
 		if(player.getPlayerArmiesNotDeployed()==0) {
-			//display u dont have anymore to reinforce
+			return "sdkofjdapidjipojf";
 		}
 		else {
 			updateValue(player,country);
+			return "";
 		}
 	}
 	
@@ -30,16 +32,17 @@ class ReinforcementController {
 
 	public void calculateReinforcementArmies(Player player) {
 		int totalCountriesOFPlayer = player.getTotalCountriesOccupied().size();
-		int total_armies_to_reinforce;
-		total_armies_to_reinforce = totalCountriesOFPlayer / 3;
+		float total_armies_to_reinforce;
+		total_armies_to_reinforce =  (float)totalCountriesOFPlayer / 3;
 		int armies = 0;
-		if (totalCountriesOFPlayer < 3) {
+		if (total_armies_to_reinforce < 3.0) {
 			armies = armies + 3;
 		} else {
-			armies = armies + total_armies_to_reinforce;
+			armies = armies + (int) total_armies_to_reinforce;
 		}
 		armies = armies + calcArmiesByControlValue(player);
 		player.setPlayerTotalArmiesNotDeployed(armies);
+		//return armies;
 	}
 
 	public List<Continent> playerOwnsContinent(Player player) {

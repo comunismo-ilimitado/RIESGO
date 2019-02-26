@@ -13,7 +13,7 @@ public class AssignCountries {
 	private static JButton OKButton;
 //	static String NumberOfPlayers="6";
 	private static JFrame Frame1;
-	static int NumberOfPlayers=2;
+	static int NumberOfPlayers=6;
 	public static void main(String[] args) {
 		AssignCountries temp= new AssignCountries();
 		temp.assignCountries();

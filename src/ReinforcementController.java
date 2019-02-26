@@ -42,11 +42,32 @@ import javax.swing.*;
 		
 	}
 	
+	
+	/*public List<Continent> playerOwnsContinent(Player player, Country country, Continent continent )
+	{
+		for()
+		
+		
+		
+	}*/
+	
 	public void updateValue(Player player, Country country )
 	{
 		country.setNoOfArmies(country.getNoOfArmies()+1);
+		player.setPlayerTotalArmiesNotDeployed(player.getPlayerArmiesNotDeployed()-1);;
 	}
-	
+   
+	public int ReinforcementEnd(Player player)
+	{
+		
+		if(player.getPlayerArmiesNotDeployed()==0)
+		{
+			return 0;
+		}
+		
+		else
+			return -1;
+	}
 	
 	
 	

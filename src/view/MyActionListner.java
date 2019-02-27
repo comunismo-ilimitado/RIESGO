@@ -99,10 +99,12 @@ public class MyActionListner implements ActionListener {
 		} else if (attackCountry2 == null) {
 			attackCountry2=country;
 			String reply=controll.attackerButtons.attackButton(attackCountry1, attackCountry2);
-			if(!reply="") {
+			if(!reply.equals("")) {
 				controll.frame.error(reply);
 			}else {
-				
+				controll.frame.AAA=controll.attackerButtons.attackerDiceRoll.toString();
+				controll.frame.BBB=controll.attackerButtons.defenderDiceRoll.toString();
+				controll.frame.NotifyAll();
 			}
 
 		}

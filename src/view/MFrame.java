@@ -43,7 +43,9 @@ public class MFrame extends JFrame {
 	HashMap<String, JButton> hashButton;
 	JLabel jLabel, jLabel2, jLabel3, jLabel4, jLabel5;
 	MyActionListner myActionListner;
-	int playerTurn, noArmiesLeft, AAA, BBB;
+	int playerTurn, noArmiesLeft;
+	String BBB;
+	String AAA;
 	String CCC;
 	public String MapImage = "noimage.bmp";
 

@@ -7,10 +7,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+
+<<<<<<< HEAD
 /**
- * This ReadingFiles Class read all the information of players, Countries and Continents that is required in the different phases of the game.  
- * @author Komal
+ * This class reads the .map files, extract the information from it and stores in the variables
+ * @author Navjot kaur
+ * @version 1.0.0
  */
+
+=======
+>>>>>>> 214c17a6c43f2cd859040528d748ae4eab01a3d8
 public class ReadingFiles {
 	// public static HashMap<String, Player> playerObject;
 	public static HashMap<Integer, Player> playerId;
@@ -21,7 +27,14 @@ public class ReadingFiles {
 	public static String address="Resources/World.map";
 	public static String image="noimage.bmp";
 	
+<<<<<<< HEAD
+	/**
+	 * This method reads the file given by the user.
+	 * @throws IOException
+	 */
+=======
 	// returns country object
+>>>>>>> 214c17a6c43f2cd859040528d748ae4eab01a3d8
 
 	public static void Reads() throws IOException {
 		CountryNameObject = new HashMap<>();
@@ -92,9 +105,8 @@ public class ReadingFiles {
 		arrayListc.add(Color.black);
 		arrayListc.add(Color.GRAY);
 		arrayListc.add(Color.RED);
-// NumberOfPlayers representing total number of players playing in a game.
+
 		int noofplayers=AssignCountries.NumberOfPlayers;
-// This loop give color to player and assign id to player.
 		for (int i = 0; i < noofplayers; i++) {
 			Player player = new Player(i);
 			player.setPlayerColor(arrayListc.get(i));

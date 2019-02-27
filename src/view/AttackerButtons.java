@@ -7,6 +7,9 @@ import model.Player;
 
 import java.io.*;
 public class AttackerButtons {
+	public List<Integer> attackerDiceRoll;
+	public List<Integer>defenderDiceRoll;
+
 	AttackController attackController = new AttackController();
 	public void endReinforcementsPhaseButton(Player player){
 		//call getMyCountries(player) method and display countries
@@ -25,8 +28,8 @@ public class AttackerButtons {
 			int attackerDice=attackController.setNoOfDice(attacker, "A");
 			//display the number of defender dice
 			int defenderDice=attackController.setNoOfDice(defender, "D");
-			List<Integer> attackerDiceRoll= new ArrayList<Integer>();
-			List<Integer> defenderDiceRoll= new ArrayList<Integer>();
+			 attackerDiceRoll= new ArrayList<Integer>();
+			 defenderDiceRoll= new ArrayList<Integer>();
 			//display the int list values as the results from dice roll
 			for(int i=0;i<attackerDice;i++) {
 				attackerDiceRoll.add(attackController.rollDice());

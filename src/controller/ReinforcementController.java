@@ -1,4 +1,9 @@
+package controller;
 import java.util.*;
+
+import model.Continent;
+import model.Country;
+import model.Player;
 
 /**
  * This controller class has all the methods needs for the reinforcement phase
@@ -7,7 +12,7 @@ import java.util.*;
  * @author neeraj
  * @version 1.1
  */
-class ReinforcementController {
+public class ReinforcementController {
 	public String addarmies(Country country) {
 		 Player player=country.getOwner();
 		if(player.getPlayerArmiesNotDeployed()==0) {

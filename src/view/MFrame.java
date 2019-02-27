@@ -1,3 +1,4 @@
+package view;
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
@@ -30,7 +31,9 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
 import javafx.scene.layout.Border;
+import model.Country;
 
 public class MFrame extends JFrame {
 	private JButton[] button;

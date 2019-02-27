@@ -1,9 +1,17 @@
+package view;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import controller.AttackController;
+import controller.FortificationController;
+import controller.ReadingFiles;
+import controller.ReinforcementController;
+import model.Country;
+import model.Player;
 
 public class MainControll {
 	ReadingFiles files;

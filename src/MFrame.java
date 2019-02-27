@@ -43,6 +43,7 @@ public class MFrame extends JFrame {
 	int playerTurn, noArmiesLeft, AAA, BBB;
 	String CCC;
 	public String MapImage = "noimage.bmp";
+	public JLabel dice1,dice2;
 
 	/*
 	 * ReadingFiles files; Reinforcement reinforcement; MainControll controll;

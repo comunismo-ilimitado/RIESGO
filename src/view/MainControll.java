@@ -18,7 +18,9 @@ public class MainControll {
 	MFrame frame;
 	Player player;
 	MyActionListner myActionListner;
+	
 	AttackController attackController;
+	AttackerButtons attackerButtons;
 	ReinforcementController reinforcementController;
 	FortificationController fortificationController;
 
@@ -30,6 +32,7 @@ public class MainControll {
 		files = new ReadingFiles();
 		reinforcementController=new ReinforcementController();
 		myActionListner = new MyActionListner(this);
+		attackerButtons=new AttackerButtons();
 		files.Reads();
 		frame = new MFrame(myActionListner,files.image);
 		attackController = new AttackController();

@@ -2,9 +2,9 @@ import java.util.*;
 import java.io.*;
 
 //When the player clicks attack phase call getAllMyCountries method and using the list of countries display all his countries
-//When the player selects his country that he wants to do the attack with, show its neighbours by 
+//When the player selects his country that he wants to do the attack with, show its neighbors by 
 //calling getMyNeighbors, that are not his own
-//If the list is empty show popup asking to choose another country and go to step-1 again
+//If the list is empty show pop-up asking to choose another country and go to step-1 again
 //when the player clicks the country that he wants to attack, call getNoOfDice method for both countries
 //Then call rolldice method every time till the no.of armies becomes zero
 //No.of armies will be updated for each country after every rolldice method call
@@ -14,7 +14,7 @@ import java.io.*;
 /**
  * AttackController has all the methods needed in attack phase of the game
  * 
- * @author Team 1
+ * @author Komal
  * @version 1.0.0
  */
 public class AttackController {

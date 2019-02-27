@@ -1,8 +1,14 @@
 import java.util.*;
 import java.io.*;
+/**
+ * 
+ * @author Komal
+ * @version 1.1
+ */
 public class AttackerButtons {
 	AttackController attackController = new AttackController();
 	public void endReinforcementsPhaseButton(Player player){
+		
 		//call getMyCountries(player) method and display countries
 	}
 	public void endAttackPhaseButton(Player player) {

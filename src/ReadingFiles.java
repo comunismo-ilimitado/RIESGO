@@ -7,7 +7,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * This ReadingFiles Class read all the information of players, Countries and Continents that is required in the different phases of the game.  
+ * @author Komal
+ */
 public class ReadingFiles {
 	// public static HashMap<String, Player> playerObject;
 	public static HashMap<Integer, Player> playerId;
@@ -89,8 +92,9 @@ public class ReadingFiles {
 		arrayListc.add(Color.black);
 		arrayListc.add(Color.GRAY);
 		arrayListc.add(Color.RED);
-
+// NumberOfPlayers representing total number of players playing in a game.
 		int noofplayers=AssignCountries.NumberOfPlayers;
+// This loop give color to player and assign id to player.
 		for (int i = 0; i < noofplayers; i++) {
 			Player player = new Player(i);
 			player.setPlayerColor(arrayListc.get(i));

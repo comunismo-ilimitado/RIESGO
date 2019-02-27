@@ -1,3 +1,4 @@
+package controller;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,15 +9,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-<<<<<<< HEAD
-/**
- * This class reads the .map files, extract the information from it and stores in the variables
- * @author Navjot kaur
- * @version 1.0.0
- */
+import model.Continent;
+import model.Country;
+import model.Player;
+import view.AssignCountries;
 
-=======
->>>>>>> 214c17a6c43f2cd859040528d748ae4eab01a3d8
 public class ReadingFiles {
 	// public static HashMap<String, Player> playerObject;
 	public static HashMap<Integer, Player> playerId;
@@ -27,14 +24,7 @@ public class ReadingFiles {
 	public static String address="Resources/World.map";
 	public static String image="noimage.bmp";
 	
-<<<<<<< HEAD
-	/**
-	 * This method reads the file given by the user.
-	 * @throws IOException
-	 */
-=======
 	// returns country object
->>>>>>> 214c17a6c43f2cd859040528d748ae4eab01a3d8
 
 	public static void Reads() throws IOException {
 		CountryNameObject = new HashMap<>();

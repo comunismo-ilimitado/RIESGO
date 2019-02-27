@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * This class reads the text files
+ * This class reads the .map files, extract the information from it and stores in the variables
  * @author Navjot kaur
  * @version 1.0.0
  */
@@ -24,7 +24,7 @@ public class ReadingFiles {
 	// returns country object
 	
 	/**
-	 * 
+	 * This method reads the file given by the user.
 	 * @throws IOException
 	 */
 

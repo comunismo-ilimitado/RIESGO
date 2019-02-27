@@ -12,6 +12,7 @@ public class MainControll {
 	MyActionListner myActionListner;
 	AttackController attackController;
 	ReinforcementController reinforcementController;
+	FortificationController fortificationController;
 
 	public MainControll() throws IOException {
 
@@ -21,9 +22,10 @@ public class MainControll {
 		files = new ReadingFiles();
 		reinforcementController=new ReinforcementController();
 		myActionListner = new MyActionListner(this);
-		frame = new MFrame(myActionListner);
-		attackController = new AttackController();
 		files.Reads();
+		frame = new MFrame(myActionListner,files.image);
+		attackController = new AttackController();
+		fortificationController=new FortificationController();
 		frame.fun();
 
 		SetButtons();
@@ -80,6 +82,15 @@ public class MainControll {
 	}
 	public Player playerObjet(int id) {
 		return files.playerId.get(id);
+	}
+	
+	public String NeighboursList(Country country) {
+		List<Country> lis = country.getNeighbors();
+		String haha="";
+		for(int i=0;i<lis.size();i++) {
+			haha=haha.concat(lis.get(i).getName()+",");
+		}
+		return haha;
 	}
 
 	public void ChangePlayerCountry(String Cname) throws IOException {

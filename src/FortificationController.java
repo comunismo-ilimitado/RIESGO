@@ -11,7 +11,8 @@ public class FortificationController {
 	/**
 	 * Gets a list of countries that the player owns
 	 * 
-	 * @param player: Player object must be given to fetch the countries
+	 * @param player:
+	 *            Player object must be given to fetch the countries
 	 * @return List of countries owned by the player
 	 */
 	public List<Country> getMyCountries(Player player) {
@@ -47,7 +48,8 @@ public class FortificationController {
 	/**
 	 * To find the node of a given country object in the graph
 	 * 
-	 * @param source: Country object that needs to be found in the graph
+	 * @param source:
+	 *            Country object that needs to be found in the graph
 	 * @return The node of the given country object will be returned
 	 */
 	private Node getNode(Country source) {
@@ -63,8 +65,10 @@ public class FortificationController {
 	/**
 	 * Adds an edge in the graph between two countries
 	 * 
-	 * @param source: The source country object
-	 * @param destination: The destination country object
+	 * @param source:
+	 *            The source country object
+	 * @param destination:
+	 *            The destination country object
 	 */
 	public void addEdge(Country source, Country destination) {
 		Node s = getNode(source);
@@ -76,8 +80,10 @@ public class FortificationController {
 	 * Method to find if there is path between two countries to move armies during
 	 * fortification
 	 * 
-	 * @param source: Source Country object
-	 * @param destination: Destination Country object
+	 * @param source:
+	 *            Source Country object
+	 * @param destination:
+	 *            Destination Country object
 	 * @return
 	 */
 	public boolean hasPathBFS(Node source, Node destination) {
@@ -94,6 +100,27 @@ public class FortificationController {
 			visited.add(node.country);
 			for (Node child : node.adjacent) {
 				if (child.country.getOwner().equals(source.country.getOwner())) {
+					nextToVisit.add(child);
+				}
+			}
+		}
+		return false;
+	}
+
+	public boolean hasPathBFS2(Country source, Country destination) {
+		LinkedList<Country> nextToVisit = new LinkedList<Country>();
+		HashSet<Country> visited = new HashSet<Country>();
+		nextToVisit.add(source);
+		while (!nextToVisit.isEmpty()) {
+			Country node = nextToVisit.remove();
+			if (node.equals(destination)) {
+				return true;
+			}
+			if (visited.contains(source))
+				continue;
+			visited.add(source);
+			for (Country child : source.getNeighbors()) {
+				if (child.getOwner().equals(source.getOwner())) {
 					nextToVisit.add(child);
 				}
 			}
@@ -123,25 +150,37 @@ public class FortificationController {
 		}
 	}
 
-	public void moveArmies(Country sourceCountry, Country destinationCountry, int noOfArmiesToBeMoved) {
+	public String moveArmies(Country sourceCountry, Country destinationCountry, int noOfArmiesToBeMoved) {
 		if (sourceCountry.getNoOfArmies() < 2) {
 			// display user that he cannot move armies from this country
 			// call getmycountries method again
+			return "less army";
 		} else if (noOfArmiesToBeMoved >= sourceCountry.getNoOfArmies()) {
 			int CanMove = sourceCountry.getNoOfArmies() - 1;
 			// display user that he can move only 'CanMove' no.of armies
 			// call getmycountries method again
-		} else if (!hasPathBFS(getNode(sourceCountry), getNode(destinationCountry))) {
+			System.out.println(CanMove);
+			return "ksaodjpos";
+		} /*
+			 * else if (!hasPathBFS(getNode(sourceCountry), getNode(destinationCountry))) {
+			 * // display user that he cannot move armies to this country because there is
+			 * no // path // call getmycountries method again System.out.println("NO path");
+			 */
+		else if (!hasPathBFS2(sourceCountry, destinationCountry)) {
 			// display user that he cannot move armies to this country because there is no
 			// path
 			// call getmycountries method again
+			return "NO path";
+
 		} else {
 			sourceCountry.setNoOfArmies(sourceCountry.getNoOfArmies() - noOfArmiesToBeMoved);
 			destinationCountry.setNoOfArmies(destinationCountry.getNoOfArmies() + noOfArmiesToBeMoved);
 			// display to user that the armies are updated and move to next player
 			// reinforcement phase
-			endFortificationPhaseButton();
+			return "";
+			// endFortificationPhaseButton();
 		}
+
 	}
 
 	/**

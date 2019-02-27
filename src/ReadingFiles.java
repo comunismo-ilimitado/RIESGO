@@ -8,12 +8,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * This class reads the text files
- * @author Navjot kaur
- * @version 1.0.0
- */
-
 public class ReadingFiles {
 	// public static HashMap<String, Player> playerObject;
 	public static HashMap<Integer, Player> playerId;
@@ -21,12 +15,10 @@ public class ReadingFiles {
 	public static List<String> CountriesNames, ContinentNames; // List of countries Strings
 	public static HashMap<String, Country> CountryNameObject;
 	public static HashMap<String, Continent> ContinentNameObject; // HashMAp COntaining Country name as // // key and
-	// returns country object
+	public static String address="Resources/World.map";
+	public static String image="noimage.bmp";
 	
-	/**
-	 * 
-	 * @throws IOException
-	 */
+	// returns country object
 
 	public static void Reads() throws IOException {
 		CountryNameObject = new HashMap<>();
@@ -34,7 +26,7 @@ public class ReadingFiles {
 		ContinentNames = new ArrayList<>();
 		ContinentNameObject = new HashMap<>();
 		// Reading Country File
-		FileReader file = new FileReader("Resources/Asia.map");
+		FileReader file = new FileReader(address);
 		BufferedReader bufferedReader = new BufferedReader(file);
 		String temp = "";
 		StringBuffer buffer = new StringBuffer();
@@ -45,6 +37,15 @@ public class ReadingFiles {
 		String string = "\\[.*]";
 		String[] aaa = buffer.toString().trim().replaceAll("\n+", "\n").split(string);
 		String InfoString = aaa[1].trim();
+		String[] findInfo=InfoString.split("\n");
+		for(int i =0;i<InfoString.length();i++) {
+			String [] temp1=findInfo[i].split("=");
+			if(temp1[0].trim().equals("image")) {
+				image=temp1[1].trim();
+				break;
+			}
+		}
+		
 		String ContinentsString = aaa[2].trim();
 		String CountriesString = aaa[3].trim();
 		String[] tempContinentArray = ContinentsString.split("\n");
@@ -84,7 +85,11 @@ public class ReadingFiles {
 		arrayListc.add(Color.decode("#ffff00"));
 		arrayListc.add(Color.decode("#FF6600"));
 		arrayListc.add(Color.WHITE);
-		arrayListc.add(Color.decode("#CCFF00"));
+		arrayListc.add(Color.RED);
+		arrayListc.add(Color.black);
+		arrayListc.add(Color.GRAY);
+		arrayListc.add(Color.RED);
+
 		int noofplayers=AssignCountries.NumberOfPlayers;
 		for (int i = 0; i < noofplayers; i++) {
 			Player player = new Player(i);

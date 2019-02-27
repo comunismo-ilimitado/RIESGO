@@ -11,7 +11,7 @@ class ReinforcementController {
 	public String addarmies(Country country) {
 		 Player player=country.getOwner();
 		if(player.getPlayerArmiesNotDeployed()==0) {
-			return "sdkofjdapidjipojf";
+			return "NO ARMIES LEFT, PLEASE CLICK FINISH REINFORCEMENT";
 		}
 		else {
 			updateValue(player,country);

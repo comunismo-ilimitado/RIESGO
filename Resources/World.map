@@ -1,7 +1,7 @@
 [Map]
 author=Sean O'Connor
 warn=yes
-image=world (small).bmp
+image=world.bmp
 wrap=yes
 scroll=horizontal
 

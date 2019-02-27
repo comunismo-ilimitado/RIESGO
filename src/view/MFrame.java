@@ -121,8 +121,8 @@ public class MFrame extends JFrame {
 		jLabel.setText("Turn For Player :-" + (myActionListner.currentPlayer + 1));
 		jLabel2.setText("Armies Left:- " + noArmiesLeft);
 		jLabel3.setText("Neighbours :- " + CCC);
-		jLabel4.setText("MO Left:- " + noArmiesLeft);
-		jLabel5.setText("Armies Left:- " + noArmiesLeft);
+		jLabel4.setText("DICE 1:- " + AAA);
+		jLabel5.setText("DICE 2:- " + BBB);
 	}
 
 	public void SetButtons(HashMap<String, Country> countryObjects) throws IOException {

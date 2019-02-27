@@ -9,7 +9,6 @@ import java.util.List;
 
 import model.Country;
 
-
 public class MyActionListner implements ActionListener {
 	MFrame frame;
 	MainControll controll;
@@ -18,6 +17,7 @@ public class MyActionListner implements ActionListener {
 	int players = 6;
 	int tem = 10;
 	int currentPlayer = 0;
+	Country attackCountry1, attackCountry2;
 	Country fortifyCountry1, fortifyCountry2;
 
 	public MyActionListner(MainControll controll) throws IOException {
@@ -55,42 +55,57 @@ public class MyActionListner implements ActionListener {
 
 	public void FortificationPhase() {
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
-	//	controll.fortificationController.addNodes();
-//		controll.fortificationController.addAllEdge();
+		// controll.fortificationController.addNodes();
+		// controll.fortificationController.addAllEdge();
 	}
 
 	public void FortificationPhase2(Country country) throws IOException {
-		
-		if(fortifyCountry1==null) {
-			fortifyCountry1=country;
-			controll.frame.CCC=controll.NeighboursList(country);
+
+		if (fortifyCountry1 == null) {
+			fortifyCountry1 = country;
+			controll.frame.CCC = controll.NeighboursList(country);
 			controll.frame.NotifyAll();
 			controll.frame.error("Select One More Country You Want to move your Armies to");
-		}
-		else if(fortifyCountry2==null){
-			fortifyCountry2=country;
+		} else if (fortifyCountry2 == null) {
+			fortifyCountry2 = country;
 			String test1 = controll.frame.popupText(fortifyCountry1.getNoOfArmies() - 1);
-			String message=controll.fortificationController.moveArmies(fortifyCountry1, fortifyCountry2, Integer.parseInt(test1));
-			if(!message.equals("")) {
+			String message = controll.fortificationController.moveArmies(fortifyCountry1, fortifyCountry2,
+					Integer.parseInt(test1));
+			if (!message.equals("")) {
 				controll.frame.error(message);
-				fortifyCountry1=null;
-				fortifyCountry2=null;
-			}
-			else {
+				fortifyCountry1 = null;
+				fortifyCountry2 = null;
+			} else {
 				controll.RefreshButtons();
 				currentPhase = "Finish Reinforcement";
 				controll.frame.nextAction.setText("Finish Reinforcement");
 				playerUpdate();
+				controll.frame.ActivateAll();
 				ReinforcementPhase();
 			}
-			
-		}
 
+		}
 
 	}
 
-	public void AttackPhase() {
-		controll.frame.ActivateAll();
+	public void AttackPhase(Country country) throws IOException {
+		if (attackCountry1 == null) {
+			attackCountry1 = country;
+			controll.frame.ActivateAll();
+			List<Country> abc = controll.attackController.getMyNeighborsForAttack(country);
+			controll.frame.OnlyNeeded(abc);
+			controll.RefreshButtons();
+
+		} else if (attackCountry2 == null) {
+			attackCountry2=country;
+			String reply=controll.attackerButtons.attackButton(attackCountry1, attackCountry2);
+			if(!reply="") {
+				controll.frame.error(reply);
+			}else {
+				
+			}
+
+		}
 	}
 
 	@Override
@@ -101,7 +116,6 @@ public class MyActionListner implements ActionListener {
 			if (e.getActionCommand() == "Finish Reinforcement") {
 				currentPhase = "Finish Attack";
 				controll.frame.nextAction.setText("Finish Attack");
-				AttackPhase();
 			} else if (e.getActionCommand() == "Finish Attack") {
 				currentPhase = "Finish Fortification";
 				controll.frame.nextAction.setText("Finish Fortification");
@@ -114,7 +128,7 @@ public class MyActionListner implements ActionListener {
 
 		} else {
 			String Cname = e.getActionCommand().split("\\|")[0].trim();
-//			JButton temp = controll.frame.hashButton.get(Cname);
+			// JButton temp = controll.frame.hashButton.get(Cname);
 			Country temp2 = controll.countryObjects().get(Cname);
 			if (currentPhase.equals("Finish Reinforcement")) {
 				ReinforcementPhase2(temp2);
@@ -127,6 +141,13 @@ public class MyActionListner implements ActionListener {
 			} else if (currentPhase.equals("Finish Fortification")) {
 				try {
 					FortificationPhase2(temp2);
+				} catch (IOException e2) {
+					e2.printStackTrace();
+				}
+
+			} else if (currentPhase.equals("Finish Attack")) {
+				try {
+					AttackPhase(temp2);
 				} catch (IOException e2) {
 					e2.printStackTrace();
 				}

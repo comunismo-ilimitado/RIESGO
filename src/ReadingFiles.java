@@ -9,14 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 
 <<<<<<< HEAD
-/**
- * This class reads the .map files, extract the information from it and stores in the variables
- * @author Navjot kaur
- * @version 1.0.0
- */
+
 
 =======
->>>>>>> 214c17a6c43f2cd859040528d748ae4eab01a3d8
+>>>>>>> 5094ba0f6034cdc80319f1d065ef7d2becbaf3bc
 public class ReadingFiles {
 	// public static HashMap<String, Player> playerObject;
 	public static HashMap<Integer, Player> playerId;
@@ -28,13 +24,9 @@ public class ReadingFiles {
 	public static String image="noimage.bmp";
 	
 <<<<<<< HEAD
-	/**
-	 * This method reads the file given by the user.
-	 * @throws IOException
-	 */
 =======
 	// returns country object
->>>>>>> 214c17a6c43f2cd859040528d748ae4eab01a3d8
+>>>>>>> 5094ba0f6034cdc80319f1d065ef7d2becbaf3bc
 
 	public static void Reads() throws IOException {
 		CountryNameObject = new HashMap<>();

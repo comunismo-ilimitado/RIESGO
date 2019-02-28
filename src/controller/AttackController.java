@@ -34,7 +34,7 @@ public class AttackController {
 //	public String attack(int attackerDice, int defenderDice) {
 //		int attackerSum=rollDice(attackerDice);
 //		int defenderSum=rollDice(defenderDice);
-//		if(attackerSum<=defenderSum)
+//		if(attacke./rSum<=defenderSum)
 //			return "Defender";
 //		else
 //			return "Attacker";
@@ -151,7 +151,9 @@ public class AttackController {
 //	 * Gets player based on Owner Name from Country
 //	 * @param PlayerName
 //	 * @return
-//	 */
+//	Defender Won*/
+	
+	
 //	public Player getPlayerByName(String PlayerName){
 //		return ReadingFiles.playerObject.get(PlayerName);
 //	}
@@ -178,7 +180,6 @@ public class AttackController {
 	}
 	
 
-	AttackController attackController = new AttackController();
 	public void endReinforcementsPhaseButton(Player player){
 	}
 	public void endAttackPhaseButton(Player player) {
@@ -190,26 +191,26 @@ public class AttackController {
 			int defArmies=defender.getNoOfArmies();
 			
 			String answer = "";
-			int attackerDice=attackController.setNoOfDice(attacker, "A");
+			int attackerDice=setNoOfDice(attacker, "A");
 /*			display the number of defender dice
-*/			int defenderDice=attackController.setNoOfDice(defender, "D");
+*/			int defenderDice=setNoOfDice(defender, "D");
 			 attackerDiceRoll= new ArrayList<Integer>();
 			 defenderDiceRoll= new ArrayList<Integer>();
 			/*display the int list values as the results from dice roll
 			*/for(int i=0;i<attackerDice;i++) {
-				attackerDiceRoll.add(attackController.rollDice());
+				attackerDiceRoll.add(rollDice());
 			}
 			for(int i=0;i<defenderDice;i++) {
-				defenderDiceRoll.add(attackController.rollDice());
+				defenderDiceRoll.add(rollDice());
 			}
 			for(int i=0;i<defenderDice;i++) {
 				int attackerMax=getMaxValue(attackerDiceRoll);
 				int defenderMax=getMaxValue(defenderDiceRoll);
 				if(attackerMax<=defenderMax) {
-					attackController.updateArmies(attacker);
+					updateArmies(attacker);
 				}
 				else {
-					attackController.updateArmies(defender);
+					updateArmies(defender);
 				}
 				attackerDiceRoll.remove(attackerDiceRoll.indexOf(attackerMax));
 				defenderDiceRoll.remove(defenderDiceRoll.indexOf(defenderMax));
@@ -219,10 +220,10 @@ public class AttackController {
 					continue;
 			}
 			if(defender.getNoOfArmies()==0) {
-				attackController.updateOwner(defender, attacker.getOwner());
+				updateOwner(defender, attacker.getOwner());
 				answer = answer+ "hhgjhghjgjhghjYou Won and you occupied this country.";
 			}
-			if(attackController.getMyCountries(defender.getOwner()).size()==0) {
+			if(getMyCountries(defender.getOwner()).size()==0) {
 			}
 			int armiesLostByAttacker=0;
 			int armiesLostByDefender=0;

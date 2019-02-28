@@ -102,9 +102,11 @@ public class MyActionListner implements ActionListener {
 			if(!reply.equals("")) {
 				controll.frame.error(reply);
 			}else {
-				controll.frame.AAA=controll.attackerButtons.attackerDiceRoll.toString();
-				controll.frame.BBB=controll.attackerButtons.defenderDiceRoll.toString();
+				controll.frame.AAA=controll.attackController.attackerDiceRoll.toString();
+				controll.frame.BBB=controll.attackController.defenderDiceRoll.toString();
 				controll.frame.NotifyAll();
+				controll.RefreshButtons();
+				
 			}
 
 		}

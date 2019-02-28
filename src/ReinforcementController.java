@@ -7,7 +7,7 @@ import java.util.*;
  * @author neeraj
  * @version 1.1
  */
-class ReinforcementController {
+public class ReinforcementController {
 	public String addarmies(Country country) {
 		 Player player=country.getOwner();
 		if(player.getPlayerArmiesNotDeployed()==0) {

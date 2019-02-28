@@ -22,6 +22,9 @@ import java.io.*;
  * @version 1.0.0
  */
 public class AttackController {
+	public List<Integer> attackerDiceRoll;
+	public List<Integer>defenderDiceRoll;
+
 //	/**
 //	 * Returns the winner of each dice roll as a string, either "Attacker" or "Defender"
 //	 * @param attackerDice
@@ -173,4 +176,84 @@ public class AttackController {
 	public void placeArmies(Country country) {
 		country.setNoOfArmies(1);
 	}
+	
+
+	AttackController attackController = new AttackController();
+	public void endReinforcementsPhaseButton(Player player){
+	}
+	public void endAttackPhaseButton(Player player) {
+	}
+	public String attackButton(Country attacker, Country defender) {
+		if(attacker.getNoOfArmies()>=2 && defender.getNoOfArmies()>=2)
+		{
+			int attArmies=attacker.getNoOfArmies();
+			int defArmies=defender.getNoOfArmies();
+			
+			String answer = "";
+			int attackerDice=attackController.setNoOfDice(attacker, "A");
+/*			display the number of defender dice
+*/			int defenderDice=attackController.setNoOfDice(defender, "D");
+			 attackerDiceRoll= new ArrayList<Integer>();
+			 defenderDiceRoll= new ArrayList<Integer>();
+			/*display the int list values as the results from dice roll
+			*/for(int i=0;i<attackerDice;i++) {
+				attackerDiceRoll.add(attackController.rollDice());
+			}
+			for(int i=0;i<defenderDice;i++) {
+				defenderDiceRoll.add(attackController.rollDice());
+			}
+			for(int i=0;i<defenderDice;i++) {
+				int attackerMax=getMaxValue(attackerDiceRoll);
+				int defenderMax=getMaxValue(defenderDiceRoll);
+				if(attackerMax<=defenderMax) {
+					attackController.updateArmies(attacker);
+				}
+				else {
+					attackController.updateArmies(defender);
+				}
+				attackerDiceRoll.remove(attackerDiceRoll.indexOf(attackerMax));
+				defenderDiceRoll.remove(defenderDiceRoll.indexOf(defenderMax));
+				if(attackerDice==1)
+					break;
+				else
+					continue;
+			}
+			if(defender.getNoOfArmies()==0) {
+				attackController.updateOwner(defender, attacker.getOwner());
+				answer = answer+ "hhgjhghjgjhghjYou Won and you occupied this country.";
+			}
+			if(attackController.getMyCountries(defender.getOwner()).size()==0) {
+			}
+			int armiesLostByAttacker=0;
+			int armiesLostByDefender=0;
+			if(attacker.getNoOfArmies()<attArmies)
+			{
+			armiesLostByAttacker = attArmies-attacker.getNoOfArmies();}
+			if(defender.getNoOfArmies()<defArmies) {
+				armiesLostByDefender=defArmies-defender.getNoOfArmies();
+			}
+			answer=answer+"Armies lost by attacker:"+armiesLostByAttacker+"Armies lost by defender:"+armiesLostByDefender;
+			return answer;
+		}
+		else
+		{
+			if(attacker.getNoOfArmies()<=1)
+			return "Your country must have more than one army";
+			else if(defender.getNoOfArmies()<=1)
+				return "Please a country with more than one army to attack";
+			else
+				return "Wrong input";
+		}
+	}
+	public int getMaxValue(List<Integer> list) {
+		int max=list.get(0);
+		for(int i=1;i<list.size();i++) {
+			if(list.get(i)>max)
+				max=list.get(i);
+			else
+				continue;
+		}
+		return max;
+	}
+
 }

@@ -17,6 +17,9 @@ public class AttackerButtons {
 	public String attackButton(Country attacker, Country defender) {
 		if(attacker.getNoOfArmies()>=2 && defender.getNoOfArmies()>=2)
 		{
+			int attArmies=attacker.getNoOfArmies();
+			int defArmies=defender.getNoOfArmies();
+			
 			String answer = "";
 			//display the number of attacker dice
 			int attackerDice=attackController.setNoOfDice(attacker, "A");
@@ -36,11 +39,11 @@ public class AttackerButtons {
 				int defenderMax=getMaxValue(defenderDiceRoll);
 				if(attackerMax<=defenderMax) {
 					attackController.updateArmies(attacker);
-					answer= "Defender Won";
+					//answer= "Defender Won";
 				}
 				else {
 					attackController.updateArmies(defender);
-					answer= "You Won";
+					//answer= "";
 				}
 				attackerDiceRoll.remove(attackerDiceRoll.indexOf(attackerMax));
 				defenderDiceRoll.remove(defenderDiceRoll.indexOf(defenderMax));
@@ -51,13 +54,22 @@ public class AttackerButtons {
 			}
 			if(defender.getNoOfArmies()==0) {
 				attackController.updateOwner(defender, attacker.getOwner());
-				answer = answer+"and you occupied this country.";
+				answer = answer+ "You Won and you occupied this country.";
 				//call place armies method from reinforcements phase and force player to place armies
 				//that are at least the number of dice rolled by attacker
 			}
 			if(attackController.getMyCountries(defender.getOwner()).size()==0) {
 				//add code to give all defenders cards to attacker
 			}
+			int armiesLostByAttacker=0;
+			int armiesLostByDefender=0;
+			if(attacker.getNoOfArmies()<attArmies)
+			{
+			armiesLostByAttacker = attArmies-attacker.getNoOfArmies();}
+			if(defender.getNoOfArmies()<defArmies) {
+				armiesLostByDefender=defArmies-defender.getNoOfArmies();
+			}
+			answer=answer+"Armies lost by attacker:"+armiesLostByAttacker+"Armies lost by defender:"+armiesLostByDefender;
 			return answer;
 		}
 		else

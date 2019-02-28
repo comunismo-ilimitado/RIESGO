@@ -1,4 +1,4 @@
-package test;
+/*package test;
 
 import controller.FortificationController;
 
@@ -6,7 +6,14 @@ public class FortificationTest
 {
 	FortificationController fortification;
 	
+	
 	@Before
-	public void 
+	public void onStart()
+	{
+		fortification = new FortificationController();
+	}
+	
+	
 
 }
+*/

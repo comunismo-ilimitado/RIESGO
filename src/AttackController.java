@@ -14,7 +14,7 @@ import java.io.*;
 /**
  * AttackController has all the methods needed in attack phase of the game
  * 
- * @author Komal
+ * @author bhargav
  * @version 1.0.0
  */
 public class AttackController {

@@ -190,7 +190,7 @@ public class AttackController {
 			int attArmies=attacker.getNoOfArmies();
 			int defArmies=defender.getNoOfArmies();
 			
-			String answer = "";
+			//String answer = "";
 			int attackerDice=setNoOfDice(attacker, "A");
 /*			display the number of defender dice
 */			int defenderDice=setNoOfDice(defender, "D");
@@ -221,7 +221,7 @@ public class AttackController {
 			}
 			if(defender.getNoOfArmies()==0) {
 				updateOwner(defender, attacker.getOwner());
-				answer = answer+ "hhgjhghjgjhghjYou Won and you occupied this country.";
+				//answer = answer+ "You Won and you occupied this country.";
 			}
 			if(getMyCountries(defender.getOwner()).size()==0) {
 			}
@@ -233,8 +233,8 @@ public class AttackController {
 			if(defender.getNoOfArmies()<defArmies) {
 				armiesLostByDefender=defArmies-defender.getNoOfArmies();
 			}
-			answer=answer+"Armies lost by attacker:"+armiesLostByAttacker+"Armies lost by defender:"+armiesLostByDefender;
-			return answer;
+			//answer=answer+"Armies lost by attacker:"+armiesLostByAttacker+"Armies lost by defender:"+armiesLostByDefender;
+			return "";
 		}
 		else
 		{

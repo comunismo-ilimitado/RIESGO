@@ -38,7 +38,6 @@ public class MyActionListner implements ActionListener {
 
 	public void ReinforcementPhase2(Country country) {
 		// controll.AddArmies(currentPlayer);
-
 		String message = controll.reinforcementController.addarmies(country);
 		controll.frame.noArmiesLeft = country.getOwner().getPlayerArmiesNotDeployed();
 		controll.frame.NotifyAll();
@@ -48,15 +47,18 @@ public class MyActionListner implements ActionListener {
 
 	public void ReinforcementPhase() {
 		// controll.AddArmies(currentPlayer);
+		controll.frame.ActivateAll();
+		controll.frame.NotifyAll();
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
 		controll.reinforcementController.calculateReinforcementArmies(controll.playerObjet(currentPlayer));
-		System.out.println(controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed());
 	}
 
 	public void FortificationPhase() {
+		controll.frame.ActivateAll();
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
 		// controll.fortificationController.addNodes();
 		// controll.fortificationController.addAllEdge();
+		playerUpdate();
 	}
 
 	public void FortificationPhase2(Country country) throws IOException {
@@ -97,18 +99,23 @@ public class MyActionListner implements ActionListener {
 			controll.RefreshButtons();
 
 		} else if (attackCountry2 == null) {
-			attackCountry2=country;
-			String reply=controll.attackController.attackButton(attackCountry1, attackCountry2);
-			if(!reply.equals("")) {
+			attackCountry2 = country;
+			String reply = controll.attackController.attackButton(attackCountry1, attackCountry2);
+			if (!reply.equals("")) {
 				controll.frame.error(reply);
-			}else {
-				controll.frame.AAA=controll.attackController.attackerDiceRoll.toString();
-				controll.frame.BBB=controll.attackController.defenderDiceRoll.toString();
-				controll.frame.NotifyAll();
-				controll.RefreshButtons();
-				
 			}
+			controll.frame.AAA = controll.attackController.attackerDiceRoll.toString();
+			controll.frame.BBB = controll.attackController.defenderDiceRoll.toString();
+			controll.frame.NotifyAll();
+			controll.frame.ActivateAll();
+			attackCountry1 = null;
+			attackCountry2 = null;
+			controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
+			controll.RefreshButtons();
 
+		} else {
+			attackCountry1 = null;
+			attackCountry2 = null;
 		}
 	}
 
@@ -118,8 +125,14 @@ public class MyActionListner implements ActionListener {
 		// TODO Auto-generated method stub
 		if (Phases.contains(e.getActionCommand())) {
 			if (e.getActionCommand() == "Finish Reinforcement") {
+			if(controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed()>0) {
+				controll.frame.error("Connot End Reinforcement Untill All armies are deployed");
+			}else {
+				
 				currentPhase = "Finish Attack";
 				controll.frame.nextAction.setText("Finish Attack");
+			} 
+
 			} else if (e.getActionCommand() == "Finish Attack") {
 				currentPhase = "Finish Fortification";
 				controll.frame.nextAction.setText("Finish Fortification");

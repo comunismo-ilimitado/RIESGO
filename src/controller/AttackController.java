@@ -231,6 +231,7 @@ public class AttackController {
 				newListOfCountriesDef.remove(defender);
 				defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
 				attackController.updateOwner(defender, attacker.getOwner());
+				defender.setNoOfArmies(1);
 				answer = answer+ "You Won and you occupied this country.";
 >>>>>>> 385a41466cca6fd18215230424e9c39c13996a6c
 			}

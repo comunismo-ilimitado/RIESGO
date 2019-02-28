@@ -219,8 +219,14 @@ public class AttackController {
 					continue;
 			}
 			if(defender.getNoOfArmies()==0) {
+				List<Country> newListOfCountriesAtt = attacker.getOwner().getTotalCountriesOccupied();
+				newListOfCountriesAtt.add(defender);
+				attacker.getOwner().setTotalCountriesOccupied(newListOfCountriesAtt);
+				List<Country> newListOfCountriesDef=defender.getOwner().getTotalCountriesOccupied();
+				newListOfCountriesDef.remove(defender);
+				defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
 				attackController.updateOwner(defender, attacker.getOwner());
-				answer = answer+ "hhgjhghjgjhghjYou Won and you occupied this country.";
+				answer = answer+ "You Won and you occupied this country.";
 			}
 			if(attackController.getMyCountries(defender.getOwner()).size()==0) {
 			}

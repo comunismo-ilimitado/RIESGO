@@ -1,14 +1,10 @@
-package controller;
 import java.util.*;
-import model.Country;
-import model.Player;
-
 import java.io.*;
 
 //When the player clicks attack phase call getAllMyCountries method and using the list of countries display all his countries
-//When the player selects his country that he wants to do the attack with, show its neighbours by 
+//When the player selects his country that he wants to do the attack with, show its neighbors by 
 //calling getMyNeighbors, that are not his own
-//If the list is empty show popup asking to choose another country and go to step-1 again
+//If the list is empty show pop-up asking to choose another country and go to step-1 again
 //when the player clicks the country that he wants to attack, call getNoOfDice method for both countries
 //Then call rolldice method every time till the no.of armies becomes zero
 //No.of armies will be updated for each country after every rolldice method call
@@ -18,13 +14,10 @@ import java.io.*;
 /**
  * AttackController has all the methods needed in attack phase of the game
  * 
- * @author Team 1
+ * @author bhargav
  * @version 1.0.0
  */
 public class AttackController {
-	public List<Integer> attackerDiceRoll;
-	public List<Integer>defenderDiceRoll;
-
 //	/**
 //	 * Returns the winner of each dice roll as a string, either "Attacker" or "Defender"
 //	 * @param attackerDice
@@ -34,7 +27,7 @@ public class AttackController {
 //	public String attack(int attackerDice, int defenderDice) {
 //		int attackerSum=rollDice(attackerDice);
 //		int defenderSum=rollDice(defenderDice);
-//		if(attacke./rSum<=defenderSum)
+//		if(attackerSum<=defenderSum)
 //			return "Defender";
 //		else
 //			return "Attacker";
@@ -151,9 +144,7 @@ public class AttackController {
 //	 * Gets player based on Owner Name from Country
 //	 * @param PlayerName
 //	 * @return
-//	Defender Won*/
-	
-	
+//	 */
 //	public Player getPlayerByName(String PlayerName){
 //		return ReadingFiles.playerObject.get(PlayerName);
 //	}
@@ -178,94 +169,4 @@ public class AttackController {
 	public void placeArmies(Country country) {
 		country.setNoOfArmies(1);
 	}
-	
-
-	public void endReinforcementsPhaseButton(Player player){
-	}
-	public void endAttackPhaseButton(Player player) {
-	}
-	public String attackButton(Country attacker, Country defender) {
-		if(attacker.getNoOfArmies()>=2 && defender.getNoOfArmies()>=2)
-		{
-			int attArmies=attacker.getNoOfArmies();
-			int defArmies=defender.getNoOfArmies();
-			
-			//String answer = "";
-			int attackerDice=setNoOfDice(attacker, "A");
-/*			display the number of defender dice
-*/			int defenderDice=setNoOfDice(defender, "D");
-			 attackerDiceRoll= new ArrayList<Integer>();
-			 defenderDiceRoll= new ArrayList<Integer>();
-			/*display the int list values as the results from dice roll
-			*/for(int i=0;i<attackerDice;i++) {
-				attackerDiceRoll.add(rollDice());
-			}
-			for(int i=0;i<defenderDice;i++) {
-				defenderDiceRoll.add(rollDice());
-			}
-			for(int i=0;i<defenderDice;i++) {
-				int attackerMax=getMaxValue(attackerDiceRoll);
-				int defenderMax=getMaxValue(defenderDiceRoll);
-				if(attackerMax<=defenderMax) {
-					updateArmies(attacker);
-				}
-				else {
-					updateArmies(defender);
-				}
-				attackerDiceRoll.remove(attackerDiceRoll.indexOf(attackerMax));
-				defenderDiceRoll.remove(defenderDiceRoll.indexOf(defenderMax));
-				if(attackerDice==1)
-					break;
-				else
-					continue;
-			}
-			if(defender.getNoOfArmies()==0) {
-<<<<<<< HEAD
-				updateOwner(defender, attacker.getOwner());
-				//answer = answer+ "You Won and you occupied this country.";
-=======
-				List<Country> newListOfCountriesAtt = attacker.getOwner().getTotalCountriesOccupied();
-				newListOfCountriesAtt.add(defender);
-				attacker.getOwner().setTotalCountriesOccupied(newListOfCountriesAtt);
-				List<Country> newListOfCountriesDef=defender.getOwner().getTotalCountriesOccupied();
-				newListOfCountriesDef.remove(defender);
-				defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
-				attackController.updateOwner(defender, attacker.getOwner());
-				answer = answer+ "You Won and you occupied this country.";
->>>>>>> 385a41466cca6fd18215230424e9c39c13996a6c
-			}
-			if(getMyCountries(defender.getOwner()).size()==0) {
-			}
-			int armiesLostByAttacker=0;
-			int armiesLostByDefender=0;
-			if(attacker.getNoOfArmies()<attArmies)
-			{
-			armiesLostByAttacker = attArmies-attacker.getNoOfArmies();}
-			if(defender.getNoOfArmies()<defArmies) {
-				armiesLostByDefender=defArmies-defender.getNoOfArmies();
-			}
-			//answer=answer+"Armies lost by attacker:"+armiesLostByAttacker+"Armies lost by defender:"+armiesLostByDefender;
-			return "";
-		}
-		else
-		{
-			if(attacker.getNoOfArmies()<=1)
-			return "Your country must have more than one army";
-			else if(defender.getNoOfArmies()<=1)
-				return "Please a country with more than one army to attack";
-			else
-				return "Wrong input";
-		}
-	}
-	public int getMaxValue(List<Integer> list) {
-		int max=list.get(0);
-		for(int i=1;i<list.size();i++) {
-			if(list.get(i)>max)
-				max=list.get(i);
-			else
-				continue;
-		}
-		return max;
-	}
-
 }

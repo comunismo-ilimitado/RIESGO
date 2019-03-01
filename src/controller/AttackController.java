@@ -48,7 +48,7 @@ public class AttackController {
 	public List<Country> getMyCountries(Player player) {
 		List<Country> countries = new ArrayList<Country>();
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
-			if (entry.getValue().getOwner().equals(player)) {
+			if (entry.getValue().getOwner().equals(player)&& entry.getValue().getNoOfArmies()>1) {
 				countries.add(entry.getValue());
 			} else
 				continue;
@@ -199,13 +199,13 @@ public class AttackController {
 			 attackerDiceRoll= new ArrayList<Integer>();
 			 defenderDiceRoll= new ArrayList<Integer>();
 			/*display the int list values as the results from dice roll
-			*/for(int i=0;i<=attackerDice;i++) {
+			*/for(int i=0;i<attackerDice;i++) {
 				attackerDiceRoll.add(attackController.rollDice());
 			}
-			for(int i=0;i<=defenderDice;i++) {
+			for(int i=0;i<defenderDice;i++) {
 				defenderDiceRoll.add(attackController.rollDice());
 			}
-			for(int i=0;i<=defenderDice;i++) {
+			while(attackerDiceRoll.size()!=0&& defenderDiceRoll.size()!=0) {
 				int attackerMax=getMaxValue(attackerDiceRoll);
 				int defenderMax=getMaxValue(defenderDiceRoll);
 				if(attackerMax<=defenderMax) {
@@ -230,7 +230,7 @@ public class AttackController {
 				defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
 				attackController.updateOwner(defender, attacker.getOwner());
 				defender.setNoOfArmies(1);
-				answer = answer+ "You Won and you occupied this country.";
+				//answer = answer+ "You Won and you occupied this country.";
 			}
 			if(attackController.getMyCountries(defender.getOwner()).size()==0) {
 			}
@@ -242,8 +242,8 @@ public class AttackController {
 			if(defender.getNoOfArmies()<defArmies) {
 				armiesLostByDefender=defArmies-defender.getNoOfArmies();
 			}
-			answer=answer+"Armies lost by attacker:"+armiesLostByAttacker+"Armies lost by defender:"+armiesLostByDefender;
-			return answer;
+			//answer=answer+"Armies lost by attacker:"+armiesLostByAttacker+"Armies lost by defender:"+armiesLostByDefender;
+			return "";
 		}
 		else
 		{

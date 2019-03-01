@@ -34,7 +34,7 @@ public class AttackController {
 //	public String attack(int attackerDice, int defenderDice) {
 //		int attackerSum=rollDice(attackerDice);
 //		int defenderSum=rollDice(defenderDice);
-//		if(attacke./rSum<=defenderSum)
+//		if(attackerSum<=defenderSum)
 //			return "Defender";
 //		else
 //			return "Attacker";
@@ -119,12 +119,15 @@ public class AttackController {
 				return 2;
 			else
 				return 3;
-		} else {
+		}
+		else if(ad.equals("D")) {
 			if (country.getNoOfArmies() == 1)
 				return 1;
 			else
 				return 2;
 		}
+		else
+			return 0;
 	}
 
 	/**
@@ -151,9 +154,7 @@ public class AttackController {
 //	 * Gets player based on Owner Name from Country
 //	 * @param PlayerName
 //	 * @return
-//	Defender Won*/
-	
-	
+//	 */
 //	public Player getPlayerByName(String PlayerName){
 //		return ReadingFiles.playerObject.get(PlayerName);
 //	}
@@ -180,6 +181,7 @@ public class AttackController {
 	}
 	
 
+	AttackController attackController = new AttackController();
 	public void endReinforcementsPhaseButton(Player player){
 	}
 	public void endAttackPhaseButton(Player player) {
@@ -190,27 +192,27 @@ public class AttackController {
 			int attArmies=attacker.getNoOfArmies();
 			int defArmies=defender.getNoOfArmies();
 			
-			//String answer = "";
-			int attackerDice=setNoOfDice(attacker, "A");
+			String answer = "";
+			int attackerDice=attackController.setNoOfDice(attacker, "A");
 /*			display the number of defender dice
-*/			int defenderDice=setNoOfDice(defender, "D");
+*/			int defenderDice=attackController.setNoOfDice(defender, "D");
 			 attackerDiceRoll= new ArrayList<Integer>();
 			 defenderDiceRoll= new ArrayList<Integer>();
 			/*display the int list values as the results from dice roll
 			*/for(int i=0;i<attackerDice;i++) {
-				attackerDiceRoll.add(rollDice());
+				attackerDiceRoll.add(attackController.rollDice());
 			}
 			for(int i=0;i<defenderDice;i++) {
-				defenderDiceRoll.add(rollDice());
+				defenderDiceRoll.add(attackController.rollDice());
 			}
 			for(int i=0;i<defenderDice;i++) {
 				int attackerMax=getMaxValue(attackerDiceRoll);
 				int defenderMax=getMaxValue(defenderDiceRoll);
 				if(attackerMax<=defenderMax) {
-					updateArmies(attacker);
+					attackController.updateArmies(attacker);
 				}
 				else {
-					updateArmies(defender);
+					attackController.updateArmies(defender);
 				}
 				attackerDiceRoll.remove(attackerDiceRoll.indexOf(attackerMax));
 				defenderDiceRoll.remove(defenderDiceRoll.indexOf(defenderMax));
@@ -220,10 +222,6 @@ public class AttackController {
 					continue;
 			}
 			if(defender.getNoOfArmies()==0) {
-<<<<<<< HEAD
-				updateOwner(defender, attacker.getOwner());
-				//answer = answer+ "You Won and you occupied this country.";
-=======
 				List<Country> newListOfCountriesAtt = attacker.getOwner().getTotalCountriesOccupied();
 				newListOfCountriesAtt.add(defender);
 				attacker.getOwner().setTotalCountriesOccupied(newListOfCountriesAtt);
@@ -233,9 +231,8 @@ public class AttackController {
 				attackController.updateOwner(defender, attacker.getOwner());
 				defender.setNoOfArmies(1);
 				answer = answer+ "You Won and you occupied this country.";
->>>>>>> 385a41466cca6fd18215230424e9c39c13996a6c
 			}
-			if(getMyCountries(defender.getOwner()).size()==0) {
+			if(attackController.getMyCountries(defender.getOwner()).size()==0) {
 			}
 			int armiesLostByAttacker=0;
 			int armiesLostByDefender=0;
@@ -245,8 +242,8 @@ public class AttackController {
 			if(defender.getNoOfArmies()<defArmies) {
 				armiesLostByDefender=defArmies-defender.getNoOfArmies();
 			}
-			//answer=answer+"Armies lost by attacker:"+armiesLostByAttacker+"Armies lost by defender:"+armiesLostByDefender;
-			return "";
+			answer=answer+"Armies lost by attacker:"+armiesLostByAttacker+"Armies lost by defender:"+armiesLostByDefender;
+			return answer;
 		}
 		else
 		{

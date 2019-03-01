@@ -1,4 +1,3 @@
-package view;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -6,21 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import controller.AttackController;
-import controller.FortificationController;
-import controller.ReadingFiles;
-import controller.ReinforcementController;
-import model.Country;
-import model.Player;
-
 public class MainControll {
 	ReadingFiles files;
 	MFrame frame;
 	Player player;
 	MyActionListner myActionListner;
-	
 	AttackController attackController;
-	AttackerButtons attackerButtons;
 	ReinforcementController reinforcementController;
 	FortificationController fortificationController;
 
@@ -32,7 +22,6 @@ public class MainControll {
 		files = new ReadingFiles();
 		reinforcementController=new ReinforcementController();
 		myActionListner = new MyActionListner(this);
-		attackerButtons=new AttackerButtons();
 		files.Reads();
 		frame = new MFrame(myActionListner,files.image);
 		attackController = new AttackController();
@@ -60,6 +49,7 @@ public class MainControll {
 		frame.Refresh(countryObjects());
 		PaintCountries();
 		repaintAndRevalidate();
+
 	}
 
 	public List<String> countriesNames() {

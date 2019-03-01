@@ -1,4 +1,3 @@
-package controller;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,9 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-
-import model.Country;
-import model.Player;
 
 public class ReadingFiles3 {
 	String temp = "";

@@ -199,13 +199,13 @@ public class AttackController {
 			 attackerDiceRoll= new ArrayList<Integer>();
 			 defenderDiceRoll= new ArrayList<Integer>();
 			/*display the int list values as the results from dice roll
-			*/for(int i=0;i<attackerDice;i++) {
+			*/for(int i=0;i<=attackerDice;i++) {
 				attackerDiceRoll.add(attackController.rollDice());
 			}
-			for(int i=0;i<defenderDice;i++) {
+			for(int i=0;i<=defenderDice;i++) {
 				defenderDiceRoll.add(attackController.rollDice());
 			}
-			for(int i=0;i<defenderDice;i++) {
+			for(int i=0;i<=defenderDice;i++) {
 				int attackerMax=getMaxValue(attackerDiceRoll);
 				int defenderMax=getMaxValue(defenderDiceRoll);
 				if(attackerMax<=defenderMax) {

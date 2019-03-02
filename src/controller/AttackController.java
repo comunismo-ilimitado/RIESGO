@@ -246,7 +246,7 @@ public class AttackController {
 			}
 			answer = answer + "Armies lost by attacker:" + armiesLostByAttacker + "Armies lost by defender:"
 					+ armiesLostByDefender;
-			return answer;
+			return "";
 		} else {
 			if (attacker.getNoOfArmies() <= 1)
 				return "Your country must have more than one army";

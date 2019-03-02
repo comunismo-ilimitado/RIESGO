@@ -178,10 +178,10 @@ public class AttackController {
 	 */
 	public void placeArmies(Country country) {
 		country.setNoOfArmies(1);
+
 	}
 	
 
-	AttackController attackController = new AttackController();
 	public void endReinforcementsPhaseButton(Player player){
 	}
 	public void endAttackPhaseButton(Player player) {
@@ -193,26 +193,26 @@ public class AttackController {
 			int defArmies=defender.getNoOfArmies();
 			
 			String answer = "";
-			int attackerDice=attackController.setNoOfDice(attacker, "A");
+			int attackerDice=setNoOfDice(attacker, "A");
 /*			display the number of defender dice
-*/			int defenderDice=attackController.setNoOfDice(defender, "D");
+*/			int defenderDice=setNoOfDice(defender, "D");
 			 attackerDiceRoll= new ArrayList<Integer>();
 			 defenderDiceRoll= new ArrayList<Integer>();
 			/*display the int list values as the results from dice roll
 			*/for(int i=0;i<attackerDice;i++) {
-				attackerDiceRoll.add(attackController.rollDice());
+				attackerDiceRoll.add(rollDice());
 			}
 			for(int i=0;i<defenderDice;i++) {
-				defenderDiceRoll.add(attackController.rollDice());
+				defenderDiceRoll.add(rollDice());
 			}
 			while(attackerDiceRoll.size()!=0&& defenderDiceRoll.size()!=0) {
 				int attackerMax=getMaxValue(attackerDiceRoll);
 				int defenderMax=getMaxValue(defenderDiceRoll);
 				if(attackerMax<=defenderMax) {
-					attackController.updateArmies(attacker);
+					updateArmies(attacker);
 				}
 				else {
-					attackController.updateArmies(defender);
+					updateArmies(defender);
 				}
 				attackerDiceRoll.remove(attackerDiceRoll.indexOf(attackerMax));
 				defenderDiceRoll.remove(defenderDiceRoll.indexOf(defenderMax));
@@ -228,11 +228,11 @@ public class AttackController {
 				List<Country> newListOfCountriesDef=defender.getOwner().getTotalCountriesOccupied();
 				newListOfCountriesDef.remove(defender);
 				defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
-				attackController.updateOwner(defender, attacker.getOwner());
+				updateOwner(defender, attacker.getOwner());
 				defender.setNoOfArmies(1);
 				//answer = answer+ "You Won and you occupied this country.";
 			}
-			if(attackController.getMyCountries(defender.getOwner()).size()==0) {
+			if(getMyCountries(defender.getOwner()).size()==0) {
 			}
 			int armiesLostByAttacker=0;
 			int armiesLostByDefender=0;

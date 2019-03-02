@@ -192,7 +192,11 @@ public class AttackController {
 			int defArmies=defender.getNoOfArmies();
 			
 <<<<<<< HEAD
+<<<<<<< HEAD
 			String answer = "";
+=======
+			//String answer = "";
+>>>>>>> parent of 77456d2... all
 =======
 			//String answer = "";
 >>>>>>> parent of 77456d2... all
@@ -242,6 +246,9 @@ public class AttackController {
 =======
 				answer = answer+ "You Won and you occupied this country.";
 >>>>>>> 385a41466cca6fd18215230424e9c39c13996a6c
+<<<<<<< HEAD
+>>>>>>> parent of 77456d2... all
+=======
 >>>>>>> parent of 77456d2... all
 			}
 			if(getMyCountries(defender.getOwner()).size()==0) {

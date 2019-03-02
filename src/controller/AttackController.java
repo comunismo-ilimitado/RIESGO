@@ -229,8 +229,13 @@ public class AttackController {
 				newListOfCountriesDef.remove(defender);
 				defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
 				attackController.updateOwner(defender, attacker.getOwner());
+<<<<<<< HEAD
 				defender.setNoOfArmies(1);
 				//answer = answer+ "You Won and you occupied this country.";
+=======
+				answer = answer+ "You Won and you occupied this country.";
+>>>>>>> 385a41466cca6fd18215230424e9c39c13996a6c
+>>>>>>> parent of 21d190b... Update 1.2
 			}
 			if(attackController.getMyCountries(defender.getOwner()).size()==0) {
 			}

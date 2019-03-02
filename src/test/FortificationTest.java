@@ -66,7 +66,6 @@ public class FortificationTest
 		n_list.add(country4);
 		
 		List<Country> n_list1 = new ArrayList<Country>();
-		n_list.add(country1);
 		n_list1.add(country5);
 		n_list1.add(country6);
 		
@@ -95,14 +94,12 @@ public class FortificationTest
 		
 		country4.setNeighbors(n_list1);
 		country4.setNoOfArmies(2);
-		country4.setPlayer(player1);
+		country4.setPlayer(player2);
 		
-		country5.setPlayer(player2);
-		
-//		continent1.setContinentId(81);
-//		continent1.setName("Asia");
-//		continent1.setCountries(n_list);
-//		continent1.setControlValue(4);
+		continent1.setContinentId(81);
+		continent1.setName("Asia");
+		continent1.setCountries(n_list);
+		continent1.setControlValue(4);
 		
 	}
 	
@@ -115,6 +112,6 @@ public class FortificationTest
 	@Test
 	public void test1HasPathBFS() 
 	{
-		assertEquals(false,fortification.hasPathBFS2(country1, country5));
+		assertNotEquals(true,fortification.hasPathBFS2(country1, country5));
 	}
 }

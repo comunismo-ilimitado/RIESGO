@@ -34,7 +34,7 @@ public class AttackController {
 //	public String attack(int attackerDice, int defenderDice) {
 //		int attackerSum=rollDice(attackerDice);
 //		int defenderSum=rollDice(defenderDice);
-//		if(attackerSum<=defenderSum)
+//		if(attacke./rSum<=defenderSum)
 //			return "Defender";
 //		else
 //			return "Attacker";
@@ -119,15 +119,12 @@ public class AttackController {
 				return 2;
 			else
 				return 3;
-		}
-		else if(ad.equals("D")) {
+		} else {
 			if (country.getNoOfArmies() == 1)
 				return 1;
 			else
 				return 2;
 		}
-		else
-			return 0;
 	}
 
 	/**
@@ -154,7 +151,9 @@ public class AttackController {
 //	 * Gets player based on Owner Name from Country
 //	 * @param PlayerName
 //	 * @return
-//	 */
+//	Defender Won*/
+	
+	
 //	public Player getPlayerByName(String PlayerName){
 //		return ReadingFiles.playerObject.get(PlayerName);
 //	}
@@ -192,7 +191,11 @@ public class AttackController {
 			int attArmies=attacker.getNoOfArmies();
 			int defArmies=defender.getNoOfArmies();
 			
+<<<<<<< HEAD
 			String answer = "";
+=======
+			//String answer = "";
+>>>>>>> parent of 77456d2... all
 			int attackerDice=setNoOfDice(attacker, "A");
 /*			display the number of defender dice
 */			int defenderDice=setNoOfDice(defender, "D");
@@ -222,6 +225,10 @@ public class AttackController {
 					continue;
 			}
 			if(defender.getNoOfArmies()==0) {
+<<<<<<< HEAD
+				updateOwner(defender, attacker.getOwner());
+				//answer = answer+ "You Won and you occupied this country.";
+=======
 				List<Country> newListOfCountriesAtt = attacker.getOwner().getTotalCountriesOccupied();
 				newListOfCountriesAtt.add(defender);
 				attacker.getOwner().setTotalCountriesOccupied(newListOfCountriesAtt);
@@ -230,7 +237,12 @@ public class AttackController {
 				defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
 				updateOwner(defender, attacker.getOwner());
 				defender.setNoOfArmies(1);
+<<<<<<< HEAD
 				//answer = answer+ "You Won and you occupied this country.";
+=======
+				answer = answer+ "You Won and you occupied this country.";
+>>>>>>> 385a41466cca6fd18215230424e9c39c13996a6c
+>>>>>>> parent of 77456d2... all
 			}
 			if(getMyCountries(defender.getOwner()).size()==0) {
 			}

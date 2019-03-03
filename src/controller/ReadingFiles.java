@@ -27,8 +27,7 @@ public class ReadingFiles {
 
 	// returns country object
 
-	public static void Reads() {
-		try {
+	public static void Reads() throws IOException {
 		CountryNameObject = new HashMap<>();
 		CountriesNames = new ArrayList<>();
 		ContinentNames = new ArrayList<>();
@@ -64,7 +63,6 @@ public class ReadingFiles {
 			ContinentNames.add(temporary);
 			ContinentNameObject.put(temporary, new Continent(value, temporary));
 		}
-		
 		String[] tempCountryArray = CountriesString.split("\n");
 		for (int i = 0; i < tempCountryArray.length; i++) {
 			String a = tempCountryArray[i].split(",")[0].trim();
@@ -91,12 +89,14 @@ public class ReadingFiles {
 		List<Color> arrayListc = new ArrayList<>();
 		arrayListc.add(Color.cyan);
 		arrayListc.add(Color.GREEN);
-		arrayListc.add(Color.YELLOW);
-		arrayListc.add(Color.ORANGE);
-		arrayListc.add(Color.decode("#33cccc"));
-		arrayListc.add(Color.PINK);
-		
-		
+		arrayListc.add(Color.decode("#ffff00"));
+		arrayListc.add(Color.decode("#FF6600"));
+		arrayListc.add(Color.WHITE);
+		arrayListc.add(Color.RED);
+		arrayListc.add(Color.black);
+		arrayListc.add(Color.GRAY);
+		arrayListc.add(Color.RED);
+
 		int noofplayers = AssignCountries.NumberOfPlayers;
 
 		for (int i = 0; i < noofplayers; i++) {
@@ -133,9 +133,6 @@ public class ReadingFiles {
 			}
 
 		}
-		}
-		catch(Exception e) {
-			System.out.println("ERROR IN MAP");
-		}
+
 	}
 }

@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -137,10 +136,7 @@ public class MFrame extends JFrame {
 			button[i] = new JButton(count.get(i) + " | " + countryObjects.get(count.get(i)).getNoOfArmies() + " | "
 					+ countryObjects.get(count.get(i)).getContinent().getName());
 			// button[i].setBackground(arrayList.get(random.nextInt(4)));
-			button[i].setFont(new Font("Arial", Font.PLAIN, 13));
-
 			hashButton.put((String) count.get(i), button[i]);
-
 			jPanel2.add(button[i]);
 			/*
 			 * JButton butto= new JButton("1"); butto.setEnabled(false);

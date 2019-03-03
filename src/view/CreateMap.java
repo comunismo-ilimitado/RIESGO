@@ -223,7 +223,6 @@ public class CreateMap {
 					if (checkboxes1[i].isSelected()) {
 						Country temp = new Country(checkboxes1[i].getText());
 						TempCountriesObject2.add(temp);
-						System.out.print(checkboxes1[i].isSelected() + "yesss");
 						checkboxes1[i].setSelected(false);
 					}
 				}
@@ -257,7 +256,6 @@ public class CreateMap {
 	// Just for checking.. remove later
 	public void Disp() {
 		List<Country> Neighbours = new ArrayList<Country>();
-		System.out.print("end");
 		for (Country in : CountriesObjectList) {
 			Neighbours = in.getNeighbors();
 			System.out.println("\nCountry name: " + in.getName() + "\nNeighbours:\n");

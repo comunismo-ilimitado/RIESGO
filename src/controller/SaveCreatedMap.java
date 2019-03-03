@@ -82,7 +82,7 @@ public class SaveCreatedMap {
 			bw.newLine();
 			i++;
 			 }
-			
+			bw.newLine();
 		}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block

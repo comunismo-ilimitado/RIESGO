@@ -50,7 +50,6 @@ public class SaveCreatedMap {
 		try {
 			WriteIntoFile("[Map]");
 			WriteIntoFile("Image=UserMap.bmp");
-			WriteIntoFile("");
 			WriteIntoFile("wrap=yes");
 			WriteIntoFile("scroll=none");
 			WriteIntoFile("warn=yes");

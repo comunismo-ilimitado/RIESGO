@@ -18,7 +18,7 @@ public class SaveCreatedMap {
 	BufferedWriter bw;
 
 	public SaveCreatedMap() {
-		File f1 = new File("Resources/UserMap.txt");
+		File f1 = new File("Resources/UserMap.map");
 		try {
 			if (f1.createNewFile())
 				System.out.println("File created");

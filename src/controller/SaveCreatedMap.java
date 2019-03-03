@@ -65,18 +65,16 @@ public class SaveCreatedMap {
 			Random rand1 = new Random();
 			Random rand2 = new Random();
 
-			int i = 1;
 			for (Continent cc : CreateMap.ContinentsObjectList) {
 				for (Country cn : cc.getCountries()) {
 					int value1 = rand1.nextInt(255);
 					int value2 = rand2.nextInt(255);
-					bw.write(i + "," + cn.getName() + "," + value1 + "," + value2 + "," + cc.getName());
+					bw.write(cn.getName() + "," + value1 + "," + value2 + "," + cc.getName());
 
 					for (Country cin : cn.getNeighbors()) {
 						bw.write("," + cn.getName());
 					}
 					bw.newLine();
-					i++;
 				}
 				bw.newLine();
 			}

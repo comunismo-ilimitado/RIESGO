@@ -95,33 +95,43 @@ public class MyActionListner implements ActionListener {
 			attackCountry1 = country;
 			controll.frame.ActivateAll();
 			List<Country> abc = controll.attackController.getMyNeighborsForAttack(country);
+			if(abc.size()==0)
+			{
+				controll.frame.error("No Neighbours To Attack");
+				doeverything();
+			}else {
+			
 			controll.frame.OnlyNeeded(abc);
 			controll.RefreshButtons();
-
+			}
 		} else if (attackCountry2 == null) {
 			attackCountry2 = country;
 			String reply = controll.attackController.attackButton(attackCountry1, attackCountry2);
 			if (!reply.equals("")) {
 				controll.frame.error(reply);
 			}
-			controll.frame.AAA = controll.attackController.attackerDiceRoll.toString();
-			controll.frame.BBB = controll.attackController.defenderDiceRoll.toString();
-			controll.frame.NotifyAll();
-			controll.frame.ActivateAll();
-			attackCountry1 = null;
-			attackCountry2 = null;
-			controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
-			controll.RefreshButtons();
-
+			
+			doeverything();
+		
 		} else {
 			attackCountry1 = null;
 			attackCountry2 = null;
 		}
 	}
+	public void doeverything() throws IOException {
+		controll.frame.AAA= controll.attackController.attackerDiceRollFinal.toString();
+		controll.frame.BBB= controll.attackController.defenderDiceRollFinal.toString();
+		controll.frame.NotifyAll();
+		controll.frame.ActivateAll();
+		attackCountry1 = null;
+		attackCountry2 = null;
+		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
+		controll.PaintCountries();
+		controll.RefreshButtons();
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.toString());
 		// TODO Auto-generated method stub
 		if (Phases.contains(e.getActionCommand())) {
 			if (e.getActionCommand() == "Finish Reinforcement") {

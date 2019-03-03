@@ -22,9 +22,9 @@ import java.io.*;
  * @version 1.0.0
  */
 public class AttackController {
-	public List<Integer> attackerDiceRoll;
-	public List<Integer>defenderDiceRoll;
-
+	public List<Integer> attackerDiceRollFinal=new ArrayList<Integer>();
+	public List<Integer>defenderDiceRollFinal=new ArrayList<Integer>();
+	
 //	/**
 //	 * Returns the winner of each dice roll as a string, either "Attacker" or "Defender"
 //	 * @param attackerDice
@@ -70,9 +70,9 @@ public class AttackController {
 		for(int i=0;i<neighbors.size();i++) {
 			if (neighbors.get(i).getOwner().equals(country.getOwner())) {
 				temp.add(neighbors.get(i));}
-			if (neighbors.get(i).getNoOfArmies() < 2)
+		/*	if (neighbors.get(i).getNoOfArmies() < 2)
 				temp.add(neighbors.get(i));
-		}
+		*/}
 /*		for(int i=0;i<temp.size();i++) {
 			neighbors.remove(neighbors.indexOf(temp.get(i)));
 		}
@@ -186,7 +186,8 @@ public class AttackController {
 	public void endAttackPhaseButton(Player player) {
 	}
 	public String attackButton(Country attacker, Country defender) {
-		if(attacker.getNoOfArmies()>=2 && defender.getNoOfArmies()>=2)
+		
+		if(attacker.getNoOfArmies()>=2 && defender.getNoOfArmies()>=1)
 		{
 			int attArmies=attacker.getNoOfArmies();
 			int defArmies=defender.getNoOfArmies();
@@ -195,8 +196,8 @@ public class AttackController {
 			int attackerDice=setNoOfDice(attacker, "A");
 /*			display the number of defender dice
 */			int defenderDice=setNoOfDice(defender, "D");
-			 attackerDiceRoll= new ArrayList<Integer>();
-			 defenderDiceRoll= new ArrayList<Integer>();
+			 List<Integer> attackerDiceRoll = new ArrayList<Integer>();
+			 List<Integer> defenderDiceRoll = new ArrayList<Integer>();
 			/*display the int list values as the results from dice roll
 			*/for(int i=0;i<attackerDice;i++) {
 				attackerDiceRoll.add(rollDice());
@@ -204,6 +205,10 @@ public class AttackController {
 			for(int i=0;i<defenderDice;i++) {
 				defenderDiceRoll.add(rollDice());
 			}
+			attackerDiceRollFinal.clear();
+			defenderDiceRollFinal.clear();
+			attackerDiceRollFinal.addAll(attackerDiceRoll);
+			defenderDiceRollFinal.addAll(defenderDiceRoll);
 			while(attackerDiceRoll.size()!=0&& defenderDiceRoll.size()!=0) {
 				int attackerMax=getMaxValue(attackerDiceRoll);
 				int defenderMax=getMaxValue(defenderDiceRoll);
@@ -228,7 +233,8 @@ public class AttackController {
 				newListOfCountriesDef.remove(defender);
 				defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
 				updateOwner(defender, attacker.getOwner());
-				defender.setNoOfArmies(1);
+				defender.setNoOfArmies(attackerDice);
+				attacker.setNoOfArmies(attacker.getNoOfArmies()-attackerDice);
 				//answer = answer+ "You Won and you occupied this country.";
 				answer = answer+ "You Won and you occupied this country.";
 			}
@@ -249,9 +255,9 @@ public class AttackController {
 		{
 			if(attacker.getNoOfArmies()<=1)
 			return "Your country must have more than one army";
-			else if(defender.getNoOfArmies()<=1)
+		/*	else if(defender.getNoOfArmies()<=1)
 				return "Please a country with more than one army to attack";
-			else
+		*/	else
 				return "Wrong input";
 		}
 	}

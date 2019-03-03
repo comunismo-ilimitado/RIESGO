@@ -15,7 +15,6 @@ public class MyActionListner implements ActionListener {
 	List<String> Phases;
 	String currentPhase;
 	int players = 6;
-	int tem = 10;
 	int currentPlayer = 0;
 	Country attackCountry1, attackCountry2;
 	Country fortifyCountry1, fortifyCountry2;
@@ -121,7 +120,6 @@ public class MyActionListner implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.toString());
 		// TODO Auto-generated method stub
 		if (Phases.contains(e.getActionCommand())) {
 			if (e.getActionCommand() == "Finish Reinforcement") {

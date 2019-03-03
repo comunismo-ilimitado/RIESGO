@@ -9,7 +9,7 @@ import model.Player;
  * This controller class has all the methods needs for the reinforcement phase
  * of the game
  * 
- * @author neeraj
+ * @author TEAM 1
  * @version 1.1
  */
 public class ReinforcementController {

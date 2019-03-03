@@ -22,12 +22,13 @@ public class ReadingFiles {
 	public static List<String> CountriesNames, ContinentNames; // List of countries Strings
 	public static HashMap<String, Country> CountryNameObject;
 	public static HashMap<String, Continent> ContinentNameObject; // HashMAp COntaining Country name as // // key and
-	public static String address = "Resources/World.map";
-	public static String image = "noimage.bmp";
+	public static String address = "Resources/Asia.map";
+	public static String image = "Asia.bmp";
 
 	// returns country object
 
 	public static void Reads() throws IOException {
+		try {
 		CountryNameObject = new HashMap<>();
 		CountriesNames = new ArrayList<>();
 		ContinentNames = new ArrayList<>();
@@ -80,6 +81,7 @@ public class ReadingFiles {
 			}
 		}
 
+
 		List<String> CountriesNames2 = new ArrayList<String>(CountryNameObject.keySet());
 		Collections.shuffle(CountriesNames2);
 
@@ -105,7 +107,6 @@ public class ReadingFiles {
 			playerId.put(i, player);
 			players.add(i);
 		}
-		try {
 			int n = noofplayers;
 			for (int i = 0; i < CountriesNames2.size(); i++) {
 				for (int j = 0; j < noofplayers; j++) {
@@ -116,8 +117,7 @@ public class ReadingFiles {
 				}
 				i = i + n - 1;
 			}
-		} catch (Exception e) {
-		}
+
 		int ArmiesPerPlayer = 50 - (5 * noofplayers);
 		for (int i = 0; i < noofplayers; i++) {
 			Player temp1 = playerId.get(players.get(i));
@@ -132,6 +132,11 @@ public class ReadingFiles {
 
 			}
 
+		}
+		}
+		catch(Exception e) {
+			
+			System.out.println("ERROR IN MAP READING");
 		}
 
 	}

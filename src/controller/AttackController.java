@@ -23,16 +23,8 @@ import java.io.*;
  * @version 1.0.0
  */
 public class AttackController {
-<<<<<<< HEAD
-	public List<Integer> attackerDiceRollFinal=new ArrayList<Integer>();
-	public List<Integer>defenderDiceRollFinal=new ArrayList<Integer>();
-	
 	public List<Integer> attackerDiceRoll;
 	public List<Integer> defenderDiceRoll;
-=======
-	public List<Integer> attackerDiceRoll;
-	public List<Integer>defenderDiceRoll;
->>>>>>> parent of 8730d55... my fiunal
 
 //	/**
 //	 * Returns the winner of each dice roll as a string, either "Attacker" or "Defender"
@@ -78,18 +70,6 @@ public class AttackController {
 		List<Country> temp = new ArrayList<Country>();
 		for (int i = 0; i < neighbors.size(); i++) {
 			if (neighbors.get(i).getOwner().equals(country.getOwner())) {
-<<<<<<< HEAD
-				temp.add(neighbors.get(i));}
-			if (neighbors.get(i).getNoOfArmies() < 2)
-				temp.add(neighbors.get(i));
-		}
-/*		for(int i=0;i<temp.size();i++) {
-			neighbors.remove(neighbors.indexOf(temp.get(i)));
-		}
-		
-		
-*/		neighbors.removeAll(temp);
-=======
 				temp.add(neighbors.get(i));
 			}
 			if (neighbors.get(i).getNoOfArmies() < 2)
@@ -101,7 +81,6 @@ public class AttackController {
 		 * 
 		 * 
 		 */ neighbors.removeAll(temp);
->>>>>>> c99fa4c4f6fafe24b0a73a53e67fcf8e78f2b53c
 		return neighbors;
 	}
 
@@ -201,7 +180,7 @@ public class AttackController {
 		country.setNoOfArmies(1);
 	}
 
-	AttackController attackController = new AttackController();
+//	AttackController attackController = new AttackController();
 
 	public void endReinforcementsPhaseButton(Player player) {
 	}
@@ -210,72 +189,32 @@ public class AttackController {
 	}
 
 	public String attackButton(Country attacker, Country defender) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-		
-		if(attacker.getNoOfArmies()>=2 && defender.getNoOfArmies()>=1)
-=======
-		if(attacker.getNoOfArmies()>=2 && defender.getNoOfArmies()>=2)
->>>>>>> parent of 8730d55... my fiunal
-		{
-			int attArmies=attacker.getNoOfArmies();
-			int defArmies=defender.getNoOfArmies();
-			
-			String answer = "";
-			int attackerDice=setNoOfDice(attacker, "A");
-/*			display the number of defender dice
-*/			int defenderDice=setNoOfDice(defender, "D");
-			 attackerDiceRoll= new ArrayList<Integer>();
-			 defenderDiceRoll= new ArrayList<Integer>();
-			/*display the int list values as the results from dice roll
-			*/for(int i=0;i<attackerDice;i++) {
-				attackerDiceRoll.add(rollDice());
-=======
 		if (attacker.getNoOfArmies() >= 2 && defender.getNoOfArmies() >= 2) {
 			int attArmies = attacker.getNoOfArmies();
 			int defArmies = defender.getNoOfArmies();
 
 			String answer = "";
-			int attackerDice = attackController.setNoOfDice(attacker, 'A');
+			int attackerDice = setNoOfDice(attacker, 'A');
 			/*
 			 * display the number of defender dice
-			 */ int defenderDice = attackController.setNoOfDice(defender, 'D');
+			 */ int defenderDice = setNoOfDice(defender, 'D');
 			attackerDiceRoll = new ArrayList<Integer>();
 			defenderDiceRoll = new ArrayList<Integer>();
 			/*
 			 * display the int list values as the results from dice roll
 			 */for (int i = 0; i < attackerDice; i++) {
-				attackerDiceRoll.add(attackController.rollDice());
->>>>>>> c99fa4c4f6fafe24b0a73a53e67fcf8e78f2b53c
+				attackerDiceRoll.add(rollDice());
 			}
 			for (int i = 0; i < defenderDice; i++) {
-				defenderDiceRoll.add(attackController.rollDice());
+				defenderDiceRoll.add(rollDice());
 			}
-<<<<<<< HEAD
-<<<<<<< HEAD
-			attackerDiceRollFinal.clear();
-			defenderDiceRollFinal.clear();
-			attackerDiceRollFinal.addAll(attackerDiceRoll);
-			defenderDiceRollFinal.addAll(defenderDiceRoll);
-=======
->>>>>>> parent of 8730d55... my fiunal
-			while(attackerDiceRoll.size()!=0&& defenderDiceRoll.size()!=0) {
-				int attackerMax=getMaxValue(attackerDiceRoll);
-				int defenderMax=getMaxValue(defenderDiceRoll);
-				if(attackerMax<=defenderMax) {
-					updateArmies(attacker);
-				}
-				else {
-					updateArmies(defender);
-=======
 			while (attackerDiceRoll.size() != 0 && defenderDiceRoll.size() != 0) {
 				int attackerMax = getMaxValue(attackerDiceRoll);
 				int defenderMax = getMaxValue(defenderDiceRoll);
 				if (attackerMax <= defenderMax) {
-					attackController.updateArmies(attacker);
+					updateArmies(attacker);
 				} else {
-					attackController.updateArmies(defender);
->>>>>>> c99fa4c4f6fafe24b0a73a53e67fcf8e78f2b53c
+					updateArmies(defender);
 				}
 				attackerDiceRoll.remove(attackerDiceRoll.indexOf(attackerMax));
 				defenderDiceRoll.remove(defenderDiceRoll.indexOf(defenderMax));
@@ -291,18 +230,11 @@ public class AttackController {
 				List<Country> newListOfCountriesDef = defender.getOwner().getTotalCountriesOccupied();
 				newListOfCountriesDef.remove(defender);
 				defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
-<<<<<<< HEAD
 				updateOwner(defender, attacker.getOwner());
 				defender.setNoOfArmies(1);
-				//answer = answer+ "You Won and you occupied this country.";
-				answer = answer+ "You Won and you occupied this country.";
-=======
-				attackController.updateOwner(defender, attacker.getOwner());
-				defender.setNoOfArmies(1);
 				answer = answer + "You Won and you occupied this country.";
->>>>>>> c99fa4c4f6fafe24b0a73a53e67fcf8e78f2b53c
 			}
-			if (attackController.getMyCountries(defender.getOwner()).size() == 0) {
+			if (getMyCountries(defender.getOwner()).size() == 0) {
 			}
 			int armiesLostByAttacker = 0;
 			int armiesLostByDefender = 0;
@@ -315,23 +247,10 @@ public class AttackController {
 			answer = answer + "Armies lost by attacker:" + armiesLostByAttacker + "Armies lost by defender:"
 					+ armiesLostByDefender;
 			return "";
-<<<<<<< HEAD
-		}
-		else
-		{
-			if(attacker.getNoOfArmies()<=1)
-			return "Your country must have more than one army";
-<<<<<<< HEAD
-		/*	else if(defender.getNoOfArmies()<=1)
-=======
 		} else {
 			if (attacker.getNoOfArmies() <= 1)
 				return "Your country must have more than one army";
 			else if (defender.getNoOfArmies() <= 1)
->>>>>>> c99fa4c4f6fafe24b0a73a53e67fcf8e78f2b53c
-=======
-			else if(defender.getNoOfArmies()<=1)
->>>>>>> parent of 8730d55... my fiunal
 				return "Please a country with more than one army to attack";
 			else
 				return "Wrong input";

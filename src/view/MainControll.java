@@ -28,7 +28,9 @@ public class MainControll {
 
 	}
 
-	public void Function() throws IOException {
+	public void Function()  {
+		try {
+		
 		files = new ReadingFiles();
 		reinforcementController=new ReinforcementController();
 		myActionListner = new MyActionListner(this);
@@ -45,6 +47,11 @@ public class MainControll {
 		
 		myActionListner.ReinforcementPhase();
 		repaintAndRevalidate();
+		}
+		catch(Exception e) {
+			System.out.println("ERROR IN MAP");
+			frame.error("ERRRRRRRRRRROOOOOOOOOOOOOOOORRRRRRRRRRRRRRRRR");
+		}
 	}
 
 	public void AddArmies(int no) {

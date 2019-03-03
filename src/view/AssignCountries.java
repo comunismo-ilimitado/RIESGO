@@ -57,11 +57,7 @@ public class AssignCountries {
 		OKButton= new JButton("OK");
 		OKButton.setBounds(290,190,100,30);
 		
-
-/*<<<<<<< HEAD
-		String[] select= {"2", "3", "4","5", "6"};
-=======
-*/		String[] select= {"2", "3", "4"};
+String[] select= {"2", "3", "4","5", "6"};
 		PNumberJCombo= new JComboBox(select);
 		PNumberJCombo.setBounds(120,150,200,20);
 	   	

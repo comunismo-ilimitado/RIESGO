@@ -1,12 +1,14 @@
+package view;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 /**
- * First Paga of Start up phase
- * Start here
+ * First Paga of Start up phase Start here
  *
  *
  */
@@ -14,18 +16,18 @@ public class StartUpWindow {
 
 	private static JFrame window;
 	private JLabel HeaderLabel;
-	private JButton select1, select2,select3;
+	private JButton select1, select2, select3;
 
 	public StartUpWindow() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public static void main(String[] args) {
-      StartUpWindow temp= new StartUpWindow();
-      temp.setup();    
+		StartUpWindow temp = new StartUpWindow();
+		temp.setup();
 	}
 
-	 public void setup() {
+	public void setup() {
 		window = new JFrame("Start-up phase");
 		window.setSize(500, 700);
 
@@ -37,7 +39,7 @@ public class StartUpWindow {
 
 		select2 = new JButton("Load Map");
 		select2.setBounds(100, 300, 200, 50);
-		
+
 		select3 = new JButton("Create New Map");
 		select3.setBounds(100, 400, 200, 50);
 
@@ -47,35 +49,37 @@ public class StartUpWindow {
 		window.add(select3);
 
 		HeaderLabel.setVisible(true);
-		
+
 		select1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				window.dispose();
 				System.out.print("Select fromlist");
- 				MapSelection Map= new MapSelection();
-			}});
+				MapSelection Map = new MapSelection();
+			}
+		});
 		select2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				window.dispose();
-				BrowseMapFile Map= new BrowseMapFile();
-			}});
+				BrowseMapFile Map = new BrowseMapFile();
+			}
+		});
 
 		select3.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				window.dispose();
-				CreateMap CreatedMap= new CreateMap();
-			}});
-		
+				CreateMap CreatedMap = new CreateMap();
+			}
+		});
+
 		select1.setVisible(true);
 		select2.setVisible(true);
 		select3.setVisible(true);
-
 
 		window.setLayout(null);
 		window.setVisible(true);

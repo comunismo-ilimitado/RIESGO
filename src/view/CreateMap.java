@@ -122,8 +122,6 @@ public class CreateMap {
 		GenerateMapButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-
-				System.out.print("countries%%%%:" + NoOfCountries);
 				NoOfCountries = Integer.parseInt(NoOfCountriesTextField.getText());
 				NoOfContinents = Integer.parseInt(NoOfContinentsTextField.getText());
 				if (NoOfCountries <= 2 || NoOfContinents <= 1) {
@@ -161,15 +159,11 @@ public class CreateMap {
 					if (checkboxes[i].isSelected()) {
 						Country temp = new Country(checkboxes[i].getText());
 						TempCountriesObject.add(temp);
-						// AssignCoumtriesPanel.remove(checkboxes[i]);
 						checkboxes[i].setVisible(false);
 						AssignCoumtriesPanel.updateUI();
-						System.out.print(checkboxes[i].isSelected() + "yesss checkbox name:" + checkboxes[i].getText());
 						checkboxes[i].setSelected(false);
 					}
-
 				}
-				System.out.println("selected");
 				Continent tempc = new Continent(Integer.parseInt(ControlValueTextField.getText()),
 						(String) ContinentsCombo.getSelectedItem());
 				tempc.setCountries(TempCountriesObject);
@@ -177,8 +171,6 @@ public class CreateMap {
 					ContinentsObjectList.add(tempc);
 				}
 				ContinentsCombo.removeItem((String) ContinentsCombo.getSelectedItem());
-				System.out.print("index:" + (String) ContinentsCombo.getSelectedItem());
-
 			}
 		});
 	}
@@ -234,19 +226,13 @@ public class CreateMap {
 						System.out.print(checkboxes1[i].isSelected() + "yesss");
 						checkboxes1[i].setSelected(false);
 					}
-					System.out.println("selected");
 				}
-				System.out.print("index1:" + (String) CountriesCombo.getSelectedItem());
-				// String index1=(String)CountriesCombo.getSelectedItem()
-
 				Country tempct = new Country((String) CountriesCombo.getSelectedItem());
 				tempct.setNeighbors(TempCountriesObject2);
 				CountriesObjectList.add(tempct);
 				CountriesCombo.removeItem((String) CountriesCombo.getSelectedItem());
 				if ((String) CountriesCombo.getSelectedItem() == null) {
-					// AssignNeighboursPanel.removeAll();
-
-					for (int j = 0; j < NoOfCountries; j++) {
+                    for (int j = 0; j < NoOfCountries; j++) {
 						checkboxes1[j].setVisible(false);
 						AssignNeighboursPanel.updateUI();
 					}

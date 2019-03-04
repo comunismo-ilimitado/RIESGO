@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.ModuleLayer.Controller;
+//import java.lang.ModuleLayer.Controller;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -113,7 +113,7 @@ public class MFrame extends JFrame {
 
 		setTitle("PAZIM");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setResizable(false);
+		setResizable(true);
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);

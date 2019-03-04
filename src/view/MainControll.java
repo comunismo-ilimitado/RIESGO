@@ -33,9 +33,17 @@ public class MainControll {
 		reinforcementController = new ReinforcementController();
 		myactionlistner = new MyActionListner(this);
 		attackerButtons = new AttackerButtons();
-		files.Reads();
+		String address="Resources/World.map";
+		if(StartUpWindow.MapType==1)
+			address="Resources/"+MapSelection.getSelectedMap()+".map";
+		else if(StartUpWindow.MapType==2) 
+			address="Resources/LoadedMap.map";
+		else if(StartUpWindow.MapType==3)
+			address="Resources/UserMap.map";
+		System.out.print("Selected Map:" + address);
+		files.Reads(address);
 		frame = new MFrame(myactionlistner, files.image);
-		attackController = new AttackController();
+		//attackController = new AttackController();
 		fortificationController = new FortificationController();
 		frame.fun();
 

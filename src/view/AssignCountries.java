@@ -14,11 +14,7 @@ public class AssignCountries {
 	private static JButton OKButton;
 	private static JFrame Frame1;
 	public static int NumberOfPlayers=2;
-	public static void main(String[] args) {
-		AssignCountries temp= new AssignCountries();
-		temp.assignCountries();
-		NumberOfPlayers=temp.getNumberOfPlayer();
-	}
+
 	/**
 	 * returns the number of player chooses as integer
 	 * @return int

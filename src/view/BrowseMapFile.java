@@ -28,13 +28,6 @@ public class BrowseMapFile {
 		
       setUp();
 	}
-
-	public static void main(String[] args) {
-		BrowseMapFile temp = new BrowseMapFile();
-		temp.setUp();
-
-	}
-
 	/**
      * Returns the path of the mapfile Browsed
      * @return
@@ -80,7 +73,7 @@ public class BrowseMapFile {
 					
 					try {
 						Path source = Paths.get(Location);
-						String dest="Resources/"+f.getName();
+						String dest="Resources/LoadedMap.map";
 						File fResource= new File(dest);
 						fResource.createNewFile();
 						OutputStream fos = new FileOutputStream(fResource);
@@ -117,7 +110,7 @@ public class BrowseMapFile {
 					JOptionPane.showMessageDialog(null,"No file Selected!");
 				else
 				{
-					LoadSelectedMap.loadMap();
+					AssignCountries.assignCountries();
 				}
 					
 			}

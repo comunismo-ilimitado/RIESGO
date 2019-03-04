@@ -1,0 +1,70 @@
+[Map]
+author=JWGNLE
+image=Europe.bmp
+wrap=no
+scroll=horizontal
+warn=yes
+
+[Continents]
+Scandinavia=5
+Western Europe=10
+Eastern Europe=8
+Central Europe=12
+Italy=3
+South Central=9
+Southern Europe=5
+
+[Territories]
+Iceland,37,12,Scandinavia,Norway,Belfast
+Norway,151,28,Scandinavia,Iceland,Scotland,Denmark,Sweden
+Sweden,175,15,Scandinavia,Denmark,Norway,Finland,Estonia,Gotland Is.,Poland
+Finland,217,14,Scandinavia,Sweden,Russia
+Russia,277,42,Scandinavia,Estonia,Finland,Latvia,Belarus,Ukraine
+Estonia,221,43,Scandinavia,Sweden,Latvia,Russia
+Gotland Is.,193,59,Scandinavia,Sweden,Latvia
+
+Ireland,63,78,Western Europe,Belfast,England,Spain
+Belfast,73,64,Western Europe,Iceland,England,Ireland
+Scotland,89,50,Western Europe,England,Norway
+England,93,89,Western Europe,Belfast,Ireland,Scotland,France
+France,106,140,Western Europe,England,Belgium,Spain,Germany,Italy
+Spain,53,188,Western Europe,Ireland,France,Portugal,Balearic Is.
+Portugal,24,189,Western Europe,Spain,Morocco
+Morocco,32,228,Western Europe,Portugal,Algeria
+Algeria,97,228,Western Europe,Morocco,Balearic Is.,Tunisia
+Balearic Is.,99,199,Western Europe,Spain,Algeria,Corsica
+
+Latvia,228,61,Eastern Europe,Gotland Is.,Estonia,Russia,Lithuania,Belarus
+Lithuania,219,77,Eastern Europe,Latvia,Poland,Belarus
+Belarus,242,86,Eastern Europe,Russia,Latvia,Lithuania,Ukraine,Poland
+Ukraine,265,115,Eastern Europe,Russia,Belarus,Poland,Ukraine Is.,Moldova,Romania,Hungary,Slovakia
+Ukraine Is.,286,143,Eastern Europe,Turkey,Ukraine,Moldova
+Moldova,256,141,Eastern Europe,Ukraine,Ukraine Is.,Romania
+
+Denmark,149,71,Central Europe,Germany,Norway,Sweden
+Netherland,131,95,Central Europe,Belgium,Germany
+Belgium,120,109,Central Europe,France,Germany,Netherland
+Germany,153,102,Central Europe,France,Belgium,Netherland,Denmark,Poland,Czech. Republic,Austria
+Poland,197,102,Central Europe,Germany,Sweden,Lithuania,Belarus,Czech. Republic,Slovakia,Ukraine
+Czech. Republic,175,120,Central Europe,Germany,Poland,Austria,Slovakia
+Austria,175,137,Central Europe,Italy,Germany,Czech. Republic,Slovakia,Hungary,Slovenia/Croatia
+Slovakia,204,128,Central Europe,Poland,Ukraine,Austria,Hungary,Czech. Republic
+
+Italy,149,157,Italy,France,Corsica,Sardina,Austria,Slovenia/Croatia,Albania/Macedonia,Sicily
+Corsica,139,183,Italy,Balearic Is.,Italy
+Sardina,137,202,Italy,Tunisia,Italy
+Tunisia,138,229,Italy,Algeria,Sicily,Sardina
+Sicily,172,222,Italy,Tunisia,Italy,Greece
+
+Slovenia/Croatia,182,152,South Central,Italy,Serbia,Bosnia,Austria,Hungary
+Hungary,204,143,South Central,Ukraine,Romania,Serbia,Austria,Slovakia,Slovenia/Croatia
+Bosnia,194,167,South Central,Albania/Macedonia,Serbia,Slovenia/Croatia
+Romania,231,151,South Central,Ukraine,Moldova,Bulgaria,Serbia,Hungary
+Serbia,213,173,South Central,Bulgaria,Romania,Albania/Macedonia,Bosnia,Slovenia/Croatia,Hungary
+
+Albania/Macedonia,217,186,Southern Europe,Italy,Bulgaria,Greece,Bosnia,Serbia
+Bulgaria,247,173,Southern Europe,Istanbul,Greece,Albania/Macedonia,Serbia,Romania
+Greece,224,219,Southern Europe,Sicily,Crete,Istanbul,Bulgaria,Albania/Macedonia
+Turkey,284,197,Southern Europe,Crete,Ukraine Is.,Istanbul
+Istanbul,254,183,Southern Europe,Turkey,Bulgaria,Greece
+Crete,289,226,Southern Europe,Greece,Turkey

@@ -12,7 +12,6 @@ public class AssignCountries {
 
 	private static JComboBox PNumberJCombo;
 	private static JButton OKButton;
-//	static String NumberOfPlayers="6";
 	private static JFrame Frame1;
 	public static int NumberOfPlayers=2;
 	public static void main(String[] args) {
@@ -29,7 +28,6 @@ public class AssignCountries {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//jumps to new window here
 				 NumberOfPlayers = Integer.parseInt((String) PNumberJCombo.getSelectedItem());	
 				 System.out.print("returns" + NumberOfPlayers);
 				 Frame1.dispose();
@@ -58,10 +56,7 @@ public class AssignCountries {
 		OKButton.setBounds(290,190,100,30);
 		
 
-/*<<<<<<< HEAD
-		String[] select= {"2", "3", "4","5", "6"};
-=======
-*/		String[] select= {"2", "3", "4"};
+	String[] select= {"2", "3", "4"};
 		PNumberJCombo= new JComboBox(select);
 		PNumberJCombo.setBounds(120,150,200,20);
 	   	

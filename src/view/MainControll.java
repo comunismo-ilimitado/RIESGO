@@ -1,4 +1,5 @@
 package view;
+
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -17,12 +18,11 @@ public class MainControll {
 	ReadingFiles files;
 	MFrame frame;
 	Player player;
-	MyActionListner myActionListner;
-	
-	AttackController attackController;
-	AttackerButtons attackerButtons;
-	ReinforcementController reinforcementController;
-	FortificationController fortificationController;
+	MyActionListner myactionlistner;
+	AttackController attackcontroller;
+	AttackerButtons attackerbuttons;
+	ReinforcementController reinforcementcontroller;
+	FortificationController fortificationcontroller;
 
 	public MainControll() throws IOException {
 
@@ -30,25 +30,25 @@ public class MainControll {
 
 	public void Function() throws IOException {
 		files = new ReadingFiles();
-		reinforcementController=new ReinforcementController();
-		myActionListner = new MyActionListner(this);
-		attackerButtons=new AttackerButtons();
+		reinforcementcontroller = new ReinforcementController();
+		myactionlistner = new MyActionListner(this);
+		attackerbuttons = new AttackerButtons();
 		files.Reads();
-		frame = new MFrame(myActionListner,files.image);
-		attackController = new AttackController();
-		fortificationController=new FortificationController();
+		frame = new MFrame(myactionlistner, files.image);
+		attackcontroller = new AttackController();
+		fortificationcontroller = new FortificationController();
 		frame.fun();
 
 		SetButtons();
 		PaintCountries();
-		
-		myActionListner.ReinforcementPhase();
+
+		myactionlistner.ReinforcementPhase();
 		repaintAndRevalidate();
 	}
 
 	public void AddArmies(int no) {
-			OnlyNeeded(neighbours(no));
-		
+		OnlyNeeded(neighbours(no));
+
 	}
 
 	public void SetButtons() throws IOException {
@@ -89,15 +89,16 @@ public class MainControll {
 	public int PlayerNo() {
 		return files.PlayerId.size();
 	}
+
 	public Player playerObjet(int id) {
 		return files.PlayerId.get(id);
 	}
-	
+
 	public String NeighboursList(Country country) {
 		List<Country> lis = country.getNeighbors();
-		String haha="";
-		for(int i=0;i<lis.size();i++) {
-			haha=haha.concat(lis.get(i).getName()+",");
+		String haha = "";
+		for (int i = 0; i < lis.size(); i++) {
+			haha = haha.concat(lis.get(i).getName() + ",");
 		}
 		return haha;
 	}

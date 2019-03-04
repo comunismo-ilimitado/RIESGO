@@ -46,8 +46,8 @@ public class MainControll {
 		repaintAndRevalidate();
 	}
 
-	public void AddArmies(int no) {
-		OnlyNeeded(neighbours(no));
+	public void AddArmies(int armies) {
+		OnlyNeeded(neighbours(armies));
 
 	}
 
@@ -95,16 +95,16 @@ public class MainControll {
 	}
 
 	public String NeighboursList(Country country) {
-		List<Country> lis = country.getNeighbors();
-		String haha = "";
-		for (int i = 0; i < lis.size(); i++) {
-			haha = haha.concat(lis.get(i).getName() + ",");
+		List<Country> countrylist = country.getNeighbors();
+		String result = "";
+		for (int i = 0; i < countrylist.size(); i++) {
+			result = result.concat(countrylist.get(i).getName() + ",");
 		}
-		return haha;
+		return result;
 	}
 
-	public void ChangePlayerCountry(String Cname) throws IOException {
-		Country country = countryObjects().get(Cname);
+	public void ChangePlayerCountry(String countryname) throws IOException {
+		Country country = countryObjects().get(countryname);
 		country.setPlayer(files.PlayerId.get(0));
 		RefreshButtons();
 

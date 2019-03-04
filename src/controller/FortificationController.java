@@ -46,11 +46,11 @@ public class FortificationController {
 			if (node.equals(destination)) {
 				return true;
 			}
-			if (visited.contains(source))
+			if (visited.contains(node))
 				continue;
-			visited.add(source);
-			for (Country child : source.getNeighbors()) {
-				if (child.getOwner().equals(source.getOwner())) {
+			visited.add(node);
+			for (Country child : node.getNeighbors()) {
+				if (child.getOwner().equals(node.getOwner())) {
 					nexttovisit.add(child);
 				}
 			}

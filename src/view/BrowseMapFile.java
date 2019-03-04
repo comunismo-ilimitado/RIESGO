@@ -16,57 +16,57 @@ import javax.swing.*;
 
 public class BrowseMapFile {
 
-	private static JFrame window;
-	private JLabel HeaderLabel;
-	private static JButton browse;
+	private static JFrame Window;
+	private JLabel header_label;
+	private static JButton Browse;
 	private JButton load;
-	private  static JLabel loc=null;
-	private  static String location;
-	private static String Filename;
+	private  static JLabel Loc=null;
+	private  static String Location;
+	private static String FileName;
 
 	public BrowseMapFile() {
 		
-      setup();
+      setUp();
 	}
 
 	public static void main(String[] args) {
 		BrowseMapFile temp = new BrowseMapFile();
-		temp.setup();
+		temp.setUp();
 
 	}
 
 	/**
-     * Returns the path of the mapfile browsed
+     * Returns the path of the mapfile Browsed
      * @return
      */
 	public static String getLocation() {		
-		return location;
+		return Location;
 	}
 	/**
 	 * Returns the name of the mapfile selected
 	 * @return
 	 */
 	public static String getFileName() {
-		return Filename;
+		return FileName;
 	}
 	
-	public void setup() {
-		window = new JFrame("Start-up phase");
-		window.setSize(500, 500);
+	public void setUp() {
+		Window = new JFrame("Start-up phase");
+		Window.setSize(500, 500);
 
-		HeaderLabel = new JLabel("Choose the map");
-		HeaderLabel.setBounds(120, 100, 150, 50);
+		header_label = new JLabel("Choose the map");
+		header_label.setBounds(120, 100, 150, 50);
 
-		loc = new JLabel("");
-		loc.setBounds(100, 150, 300, 30);
+		Loc = new JLabel("");
+		Loc.setBounds(100, 150, 300, 30);
 
-		browse = new JButton("Browse");
-		browse.setBounds(170, 200, 100, 30);
+		Browse = new JButton("Browse");
+		Browse.setBounds(170, 200, 100, 30);
 
 		load = new JButton("Load Map");
 		load.setBounds(100, 300, 100, 30);
 
-		browse.addActionListener(new ActionListener() {
+		Browse.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -75,11 +75,11 @@ public class BrowseMapFile {
 				if (result == JFileChooser.APPROVE_OPTION)
 				{
 					File f = fc.getSelectedFile();
-					loc.setText(f.getAbsolutePath());
-					location = loc.getText(); 
+					Loc.setText(f.getAbsolutePath());
+					Location = Loc.getText(); 
 					
 					try {
-						Path source = Paths.get(location);
+						Path source = Paths.get(Location);
 						String dest="Resources/"+f.getName();
 						File fResource= new File(dest);
 						fResource.createNewFile();
@@ -87,33 +87,33 @@ public class BrowseMapFile {
 						System.out.print("File created");
 						Files.copy(source, fos);// FILE copied to resources
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
+						// TODO Auto-generated catch bLock
 						e.printStackTrace();
 					}
 					
 					
-					Filename=f.getName();
+					FileName=f.getName();
 					System.out.println("File name selected is:"+getFileName());
-					System.out.println("File location selected is:"+getLocation());
+					System.out.println("File Location selected is:"+getLocation());
 					
 				}
 				
 			}
 		});
 		
-        window.add(HeaderLabel);
-		window.add(browse);
-		window.add(load);
-		window.add(loc);
+        Window.add(header_label);
+		Window.add(Browse);
+		Window.add(load);
+		Window.add(Loc);
 
-		HeaderLabel.setVisible(true);
+		header_label.setVisible(true);
 
 		load.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// MapSelection Map= new MapSelection();
-				if(location==null)
+				if(Location==null)
 					JOptionPane.showMessageDialog(null,"No file Selected!");
 				else
 				{
@@ -123,12 +123,12 @@ public class BrowseMapFile {
 			}
 		});
 
-		browse.setVisible(true);
+		Browse.setVisible(true);
 		load.setVisible(true);
-		loc.setVisible(true);
+		Loc.setVisible(true);
 
-		window.setLayout(null);
-		window.setVisible(true);
+		Window.setLayout(null);
+		Window.setVisible(true);
 
 	}
     

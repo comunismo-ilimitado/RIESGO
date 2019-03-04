@@ -31,15 +31,16 @@ public class AssignCountries {
 				 NumberOfPlayers = Integer.parseInt((String) PNumberJCombo.getSelectedItem());	
 				 System.out.print("returns" + NumberOfPlayers);
 				 Frame1.dispose();
-				 MainControll mc;
+				
 				try {
-					mc = new MainControll();
-					mc.Function();
+					 MainControll controll = new MainControll();
+					controll.Function();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				 
+					
+					
 			} 
 			
 		});
@@ -70,6 +71,7 @@ public class AssignCountries {
 	   	Label1.setVisible(true);
 	   	Frame1.setLayout(null);
 	   	Frame1.setVisible(true);
+	   	NumberOfPlayers=getNumberOfPlayer();
 	}
 	
 	

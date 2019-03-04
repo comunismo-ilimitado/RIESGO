@@ -19,10 +19,10 @@ public class MainControll {
 	MFrame frame;
 	Player player;
 	MyActionListner myactionlistner;
-	AttackController attackcontroller;
-	AttackerButtons attackerbuttons;
-	ReinforcementController reinforcementcontroller;
-	FortificationController fortificationcontroller;
+	AttackController attackController;
+	AttackerButtons attackerButtons;
+	ReinforcementController reinforcementController;
+	FortificationController fortificationController;
 
 	public MainControll() throws IOException {
 
@@ -30,13 +30,13 @@ public class MainControll {
 
 	public void Function() throws IOException {
 		files = new ReadingFiles();
-		reinforcementcontroller = new ReinforcementController();
+		reinforcementController = new ReinforcementController();
 		myactionlistner = new MyActionListner(this);
-		attackerbuttons = new AttackerButtons();
+		attackerButtons = new AttackerButtons();
 		files.Reads();
 		frame = new MFrame(myactionlistner, files.image);
-		attackcontroller = new AttackController();
-		fortificationcontroller = new FortificationController();
+		attackController = new AttackController();
+		fortificationController = new FortificationController();
 		frame.fun();
 
 		SetButtons();

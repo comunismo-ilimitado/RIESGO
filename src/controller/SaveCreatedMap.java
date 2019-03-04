@@ -49,7 +49,8 @@ public class SaveCreatedMap {
 	public void Init() {
 		try {
 			WriteIntoFile("[Map]");
-			WriteIntoFile("Image=UserMap.bmp");
+			WriteIntoFile("author=gree");
+			WriteIntoFile("Image=noimage.bmp");
 			WriteIntoFile("wrap=yes");
 			WriteIntoFile("scroll=none");
 			WriteIntoFile("warn=yes");

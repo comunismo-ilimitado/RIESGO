@@ -20,16 +20,16 @@ public class ReadingFiles {
 	public static List<String> CountriesNames, ContinentNames;
 	public static HashMap<String, Country> CountryNameObject;
 	public static HashMap<String, Continent> ContinentNameObject;
-	public static String address = "Resources/World.map";
+	public static String adress = "Resources/World.map";
 	public static String image = "noimage.bmp";
 
-	public static void Reads() {
+	public static void Reads(String adress) {
 		try {
 			CountryNameObject = new HashMap<>();
 			CountriesNames = new ArrayList<>();
 			ContinentNames = new ArrayList<>();
-			ContinentNameObject = new HashMap<>();
-			FileReader file = new FileReader(address);
+			ContinentNameObject = new HashMap<>(); 
+			FileReader file = new FileReader(adress);
 			BufferedReader bufferedreader = new BufferedReader(file);
 			String temp = "";
 			StringBuffer buffer = new StringBuffer();

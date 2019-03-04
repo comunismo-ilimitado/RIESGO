@@ -75,7 +75,7 @@ public class StartUpWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				MapType=2;
+				MapType=3;
 				window.dispose();
 				CreateMap CreatedMap = new CreateMap();
 			}

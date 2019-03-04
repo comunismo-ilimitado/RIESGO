@@ -5,67 +5,67 @@ import java.util.*;
 //Represents a continent
 public class Continent {
 	
-	public Continent(int ControlValue,String name) {
-		this.ContinentId =ContinentId;
-		this.Countries = new ArrayList<>();
-		this.Name=name;
-		this.ControlValue = ControlValue;
+	public Continent(int control_value,String name) {
+		this.continent_id =continent_id;
+		this.countries = new ArrayList<>();
+		this.name=name;
+		this.control_value = control_value;
 	}
 
 	
 	//Continent ID
-	private int ContinentId;
+	private int continent_id;
 	
-	//Continent Name
-	private String Name;
+	//Continent name
+	private String name;
 	
 	//Continent's Control Value
-	private int ControlValue;
+	private int control_value;
 	
-	//Countries that are in this continent
-	private List<Country> Countries;
+	//countries that are in this continent
+	private List<Country> countries;
 
 	//Gets continent's ID
-	public int getContinentId() {
-		return ContinentId;
+	public int getcontinent_id() {
+		return continent_id;
 	}
 	
 	//Set Country ID
-	public void setContinentId(int ContinentId) {
-		this.ContinentId=ContinentId;
+	public void setContinentId(int continent_id) {
+		this.continent_id=continent_id;
 	}
 	
-	//Gets Continent Name
+	//Gets Continent name
 	public String getName() {
-		return Name;
+		return name;
 	}
 		
-	//Sets Continent Name
-	public void setName(String Name) {
-		this.Name=Name;
+	//Sets Continent name
+	public void setName(String name) {
+		this.name=name;
 	}
 	
 	//Gets continent's countries
 	public List<Country> getCountries() {
-		return Countries;
+		return countries;
 	}
 
 	//Sets continent's countries
-	public void setCountries(List<Country> Countries) {
-		this.Countries = Countries;
+	public void setCountries(List<Country> countries) {
+		this.countries = countries;
 	}
 	
 	public void addCountrie(Country Countrie) {
-		this.Countries.add(Countrie);
+		this.countries.add(Countrie);
 	}
 
 	//Gets continent's ID
 	public int getControlValue() {
-		return ControlValue;
+		return control_value;
 	}
 		
 	//Set Country ID
-	public void setControlValue(int ControlValue) {
-		this.ControlValue=ControlValue;
+	public void setControlValue(int control_value) {
+		this.control_value=control_value;
 	}
 }

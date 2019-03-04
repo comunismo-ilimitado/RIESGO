@@ -246,6 +246,8 @@ public class CreateMap {
 				} else {
 					JOptionPane.showMessageDialog(null, "Map successfully Created");
 					Disp();
+					assign_countries_frame.dispose();
+	                                AssignCountries.assignCountries();
 					SaveCreatedMap SaveMapObejct = new SaveCreatedMap();
 				}
 			}

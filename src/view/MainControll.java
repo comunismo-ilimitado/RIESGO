@@ -40,7 +40,6 @@ public class MainControll {
 		frame.fun();
 
 		SetButtons();
-		// OnlyNeeded( attackController.getMyCountries(files.playerId.get(0)));
 		PaintCountries();
 		
 		myActionListner.ReinforcementPhase();
@@ -72,7 +71,7 @@ public class MainControll {
 	}
 
 	public List<Country> neighbours(Integer id) {
-		return files.playerId.get(id).getTotalCountriesOccupied();
+		return files.PlayerId.get(id).getTotalCountriesOccupied();
 	}
 
 	public HashMap<String, Country> countryObjects() {
@@ -88,10 +87,10 @@ public class MainControll {
 	}
 
 	public int PlayerNo() {
-		return files.playerId.size();
+		return files.PlayerId.size();
 	}
 	public Player playerObjet(int id) {
-		return files.playerId.get(id);
+		return files.PlayerId.get(id);
 	}
 	
 	public String NeighboursList(Country country) {
@@ -105,7 +104,7 @@ public class MainControll {
 
 	public void ChangePlayerCountry(String Cname) throws IOException {
 		Country country = countryObjects().get(Cname);
-		country.setPlayer(files.playerId.get(0));
+		country.setPlayer(files.PlayerId.get(0));
 		RefreshButtons();
 
 	}

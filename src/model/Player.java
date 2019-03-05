@@ -2,63 +2,38 @@ package model;
 import java.awt.Color;
 import java.util.*;
 
-/**
- * represents the player 
- * @author bhargav
- * version 1.0
- */
+//Represents a player in the game
 public class Player {
 	
-		/**
-		 * Player name
-		 */
+		//Player name
 		private String name;
 		
-		/**
-		 * Player ID
-		 */
+		//Player ID
 		private int player_id;
 		
-		/**
-		 * Total number of armies a player has
-		 */
+		//Total number of armies a player has
 		private int total_armies;
 		
-		/**
-		 * Armies that are not assigned to any country
-		 */
+		//Armies that are not assigned to any country
 		private int total_armies_not_deployed;
 		
-		/**
-		 * Total number of countries a player owns
-		 */
+		//Total number of armies a player owns
 		private List<Country> total_countries_occupied;
 		
-	        /**
-		 * Total number of countries a player owns
-		 */
 		
 		private List<Country> countries_occupied;
 		
-		/**
-		 * Number of Continents occupied by the player
-		 */
+		//Number of Continents occupied
 		private List<Continent> continents_occupied;
 		
-		/**
-		 * The cards that a player holds
-		 */
+		//The cards that a player holds
 		private List<CardTypes> cards;
 		
-		/**
-		 * Color to represent player owned countries
-		 */
+		//Color to represent player owned countries
 		private Color my_color;
 		
 		
-		/**
-		 * Default Constructor
-		 */
+		//Default Constructor
 		public Player(int player_id) {
 			this.player_id = player_id;
 			this.total_countries_occupied = new ArrayList<>();
@@ -66,121 +41,85 @@ public class Player {
 			this.cards = new ArrayList<>();
 		}
 	
-		/**
-		 * Gets player_id
-		 */
+		//Gets player_id
 		public int getPlayerId() {
 			return player_id;
 		}
 	
-		/**
-		 * Sets player_id
-		 */
+		//Sets player_id
 		public void setPlayerId(int player_id) {
 			this.player_id = player_id;
 		}
 
 	
-		/**
-		 * Gets Player name
-		 */
+		//Gets Player name
 		public String getPlayerName() {
 			return name;
 		}
 
-		/**
-		 * Sets Player name
-		 */
+		//Sets Player name
 		public void setPlayerName(String name) {
 			this.name = name;
 		}
 		
-		/**
-		 * Gets Player Armies
-		 */
+		//Gets Player Armies
 		public int getPlayerArmies() {
 			return total_armies;
 		}
 
-		/**
-		 * Sets Player Armies
-		 */
+		//Sets Player Armies
 		public void setPlayerArmies(int total_armies) {
 			this.total_armies = total_armies;
 		}
 		
-		/**
-		 * Gets Player Armies that are not deployed
-		 */
+		//Gets Player Armies that are not deployed
 		public int getPlayerArmiesNotDeployed() {
 			return total_armies_not_deployed;
 		}
 
-		/**
-		 * Sets Player Armies that are not deployed
-		 */
+		//Sets Player Armies that are not deployed
 		public void setPlayerTotalArmiesNotDeployed(int total_armies_not_deployed) {
 			this.total_armies_not_deployed = total_armies_not_deployed;
 		}
 				
-		/**
-		 * Gets Countries Occupied
-		 */
+		//Gets Countries Occupied
 		public List<Country> getTotalCountriesOccupied() {
 			return total_countries_occupied;
 		}
 
-		/**
-		 * Sets Countries Occupied
-		 */
+		//Sets Countries Occupied
 		public void setTotalCountriesOccupied(List<Country> total_countries_occupied) {
 			this.total_countries_occupied = total_countries_occupied;
 		}
-	
-	        /**
-		* add number of counties occupied by the player
-		*/
 		public void addCountriesOccupied(Country countriesOccupied) {
 			this.total_countries_occupied.add(countriesOccupied);
 		}
 
 		
-		/**
-		 * Gets Continents Occupied
-		 */
+		//Gets Continents Occupied
 		public List<Continent> getContinentsOccupied() {
 			return continents_occupied;
 		}
-		/**
-		 * Sets Continents Occupied
-		 */
+		//Sets Continents Occupied
 		public void setContinentsOccupied(List<Continent> continents_occupied) {
 			this.continents_occupied = continents_occupied;
 		}
-		/**
-		 * Gets Player cards
-		 */
+		//Gets Player cards
 		public List<CardTypes> getPlayerCards() {
 			return cards;
 		}
 
-		/**
-		 * Sets Player cards
-		 */
+		//Sets Player cards
 		public void setPlayerCards(List<CardTypes> Playercards) {
 			this.cards = Playercards;
 		}
 		
-		/**
-		 * Gets player color
-		 */
+		//Gets player color
 		public Color getPlayerColor() {
 			return my_color;
 		}
 			
-		/**
-		 * Sets player color
-		 */
+		//Sets player color
 		public void setPlayerColor(Color color) {
 			this.my_color = color;
 		}			

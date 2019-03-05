@@ -1,0 +1,17 @@
+[Map]
+author=gree
+warn=yes
+image=World.bmp
+wrap=no
+scroll=vertical
+
+[Continents]
+Continent1=0
+Continent2=0
+
+[Territories]
+Country1,219,194,Continent1,Country1,Country1
+Country2,214,22,Continent1,Country2,Country2
+
+Country3,45,192,Continent2,Country3,Country3
+

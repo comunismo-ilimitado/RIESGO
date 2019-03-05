@@ -31,7 +31,6 @@ public class MainControll {
 		files = new ReadingFiles();
 		reinforcementController = new ReinforcementController();
 		myactionlistner = new MyActionListner(this);
-		attackerButtons = new AttackerButtons();
 		String address="Resources/World.map";
 		if(StartUpWindow.MapType==1)
 			address="Resources/"+MapSelection.getSelectedMap()+".map";
@@ -53,8 +52,8 @@ public class MainControll {
 		repaintAndRevalidate();
 		}
 		catch(Exception e) {
-			System.out.println("ERROR IN MAP");
-			frame.error("ERRRRRRRRRRROOOOOOOOOOOOOOOORRRRRRRRRRRRRRRRR");
+			System.out.println("ERROR IN MAP"+e);
+			frame.error("ERROR" +e);
 		}
 	}
 
@@ -83,7 +82,7 @@ public class MainControll {
 	}
 
 	public List<Country> neighbours(Integer id) {
-		return files.PlayerId.get(id).getTotalCountriesOccupied();
+		return files.playerId.get(id).getTotalCountriesOccupied();
 	}
 
 	public HashMap<String, Country> countryObjects() {
@@ -99,11 +98,11 @@ public class MainControll {
 	}
 
 	public int PlayerNo() {
-		return files.PlayerId.size();
+		return files.playerId.size();
 	}
 
 	public Player playerObjet(int id) {
-		return files.PlayerId.get(id);
+		return files.playerId.get(id);
 	}
 
 	public String NeighboursList(Country country) {
@@ -117,7 +116,7 @@ public class MainControll {
 
 	public void ChangePlayerCountry(String countryname) throws IOException {
 		Country country = countryObjects().get(countryname);
-		country.setPlayer(files.PlayerId.get(0));
+		country.setPlayer(files.playerId.get(0));
 		RefreshButtons();
 
 	}

@@ -71,8 +71,13 @@ public class MFrame extends JFrame {
 		JPanel jPanel = new JPanel(new GridLayout(2, 1));
 		jPanel.setSize(new Dimension(500, 1000));
 		jPanel.setBackground(Color.red);
+		try {
 		BufferedImage image = ImageIO.read(new File("Resources/" + MapImage));
-		JLabel label = new JLabel(new ImageIcon(image));
+		}catch(Exception e) {
+			BufferedImage image = ImageIO.read(new File("Resources/noimage.bmp"));
+			
+		}
+		JLabel label = new JLabel(new ImageIcon(MapImage));
 		JScrollPane scroller = new JScrollPane(label, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jPanel.add(scroller);
@@ -112,7 +117,7 @@ public class MFrame extends JFrame {
 
 		setTitle("PAZIM");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setResizable(true);
+		setResizable(false);
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);

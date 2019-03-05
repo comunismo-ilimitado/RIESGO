@@ -22,12 +22,12 @@ public class ReadingFiles {
 	public static List<String> CountriesNames, ContinentNames; // List of countries Strings
 	public static HashMap<String, Country> CountryNameObject;
 	public static HashMap<String, Continent> ContinentNameObject; // HashMAp COntaining Country name as // // key and
-	public static String address = "Resources/Asia.map";
-	public static String image = "Asia.bmp";
+//	public static String address = "Resources/Asia.map";
+	public static String image = "noimage.bmp";
 
 	// returns country object
 
-	public static void Reads() throws IOException {
+	public static void Reads(String address) throws IOException {
 		try {
 		CountryNameObject = new HashMap<>();
 		CountriesNames = new ArrayList<>();
@@ -46,6 +46,7 @@ public class ReadingFiles {
 		String[] aaa = buffer.toString().trim().replaceAll("\n+", "\n").split(string);
 		String InfoString = aaa[1].trim();
 		String[] findInfo = InfoString.split("\n");
+	
 		for (int i = 0; i < InfoString.length(); i++) {
 			String[] temp1 = findInfo[i].split("=");
 			if (temp1[0].trim().equals("image")) {

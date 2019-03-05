@@ -20,25 +20,21 @@ Anjou,300,95,Montreal Est,RDP-PAT,Montreal Nord,Mercier,St-Leonard
 Montreal Nord,255,110,Montreal Est,RDP-PAT,Anjou,St-Leonard,Ahuntsic,Villeray
 St-Leonard,270,120,Montreal Est,Montreal Nord,Anjou,Mercier,Rosemont,Villeray
 Mercier,325,130, Montreal Est, RDP-PAT, Anjou, St-Leonard, Rosemont, Plateau
-
 Ahuntsic,230,160,Montreal Centre-Est,Montreal Nord, Villeray,Mont-Royal,Saint-Laurent,Pierrefonds
 Villeray,265,150,Montreal Centre-Est,Ahuntsic,Montreal Nord,St-Leonard,Rosemont,Mont-ROyal,Outremont
 Rosemont,290,160,Montreal Centre-Est,St-Leonard,Villeray,Mercier,Plateau,Outremont
 Plateau,300,180,Montreal Centre-Est,Mercier,Rosemont,Outremont,Ville-Marie
 Outremont,270,195,Montreal Centre-Est,Villeray,Rosemont,Plateau,Ville-Marie,NDG,Mont-Royal
-
 Saint-Laurent, 200, 210, Montreal Centre-Ouest,Ahuntsic,Mont-Royal,Hampstead,Pierrefonds,Lachine,Dorval,NDG
 Mont-Royal, 240, 200, Montreal Centre-Ouest,Saint-Laurent,Ahuntsic,Villeray,Outremont,NDG,Hampstead
 NDG, 255, 220, Montreal Centre-Ouest,Mont-Royal,Outremont,Ville-Marie,Westmount,Pointe St-Charles,Hampstead,Saint-Laurent
 Hampstead, 230, 245, Montreal Centre-Ouest,Saint-Laurent,Mont-Royal,NDG,Pointe St-Charles,La Salle,Lachine
 Westmount, 275, 225, Montreal Centre-Ouest,NDG,Ville-Marie,Pointe St-Charles
-
 Ville-Marie, 300, 210, Montreal Centre,Plateau,Outremont,NDG,Westmount,Pointe St-Charles
 Pointe St-Charles, 290, 240, Montreal Centre,Ville-Marie,Westmount,Verdun,NDG,La Salle, Hampstead
 Verdun, 300, 260, Montreal Centre,La Salle,Pointe St-Charles
 La Salle, 260, 285, Montreal Centre,Lachine,Pointe St-Charles,Verdun, Hampstead
 Lachine, 210, 270, Montreal Centre,La Salle,Hampstead,Saint-Laurent,Dorval
-
 Dorval, 165, 260, Montreal Ouest,Saint-Laurent,Lachine,Pointe-Claire,Pierrefonds
 Pierrefonds, 125, 220, Montreal Ouest,Saint-Laurent,Ahuntsic,Dorval,Pointe-Claire,Kirkland,Senneville
 Pointe-Claire, 120, 260, Montreal Ouest,Dorval,Pierrefonds,Kirkland,Beaconsfield

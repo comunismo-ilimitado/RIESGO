@@ -9,6 +9,7 @@ import controller.FortificationController;
 import controller.ReadingFiles;
 import controller.ReinforcementController;
 import model.Country;
+import model.MapVarification;
 import model.Player;
 
 public class MainControll {
@@ -21,10 +22,11 @@ public class MainControll {
 	AttackerButtons attackerButtons;
 	ReinforcementController reinforcementController;
 	FortificationController fortificationController;
+	MapVarification mapVarification;
 
 	public void Function() throws Exception {
-		try {
-			frame2=new MFrame2();
+/*		try {
+*/			frame2=new MFrame2();
 			files = new ReadingFiles(frame2);
 			
 			String address = "Resources/World.map";
@@ -36,6 +38,9 @@ public class MainControll {
 				address = "Resources/UserMap.map";
 			System.out.print("Selected Map : " + address);
 			files.Reads(address);
+	//		mapVarification=new MapVarification(files.CountryNameObject, files.ContinentNameObject);
+//			mapVarification.CallAllMethods();
+			
 			myactionlistner = new MyActionListner(this);
 			frame = new MFrame(myactionlistner, ReadingFiles.image);
 			reinforcementController = new ReinforcementController();
@@ -48,10 +53,10 @@ public class MainControll {
 			myactionlistner.ReinforcementPhase();
 			repaintAndRevalidate();
 
-		} catch (Exception e) {
+		/*} catch (Exception e) {
 			System.out.println("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n" + e);
 			frame2.error("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n" + e);
-		}
+		}*/
 	}
 
 	public void AddArmies(int armies) {

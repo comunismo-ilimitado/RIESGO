@@ -143,6 +143,7 @@ public class ReadingFiles {
 		catch(Exception e) {
 			
 			System.out.println("ERROR IN MAP READING");
+			
 			frame2.error("Error In MAP READING START AGAIN");
 		}
 

@@ -20,7 +20,7 @@ public class MapVarification {
 		for (int i = 0; i < hashMap.size(); i++) {
 			Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
 			for (int j = 0; j < temp.getNeighbors().size(); j++) {
-				if(!temp.getNeighbors().get(j).getNeighbors().contains(temp)) {
+				if (!temp.getNeighbors().get(j).getNeighbors().contains(temp)) {
 					temp.getNeighbors().get(j).getNeighbors().add(temp);
 					arrayList.add("BI-Directional Error --Repaired");
 				}
@@ -29,5 +29,32 @@ public class MapVarification {
 
 		}
 
+	}
+
+	public void NoCountryIsUnused() {
+
+	}
+
+	public void NoContinentIsUnused() {
+		ArrayList<Continent> temparrayList=new ArrayList<>(hashMap2.values());
+		
+		for (int i = 0; i < hashMap.size(); i++) {
+		
+			Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
+			for (int j = 0; j < temp.getNeighbors().size(); j++) {
+			
+			if(	hashMap2.containsValue(temp.getContinent())	) {
+				if(temparrayList.contains(temp.getContinent())) {
+					temparrayList.remove(temp.getContinent());
+				}
+			}else {
+			arrayList.add("Continent not Found in Continent Object");	
+			}
+		}
+		}
+		if(temparrayList.size()>0) {
+		arrayList.add("EVERY CONTINENT IS NOT USED");
+		}
+		
 	}
 }

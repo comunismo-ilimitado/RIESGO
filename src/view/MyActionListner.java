@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import controller.ReadingFiles;
 import model.Country;
 
 public class MyActionListner implements ActionListener {
@@ -14,18 +15,19 @@ public class MyActionListner implements ActionListener {
 	MainControll controll;
 	List<String> Phases;
 	String currentPhase;
-	int players = 6;
+	int players = 3;
 	int currentPlayer = 0;
 	Country attackCountry1, attackCountry2;
 	Country fortifyCountry1, fortifyCountry2;
 
-	public MyActionListner(MainControll controll) throws IOException {
+	public MyActionListner(MainControll controll) {
 		this.controll = controll;
 		Phases = new ArrayList<>();
 		Phases.add("Finish Reinforcement");
 		Phases.add("Finish Attack");
 		Phases.add("Finish Fortification");
 		currentPhase = Phases.get(0);
+		players=controll.PlayerNo();
 	}
 
 	public void playerUpdate() {
@@ -80,7 +82,9 @@ public class MyActionListner implements ActionListener {
 				controll.RefreshButtons();
 				currentPhase = "Finish Reinforcement";
 				controll.frame.nextAction.setText("Finish Reinforcement");
-				playerUpdate();
+//				playerUpdate();
+				fortifyCountry1=null;
+				fortifyCountry2=null;
 				controll.frame.ActivateAll();
 				ReinforcementPhase();
 			}
@@ -129,11 +133,15 @@ public class MyActionListner implements ActionListener {
 				
 				currentPhase = "Finish Attack";
 				controll.frame.nextAction.setText("Finish Attack");
+				attackCountry1=null;
+				attackCountry2=null;
 			} 
 
 			} else if (e.getActionCommand() == "Finish Attack") {
 				currentPhase = "Finish Fortification";
 				controll.frame.nextAction.setText("Finish Fortification");
+				fortifyCountry1=null;
+				fortifyCountry2=null;
 				FortificationPhase();
 			} else if (e.getActionCommand() == "Finish Fortification") {
 				currentPhase = "Finish Reinforcement";

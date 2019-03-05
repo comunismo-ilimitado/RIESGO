@@ -59,7 +59,7 @@ public class MFrame extends JFrame {
 		this.MapImage = MapImage;
 	}
 
-	public void fun() throws IOException {
+	public void fun() throws Exception  {
 		/*
 		 * files = new ReadingFiles(); reinforcement = new Reinforcement();
 		 * files.Reads(); controll = new MainControll();

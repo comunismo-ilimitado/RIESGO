@@ -1,9 +1,6 @@
 package view;
 
-import java.awt.Frame;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,38 +21,36 @@ public class MainControll {
 	ReinforcementController reinforcementController;
 	FortificationController fortificationController;
 
+	public void Function() throws Exception {
+		// try {
 
-	public void Function()  {
-		try {
-		
 		files = new ReadingFiles();
-		reinforcementController = new ReinforcementController();
+		String address = "Resources/World.map";
+		if (StartUpWindow.MapType == 1)
+			address = "Resources/" + MapSelection.getSelectedMap() + ".map";
+		else if (StartUpWindow.MapType == 2)
+			address = "Resources/LoadedMap.map";
+		else if (StartUpWindow.MapType == 3)
+			address = "Resources/UserMap.map";
+		System.out.print("Selected Map : " + address);
+		files.Reads();
 		myactionlistner = new MyActionListner(this);
-		String address="Resources/World.map";
-		if(StartUpWindow.MapType==1)
-			address="Resources/"+MapSelection.getSelectedMap()+".map";
-		else if(StartUpWindow.MapType==2) 
-			address="Resources/LoadedMap.map";
-		else if(StartUpWindow.MapType==3)
-			address="Resources/UserMap.map";
-		System.out.print("Selected Map:" + address);
-		files.Reads(address);
-		frame = new MFrame(myactionlistner, files.image);
-		//attackController = new AttackController();
+		frame = new MFrame(myactionlistner, ReadingFiles.image);
+		reinforcementController = new ReinforcementController();
+		attackController = new AttackController();
 		fortificationController = new FortificationController();
 		frame.fun();
-
 		SetButtons();
 		PaintCountries();
 
 		myactionlistner.ReinforcementPhase();
 		repaintAndRevalidate();
-		}
-		catch(Exception e) {
-			System.out.println("ERROR IN MAP"+e);
-			frame.error("ERROR" +e);
-		}
-	}
+		/*
+		 * } catch(Exception e) { System.out.
+		 * println("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n"+e);
+		 * frame.error("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n"
+		 * +e); }
+		 */ }
 
 	public void AddArmies(int armies) {
 		OnlyNeeded(neighbours(armies));
@@ -73,7 +68,7 @@ public class MainControll {
 	}
 
 	public List<String> countriesNames() {
-		return files.CountriesNames;
+		return ReadingFiles.CountriesNames;
 	}
 
 	public void repaintAndRevalidate() {
@@ -86,7 +81,7 @@ public class MainControll {
 	}
 
 	public HashMap<String, Country> countryObjects() {
-		return files.CountryNameObject;
+		return ReadingFiles.CountryNameObject;
 	}
 
 	public void PaintCountries() {

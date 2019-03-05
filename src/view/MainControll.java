@@ -24,9 +24,6 @@ public class MainControll {
 	ReinforcementController reinforcementController;
 	FortificationController fortificationController;
 
-	public MainControll() throws IOException {
-
-	}
 
 	public void Function()  {
 		try {

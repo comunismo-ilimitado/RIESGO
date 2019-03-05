@@ -20,6 +20,7 @@ import view.MFrame2;
 public class ReadingFiles {
 	// public static HashMap<String, Player> playerObject;
 	public HashMap<Integer, Player> playerId;
+	public static boolean errors=false;
 	public static List<Integer> players;
 	public static List<String> CountriesNames, ContinentNames; // List of countries Strings
 	public static HashMap<String, Country> CountryNameObject;
@@ -116,11 +117,12 @@ public class ReadingFiles {
 			int n = noofplayers;
 			for (int i = 0; i < CountriesNames2.size(); i++) {
 				for (int j = 0; j < noofplayers; j++) {
+					if((i+j)<CountriesNames2.size()) {
 					Country temp1 = CountryNameObject.get(CountriesNames2.get(i + j));
 					Player tempPlayer = playerId.get(j);
 					temp1.setPlayer(tempPlayer);
 					tempPlayer.addCountriesOccupied(temp1);
-				}
+				}}
 				i = i + n - 1;
 			}
 
@@ -141,9 +143,10 @@ public class ReadingFiles {
 		}
 		}
 		catch(Exception e) {
-			
-			System.out.println("ERROR IN MAP READING");
-			frame2.error("Error In MAP READING START AGAIN");
+			e.printStackTrace();
+			errors=true;
+			System.out.println("ERROR IN MAP READING \n"+e);
+			frame2.error("Error In MAP READING START AGAIN\n"+e);
 		}
 
 	}

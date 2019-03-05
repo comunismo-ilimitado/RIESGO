@@ -90,7 +90,6 @@ public class MFrame extends JFrame {
 		nextAction = new JButton("Finish Reinforcement");
 		nextAction.addActionListener(myActionListner);
 		jPanel5.add(nextAction);
-
 		jLabel = new JLabel("Turn For:- " + playerTurn);
 		// jLabel.setSize(MAXIMIZED_HORIZ, MAXIMIZED_VERT);
 		jLabel2 = new JLabel("Armies Left:- " + noArmiesLeft);

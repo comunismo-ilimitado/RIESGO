@@ -2,37 +2,27 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class MapVarification {
 	ArrayList<String> arrayList = new ArrayList<>();
-	ArrayList<String> arrayList2 = new ArrayList<>();
 	HashMap<String, Country> hashMap;
 	HashMap<String, Continent> hashMap2;
 
-	/**
-	 * 
-	 * @param hashMap
-	 * @param hashMap2
-	 * @author Pazim
-	 */
 	public MapVarification(HashMap<String, Country> hashMap, HashMap<String, Continent> hashMap2) {
 		this.hashMap = hashMap;
 		this.hashMap2 = hashMap2;
-	
 	}
 
 	public void BiDirectionalCheck() {
 
 		for (int i = 0; i < hashMap.size(); i++) {
 			Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
-			System.out.println(temp.getName());
 			for (int j = 0; j < temp.getNeighbors().size(); j++) {
 				if (!temp.getNeighbors().get(j).getNeighbors().contains(temp)) {
 					temp.getNeighbors().get(j).getNeighbors().add(temp);
-					arrayList2.add("BI-Directional Error --Repaired");
+					arrayList.add("BI-Directional Error --Repaired");
 				}
 
 			}
@@ -73,7 +63,7 @@ public class MapVarification {
 			Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
 			if (temp.getNeighbors().contains(temp)) {
 				temp.getNeighbors().remove(temp);
-				arrayList2.add("Neighbour Of itself Removed");
+				arrayList.add("Neighbour Of itself Removed");
 			}
 
 		}
@@ -88,13 +78,12 @@ public class MapVarification {
 
 	public void ContinentHaveSameCountry() {
 		for (int i = 0; i < hashMap2.size(); i++) {
-			Continent temp = hashMap2.get(hashMap2.keySet().toArray()[i]);
+			Continent temp = hashMap2.get(hashMap2.values().toArray()[i]);
 			for (int j = 0; j < hashMap2.size(); j++) {
-				Continent temp2 = hashMap2.get(hashMap2.keySet().toArray()[j]);
-				if(i!=j||!temp.equals(temp2)) {
+				Continent temp2 = hashMap2.get(hashMap2.values().toArray()[i]);
 				if (temp.getCountries().containsAll(temp2.getCountries())) {
 					arrayList.add("MULTIPLE CONTINENTS HAVE SAME COUNTRIES");
-				}}
+				}
 
 			}
 		}
@@ -112,41 +101,6 @@ public class MapVarification {
 
 	public void GraphConnectivity() {
 
-	}
-
-	private void checkConnectedGraph(Country country, Set<Country> queue, Continent continent) {
-
-		for (int i = 0; i < country.getNeighbors().size(); i++) {
-
-			Country neighbouringTerritory = country.getNeighbors().get(i);
-			if (continent == null && !queue.contains(neighbouringTerritory)) {
-				queue.add(neighbouringTerritory);
-				checkConnectedGraph(neighbouringTerritory, queue, continent);
-			} else if (!queue.contains(neighbouringTerritory)
-					&& neighbouringTerritory.getContinent().getName() == continent.getName()
-					&& neighbouringTerritory.getNeighbors().size() != 0) {
-				queue.add(neighbouringTerritory);
-				checkConnectedGraph(neighbouringTerritory, queue, continent);
-			}
-		}
-
-	}
-
-	public void CallAllMethods() {
-		BiDirectionalCheck();
-		EmptyNeighbours();
-		ContinentHaveSameCountry();
-		NoContinentIsUnused();
-		NoCountryIsUnused();
-		NoContinentOrCountry();
-		NotItsOwnNeighbour();
-		GraphConnectivity();
-		Set<Country> countries = new HashSet<Country>();
-		checkConnectedGraph(hashMap.get(hashMap.keySet().toArray()[0]), countries,
-				hashMap2.get(hashMap2.keySet().toArray()[0]));
-		System.out.println("\n"+arrayList.toString());
-		System.out.println(arrayList2.toString());
-		
 	}
 
 }

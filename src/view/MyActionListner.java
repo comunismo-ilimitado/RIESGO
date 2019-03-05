@@ -13,169 +13,169 @@ import model.Country;
 public class MyActionListner implements ActionListener {
 	MFrame frame;
 	MainControll controll;
-	List<String> Phases;
-	String currentPhase;
+	List<String> phases;
+	String current_phase;
 	int players = 3;
-	int currentPlayer = 0;
-	Country attackCountry1, attackCountry2;
-	Country fortifyCountry1, fortifyCountry2;
+	int current_player = 0;
+	Country attack_country1, attack_country2;
+	Country fortify_country1, fortify_country2;
 
 	public MyActionListner(MainControll controll) {
 		this.controll = controll;
-		Phases = new ArrayList<>();
-		Phases.add("Finish Reinforcement");
-		Phases.add("Finish Attack");
-		Phases.add("Finish Fortification");
-		currentPhase = Phases.get(0);
-		players=controll.PlayerNo();
+		phases = new ArrayList<>();
+		phases.add("Finish Reinforcement");
+		phases.add("Finish Attack");
+		phases.add("Finish Fortification");
+		current_phase = phases.get(0);
+		players=controll.playerNo();
 	}
 
 	public void playerUpdate() {
-		if (currentPlayer >= players - 1)
-			currentPlayer = 0;
+		if (current_player >= players - 1)
+			current_player = 0;
 		else
-			currentPlayer++;
+			current_player++;
 	}
 
-	public void ReinforcementPhase2(Country country) {
+	public void reinforcementPhase2(Country country) {
 		// controll.AddArmies(currentPlayer);
-		String message = controll.reinforcementController.addarmies(country);
+		String message = controll.reinforcement_controller.addarmies(country);
 		controll.frame.noArmiesLeft = country.getOwner().getPlayerArmiesNotDeployed();
 		controll.frame.NotifyAll();
 		if (!message.equals(""))
 			controll.frame.error(message);
 	}
 
-	public void ReinforcementPhase() {
+	public void reinforcementPhase() {
 		// controll.AddArmies(currentPlayer);
 		controll.frame.ActivateAll();
 		controll.frame.NotifyAll();
-		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
-		controll.reinforcementController.calculateReinforcementArmies(controll.playerObjet(currentPlayer));
+		controll.onlyNeeded(controll.playerObjet(current_player).getTotalCountriesOccupied());
+		controll.reinforcement_controller.calculateReinforcementArmies(controll.playerObjet(current_player));
 	}
 
-	public void FortificationPhase() {
+	public void fortificationPhase() {
 		controll.frame.ActivateAll();
-		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
+		controll.onlyNeeded(controll.playerObjet(current_player).getTotalCountriesOccupied());
 		playerUpdate();
 	}
 
-	public void FortificationPhase2(Country country) throws IOException {
+	public void fortificationPhase2(Country country) throws IOException {
 
-		if (fortifyCountry1 == null) {
-			fortifyCountry1 = country;
-			controll.frame.CCC = controll.NeighboursList(country);
+		if (fortify_country1 == null) {
+			fortify_country1 = country;
+			controll.frame.CCC = controll.neighboursList(country);
 			controll.frame.NotifyAll();
 			controll.frame.error("Select One More Country You Want to move your Armies to");
-		} else if (fortifyCountry2 == null) {		
-			fortifyCountry2 = country;
+		} else if (fortify_country2 == null) {		
+			fortify_country2 = country;
 			
-			if(fortifyCountry1.equals(fortifyCountry2)) {
+			if(fortify_country1.equals(fortify_country2)) {
 				controll.frame.error("SAME COUNTRY SELECTED");
-				fortifyCountry1 = null;
-				fortifyCountry2 = null;
+				fortify_country1 = null;
+				fortify_country2 = null;
 
 			}else {
-			String test1 = controll.frame.popupText(fortifyCountry1.getNoOfArmies() - 1);
-			String message = controll.fortificationController.moveArmies(fortifyCountry1, fortifyCountry2,
+			String test1 = controll.frame.popupText(fortify_country1.getNoOfArmies() - 1);
+			String message = controll.fortification_controller.moveArmies(fortify_country1, fortify_country2,
 					Integer.parseInt(test1));
 			if (!message.equals("")) {
 				controll.frame.error(message);
-				fortifyCountry1 = null;
-				fortifyCountry2 = null;
+				fortify_country1 = null;
+				fortify_country2 = null;
 			} else {
-				controll.RefreshButtons();
-				currentPhase = "Finish Reinforcement";
+				controll.refreshButtons();
+				current_phase = "Finish Reinforcement";
 				controll.frame.nextAction.setText("Finish Reinforcement");
 //				playerUpdate();
-				fortifyCountry1=null;
-				fortifyCountry2=null;
+				fortify_country1=null;
+				fortify_country2=null;
 				controll.frame.ActivateAll();
-				ReinforcementPhase();
+				reinforcementPhase();
 			}
 
 		}}
 
 	}
 
-	public void AttackPhase(Country country) throws IOException {
-		if (attackCountry1 == null) {
-			attackCountry1 = country;
+	public void attackPhase(Country country) throws IOException {
+		if (attack_country1 == null) {
+			attack_country1 = country;
 			controll.frame.ActivateAll();
-			List<Country> abc = controll.attackController.getMyNeighborsForAttack(country);
+			List<Country> abc = controll.attack_controller.getMyNeighborsForAttack(country);
 			controll.frame.OnlyNeeded(abc);
-			controll.RefreshButtons();
+			controll.refreshButtons();
 
-		} else if (attackCountry2 == null) {
-			attackCountry2 = country;
-			String reply = controll.attackController.attackButton(attackCountry1, attackCountry2);
+		} else if (attack_country2 == null) {
+			attack_country2 = country;
+			String reply = controll.attack_controller.attackButton(attack_country1, attack_country2);
 			if (!reply.equals("")) {
 				controll.frame.error(reply);
 			}
-			controll.frame.AAA = controll.attackController.attackerDiceRoll.toString();
-			controll.frame.BBB = controll.attackController.defenderDiceRoll.toString();
+			controll.frame.AAA = controll.attack_controller.attackerDiceRoll.toString();
+			controll.frame.BBB = controll.attack_controller.defenderDiceRoll.toString();
 			controll.frame.NotifyAll();
 			controll.frame.ActivateAll();
-			attackCountry1 = null;
-			attackCountry2 = null;
-			controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
-			controll.RefreshButtons();
+			attack_country1 = null;
+			attack_country2 = null;
+			controll.onlyNeeded(controll.playerObjet(current_player).getTotalCountriesOccupied());
+			controll.refreshButtons();
 
 		} else {
-			attackCountry1 = null;
-			attackCountry2 = null;
+			attack_country1 = null;
+			attack_country2 = null;
 		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if (Phases.contains(e.getActionCommand())) {
+		if (phases.contains(e.getActionCommand())) {
 			if (e.getActionCommand() == "Finish Reinforcement") {
-			if(controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed()>0) {
+			if(controll.playerObjet(current_player).getPlayerArmiesNotDeployed()>0) {
 				controll.frame.error("Connot End Reinforcement Untill All armies are deployed");
 			}else {
 				
-				currentPhase = "Finish Attack";
+				current_phase = "Finish Attack";
 				controll.frame.nextAction.setText("Finish Attack");
-				attackCountry1=null;
-				attackCountry2=null;
+				attack_country1=null;
+				attack_country2=null;
 			} 
 
 			} else if (e.getActionCommand() == "Finish Attack") {
-				currentPhase = "Finish Fortification";
+				current_phase = "Finish Fortification";
 				controll.frame.nextAction.setText("Finish Fortification");
-				fortifyCountry1=null;
-				fortifyCountry2=null;
-				FortificationPhase();
+				fortify_country1=null;
+				fortify_country2=null;
+				fortificationPhase();
 			} else if (e.getActionCommand() == "Finish Fortification") {
-				currentPhase = "Finish Reinforcement";
+				current_phase = "Finish Reinforcement";
 				controll.frame.nextAction.setText("Finish Reinforcement");
-				ReinforcementPhase();
+				reinforcementPhase();
 			}
 
 		} else {
 			String Cname = e.getActionCommand().split("\\|")[0].trim();
 			// JButton temp = controll.frame.hashButton.get(Cname);
 			Country temp2 = controll.countryObjects().get(Cname);
-			if (currentPhase.equals("Finish Reinforcement")) {
-				ReinforcementPhase2(temp2);
+			if (current_phase.equals("Finish Reinforcement")) {
+				reinforcementPhase2(temp2);
 				try {
-					controll.RefreshButtons();
+					controll.refreshButtons();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 
-			} else if (currentPhase.equals("Finish Fortification")) {
+			} else if (current_phase.equals("Finish Fortification")) {
 				try {
-					FortificationPhase2(temp2);
+					fortificationPhase2(temp2);
 				} catch (IOException e2) {
 					e2.printStackTrace();
 				}
 
-			} else if (currentPhase.equals("Finish Attack")) {
+			} else if (current_phase.equals("Finish Attack")) {
 				try {
-					AttackPhase(temp2);
+					attackPhase(temp2);
 				} catch (IOException e2) {
 					e2.printStackTrace();
 				}

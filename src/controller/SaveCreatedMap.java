@@ -30,11 +30,11 @@ public class SaveCreatedMap {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Init();
+		init();
 
 	}
 
-	public void WriteIntoFile(String s) {
+	public void writeIntoFile(String s) {
 		try {
 
 			bw.write(s);
@@ -46,22 +46,22 @@ public class SaveCreatedMap {
 		}
 	}
 
-	public void Init() {
+	public void init() {
 		try {
-			WriteIntoFile("[Map]");
-			WriteIntoFile("author=gree");
-			WriteIntoFile("warn=yes");
-			WriteIntoFile("image=World.bmp");
-			WriteIntoFile("wrap=no");
-			WriteIntoFile("scroll=vertical");
+			writeIntoFile("[Map]");
+			writeIntoFile("author=gree");
+			writeIntoFile("warn=yes");
+			writeIntoFile("image=World.bmp");
+			writeIntoFile("wrap=no");
+			writeIntoFile("scroll=vertical");
 			
 			bw.newLine();
-			WriteIntoFile("[Continents]");
+			writeIntoFile("[Continents]");
 			for (Continent in : CreateMap.ContinentsObjectList) {
-				WriteIntoFile(in.getName() + "=" + in.getControlValue());
+				writeIntoFile(in.getName() + "=" + in.getControlValue());
 			}
 			bw.newLine();
-			WriteIntoFile("[Territories]");
+			writeIntoFile("[Territories]");
 
 			Random rand1 = new Random();
 			Random rand2 = new Random();

@@ -117,6 +117,7 @@ public class CreateMap {
 		assign_neighbours_frame.setVisible(true);
 	}
 
+	
 	public void StartFrame() {
 
 		generate_map_button.addActionListener(new ActionListener() {

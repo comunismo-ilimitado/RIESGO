@@ -57,8 +57,6 @@ public class MyActionListner implements ActionListener {
 	public void FortificationPhase() {
 		controll.frame.ActivateAll();
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
-		// controll.fortificationController.addNodes();
-		// controll.fortificationController.addAllEdge();
 		playerUpdate();
 	}
 
@@ -69,8 +67,15 @@ public class MyActionListner implements ActionListener {
 			controll.frame.CCC = controll.NeighboursList(country);
 			controll.frame.NotifyAll();
 			controll.frame.error("Select One More Country You Want to move your Armies to");
-		} else if (fortifyCountry2 == null) {
+		} else if (fortifyCountry2 == null) {		
 			fortifyCountry2 = country;
+			
+			if(fortifyCountry1.equals(fortifyCountry2)) {
+				controll.frame.error("SAME COUNTRY SELECTED");
+				fortifyCountry1 = null;
+				fortifyCountry2 = null;
+
+			}else {
 			String test1 = controll.frame.popupText(fortifyCountry1.getNoOfArmies() - 1);
 			String message = controll.fortificationController.moveArmies(fortifyCountry1, fortifyCountry2,
 					Integer.parseInt(test1));
@@ -89,7 +94,7 @@ public class MyActionListner implements ActionListener {
 				ReinforcementPhase();
 			}
 
-		}
+		}}
 
 	}
 

@@ -71,13 +71,14 @@ public class MFrame extends JFrame {
 		JPanel jPanel = new JPanel(new GridLayout(2, 1));
 		jPanel.setSize(new Dimension(500, 1000));
 		jPanel.setBackground(Color.red);
+		BufferedImage image;
 		try {
-		BufferedImage image = ImageIO.read(new File("Resources/" + MapImage));
+		 image = ImageIO.read(new File("Resources/" + MapImage));
 		}catch(Exception e) {
-			BufferedImage image = ImageIO.read(new File("Resources/noimage.bmp"));
+			 image = ImageIO.read(new File("Resources/noimage.bmp"));
 			
 		}
-		JLabel label = new JLabel(new ImageIcon(MapImage));
+		JLabel label = new JLabel(new ImageIcon(image));
 		JScrollPane scroller = new JScrollPane(label, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jPanel.add(scroller);
@@ -114,8 +115,7 @@ public class MFrame extends JFrame {
 		mainPanel.add(jPanel);
 		mainPanel.add(jPanel2);
 		Random random = new Random();
-
-		setTitle("PAZIM");
+		setTitle("PAZIMs Risk Game");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setResizable(false);
 		pack();

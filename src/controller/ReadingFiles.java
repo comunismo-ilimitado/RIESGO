@@ -14,6 +14,8 @@ import model.Continent;
 import model.Country;
 import model.Player;
 import view.AssignCountries;
+import view.MFrame;
+import view.MFrame2;
 
 public class ReadingFiles {
 	// public static HashMap<String, Player> playerObject;
@@ -22,12 +24,16 @@ public class ReadingFiles {
 	public static List<String> CountriesNames, ContinentNames; // List of countries Strings
 	public static HashMap<String, Country> CountryNameObject;
 	public static HashMap<String, Continent> ContinentNameObject; // HashMAp COntaining Country name as // // key and
-	public static String address = "Resources/Asia.map";
-	public static String image = "Asia.bmp";
+	public static String address = "Resources/World.map";
+	public static String image = "noimage.bmp";
+	MFrame2 frame2;
 
 	// returns country object
+	public ReadingFiles(MFrame2 frame2) {
+		this.frame2=frame2;
+	}
 
-	public  void Reads() throws IOException {
+	public  void Reads(String address) throws IOException {
 		try {
 		CountryNameObject = new HashMap<>();
 		CountriesNames = new ArrayList<>();
@@ -137,6 +143,7 @@ public class ReadingFiles {
 		catch(Exception e) {
 			
 			System.out.println("ERROR IN MAP READING");
+			frame2.error("Error In MAP READING START AGAIN");
 		}
 
 	}

@@ -14,6 +14,7 @@ import model.Player;
 public class MainControll {
 	ReadingFiles files;
 	MFrame frame;
+	MFrame2 frame2;
 	Player player;
 	MyActionListner myactionlistner;
 	AttackController attackController;
@@ -22,35 +23,36 @@ public class MainControll {
 	FortificationController fortificationController;
 
 	public void Function() throws Exception {
-		// try {
+		try {
+			frame2=new MFrame2();
+			files = new ReadingFiles(frame2);
+			
+			String address = "Resources/World.map";
+			if (StartUpWindow.MapType == 1)
+				address = "Resources/" + MapSelection.getSelectedMap() + ".map";
+			else if (StartUpWindow.MapType == 2)
+				address = "Resources/LoadedMap.map";
+			else if (StartUpWindow.MapType == 3)
+				address = "Resources/UserMap.map";
+			System.out.print("Selected Map : " + address);
+			files.Reads(address);
+			myactionlistner = new MyActionListner(this);
+			frame = new MFrame(myactionlistner, ReadingFiles.image);
+			reinforcementController = new ReinforcementController();
+			attackController = new AttackController();
+			fortificationController = new FortificationController();
+			frame.fun();
+			SetButtons();
+			PaintCountries();
 
-		files = new ReadingFiles();
-		String address = "Resources/World.map";
-		if (StartUpWindow.MapType == 1)
-			address = "Resources/" + MapSelection.getSelectedMap() + ".map";
-		else if (StartUpWindow.MapType == 2)
-			address = "Resources/LoadedMap.map";
-		else if (StartUpWindow.MapType == 3)
-			address = "Resources/UserMap.map";
-		System.out.print("Selected Map : " + address);
-		files.Reads();
-		myactionlistner = new MyActionListner(this);
-		frame = new MFrame(myactionlistner, ReadingFiles.image);
-		reinforcementController = new ReinforcementController();
-		attackController = new AttackController();
-		fortificationController = new FortificationController();
-		frame.fun();
-		SetButtons();
-		PaintCountries();
+			myactionlistner.ReinforcementPhase();
+			repaintAndRevalidate();
 
-		myactionlistner.ReinforcementPhase();
-		repaintAndRevalidate();
-		/*
-		 * } catch(Exception e) { System.out.
-		 * println("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n"+e);
-		 * frame.error("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n"
-		 * +e); }
-		 */ }
+		} catch (Exception e) {
+			System.out.println("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n" + e);
+			frame2.error("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n" + e);
+		}
+	}
 
 	public void AddArmies(int armies) {
 		OnlyNeeded(neighbours(armies));

@@ -73,7 +73,7 @@ public class SaveCreatedMap {
 					bw.write(cn.getName() + "," + value1 + "," + value2 + "," + cc.getName());
 
 					for (Country cin : cn.getNeighbors()) {
-						bw.write("," + cn.getName());
+						bw.write("," + cin.getName());
 					}
 					bw.newLine();
 				}

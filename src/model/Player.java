@@ -136,6 +136,10 @@ public class Player {
 		public void setTotalCountriesOccupied(List<Country> total_countries_occupied) {
 			this.total_countries_occupied = total_countries_occupied;
 		}
+	
+	        /**
+		* add number of counties occupied by the player
+		*/
 		public void addCountriesOccupied(Country countriesOccupied) {
 			this.total_countries_occupied.add(countriesOccupied);
 		}

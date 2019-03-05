@@ -16,13 +16,13 @@ public class MainControll {
 	MFrame frame;
 	MFrame2 frame2;
 	Player player;
-	MyActionListner myactionlistner;
-	AttackController attackController;
-	AttackerButtons attackerButtons;
-	ReinforcementController reinforcementController;
-	FortificationController fortificationController;
+	MyActionListner my_action_listner;
+	AttackController attack_controller;
+	AttackerButtons attacker_buttons;
+	ReinforcementController reinforcement_controller;
+	FortificationController fortification_controller;
 
-	public void Function() throws Exception {
+	public void function() throws Exception {
 		try {
 			frame2=new MFrame2();
 			files = new ReadingFiles(frame2);
@@ -36,16 +36,16 @@ public class MainControll {
 				address = "Resources/UserMap.map";
 			System.out.print("Selected Map : " + address);
 			files.Reads(address);
-			myactionlistner = new MyActionListner(this);
-			frame = new MFrame(myactionlistner, ReadingFiles.image);
-			reinforcementController = new ReinforcementController();
-			attackController = new AttackController();
-			fortificationController = new FortificationController();
+			my_action_listner = new MyActionListner(this);
+			frame = new MFrame(my_action_listner, ReadingFiles.image);
+			reinforcement_controller = new ReinforcementController();
+			attack_controller = new AttackController();
+			fortification_controller = new FortificationController();
 			frame.fun();
-			SetButtons();
-			PaintCountries();
+			setButtons();
+			paintCountries();
 
-			myactionlistner.ReinforcementPhase();
+			my_action_listner.reinforcementPhase();
 			repaintAndRevalidate();
 
 		} catch (Exception e) {
@@ -54,18 +54,18 @@ public class MainControll {
 		}
 	}
 
-	public void AddArmies(int armies) {
-		OnlyNeeded(neighbours(armies));
+	public void addArmies(int armies) {
+		onlyNeeded(neighbours(armies));
 
 	}
 
-	public void SetButtons() throws IOException {
+	public void setButtons() throws IOException {
 		frame.SetButtons(countryObjects());
 	}
 
-	public void RefreshButtons() throws IOException {
+	public void refreshButtons() throws IOException {
 		frame.Refresh(countryObjects());
-		PaintCountries();
+		paintCountries();
 		repaintAndRevalidate();
 	}
 
@@ -86,15 +86,15 @@ public class MainControll {
 		return ReadingFiles.CountryNameObject;
 	}
 
-	public void PaintCountries() {
+	public void paintCountries() {
 		frame.SetColorToAll(countryObjects());
 	}
 
-	public void OnlyNeeded(List<Country> country) {
+	public void onlyNeeded(List<Country> country) {
 		frame.OnlyNeeded(country);
 	}
 
-	public int PlayerNo() {
+	public int playerNo() {
 		return files.playerId.size();
 	}
 
@@ -102,7 +102,7 @@ public class MainControll {
 		return files.playerId.get(id);
 	}
 
-	public String NeighboursList(Country country) {
+	public String neighboursList(Country country) {
 		List<Country> countrylist = country.getNeighbors();
 		String result = "";
 		for (int i = 0; i < countrylist.size(); i++) {
@@ -111,10 +111,10 @@ public class MainControll {
 		return result;
 	}
 
-	public void ChangePlayerCountry(String countryname) throws IOException {
+	public void changePlayerCountry(String countryname) throws IOException {
 		Country country = countryObjects().get(countryname);
 		country.setPlayer(files.playerId.get(0));
-		RefreshButtons();
+		refreshButtons();
 
 	}
 

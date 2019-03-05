@@ -1,6 +1,9 @@
+package view;
+
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.*;
 
 import javax.swing.*;
@@ -12,22 +15,9 @@ public class MapSelection {
 	private JLabel HeaderLabel2;
 	private static JButton SelectButton;
 	private static JComboBox MapCombobox;
-	private static String MapSelected;
+	private static String MapSelected="";
 
 	static List<String> MapFiles = new ArrayList<String>();
-
-	public static void main(String args[]) {
-		MapSelection screen1 = new MapSelection();
-		// Use following method to add Maps to the Displayed List
-		screen1.addMap("World1.map");
-		screen1.addMap("World2.txt");
-		screen1.addMap("World3.txt");
-		screen1.addMap("World4.txt");
-		screen1.addMap("World5.txt");
-		screen1.setUpScreen();
-		String temp = screen1.getSelectedMap();
-
-	}
 
 	/**
 	 * Setting up frame components
@@ -35,11 +25,11 @@ public class MapSelection {
 	public MapSelection() {
 		// MapSelection screen1= new MapSelection();
 		// Use following method to add Maps to the Displayed List
-		this.addMap("World1.map");
-		this.addMap("World2.txt");
-		this.addMap("World3.txt");
-		this.addMap("World4.txt");
-		this.addMap("World5.txt");
+		addMap("Asia");
+		addMap("Montreal");
+		addMap("India");
+		addMap("World");
+		addMap("Europe");
 		this.setUpScreen();
 		String temp = this.getSelectedMap();
 	}
@@ -99,7 +89,7 @@ public class MapSelection {
 				System.out.print(MapSelected);
 				// invoke next screen here i.e Load Maps
 				MapFrame.dispose();
-				LoadSelectedMap.loadMap();
+				AssignCountries.assignCountries();
 				// jumps to new Window
 			}
 		});

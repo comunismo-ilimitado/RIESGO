@@ -49,10 +49,12 @@ public class SaveCreatedMap {
 	public void Init() {
 		try {
 			WriteIntoFile("[Map]");
-			WriteIntoFile("Image=UserMap.bmp");
-			WriteIntoFile("wrap=yes");
-			WriteIntoFile("scroll=none");
+			WriteIntoFile("author=gree");
 			WriteIntoFile("warn=yes");
+			WriteIntoFile("image=World.bmp");
+			WriteIntoFile("wrap=no");
+			WriteIntoFile("scroll=vertical");
+			
 			bw.newLine();
 			WriteIntoFile("[Continents]");
 			for (Continent in : CreateMap.ContinentsObjectList) {

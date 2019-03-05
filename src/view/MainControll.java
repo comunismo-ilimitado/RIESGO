@@ -1,4 +1,5 @@
 package view;
+
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -17,8 +18,7 @@ public class MainControll {
 	ReadingFiles files;
 	MFrame frame;
 	Player player;
-	MyActionListner myActionListner;
-	
+	MyActionListner myactionlistner;
 	AttackController attackController;
 	AttackerButtons attackerButtons;
 	ReinforcementController reinforcementController;
@@ -29,20 +29,27 @@ public class MainControll {
 		try {
 		
 		files = new ReadingFiles();
-		reinforcementController=new ReinforcementController();
-		myActionListner = new MyActionListner(this);
-		attackerButtons=new AttackerButtons();
-		files.Reads();
-		frame = new MFrame(myActionListner,files.image);
-		attackController = new AttackController();
-		fortificationController=new FortificationController();
+		reinforcementController = new ReinforcementController();
+		myactionlistner = new MyActionListner(this);
+		attackerButtons = new AttackerButtons();
+		String address="Resources/World.map";
+		if(StartUpWindow.MapType==1)
+			address="Resources/"+MapSelection.getSelectedMap()+".map";
+		else if(StartUpWindow.MapType==2) 
+			address="Resources/LoadedMap.map";
+		else if(StartUpWindow.MapType==3)
+			address="Resources/UserMap.map";
+		System.out.print("Selected Map:" + address);
+		files.Reads(address);
+		frame = new MFrame(myactionlistner, files.image);
+		//attackController = new AttackController();
+		fortificationController = new FortificationController();
 		frame.fun();
 
 		SetButtons();
-		// OnlyNeeded( attackController.getMyCountries(files.playerId.get(0)));
 		PaintCountries();
-		
-		myActionListner.ReinforcementPhase();
+
+		myactionlistner.ReinforcementPhase();
 		repaintAndRevalidate();
 		}
 		catch(Exception e) {
@@ -51,9 +58,9 @@ public class MainControll {
 		}
 	}
 
-	public void AddArmies(int no) {
-			OnlyNeeded(neighbours(no));
-		
+	public void AddArmies(int armies) {
+		OnlyNeeded(neighbours(armies));
+
 	}
 
 	public void SetButtons() throws IOException {
@@ -76,7 +83,7 @@ public class MainControll {
 	}
 
 	public List<Country> neighbours(Integer id) {
-		return files.playerId.get(id).getTotalCountriesOccupied();
+		return files.PlayerId.get(id).getTotalCountriesOccupied();
 	}
 
 	public HashMap<String, Country> countryObjects() {
@@ -92,24 +99,25 @@ public class MainControll {
 	}
 
 	public int PlayerNo() {
-		return files.playerId.size();
-	}
-	public Player playerObjet(int id) {
-		return files.playerId.get(id);
-	}
-	
-	public String NeighboursList(Country country) {
-		List<Country> lis = country.getNeighbors();
-		String haha="";
-		for(int i=0;i<lis.size();i++) {
-			haha=haha.concat(lis.get(i).getName()+",");
-		}
-		return haha;
+		return files.PlayerId.size();
 	}
 
-	public void ChangePlayerCountry(String Cname) throws IOException {
-		Country country = countryObjects().get(Cname);
-		country.setPlayer(files.playerId.get(0));
+	public Player playerObjet(int id) {
+		return files.PlayerId.get(id);
+	}
+
+	public String NeighboursList(Country country) {
+		List<Country> countrylist = country.getNeighbors();
+		String result = "";
+		for (int i = 0; i < countrylist.size(); i++) {
+			result = result.concat(countrylist.get(i).getName() + ",");
+		}
+		return result;
+	}
+
+	public void ChangePlayerCountry(String countryname) throws IOException {
+		Country country = countryObjects().get(countryname);
+		country.setPlayer(files.PlayerId.get(0));
 		RefreshButtons();
 
 	}

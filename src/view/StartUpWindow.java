@@ -17,6 +17,7 @@ public class StartUpWindow {
 	private static JFrame window;
 	private JLabel HeaderLabel;
 	private JButton select1, select2, select3;
+	public static  int MapType=0;
 
 	public StartUpWindow() {
 		// TODO Auto-generated constructor stub
@@ -55,6 +56,7 @@ public class StartUpWindow {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				window.dispose();
+				MapType=1;
 				System.out.print("Select fromlist");
 				MapSelection Map = new MapSelection();
 			}
@@ -63,6 +65,7 @@ public class StartUpWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				MapType=2;
 				window.dispose();
 				BrowseMapFile Map = new BrowseMapFile();
 			}
@@ -72,6 +75,7 @@ public class StartUpWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				MapType=3;
 				window.dispose();
 				CreateMap CreatedMap = new CreateMap();
 			}

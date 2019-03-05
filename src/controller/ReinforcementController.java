@@ -1,4 +1,5 @@
 package controller;
+
 import java.util.*;
 
 import model.Continent;
@@ -13,17 +14,21 @@ import model.Player;
  * @version 1.1
  */
 public class ReinforcementController {
+	/**
+	 * 
+	 * @param country
+	 * @return
+	 */
 	public String addarmies(Country country) {
-		 Player player=country.getOwner();
-		if(player.getPlayerArmiesNotDeployed()==0) {
+		Player player = country.getOwner();
+		if (player.getPlayerArmiesNotDeployed() == 0) {
 			return "NO ARMIES LEFT, PLEASE CLICK FINISH REINFORCEMENT";
-		}
-		else {
-			updateValue(player,country);
+		} else {
+			updateValue(player, country);
 			return "";
 		}
 	}
-	
+
 	public List<Country> getMyCountries(Player player) {
 		List<Country> countries = new ArrayList<Country>();
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
@@ -36,18 +41,17 @@ public class ReinforcementController {
 	}
 
 	public void calculateReinforcementArmies(Player player) {
-		int totalCountriesOFPlayer = player.getTotalCountriesOccupied().size();
-		float total_armies_to_reinforce;
-		total_armies_to_reinforce =  (float)totalCountriesOFPlayer / 3;
+		int totalcountriesofplayer = player.getTotalCountriesOccupied().size();
+		float totalarmiestoreinforce;
+		totalarmiestoreinforce = (float) totalcountriesofplayer / 3;
 		int armies = 0;
-		if (total_armies_to_reinforce < 3.0) {
+		if (totalarmiestoreinforce < 3.0) {
 			armies = armies + 3;
 		} else {
-			armies = armies + (int) total_armies_to_reinforce;
+			armies = armies + (int) totalarmiestoreinforce;
 		}
 		armies = armies + calcArmiesByControlValue(player);
 		player.setPlayerTotalArmiesNotDeployed(armies);
-		//return armies;
 	}
 
 	public List<Continent> playerOwnsContinent(Player player) {

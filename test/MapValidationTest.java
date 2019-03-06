@@ -11,19 +11,27 @@ import model.Continent;
 import model.Country;
 import model.MapVarification;
 
-public class MapValidationTest
-{
+/**
+ * This class tests the map validations
+ * 
+ * @author navjot and neerajpreet
+ *
+ */
+public class MapValidationTest {
 	MapVarification map;
-	Country country1,country2,country3,country4,country5;
-	List<Country> n_list,n_list1,n_list2,n_list3;
-	Continent continent1,continent2,continent3;
+	Country country1, country2, country3, country4, country5;
+	List<Country> n_list, n_list1, n_list2, n_list3;
+	Continent continent1, continent2, continent3;
 
+	/**
+	 * This method create objects of countries and assign values to methods This
+	 * will be called before every test case
+	 */
 	@Before
-	public void onStart()
-	{
-		HashMap<String,Country> countries = new HashMap<>();
-		HashMap<String,Continent> continents = new HashMap<>();
-		
+	public void onStart() {
+		HashMap<String, Country> countries = new HashMap<>();
+		HashMap<String, Continent> continents = new HashMap<>();
+
 		country1 = new Country("India");
 		country2 = new Country("China");
 		country3 = new Country("Pakistan");
@@ -31,105 +39,112 @@ public class MapValidationTest
 		country5 = new Country("Iran");
 		continent1 = new Continent(4, "Asia");
 		continent2 = new Continent(5, "Africa");
-		continent3 = new Continent(6,"North America");
-		
+		continent3 = new Continent(6, "North America");
+
 		n_list = new ArrayList<Country>();
 		n_list.add(country2);
 		n_list.add(country3);
 		n_list.add(country4);
-		
+
 		n_list1 = new ArrayList<Country>();
 		n_list1.add(country5);
-		
-		
+
 		n_list2 = new ArrayList<Country>();
 		n_list2.add(country5);
 		n_list2.add(country3);
-		
-		
+
 		n_list3 = new ArrayList<Country>();
 		n_list3.add(country1);
 		n_list3.add(country2);
 		n_list3.add(country3);
 		n_list3.add(country4);
-		
+
 		country1.setContinentId(1);
 		country1.setCountryId(11);
 		country1.setName("India");
 		country1.setNeighbors(n_list);
-		
+
 		country2.setContinentId(2);
 		country2.setCountryId(21);
 		country2.setName("China");
 		country2.setNeighbors(n_list1);
-		
+
 		country3.setContinentId(3);
 		country3.setCountryId(31);
 		country3.setName("Pakistan");
 		country3.setNeighbors(n_list2);
-		
+
 		country4.setContinentId(4);
 		country4.setCountryId(41);
 		country4.setName("Bhutan");
 		country4.setNeighbors(n_list3);
-		
+
 		country5.setContinentId(5);
 		country5.setCountryId(51);
 		country5.setName("Iran");
 		country5.setNeighbors(n_list);
-		
-		//continent1.setContinentId(81);
+
 		continent1.setName("Asia");
 		continent1.setCountries(n_list);
 		continent1.setControlValue(4);
-		
-		//continent2.setContinentId(82);
+
 		continent2.setName("Africa");
 		continent2.setCountries(n_list2);
 		continent2.setControlValue(5);
-		
+
 		continent3.setName("North America");
 		continent3.setCountries(n_list3);
-		
-		countries.put("India",country1);
-		countries.put("China",country2);
-		countries.put("Pakistan",country3);
-		countries.put("Bhutan",country4);
-		countries.put("Iran",country5);
-		
+
+		countries.put("India", country1);
+		countries.put("China", country2);
+		countries.put("Pakistan", country3);
+		countries.put("Bhutan", country4);
+		countries.put("Iran", country5);
+
 		continents.put("Asia", continent1);
 		continents.put("Africa", continent1);
-		
-		map = new MapVarification(countries,continents);
+
+		map = new MapVarification(countries, continents);
 	}
-	
+
+	/**
+	 * This test case will pass if one country is neighbor of another country and
+	 * vice versa
+	 */
 	@Test
-	public void testBidirectionalCheck()
-	{
+	public void testBidirectionalCheck() {
 		map.BiDirectionalCheck();
-		assertEquals(true,country2.getNeighbors().contains(country1));
+		assertEquals(true, country2.getNeighbors().contains(country1));
 	}
-	
+
+	/**
+	 * This test case will pass if any of the continent does not contain any country
+	 * or null
+	 */
 	@Test
-	public void testNoContinentIsUsed()
-	{
+	public void testNoContinentIsUsed() {
 		continent3.setCountries(null);
 		map.NoContinentIsUnused();
-		assertEquals(true,map.getString().contains("EVERY CONTINENT IS NOT USED"));
+		assertEquals(true, map.getString().contains("EVERY CONTINENT IS NOT USED"));
 	}
-	
+
+	/**
+	 * This test case will pass if country itself is not its neighbor
+	 */
 	@Test
-	public void testNotItsOwnNeighbour()
-	{
+	public void testNotItsOwnNeighbour() {
 		map.NotItsOwnNeighbour();
-		assertEquals(true,map.getString2().contains("Neighbour Of itself Removed"));
+		assertEquals(true, map.getString2().contains("Neighbour Of itself Removed"));
 	}
-	
+
+	/**
+	 * This test case will pass if one country should not be in more than one
+	 * continent
+	 */
 	@Test
-	public void testContinentHaveSameCountry()
-	{
+	public void testContinentHaveSameCountry() {
 		map.ContinentHaveSameCountry();
-		assertEquals(true,map.getString().contains("MULTIPLE CONTINENTS HAVE SAME COUNTRIES"));
+		assertEquals(true, map.getString().contains("MULTIPLE CONTINENTS HAVE SAME COUNTRIES"));
 	}
-	
+
 }

@@ -12,37 +12,33 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
+/**
+ * Class to display errors
+ * 
+ * @author pazim
+ *
+ */
 public class MFrame2 {
-	/**
-	 * 
-	 */
+
 	JFrame frame;
 	JLabel jLabel;
 
+	/**
+	 * default constructor
+	 */
 	public MFrame2() {
+	}
 
-	/*
-	 * frame = new JFrame("samdlknas;"); JPanel jPanel = new JPanel(); JButton
-	 * button = new JButton("Start Again"); jLabel = new JLabel("Message");
-	 * frame.add(jPanel); jPanel.add(jLabel); button.setSize(100, 100);
-	 * jPanel.add(button); frame.setMinimumSize(new Dimension(500, 500));
-	 * frame.setVisible(false);
+	/**
+	 * throws error and restarts game
 	 * 
-	 * button.addActionListener(new ActionListener() {
-	 * 
-	 * @Override public void actionPerformed(ActionEvent arg0) { try {
-	 * Runtime.getRuntime().exec("java StartUpWindow"); } catch (IOException e) { //
-	 * TODO Auto-generated catch block e.printStackTrace(); } System.exit(0); } });
-	 * }
-	 */}
+	 * @param message
+	 */
 	public void error(String message) {
-		/*
-		 * System.out.println(message); jLabel.setText(message); frame.setVisible(true);
-		 */ JOptionPane.showMessageDialog(null, message);
+		JOptionPane.showMessageDialog(null, message);
 
-		 String args[]=new String[0];
-		 StartUpWindow.main(args);
+		String args[] = new String[0];
+		StartUpWindow.main(args);
 
 	}
 }

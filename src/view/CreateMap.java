@@ -11,6 +11,11 @@ import javax.swing.*;
 import controller.SaveCreatedMap;
 import model.Continent;
 import model.Country;
+/**
+ * This class create the map
+ * @author greeshma
+ * @version 1.0
+ */
 
 public class CreateMap {
 

@@ -45,6 +45,9 @@ public class AssignCountries {
 		});
 		return NumberOfPlayers;
 	}
+	/**
+	 * This method is used to select the number of players in a game for user interface
+	 */
 	public static void assignCountries() {
 		Frame1= new JFrame("Map");
 		Frame1.setSize(500, 500);

@@ -25,7 +25,10 @@ public class LoadSelectedMap {
 		JLabel Label1= new JLabel("MAP LOADED");
 		Label1.setBounds(90,40,150,50);
 		
-		//Display selected map here
+		/**
+		*Display selected map here
+		*/
+		
 
 
 		JButton NextButton= new JButton("Continue");

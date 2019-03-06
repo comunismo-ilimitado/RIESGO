@@ -101,7 +101,7 @@ public class Country {
 	/**
 	 * Set the owner of the country
 	 * 
-	 * @param Player It is the object of the Player type
+	 * @param player It is the object of the Player type
 	 */
 	public void setPlayer(Player player) {
 		this.owned_player = player;
@@ -146,7 +146,7 @@ public class Country {
 	/**
 	 * This method add the neighbor countries to the list of neighbors
 	 * 
-	 * @param Neighbor It takes the object of type Country
+	 * @param neighbor It takes the object of type Country
 	 */
 	public void addNeighbors(Country neighbor) {
 		this.neighbors.add(neighbor);

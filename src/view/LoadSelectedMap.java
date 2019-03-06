@@ -3,6 +3,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+/**
+*This class loads the selected map.
+*@author Greeshma
+*@version 1.0
+*/
 
 public class LoadSelectedMap {
 

@@ -44,7 +44,7 @@ public class MyActionListner implements ActionListener {
 
 	/**
 	 * This method display the armies that are not deployed
-	 * @param: country object
+	 * @param country: object
 	 */
 	public void ReinforcementPhase2(Country country) {
 		// controll.AddArmies(currentPlayer);
@@ -117,7 +117,7 @@ public class MyActionListner implements ActionListener {
 	}
 	/**
 	 * This method check validations of attack phase
-	 * @param: country object
+	 * @param country: object
 	 * @throws IOException
 	 */
 	public void AttackPhase(Country country) throws IOException {

@@ -12,6 +12,12 @@ import controller.SaveCreatedMap;
 import model.Continent;
 import model.Country;
 
+/**
+ * This class create the map
+ * 
+ * @author greeshma
+ * @version 1.0
+ */
 public class CreateMap {
 
 	private JPanel assign_countries_panel, assign_neighbours_panel;
@@ -37,6 +43,9 @@ public class CreateMap {
 
 	}
 
+	/**
+	 * This method creates map for the user interface
+	 */
 	public void GetNumbers() {
 		get_number_frame = new JFrame("Create Map");
 		get_number_frame.setSize(500, 500);
@@ -59,6 +68,9 @@ public class CreateMap {
 		get_number_frame.setVisible(true);
 	}
 
+	/**
+	 * This method assigning countries to continents
+	 */
 	public void AssignCountriesFrame() {
 		assign_countries_frame = new JFrame("Assign Countries To continents");
 		assign_countries_panel = new JPanel();
@@ -74,7 +86,7 @@ public class CreateMap {
 
 		next_button = new JButton("Next");
 		next_button.setBounds(700, 700, 150, 30);
-		continents_combo = new JComboBox();// insetr string
+		continents_combo = new JComboBox();
 		continents_combo.setBounds(10, 150, 200, 20);
 		control_value_text_field = new JTextField("0");
 		control_value_text_field.setBounds(10, 250, 50, 20);
@@ -91,6 +103,9 @@ public class CreateMap {
 		assign_countries_frame.setVisible(true);
 	}
 
+	/**
+	 * This method add neighbors to the countries
+	 */
 	public void AssignNeighboursFrame() {
 
 		assign_neighbours_frame = new JFrame("Add Neighbours");
@@ -105,7 +120,7 @@ public class CreateMap {
 		done_button = new JButton("done");
 		done_button.setBounds(700, 700, 150, 30);
 
-		countries_combo = new JComboBox();// insetr string
+		countries_combo = new JComboBox();
 		countries_combo.setBounds(10, 150, 200, 20);
 
 		assign_neighbours_frame.add(assign_neighbours_panel);
@@ -117,7 +132,9 @@ public class CreateMap {
 		assign_neighbours_frame.setVisible(true);
 	}
 
-	
+	/**
+	 * This method checks validations of the map
+	 */
 	public void StartFrame() {
 
 		generate_map_button.addActionListener(new ActionListener() {
@@ -150,6 +167,9 @@ public class CreateMap {
 
 	}
 
+	/**
+	 * UI for assigning continents and adding countries to the continent
+	 */
 	public void ActionAddContinent() {
 		add_to_continent_button.addActionListener(new ActionListener() {
 			@Override
@@ -176,6 +196,9 @@ public class CreateMap {
 		});
 	}
 
+	/**
+	 * UI for assigning countries to the continents
+	 */
 	public void ActionNextButtonFrame() {
 		next_button.addActionListener(new ActionListener() {
 			@Override
@@ -214,6 +237,9 @@ public class CreateMap {
 
 	}
 
+	/**
+	 * UI for assigning neighbors to the countries
+	 */
 	public void ActionAssignNeighbours() {
 		add_to_country_button.addActionListener(new ActionListener() {
 			@Override
@@ -232,7 +258,7 @@ public class CreateMap {
 				CountriesObjectList.add(tempct);
 				countries_combo.removeItem((String) countries_combo.getSelectedItem());
 				if ((String) countries_combo.getSelectedItem() == null) {
-                    for (int j = 0; j < NoOfCountries; j++) {
+					for (int j = 0; j < NoOfCountries; j++) {
 						check_boxes1[j].setVisible(false);
 						assign_neighbours_panel.updateUI();
 					}
@@ -248,7 +274,7 @@ public class CreateMap {
 					JOptionPane.showMessageDialog(null, "Map successfully Created");
 					Disp();
 					assign_countries_frame.dispose();
-	                                AssignCountries.assignCountries();
+					AssignCountries.assignCountries();
 					SaveCreatedMap SaveMapObejct = new SaveCreatedMap();
 				}
 			}

@@ -42,7 +42,9 @@ public class BrowseMapFile {
 	public static String getFileName() {
 		return FileName;
 	}
-	
+	/**
+	 * this method is used to select and load the map file.
+	 */
 	public void setUp() {
 		Window = new JFrame("Start-up phase");
 		Window.setSize(500, 500);
@@ -100,6 +102,9 @@ public class BrowseMapFile {
 		Window.add(Loc);
 
 		header_label.setVisible(true);
+		/**
+		 *this listener is used if no map file selected by user else will assign countries.
+		 */
 
 		load.addActionListener(new ActionListener() {
 

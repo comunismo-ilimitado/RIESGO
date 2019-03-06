@@ -23,9 +23,6 @@ public class MapSelection {
 	 * Setting up frame components
 	 */
 	public MapSelection() {
-		// MapSelection screen1= new MapSelection();
-		// Use following method to add Maps to the Displayed List
-		addMap("Asia");
 		addMap("Montreal");
 		addMap("India");
 		addMap("World");

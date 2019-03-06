@@ -47,6 +47,17 @@ public class MapVarification {
 	public void NoCountryIsUnused() {
 
 	}
+	
+	public ArrayList<String> getString()
+	{
+		return arrayList;
+	}
+	
+	public ArrayList<String> getString2()
+	{
+		return arrayList2;
+	}
+
 
 	public void NoContinentIsUnused() {
 		ArrayList<Continent> temparrayList = new ArrayList<>(hashMap2.values());

@@ -74,7 +74,7 @@ public class FortificationController {
 		} else if (noofarmiestobemoved >= sourcecountry.getNoOfArmies()) {
 			int CanMove = sourcecountry.getNoOfArmies() - 1;
 			System.out.println(CanMove);
-			return "ksaodjpos";
+			return "You can only move"+CanMove;
 		} else if (!hasPathBFS2(sourcecountry, destinationcountry)) {
 
 			return "NO path";

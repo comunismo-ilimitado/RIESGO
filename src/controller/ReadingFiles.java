@@ -21,7 +21,7 @@ import view.MFrame2;
  * This class reads the map files
  * 
  * @author pazim
- * @version 1.0
+ * @version 1.1
  */
 public class ReadingFiles {
 
@@ -43,7 +43,7 @@ public class ReadingFiles {
 	 * This method will store all values from the map file in static variables
 	 * 
 	 * @param address: location of the map file
-	 * @throws IOException
+	 * @throws IOException 
 	 */
 	public void Reads(String address) throws IOException {
 		try {

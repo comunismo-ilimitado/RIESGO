@@ -39,8 +39,10 @@ public class MainControll {
 			files.Reads(address);
 			mapVarification=new MapVarification(files.CountryNameObject,files.ContinentNameObject);
 			mapVarification.CallAllMethods();
+			
+			
+			
 			if(!files.errors&&!mapVarification.error) {
-				
 			myactionlistner = new MyActionListner(this);
 			frame = new MFrame(myactionlistner, ReadingFiles.image);
 			reinforcementController = new ReinforcementController();
@@ -49,14 +51,19 @@ public class MainControll {
 			frame.fun();
 			SetButtons();
 			PaintCountries();
-
+			SetDominationView();
+			
 			myactionlistner.ReinforcementPhase();
 			repaintAndRevalidate();
 			}
 		} catch (Exception e) {
 			System.out.println("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n" + e);
+			e.printStackTrace();
 			frame2.error("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n" + e);
 		}
+	}
+	public void SetDominationView() {
+	frame.SetDominationView(files.players.size());	
 	}
 
 	public void AddArmies(int armies) {

@@ -31,21 +31,28 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 
 import javafx.scene.layout.Border;
 import model.Country;
+
 /**
  * This class represents user interface for the game play
+ * 
  * @author pazim
  * @version 1.0
  */
 public class MFrame extends JFrame {
 	private JButton[] button;
-	JPanel jPanel2;
+	JPanel jPanel2, jPanel6, jPanel7;
 	JButton nextAction;
 	String Phases[] = { "Finish Reinforcement", "Finish Attack", "Finish Fortification" };
 	HashMap<String, JButton> hashButton;
-	JLabel jLabel, jLabel2, jLabel3, jLabel4, jLabel5;
+	JLabel jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel16, jLabel26, jLabel36, jLabel46, jLabel56, jLabel66,
+			jLabel17, jLabel27, jLabel37, jLabel47, jLabel57, jLabel67;
+	ArrayList<JLabel> jLabels, jLabels2;
 	MyActionListner myActionListner;
 	int playerTurn, noArmiesLeft;
 	String BBB;
@@ -59,19 +66,26 @@ public class MFrame extends JFrame {
 		this.myActionListner = myActionListner;
 		this.MapImage = MapImage;
 	}
+
 	/**
 	 * This method displays the user interface
+	 * 
 	 * @throws Exception
 	 */
 	public void fun() throws Exception {
 		hashButton = new HashMap<>();
 		FlowLayout flowLayout = new FlowLayout();
 		BorderLayout borderLayout = new BorderLayout();
+		// main pannel
+
 		JPanel mainPanel = new JPanel(new GridLayout(1, 2));
 
 		JPanel jPanel = new JPanel(new GridLayout(2, 1));
-		jPanel.setSize(new Dimension(500, 1000));
-		jPanel.setBackground(Color.red);
+		// jPanel.setSize(new Dimension(500, 1000));
+		// jPanel.setBackground(Color.red);
+
+		// image pannel
+
 		BufferedImage image;
 		try {
 			image = ImageIO.read(new File("Resources/" + MapImage));
@@ -80,41 +94,97 @@ public class MFrame extends JFrame {
 
 		}
 		JLabel label = new JLabel(new ImageIcon(image));
+
 		JScrollPane scroller = new JScrollPane(label, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jPanel.add(scroller);
-		JPanel jPanel3 = new JPanel(new GridLayout(2, 1));
-		JPanel jPanel4 = new JPanel(new GridLayout(0, 1));
-		jPanel4.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-		JPanel jPanel5 = new JPanel();
-		nextAction = new JButton("Finish Reinforcement");
-		nextAction.addActionListener(myActionListner);
-		jPanel5.add(nextAction);
-		jLabel = new JLabel("Turn For:- " + playerTurn);
-	
+		// startup view
+		JPanel jPanel3 = new JPanel(new GridLayout(2, 2));
+
+		jPanel.add(jPanel3);
+
+		// upper text
+		JPanel jPanel4 = new JPanel(new GridLayout(0, 1));
+		jPanel4.setBorder(new CompoundBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED),
+				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+		// jPanel4.setBackground(Color.RED);
+
+		jLabel1 = new JLabel("");
 		jLabel2 = new JLabel("Armies Left:- " + noArmiesLeft);
 		jLabel3 = new JLabel("Neighbours :- " + CCC);
 		jLabel4 = new JLabel("HIIIIIII:- " + AAA);
 		jLabel5 = new JLabel("HIIIIIII:- " + BBB);
-		NotifyAll();
-		jPanel3.add(jPanel4);
-		jPanel4.setBackground(Color.WHITE);
-		jPanel3.add(jPanel5);
-		jPanel4.add(jLabel);
+
+		jPanel4.add(jLabel1);
 		jPanel4.add(jLabel2);
 		jPanel4.add(jLabel3);
 		jPanel4.add(jLabel4);
 		jPanel4.add(jLabel5);
-		jPanel.add(jPanel3);
+
+		jPanel3.add(jPanel4);
+
+		// lower text
+		JPanel jPanel5 = new JPanel();
+		nextAction = new JButton("Finish Reinforcement");
+		nextAction.addActionListener(myActionListner);
+		jPanel5.add(nextAction);
+		// jPanel5.setBackground(Color.GREEN);
+		jPanel3.add(jPanel5);
+
+		jPanel6 = new JPanel(new GridLayout(0, 1));
+		jPanel6.setBorder(new CompoundBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED),
+				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+		jPanel6.add(new JLabel("Percentage Of Countries Occupied By Player"));
+
+		// jPanel6.setBackground(Color.YELLOW);
+
+		jLabel16 = new JLabel("Player 1:- " + playerTurn);
+		jLabel26 = new JLabel("Player 2:- " + noArmiesLeft);
+		jLabel36 = new JLabel("Player 3 :- " + CCC);
+		jLabel46 = new JLabel("Player 4:- " + AAA);
+		jLabel56 = new JLabel("Player 5:- " + BBB);
+		jLabel66 = new JLabel("Player 6:- " + BBB);
+		jLabels = new ArrayList<>();
+		jLabels.add(jLabel16);
+		jLabels.add(jLabel26);
+		jLabels.add(jLabel36);
+		jLabels.add(jLabel46);
+		jLabels.add(jLabel56);
+		jLabels.add(jLabel66);
+
+		jPanel3.add(jPanel6);
+
+		jPanel7 = new JPanel(new GridLayout(0, 1));
+
+		jPanel7.setBorder(new CompoundBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED),
+				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+		jPanel7.setToolTipText("CONTINENTS");
+		jPanel7.add(new JLabel("Continent Occupied By Player"));
+		jLabel17 = new JLabel("Player 1:- " + playerTurn);
+		jLabel27 = new JLabel("Player 2:- " + noArmiesLeft);
+		jLabel37 = new JLabel("Player 3 :- " + CCC);
+		jLabel47 = new JLabel("Player 4:- " + AAA);
+		jLabel57 = new JLabel("Player 5:- " + BBB);
+		jLabel67 = new JLabel("Player 6:- " + BBB);
+		jLabels2 = new ArrayList<>();
+		jLabels2.add(jLabel17);
+		jLabels2.add(jLabel27);
+		jLabels2.add(jLabel37);
+		jLabels2.add(jLabel47);
+		jLabels2.add(jLabel57);
+		jLabels2.add(jLabel67);
+
+		jPanel3.add(jPanel7);
 
 		jPanel2 = new JPanel(new GridLayout(0, 5));
-		jPanel2.setBackground(Color.BLACK);
+		// jPanel2.setBackground(Color.BLACK);
 		jPanel2.setSize(new Dimension(500, 1000));
+
 		add(mainPanel);
 		mainPanel.add(jPanel);
 		mainPanel.add(jPanel2);
-		Random random = new Random();
+
 		setTitle("PAZIMs Risk Game");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setResizable(false);
@@ -123,18 +193,28 @@ public class MFrame extends JFrame {
 		setVisible(true);
 
 	}
+
 	/**
 	 * This method update the view
 	 */
 	public void NotifyAll() {
-		jLabel.setText("Turn For Player :-" + (myActionListner.currentPlayer + 1));
+		jLabel1.setText("Turn For Player :-" + (myActionListner.currentPlayer + 1));
 		jLabel2.setText("Armies Left:- " + noArmiesLeft);
 		jLabel3.setText("Neighbours :- " + CCC);
 		jLabel4.setText("DICE 1:- " + AAA);
 		jLabel5.setText("DICE 2:- " + BBB);
 	}
+
+	public void SetDominationView(int NoOfPlayers) {
+		for (int i = 0; i < NoOfPlayers; i++) {
+			jPanel6.add(jLabels.get(i));
+			jPanel7.add(jLabels2.get(i));
+		}
+	}
+
 	/**
 	 * This method assigns button to each country in UI
+	 * 
 	 * @param countryObjects
 	 * @throws IOException
 	 */
@@ -154,8 +234,10 @@ public class MFrame extends JFrame {
 		}
 
 	}
+
 	/**
 	 * This method give color to the countries
+	 * 
 	 * @param countryObjects
 	 */
 	public void SetColorToAll(HashMap<String, Country> countryObjects) {
@@ -165,8 +247,10 @@ public class MFrame extends JFrame {
 		}
 
 	}
+
 	/**
 	 * This method runs after every button click
+	 * 
 	 * @param countryObjects
 	 * @throws IOException
 	 */

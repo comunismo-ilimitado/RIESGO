@@ -13,7 +13,6 @@ Montreal Centre-Ouest=4
 Montreal Centre=3
 Montreal Ouest=6
 
-
 [Territories]
 RDP-PAT,330,50,Montreal Est,Anjou,Montreal Nord,Mercier
 Anjou,300,95,Montreal Est,RDP-PAT,Montreal Nord,Mercier,St-Leonard

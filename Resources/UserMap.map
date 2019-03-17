@@ -10,8 +10,8 @@ Continent1=0
 Continent2=0
 
 [Territories]
-Country1,235,220,Continent1,Country2
-Country2,114,42,Continent1,Country3
+Country1,139,142,Continent1,Country2,Country3
+Country2,203,75,Continent1,Country1,Country3
 
-Country3,66,181,Continent2,Country1
+Country3,13,94,Continent2,Country1,Country2
 

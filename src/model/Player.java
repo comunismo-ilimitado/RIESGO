@@ -32,6 +32,10 @@ public class Player {
 		//Color to represent player owned countries
 		private Color my_color;
 		
+		private int card_exchange_counter;
+		
+//		//Player cards
+//		private List<String> cards = new ArrayList<String>();
 		
 		//Default Constructor
 		public Player(int player_id) {
@@ -39,6 +43,7 @@ public class Player {
 			this.total_countries_occupied = new ArrayList<>();
 			this.countries_occupied = new ArrayList<>();
 			this.cards = new ArrayList<>();
+			card_exchange_counter=0;
 		}
 	
 		//Gets player_id
@@ -122,5 +127,14 @@ public class Player {
 		//Sets player color
 		public void setPlayerColor(Color color) {
 			this.my_color = color;
-		}			
+		}	
+		
+		//
+		public int getCardExchangeValue() {
+			return card_exchange_counter;
+		}
+		//
+		public void setCardExchangeValue(int value) {
+			this.card_exchange_counter=value;
+		}
 }

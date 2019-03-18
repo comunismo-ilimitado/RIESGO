@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.*;
+import model.CardTypes;
 import model.Country;
 import model.Player;
 
@@ -145,15 +146,15 @@ public class AttackController {
 		return;
 	}
 
-	/**
-	 * Places an army in the country that the player has just won
-	 * 
-	 * @param country: Country object must be passed to update the number of armies
-	 *        to 1
-	 */
-	public void placeArmies(Country country) {
-		country.setNoOfArmies(1);
-	}
+//	/**
+//	 * Places an army in the country that the player has just won
+//	 * 
+//	 * @param country: Country object must be passed to update the number of armies
+//	 *        to 1
+//	 */
+//	public void placeArmies(Country country) {
+//		country.setNoOfArmies(1);
+//	}
 
 //	AttackController attackController = new AttackController();
 
@@ -207,10 +208,39 @@ public class AttackController {
 				defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
 				updateOwner(defender, attacker.getOwner());
 				defender.setNoOfArmies(attackerDice);
+				//code for drawing a card randomly
+				int cardnumber = (int) (Math.random() * 3 + 1);
+				List<CardTypes> newsetofcards =  new ArrayList<CardTypes>();
+				if(cardnumber==1) {
+					newsetofcards=attacker.getOwner().getPlayerCards();
+					newsetofcards.add(CardTypes.Artillery);
+					attacker.getOwner().setPlayerCards(newsetofcards);
+					ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(newsetofcards);
+					
+				}
+				else if(cardnumber==2) {
+					newsetofcards=attacker.getOwner().getPlayerCards();
+					newsetofcards.add(CardTypes.Cavalry);
+					attacker.getOwner().setPlayerCards(newsetofcards);
+					ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(newsetofcards);
+				}
+				else if(cardnumber==3) {
+					newsetofcards=attacker.getOwner().getPlayerCards();
+					newsetofcards.add(CardTypes.Infantry);
+					attacker.getOwner().setPlayerCards(newsetofcards);
+					ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(newsetofcards);
+				}
 				//answer = answer + "You Won and you occupied this country.";
 			}
 			if (getMyCountries(defender.getOwner()).size() == 0) {
-				//eliminate player
+				//add code to give cards to attacker
+				List<CardTypes> defcards=defender.getOwner().getPlayerCards();
+				List<CardTypes> attcards=attacker.getOwner().getPlayerCards();
+				attcards.addAll(defcards);
+				attacker.getOwner().setPlayerCards(attcards);
+				ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(attcards);
+				ReadingFiles.playerId.remove(defender.getOwner().getPlayerId());
+				ReadingFiles.players.remove(ReadingFiles.players.indexOf(defender.getOwner().getPlayerId()));
 			}
 //			int armiesLostByAttacker = 0;
 //			int armiesLostByDefender = 0;
@@ -243,5 +273,4 @@ public class AttackController {
 		}
 		return max;
 	}
-
 }

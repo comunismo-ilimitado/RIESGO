@@ -16,6 +16,7 @@ import java.io.*;
 public class AttackController {
 	public List<Integer> attackerDiceRoll;
 	public List<Integer> defenderDiceRoll;
+
 	/**
 	 * Gets a list of countries that the player owns
 	 * 
@@ -169,7 +170,7 @@ public class AttackController {
 //			int attArmies = attacker.getNoOfArmies();
 //			int defArmies = defender.getNoOfArmies();
 
-			//String answer = "";
+			// String answer = "";
 			int attackerDice = setNoOfDice(attacker, 'A');
 			/*
 			 * display the number of defender dice
@@ -200,42 +201,46 @@ public class AttackController {
 					continue;
 			}
 			if (defender.getNoOfArmies() == 0) {
-				List<Country> newListOfCountriesAtt = attacker.getOwner().getTotalCountriesOccupied();
+				List<Country> newListOfCountriesAtt = ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+						.getTotalCountriesOccupied();
 				newListOfCountriesAtt.add(defender);
+				ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+						.setTotalCountriesOccupied(newListOfCountriesAtt);
 				attacker.getOwner().setTotalCountriesOccupied(newListOfCountriesAtt);
-				List<Country> newListOfCountriesDef = defender.getOwner().getTotalCountriesOccupied();
+				List<Country> newListOfCountriesDef = ReadingFiles.playerId.get(defender.getOwner().getPlayerId())
+						.getTotalCountriesOccupied();
 				newListOfCountriesDef.remove(defender);
+				ReadingFiles.playerId.get(defender.getOwner().getPlayerId())
+						.setTotalCountriesOccupied(newListOfCountriesDef);
 				defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
 				updateOwner(defender, attacker.getOwner());
 				defender.setNoOfArmies(attackerDice);
-				//code for drawing a card randomly
+				// code for drawing a card randomly
 				int cardnumber = (int) (Math.random() * 3 + 1);
-				List<CardTypes> newsetofcards =  new ArrayList<CardTypes>();
-				if(cardnumber==1) {
-					newsetofcards=attacker.getOwner().getPlayerCards();
+				List<CardTypes> newsetofcards = new ArrayList<CardTypes>();
+				if (cardnumber == 1) {
+					newsetofcards = attacker.getOwner().getPlayerCards();
 					newsetofcards.add(CardTypes.Artillery);
 					attacker.getOwner().setPlayerCards(newsetofcards);
 					ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(newsetofcards);
-					
-				}
-				else if(cardnumber==2) {
-					newsetofcards=attacker.getOwner().getPlayerCards();
+
+				} else if (cardnumber == 2) {
+					newsetofcards = attacker.getOwner().getPlayerCards();
 					newsetofcards.add(CardTypes.Cavalry);
 					attacker.getOwner().setPlayerCards(newsetofcards);
 					ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(newsetofcards);
-				}
-				else if(cardnumber==3) {
-					newsetofcards=attacker.getOwner().getPlayerCards();
+				} else if (cardnumber == 3) {
+					newsetofcards = attacker.getOwner().getPlayerCards();
 					newsetofcards.add(CardTypes.Infantry);
 					attacker.getOwner().setPlayerCards(newsetofcards);
 					ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(newsetofcards);
 				}
-				//answer = answer + "You Won and you occupied this country.";
+				// answer = answer + "You Won and you occupied this country.";
 			}
 			if (getMyCountries(defender.getOwner()).size() == 0) {
-				//add code to give cards to attacker
-				List<CardTypes> defcards=defender.getOwner().getPlayerCards();
-				List<CardTypes> attcards=attacker.getOwner().getPlayerCards();
+				// add code to give cards to attacker
+				List<CardTypes> defcards = defender.getOwner().getPlayerCards();
+				List<CardTypes> attcards = attacker.getOwner().getPlayerCards();
 				attcards.addAll(defcards);
 				attacker.getOwner().setPlayerCards(attcards);
 				ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(attcards);

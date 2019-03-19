@@ -59,6 +59,14 @@ public class MyActionListner implements ActionListener {
 	 */
 	public void ReinforcementPhase() {
 		// controll.AddArmies(currentPlayer);
+		MFrame3 frame3=new MFrame3();
+		try {
+			frame3.fun();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		controll.frame.ActivateAll();
 		controll.frame.NotifyAll();
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());

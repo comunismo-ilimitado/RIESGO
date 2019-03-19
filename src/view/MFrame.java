@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Observer;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -210,6 +211,10 @@ public class MFrame extends JFrame {
 			jPanel6.add(jLabels.get(i));
 			jPanel7.add(jLabels2.get(i));
 		}
+	}
+	
+	public void UpdateGameDominationView(int NoOfPlayers) {
+		
 	}
 
 	/**

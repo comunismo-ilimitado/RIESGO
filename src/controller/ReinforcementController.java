@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.*;
+import model.CardTypes;
 
 import model.Continent;
 import model.Country;
@@ -14,6 +15,46 @@ import model.Player;
  * @version 1.1
  */
 public class ReinforcementController {
+	//
+	public boolean hasMoreCards(Player player) {
+		if (player.getPlayerCards().size() >= 5)
+			return true;
+		else
+			return false;
+	}
+
+	//
+	public String exchangeCards(List<CardTypes> list, Player player) {
+		HashSet<CardTypes> temp = new HashSet<>();
+		List<CardTypes> playerCards = player.getPlayerCards();
+		temp.addAll(list);
+		if (list.size() == 3) {
+			if ((temp.size() == 1 && (temp.contains(CardTypes.Artillery) || temp.contains(CardTypes.Cavalry)
+					|| temp.contains(CardTypes.Infantry)))
+					|| (temp.size() == 3 && temp.contains(CardTypes.Artillery) && temp.contains(CardTypes.Cavalry)
+							&& temp.contains(CardTypes.Infantry))) {
+				if (temp.size() == 1) {
+					CardTypes card = temp.iterator().next();
+					playerCards.remove(card);
+					playerCards.remove(card);
+					playerCards.remove(card);
+					player.setPlayerCards(playerCards);
+				} else if (temp.size() == 3) {
+					playerCards.remove(CardTypes.Artillery);
+					playerCards.remove(CardTypes.Cavalry);
+					playerCards.remove(CardTypes.Infantry);
+					player.setPlayerCards(playerCards);
+				}
+				player.setCardExchangeValue(player.getCardExchangeValue() + 1);
+				int number = player.getCardExchangeValue();
+				player.setPlayerTotalArmiesNotDeployed(player.getPlayerArmiesNotDeployed() + number * 5);
+				return "";
+			} else
+				return "Cannot exchange these cards for armies and select atleast 3 cards";
+		} else
+			return "Select 3 cards of the same type or all unique";
+	}
+
 	/**
 	 * this method checks for the number of armies that are not deployed
 	 * 
@@ -21,7 +62,8 @@ public class ReinforcementController {
 	 * @return some value of type string
 	 */
 	public String addarmies(Country country) {
-		Player player = country.getOwner();
+		int index = country.getOwner().getPlayerId();
+		Player player = ReadingFiles.playerId.get(index);
 		if (player.getPlayerArmiesNotDeployed() == 0) {
 			return "NO ARMIES LEFT, PLEASE CLICK FINISH REINFORCEMENT";
 		} else {
@@ -29,6 +71,7 @@ public class ReinforcementController {
 			return "";
 		}
 	}
+
 	/**
 	 * Gets a list of countries that the player owns
 	 * 
@@ -38,13 +81,14 @@ public class ReinforcementController {
 	public List<Country> getMyCountries(Player player) {
 		List<Country> countries = new ArrayList<Country>();
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
-			if (entry.getValue().getOwner().equals(player)) {
+			if (entry.getValue().getOwner().getPlayerId()==(player.getPlayerId())) {
 				countries.add(entry.getValue());
 			} else
 				continue;
 		}
 		return countries;
 	}
+
 	/**
 	 * this method calculates the number of armies each player gets to reinforce
 	 * 
@@ -52,7 +96,13 @@ public class ReinforcementController {
 	 */
 
 	public void calculateReinforcementArmies(Player player) {
-		int totalcountriesofplayer = player.getTotalCountriesOccupied().size();
+		int totalcountriesofplayer = 0;
+		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
+			if (entry.getValue().getOwner().getPlayerId()==(player.getPlayerId())) {
+				totalcountriesofplayer++;
+			} else
+				continue;
+		}
 		float totalarmiestoreinforce;
 		totalarmiestoreinforce = (float) totalcountriesofplayer / 3;
 		int armies = 0;
@@ -62,8 +112,9 @@ public class ReinforcementController {
 			armies = armies + (int) totalarmiestoreinforce;
 		}
 		armies = armies + calcArmiesByControlValue(player);
-		player.setPlayerTotalArmiesNotDeployed(armies);
+		player.setPlayerTotalArmiesNotDeployed(player.getPlayerArmiesNotDeployed() + armies);
 	}
+
 	/**
 	 * this method checks whether the player owns the whole continent or not
 	 * 
@@ -77,7 +128,7 @@ public class ReinforcementController {
 			List<Country> temp = entry.getValue().getCountries();
 			int counter = 0;
 			for (int i = 0; i < entry.getValue().getCountries().size(); i++) {
-				if (entry.getValue().getCountries().get(i).getOwner().equals(player))
+				if (entry.getValue().getCountries().get(i).getOwner().getPlayerId()==(player.getPlayerId()))
 					counter++;
 				else
 					continue;
@@ -89,6 +140,7 @@ public class ReinforcementController {
 		}
 		return continents;
 	}
+
 	/**
 	 * this method calculates the number of armies according to the control value
 	 * 
@@ -103,7 +155,7 @@ public class ReinforcementController {
 		}
 		return armies;
 	}
-	
+
 	/**
 	 * this method updates the number of armies player owns and armies not deployed
 	 * 
@@ -112,9 +164,11 @@ public class ReinforcementController {
 	 */
 	public void updateValue(Player player, Country country) {
 		country.setNoOfArmies(country.getNoOfArmies() + 1);
+		int x = ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().indexOf(country);
+		ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().get(x).setNoOfArmies(country.getNoOfArmies() + 1);
 		player.setPlayerTotalArmiesNotDeployed(player.getPlayerArmiesNotDeployed() - 1);
 	}
-	
+
 	/**
 	 * this method checks whether player has deployed all his armies or not
 	 * 

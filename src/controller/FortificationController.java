@@ -22,7 +22,7 @@ public class FortificationController {
 	public List<Country> getMyCountries(Player player) {
 		List<Country> countries = new ArrayList<Country>();
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
-			if (entry.getValue().getOwner().equals(player)) {
+			if (entry.getValue().getOwner().getPlayerId()==(player.getPlayerId())) {
 				countries.add(entry.getValue());
 			} else
 				continue;
@@ -50,7 +50,7 @@ public class FortificationController {
 				continue;
 			visited.add(node);
 			for (Country child : node.getNeighbors()) {
-				if (child.getOwner().equals(node.getOwner())) {
+				if (child.getOwner().getPlayerId()==node.getOwner().getPlayerId()) {
 					nexttovisit.add(child);
 				}
 			}
@@ -81,7 +81,11 @@ public class FortificationController {
 
 		} else {
 			sourcecountry.setNoOfArmies(sourcecountry.getNoOfArmies() - noofarmiestobemoved);
+			int x = ReadingFiles.ContinentNameObject.get(sourcecountry.getContinent().getName()).getCountries().indexOf(sourcecountry);
+			ReadingFiles.ContinentNameObject.get(sourcecountry.getContinent().getName()).getCountries().get(x).setNoOfArmies(sourcecountry.getNoOfArmies() - noofarmiestobemoved);
 			destinationcountry.setNoOfArmies(destinationcountry.getNoOfArmies() + noofarmiestobemoved);
+			int y = ReadingFiles.ContinentNameObject.get(destinationcountry.getContinent().getName()).getCountries().indexOf(destinationcountry);
+			ReadingFiles.ContinentNameObject.get(destinationcountry.getContinent().getName()).getCountries().get(y).setNoOfArmies(destinationcountry.getNoOfArmies() + noofarmiestobemoved);
 			return "";
 		}
 	}

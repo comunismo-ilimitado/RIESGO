@@ -26,7 +26,7 @@ public class AttackController {
 	public List<Country> getMyCountries(Player player) {
 		List<Country> countries = new ArrayList<Country>();
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
-			if (entry.getValue().getOwner().equals(player) && entry.getValue().getNoOfArmies() > 1) {
+			if (entry.getValue().getOwner().getPlayerId()==player.getPlayerId()) {
 				countries.add(entry.getValue());
 			} else
 				continue;
@@ -46,7 +46,7 @@ public class AttackController {
 		// int total = neighbors.size();
 		List<Country> temp = new ArrayList<Country>();
 		for (int i = 0; i < neighbors.size(); i++) {
-			if (neighbors.get(i).getOwner().equals(country.getOwner())) {
+			if (neighbors.get(i).getOwner().getPlayerId()==country.getOwner().getPlayerId()) {
 				temp.add(neighbors.get(i));
 			}
 //			if (neighbors.get(i).getNoOfArmies() < 2)
@@ -143,6 +143,7 @@ public class AttackController {
 	 * @param player: Player object to update the owner in the given country
 	 */
 	public void updateOwner(Country country, Player player) {
+		country.setPlayer(player);
 		ReadingFiles.CountryNameObject.get(country.getName()).setPlayer(player);
 		return;
 	}
@@ -219,18 +220,21 @@ public class AttackController {
 				int cardnumber = (int) (Math.random() * 3 + 1);
 				List<CardTypes> newsetofcards = new ArrayList<CardTypes>();
 				if (cardnumber == 1) {
-					newsetofcards = attacker.getOwner().getPlayerCards();
+					Player attplayer = ReadingFiles.playerId.get(attacker.getOwner().getPlayerId());
+					newsetofcards = attplayer.getPlayerCards();
 					newsetofcards.add(CardTypes.Artillery);
 					attacker.getOwner().setPlayerCards(newsetofcards);
 					ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(newsetofcards);
 
 				} else if (cardnumber == 2) {
-					newsetofcards = attacker.getOwner().getPlayerCards();
+					Player attplayer = ReadingFiles.playerId.get(attacker.getOwner().getPlayerId());
+					newsetofcards = attplayer.getPlayerCards();
 					newsetofcards.add(CardTypes.Cavalry);
 					attacker.getOwner().setPlayerCards(newsetofcards);
 					ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(newsetofcards);
 				} else if (cardnumber == 3) {
-					newsetofcards = attacker.getOwner().getPlayerCards();
+					Player attplayer = ReadingFiles.playerId.get(attacker.getOwner().getPlayerId());
+					newsetofcards = attplayer.getPlayerCards();
 					newsetofcards.add(CardTypes.Infantry);
 					attacker.getOwner().setPlayerCards(newsetofcards);
 					ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(newsetofcards);
@@ -239,8 +243,10 @@ public class AttackController {
 			}
 			if (getMyCountries(defender.getOwner()).size() == 0) {
 				// add code to give cards to attacker
-				List<CardTypes> defcards = defender.getOwner().getPlayerCards();
-				List<CardTypes> attcards = attacker.getOwner().getPlayerCards();
+				Player def = ReadingFiles.playerId.get(defender.getOwner().getPlayerId());
+				Player att = ReadingFiles.playerId.get(attacker.getOwner().getPlayerId());
+				List<CardTypes> defcards = def.getPlayerCards();
+				List<CardTypes> attcards = att.getPlayerCards();
 				attcards.addAll(defcards);
 				attacker.getOwner().setPlayerCards(attcards);
 				ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(attcards);

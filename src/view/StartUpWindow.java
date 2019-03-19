@@ -57,7 +57,7 @@ public class StartUpWindow {
 			public void actionPerformed(ActionEvent arg0) {
 				window.dispose();
 				MapType=1;
-				System.out.print("Select fromlist");
+//				System.out.print("Select fromlist");
 				MapSelection Map = new MapSelection();
 			}
 		});

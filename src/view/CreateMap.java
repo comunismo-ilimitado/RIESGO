@@ -287,9 +287,9 @@ public class CreateMap {
 		List<Country> Neighbours = new ArrayList<Country>();
 		for (Country in : CountriesObjectList) {
 			Neighbours = in.getNeighbors();
-			System.out.println("\nCountry name: " + in.getName() + "\nNeighbours:\n");
+		//	System.out.println("\nCountry name: " + in.getName() + "\nNeighbours:\n");
 			for (Country it : Neighbours) {
-				System.out.println(it.getName());
+		//		System.out.println(it.getName());
 			}
 
 		}

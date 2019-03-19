@@ -60,10 +60,11 @@ public class MFrame3 extends JFrame {
 
 	/**
 	 * This method displays the user interface
+	 * @param list 
 	 * 
 	 * @throws Exception
 	 */
-	public void fun() throws Exception {
+	public void fun(List<CardTypes> list) throws Exception {
 		FlowLayout flowLayout = new FlowLayout();
 		JPanel mainPanel = new JPanel(flowLayout);
 		jPanel2 = new JPanel(new GridLayout(0, 5));
@@ -73,6 +74,9 @@ public class MFrame3 extends JFrame {
 		setTitle("PAZIMs Card Selection");
 		setResizable(false);
 		pack();
+		SetButtons(list);
+		JButton button=new JButton("NEXT");
+		mainPanel.add(button);
 		setVisible(true);
 
 	}
@@ -91,7 +95,7 @@ public class MFrame3 extends JFrame {
 	 * @param countryObjects
 	 * @throws IOException
 	 */
-	public void SetButtons(ArrayList<CardTypes> cards) throws IOException {
+	public void SetButtons(List<CardTypes> cards) throws IOException {
 		button = new JButton[cards.size()];
 		Random random = new Random();
 

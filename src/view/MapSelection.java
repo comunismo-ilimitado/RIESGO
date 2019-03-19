@@ -83,7 +83,7 @@ public class MapSelection {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				MapSelected = (String) MapCombobox.getSelectedItem();
-				System.out.print(MapSelected);
+			//	System.out.print(MapSelected);
 				// invoke next screen here i.e Load Maps
 				MapFrame.dispose();
 				AssignCountries.assignCountries();

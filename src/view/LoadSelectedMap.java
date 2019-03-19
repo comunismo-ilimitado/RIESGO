@@ -28,9 +28,6 @@ public class LoadSelectedMap {
 		/**
 		*Display selected map here
 		*/
-		
-
-
 		JButton NextButton= new JButton("Continue");
 		NextButton.setBounds(290,370,100,30);
 		

@@ -49,16 +49,13 @@ public class Continent {
 	public List<Country> getCountries() {
 		return countries;
 	}
-
 	//Sets continent's countries
 	public void setCountries(List<Country> countries) {
 		this.countries = countries;
 	}
-	
 	public void addCountrie(Country Countrie) {
 		this.countries.add(Countrie);
 	}
-
 	//Gets continent's ID
 	public int getControlValue() {
 		return control_value;

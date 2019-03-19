@@ -213,7 +213,18 @@ public class MFrame extends JFrame {
 		}
 	}
 	
-	public void UpdateGameDominationView(int NoOfPlayers) {
+	public void UpdateGameDominationViewPercentage(ArrayList<Float> percent) {
+		for(int i=0;i<percent.size();i++) {
+			jLabels.get(i).setText("Player "+(i+1)+" :- "+percent.get(i));
+		}
+		
+		
+	}
+	public void UpdateGameDominationViewContinentOccupied(ArrayList<String> occupies) {
+		for(int i=0;i<occupies.size();i++) {
+			jLabels2.get(i).setText("Player "+(i+1)+" :- "+occupies.get(i));
+		}
+		
 		
 	}
 

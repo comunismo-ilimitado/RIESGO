@@ -25,7 +25,7 @@ import view.MFrame2;
  */
 public class ReadingFiles {
 
-	public HashMap<Integer, Player> playerId;
+	public static HashMap<Integer, Player> playerId;
 	public static boolean errors = false;
 	public static List<Integer> players;
 	public static List<String> CountriesNames, ContinentNames;

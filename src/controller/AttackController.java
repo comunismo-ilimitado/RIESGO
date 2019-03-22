@@ -17,6 +17,44 @@ public class AttackController {
 	public List<Integer> attackerDiceRoll;
 	public List<Integer> defenderDiceRoll;
 
+	//
+	public boolean canAttack(Player player) {
+		List<Country> list = getMyCountries(player);
+		int counter = 0;
+		int breaker = 0;
+		for (int i = 0; i < list.size(); i++) {
+			Country temp = list.get(i);
+			if (temp.getNeighbors().size() == 0) {
+				counter++;
+
+			} else if (temp.getNoOfArmies() < 2) {
+				counter++;
+
+			} else {
+				List<Country> templist = temp.getNeighbors();
+				for (int j = 0; j < templist.size(); j++) {
+					if (templist.get(j).getOwner().getPlayerId() == temp.getOwner().getPlayerId()) {
+						continue;
+					} else {
+						breaker = -1;
+						break;
+					}
+				}
+				counter++;
+			}
+			if(breaker==-1) {
+				break;
+			}
+		}
+		if (breaker == -1) {
+			return true;
+		}
+		if (counter == list.size()) {
+			return false;
+		}
+		return false;
+	}
+	
 	/**
 	 * Gets a list of countries that the player owns
 	 * 

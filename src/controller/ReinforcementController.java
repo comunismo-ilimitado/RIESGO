@@ -22,6 +22,9 @@ public class ReinforcementController {
 		else
 			return false;
 	}
+	
+	
+	
 
 	//
 	public String exchangeCards(List<CardTypes> list, Player player) {
@@ -164,6 +167,7 @@ public class ReinforcementController {
 	 */
 	public void updateValue(Player player, Country country) {
 		country.setNoOfArmies(country.getNoOfArmies() + 1);
+System.out.println(country.getNoOfArmies());
 		int x = ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().indexOf(country);
 		ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().get(x).setNoOfArmies(country.getNoOfArmies() + 1);
 		player.setPlayerTotalArmiesNotDeployed(player.getPlayerArmiesNotDeployed() - 1);

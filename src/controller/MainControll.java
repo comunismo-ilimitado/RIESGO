@@ -1,18 +1,16 @@
-package view;
-
+package controller;
+import view.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import controller.AttackController;
-import controller.FortificationController;
-import controller.ReadingFiles;
-import controller.ReinforcementController;
 import model.Continent;
 import model.Country;
 import model.MapVarification;
 import model.Player;
+import view.AttackerButtons;
+import view.MFrame;
+import view.MFrame2;
 
 public class MainControll {
 	ReadingFiles files;
@@ -26,6 +24,8 @@ public class MainControll {
 	FortificationController fortificationController;
 	MapVarification mapVarification;
 
+
+	@SuppressWarnings("deprecation")
 	public void Function() throws Exception {
 		try {
 			frame2 = new MFrame2();
@@ -49,10 +49,15 @@ public class MainControll {
 				reinforcementController = new ReinforcementController();
 				attackController = new AttackController();
 				fortificationController = new FortificationController();
+				myactionlistner.addObserver(frame);
 				frame.fun();
 				SetButtons();
 				PaintCountries();
 				SetDominationView();
+				
+				for (Continent val : files.ContinentNameObject.values()) {
+					System.out.println(val.getName()+" : -"+ ListToStringCountries(val.getCountries()));
+				}
 
 				myactionlistner.ReinforcementPhase();
 				repaintAndRevalidate();
@@ -66,8 +71,13 @@ public class MainControll {
 
 	public void SetDominationView() {
 		frame.SetDominationView(files.players.size());
+		updateDominationView();
+
+	}
+	public void updateDominationView() {
 		 frame.UpdateGameDominationViewPercentage(CountriesPercentage());
 		 frame.UpdateGameDominationViewContinentOccupied(ContinentsOccupied());
+
 	}
 
 	public void AddArmies(int armies) {
@@ -161,21 +171,35 @@ public class MainControll {
 		for(int i=0;i<list.size();i++) {
 			occu=occu+", "+list.get(i).getName();
 		}
+		if(occu=="") {
+			occu="No Continents";
+		}
+		return occu;
+	}catch(Exception e) {
+		e.printStackTrace();
+		return "None";
+	}
+		}
+	public String ListToStringCountries(List<Country> list) {
+		String occu="";
+		try {
+		for(int i=0;i<list.size();i++) {
+			occu=occu+", "+list.get(i).getName();
+		}
 		return occu;
 	}catch(Exception e) {
 		e.printStackTrace();
 		return "NONE";
 	}
-		}
-		
+		}		
 	public ArrayList<String> ContinentsOccupied(){
 		ArrayList<String> arrayList=new ArrayList<>(); 
 		for(int i=0;i<PlayerNo();i++) {
-			System.out.println(playerObjet(i).getContinentsOccupied());
-			arrayList.add(ListToStringContinent(playerObjet(i).getContinentsOccupied()));
+			System.out.println(reinforcementController.playerOwnsContinent(playerObjet(i)));
+			arrayList.add(ListToStringContinent(reinforcementController.playerOwnsContinent(playerObjet(i))));
 		}
 		return arrayList;
 	}
-	
+
 
 }

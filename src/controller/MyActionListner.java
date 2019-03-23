@@ -1,4 +1,4 @@
-package view;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,27 +6,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.List;
-
-import controller.ReadingFiles;
+import java.util.*;
 import model.Country;
+import view.*;
+
 /**
  * This class handles events of the User Interface
+ * 
  * @author pazim and bhargav
- *@version 1.o
+ * @version 1.o
  */
 
-public class MyActionListner implements ActionListener {
+@SuppressWarnings("deprecation")
+public class MyActionListner extends Observable implements ActionListener {
 	MFrame frame;
 	MainControll controll;
 	List<String> Phases;
 	String currentPhase;
 	int players = 3;
-	int currentPlayer = 0;
+	public int currentPlayer = 0;
 	Country attackCountry1, attackCountry2;
 	Country fortifyCountry1, fortifyCountry2;
 
 	public MyActionListner(MainControll controll) {
 		this.controll = controll;
+
 		Phases = new ArrayList<>();
 		Phases.add("Finish Reinforcement");
 		Phases.add("Finish Attack");
@@ -44,7 +48,9 @@ public class MyActionListner implements ActionListener {
 
 	/**
 	 * This method display the armies that are not deployed
-	 * @param country: object
+	 * 
+	 * @param country:
+	 *            object
 	 */
 	public void ReinforcementPhase2(Country country) {
 		// controll.AddArmies(currentPlayer);
@@ -54,47 +60,48 @@ public class MyActionListner implements ActionListener {
 		if (!message.equals(""))
 			controll.frame.error(message);
 	}
+
 	/**
-	 * This method display number of armies player can  deploy 
+	 * This method display number of armies player can deploy
 	 */
 	public void ReinforcementPhase() {
 		// controll.AddArmies(currentPlayer);
-//		MFrame3 frame3=new MFrame3();
-	/*	try {
-			frame3.fun(controll.player.getPlayerCards());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	*/	
+		// MFrame3 frame3=new MFrame3();
+		/*
+		 * try { frame3.fun(controll.player.getPlayerCards()); } catch (Exception e) {
+		 * // TODO Auto-generated catch block e.printStackTrace(); }
+		 */ changed();
 		controll.frame.ActivateAll();
-		controll.frame.NotifyAll();
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
 		controll.reinforcementController.calculateReinforcementArmies(controll.playerObjet(currentPlayer));
 	}
+
 	/**
-	 * This method 
+	 * This method
 	 */
 	public void FortificationPhase() {
+		changed();
 		controll.frame.ActivateAll();
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
 		playerUpdate();
 	}
+
 	/**
 	 * This method does the validations of fortification phase
-	 * @param country: country object
+	 * 
+	 * @param country:
+	 *            country object
 	 * @throws IOException
 	 */
 	public void FortificationPhase2(Country country) throws IOException {
 
 		if (fortifyCountry1 == null) {
 			fortifyCountry1 = country;
+			changed();
 			controll.frame.CCC = controll.NeighboursList(country);
-			controll.frame.NotifyAll();
 			controll.frame.error("Select One More Country You Want to move your Armies to");
 		} else if (fortifyCountry2 == null) {
 			fortifyCountry2 = country;
-
 			if (fortifyCountry1.equals(fortifyCountry2)) {
 				controll.frame.error("SAME COUNTRY SELECTED");
 				fortifyCountry1 = null;
@@ -112,7 +119,7 @@ public class MyActionListner implements ActionListener {
 					controll.RefreshButtons();
 					currentPhase = "Finish Reinforcement";
 					controll.frame.nextAction.setText("Finish Reinforcement");
-//				playerUpdate();
+					// playerUpdate();
 					fortifyCountry1 = null;
 					fortifyCountry2 = null;
 					controll.frame.ActivateAll();
@@ -123,39 +130,41 @@ public class MyActionListner implements ActionListener {
 		}
 
 	}
+
 	/**
 	 * This method check validations of attack phase
-	 * @param country: object
+	 * 
+	 * @param country:
+	 *            object
 	 * @throws IOException
 	 */
 	public void AttackPhase(Country country) throws IOException {
+		changed();
 		if (attackCountry1 == null) {
 			attackCountry1 = country;
 			controll.frame.ActivateAll();
 			List<Country> abc = controll.attackController.getMyNeighborsForAttack(country);
-			if(abc.size()<1) {
+			if (abc.size() < 1) {
 				controll.frame.ActivateAll();
 				attackCountry1 = null;
 				attackCountry2 = null;
 				controll.frame.error("No Neighbours to attack");
 				controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
 				controll.RefreshButtons();
-
-				
-			}else {
-			controll.frame.OnlyNeeded(abc);
-			controll.RefreshButtons();
+			} else {
+				controll.frame.OnlyNeeded(abc);
+				controll.RefreshButtons();
 			}
 		} else if (attackCountry2 == null) {
 			attackCountry2 = country;
+			String test1 = controll.frame.popupText(2);
 			String reply = controll.attackController.attackButton(attackCountry1, attackCountry2);
 			if (!reply.equals("")) {
 				controll.frame.error(reply);
-			
 			}
 			controll.frame.AAA = controll.attackController.attackerDiceRoll.toString();
 			controll.frame.BBB = controll.attackController.defenderDiceRoll.toString();
-			controll.frame.NotifyAll();
+			changed();
 			controll.frame.ActivateAll();
 			attackCountry1 = null;
 			attackCountry2 = null;
@@ -177,7 +186,6 @@ public class MyActionListner implements ActionListener {
 				if (controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed() > 0) {
 					controll.frame.error("Connot End Reinforcement Untill All armies are deployed");
 				} else {
-
 					currentPhase = "Finish Attack";
 					controll.frame.nextAction.setText("Finish Attack");
 					attackCountry1 = null;
@@ -226,6 +234,20 @@ public class MyActionListner implements ActionListener {
 
 		}
 
+	}
+
+	public ArrayList<Float> CountriesPercentage() {
+		return controll.CountriesPercentage();
+	}
+
+	public ArrayList<String> ContinentsOccupied() {
+		return controll.ContinentsOccupied();
+	}
+
+	public void changed() {
+
+		setChanged();
+		notifyObservers();
 	}
 
 }

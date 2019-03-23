@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 import javax.imageio.ImageIO;
@@ -36,6 +37,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import controller.MyActionListner;
 import javafx.scene.layout.Border;
 import model.Country;
 
@@ -45,20 +47,22 @@ import model.Country;
  * @author pazim
  * @version 1.0
  */
-public class MFrame extends JFrame {
+@SuppressWarnings("deprecation")
+public class MFrame extends JFrame implements Observer {
 	private JButton[] button;
 	JPanel jPanel2, jPanel6, jPanel7;
-	JButton nextAction;
+	public JButton nextAction;
 	String Phases[] = { "Finish Reinforcement", "Finish Attack", "Finish Fortification" };
 	HashMap<String, JButton> hashButton;
 	JLabel jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel16, jLabel26, jLabel36, jLabel46, jLabel56, jLabel66,
 			jLabel17, jLabel27, jLabel37, jLabel47, jLabel57, jLabel67;
 	ArrayList<JLabel> jLabels, jLabels2;
 	MyActionListner myActionListner;
-	int playerTurn, noArmiesLeft;
-	String BBB;
-	String AAA;
-	String CCC;
+	public int playerTurn;
+	public int noArmiesLeft;
+	public String BBB;
+	public String AAA;
+	public String CCC;
 	public String MapImage = "noimage.bmp";
 
 	public MFrame(MyActionListner myActionListner, String MapImage) {
@@ -101,7 +105,7 @@ public class MFrame extends JFrame {
 		jPanel.add(scroller);
 
 		// startup view
-		JPanel jPanel3 = new JPanel(new GridLayout(2, 2));
+		JPanel jPanel3 = new JPanel(new GridLayout(0, 1));
 
 		jPanel.add(jPanel3);
 
@@ -129,7 +133,10 @@ public class MFrame extends JFrame {
 		JPanel jPanel5 = new JPanel();
 		nextAction = new JButton("Finish Reinforcement");
 		nextAction.addActionListener(myActionListner);
+		JButton button=new JButton("EXTRA");
 		jPanel5.add(nextAction);
+		jPanel5.add(button);
+		
 		// jPanel5.setBackground(Color.GREEN);
 		jPanel3.add(jPanel5);
 
@@ -315,6 +322,18 @@ public class MFrame extends JFrame {
 
 		}
 
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		System.out.println("sdsd");
+
+		ArrayList<Float> percent = 		((MyActionListner) arg0).CountriesPercentage();
+		ArrayList<String> listinh = ((MyActionListner) arg0).ContinentsOccupied();
+		 UpdateGameDominationViewPercentage(percent);
+		 UpdateGameDominationViewContinentOccupied(listinh);
+		 NotifyAll();
 	}
 
 }

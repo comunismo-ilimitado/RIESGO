@@ -9,6 +9,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import controller.MainControll;
+
 public class AssignCountries {
 
 	private static JComboBox PNumberJCombo;
@@ -62,7 +64,7 @@ public class AssignCountries {
 		OKButton = new JButton("OK");
 		OKButton.setBounds(290, 190, 100, 30);
 
-		String[] select = { "2", "3", "4", "5", "6" };
+		String[] select = {"1", "2", "3", "4", "5", "6" };
 		PNumberJCombo = new JComboBox(select);
 		PNumberJCombo.setBounds(120, 150, 200, 20);
 

@@ -19,6 +19,7 @@ import view.*;
 
 @SuppressWarnings("deprecation")
 public class MyActionListner extends Observable implements ActionListener {
+	
 	MFrame frame;
 	MainControll controll;
 	List<String> Phases;
@@ -55,8 +56,8 @@ public class MyActionListner extends Observable implements ActionListener {
 	public void ReinforcementPhase2(Country country) {
 		// controll.AddArmies(currentPlayer);
 		String message = controll.reinforcementController.addarmies(country);
-		controll.frame.noArmiesLeft = country.getOwner().getPlayerArmiesNotDeployed();
-		controll.frame.NotifyAll();
+		controll.frame.noArmiesLeft = controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
+		changed();
 		if (!message.equals(""))
 			controll.frame.error(message);
 	}
@@ -65,12 +66,14 @@ public class MyActionListner extends Observable implements ActionListener {
 	 * This method display number of armies player can deploy
 	 */
 	public void ReinforcementPhase() {
+
 		// controll.AddArmies(currentPlayer);
 		// MFrame3 frame3=new MFrame3();
 		/*
 		 * try { frame3.fun(controll.player.getPlayerCards()); } catch (Exception e) {
 		 * // TODO Auto-generated catch block e.printStackTrace(); }
-		 */ changed();
+		 */
+		changed();
 		controll.frame.ActivateAll();
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
 		controll.reinforcementController.calculateReinforcementArmies(controll.playerObjet(currentPlayer));
@@ -97,8 +100,8 @@ public class MyActionListner extends Observable implements ActionListener {
 
 		if (fortifyCountry1 == null) {
 			fortifyCountry1 = country;
-			changed();
 			controll.frame.CCC = controll.NeighboursList(country);
+			changed();
 			controll.frame.error("Select One More Country You Want to move your Armies to");
 		} else if (fortifyCountry2 == null) {
 			fortifyCountry2 = country;
@@ -162,9 +165,11 @@ public class MyActionListner extends Observable implements ActionListener {
 			if (!reply.equals("")) {
 				controll.frame.error(reply);
 			}
-			controll.frame.AAA = controll.attackController.attackerDiceRoll.toString();
-			controll.frame.BBB = controll.attackController.defenderDiceRoll.toString();
+			controll.frame.AAA = controll.attackController.attackerDiceRollOutput.toString();
+			controll.frame.BBB = controll.attackController.defenderDiceRollOutput.toString();
 			changed();
+			controll.attackController.attackerDiceRollOutput.clear();
+			controll.attackController.defenderDiceRollOutput.clear();
 			controll.frame.ActivateAll();
 			attackCountry1 = null;
 			attackCountry2 = null;

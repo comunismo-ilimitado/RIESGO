@@ -166,10 +166,9 @@ public class ReinforcementController {
 	 * @param country: country object where armies updated
 	 */
 	public void updateValue(Player player, Country country) {
-		country.setNoOfArmies(country.getNoOfArmies() + 1);
-System.out.println(country.getNoOfArmies());
+		country.setNoOfArmies(country.getNoOfArmies()+1);
 		int x = ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().indexOf(country);
-		ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().get(x).setNoOfArmies(country.getNoOfArmies() + 1);
+		ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().get(x).setNoOfArmies(country.getNoOfArmies());
 		player.setPlayerTotalArmiesNotDeployed(player.getPlayerArmiesNotDeployed() - 1);
 	}
 

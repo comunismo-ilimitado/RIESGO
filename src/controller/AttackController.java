@@ -16,7 +16,47 @@ import java.io.*;
 public class AttackController {
 	public List<Integer> attackerDiceRoll;
 	public List<Integer> defenderDiceRoll;
+	public List<Integer> attackerDiceRollOutput=new ArrayList<>();
+	public List<Integer> defenderDiceRollOutput=new ArrayList<>();
 
+	//
+	public boolean canAttack(Player player) {
+		List<Country> list = getMyCountries(player);
+		int counter = 0;
+		int breaker = 0;
+		for (int i = 0; i < list.size(); i++) {
+			Country temp = list.get(i);
+			if (temp.getNeighbors().size() == 0) {
+				counter++;
+
+			} else if (temp.getNoOfArmies() < 2) {
+				counter++;
+
+			} else {
+				List<Country> templist = temp.getNeighbors();
+				for (int j = 0; j < templist.size(); j++) {
+					if (templist.get(j).getOwner().getPlayerId() == temp.getOwner().getPlayerId()) {
+						continue;
+					} else {
+						breaker = -1;
+						break;
+					}
+				}
+				counter++;
+			}
+			if(breaker==-1) {
+				break;
+			}
+		}
+		if (breaker == -1) {
+			return true;
+		}
+		if (counter == list.size()) {
+			return false;
+		}
+		return false;
+	}
+	
 	/**
 	 * Gets a list of countries that the player owns
 	 * 
@@ -178,6 +218,7 @@ public class AttackController {
 			 */ int defenderDice = setNoOfDice(defender, 'D');
 			attackerDiceRoll = new ArrayList<Integer>();
 			defenderDiceRoll = new ArrayList<Integer>();
+
 			/*
 			 * display the int list values as the results from dice roll
 			 */for (int i = 0; i < attackerDice; i++) {
@@ -186,6 +227,9 @@ public class AttackController {
 			for (int i = 0; i < defenderDice; i++) {
 				defenderDiceRoll.add(rollDice());
 			}
+			attackerDiceRollOutput.addAll(attackerDiceRoll);
+			defenderDiceRollOutput.addAll(defenderDiceRoll);
+			System.out.println(attackerDiceRoll.toString()+" "+defenderDiceRoll.toString());
 			while (attackerDiceRoll.size() != 0 && defenderDiceRoll.size() != 0) {
 				int attackerMax = getMaxValue(attackerDiceRoll);
 				int defenderMax = getMaxValue(defenderDiceRoll);
@@ -194,6 +238,9 @@ public class AttackController {
 				} else {
 					updateArmies(defender);
 				}
+				
+
+
 				attackerDiceRoll.remove(attackerDiceRoll.indexOf(attackerMax));
 				defenderDiceRoll.remove(defenderDiceRoll.indexOf(defenderMax));
 				if (attackerDice == 1)

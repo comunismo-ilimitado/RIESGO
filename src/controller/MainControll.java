@@ -49,6 +49,8 @@ public class MainControll {
 				reinforcementController = new ReinforcementController();
 				attackController = new AttackController();
 				fortificationController = new FortificationController();
+				frame.noArmiesLeft = playerObjet(0).getPlayerArmiesNotDeployed();
+
 				myactionlistner.addObserver(frame);
 				frame.fun();
 				SetButtons();
@@ -195,7 +197,6 @@ public class MainControll {
 	public ArrayList<String> ContinentsOccupied(){
 		ArrayList<String> arrayList=new ArrayList<>(); 
 		for(int i=0;i<PlayerNo();i++) {
-			System.out.println(reinforcementController.playerOwnsContinent(playerObjet(i)));
 			arrayList.add(ListToStringContinent(reinforcementController.playerOwnsContinent(playerObjet(i))));
 		}
 		return arrayList;

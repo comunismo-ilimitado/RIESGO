@@ -116,10 +116,10 @@ public class MFrame extends JFrame implements Observer {
 		// jPanel4.setBackground(Color.RED);
 
 		jLabel1 = new JLabel("");
-		jLabel2 = new JLabel("Armies Left:- " + noArmiesLeft);
-		jLabel3 = new JLabel("Neighbours :- " + CCC);
-		jLabel4 = new JLabel("HIIIIIII:- " + AAA);
-		jLabel5 = new JLabel("HIIIIIII:- " + BBB);
+		jLabel2 = new JLabel("");
+		jLabel3 = new JLabel("");
+		jLabel4 = new JLabel("");
+		jLabel5 = new JLabel("");
 
 		jPanel4.add(jLabel1);
 		jPanel4.add(jLabel2);
@@ -205,8 +205,10 @@ public class MFrame extends JFrame implements Observer {
 	/**
 	 * This method update the view
 	 */
+	
 	public void NotifyAll() {
 		jLabel1.setText("Turn For Player :-" + (myActionListner.currentPlayer + 1));
+
 		jLabel2.setText("Armies Left:- " + noArmiesLeft);
 		jLabel3.setText("Neighbours :- " + CCC);
 		jLabel4.setText("DICE 1:- " + AAA);
@@ -327,7 +329,6 @@ public class MFrame extends JFrame implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
-		System.out.println("sdsd");
 
 		ArrayList<Float> percent = 		((MyActionListner) arg0).CountriesPercentage();
 		ArrayList<String> listinh = ((MyActionListner) arg0).ContinentsOccupied();

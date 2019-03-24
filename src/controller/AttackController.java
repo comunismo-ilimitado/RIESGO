@@ -203,16 +203,16 @@ public class AttackController {
 	public void endAttackPhaseButton(Player player) {
 	}
 
-	public String attackButton(Country attacker, Country defender) {
+	public String attackButton(Country attacker, Country defender, int attackerDice, int defenderDice) {
 		if (attacker.getNoOfArmies() >= 2 && defender.getNoOfArmies() >= 1) {
 //			int attArmies = attacker.getNoOfArmies();
 //			int defArmies = defender.getNoOfArmies();
 
 			// String answer = "";
-			int attackerDice = setNoOfDice(attacker, 'A');
-			/*
-			 * display the number of defender dice
-			 */ int defenderDice = setNoOfDice(defender, 'D');
+// 			int attackerDice = setNoOfDice(attacker, 'A');
+// 			/*
+// 			 * display the number of defender dice
+// 			 */ int defenderDice = setNoOfDice(defender, 'D');
 			attackerDiceRoll = new ArrayList<Integer>();
 			defenderDiceRoll = new ArrayList<Integer>();
 			/*

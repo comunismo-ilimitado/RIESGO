@@ -14,7 +14,7 @@ import model.Country;
 
 /**
  * This class create the map
- * 
+ *  
  * @author greeshma
  * @version 1.0
  */
@@ -34,6 +34,8 @@ public class CreateMap {
 	DefaultListModel<String> countries_to_continent_list;
 	public static List<Continent> ContinentsObjectList = new ArrayList<>();
 	public static List<Country> CountriesObjectList = new ArrayList<>();
+
+	private static JButton EditButton;
 
 	private static int Index1 = 0;
 
@@ -91,7 +93,7 @@ public class CreateMap {
 		control_value_text_field = new JTextField("0");
 		control_value_text_field.setBounds(10, 250, 50, 20);
 		countries_to_continent_list = new DefaultListModel<>();
-
+		
 		assign_countries_frame.add(assign_countries_panel);
 		assign_countries_frame.add(next_button);
 		assign_countries_frame.add(continent_contol_value_label);
@@ -123,6 +125,31 @@ public class CreateMap {
 		countries_combo = new JComboBox();
 		countries_combo.setBounds(10, 150, 200, 20);
 
+		EditButton = new JButton("EDIT");
+		EditButton.setBounds(275, 200, 90, 20);
+		
+		EditButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				if (countries_combo.getSelectedItem() != null) {
+					JOptionPane.showMessageDialog(null, "Assign neighbours to all Countries");
+				} else {
+					JOptionPane.showMessageDialog(null, "Map successfully Created");
+					Disp();
+					assign_countries_frame.dispose();
+					SaveCreatedMap SaveMapObejct = new SaveCreatedMap();
+				
+	
+					assign_countries_frame.dispose();
+					StartUpWindow.MapType=6;
+					EditContinents obj= new EditContinents();
+			}
+			}
+		});
+		
+		assign_neighbours_frame.add(EditButton);
+		
 		assign_neighbours_frame.add(assign_neighbours_panel);
 		assign_neighbours_frame.add(done_button);
 		assign_neighbours_frame.add(add_to_country_button);

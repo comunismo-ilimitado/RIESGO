@@ -23,6 +23,8 @@ public class BrowseMapFile {
 	private  static JLabel Loc=null;
 	private  static String Location;
 	private static String FileName;
+	private static JButton EditButton;
+
 
 	public BrowseMapFile() {
 		
@@ -60,6 +62,24 @@ public class BrowseMapFile {
 
 		load = new JButton("Load Map");
 		load.setBounds(100, 300, 100, 30);
+		
+		EditButton = new JButton("EDIT");
+		EditButton.setBounds(275, 200, 90, 20);
+		
+		EditButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				if(Location==null)
+					JOptionPane.showMessageDialog(null,"No file Selected!");
+				else
+				{
+					Window.dispose();
+					StartUpWindow.MapType=5;
+					EditContinents obj= new EditContinents();
+				}
+			}
+		});
 
 		Browse.addActionListener(new ActionListener() {
 
@@ -100,6 +120,8 @@ public class BrowseMapFile {
 		Window.add(Browse);
 		Window.add(load);
 		Window.add(Loc);
+		Window.add(EditButton);
+
 
 		header_label.setVisible(true);
 		/**
@@ -115,6 +137,7 @@ public class BrowseMapFile {
 					JOptionPane.showMessageDialog(null,"No file Selected!");
 				else
 				{
+					Window.dispose();
 					AssignCountries.assignCountries();
 				}
 					

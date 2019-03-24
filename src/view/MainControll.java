@@ -36,7 +36,9 @@ public class MainControll {
 			else if (StartUpWindow.MapType == 3)
 				address = "Resources/UserMap.map";
 			System.out.print("Selected Map : " + address);
-			files.Reads(address);
+			if (StartUpWindow.MapType !=4) {
+				files.Reads(address);
+			}
 			mapVarification=new MapVarification(files.CountryNameObject,files.ContinentNameObject);
 			mapVarification.CallAllMethods();
 			if(!files.errors&&!mapVarification.error) {

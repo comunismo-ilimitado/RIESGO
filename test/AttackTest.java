@@ -168,19 +168,22 @@ public class AttackTest
 	@Test
 	public void testAttackButton()
 	{
-		assertEquals("Wrong input",attack.attackButton(country3, country6));
+		assertEquals("Wrong input",attack.attackButton(country3, country6, 3,1));
 	}
 	
 	@Test
 	public void testAttackButton1()
 	{
-		assertEquals("Your country must have more than one army",attack.attackButton(country1,country2));
+		assertEquals("Your country must have more than one army",attack.attackButton(country1,country2,3,1));
 	}
 	
 	@Test
 	public void testAttackButton2()
 	{
-		assertEquals("",attack.attackButton(country2,country1));
+		assertEquals("",attack.attackButton(country2,country1,3,1));
+		System.out.println(country1.getOwner().getPlayerId()+" "+country2.getOwner().getPlayerId()+" "+
+		ReadingFiles.playerId.get(country2.getOwner().getPlayerId()).getPlayerCards());
+		
 	}
 	
 }

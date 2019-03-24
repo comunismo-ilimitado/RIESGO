@@ -15,7 +15,9 @@ public class MapSelection {
 	private JLabel HeaderLabel2;
 	private static JButton SelectButton;
 	private static JComboBox MapCombobox;
-	private static String MapSelected="";
+	private static JButton EditButton;
+
+	public static String MapSelected = "";
 
 	static List<String> MapFiles = new ArrayList<String>();
 
@@ -45,18 +47,32 @@ public class MapSelection {
 		MapCombobox = new JComboBox(Maps);
 		MapCombobox.setBounds(120, 150, 200, 20);
 
-		SelectButton = new JButton("OK");
+		SelectButton = new JButton("OK"); 
 		SelectButton.setBounds(175, 200, 90, 20);
+
+		EditButton = new JButton("EDIT");
+		EditButton.setBounds(275, 200, 90, 20);
+		
+		EditButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MapFrame.dispose();
+				MapSelected = (String) MapCombobox.getSelectedItem();
+				StartUpWindow.MapType=4;
+				EditContinents obj= new EditContinents();
+			}
+		});
 
 		MapFrame.add(HeaderLabel);
 		MapFrame.add(HeaderLabel2);
 		MapFrame.add(MapCombobox);
 		MapFrame.add(SelectButton);
+		MapFrame.add(EditButton);
 		HeaderLabel.setVisible(true);
 		HeaderLabel2.setVisible(true);
 		MapCombobox.setVisible(true);
 		SelectButton.setVisible(true);
-
+		EditButton.setVisible(true);
 		MapFrame.setLayout(null);
 		MapFrame.setVisible(true);
 
@@ -91,7 +107,7 @@ public class MapSelection {
 			}
 		});
 		return MapSelected;
-
 	}
+
 
 }

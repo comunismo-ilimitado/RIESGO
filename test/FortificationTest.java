@@ -4,12 +4,14 @@ import static org.junit.Assert.assertNotEquals;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import controller.FortificationController;
+import controller.ReadingFiles;
 import model.Continent;
 import model.Country;
 import model.Player;
@@ -24,7 +26,7 @@ public class FortificationTest {
 	FortificationController fortification;
 	Player player1, player2, player3;
 	Country country1, country2, country3, country4, country5, country6, country7;
-	Continent continent1;
+	Continent continent1, continent2;
 
 	/**
 	 * Method to create all objects
@@ -40,6 +42,8 @@ public class FortificationTest {
 		country5 = new Country("Iran");
 		country6 = new Country("Canada");
 		country7 = new Country("Egypt");
+		continent1 = new Continent(4, "Asia");
+		continent2 = new Continent(5, "Africa");
 
 		country1.setContinentId(1);
 		country1.setCountryId(11);
@@ -73,6 +77,8 @@ public class FortificationTest {
 		n_list.add(country2);
 		n_list.add(country5);
 		n_list.add(country6);
+		n_list.add(country3);
+		
 
 		List<Country> n_list4 = new ArrayList<Country>();
 		n_list4.add(country2);
@@ -92,6 +98,7 @@ public class FortificationTest {
 		n_list2.add(country1);
 		n_list2.add(country3);
 		n_list2.add(country5);
+		n_list2.add(country4);
 
 		player1 = new Player(9);
 		player1.setPlayerId(9);
@@ -108,27 +115,46 @@ public class FortificationTest {
 		country1.setNeighbors(n_list);
 		country1.setNoOfArmies(1);
 		country1.setPlayer(player1);
+		country1.setContinent(continent1);
 
 		country2.setNeighbors(n_list3);
 		country2.setNoOfArmies(4);
 		country2.setPlayer(player1);
+		country2.setContinent(continent1);
 
 		country3.setNeighbors(n_list);
 		country3.setNoOfArmies(4);
 		country3.setPlayer(player1);
+		country3.setContinent(continent1);
 
 		country6.setNeighbors(n_list);
 		country6.setNoOfArmies(4);
 		country6.setPlayer(player1);
+		country6.setContinent(continent2);
 
 		country5.setNeighbors(n_list3);
 		country5.setNoOfArmies(4);
 		country5.setPlayer(player2);
+		country5.setContinent(continent2);
 
 		country4.setNeighbors(n_list1);
 		country4.setNoOfArmies(2);
 		country4.setPlayer(player1);
+		country4.setContinent(continent2);
+		
+		continent1.setContinentId(81);
+		continent1.setName("Asia");
+		continent1.setCountries(n_list);
+		continent1.setControlValue(4);
 
+		continent2.setContinentId(82);
+		continent2.setName("Africa");
+		continent2.setCountries(n_list2);
+		continent2.setControlValue(5);
+
+		ReadingFiles.ContinentNameObject = new HashMap<>();
+		ReadingFiles.ContinentNameObject.put(continent1.getName(), continent1);
+		ReadingFiles.ContinentNameObject.put(continent2.getName(), continent2);
 	}
 
 	/**

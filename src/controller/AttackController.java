@@ -16,7 +16,7 @@ import java.io.*;
 public class AttackController {
 	public List<Integer> attackerDiceRoll;
 	public List<Integer> defenderDiceRoll;
-
+	public static boolean card;
 	//
 	public boolean canAttack(Player player) {
 		List<Country> list = getMyCountries(player);
@@ -262,7 +262,7 @@ public class AttackController {
 							defender.setNoOfArmies(attackerDice);
 
 							// code for drawing a card randomly
-							if (attackcounter < 1) {
+							if (!card) {
 								int cardnumber = (int) (Math.random() * 3 + 1);
 								List<CardTypes> newsetofcards = new ArrayList<CardTypes>();
 								if (cardnumber == 1) {
@@ -285,8 +285,9 @@ public class AttackController {
 									ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
 											.setPlayerCards(newsetofcards);
 								}
+								card=true;
 							}
-							attackcounter++;
+							
 						}
 					}
 					return "";
@@ -338,7 +339,7 @@ public class AttackController {
 						defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
 						updateOwner(defender, attacker.getOwner());
 						defender.setNoOfArmies(attackerDice);
-
+						if(!card){
 						// code for drawing a card randomly
 						int cardnumber = (int) (Math.random() * 3 + 1);
 						List<CardTypes> newsetofcards = new ArrayList<CardTypes>();
@@ -358,6 +359,8 @@ public class AttackController {
 							newsetofcards.add(CardTypes.Infantry);
 							attacker.getOwner().setPlayerCards(newsetofcards);
 							ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(newsetofcards);
+						}
+							card=true;
 						}
 					}
 					return "";

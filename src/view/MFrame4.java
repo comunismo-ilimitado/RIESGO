@@ -36,6 +36,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import controller.MyActionListner;
 import model.CardTypes;
 import model.Country;
 
@@ -45,15 +46,18 @@ import model.Country;
  * @author pazim
  * @version 1.0
  */
-public class MFrame4 extends JFrame implements ActionListener{
+public class MFrame4 extends JFrame implements ActionListener {
 	JPanel jPanel2;
-
 	JTextField field, field2;
 	JButton button, button2;
+	public static int no1, no2 = 1;
+	public static boolean allout = false;
+	MyActionListner actionListner;
 
 	public MFrame4() {
 		super("Dices and All out ");
-	}
+		this.actionListner = actionListner;
+		}
 
 	/**
 	 * This method displays the user interface
@@ -74,14 +78,14 @@ public class MFrame4 extends JFrame implements ActionListener{
 		button = new JButton("All Out");
 		button2 = new JButton("Single Attack");
 		setTitle("PAZIMs Card Selection");
-
+		button.addActionListener(this);
+		button2.addActionListener(this);
 		mainPanel.add(field);
 		mainPanel.add(new JLabel("Enter Opponent Dice Rolls"));
 		mainPanel.add(field2);
 		mainPanel.add(button);
 		mainPanel.add(button2);
 		setResizable(false);
-
 		pack();
 		setVisible(true);
 
@@ -104,13 +108,32 @@ public class MFrame4 extends JFrame implements ActionListener{
 	 * @param countryObjects
 	 */
 
-	public String popupText(int a) {
-		return JOptionPane.showInputDialog("Enter Armies You wana Move Between, Maximum :-" + a);
+	public void popupText(String string) {
+		JOptionPane.showMessageDialog(null, string);
 	}
 
-	public static void main(String[] args) {
-		MFrame4 frame4 = new MFrame4();
-		frame4.fun();
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		try {
+			no1 = Integer.parseInt(field.getText());
+			no2 = Integer.parseInt(field2.getText());
+
+			if (arg0.getActionCommand() == "All Out") {
+				allout = true;
+			} else {
+				allout = false;
+			}
+			System.out.println("" + no1 + no2 + allout);
+			actionListner.notify();
+			dispose();
+		}
+
+		catch (Exception e) {
+			// TODO: handle exception
+			popupText("Enter Valid Values");
+		}
+
 	}
 
 }

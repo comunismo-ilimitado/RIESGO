@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.*;
+
 import model.CardTypes;
 import model.Country;
 import model.Player;
@@ -16,10 +17,8 @@ import java.io.*;
 public class AttackController {
 	public List<Integer> attackerDiceRoll;
 	public List<Integer> defenderDiceRoll;
-	public List<Integer> attackerDiceRollOutput=new ArrayList<>();
-	public List<Integer> defenderDiceRollOutput=new ArrayList<>();
-
-	//
+	public List<String> attackerDiceRollOutput=new ArrayList<>();
+	public List<String> defenderDiceRollOutput=new ArrayList<>();
 	public boolean canAttack(Player player) {
 		List<Country> list = getMyCountries(player);
 		int counter = 0;
@@ -131,6 +130,7 @@ public class AttackController {
 	 * @return Number of Dice to be assigned
 	 */
 	public int setNoOfDice(Country country, char ad) {
+	 try {
 		if (ad == 'A') {
 			if (country.getNoOfArmies() == 2)
 				return 1;
@@ -146,6 +146,12 @@ public class AttackController {
 		} else
 			return 0;
 	}
+	 catch (Exception e) {
+		// TODO: handle exception
+		 return 0;
+	}
+	 }
+	
 
 	/**
 	 * To get a random number between 1 and 6 which simulates a dice roll
@@ -227,12 +233,18 @@ public class AttackController {
 							&& defender.getOwner().getPlayerId() != attacker.getOwner().getPlayerId()) {
 						attackerDice = setNoOfDice(attacker, 'A');
 						defenderDice = setNoOfDice(defender, 'D');
+						attackerDiceRoll.clear();
+						defenderDiceRoll.clear();
 						for (int i = 0; i < attackerDice; i++) {
 							attackerDiceRoll.add(rollDice());
 						}
 						for (int i = 0; i < defenderDice; i++) {
 							defenderDiceRoll.add(rollDice());
 						}
+						attackerDiceRollOutput.add(attackerDiceRoll.toString());
+						defenderDiceRollOutput.add(defenderDiceRoll.toString());
+						System.out.println(attackerDiceRollOutput);
+
 						while (attackerDiceRoll.size() != 0 && defenderDiceRoll.size() != 0) {
 							int attackerMax = getMaxValue(attackerDiceRoll);
 							int defenderMax = getMaxValue(defenderDiceRoll);
@@ -241,6 +253,7 @@ public class AttackController {
 							} else {
 								updateArmies(defender);
 							}
+							
 							attackerDiceRoll.remove(attackerDiceRoll.indexOf(attackerMax));
 							defenderDiceRoll.remove(defenderDiceRoll.indexOf(defenderMax));
 							if (attackerDice == 1)
@@ -307,6 +320,9 @@ public class AttackController {
 					for (int i = 0; i < defenderDice; i++) {
 						defenderDiceRoll.add(rollDice());
 					}
+					attackerDiceRollOutput.add(attackerDiceRoll.toString());
+					defenderDiceRollOutput.add(defenderDiceRoll.toString());
+
 					while (attackerDiceRoll.size() != 0 && defenderDiceRoll.size() != 0) {
 						int attackerMax = getMaxValue(attackerDiceRoll);
 						int defenderMax = getMaxValue(defenderDiceRoll);
@@ -315,6 +331,7 @@ public class AttackController {
 						} else {
 							updateArmies(defender);
 						}
+
 						attackerDiceRoll.remove(attackerDiceRoll.indexOf(attackerMax));
 						defenderDiceRoll.remove(defenderDiceRoll.indexOf(defenderMax));
 						if (attackerDice == 1)

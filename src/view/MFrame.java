@@ -50,12 +50,14 @@ import model.Country;
 @SuppressWarnings("deprecation")
 public class MFrame extends JFrame implements Observer {
 	private JButton[] button;
+	JButton buttonCard1, buttonCard2, buttonCard3, buttonCard4;
 	JPanel jPanel2, jPanel6, jPanel7;
+	JLabel jLabeCardl, jLabelCard2, jLabelCard3;
 	public JButton nextAction;
 	String Phases[] = { "Finish Reinforcement", "Finish Attack", "Finish Fortification" };
 	HashMap<String, JButton> hashButton;
-	JLabel jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel16, jLabel26, jLabel36, jLabel46, jLabel56, jLabel66,
-			jLabel17, jLabel27, jLabel37, jLabel47, jLabel57, jLabel67;
+	JLabel jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel16, jLabel26, jLabel36, jLabel46, jLabel56,
+			jLabel66, jLabel17, jLabel27, jLabel37, jLabel47, jLabel57, jLabel67;
 	ArrayList<JLabel> jLabels, jLabels2;
 	MyActionListner myActionListner;
 	public int playerTurn;
@@ -114,39 +116,49 @@ public class MFrame extends JFrame implements Observer {
 		jPanel4.setBorder(new CompoundBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED),
 				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 		// jPanel4.setBackground(Color.RED);
-
 		jLabel1 = new JLabel("");
 		jLabel2 = new JLabel("");
 		jLabel3 = new JLabel("");
 		jLabel4 = new JLabel("");
 		jLabel5 = new JLabel("");
-
+		jLabel6 = new JLabel("");
 		jPanel4.add(jLabel1);
 		jPanel4.add(jLabel2);
 		jPanel4.add(jLabel3);
 		jPanel4.add(jLabel4);
 		jPanel4.add(jLabel5);
-
+		jPanel4.add(jLabel6);
 		jPanel3.add(jPanel4);
 
 		// lower text
-		JPanel jPanel5 = new JPanel();
+		JPanel jPanel5 = new JPanel(new GridLayout(2, 4));
 		nextAction = new JButton("Finish Reinforcement");
 		nextAction.addActionListener(myActionListner);
-		JButton button=new JButton("EXTRA");
-		jPanel5.add(nextAction);
-		jPanel5.add(button);
-		
-		// jPanel5.setBackground(Color.GREEN);
-		jPanel3.add(jPanel5);
+		buttonCard1 = new JButton("Infantry");
+		buttonCard2 = new JButton("Cavalry");
+		buttonCard3 = new JButton("Artillery");
+		buttonCard4 = new JButton("Exchange Cards0");
+		jLabeCardl = new JLabel("");
+		jLabelCard2 = new JLabel("");
+		jLabelCard3 = new JLabel("");
 
+		jPanel5.add(nextAction);
+		jPanel5.add(jLabeCardl);
+		jPanel5.add(jLabelCard2);
+		jPanel5.add(jLabelCard3);
+		jPanel5.add(buttonCard1);
+		jPanel5.add(buttonCard2);
+		jPanel5.add(buttonCard3);
+		jPanel5.add(buttonCard4);
+
+		// jPanel5.setBackground(Color.GREEN);
+
+		jPanel3.add(jPanel5);
 		jPanel6 = new JPanel(new GridLayout(0, 1));
 		jPanel6.setBorder(new CompoundBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED),
 				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 		jPanel6.add(new JLabel("Percentage Of Countries Occupied By Player"));
-
 		// jPanel6.setBackground(Color.YELLOW);
-
 		jLabel16 = new JLabel("Player 1:- " + playerTurn);
 		jLabel26 = new JLabel("Player 2:- " + noArmiesLeft);
 		jLabel36 = new JLabel("Player 3 :- " + CCC);
@@ -205,14 +217,18 @@ public class MFrame extends JFrame implements Observer {
 	/**
 	 * This method update the view
 	 */
-	
+
+	public void cards() {
+
+	}
+
 	public void NotifyAll() {
 		jLabel1.setText("Turn For Player :-" + (myActionListner.currentPlayer + 1));
-
 		jLabel2.setText("Armies Left:- " + noArmiesLeft);
 		jLabel3.setText("Neighbours :- " + CCC);
 		jLabel4.setText("DICE 1:- " + AAA);
 		jLabel5.setText("DICE 2:- " + BBB);
+		jLabel6.setText("Current Phase :-" + nextAction.getText().split(" ")[1] + " Phase");
 	}
 
 	public void SetDominationView(int NoOfPlayers) {
@@ -221,20 +237,17 @@ public class MFrame extends JFrame implements Observer {
 			jPanel7.add(jLabels2.get(i));
 		}
 	}
-	
+
 	public void UpdateGameDominationViewPercentage(ArrayList<Float> percent) {
-		for(int i=0;i<percent.size();i++) {
-			jLabels.get(i).setText("Player "+(i+1)+" :- "+percent.get(i));
+		for (int i = 0; i < percent.size(); i++) {
+			jLabels.get(i).setText("Player " + (i + 1) + " :- " + percent.get(i));
 		}
-		
-		
 	}
+
 	public void UpdateGameDominationViewContinentOccupied(ArrayList<String> occupies) {
-		for(int i=0;i<occupies.size();i++) {
-			jLabels2.get(i).setText("Player "+(i+1)+" :- "+occupies.get(i));
+		for (int i = 0; i < occupies.size(); i++) {
+			jLabels2.get(i).setText("Player " + (i + 1) + " :- " + occupies.get(i));
 		}
-		
-		
 	}
 
 	/**
@@ -247,14 +260,11 @@ public class MFrame extends JFrame implements Observer {
 		List<String> count = new ArrayList<>(countryObjects.keySet());
 		button = new JButton[count.size()];
 		Random random = new Random();
-
 		for (int i = 0; i < count.size(); i++) {
 			button[i] = new JButton(count.get(i) + " | " + countryObjects.get(count.get(i)).getNoOfArmies() + " | "
 					+ countryObjects.get(count.get(i)).getContinent().getName());
-
 			hashButton.put((String) count.get(i), button[i]);
 			jPanel2.add(button[i]);
-
 			button[i].addActionListener(myActionListner);
 		}
 
@@ -271,6 +281,7 @@ public class MFrame extends JFrame implements Observer {
 			hashButton.get(count.get(i)).setBackground(countryObjects.get(count.get(i)).getOwner().getPlayerColor());
 		}
 	}
+
 	/**
 	 * This method runs after every button click
 	 * 
@@ -286,23 +297,40 @@ public class MFrame extends JFrame implements Observer {
 
 		}
 	}
+
 	public void RepaintAndRevalidate() {
 		revalidate();
 	}
+
 	public void error(String string) {
 		JOptionPane.showMessageDialog(null, string);
 	}
 
-	public void updateArmies() {
-	}
+
 	public void ActivateAll() {
 		for (int i = 0; i < button.length; i++) {
 			button[i].setEnabled(true);
 		}
 	}
+
 	public String popupText(int a) {
 		return JOptionPane.showInputDialog("Enter Armies You wana Move Between, Maximum :-" + a);
 	}
+
+	public String popupTextNew(String a) {
+		String ans = JOptionPane.showInputDialog(a);
+		return ans;
+	}
+
+	public boolean Allout() {
+		int n = JOptionPane.showConfirmDialog(null, "Press Yes For 'All Out' and no for 'Single Attack'",
+				"An Inane Question", JOptionPane.YES_NO_OPTION);
+		if (n == 0)
+			return true;
+		else
+			return false;
+	}
+
 	public void OnlyNeeded(List<Country> arrayList) {
 		List<String> temp = new ArrayList<>(hashButton.keySet());
 		for (int i = 0; i < arrayList.size(); i++) {
@@ -319,11 +347,12 @@ public class MFrame extends JFrame implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stu
-		ArrayList<Float> percent = 		((MyActionListner) arg0).CountriesPercentage();
+		ArrayList<Float> percent = ((MyActionListner) arg0).CountriesPercentage();
 		ArrayList<String> listinh = ((MyActionListner) arg0).ContinentsOccupied();
-		 UpdateGameDominationViewPercentage(percent);
-		 UpdateGameDominationViewContinentOccupied(listinh);
-		 NotifyAll();
+		UpdateGameDominationViewPercentage(percent);
+		UpdateGameDominationViewContinentOccupied(listinh);
+		NotifyAll();
 	}
+
 
 }

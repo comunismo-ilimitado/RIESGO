@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.List;
+
 import java.util.*;
 
 import model.CardTypes;
@@ -21,6 +22,7 @@ import view.*;
 
 @SuppressWarnings("deprecation")
 public class MyActionListner extends Observable implements ActionListener {
+	boolean gotCard = false;
 
 	MFrame frame;
 	MainControll controll;
@@ -69,10 +71,6 @@ public class MyActionListner extends Observable implements ActionListener {
 	 */
 	public void ReinforcementPhase() {
 
-		MFrame3 frame3 = new MFrame3();
-		List<CardTypes> cardTypes=new ArrayList<>();
-		if(cardTypes.size()>0) {
-		frame3.fun(cardTypes);}
 		changed();
 		controll.frame.ActivateAll();
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
@@ -111,24 +109,25 @@ public class MyActionListner extends Observable implements ActionListener {
 				fortifyCountry2 = null;
 
 			} else {
-			try {	
-				String test1 = controll.frame.popupText(fortifyCountry1.getNoOfArmies() - 1);
-				String message = controll.fortificationController.moveArmies(fortifyCountry1, fortifyCountry2,
-						Integer.parseInt(test1));
-				if (!message.equals("")) {
-					controll.frame.error(message);
-					fortifyCountry1 = null;
-					fortifyCountry2 = null;
-				} else {
-					controll.RefreshButtons();
-					currentPhase = "Finish Reinforcement";
-					controll.frame.nextAction.setText("Finish Reinforcement");
-					// playerUpdate();
-					fortifyCountry1 = null;
-					fortifyCountry2 = null;
-					controll.frame.ActivateAll();
-					ReinforcementPhase();
-				}}catch (Exception e) {
+				try {
+					String test1 = controll.frame.popupText(fortifyCountry1.getNoOfArmies() - 1);
+					String message = controll.fortificationController.moveArmies(fortifyCountry1, fortifyCountry2,
+							Integer.parseInt(test1));
+					if (!message.equals("")) {
+						controll.frame.error(message);
+						fortifyCountry1 = null;
+						fortifyCountry2 = null;
+					} else {
+						controll.RefreshButtons();
+						currentPhase = "Finish Reinforcement";
+						controll.frame.nextAction.setText("Finish Reinforcement");
+						// playerUpdate();
+						fortifyCountry1 = null;
+						fortifyCountry2 = null;
+						controll.frame.ActivateAll();
+						ReinforcementPhase();
+					}
+				} catch (Exception e) {
 					// TODO: handle exception
 					controll.frame.error("Invalid Number");
 				}
@@ -146,6 +145,7 @@ public class MyActionListner extends Observable implements ActionListener {
 	 * @throws IOException
 	 */
 	public void AttackPhase(Country country) throws IOException {
+
 		changed();
 		if (attackCountry1 == null) {
 			attackCountry1 = country;
@@ -164,8 +164,28 @@ public class MyActionListner extends Observable implements ActionListener {
 			}
 		} else if (attackCountry2 == null) {
 			attackCountry2 = country;
-			String test1 = controll.frame.popupText(2);
-			String reply = controll.attackController.attackButton(attackCountry1, attackCountry2,test1);
+			int dice1 = 0;
+			int dice2 = 0;
+			boolean allout = false;
+
+			try {
+				allout = controll.frame.Allout();
+				if (allout == true) {
+
+				} else {
+					dice1 = Integer.parseInt(controll.frame.popupTextNew("Enter No of Dices for player 1 --Minimum: 1 Maximum: "+controll.attackController.setNoOfDice(attackCountry1, 'A')));
+					dice2 = Integer.parseInt(controll.frame.popupTextNew("Enter No of Dices for player 2 --Minimum: 1 Maximum: "+controll.attackController.setNoOfDice(attackCountry2, 'D')));
+				}
+			} catch (Exception e) {
+				controll.frame.error("Invalid Entry Try again");
+				controll.frame.ActivateAll();
+				attackCountry1 = null;
+				attackCountry2 = null;
+				controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
+				controll.RefreshButtons();
+			}
+
+			String reply = controll.attackController.attackButton(attackCountry1, attackCountry2, dice1, dice2, allout);
 			if (!reply.equals("")) {
 				controll.frame.error(reply);
 			}
@@ -197,17 +217,20 @@ public class MyActionListner extends Observable implements ActionListener {
 				} else {
 					currentPhase = "Finish Attack";
 					controll.frame.nextAction.setText("Finish Attack");
+					changed();
 					attackCountry1 = null;
 					attackCountry2 = null;
 				}
 
 			} else if (e.getActionCommand() == "Finish Attack") {
+				changed();
 				currentPhase = "Finish Fortification";
 				controll.frame.nextAction.setText("Finish Fortification");
 				fortifyCountry1 = null;
 				fortifyCountry2 = null;
 				FortificationPhase();
 			} else if (e.getActionCommand() == "Finish Fortification") {
+				changed();
 				currentPhase = "Finish Reinforcement";
 				controll.frame.nextAction.setText("Finish Reinforcement");
 				ReinforcementPhase();

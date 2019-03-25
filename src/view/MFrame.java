@@ -117,7 +117,7 @@ public class MFrame extends JFrame {
 		Random random = new Random();
 		setTitle("PAZIMs Risk Game");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setResizable(false);
+		setResizable(true);
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);

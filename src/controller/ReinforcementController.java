@@ -62,7 +62,8 @@ public class ReinforcementController {
 	 * @return some value of type string
 	 */
 	public String addarmies(Country country) {
-		Player player = country.getOwner();
+		int index = country.getOwner().getPlayerId();
+		Player player = ReadingFiles.playerId.get(index);
 		if (player.getPlayerArmiesNotDeployed() == 0) {
 			return "NO ARMIES LEFT, PLEASE CLICK FINISH REINFORCEMENT";
 		} else {
@@ -80,7 +81,7 @@ public class ReinforcementController {
 	public List<Country> getMyCountries(Player player) {
 		List<Country> countries = new ArrayList<Country>();
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
-			if (entry.getValue().getOwner().equals(player)) {
+			if (entry.getValue().getOwner().getPlayerId()==(player.getPlayerId())) {
 				countries.add(entry.getValue());
 			} else
 				continue;
@@ -95,7 +96,13 @@ public class ReinforcementController {
 	 */
 
 	public void calculateReinforcementArmies(Player player) {
-		int totalcountriesofplayer = player.getTotalCountriesOccupied().size();
+		int totalcountriesofplayer = 0;
+		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
+			if (entry.getValue().getOwner().getPlayerId()==(player.getPlayerId())) {
+				totalcountriesofplayer++;
+			} else
+				continue;
+		}
 		float totalarmiestoreinforce;
 		totalarmiestoreinforce = (float) totalcountriesofplayer / 3;
 		int armies = 0;
@@ -121,7 +128,7 @@ public class ReinforcementController {
 			List<Country> temp = entry.getValue().getCountries();
 			int counter = 0;
 			for (int i = 0; i < entry.getValue().getCountries().size(); i++) {
-				if (entry.getValue().getCountries().get(i).getOwner().equals(player))
+				if (entry.getValue().getCountries().get(i).getOwner().getPlayerId()==(player.getPlayerId()))
 					counter++;
 				else
 					continue;
@@ -157,6 +164,8 @@ public class ReinforcementController {
 	 */
 	public void updateValue(Player player, Country country) {
 		country.setNoOfArmies(country.getNoOfArmies() + 1);
+		int x = ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().indexOf(country);
+		ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().get(x).setNoOfArmies(country.getNoOfArmies());
 		player.setPlayerTotalArmiesNotDeployed(player.getPlayerArmiesNotDeployed() - 1);
 	}
 

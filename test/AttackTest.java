@@ -111,11 +111,11 @@ public class AttackTest
 
 		country3.setNeighbors(n_list);
 		country3.setNoOfArmies(4);
-		country3.setPlayer(player2);
+		country3.setPlayer(player1);
 
 		country6.setNeighbors(n_list);
 		country6.setNoOfArmies(0);
-		country6.setPlayer(player1);
+		country6.setPlayer(player2);
 
 		country5.setNeighbors(n_list3);
 		country5.setNoOfArmies(4);
@@ -140,8 +140,7 @@ public class AttackTest
 		
 		ReadingFiles.playerId.put(player1.getPlayerId(),player1);
 		ReadingFiles.playerId.put(player2.getPlayerId(),player2);
-		//ReadingFiles.playerId.put(player1.getPlayerId(),player1);
-
+		
 	}
 	
 	@After
@@ -155,7 +154,7 @@ public class AttackTest
 	
 	@Test
 	public void testGetMyCountries() {
-		System.out.println(player2.getTotalCountriesOccupied());
+		System.out.println(player2.getTotalCountriesOccupied().size());
 		assertEquals(3, attack.getMyCountries(player2).size());
 	}
 
@@ -168,19 +167,19 @@ public class AttackTest
 	@Test
 	public void testAttackButton()
 	{
-		assertEquals("Wrong input",attack.attackButton(country3, country6, 3,1));
+		assertEquals("Wrong input",attack.attackButton(country3, country6, 3,1,false));
 	}
 	
 	@Test
 	public void testAttackButton1()
 	{
-		assertEquals("Your country must have more than one army",attack.attackButton(country1,country2,3,1));
+		assertEquals("Your country must have more than one army",attack.attackButton(country1,country2,3,1,false));
 	}
 	
 	@Test
 	public void testAttackButton2()
 	{
-		assertEquals("",attack.attackButton(country2,country1,3,1));
+		assertEquals("",attack.attackButton(country2,country1,3,1,true));
 		System.out.println(country1.getOwner().getPlayerId()+" "+country2.getOwner().getPlayerId()+" "+
 		ReadingFiles.playerId.get(country2.getOwner().getPlayerId()).getPlayerCards());
 		

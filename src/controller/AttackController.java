@@ -203,22 +203,12 @@ public class AttackController {
 	public void endAttackPhaseButton(Player player) {
 	}
 
-	public String attackButton(Country attacker, Country defender, int attackerDice, int defenderDice, boolean allOut) {
+		public String attackButton(Country attacker, Country defender, int attackerDice, int defenderDice, boolean allOut,
+			int attackcounter) {
 		if (attackerDice <= setNoOfDice(attacker, 'A') && defenderDice <= setNoOfDice(defender, 'D')) {
 			if (attacker.getNoOfArmies() >= 2 && defender.getNoOfArmies() >= 1) {
-//			int attArmies = attacker.getNoOfArmies();
-//			int defArmies = defender.getNoOfArmies();
-
-				// String answer = "";
-// 			int attackerDice = setNoOfDice(attacker, 'A');
-// 			/*
-// 			 * display the number of defender dice
-// 			 */ int defenderDice = setNoOfDice(defender, 'D');
 				attackerDiceRoll = new ArrayList<Integer>();
 				defenderDiceRoll = new ArrayList<Integer>();
-				/*
-				 * display the int list values as the results from dice roll
-				 */
 				if (allOut) {
 					while (attacker.getNoOfArmies() > 1
 							&& defender.getOwner().getPlayerId() != attacker.getOwner().getPlayerId()) {
@@ -272,28 +262,31 @@ public class AttackController {
 							defender.setNoOfArmies(attackerDice);
 
 							// code for drawing a card randomly
-							int cardnumber = (int) (Math.random() * 3 + 1);
-							List<CardTypes> newsetofcards = new ArrayList<CardTypes>();
-							if (cardnumber == 1) {
-								newsetofcards = attacker.getOwner().getPlayerCards();
-								newsetofcards.add(CardTypes.Artillery);
-								attacker.getOwner().setPlayerCards(newsetofcards);
-								ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
-										.setPlayerCards(newsetofcards);
+							if (attackcounter < 1) {
+								int cardnumber = (int) (Math.random() * 3 + 1);
+								List<CardTypes> newsetofcards = new ArrayList<CardTypes>();
+								if (cardnumber == 1) {
+									newsetofcards = attacker.getOwner().getPlayerCards();
+									newsetofcards.add(CardTypes.Artillery);
+									attacker.getOwner().setPlayerCards(newsetofcards);
+									ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+											.setPlayerCards(newsetofcards);
 
-							} else if (cardnumber == 2) {
-								newsetofcards = attacker.getOwner().getPlayerCards();
-								newsetofcards.add(CardTypes.Cavalry);
-								attacker.getOwner().setPlayerCards(newsetofcards);
-								ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
-										.setPlayerCards(newsetofcards);
-							} else if (cardnumber == 3) {
-								newsetofcards = attacker.getOwner().getPlayerCards();
-								newsetofcards.add(CardTypes.Infantry);
-								attacker.getOwner().setPlayerCards(newsetofcards);
-								ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
-										.setPlayerCards(newsetofcards);
+								} else if (cardnumber == 2) {
+									newsetofcards = attacker.getOwner().getPlayerCards();
+									newsetofcards.add(CardTypes.Cavalry);
+									attacker.getOwner().setPlayerCards(newsetofcards);
+									ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+											.setPlayerCards(newsetofcards);
+								} else if (cardnumber == 3) {
+									newsetofcards = attacker.getOwner().getPlayerCards();
+									newsetofcards.add(CardTypes.Infantry);
+									attacker.getOwner().setPlayerCards(newsetofcards);
+									ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+											.setPlayerCards(newsetofcards);
+								}
 							}
+							attackcounter++;
 						}
 					}
 					return "";

@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Observer;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -36,7 +35,6 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-import javafx.scene.layout.Border;
 import model.CardTypes;
 import model.Country;
 
@@ -64,7 +62,7 @@ public class MFrame3 extends JFrame {
 	 * 
 	 * @throws Exception
 	 */
-	public void fun(List<CardTypes> list) throws Exception {
+	public void fun(List<CardTypes> list)  {
 		FlowLayout flowLayout = new FlowLayout();
 		JPanel mainPanel = new JPanel(flowLayout);
 		jPanel2 = new JPanel(new GridLayout(0, 5));
@@ -85,9 +83,6 @@ public class MFrame3 extends JFrame {
 	 * This method update the view
 	 */
 	
-	public void UpdateGameDominationView(int NoOfPlayers) {
-		
-	}
 
 	/**
 	 * This method assigns button to each country in UI
@@ -95,14 +90,13 @@ public class MFrame3 extends JFrame {
 	 * @param countryObjects
 	 * @throws IOException
 	 */
-	public void SetButtons(List<CardTypes> cards) throws IOException {
+	public void SetButtons(List<CardTypes> cards)  {
 		button = new JButton[cards.size()];
 		Random random = new Random();
 
 		for (int i = 0; i < cards.size(); i++) {
 			button[i] = new JButton(cards.get(i).name());
 			jPanel2.add(button[i]);
-
 			//button[i].addActionListener(this);
 		}
 
@@ -116,20 +110,14 @@ public class MFrame3 extends JFrame {
 
 	public void error(String string) {
 		JOptionPane.showMessageDialog(null, string);
-
 	}
-
 	public void ActivateAll() {
 		for (int i = 0; i < button.length; i++) {
 			button[i].setEnabled(true);
-
 		}
 	}
 
 	public String popupText(int a) {
 		return JOptionPane.showInputDialog("Enter Armies You wana Move Between, Maximum :-" + a);
 	}
-
-
-
 }

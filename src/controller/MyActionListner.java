@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.*;
+
+import model.CardTypes;
 import model.Country;
 import view.*;
 
@@ -19,7 +21,7 @@ import view.*;
 
 @SuppressWarnings("deprecation")
 public class MyActionListner extends Observable implements ActionListener {
-	
+
 	MFrame frame;
 	MainControll controll;
 	List<String> Phases;
@@ -67,12 +69,10 @@ public class MyActionListner extends Observable implements ActionListener {
 	 */
 	public void ReinforcementPhase() {
 
-		// controll.AddArmies(currentPlayer);
-		// MFrame3 frame3=new MFrame3();
-		/*
-		 * try { frame3.fun(controll.player.getPlayerCards()); } catch (Exception e) {
-		 * // TODO Auto-generated catch block e.printStackTrace(); }
-		 */
+		MFrame3 frame3 = new MFrame3();
+		List<CardTypes> cardTypes=new ArrayList<>();
+		if(cardTypes.size()>0) {
+		frame3.fun(cardTypes);}
 		changed();
 		controll.frame.ActivateAll();
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
@@ -111,6 +111,7 @@ public class MyActionListner extends Observable implements ActionListener {
 				fortifyCountry2 = null;
 
 			} else {
+			try {	
 				String test1 = controll.frame.popupText(fortifyCountry1.getNoOfArmies() - 1);
 				String message = controll.fortificationController.moveArmies(fortifyCountry1, fortifyCountry2,
 						Integer.parseInt(test1));
@@ -127,6 +128,9 @@ public class MyActionListner extends Observable implements ActionListener {
 					fortifyCountry2 = null;
 					controll.frame.ActivateAll();
 					ReinforcementPhase();
+				}}catch (Exception e) {
+					// TODO: handle exception
+					controll.frame.error("Invalid Number");
 				}
 
 			}
@@ -210,6 +214,7 @@ public class MyActionListner extends Observable implements ActionListener {
 			}
 
 		} else {
+			controll.frame.noArmiesLeft = controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
 			String Cname = e.getActionCommand().split("\\|")[0].trim();
 			// JButton temp = controll.frame.hashButton.get(Cname);
 			Country temp2 = controll.countryObjects().get(Cname);

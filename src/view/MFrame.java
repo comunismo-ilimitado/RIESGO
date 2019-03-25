@@ -270,16 +270,13 @@ public class MFrame extends JFrame implements Observer {
 		for (int i = 0; i < count.size(); i++) {
 			hashButton.get(count.get(i)).setBackground(countryObjects.get(count.get(i)).getOwner().getPlayerColor());
 		}
-
 	}
-
 	/**
 	 * This method runs after every button click
 	 * 
 	 * @param countryObjects
 	 * @throws IOException
 	 */
-
 	public void Refresh(HashMap<String, Country> countryObjects) throws IOException {
 		List<String> count = new ArrayList<>(countryObjects.keySet());
 		for (int i = 0; i < count.size(); i++) {
@@ -289,30 +286,23 @@ public class MFrame extends JFrame implements Observer {
 
 		}
 	}
-
 	public void RepaintAndRevalidate() {
 		revalidate();
 	}
-
 	public void error(String string) {
 		JOptionPane.showMessageDialog(null, string);
-
 	}
 
 	public void updateArmies() {
 	}
-
 	public void ActivateAll() {
 		for (int i = 0; i < button.length; i++) {
 			button[i].setEnabled(true);
-
 		}
 	}
-
 	public String popupText(int a) {
 		return JOptionPane.showInputDialog("Enter Armies You wana Move Between, Maximum :-" + a);
 	}
-
 	public void OnlyNeeded(List<Country> arrayList) {
 		List<String> temp = new ArrayList<>(hashButton.keySet());
 		for (int i = 0; i < arrayList.size(); i++) {
@@ -328,8 +318,7 @@ public class MFrame extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-
+		// TODO Auto-generated method stu
 		ArrayList<Float> percent = 		((MyActionListner) arg0).CountriesPercentage();
 		ArrayList<String> listinh = ((MyActionListner) arg0).ContinentsOccupied();
 		 UpdateGameDominationViewPercentage(percent);

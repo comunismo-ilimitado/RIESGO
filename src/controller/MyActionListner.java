@@ -165,7 +165,7 @@ public class MyActionListner extends Observable implements ActionListener {
 		} else if (attackCountry2 == null) {
 			attackCountry2 = country;
 			String test1 = controll.frame.popupText(2);
-			String reply = controll.attackController.attackButton(attackCountry1, attackCountry2);
+			String reply = controll.attackController.attackButton(attackCountry1, attackCountry2,test1);
 			if (!reply.equals("")) {
 				controll.frame.error(reply);
 			}

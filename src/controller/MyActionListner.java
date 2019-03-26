@@ -211,7 +211,7 @@ public class MyActionListner extends Observable implements ActionListener {
 
 		} else {
 			attackCountry1 = null;
-			attackCountry2 = null;
+			attackCountry2 =	 null;
 		}
 	}
 
@@ -223,6 +223,7 @@ public class MyActionListner extends Observable implements ActionListener {
 				if (controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed() > 0) {
 					controll.frame.error("Connot End Reinforcement Untill All armies are deployed");
 				} else {
+					controll.frame.buttonCard4.setEnabled(false);
 					currentPhase = "Finish Attack";
 					controll.frame.nextAction.setText("Finish Attack");
 					changed();
@@ -231,6 +232,8 @@ public class MyActionListner extends Observable implements ActionListener {
 				}
 
 			} else if (e.getActionCommand() == "Finish Attack") {
+				controll.frame.buttonCard4.setEnabled(false);
+
 				changed();
 				currentPhase = "Finish Fortification";
 				controll.frame.nextAction.setText("Finish Fortification");
@@ -238,6 +241,8 @@ public class MyActionListner extends Observable implements ActionListener {
 				fortifyCountry2 = null;
 				FortificationPhase();
 			} else if (e.getActionCommand() == "Finish Fortification") {
+				controll.frame.buttonCard4.setEnabled(true);
+
 				changed();
 				currentPhase = "Finish Reinforcement";
 				controll.frame.nextAction.setText("Finish Reinforcement");

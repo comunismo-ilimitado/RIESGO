@@ -216,9 +216,9 @@ public class AttackController {
 	 * 
 	 * @param attacker: player who attacks
 	 * @param defender: player who's country being attacked
-	 * @param attackerDice: dice of attacker
-	 * @param defenderDice: dice of defender
-	 * @param allOut:if it's all out attack or not
+	 * @param attackerdice: dice of attacker
+	 * @param defenderdice: dice of defender
+	 * @param allout:if it's all out attack or not
 	 * @return string which player has won
 	 */
 	public String attackButton(Country attacker, Country defender, int attackerdice, int defenderdice, boolean allout) {

@@ -38,7 +38,7 @@ public class ReinforcementController {
 	 */
 	public String exchangeCards(List<CardTypes> list, Player player) {
 		HashSet<CardTypes> temp = new HashSet<>();
-		List<CardTypes> playerCards = player.getPlayerCards();
+		List<CardTypes> playercards = player.getPlayerCards();
 		temp.addAll(list);
 		if (list.size() == 3) {
 			if ((temp.size() == 1 && (temp.contains(CardTypes.Artillery) || temp.contains(CardTypes.Cavalry)
@@ -47,15 +47,15 @@ public class ReinforcementController {
 							&& temp.contains(CardTypes.Infantry))) {
 				if (temp.size() == 1) {
 					CardTypes card = temp.iterator().next();
-					playerCards.remove(card);
-					playerCards.remove(card);
-					playerCards.remove(card);
-					player.setPlayerCards(playerCards);
+					playercards.remove(card);
+					playercards.remove(card);
+					playercards.remove(card);
+					player.setPlayerCards(playercards);
 				} else if (temp.size() == 3) {
-					playerCards.remove(CardTypes.Artillery);
-					playerCards.remove(CardTypes.Cavalry);
-					playerCards.remove(CardTypes.Infantry);
-					player.setPlayerCards(playerCards);
+					playercards.remove(CardTypes.Artillery);
+					playercards.remove(CardTypes.Cavalry);
+					playercards.remove(CardTypes.Infantry);
+					player.setPlayerCards(playercards);
 				}
 				player.setCardExchangeValue(player.getCardExchangeValue() + 1);
 				int number = player.getCardExchangeValue();

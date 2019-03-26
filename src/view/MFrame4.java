@@ -61,10 +61,7 @@ public class MFrame4 extends JFrame implements ActionListener {
 
 	/**
 	 * This method displays the user interface
-	 * 
-	 * @param list
-	 * 
-	 * @throws Exception
+	
 	 */
 	public void fun() {
 		FlowLayout flowLayout = new FlowLayout();
@@ -98,14 +95,14 @@ public class MFrame4 extends JFrame implements ActionListener {
 	/**
 	 * This method assigns button to each country in UI
 	 * 
-	 * @param countryObjects
-	 * @throws IOException
+	 * 
+	 *
 	 */
 
 	/**
 	 * This method give color to the countries
 	 * 
-	 * @param countryObjects
+	 *
 	 */
 
 	public void popupText(String string) {

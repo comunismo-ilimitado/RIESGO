@@ -33,6 +33,9 @@ public class EditContinents {
 	static List<String> Countries = new ArrayList<String>();
 	static List<String> Continents = new ArrayList<String>();
 
+	/**
+	 * Constructor
+	 */
 	public EditContinents() {
 		MFrame2 frame2 = new MFrame2();
 		ReadFile = new ReadingFiles(frame2);
@@ -58,6 +61,9 @@ public class EditContinents {
 		getSelectedContinent();
 	}
 
+	/**
+	 * Set the Continents in the view
+	 */
 	public void setUp() {
 
 		if (ReadingFiles.CountryNameObject != null)
@@ -138,6 +144,11 @@ public class EditContinents {
 
 	}
 
+	/**
+	 * Gets selected continents
+	 * 
+	 * @return ContinentSelected: String of continent selected
+	 */
 	public String getSelectedContinent() {
 
 		SelectButton.addActionListener(new ActionListener() {

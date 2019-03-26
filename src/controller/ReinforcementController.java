@@ -15,7 +15,13 @@ import model.Player;
  * @version 1.1
  */
 public class ReinforcementController {
-	//
+
+	/**
+	 * Checks if player has more than 5 cards
+	 * 
+	 * @param player: Player object must be given to fetch number of cards
+	 * @return true if player has more than 5 cards else false
+	 */
 	public boolean hasMoreCards(Player player) {
 		if (player.getPlayerCards().size() >= 5)
 			return true;
@@ -23,13 +29,16 @@ public class ReinforcementController {
 			return false;
 	}
 
-
-
-
-	//
+	/**
+	 * number of times player exchanges the cards
+	 * 
+	 * @param list: list of cards
+	 * @param player: player object must be given to fetch the player cards
+	 * @return message how player can exchange cards
+	 */
 	public String exchangeCards(List<CardTypes> list, Player player) {
 		HashSet<CardTypes> temp = new HashSet<>();
-		List<CardTypes> playercards = player.getPlayerCards();
+		List<CardTypes> playerCards = player.getPlayerCards();
 		temp.addAll(list);
 		if (list.size() == 3) {
 			if ((temp.size() == 1 && (temp.contains(CardTypes.Artillery) || temp.contains(CardTypes.Cavalry)
@@ -38,15 +47,15 @@ public class ReinforcementController {
 							&& temp.contains(CardTypes.Infantry))) {
 				if (temp.size() == 1) {
 					CardTypes card = temp.iterator().next();
-					playercards.remove(card);
-					playercards.remove(card);
-					playercards.remove(card);
-					player.setPlayerCards(playercards);
+					playerCards.remove(card);
+					playerCards.remove(card);
+					playerCards.remove(card);
+					player.setPlayerCards(playerCards);
 				} else if (temp.size() == 3) {
-					playercards.remove(CardTypes.Artillery);
-					playercards.remove(CardTypes.Cavalry);
-					playercards.remove(CardTypes.Infantry);
-					player.setPlayerCards(playercards);
+					playerCards.remove(CardTypes.Artillery);
+					playerCards.remove(CardTypes.Cavalry);
+					playerCards.remove(CardTypes.Infantry);
+					player.setPlayerCards(playerCards);
 				}
 				player.setCardExchangeValue(player.getCardExchangeValue() + 1);
 				int number = player.getCardExchangeValue();
@@ -84,7 +93,7 @@ public class ReinforcementController {
 	public List<Country> getMyCountries(Player player) {
 		List<Country> countries = new ArrayList<Country>();
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
-			if (entry.getValue().getOwner().getPlayerId()==(player.getPlayerId())) {
+			if (entry.getValue().getOwner().getPlayerId() == (player.getPlayerId())) {
 				countries.add(entry.getValue());
 			} else
 				continue;
@@ -101,7 +110,7 @@ public class ReinforcementController {
 	public void calculateReinforcementArmies(Player player) {
 		int totalcountriesofplayer = 0;
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
-			if (entry.getValue().getOwner().getPlayerId()==(player.getPlayerId())) {
+			if (entry.getValue().getOwner().getPlayerId() == (player.getPlayerId())) {
 				totalcountriesofplayer++;
 			} else
 				continue;
@@ -131,7 +140,7 @@ public class ReinforcementController {
 			List<Country> temp = entry.getValue().getCountries();
 			int counter = 0;
 			for (int i = 0; i < entry.getValue().getCountries().size(); i++) {
-				if (entry.getValue().getCountries().get(i).getOwner().getPlayerId()==(player.getPlayerId()))
+				if (entry.getValue().getCountries().get(i).getOwner().getPlayerId() == (player.getPlayerId()))
 					counter++;
 				else
 					continue;
@@ -166,9 +175,10 @@ public class ReinforcementController {
 	 * @param country: country object where armies updated
 	 */
 	public void updateValue(Player player, Country country) {
-		country.setNoOfArmies(country.getNoOfArmies()+1);
+		country.setNoOfArmies(country.getNoOfArmies() + 1);
 		int x = ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().indexOf(country);
-		ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().get(x).setNoOfArmies(country.getNoOfArmies());
+		ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().get(x)
+				.setNoOfArmies(country.getNoOfArmies());
 		player.setPlayerTotalArmiesNotDeployed(player.getPlayerArmiesNotDeployed() - 1);
 	}
 

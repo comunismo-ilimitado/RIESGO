@@ -1,4 +1,5 @@
 package model;
+
 import java.util.*;
 
 /**
@@ -14,7 +15,9 @@ public class Country {
 	 */
 	private int country_id;
 
-	// continent which it belongs to
+	/**
+	 * continent which it belongs to
+	 */
 	private Continent continent;
 
 	/**
@@ -61,12 +64,20 @@ public class Country {
 		this.country_id = country_id;
 	}
 
-	// Gets continent ID
+	/**
+	 * Gets continent ID
+	 * 
+	 * @return continent object
+	 */
 	public Continent getContinent() {
 		return continent;
 	}
 
-	// Set continent ID
+	/**
+	 * Set continent ID
+	 * 
+	 * @param continent : object
+	 */
 	public void setContinent(Continent continent) {
 		this.continent = continent;
 	}

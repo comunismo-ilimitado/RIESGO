@@ -60,7 +60,7 @@ public class MFrame3 extends JFrame {
 	 * This method displays the user interface
 	 * @param list 
 	 * 
-	 * @throws Exception
+	 *
 	 */
 	public void fun(List<CardTypes> list)  {
 		FlowLayout flowLayout = new FlowLayout();
@@ -87,8 +87,7 @@ public class MFrame3 extends JFrame {
 	/**
 	 * This method assigns button to each country in UI
 	 * 
-	 * @param countryObjects
-	 * @throws IOException
+	 * 
 	 */
 	public void SetButtons(List<CardTypes> cards)  {
 		button = new JButton[cards.size()];
@@ -105,7 +104,7 @@ public class MFrame3 extends JFrame {
 	/**
 	 * This method give color to the countries
 	 * 
-	 * @param countryObjects
+	 *
 	 */
 
 	public void error(String string) {

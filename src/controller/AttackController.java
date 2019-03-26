@@ -19,6 +19,10 @@ public class AttackController {
 	public List<Integer> defenderdiceroll;
 	public static boolean card;
 
+	/**
+	 * Gets list of total number of countries
+	 * 
+	 */
 	public int getTotalCountries() {
 		// List<Country> list=new ArrayList<>();
 		int count = 0;
@@ -28,6 +32,11 @@ public class AttackController {
 		return count;
 	}
 
+	/**
+	 * Gets list of total number of countries player owns
+	 * 
+	 * @param player: Player object must be given to fetch the countries
+	 */
 	public int getTotalCountries(Player player) {
 		int count = 0;
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
@@ -41,6 +50,12 @@ public class AttackController {
 	public List<String> attackerdicerolloutput = new ArrayList<>();
 	public List<String> defenderdicerolloutput = new ArrayList<>();
 
+	/**
+	 * checks player can attack or not
+	 * 
+	 * @param player: player object
+	 * @return true if player can attack else false
+	 */
 	public boolean canAttack(Player player) {
 		List<Country> list = getMyCountries(player);
 		int counter = 0;
@@ -196,6 +211,16 @@ public class AttackController {
 		return;
 	}
 
+	/**
+	 * Attack simulator
+	 * 
+	 * @param attacker: player who attacks
+	 * @param defender: player who's country being attacked
+	 * @param attackerDice: dice of attacker
+	 * @param defenderDice: dice of defender
+	 * @param allOut:if it's all out attack or not
+	 * @return string which player has won
+	 */
 	public String attackButton(Country attacker, Country defender, int attackerdice, int defenderdice, boolean allout) {
 		if (attackerdice <= setNoOfDice(attacker, 'A') && defenderdice <= setNoOfDice(defender, 'D')) {
 			if (attacker.getNoOfArmies() >= 2 && defender.getNoOfArmies() >= 1) {
@@ -391,6 +416,12 @@ public class AttackController {
 		}
 	}
 
+	/**
+	 * Gets maximum value of the dice
+	 * 
+	 * @param list: list of dice roll numbers
+	 * @return maximum value from list
+	 */
 	public int getMaxValue(List<Integer> list) {
 		int max = list.get(0);
 		for (int i = 1; i < list.size(); i++) {

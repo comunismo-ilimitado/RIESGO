@@ -1,6 +1,10 @@
 package model;
 
-//All the card types a player can hold
+/**
+ * Enumeration that has all the card types
+ * @author bhargav
+ * @version 1.0
+ */
 public enum CardTypes {
 	Infantry, Cavalry, Artillery
 }

@@ -243,7 +243,6 @@ public class ReinforcementTest {
 	 * Tests updating armies accordingly
 	 */
 	@Test
-
 	public void testUpdateValue() {
 		reinforcement.updateValue(player1, country4);
 		assertEquals(3, country4.getNoOfArmies());
@@ -325,7 +324,4 @@ public class ReinforcementTest {
 	{
 		assertFalse(reinforcement.hasMoreCards(player1));
 	}
-	
-
-
 }

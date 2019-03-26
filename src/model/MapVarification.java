@@ -7,13 +7,12 @@ import java.util.Set;
 
 import view.MFrame2;
 
-
 public class MapVarification {
 	ArrayList<String> arrayList = new ArrayList<>();
 	ArrayList<String> arrayList2 = new ArrayList<>();
 	HashMap<String, Country> hashMap;
 	HashMap<String, Continent> hashMap2;
-	public static boolean error=false;
+	public static boolean error = false;
 
 	/**
 	 * 
@@ -24,7 +23,7 @@ public class MapVarification {
 	public MapVarification(HashMap<String, Country> hashMap, HashMap<String, Continent> hashMap2) {
 		this.hashMap = hashMap;
 		this.hashMap2 = hashMap2;
-	
+
 	}
 
 	public void BiDirectionalCheck() {
@@ -44,20 +43,13 @@ public class MapVarification {
 
 	}
 
-	public void NoCountryIsUnused() {
-
-	}
-	
-	public ArrayList<String> getString()
-	{
+	public ArrayList<String> getString() {
 		return arrayList;
 	}
-	
-	public ArrayList<String> getString2()
-	{
+
+	public ArrayList<String> getString2() {
 		return arrayList2;
 	}
-
 
 	public void NoContinentIsUnused() {
 		ArrayList<Continent> temparrayList = new ArrayList<>(hashMap2.values());
@@ -105,10 +97,11 @@ public class MapVarification {
 			Continent temp = hashMap2.get(hashMap2.keySet().toArray()[i]);
 			for (int j = 0; j < hashMap2.size(); j++) {
 				Continent temp2 = hashMap2.get(hashMap2.keySet().toArray()[j]);
-				if(i!=j||!temp.equals(temp2)) {
-				if (temp.getCountries().containsAll(temp2.getCountries())) {
-					arrayList.add("MULTIPLE CONTINENTS HAVE SAME COUNTRIES");
-				}}
+				if (i != j || !temp.equals(temp2)) {
+					if (temp.getCountries().containsAll(temp2.getCountries())) {
+						arrayList.add("MULTIPLE CONTINENTS HAVE SAME COUNTRIES");
+					}
+				}
 
 			}
 		}
@@ -125,44 +118,49 @@ public class MapVarification {
 	}
 
 	public void GraphConnectivity() {
-
-	}
-
-	private void checkConnectedGraph(Country country, Set<Country> queue, Continent continent) {
-
-		for (int i = 0; i < country.getNeighbors().size(); i++) {
-
-			Country neighbouringTerritory = country.getNeighbors().get(i);
-			if (continent == null && !queue.contains(neighbouringTerritory)) {
-				queue.add(neighbouringTerritory);
-				checkConnectedGraph(neighbouringTerritory, queue, continent);
-			} else if (!queue.contains(neighbouringTerritory)
-					&& neighbouringTerritory.getContinent().getName() == continent.getName()
-					&& neighbouringTerritory.getNeighbors().size() != 0) {
-				queue.add(neighbouringTerritory);
-				checkConnectedGraph(neighbouringTerritory, queue, continent);
-			}
+		for (int i = 0; i < hashMap.size(); i++) {
+			Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
+			
+			
 		}
-
 	}
+
+	// private void checkConnectedGraph(Country country, Set<Country> queue,
+	// Continent continent) {
+	//
+	// for (int i = 0; i < country.getNeighbors().size(); i++) {
+	//
+	// Country neighbouringTerritory = country.getNeighbors().get(i);
+	// if (continent == null && !queue.contains(neighbouringTerritory)) {
+	// queue.add(neighbouringTerritory);
+	// checkConnectedGraph(neighbouringTerritory, queue, continent);
+	// } else if (!queue.contains(neighbouringTerritory)
+	// && neighbouringTerritory.getContinent().getName() == continent.getName()
+	// && neighbouringTerritory.getNeighbors().size() != 0) {
+	// queue.add(neighbouringTerritory);
+	// checkConnectedGraph(neighbouringTerritory, queue, continent);
+	// }
+	// }
+	//
+	// }
 
 	public void CallAllMethods() {
-//		BiDirectionalCheck();
+		// BiDirectionalCheck();
 		EmptyNeighbours();
 		ContinentHaveSameCountry();
 		NoContinentIsUnused();
-		NoCountryIsUnused();
 		NoContinentOrCountry();
 		NotItsOwnNeighbour();
-//		GraphConnectivity();
-/*		Set<Country> countries = new HashSet<Country>();
-		checkConnectedGraph(hashMap.get(hashMap.keySet().toArray()[0]), countries,
-				hashMap2.get(hashMap2.keySet().toArray()[0]));
-*/
-		if(arrayList.size()>0) {
+		GraphConnectivity();
+		/*
+		 * Set<Country> countries = new HashSet<Country>();
+		 * checkConnectedGraph(hashMap.get(hashMap.keySet().toArray()[0]), countries,
+		 * hashMap2.get(hashMap2.keySet().toArray()[0]));
+		 */
+		if (arrayList.size() > 0) {
 			System.out.println(arrayList);
-			MFrame2 frame2=new MFrame2();
-			error=true;
+			MFrame2 frame2 = new MFrame2();
+			error = true;
 			frame2.error("Error in Map File Start Again");
 		}
 	}

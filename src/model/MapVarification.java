@@ -15,6 +15,7 @@ public class MapVarification {
 	public static boolean error = false;
 
 	/**
+	 * Parameterized constructor
 	 * 
 	 * @param hashMap
 	 * @param hashMap2
@@ -26,6 +27,9 @@ public class MapVarification {
 
 	}
 
+	/**
+	 * Checks if graph is functional in two ways
+	 */
 	public void BiDirectionalCheck() {
 
 		for (int i = 0; i < hashMap.size(); i++) {
@@ -43,14 +47,27 @@ public class MapVarification {
 
 	}
 
+	/**
+	 * Gets list
+	 * 
+	 * @return arrayList
+	 */
 	public ArrayList<String> getString() {
 		return arrayList;
 	}
 
+	/**
+	 * Gets list2
+	 * 
+	 * @return arrayList2
+	 */
 	public ArrayList<String> getString2() {
 		return arrayList2;
 	}
 
+	/**
+	 * continent must not be empty
+	 */
 	public void NoContinentIsUnused() {
 		ArrayList<Continent> temparrayList = new ArrayList<>(hashMap2.values());
 
@@ -74,6 +91,9 @@ public class MapVarification {
 
 	}
 
+	/**
+	 * country should not be its own neighbor
+	 */
 	public void NotItsOwnNeighbour() {
 		for (int i = 0; i < hashMap.size(); i++) {
 			Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
@@ -85,6 +105,9 @@ public class MapVarification {
 		}
 	}
 
+	/**
+	 * checks if no country or continent in the map file
+	 */
 	public void NoContinentOrCountry() {
 		if (hashMap.size() < 1 || hashMap2.size() < 1) {
 			arrayList.add("NO COUNTRY OR CONTINENT");
@@ -92,6 +115,9 @@ public class MapVarification {
 
 	}
 
+	/**
+	 * No two continents can have same country
+	 */
 	public void ContinentHaveSameCountry() {
 		for (int i = 0; i < hashMap2.size(); i++) {
 			Continent temp = hashMap2.get(hashMap2.keySet().toArray()[i]);
@@ -108,6 +134,9 @@ public class MapVarification {
 
 	}
 
+	/**
+	 * if country doesn't have neighbors
+	 */
 	public void EmptyNeighbours() {
 		for (int i = 0; i < hashMap.size(); i++) {
 			Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
@@ -117,11 +146,13 @@ public class MapVarification {
 		}
 	}
 
+	/**
+	 * checks graph is connected or not
+	 */
 	public void GraphConnectivity() {
 		for (int i = 0; i < hashMap.size(); i++) {
 			Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
-			
-			
+
 		}
 	}
 

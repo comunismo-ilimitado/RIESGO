@@ -42,8 +42,9 @@ public class ReadingFiles {
 	/**
 	 * This method will store all values from the map file in static variables
 	 * 
-	 * @param address: location of the map file
-	 * @throws IOException 
+	 * @param address:
+	 *            location of the map file
+	 * @throws IOException
 	 */
 	public void Reads(String address) throws IOException {
 		try {
@@ -107,13 +108,10 @@ public class ReadingFiles {
 			List<Color> arrayListc = new ArrayList<>();
 			arrayListc.add(Color.cyan);
 			arrayListc.add(Color.GREEN);
+			arrayListc.add(Color.WHITE);
+			arrayListc.add(Color.PINK);
 			arrayListc.add(Color.decode("#ffff00"));
 			arrayListc.add(Color.decode("#FF6600"));
-			arrayListc.add(Color.WHITE);
-			arrayListc.add(Color.RED);
-			arrayListc.add(Color.black);
-			arrayListc.add(Color.GRAY);
-			arrayListc.add(Color.RED);
 
 			int noofplayers = AssignCountries.NumberOfPlayers;
 
@@ -137,8 +135,7 @@ public class ReadingFiles {
 			}
 
 			int ArmiesPerPlayer = 50 - (5 * noofplayers);
-			
-			
+
 			for (int i = 0; i < noofplayers; i++) {
 				Player temp1 = playerId.get(players.get(i));
 				List<Country> clis = temp1.getTotalCountriesOccupied();

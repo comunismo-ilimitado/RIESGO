@@ -17,8 +17,12 @@ import java.io.*;
 public class AttackController {
 	public List<Integer> attackerdiceroll;
 	public List<Integer> defenderdiceroll;
-	
+
 	public static boolean card;
+
+	public List<String> attackerdicerolloutput = new ArrayList<>();
+	public List<String> defenderdicerolloutput = new ArrayList<>();
+
 
 	/**
 	 * Gets list of total number of countries
@@ -47,9 +51,6 @@ public class AttackController {
 		}
 		return count;
 	}
-
-	public List<String> attackerdicerolloutput = new ArrayList<>();
-	public List<String> defenderdicerolloutput = new ArrayList<>();
 
 	/**
 	 * checks player can attack or not
@@ -123,8 +124,11 @@ public class AttackController {
 		// int total = neighbors.size();
 		List<Country> temp = new ArrayList<Country>();
 		for (int i = 0; i < neighbors.size(); i++) {
+			try {
 			if (neighbors.get(i).getOwner().getPlayerId() == country.getOwner().getPlayerId()) {
 				temp.add(neighbors.get(i));
+			}}catch (Exception e) {
+				// TODO: handle exception
 			}
 //			if (neighbors.get(i).getNoOfArmies() < 2)
 //				temp.add(neighbors.get(i));
@@ -242,7 +246,6 @@ public class AttackController {
 						}
 						attackerdicerolloutput.add(attackerdiceroll.toString());
 						defenderdicerolloutput.add(defenderdiceroll.toString());
-						System.out.println(attackerdicerolloutput);
 
 						while (attackerdiceroll.size() != 0 && defenderdiceroll.size() != 0) {
 							int attackermax = getMaxValue(attackerdiceroll);

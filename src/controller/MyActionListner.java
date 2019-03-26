@@ -47,14 +47,18 @@ public class MyActionListner extends Observable implements ActionListener {
 	}
 
 	public void playerUpdate() {
-		for (Integer key : controll.files.playerId.keySet()) {
-
+		try {
+			if (currentPlayer >= players - 1)
+				currentPlayer = 0;
+			else
+				currentPlayer++;
+			System.out.println(controll.files.playerId.get(currentPlayer));
+			System.out.println(controll.files.playerId);
+		} catch (Exception e) {
+			playerUpdate();
 		}
-		if (currentPlayer >= players - 1)
-			currentPlayer = 0;
-		else
-			currentPlayer++;
 	}
+	
 
 	/**
 	 * This method display the armies that are not deployed
@@ -64,7 +68,7 @@ public class MyActionListner extends Observable implements ActionListener {
 	 */
 	public void ReinforcementPhase2(Country country) {
 		// controll.AddArmies(currentPlayer);
-		String message = controll.reinforcementController.addarmies(country);
+		String message = controll.playerObjet(currentPlayer).addarmies(country);
 		controll.frame.noArmiesLeft = controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
 		changed();
 		if (!message.equals(""))
@@ -78,13 +82,14 @@ public class MyActionListner extends Observable implements ActionListener {
 		changed();
 		controll.frame.ActivateAll();
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
-		controll.reinforcementController.calculateReinforcementArmies(controll.playerObjet(currentPlayer));
+		controll.playerObjet(currentPlayer).calculateReinforcementArmies(controll.playerObjet(currentPlayer));
 	}
 
 	/**
 	 * This method
 	 */
 	public void FortificationPhase() {
+		AttackController.card=false;
 		changed();
 		controll.frame.ActivateAll();
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
@@ -149,7 +154,7 @@ public class MyActionListner extends Observable implements ActionListener {
 	 * @throws IOException
 	 */
 	public void AttackPhase(Country country) throws IOException {
-
+		
 		changed();
 		if (attackCountry1 == null) {
 			attackCountry1 = country;
@@ -194,24 +199,43 @@ public class MyActionListner extends Observable implements ActionListener {
 			}
 
 			String reply = controll.attackController.attackButton(attackCountry1, attackCountry2, dice1, dice2, allout);
-			if (!reply.equals("")) {
+			if(reply.equals("Player "+currentPlayer+" wins")) {
+				controll.frame.error(reply);
+				StartUpWindow startUpWindow=new StartUpWindow();
+				String args []= {""};
+				startUpWindow.main(args);
+			}
+			else if (!reply.equals("")) {
 				controll.frame.error(reply);
 			}
-			controll.frame.AAA = controll.attackController.attackerDiceRollOutput.toString();
-			controll.frame.BBB = controll.attackController.defenderDiceRollOutput.toString();
+			
+			
+			controll.frame.AAA = controll.attackController.attackerdicerolloutput.toString();
+			controll.frame.BBB = controll.attackController.defenderdicerolloutput.toString();
 			changed();
-			controll.attackController.attackerDiceRollOutput.clear();
-			controll.attackController.defenderDiceRollOutput.clear();
+			controll.attackController.attackerdicerolloutput.clear();
+			controll.attackController.defenderdicerolloutput.clear();
 			controll.frame.ActivateAll();
 			attackCountry1 = null;
 			attackCountry2 = null;
 			controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
 			controll.RefreshButtons();
 			controll.PaintCountries();
+			boolean result=controll.playerObjet(currentPlayer).canAttack(controll.playerObjet(currentPlayer));
+			if(!result) {
+				controll.frame.buttonCard4.setEnabled(false);
+				changed();
+				currentPhase = "Finish Fortification";
+				controll.frame.nextAction.setText("Finish Fortification");
+				fortifyCountry1 = null;
+				fortifyCountry2 = null;
+				FortificationPhase();
+			}
+
 
 		} else {
 			attackCountry1 = null;
-			attackCountry2 =	 null;
+			attackCountry2 = null;
 		}
 	}
 
@@ -233,7 +257,6 @@ public class MyActionListner extends Observable implements ActionListener {
 
 			} else if (e.getActionCommand() == "Finish Attack") {
 				controll.frame.buttonCard4.setEnabled(false);
-
 				changed();
 				currentPhase = "Finish Fortification";
 				controll.frame.nextAction.setText("Finish Fortification");
@@ -284,8 +307,7 @@ public class MyActionListner extends Observable implements ActionListener {
 			if (answer == "") {
 				cardTypesList.clear();
 				controll.frame.jLabeCardl.setText(cardTypesList.toString());
-				controll.frame.noArmiesLeft=controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
-
+				controll.frame.noArmiesLeft = controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
 
 			} else {
 				controll.frame.error("Invalid Cards Selected");
@@ -300,7 +322,7 @@ public class MyActionListner extends Observable implements ActionListener {
 			String Cname = e.getActionCommand().split("\\|")[0].trim();
 			Country temp2 = controll.countryObjects().get(Cname);
 			if (currentPhase.equals("Finish Reinforcement")) {
-				if (controll.playerObjet(currentPlayer).getPlayerCards().size() >= 500) {
+				if (controll.playerObjet(currentPlayer).getPlayerCards().size() >= 5) {
 					controll.frame.error("First Exchange Cards");
 
 				} else {
@@ -386,6 +408,7 @@ public class MyActionListner extends Observable implements ActionListener {
 	public ArrayList<String> ContinentsOccupied() {
 		return controll.ContinentsOccupied();
 	}
+
 	public int getArmiesPerPlayer() {
 		return controll.attackController.getTotalCountries(controll.playerObjet(currentPlayer));
 	}

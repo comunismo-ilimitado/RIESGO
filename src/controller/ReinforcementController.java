@@ -10,7 +10,7 @@ import model.Player;
 /**
  * This controller class has all the methods needs for the reinforcement phase
  * of the game
- * 
+ *
  * @author neerajpreet
  * @version 1.1
  */
@@ -22,6 +22,9 @@ public class ReinforcementController {
 		else
 			return false;
 	}
+
+
+
 
 	//
 	public String exchangeCards(List<CardTypes> list, Player player) {
@@ -57,7 +60,7 @@ public class ReinforcementController {
 
 	/**
 	 * this method checks for the number of armies that are not deployed
-	 * 
+	 *
 	 * @param country source country of the player
 	 * @return some value of type string
 	 */
@@ -74,7 +77,7 @@ public class ReinforcementController {
 
 	/**
 	 * Gets a list of countries that the player owns
-	 * 
+	 *
 	 * @param player: Player object must be given to fetch the countries
 	 * @return List of countries owned by the player
 	 */
@@ -91,7 +94,7 @@ public class ReinforcementController {
 
 	/**
 	 * this method calculates the number of armies each player gets to reinforce
-	 * 
+	 *
 	 * @param player: player object for which the armies are calculated
 	 */
 
@@ -117,7 +120,7 @@ public class ReinforcementController {
 
 	/**
 	 * this method checks whether the player owns the whole continent or not
-	 * 
+	 *
 	 * @param player: player object for which it will check
 	 * @return continents list of continents
 	 */
@@ -143,7 +146,7 @@ public class ReinforcementController {
 
 	/**
 	 * this method calculates the number of armies according to the control value
-	 * 
+	 *
 	 * @param player: player object for which it calculates
 	 * @return armies
 	 */
@@ -158,12 +161,12 @@ public class ReinforcementController {
 
 	/**
 	 * this method updates the number of armies player owns and armies not deployed
-	 * 
+	 *
 	 * @param player: player object that updates
 	 * @param country: country object where armies updated
 	 */
 	public void updateValue(Player player, Country country) {
-		country.setNoOfArmies(country.getNoOfArmies() + 1);
+		country.setNoOfArmies(country.getNoOfArmies()+1);
 		int x = ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().indexOf(country);
 		ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().get(x).setNoOfArmies(country.getNoOfArmies());
 		player.setPlayerTotalArmiesNotDeployed(player.getPlayerArmiesNotDeployed() - 1);
@@ -171,7 +174,7 @@ public class ReinforcementController {
 
 	/**
 	 * this method checks whether player has deployed all his armies or not
-	 * 
+	 *
 	 * @param player: player object
 	 */
 

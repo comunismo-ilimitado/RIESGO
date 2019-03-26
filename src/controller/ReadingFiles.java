@@ -137,6 +137,8 @@ public class ReadingFiles {
 			}
 
 			int ArmiesPerPlayer = 50 - (5 * noofplayers);
+			
+			
 			for (int i = 0; i < noofplayers; i++) {
 				Player temp1 = playerId.get(players.get(i));
 				List<Country> clis = temp1.getTotalCountriesOccupied();

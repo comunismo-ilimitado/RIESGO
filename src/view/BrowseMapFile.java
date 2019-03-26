@@ -99,7 +99,7 @@ public class BrowseMapFile {
 						File fResource= new File(dest);
 						fResource.createNewFile();
 						OutputStream fos = new FileOutputStream(fResource);
-						System.out.print("File created");
+				//		System.out.print("File created");
 						Files.copy(source, fos);// FILE copied to resources
 					} catch (IOException e) {
 						// TODO Auto-generated catch bLock
@@ -108,8 +108,8 @@ public class BrowseMapFile {
 					
 					
 					FileName=f.getName();
-					System.out.println("File name selected is:"+getFileName());
-					System.out.println("File Location selected is:"+getLocation());
+//					System.out.println("File name selected is:"+getFileName());
+	//				System.out.println("File Location selected is:"+getLocation());
 					
 				}
 				

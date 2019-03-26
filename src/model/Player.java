@@ -10,7 +10,9 @@ public class Player {
 		FortificationController fortificationcontroller = new FortificationController();
 		AttackController attackcontroller = new AttackController();
 		
-		
+		public int getTotalCountries(Player player) {
+			return attackcontroller.getTotalCountries(player);
+		}
 		public List<Country> getMyCountries(Player player){
 			return reinforcementcontroller.getMyCountries(player);
 		}

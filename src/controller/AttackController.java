@@ -17,6 +17,7 @@ import java.io.*;
 public class AttackController {
 	public List<Integer> attackerdiceroll;
 	public List<Integer> defenderdiceroll;
+	
 	public static boolean card;
 
 	/**

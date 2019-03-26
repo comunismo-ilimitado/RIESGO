@@ -32,9 +32,9 @@ public class MyActionListner extends Observable implements ActionListener {
 	public int currentPlayer = 0;
 	Country attackCountry1, attackCountry2;
 	Country fortifyCountry1, fortifyCountry2;
-	public int cardsSelected=0;
-	List<CardTypes> cardTypesList=new ArrayList<CardTypes>();
-	
+	public int cardsSelected = 0;
+	List<CardTypes> cardTypesList = new ArrayList<CardTypes>();
+
 	public MyActionListner(MainControll controll) {
 		this.controll = controll;
 
@@ -75,7 +75,8 @@ public class MyActionListner extends Observable implements ActionListener {
 	 * This method display number of armies player can deploy
 	 */
 	public void ReinforcementPhase() {
-
+		controll.reinforcementController.calculateReinforcementArmies(controll.playerObjet(currentPlayer));
+		controll.frame.noArmiesLeft=controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
 		changed();
 		controll.frame.ActivateAll();
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
@@ -219,7 +220,6 @@ public class MyActionListner extends Observable implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getActionCommand().split(" ")[0]);
 		if (Phases.contains(e.getActionCommand())) {
 			if (e.getActionCommand() == "Finish Reinforcement") {
 				if (controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed() > 0) {
@@ -244,43 +244,69 @@ public class MyActionListner extends Observable implements ActionListener {
 				currentPhase = "Finish Reinforcement";
 				controll.frame.nextAction.setText("Finish Reinforcement");
 				ReinforcementPhase();
-			} 
+			}
 		} else if (e.getActionCommand().split(" ")[0].equals("Infantry")) {
-			cardTypesList.add(CardTypes.Infantry);
-			changed();
+			int no = Integer.parseInt(e.getActionCommand().split(" ")[1]);
+			if (no > 0) {
+				cardTypesList.add(CardTypes.Infantry);
+				controll.frame.buttonCard1.setText("Infantry " + (no - 1));
+				controll.frame.jLabeCardl.setText(cardTypesList.toString());
+
+			} else {
+				controll.frame.error("No Card Of this Type");
+			}
+
 		} else if (e.getActionCommand().split(" ")[0].equals("Cavalry")) {
-			cardTypesList.add(CardTypes.Cavalry);
+			int no = Integer.parseInt(e.getActionCommand().split(" ")[1]);
+			if (no > 0) {
+				cardTypesList.add(CardTypes.Cavalry);
+				controll.frame.buttonCard3.setText("Cavalry " + (no - 1));
+				controll.frame.jLabeCardl.setText(cardTypesList.toString());
+			} else {
+				controll.frame.error("No Card Of this Type");
+			}
+		} else if (e.getActionCommand().split(" ")[0].equals("Artillery")) {
+			int no = Integer.parseInt(e.getActionCommand().split(" ")[1]);
+			if (no > 0) {
+				cardTypesList.add(CardTypes.Artillery);
+				controll.frame.buttonCard2.setText("Artillery " + (no - 1));
+				controll.frame.jLabeCardl.setText(cardTypesList.toString());
+
+			} else {
+				controll.frame.error("No Card Of this Type");
+			}
+		} else if (e.getActionCommand().equals("Exchange Cards")) {
+			String answer = controll.reinforcementController.exchangeCards(cardTypesList,
+					controll.playerObjet(currentPlayer));
+			if (answer == "") {
+				cardTypesList.clear();
+				controll.frame.jLabeCardl.setText(cardTypesList.toString());
+				controll.frame.noArmiesLeft=controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
+
+
+			} else {
+				controll.frame.error("Invalid Cards Selected");
+				cardTypesList.clear();
+				controll.frame.jLabeCardl.setText(cardTypesList.toString());
+
+			}
 			changed();
 
-		} else if (e.getActionCommand().split(" ")[0].equals("Artillery") ) {
-			cardTypesList.add(CardTypes.Artillery);
-			changed();
-		} else if (e.getActionCommand().equals("Exchange Cards") ) {
-		String answer=	controll.reinforcementController.exchangeCards(cardTypesList, controll.playerObjet(currentPlayer));
-		if(answer=="") {
-			changed();
-			cardTypesList.clear();
-		}
-		else {
-			controll.frame.error("Invalid Cards Selected");			
-			cardTypesList.clear();		}
-		
-		}else {
+		} else {
 			controll.frame.noArmiesLeft = controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
 			String Cname = e.getActionCommand().split("\\|")[0].trim();
 			Country temp2 = controll.countryObjects().get(Cname);
 			if (currentPhase.equals("Finish Reinforcement")) {
-				if(controll.playerObjet(currentPlayer).getPlayerCards().size()>=5) {
+				if (controll.playerObjet(currentPlayer).getPlayerCards().size() >= 500) {
 					controll.frame.error("First Exchange Cards");
-					
-				}
-				else {
-				ReinforcementPhase2(temp2);
-				try {
-					controll.RefreshButtons();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+
+				} else {
+					ReinforcementPhase2(temp2);
+					try {
+						controll.RefreshButtons();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 				}
 			} else if (currentPhase.equals("Finish Fortification")) {
 				try {
@@ -305,24 +331,8 @@ public class MyActionListner extends Observable implements ActionListener {
 	public String getCardsType1() {
 		int aaa = 0;
 		List<CardTypes> type = controll.playerObjet(currentPlayer).getPlayerCards();
-		System.out.println(type);
 		for (int i = 0; i < type.size(); i++) {
 			int x = type.get(i).compareTo(CardTypes.Infantry);
-			if (x == 0) {
-				aaa += 1;
-			}
-
-		}
-
-		return "" + aaa;
-	}
-
-	public String getCardsType2() {
-		int aaa = 0;
-		List<CardTypes> type = controll.playerObjet(currentPlayer).getPlayerCards();
-		System.out.println(type);
-		for (int i = 0; i < type.size(); i++) {
-			int x = type.get(i).compareTo(CardTypes.Artillery);
 			if (x == 0) {
 				aaa += 1;
 			}
@@ -335,7 +345,6 @@ public class MyActionListner extends Observable implements ActionListener {
 	public String getCardsType3() {
 		int aaa = 0;
 		List<CardTypes> type = controll.playerObjet(currentPlayer).getPlayerCards();
-		System.out.println(type);
 		for (int i = 0; i < type.size(); i++) {
 			int x = type.get(i).compareTo(CardTypes.Cavalry);
 			if (x == 0) {
@@ -345,8 +354,24 @@ public class MyActionListner extends Observable implements ActionListener {
 		}
 
 		return "" + aaa;
+	}
+
+	public String getCardsType2() {
+		int aaa = 0;
+		List<CardTypes> type = controll.playerObjet(currentPlayer).getPlayerCards();
+
+		for (int i = 0; i < type.size(); i++) {
+			int x = type.get(i).compareTo(CardTypes.Artillery);
+			if (x == 0) {
+				aaa += 1;
+			}
+
+		}
+
+		return "" + aaa;
 
 	}
+
 	public String getSelectedCards() {
 		return cardTypesList.toString();
 	}
@@ -358,9 +383,10 @@ public class MyActionListner extends Observable implements ActionListener {
 	public ArrayList<String> ContinentsOccupied() {
 		return controll.ContinentsOccupied();
 	}
+	public int getArmiesPerPlayer() {
+	}
 
 	public void changed() {
-
 		setChanged();
 		notifyObservers();
 	}

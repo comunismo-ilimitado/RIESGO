@@ -62,7 +62,6 @@ public class MainControll {
 				for (Continent val : files.ContinentNameObject.values()) {
 					System.out.println(val.getName()+" : -"+ ListToStringCountries(val.getCountries()));
 				}
-
 				myactionlistner.ReinforcementPhase();
 				repaintAndRevalidate();
 			}

@@ -51,9 +51,9 @@ import model.Country;
 @SuppressWarnings("deprecation")
 public class MFrame extends JFrame implements Observer {
 	private JButton[] button;
-	JButton buttonCard1, buttonCard2, buttonCard3, buttonCard4;
+	public JButton buttonCard1, buttonCard2, buttonCard3, buttonCard4;
 	JPanel jPanel2, jPanel6, jPanel7;
-	JLabel jLabeCardl, jLabelCard2, jLabelCard3;
+	public JLabel jLabeCardl, jLabelCard2, jLabelCard3;
 	public JButton nextAction;
 	String Phases[] = { "Finish Reinforcement", "Finish Attack", "Finish Fortification" };
 	HashMap<String, JButton> hashButton;
@@ -67,8 +67,6 @@ public class MFrame extends JFrame implements Observer {
 	public String AAA;
 	public String CCC;
 	public String MapImage = "noimage.bmp";
-
-	
 
 	public MFrame(MyActionListner myActionListner, String MapImage) {
 
@@ -180,7 +178,6 @@ public class MFrame extends JFrame implements Observer {
 		jLabels.add(jLabel56);
 		jLabels.add(jLabel66);
 
-		
 		jPanel3.add(jPanel6);
 
 		jPanel7 = new JPanel(new GridLayout(0, 1));

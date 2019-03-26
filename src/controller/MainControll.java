@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import model.CardTypes;
 import model.Continent;
 import model.Country;
 import model.MapVarification;
@@ -42,7 +44,6 @@ public class MainControll {
 			
 			mapVarification = new MapVarification(files.CountryNameObject, files.ContinentNameObject);
 			mapVarification.CallAllMethods();
-
 			if (!files.errors && !mapVarification.error) {
 				myactionlistner = new MyActionListner(this);
 				frame = new MFrame(myactionlistner, ReadingFiles.image);
@@ -55,8 +56,9 @@ public class MainControll {
 				frame.fun();
 				SetButtons();
 				PaintCountries();
-				SetDominationView();
 				
+				SetDominationView();
+				temp();
 				for (Continent val : files.ContinentNameObject.values()) {
 					System.out.println(val.getName()+" : -"+ ListToStringCountries(val.getCountries()));
 				}
@@ -200,6 +202,23 @@ public class MainControll {
 			arrayList.add(ListToStringContinent(reinforcementController.playerOwnsContinent(playerObjet(i))));
 		}
 		return arrayList;
+	}
+	public void temp() {
+		List<CardTypes> cardTypes=new ArrayList<>();
+		cardTypes.add(CardTypes.Artillery);
+		cardTypes.add(CardTypes.Artillery);
+		cardTypes.add(CardTypes.Artillery);
+		cardTypes.add(CardTypes.Infantry);
+		cardTypes.add(CardTypes.Infantry);
+		cardTypes.add(CardTypes.Infantry);
+		cardTypes.add(CardTypes.Infantry);
+		cardTypes.add(CardTypes.Cavalry);
+		cardTypes.add(CardTypes.Cavalry);
+		cardTypes.add(CardTypes.Cavalry);
+		cardTypes.add(CardTypes.Cavalry);
+		cardTypes.add(CardTypes.Cavalry);
+		cardTypes.add(CardTypes.Cavalry);
+		playerObjet(0).setPlayerCards(cardTypes);
 	}
 
 

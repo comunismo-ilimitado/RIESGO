@@ -32,7 +32,9 @@ public class MyActionListner extends Observable implements ActionListener {
 	public int currentPlayer = 0;
 	Country attackCountry1, attackCountry2;
 	Country fortifyCountry1, fortifyCountry2;
-
+	public int cardsSelected=0;
+	List<CardTypes> cardTypesList=new ArrayList<CardTypes>();
+	
 	public MyActionListner(MainControll controll) {
 		this.controll = controll;
 
@@ -45,6 +47,9 @@ public class MyActionListner extends Observable implements ActionListener {
 	}
 
 	public void playerUpdate() {
+		for (Integer key : controll.files.playerId.keySet()) {
+
+		}
 		if (currentPlayer >= players - 1)
 			currentPlayer = 0;
 		else
@@ -173,8 +178,12 @@ public class MyActionListner extends Observable implements ActionListener {
 				if (allout == true) {
 
 				} else {
-					dice1 = Integer.parseInt(controll.frame.popupTextNew("Enter No of Dices for player 1 --Minimum: 1 Maximum: "+controll.attackController.setNoOfDice(attackCountry1, 'A')));
-					dice2 = Integer.parseInt(controll.frame.popupTextNew("Enter No of Dices for player 2 --Minimum: 1 Maximum: "+controll.attackController.setNoOfDice(attackCountry2, 'D')));
+					dice1 = Integer.parseInt(
+							controll.frame.popupTextNew("Enter No of Dices for player 1 --Minimum: 1 Maximum: "
+									+ controll.attackController.setNoOfDice(attackCountry1, 'A')));
+					dice2 = Integer.parseInt(
+							controll.frame.popupTextNew("Enter No of Dices for player 2 --Minimum: 1 Maximum: "
+									+ controll.attackController.setNoOfDice(attackCountry2, 'D')));
 				}
 			} catch (Exception e) {
 				controll.frame.error("Invalid Entry Try again");
@@ -210,6 +219,7 @@ public class MyActionListner extends Observable implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		System.out.println(e.getActionCommand().split(" ")[0]);
 		if (Phases.contains(e.getActionCommand())) {
 			if (e.getActionCommand() == "Finish Reinforcement") {
 				if (controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed() > 0) {
@@ -234,21 +244,44 @@ public class MyActionListner extends Observable implements ActionListener {
 				currentPhase = "Finish Reinforcement";
 				controll.frame.nextAction.setText("Finish Reinforcement");
 				ReinforcementPhase();
-			}
+			} 
+		} else if (e.getActionCommand().split(" ")[0].equals("Infantry")) {
+			cardTypesList.add(CardTypes.Infantry);
+			changed();
+		} else if (e.getActionCommand().split(" ")[0].equals("Cavalry")) {
+			cardTypesList.add(CardTypes.Cavalry);
+			changed();
 
-		} else {
+		} else if (e.getActionCommand().split(" ")[0].equals("Artillery") ) {
+			cardTypesList.add(CardTypes.Artillery);
+			changed();
+		} else if (e.getActionCommand().equals("Exchange Cards") ) {
+		String answer=	controll.reinforcementController.exchangeCards(cardTypesList, controll.playerObjet(currentPlayer));
+		if(answer=="") {
+			changed();
+			cardTypesList.clear();
+		}
+		else {
+			controll.frame.error("Invalid Cards Selected");			
+			cardTypesList.clear();		}
+		
+		}else {
 			controll.frame.noArmiesLeft = controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
 			String Cname = e.getActionCommand().split("\\|")[0].trim();
-			// JButton temp = controll.frame.hashButton.get(Cname);
 			Country temp2 = controll.countryObjects().get(Cname);
 			if (currentPhase.equals("Finish Reinforcement")) {
+				if(controll.playerObjet(currentPlayer).getPlayerCards().size()>=5) {
+					controll.frame.error("First Exchange Cards");
+					
+				}
+				else {
 				ReinforcementPhase2(temp2);
 				try {
 					controll.RefreshButtons();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-
+				}
 			} else if (currentPhase.equals("Finish Fortification")) {
 				try {
 					FortificationPhase2(temp2);
@@ -267,6 +300,55 @@ public class MyActionListner extends Observable implements ActionListener {
 
 		}
 
+	}
+
+	public String getCardsType1() {
+		int aaa = 0;
+		List<CardTypes> type = controll.playerObjet(currentPlayer).getPlayerCards();
+		System.out.println(type);
+		for (int i = 0; i < type.size(); i++) {
+			int x = type.get(i).compareTo(CardTypes.Infantry);
+			if (x == 0) {
+				aaa += 1;
+			}
+
+		}
+
+		return "" + aaa;
+	}
+
+	public String getCardsType2() {
+		int aaa = 0;
+		List<CardTypes> type = controll.playerObjet(currentPlayer).getPlayerCards();
+		System.out.println(type);
+		for (int i = 0; i < type.size(); i++) {
+			int x = type.get(i).compareTo(CardTypes.Artillery);
+			if (x == 0) {
+				aaa += 1;
+			}
+
+		}
+
+		return "" + aaa;
+	}
+
+	public String getCardsType3() {
+		int aaa = 0;
+		List<CardTypes> type = controll.playerObjet(currentPlayer).getPlayerCards();
+		System.out.println(type);
+		for (int i = 0; i < type.size(); i++) {
+			int x = type.get(i).compareTo(CardTypes.Cavalry);
+			if (x == 0) {
+				aaa += 1;
+			}
+
+		}
+
+		return "" + aaa;
+
+	}
+	public String getSelectedCards() {
+		return cardTypesList.toString();
 	}
 
 	public ArrayList<Float> CountriesPercentage() {

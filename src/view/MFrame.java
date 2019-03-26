@@ -39,6 +39,7 @@ import javax.swing.border.EtchedBorder;
 
 import controller.MyActionListner;
 import javafx.scene.layout.Border;
+import model.CardTypes;
 import model.Country;
 
 /**
@@ -66,6 +67,8 @@ public class MFrame extends JFrame implements Observer {
 	public String AAA;
 	public String CCC;
 	public String MapImage = "noimage.bmp";
+
+	
 
 	public MFrame(MyActionListner myActionListner, String MapImage) {
 
@@ -137,10 +140,14 @@ public class MFrame extends JFrame implements Observer {
 		buttonCard1 = new JButton("Infantry");
 		buttonCard2 = new JButton("Cavalry");
 		buttonCard3 = new JButton("Artillery");
-		buttonCard4 = new JButton("Exchange Cards0");
+		buttonCard4 = new JButton("Exchange Cards");
 		jLabeCardl = new JLabel("");
 		jLabelCard2 = new JLabel("");
 		jLabelCard3 = new JLabel("");
+		buttonCard1.addActionListener(myActionListner);
+		buttonCard2.addActionListener(myActionListner);
+		buttonCard3.addActionListener(myActionListner);
+		buttonCard4.addActionListener(myActionListner);
 
 		jPanel5.add(nextAction);
 		jPanel5.add(jLabeCardl);
@@ -173,6 +180,7 @@ public class MFrame extends JFrame implements Observer {
 		jLabels.add(jLabel56);
 		jLabels.add(jLabel66);
 
+		
 		jPanel3.add(jPanel6);
 
 		jPanel7 = new JPanel(new GridLayout(0, 1));
@@ -220,6 +228,9 @@ public class MFrame extends JFrame implements Observer {
 
 	public void cards() {
 
+		buttonCard1.setText("Infantry " + myActionListner.getCardsType1());
+		buttonCard2.setText("Artillery " + myActionListner.getCardsType2());
+		buttonCard3.setText("Cavalry " + myActionListner.getCardsType3());
 	}
 
 	public void NotifyAll() {
@@ -256,6 +267,7 @@ public class MFrame extends JFrame implements Observer {
 	 * @param countryObjects
 	 * @throws IOException
 	 */
+
 	public void SetButtons(HashMap<String, Country> countryObjects) throws IOException {
 		List<String> count = new ArrayList<>(countryObjects.keySet());
 		button = new JButton[count.size()];
@@ -306,7 +318,6 @@ public class MFrame extends JFrame implements Observer {
 		JOptionPane.showMessageDialog(null, string);
 	}
 
-
 	public void ActivateAll() {
 		for (int i = 0; i < button.length; i++) {
 			button[i].setEnabled(true);
@@ -351,8 +362,8 @@ public class MFrame extends JFrame implements Observer {
 		ArrayList<String> listinh = ((MyActionListner) arg0).ContinentsOccupied();
 		UpdateGameDominationViewPercentage(percent);
 		UpdateGameDominationViewContinentOccupied(listinh);
+		cards();
 		NotifyAll();
 	}
-
 
 }

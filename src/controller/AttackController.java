@@ -18,6 +18,24 @@ public class AttackController {
 	public List<Integer> defenderDiceRoll;
 	public static boolean card;
 	//
+	
+	public int getTotalCountries() {
+		List<Country> list=new ArrayList<>();
+		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
+			list.add(entry.getValue());
+		}
+		return list.size();
+	}
+	
+	public int getTotalCountries(Player player) {
+		List<Country> list=new ArrayList<>();
+		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
+			if(entry.getValue().getOwner().getPlayerId()==player.getPlayerId()) {
+			list.add(entry.getValue());
+			}
+		}
+		return list.size();
+	}
 	public boolean canAttack(Player player) {
 		List<Country> list = getMyCountries(player);
 		int counter = 0;
@@ -290,6 +308,9 @@ public class AttackController {
 							
 						}
 					}
+					if(attacker.getOwner().getTotalCountriesOccupied().size()==getTotalCountries()) {
+						return "Player "+attacker.getOwner().getPlayerId()+" wins";
+					}
 					return "";
 				} else {
 					for (int i = 0; i < attackerDice; i++) {
@@ -362,6 +383,9 @@ public class AttackController {
 						}
 							card=true;
 						}
+					}
+					if(attacker.getOwner().getTotalCountriesOccupied().size()==getTotalCountries()) {
+						return "Player "+attacker.getOwner().getPlayerId()+" wins";
 					}
 					return "";
 				}

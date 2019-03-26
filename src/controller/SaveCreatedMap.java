@@ -17,6 +17,9 @@ public class SaveCreatedMap {
 
 	BufferedWriter bw;
 
+	/**
+	 * Saves the map created by user
+	 */
 	public SaveCreatedMap() {
 		File f1 = new File("Resources/UserMap.map");
 		try {
@@ -34,6 +37,11 @@ public class SaveCreatedMap {
 
 	}
 
+	/**
+	 * Write map into .map file
+	 * 
+	 * @param s
+	 */
 	public void WriteIntoFile(String s) {
 		try {
 
@@ -46,6 +54,9 @@ public class SaveCreatedMap {
 		}
 	}
 
+	/**
+	 * Does initialization
+	 */
 	public void Init() {
 		try {
 			WriteIntoFile("[Map]");
@@ -54,7 +65,7 @@ public class SaveCreatedMap {
 			WriteIntoFile("image=World.bmp");
 			WriteIntoFile("wrap=no");
 			WriteIntoFile("scroll=vertical");
-			
+
 			bw.newLine();
 			WriteIntoFile("[Continents]");
 			for (Continent in : CreateMap.ContinentsObjectList) {

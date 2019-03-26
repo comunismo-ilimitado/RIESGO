@@ -15,30 +15,32 @@ import java.io.*;
  * @version 1.0.0
  */
 public class AttackController {
-	public List<Integer> attackerDiceRoll;
-	public List<Integer> defenderDiceRoll;
+	public List<Integer> attackerdiceroll;
+	public List<Integer> defenderdiceroll;
 	public static boolean card;
 
 	public int getTotalCountries() {
-		//List<Country> list=new ArrayList<>();
-		int count=0;
+		// List<Country> list=new ArrayList<>();
+		int count = 0;
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
-			count+=entry.getValue().getNoOfArmies();
+			count += entry.getValue().getNoOfArmies();
 		}
 		return count;
 	}
 
 	public int getTotalCountries(Player player) {
-		int count=0;
+		int count = 0;
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
-			if(entry.getValue().getOwner().getPlayerId()==player.getPlayerId()) {
-				count+=entry.getValue().getNoOfArmies();
-		}
+			if (entry.getValue().getOwner().getPlayerId() == player.getPlayerId()) {
+				count += entry.getValue().getNoOfArmies();
+			}
 		}
 		return count;
 	}
-	public List<String> attackerDiceRollOutput=new ArrayList<>();
-	public List<String> defenderDiceRollOutput=new ArrayList<>();
+
+	public List<String> attackerdicerolloutput = new ArrayList<>();
+	public List<String> defenderdicerolloutput = new ArrayList<>();
+
 	public boolean canAttack(Player player) {
 		List<Country> list = getMyCountries(player);
 		int counter = 0;
@@ -63,7 +65,7 @@ public class AttackController {
 				}
 				counter++;
 			}
-			if(breaker==-1) {
+			if (breaker == -1) {
 				break;
 			}
 		}
@@ -85,7 +87,7 @@ public class AttackController {
 	public List<Country> getMyCountries(Player player) {
 		List<Country> countries = new ArrayList<Country>();
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
-			if (entry.getValue().getOwner().getPlayerId()==player.getPlayerId()) {
+			if (entry.getValue().getOwner().getPlayerId() == player.getPlayerId()) {
 				countries.add(entry.getValue());
 			} else
 				continue;
@@ -105,7 +107,7 @@ public class AttackController {
 		// int total = neighbors.size();
 		List<Country> temp = new ArrayList<Country>();
 		for (int i = 0; i < neighbors.size(); i++) {
-			if (neighbors.get(i).getOwner().getPlayerId()==country.getOwner().getPlayerId()) {
+			if (neighbors.get(i).getOwner().getPlayerId() == country.getOwner().getPlayerId()) {
 				temp.add(neighbors.get(i));
 			}
 //			if (neighbors.get(i).getNoOfArmies() < 2)
@@ -150,28 +152,26 @@ public class AttackController {
 	 * @return Number of Dice to be assigned
 	 */
 	public int setNoOfDice(Country country, char ad) {
-	 try {
-		if (ad == 'A') {
-			if (country.getNoOfArmies() == 2)
-				return 1;
-			else if (country.getNoOfArmies() == 3)
-				return 2;
-			else
-				return 3;
-		} else if (ad == 'D') {
-			if (country.getNoOfArmies() == 1)
-				return 1;
-			else
-				return 2;
-		} else
+		try {
+			if (ad == 'A') {
+				if (country.getNoOfArmies() == 2)
+					return 1;
+				else if (country.getNoOfArmies() == 3)
+					return 2;
+				else
+					return 3;
+			} else if (ad == 'D') {
+				if (country.getNoOfArmies() == 1)
+					return 1;
+				else
+					return 2;
+			} else
+				return 0;
+		} catch (Exception e) {
+			// TODO: handle exception
 			return 0;
+		}
 	}
-	 catch (Exception e) {
-		// TODO: handle exception
-		 return 0;
-	}
-	 }
-
 
 	/**
 	 * To get a random number between 1 and 6 which simulates a dice roll
@@ -183,24 +183,6 @@ public class AttackController {
 		return number;
 	}
 
-//	/**
-//	 * Check if the country has any armies to attack before rolling the dice
-//	 * @param country
-//	 * @return
-//	 */
-//	public boolean checkArmies(Country country){
-//		if(country.getNoOfArmies()==0)
-//			return true;
-//		return false;
-//	}
-//	/**
-//	 * Gets player based on Owner Name from Country
-//	 * @param PlayerName
-//	 * @return
-//	 */
-//	public Player getPlayerByName(String PlayerName){
-//		return ReadingFiles.playerObject.get(PlayerName);
-//	}
 	/**
 	 * Updates the owner of a country if the attacker destroys all armies of
 	 * opponent
@@ -214,69 +196,40 @@ public class AttackController {
 		return;
 	}
 
-//	/**
-//	 * Places an army in the country that the player has just won
-//	 *
-//	 * @param country: Country object must be passed to update the number of armies
-//	 *        to 1
-//	 */
-//	public void placeArmies(Country country) {
-//		country.setNoOfArmies(1);
-//	}
-
-//	AttackController attackController = new AttackController();
-
-	public void endReinforcementsPhaseButton(Player player) {
-	}
-
-	public void endAttackPhaseButton(Player player) {
-	}
-
-	public String attackButton(Country attacker, Country defender, int attackerDice, int defenderDice, boolean allOut) {
-		if (attackerDice <= setNoOfDice(attacker, 'A') && defenderDice <= setNoOfDice(defender, 'D')) {
+	public String attackButton(Country attacker, Country defender, int attackerdice, int defenderdice, boolean allout) {
+		if (attackerdice <= setNoOfDice(attacker, 'A') && defenderdice <= setNoOfDice(defender, 'D')) {
 			if (attacker.getNoOfArmies() >= 2 && defender.getNoOfArmies() >= 1) {
-//			int attArmies = attacker.getNoOfArmies();
-//			int defArmies = defender.getNoOfArmies();
-
-				// String answer = "";
-// 			int attackerDice = setNoOfDice(attacker, 'A');
-// 			/*
-// 			 * display the number of defender dice
-// 			 */ int defenderDice = setNoOfDice(defender, 'D');
-				attackerDiceRoll = new ArrayList<Integer>();
-				defenderDiceRoll = new ArrayList<Integer>();
-				/*
-				 * display the int list values as the results from dice roll
-				 */
-				if (allOut) {
+				attackerdiceroll = new ArrayList<Integer>();
+				defenderdiceroll = new ArrayList<Integer>();
+				if (allout) {
 					while (attacker.getNoOfArmies() > 1
 							&& defender.getOwner().getPlayerId() != attacker.getOwner().getPlayerId()) {
-						attackerDice = setNoOfDice(attacker, 'A');
-						defenderDice = setNoOfDice(defender, 'D');
-						attackerDiceRoll.clear();
-						defenderDiceRoll.clear();
-						for (int i = 0; i < attackerDice; i++) {
-							attackerDiceRoll.add(rollDice());
+						attackerdice = setNoOfDice(attacker, 'A');
+						defenderdice = setNoOfDice(defender, 'D');
+						attackerdiceroll.clear();
+						defenderdiceroll.clear();
+						for (int i = 0; i < attackerdice; i++) {
+							attackerdiceroll.add(rollDice());
 						}
-						for (int i = 0; i < defenderDice; i++) {
-							defenderDiceRoll.add(rollDice());
+						for (int i = 0; i < defenderdice; i++) {
+							defenderdiceroll.add(rollDice());
 						}
-						attackerDiceRollOutput.add(attackerDiceRoll.toString());
-						defenderDiceRollOutput.add(defenderDiceRoll.toString());
-						System.out.println(attackerDiceRollOutput);
+						attackerdicerolloutput.add(attackerdiceroll.toString());
+						defenderdicerolloutput.add(defenderdiceroll.toString());
+						System.out.println(attackerdicerolloutput);
 
-						while (attackerDiceRoll.size() != 0 && defenderDiceRoll.size() != 0) {
-							int attackerMax = getMaxValue(attackerDiceRoll);
-							int defenderMax = getMaxValue(defenderDiceRoll);
-							if (attackerMax <= defenderMax) {
+						while (attackerdiceroll.size() != 0 && defenderdiceroll.size() != 0) {
+							int attackermax = getMaxValue(attackerdiceroll);
+							int defendermax = getMaxValue(defenderdiceroll);
+							if (attackermax <= defendermax) {
 								updateArmies(attacker);
 							} else {
 								updateArmies(defender);
 							}
 
-							attackerDiceRoll.remove(attackerDiceRoll.indexOf(attackerMax));
-							defenderDiceRoll.remove(defenderDiceRoll.indexOf(defenderMax));
-							if (attackerDice == 1)
+							attackerdiceroll.remove(attackerdiceroll.indexOf(attackermax));
+							defenderdiceroll.remove(defenderdiceroll.indexOf(defendermax));
+							if (attackerdice == 1)
 								break;
 							else
 								continue;
@@ -292,21 +245,21 @@ public class AttackController {
 								ReadingFiles.players
 										.remove(ReadingFiles.players.indexOf(defender.getOwner().getPlayerId()));
 							}
-							List<Country> newListOfCountriesAtt = ReadingFiles.playerId
+							List<Country> newlistofcountriesatt = ReadingFiles.playerId
 									.get(attacker.getOwner().getPlayerId()).getTotalCountriesOccupied();
-							newListOfCountriesAtt.add(defender);
+							newlistofcountriesatt.add(defender);
 							ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
-									.setTotalCountriesOccupied(newListOfCountriesAtt);
-							attacker.getOwner().setTotalCountriesOccupied(newListOfCountriesAtt);
-							List<Country> newListOfCountriesDef = ReadingFiles.playerId
+									.setTotalCountriesOccupied(newlistofcountriesatt);
+							attacker.getOwner().setTotalCountriesOccupied(newlistofcountriesatt);
+							List<Country> newlistofcountriesdef = ReadingFiles.playerId
 									.get(defender.getOwner().getPlayerId()).getTotalCountriesOccupied();
-							newListOfCountriesDef.remove(defender);
+							newlistofcountriesdef.remove(defender);
 							ReadingFiles.playerId.get(defender.getOwner().getPlayerId())
-									.setTotalCountriesOccupied(newListOfCountriesDef);
-							defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
+									.setTotalCountriesOccupied(newlistofcountriesdef);
+							defender.getOwner().setTotalCountriesOccupied(newlistofcountriesdef);
 							updateOwner(defender, attacker.getOwner());
-							defender.setNoOfArmies(attackerDice);
-							attacker.setNoOfArmies(attacker.getNoOfArmies()-attackerDice);
+							defender.setNoOfArmies(attackerdice);
+							attacker.setNoOfArmies(attacker.getNoOfArmies() - attackerdice);
 
 							// code for drawing a card randomly
 							if (!card) {
@@ -336,39 +289,38 @@ public class AttackController {
 							}
 						}
 					}
-					if(attacker.getOwner().getTotalCountriesOccupied().size()==getTotalCountries()) {
-						return "Player "+attacker.getOwner().getPlayerId()+" wins";
+					if (attacker.getOwner().getTotalCountriesOccupied().size() == getTotalCountries()) {
+						return "Player " + attacker.getOwner().getPlayerId() + " wins";
 					}
 					return "";
 				} else {
-					for (int i = 0; i < attackerDice; i++) {
-						attackerDiceRoll.add(rollDice());
+					for (int i = 0; i < attackerdice; i++) {
+						attackerdiceroll.add(rollDice());
 					}
-					for (int i = 0; i < defenderDice; i++) {
-						defenderDiceRoll.add(rollDice());
+					for (int i = 0; i < defenderdice; i++) {
+						defenderdiceroll.add(rollDice());
 					}
-					attackerDiceRollOutput.add(attackerDiceRoll.toString());
-					defenderDiceRollOutput.add(defenderDiceRoll.toString());
+					attackerdicerolloutput.add(attackerdiceroll.toString());
+					defenderdicerolloutput.add(defenderdiceroll.toString());
 
-					while (attackerDiceRoll.size() != 0 && defenderDiceRoll.size() != 0) {
-						int attackerMax = getMaxValue(attackerDiceRoll);
-						int defenderMax = getMaxValue(defenderDiceRoll);
-						if (attackerMax <= defenderMax) {
+					while (attackerdiceroll.size() != 0 && defenderdiceroll.size() != 0) {
+						int attackermax = getMaxValue(attackerdiceroll);
+						int defendermax = getMaxValue(defenderdiceroll);
+						if (attackermax <= defendermax) {
 							updateArmies(attacker);
 						} else {
 							updateArmies(defender);
 						}
 
-						attackerDiceRoll.remove(attackerDiceRoll.indexOf(attackerMax));
-						defenderDiceRoll.remove(defenderDiceRoll.indexOf(defenderMax));
-						if (attackerDice == 1)
+						attackerdiceroll.remove(attackerdiceroll.indexOf(attackermax));
+						defenderdiceroll.remove(defenderdiceroll.indexOf(defendermax));
+						if (attackerdice == 1)
 							break;
 						else
 							continue;
 					}
 					if (defender.getNoOfArmies() == 0) {
 						if (getMyCountries(defender.getOwner()).size() == 0) {
-							// add code to give cards to attacker
 							List<CardTypes> defcards = defender.getOwner().getPlayerCards();
 							List<CardTypes> attcards = attacker.getOwner().getPlayerCards();
 							attcards.addAll(defcards);
@@ -378,51 +330,51 @@ public class AttackController {
 							ReadingFiles.players
 									.remove(ReadingFiles.players.indexOf(defender.getOwner().getPlayerId()));
 						}
-						List<Country> newListOfCountriesAtt = ReadingFiles.playerId
+						List<Country> newlistofcountriesatt = ReadingFiles.playerId
 								.get(attacker.getOwner().getPlayerId()).getTotalCountriesOccupied();
-						newListOfCountriesAtt.add(defender);
+						newlistofcountriesatt.add(defender);
 						ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
-								.setTotalCountriesOccupied(newListOfCountriesAtt);
-						attacker.getOwner().setTotalCountriesOccupied(newListOfCountriesAtt);
-						List<Country> newListOfCountriesDef = ReadingFiles.playerId
+								.setTotalCountriesOccupied(newlistofcountriesatt);
+						attacker.getOwner().setTotalCountriesOccupied(newlistofcountriesatt);
+						List<Country> newlistofcountriesdef = ReadingFiles.playerId
 								.get(defender.getOwner().getPlayerId()).getTotalCountriesOccupied();
-						newListOfCountriesDef.remove(defender);
+						newlistofcountriesdef.remove(defender);
 						ReadingFiles.playerId.get(defender.getOwner().getPlayerId())
-								.setTotalCountriesOccupied(newListOfCountriesDef);
-						defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
+								.setTotalCountriesOccupied(newlistofcountriesdef);
+						defender.getOwner().setTotalCountriesOccupied(newlistofcountriesdef);
 						updateOwner(defender, attacker.getOwner());
-						defender.setNoOfArmies(attackerDice);
-						attacker.setNoOfArmies(attacker.getNoOfArmies()-attackerDice);
+						defender.setNoOfArmies(attackerdice);
+						attacker.setNoOfArmies(attacker.getNoOfArmies() - attackerdice);
 
 						// code for drawing a card randomly
 						if (!card) {
-								int cardnumber = (int) (Math.random() * 3 + 1);
-								List<CardTypes> newsetofcards = new ArrayList<CardTypes>();
-								if (cardnumber == 1) {
-									newsetofcards = attacker.getOwner().getPlayerCards();
-									newsetofcards.add(CardTypes.Artillery);
-									attacker.getOwner().setPlayerCards(newsetofcards);
-									ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
-											.setPlayerCards(newsetofcards);
+							int cardnumber = (int) (Math.random() * 3 + 1);
+							List<CardTypes> newsetofcards = new ArrayList<CardTypes>();
+							if (cardnumber == 1) {
+								newsetofcards = attacker.getOwner().getPlayerCards();
+								newsetofcards.add(CardTypes.Artillery);
+								attacker.getOwner().setPlayerCards(newsetofcards);
+								ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+										.setPlayerCards(newsetofcards);
 
-								} else if (cardnumber == 2) {
-									newsetofcards = attacker.getOwner().getPlayerCards();
-									newsetofcards.add(CardTypes.Cavalry);
-									attacker.getOwner().setPlayerCards(newsetofcards);
-									ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
-											.setPlayerCards(newsetofcards);
-								} else if (cardnumber == 3) {
-									newsetofcards = attacker.getOwner().getPlayerCards();
-									newsetofcards.add(CardTypes.Infantry);
-									attacker.getOwner().setPlayerCards(newsetofcards);
-									ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
-											.setPlayerCards(newsetofcards);
-								}
-								card = true;
+							} else if (cardnumber == 2) {
+								newsetofcards = attacker.getOwner().getPlayerCards();
+								newsetofcards.add(CardTypes.Cavalry);
+								attacker.getOwner().setPlayerCards(newsetofcards);
+								ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+										.setPlayerCards(newsetofcards);
+							} else if (cardnumber == 3) {
+								newsetofcards = attacker.getOwner().getPlayerCards();
+								newsetofcards.add(CardTypes.Infantry);
+								attacker.getOwner().setPlayerCards(newsetofcards);
+								ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+										.setPlayerCards(newsetofcards);
 							}
+							card = true;
+						}
 					}
-					if(attacker.getOwner().getTotalCountriesOccupied().size()==getTotalCountries()) {
-						return "Player "+attacker.getOwner().getPlayerId()+" wins";
+					if (attacker.getOwner().getTotalCountriesOccupied().size() == getTotalCountries()) {
+						return "Player " + attacker.getOwner().getPlayerId() + " wins";
 					}
 					return "";
 				}
@@ -438,7 +390,6 @@ public class AttackController {
 			return "Set the dice with the maximum value given or less";
 		}
 	}
-
 
 	public int getMaxValue(List<Integer> list) {
 		int max = list.get(0);

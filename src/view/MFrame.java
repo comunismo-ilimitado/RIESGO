@@ -124,11 +124,12 @@ public class MFrame extends JFrame implements Observer {
 		jLabel5 = new JLabel("");
 		jLabel6 = new JLabel("");
 		jPanel4.add(jLabel1);
+		jPanel4.add(jLabel6);
 		jPanel4.add(jLabel2);
 		jPanel4.add(jLabel3);
 		jPanel4.add(jLabel4);
 		jPanel4.add(jLabel5);
-		jPanel4.add(jLabel6);
+
 		jPanel3.add(jPanel4);
 
 		// lower text
@@ -233,7 +234,7 @@ public class MFrame extends JFrame implements Observer {
 	public void NotifyAll() {
 		jLabel1.setText("Turn For Player :-" + (myActionListner.currentPlayer + 1));
 		jLabel2.setText("Armies Left:- " + noArmiesLeft);
-		jLabel3.setText("Neighbours :- " + CCC);
+		jLabel3.setText("Total Armies :- " +myActionListner.getArmiesPerPlayer());
 		jLabel4.setText("DICE 1:- " + AAA);
 		jLabel5.setText("DICE 2:- " + BBB);
 		jLabel6.setText("Current Phase :-" + nextAction.getText().split(" ")[1] + " Phase");

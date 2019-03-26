@@ -58,7 +58,6 @@ public class MainControll {
 				PaintCountries();
 				
 				SetDominationView();
-				temp();
 				for (Continent val : files.ContinentNameObject.values()) {
 					System.out.println(val.getName()+" : -"+ ListToStringCountries(val.getCountries()));
 				}

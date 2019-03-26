@@ -75,8 +75,6 @@ public class MyActionListner extends Observable implements ActionListener {
 	 * This method display number of armies player can deploy
 	 */
 	public void ReinforcementPhase() {
-		controll.reinforcementController.calculateReinforcementArmies(controll.playerObjet(currentPlayer));
-		controll.frame.noArmiesLeft=controll.playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
 		changed();
 		controll.frame.ActivateAll();
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
@@ -384,6 +382,7 @@ public class MyActionListner extends Observable implements ActionListener {
 		return controll.ContinentsOccupied();
 	}
 	public int getArmiesPerPlayer() {
+		return controll.attackController.getTotalCountries(controll.playerObjet(currentPlayer));
 	}
 
 	public void changed() {

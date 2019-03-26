@@ -20,21 +20,22 @@ public class AttackController {
 	public static boolean card;
 
 	public int getTotalCountries() {
-		List<Country> list=new ArrayList<>();
+		//List<Country> list=new ArrayList<>();
+		int count=0;
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
-			list.add(entry.getValue());
+			count+=entry.getValue().getNoOfArmies();
 		}
-		return list.size();
+		return count;
 	}
 	
 	public int getTotalCountries(Player player) {
-		List<Country> list=new ArrayList<>();
+		int count=0;
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
 			if(entry.getValue().getOwner().getPlayerId()==player.getPlayerId()) {
-			list.add(entry.getValue());
-			}
+				count+=entry.getValue().getNoOfArmies();
 		}
-		return list.size();
+		}
+		return count;
 	}
 	public List<String> attackerDiceRollOutput=new ArrayList<>();
 	public List<String> defenderDiceRollOutput=new ArrayList<>();
@@ -305,6 +306,7 @@ public class AttackController {
 							defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
 							updateOwner(defender, attacker.getOwner());
 							defender.setNoOfArmies(attackerDice);
+							attacker.setNoOfArmies(attacker.getNoOfArmies()-attackerDice);
 
 							// code for drawing a card randomly
 							if (!card) {
@@ -390,6 +392,7 @@ public class AttackController {
 						defender.getOwner().setTotalCountriesOccupied(newListOfCountriesDef);
 						updateOwner(defender, attacker.getOwner());
 						defender.setNoOfArmies(attackerDice);
+						attacker.setNoOfArmies(attacker.getNoOfArmies()-attackerDice);
 
 						// code for drawing a card randomly
 						if (!card) {

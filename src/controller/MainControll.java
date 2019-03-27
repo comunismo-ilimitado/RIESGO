@@ -10,7 +10,6 @@ import model.CardTypes;
 import model.Continent;
 import model.Country;
 import model.Player;
-import view.AttackerButtons;
 import view.MFrame;
 import view.MFrame2;
 
@@ -21,7 +20,6 @@ public class MainControll {
 	Player player;
 	MyActionListner myactionlistner;
 	AttackController attackController;
-	AttackerButtons attackerButtons;
 	ReinforcementController reinforcementController;
 	FortificationController fortificationController;
 	MapValidation mapValidation;

@@ -16,7 +16,7 @@ import model.Country;
 import model.Player;
 
 /**
- * 
+ * Tests the attack controller
  * @author Navjot kaur
  *
  */
@@ -31,6 +31,10 @@ public class AttackTest
 	HashMap<Integer,Player> temp1;
 	List<Country> n_list,n_list1;
 	
+	/**
+	* Method called before each test
+	*
+	*/
 	@Before
 	public void onStart()
 	{
@@ -149,7 +153,10 @@ public class AttackTest
 		ReadingFiles.playerId.put(player2.getPlayerId(),player2);
 		
 	}
-	
+	/**
+	*Method called after each test
+	*
+	*/
 	@After
 	public void atEnd() {
 		ReadingFiles.CountryNameObject.clear();
@@ -158,36 +165,57 @@ public class AttackTest
 		ReadingFiles.playerId = temp1;
 
 	}
-	
+	/**
+	*Tests Countries of the player
+	*
+	*/
 	@Test
 	public void testGetMyCountries() {
 		assertEquals(3, attack.getMyCountries(player2).size());
 	}
 
+	/**
+	*Tests list neighbor countries of the player
+	*
+	*/
 	@Test
 	public void testGetMyNeighborsForAttack()
 	{
 		assertEquals(n_list,attack.getMyNeighborsForAttack(country1));
 	}
-	
+	/**
+	*Tests attack simulator
+	*
+	*/
 	@Test
 	public void testAttackButton()
 	{
 		assertEquals("Wrong input",attack.attackButton(country3, country6, 3,1,false));
 	}
-	
+	/**
+	*Tests attack simulator
+	*
+	*/
 	@Test
 	public void testAttackButton1()
 	{
 		assertEquals("Your country must have more than one army",attack.attackButton(country1,country2,3,1,false));
 	}
 	
+	/**
+	*Tests attack simulator
+	*
+	*/
 	@Test
 	public void testAttackButton2()
 	{
 		assertEquals("",attack.attackButton(country2,country1,3,1,true));		
 	}
 	
+	/**
+	*Tests update owner of the country
+	*
+	*/
 	@Test
 	public void testUpdateOwner()
 	{

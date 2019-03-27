@@ -10,7 +10,6 @@ import model.CardTypes;
 import model.Continent;
 import model.Country;
 import model.Player;
-import view.AttackerButtons;
 import view.MFrame;
 import view.MFrame2;
 
@@ -21,7 +20,6 @@ public class MainController {
 	Player player;
 	MyActionListner myactionlistner;
 	AttackController attackController;
-	AttackerButtons attackerButtons;
 	ReinforcementController reinforcementController;
 	FortificationController fortificationController;
 	MapValidation mapValidation;
@@ -38,7 +36,6 @@ public class MainController {
 				address = "Resources/LoadedMap.map";
 			else if (StartUpWindow.MapType == 3)
 				address = "Resources/UserMap.map";
-//			System.out.print("Selected Map : " + address);
 			files.Reads(address);
 
 			mapValidation = new MapValidation(files.CountryNameObject, files.ContinentNameObject);

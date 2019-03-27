@@ -9,7 +9,6 @@ import java.util.List;
 import model.CardTypes;
 import model.Continent;
 import model.Country;
-import model.MapVarification;
 import model.Player;
 import view.AttackerButtons;
 import view.MFrame;
@@ -25,7 +24,7 @@ public class MainControll {
 	AttackerButtons attackerButtons;
 	ReinforcementController reinforcementController;
 	FortificationController fortificationController;
-	MapVarification mapVarification;
+	MapValidation mapValidation;
 
 	@SuppressWarnings("deprecation")
 	public void Function() throws Exception {
@@ -42,9 +41,9 @@ public class MainControll {
 //			System.out.print("Selected Map : " + address);
 			files.Reads(address);
 
-			mapVarification = new MapVarification(files.CountryNameObject, files.ContinentNameObject);
-			mapVarification.CallAllMethods();
-			if (!files.errors && !mapVarification.error) {
+			mapValidation = new MapValidation(files.CountryNameObject, files.ContinentNameObject);
+			mapValidation.CallAllMethods();
+			if (!files.errors && !mapValidation.error) {
 				myactionlistner = new MyActionListner(this);
 				frame = new MFrame(myactionlistner, ReadingFiles.image);
 				reinforcementController = new ReinforcementController();

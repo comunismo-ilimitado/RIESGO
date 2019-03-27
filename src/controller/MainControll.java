@@ -178,6 +178,10 @@ public class MainControll {
 	public int PlayerNo() {
 		return files.playerId.size();
 	}
+	public int PlayerNo2() {
+		return files.playerId2.size();
+	}
+	
 
 	/**
 	 * Player object

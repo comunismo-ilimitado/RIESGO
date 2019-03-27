@@ -26,7 +26,9 @@ import view.MFrame2;
 public class ReadingFiles {
 
 	public static HashMap<Integer, Player> playerId;
-	public static boolean errors = false;
+
+	public static HashMap<Integer, Player> playerId2;
+public static boolean errors = false;
 	public static List<Integer> players;
 	public static List<String> CountriesNames, ContinentNames;
 	public static HashMap<String, Country> CountryNameObject;
@@ -150,6 +152,8 @@ public class ReadingFiles {
 				}
 
 			}
+			playerId2=(HashMap<Integer, Player>) playerId.clone();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			errors = true;

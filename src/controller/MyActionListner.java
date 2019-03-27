@@ -28,7 +28,7 @@ public class MyActionListner extends Observable implements ActionListener {
 	MainControll controll;
 	List<String> Phases;
 	String currentPhase;
-	int players = 3;
+	int players = 0;
 	public int currentPlayer = 0;
 	Country attackCountry1, attackCountry2;
 	Country fortifyCountry1, fortifyCountry2;
@@ -48,13 +48,22 @@ public class MyActionListner extends Observable implements ActionListener {
 
 	public void playerUpdate() {
 		try {
-			if (currentPlayer >= players - 1)
+			if(controll.PlayerNo2()>1) {
+			if (currentPlayer >= controll.PlayerNo2() - 1)
 				currentPlayer = 0;
 			else
 				currentPlayer++;
-			System.out.println(controll.files.playerId.get(currentPlayer));
-			System.out.println(controll.files.playerId);
-		} catch (Exception e) {
+			if(!controll.files.playerId2.containsKey(currentPlayer)) {
+				playerUpdate();
+			}
+			}else {
+				controll.frame.error("YOU WON");
+				String [] args= {""};
+				
+				StartUpWindow.main(args);
+				
+			}
+			} catch (Exception e) {
 			playerUpdate();
 		}
 	}
@@ -199,6 +208,7 @@ public class MyActionListner extends Observable implements ActionListener {
 			}
 
 			String reply = controll.attackController.attackButton(attackCountry1, attackCountry2, dice1, dice2, allout);
+System.out.println(reply);
 			if(reply.equals("Player "+currentPlayer+" wins")) {
 				controll.frame.error(reply);
 				StartUpWindow startUpWindow=new StartUpWindow();
@@ -265,7 +275,6 @@ public class MyActionListner extends Observable implements ActionListener {
 				FortificationPhase();
 			} else if (e.getActionCommand() == "Finish Fortification") {
 				controll.frame.buttonCard4.setEnabled(true);
-
 				changed();
 				currentPhase = "Finish Reinforcement";
 				controll.frame.nextAction.setText("Finish Reinforcement");

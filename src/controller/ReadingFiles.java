@@ -36,6 +36,7 @@ public static boolean errors = false;
 	public static String address = "Resources/World.map";
 	public static String image = "noimage.bmp";
 	MFrame2 frame2;
+	public static int ArmiesPerPlayer;
 
 	public ReadingFiles(MFrame2 frame2) {
 		this.frame2 = frame2;
@@ -136,7 +137,7 @@ public static boolean errors = false;
 				i = i + n - 1;
 			}
 
-			int ArmiesPerPlayer = 50 - (5 * noofplayers);
+			ArmiesPerPlayer = 50 - (5 * noofplayers);
 
 			for (int i = 0; i < noofplayers; i++) {
 				Player temp1 = playerId.get(players.get(i));

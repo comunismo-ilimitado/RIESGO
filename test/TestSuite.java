@@ -7,6 +7,7 @@ import ControllerTests.AttackTest;
 import ControllerTests.FortificationTest;
 import ControllerTests.MapValidationTest;
 import ControllerTests.ReinforcementTest;
+import ControllerTests.StartupPhaseTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({FortificationTest.class,

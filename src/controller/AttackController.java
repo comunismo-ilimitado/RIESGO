@@ -404,7 +404,7 @@ public class AttackController {
 						}
 					}
 					if (attacker.getOwner().getTotalCountriesOccupied().size() == getTotalCountries()) {
-						return "Player " + attacker.getOwner().getPlayerId() + " wins";
+						return "Player won";
 					}
 					return "";
 				}

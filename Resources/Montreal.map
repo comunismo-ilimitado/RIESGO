@@ -21,7 +21,7 @@ St-Leonard,270,120,Montreal Est,Montreal Nord,Anjou,Mercier,Rosemont,Villeray
 Mercier,325,130, Montreal Est, RDP-PAT, Anjou, St-Leonard, Rosemont, Plateau
 
 Ahuntsic,230,160,Montreal Centre-Est,Montreal Nord, Villeray,Mont-Royal,Saint-Laurent,Pierrefonds
-Villeray,265,150,Montreal Centre-Est,Ahuntsic,Montreal Nord,St-Leonard,Rosemont,Mont-ROyal,Outremont
+Villeray,265,150,Montreal Centre-Est,Ahuntsic,Montreal Nord,St-Leonard,Rosemont,Mont-Royal,Outremont
 Rosemont,290,160,Montreal Centre-Est,St-Leonard,Villeray,Mercier,Plateau,Outremont
 Plateau,300,180,Montreal Centre-Est,Mercier,Rosemont,Outremont,Ville-Marie
 Outremont,270,195,Montreal Centre-Est,Villeray,Rosemont,Plateau,Ville-Marie,NDG,Mont-Royal

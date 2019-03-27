@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import view.MFrame2;
@@ -32,16 +34,23 @@ public class MapVarification {
 	 */
 	public void BiDirectionalCheck() {
 
-		for (int i = 0; i < hashMap.size(); i++) {
-			Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
-			System.out.println(temp.getName());
-			for (int j = 0; j < temp.getNeighbors().size(); j++) {
-				if (!temp.getNeighbors().get(j).getNeighbors().contains(temp)) {
-					temp.getNeighbors().get(j).getNeighbors().add(temp);
-					arrayList2.add("BI-Directional Error --Repaired");
+		try {
+			for (int i = 0; i < hashMap.size(); i++) {
+				Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
+				int x = temp.getNeighbors().size();
+				for (int j = 0; j < x; j++) {
+					Country a = temp.getNeighbors().get(j);
+					List<Country> b = a.getNeighbors();
+					if (!b.contains(temp)) {
+						temp.getNeighbors().get(j).getNeighbors().add(temp);
+						arrayList2.add("BI-Directional Error --Repaired");
+					}
+
 				}
 
 			}
+		} catch (Exception e) {
+			arrayList.add("BI-Directional Error --NotRepaired");
 
 		}
 
@@ -150,39 +159,61 @@ public class MapVarification {
 	 * checks graph is connected or not
 	 */
 	public void GraphConnectivity() {
-		for (int i = 0; i < hashMap.size(); i++) {
-			Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
+		Country start = hashMap.get(hashMap.keySet().toArray()[0]);
+		LinkedList<Country> nexttovisit = new LinkedList<Country>();
+		HashSet<Country> visited = new HashSet<Country>();
+		nexttovisit.add(start);
 
+		while (!nexttovisit.isEmpty()) {
+			Country node = nexttovisit.remove();
+			if (visited.contains(node))
+				continue;
+			visited.add(node);
+			for (Country child : node.getNeighbors()) {
+				nexttovisit.add(child);
+
+			}
 		}
+		if(visited.size()!=hashMap.size()) {
+			arrayList.add("Error Connectivity Graph");
+		}
+		
 	}
 
-	// private void checkConnectedGraph(Country country, Set<Country> queue,
-	// Continent continent) {
-	//
-	// for (int i = 0; i < country.getNeighbors().size(); i++) {
-	//
-	// Country neighbouringTerritory = country.getNeighbors().get(i);
-	// if (continent == null && !queue.contains(neighbouringTerritory)) {
-	// queue.add(neighbouringTerritory);
-	// checkConnectedGraph(neighbouringTerritory, queue, continent);
-	// } else if (!queue.contains(neighbouringTerritory)
-	// && neighbouringTerritory.getContinent().getName() == continent.getName()
-	// && neighbouringTerritory.getNeighbors().size() != 0) {
-	// queue.add(neighbouringTerritory);
-	// checkConnectedGraph(neighbouringTerritory, queue, continent);
-	// }
-	// }
-	//
-	// }
+	public void ContinentConectivity() {
+		Country start = hashMap.get(hashMap.keySet().toArray()[0]);
+		LinkedList<Country> nexttovisit = new LinkedList<Country>();
+		HashSet<Country> visited = new HashSet<Country>();
+		HashSet<Continent> vis=new HashSet<>();
+		nexttovisit.add(start);
+
+		while (!nexttovisit.isEmpty()) {
+			Country node = nexttovisit.remove();
+			if (visited.contains(node))
+				continue;
+			visited.add(node);
+			vis.add(node.getContinent());
+			for (Country child : node.getNeighbors()) {
+				nexttovisit.add(child);
+				
+
+			}
+		}
+		if(vis.size()!=hashMap2.size()) {
+			arrayList.add("Error Connectivity Graph");
+		}
+
+	}
 
 	public void CallAllMethods() {
-		// BiDirectionalCheck();
+		GraphConnectivity();
+		ContinentConectivity();
+		BiDirectionalCheck();
 		EmptyNeighbours();
 		ContinentHaveSameCountry();
 		NoContinentIsUnused();
 		NoContinentOrCountry();
 		NotItsOwnNeighbour();
-		GraphConnectivity();
 		/*
 		 * Set<Country> countries = new HashSet<Country>();
 		 * checkConnectedGraph(hashMap.get(hashMap.keySet().toArray()[0]), countries,

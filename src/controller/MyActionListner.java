@@ -48,26 +48,26 @@ public class MyActionListner extends Observable implements ActionListener {
 
 	public void playerUpdate() {
 		try {
-			if(controll.PlayerNo2()>1) {
-			if (currentPlayer >= controll.PlayerNo2() - 1)
-				currentPlayer = 0;
-			else
-				currentPlayer++;
-			if(!controll.files.playerId2.containsKey(currentPlayer)) {
-				playerUpdate();
-			}
-			}else {
+			if (controll.PlayerNo2() > 1) {
+				if (currentPlayer >= controll.PlayerNo2() - 1)
+					currentPlayer = 0;
+				else
+					currentPlayer++;
+				if (!controll.files.playerId2.containsKey(currentPlayer)) {
+					playerUpdate();
+				}
+			} else {
 				controll.frame.error("YOU WON");
-				String [] args= {""};
-				
+				String[] args = { "" };
+
 				StartUpWindow.main(args);
-				
+				controll.frame.dispose();
+
 			}
-			} catch (Exception e) {
+		} catch (Exception e) {
 			playerUpdate();
 		}
 	}
-	
 
 	/**
 	 * This method display the armies that are not deployed
@@ -98,7 +98,7 @@ public class MyActionListner extends Observable implements ActionListener {
 	 * This method
 	 */
 	public void FortificationPhase() {
-		AttackController.card=false;
+		AttackController.card = false;
 		changed();
 		controll.frame.ActivateAll();
 		controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
@@ -129,7 +129,7 @@ public class MyActionListner extends Observable implements ActionListener {
 			} else {
 				try {
 					String test1 = controll.frame.popupText(fortifyCountry1.getNoOfArmies() - 1);
-					String message = controll.fortificationController.moveArmies(fortifyCountry1, fortifyCountry2,
+					String message = controll.playerObjet(currentPlayer).moveArmies(fortifyCountry1, fortifyCountry2,
 							Integer.parseInt(test1));
 					if (!message.equals("")) {
 						controll.frame.error(message);
@@ -163,12 +163,12 @@ public class MyActionListner extends Observable implements ActionListener {
 	 * @throws IOException
 	 */
 	public void AttackPhase(Country country) throws IOException {
-		
+
 		changed();
 		if (attackCountry1 == null) {
 			attackCountry1 = country;
 			controll.frame.ActivateAll();
-			List<Country> abc = controll.attackController.getMyNeighborsForAttack(country);
+			List<Country> abc = controll.playerObjet(currentPlayer).getMyNeighborsForAttack(country);
 			if (abc.size() < 1) {
 				controll.frame.ActivateAll();
 				attackCountry1 = null;
@@ -193,10 +193,10 @@ public class MyActionListner extends Observable implements ActionListener {
 				} else {
 					dice1 = Integer.parseInt(
 							controll.frame.popupTextNew("Enter No of Dices for player 1 --Minimum: 1 Maximum: "
-									+ controll.attackController.setNoOfDice(attackCountry1, 'A')));
+									+ controll.playerObjet(currentPlayer).setNoOfDice(attackCountry1, 'A')));
 					dice2 = Integer.parseInt(
 							controll.frame.popupTextNew("Enter No of Dices for player 2 --Minimum: 1 Maximum: "
-									+ controll.attackController.setNoOfDice(attackCountry2, 'D')));
+									+ controll.playerObjet(currentPlayer).setNoOfDice(attackCountry2, 'D')));
 				}
 			} catch (Exception e) {
 				controll.frame.error("Invalid Entry Try again");
@@ -208,18 +208,16 @@ public class MyActionListner extends Observable implements ActionListener {
 			}
 
 			String reply = controll.attackController.attackButton(attackCountry1, attackCountry2, dice1, dice2, allout);
-System.out.println(reply);
-			if(reply.equals("Player "+currentPlayer+" wins")) {
+			System.out.println(reply);
+			if (reply.equals("Player won")) {
 				controll.frame.error(reply);
-				StartUpWindow startUpWindow=new StartUpWindow();
-				String args []= {""};
+				StartUpWindow startUpWindow = new StartUpWindow();
+				String args[] = { "" };
 				startUpWindow.main(args);
-			}
-			else if (!reply.equals("")) {
+			} else if (!reply.equals("")) {
 				controll.frame.error(reply);
 			}
-			
-			
+
 			controll.frame.AAA = controll.attackController.attackerdicerolloutput.toString();
 			controll.frame.BBB = controll.attackController.defenderdicerolloutput.toString();
 			changed();
@@ -231,8 +229,8 @@ System.out.println(reply);
 			controll.OnlyNeeded(controll.playerObjet(currentPlayer).getTotalCountriesOccupied());
 			controll.RefreshButtons();
 			controll.PaintCountries();
-			boolean result=controll.playerObjet(currentPlayer).canAttack(controll.playerObjet(currentPlayer));
-			if(!result) {
+			boolean result = controll.playerObjet(currentPlayer).canAttack(controll.playerObjet(currentPlayer));
+			if (!result) {
 				controll.frame.buttonCard4.setEnabled(false);
 				changed();
 				currentPhase = "Finish Fortification";
@@ -241,7 +239,6 @@ System.out.println(reply);
 				fortifyCountry2 = null;
 				FortificationPhase();
 			}
-
 
 		} else {
 			attackCountry1 = null;
@@ -311,7 +308,7 @@ System.out.println(reply);
 				controll.frame.error("No Card Of this Type");
 			}
 		} else if (e.getActionCommand().equals("Exchange Cards")) {
-			String answer = controll.reinforcementController.exchangeCards(cardTypesList,
+			String answer = controll.playerObjet(currentPlayer).exchangeCards(cardTypesList,
 					controll.playerObjet(currentPlayer));
 			if (answer == "") {
 				cardTypesList.clear();

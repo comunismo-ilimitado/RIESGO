@@ -31,7 +31,7 @@ public class ReinforcementTest {
 	Country country1, country2, country3, country4, country5, country6, country7;
 	Continent continent1, continent2;
 	HashMap<String, Continent> temp;
-	List<CardTypes> list1, list2, list3, list4;
+	List<CardTypes> list1,list2,list3,list4;
 
 	/**
 	 * creates all objects necessary
@@ -74,16 +74,18 @@ public class ReinforcementTest {
 		country5.setCountryId(51);
 		country5.setName("Iran");
 		country5.setContinent(continent2);
+		
 
 		country6.setContinentId(6);
 		country6.setCountryId(61);
 		country6.setName("Canada");
 		country6.setContinent(continent2);
-
+		
 		country7.setContinentId(7);
 		country7.setCountryId(71);
 		country7.setName("Egypt");
 		country7.setContinent(continent2);
+		
 
 		List<Country> n_list = new ArrayList<Country>();
 		n_list.add(country1);
@@ -105,13 +107,13 @@ public class ReinforcementTest {
 		n_list3.add(country2);
 		n_list3.add(country3);
 		n_list3.add(country4);
-
-		// list of cards a player has
+		
+		//list of cards a player has
 		List<CardTypes> listp1 = new ArrayList<>();
 		listp1.add(CardTypes.Infantry);
 		listp1.add(CardTypes.Cavalry);
 		listp1.add(CardTypes.Artillery);
-
+		
 		List<CardTypes> listp2 = new ArrayList<>();
 		listp2.add(CardTypes.Artillery);
 		listp2.add(CardTypes.Cavalry);
@@ -119,23 +121,23 @@ public class ReinforcementTest {
 		listp2.add(CardTypes.Infantry);
 		listp2.add(CardTypes.Infantry);
 		listp2.add(CardTypes.Cavalry);
-
-		// temp list of cards
+		
+		//temp list of cards
 		list1 = new ArrayList<>();
 		list1.add(CardTypes.Artillery);
 		list1.add(CardTypes.Cavalry);
 		list1.add(CardTypes.Infantry);
-
+		
 		list2 = new ArrayList<>();
 		list2.add(CardTypes.Artillery);
 		list2.add(CardTypes.Artillery);
 		list2.add(CardTypes.Artillery);
-
+		
 		list3 = new ArrayList<>();
 		list3.add(CardTypes.Artillery);
 		list3.add(CardTypes.Cavalry);
 		list3.add(CardTypes.Artillery);
-
+		
 		list4 = new ArrayList<>();
 		list4.add(CardTypes.Artillery);
 		list4.add(CardTypes.Cavalry);
@@ -174,7 +176,7 @@ public class ReinforcementTest {
 		country4.setNoOfArmies(2);
 		country4.setPlayer(player1);
 		country4.setContinent(continent1);
-
+		
 		country6.setPlayer(player2);
 		country7.setPlayer(player2);
 		country5.setPlayer(player2);
@@ -188,6 +190,7 @@ public class ReinforcementTest {
 		continent2.setName("Africa");
 		continent2.setCountries(n_list2);
 		continent2.setControlValue(5);
+		
 
 		ReadingFiles.CountryNameObject = new HashMap<>();
 		ReadingFiles.ContinentNameObject = new HashMap<>();
@@ -285,54 +288,43 @@ public class ReinforcementTest {
 		assertEquals(null, reinforcement.endReinforcementCheck(player1));
 
 	}
-
-	/**
-	 * Tests Exchange Cards
-	 */
+	
 	@Test
-	public void testExchangeCards() {
-		assertEquals("", reinforcement.exchangeCards(list1, player1));
+	public void testExchangeCards()
+	{
+		assertEquals("",reinforcement.exchangeCards(list1, player1));
 	}
-
-	/**
-	 * Tests Exchange Cards
-	 */
+	
 	@Test
-	public void testExchangeCards1() {
-		assertEquals("", reinforcement.exchangeCards(list2, player1));
+	public void testExchangeCards1()
+	{
+		assertEquals("",reinforcement.exchangeCards(list2, player1));
 	}
-
-	/**
-	 * Tests Exchange Cards
-	 */
+	
 	@Test
-	public void testExchangeCards2() {
-		assertEquals("Cannot exchange these cards for armies.So, select 3 cards of the same type or all unique",
-				reinforcement.exchangeCards(list3, player1));
+	public void testExchangeCards2()
+	{
+		assertEquals("Cannot exchange these cards for armies.So, select 3 cards of the same type or all unique",reinforcement.exchangeCards(list3, player1));
 	}
-
-	/**
-	 * Tests Exchange Cards
-	 */
+	
 	@Test
-	public void testExchangeCards3() {
-		assertEquals("Select exactly 3 cards of the same type or all unique",
-				reinforcement.exchangeCards(list4, player1));
+	public void testExchangeCards3()
+	{
+		assertEquals("Select exactly 3 cards of the same type or all unique",reinforcement.exchangeCards(list4, player1));
 	}
-
-	/**
-	 * Tests if player has more cards
-	 */
+	
 	@Test
-	public void testHasMoreCards() {
+	public void testHasMoreCards()
+	{
 		assertTrue(reinforcement.hasMoreCards(player2));
 	}
-
-	/**
-	 * Tests if player has more cards
-	 */
+	
 	@Test
-	public void testHasMoreCards1() {
+	public void testHasMoreCards1()
+	{
 		assertFalse(reinforcement.hasMoreCards(player1));
 	}
+	
+
+
 }

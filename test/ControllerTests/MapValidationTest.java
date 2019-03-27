@@ -150,6 +150,10 @@ public class MapValidationTest {
 		assertEquals(true, map.getString().contains("MULTIPLE CONTINENTS HAVE SAME COUNTRIES"));
 	}
 	
+	/**
+	*Tests graph connectivity of the map
+	*
+	*/
 	@Test
 	public void testGraphConnectivity()
 	{
@@ -157,6 +161,10 @@ public class MapValidationTest {
 		assertEquals(false,map.getString().contains("Error Connectivity Graph"));
 	}
 	
+	/**
+	*Tests graph connectivity of the map
+	*
+	*/
 	@Test
 	public void testGraphConnectivity1()
 	{
@@ -168,6 +176,10 @@ public class MapValidationTest {
 		assertEquals(true,map.getString().contains("Error Connectivity Graph"));
 	}
 	
+	/**
+	*Tests continents are connected or not
+	*
+	*/
 	@Test
 	public void testContinentConnectivity()
 	{
@@ -176,6 +188,10 @@ public class MapValidationTest {
 		assertEquals(true,map.getString().contains("Error Connectivity Graph"));
 	}
 	
+	/**
+	*Tests country does not have any neighbor
+	*
+	*/
 	@Test
 	public void testEmptyNeighbours()
 	{

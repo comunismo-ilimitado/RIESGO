@@ -12,7 +12,8 @@ import ControllerTests.ReinforcementTest;
 @SuiteClasses({FortificationTest.class,
 	MapValidationTest.class,
 	ReinforcementTest.class,
-	AttackTest.class
+	AttackTest.class,
+	StartupPhaseTest.class
 	
 })
 

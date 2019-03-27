@@ -287,7 +287,7 @@ public class AttackController {
 								attcards.addAll(defcards);
 								attacker.getOwner().setPlayerCards(attcards);
 								ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(attcards);
-								ReadingFiles.playerId.remove(elimination.getPlayerId());
+								ReadingFiles.playerId2.remove(elimination.getPlayerId());
 								ReadingFiles.players
 										.remove(ReadingFiles.players.indexOf(elimination.getPlayerId()));
 							}
@@ -372,7 +372,7 @@ public class AttackController {
 								attcards.addAll(defcards);
 								attacker.getOwner().setPlayerCards(attcards);
 								ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(attcards);
-								ReadingFiles.playerId.remove(elimination.getPlayerId());
+								ReadingFiles.playerId2.remove(elimination.getPlayerId());
 								ReadingFiles.players
 										.remove(ReadingFiles.players.indexOf(elimination.getPlayerId()));
 						}

@@ -266,6 +266,10 @@ public class ReinforcementTest {
 		assertEquals("", reinforcement.addarmies(country1));
 	}
 
+	/**
+	*Tests add armies method
+	*
+	*/
 	@Test
 	public void test1AddArmies() {
 		assertEquals("NO ARMIES LEFT, PLEASE CLICK FINISH REINFORCEMENT", reinforcement.addarmies(country6));
@@ -290,36 +294,61 @@ public class ReinforcementTest {
 
 	}
 	
+	/**
+	*Tests Excahnge of cards
+	*
+	*/
 	@Test
 	public void testExchangeCards()
 	{
 		assertEquals("",reinforcement.exchangeCards(list1, player1));
 	}
 	
+	/**
+	*Tests Excahnge of cards
+	*
+	*/
 	@Test
 	public void testExchangeCards1()
 	{
 		assertEquals("",reinforcement.exchangeCards(list2, player1));
 	}
 	
+	/**
+	*Tests Excahnge of cards
+	*
+	*/
 	@Test
 	public void testExchangeCards2()
 	{
 		assertEquals("Cannot exchange these cards for armies and select atleast 3 cards",reinforcement.exchangeCards(list3, player1));
 	}
 	
+	
+	/**
+	*Tests Excahnge of cards
+	*
+	*/
 	@Test
 	public void testExchangeCards3()
 	{
 		assertEquals("Select 3 cards of the same type or all unique",reinforcement.exchangeCards(list4, player1));
 	}
 	
+	/**
+	*Tests if player has more cards or not
+	*
+	*/
 	@Test
 	public void testHasMoreCards()
 	{
 		assertTrue(reinforcement.hasMoreCards(player2));
 	}
 	
+	/**
+	*Tests if player has more cards or not
+	*
+	*/
 	@Test
 	public void testHasMoreCards1()
 	{

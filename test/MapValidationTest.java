@@ -7,9 +7,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import controller.MapValidation;
 import model.Continent;
 import model.Country;
-import model.MapVarification;
 
 /**
  * This class tests the map validations
@@ -18,7 +18,7 @@ import model.MapVarification;
  *
  */
 public class MapValidationTest {
-	MapVarification map;
+	MapValidation map;
 	Country country1, country2, country3, country4, country5;
 	List<Country> n_list, n_list1, n_list2, n_list3;
 	Continent continent1, continent2, continent3;
@@ -104,7 +104,7 @@ public class MapValidationTest {
 		continents.put("Asia", continent1);
 		continents.put("Africa", continent1);
 
-		map = new MapVarification(countries, continents);
+		map = new MapValidation(countries, continents);
 	}
 
 	/**

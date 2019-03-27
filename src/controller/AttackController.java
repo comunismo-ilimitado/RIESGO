@@ -396,8 +396,6 @@ public class AttackController {
 			} else {
 				if (attacker.getNoOfArmies() <= 1)
 					return "Your country must have more than one army";
-				else if (defender.getNoOfArmies() <= 1)
-					return "Please a country with more than one army to attack";
 				else
 					return "Wrong input";
 			}

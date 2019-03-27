@@ -254,12 +254,15 @@ public class MyActionListner extends Observable implements ActionListener {
 				if (controller.playerObjet(currentPlayer).getPlayerArmiesNotDeployed() > 0) {
 					controller.frame.error("Connot End Reinforcement Untill All armies are deployed");
 				} else {
+					cardTypesList.clear();
 					controller.frame.buttonCard4.setEnabled(false);
 					currentPhase = "Finish Attack";
 					controller.frame.nextAction.setText("Finish Attack");
 					changed();
 					attackCountry1 = null;
 					attackCountry2 = null;
+					cardTypesList.clear();
+					controller.frame.jLabeCardl.setText(cardTypesList.toString());
 				}
 
 			} else if (e.getActionCommand() == "Finish Attack") {
@@ -269,12 +272,16 @@ public class MyActionListner extends Observable implements ActionListener {
 				controller.frame.nextAction.setText("Finish Fortification");
 				fortifyCountry1 = null;
 				fortifyCountry2 = null;
+				cardTypesList.clear();
+				controller.frame.jLabeCardl.setText(cardTypesList.toString());
 				FortificationPhase();
 			} else if (e.getActionCommand() == "Finish Fortification") {
 				controller.frame.buttonCard4.setEnabled(true);
 				changed();
 				currentPhase = "Finish Reinforcement";
 				controller.frame.nextAction.setText("Finish Reinforcement");
+				cardTypesList.clear();
+				controller.frame.jLabeCardl.setText(cardTypesList.toString());
 				ReinforcementPhase();
 			}
 		} else if (e.getActionCommand().split(" ")[0].equals("Infantry")) {
@@ -314,7 +321,7 @@ public class MyActionListner extends Observable implements ActionListener {
 				cardTypesList.clear();
 				controller.frame.jLabeCardl.setText(cardTypesList.toString());
 				controller.frame.noArmiesLeft = controller.playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
-
+			
 			} else {
 				controller.frame.error("Invalid Cards Selected");
 				cardTypesList.clear();

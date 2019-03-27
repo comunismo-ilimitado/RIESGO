@@ -23,13 +23,11 @@ public class AttackController {
 	public List<String> attackerdicerolloutput = new ArrayList<>();
 	public List<String> defenderdicerolloutput = new ArrayList<>();
 
-
 	/**
 	 * Gets list of total number of countries
 	 * 
 	 */
 	public int getTotalCountries() {
-		// List<Country> list=new ArrayList<>();
 		int count = 0;
 		for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
 			count += entry.getValue().getNoOfArmies();
@@ -121,24 +119,16 @@ public class AttackController {
 	 */
 	public List<Country> getMyNeighborsForAttack(Country country) {
 		List<Country> neighbors = country.getNeighbors();
-		// int total = neighbors.size();
 		List<Country> temp = new ArrayList<Country>();
 		for (int i = 0; i < neighbors.size(); i++) {
 			try {
-			if (neighbors.get(i).getOwner().getPlayerId() == country.getOwner().getPlayerId()) {
-				temp.add(neighbors.get(i));
-			}}catch (Exception e) {
-				// TODO: handle exception
+				if (neighbors.get(i).getOwner().getPlayerId() == country.getOwner().getPlayerId()) {
+					temp.add(neighbors.get(i));
+				}
+			} catch (Exception e) {
 			}
-//			if (neighbors.get(i).getNoOfArmies() < 2)
-//				temp.add(neighbors.get(i));
 		}
-		/*
-		 * for(int i=0;i<temp.size();i++) {
-		 * neighbors.remove(neighbors.indexOf(temp.get(i))); }
-		 *
-		 *
-		 */ neighbors.removeAll(temp);
+		neighbors.removeAll(temp);
 		return neighbors;
 	}
 
@@ -188,7 +178,6 @@ public class AttackController {
 			} else
 				return 0;
 		} catch (Exception e) {
-			// TODO: handle exception
 			return 0;
 		}
 	}
@@ -265,7 +254,7 @@ public class AttackController {
 						}
 						if (defender.getNoOfArmies() == 0) {
 							Player elimination = defender.getOwner();
-							
+
 							List<Country> newlistofcountriesatt = ReadingFiles.playerId
 									.get(attacker.getOwner().getPlayerId()).getTotalCountriesOccupied();
 							newlistofcountriesatt.add(defender);
@@ -288,10 +277,8 @@ public class AttackController {
 								attacker.getOwner().setPlayerCards(attcards);
 								ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(attcards);
 								ReadingFiles.playerId2.remove(elimination.getPlayerId());
-								ReadingFiles.players
-										.remove(ReadingFiles.players.indexOf(elimination.getPlayerId()));
+								ReadingFiles.players.remove(ReadingFiles.players.indexOf(elimination.getPlayerId()));
 							}
-							// code for drawing a card randomly
 							if (!card) {
 								int cardnumber = (int) (Math.random() * 3 + 1);
 								List<CardTypes> newsetofcards = new ArrayList<CardTypes>();
@@ -367,16 +354,14 @@ public class AttackController {
 						defender.setNoOfArmies(attackerdice);
 						attacker.setNoOfArmies(attacker.getNoOfArmies() - attackerdice);
 						if (getMyCountries(elimination).size() == 0) {
-								List<CardTypes> defcards = elimination.getPlayerCards();
-								List<CardTypes> attcards = attacker.getOwner().getPlayerCards();
-								attcards.addAll(defcards);
-								attacker.getOwner().setPlayerCards(attcards);
-								ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(attcards);
-								ReadingFiles.playerId2.remove(elimination.getPlayerId());
-								ReadingFiles.players
-										.remove(ReadingFiles.players.indexOf(elimination.getPlayerId()));
+							List<CardTypes> defcards = elimination.getPlayerCards();
+							List<CardTypes> attcards = attacker.getOwner().getPlayerCards();
+							attcards.addAll(defcards);
+							attacker.getOwner().setPlayerCards(attcards);
+							ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(attcards);
+							ReadingFiles.playerId2.remove(elimination.getPlayerId());
+							ReadingFiles.players.remove(ReadingFiles.players.indexOf(elimination.getPlayerId()));
 						}
-						// code for drawing a card randomly
 						if (!card) {
 							int cardnumber = (int) (Math.random() * 3 + 1);
 							List<CardTypes> newsetofcards = new ArrayList<CardTypes>();

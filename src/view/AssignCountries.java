@@ -9,7 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import controller.MainControll;
+import controller.MainController;
 
 public class AssignCountries {
 
@@ -33,7 +33,7 @@ public class AssignCountries {
 				Frame1.dispose();
 
 				try {
-					MainControll controll = new MainControll();
+					MainController controll = new MainController();
 					controll.Function();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block

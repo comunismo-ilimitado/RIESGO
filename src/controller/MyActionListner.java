@@ -76,6 +76,8 @@ public class MyActionListner extends Observable implements ActionListener {
 	 *            object
 	 */
 	public void ReinforcementPhase2(Country country) {
+		cardTypesList.clear();
+		controller.frame.jLabeCardl.setText(cardTypesList.toString());
 		// controll.AddArmies(currentPlayer);
 		String message = controller.playerObjet(currentPlayer).addarmies(country);
 		controller.frame.noArmiesLeft = controller.playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
@@ -88,6 +90,10 @@ public class MyActionListner extends Observable implements ActionListener {
 	 * This method display number of armies player can deploy
 	 */
 	public void ReinforcementPhase() {
+		controller.frame.buttonCard4.setEnabled(true);
+		controller.frame.buttonCard3.setEnabled(true);
+		controller.frame.buttonCard2.setEnabled(true);
+		controller.frame.buttonCard1.setEnabled(true);
 		changed();
 		controller.frame.ActivateAll();
 		controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
@@ -113,7 +119,8 @@ public class MyActionListner extends Observable implements ActionListener {
 	 * @throws IOException
 	 */
 	public void FortificationPhase2(Country country) throws IOException {
-
+		cardTypesList.clear();
+		controller.frame.jLabeCardl.setText(cardTypesList.toString());
 		if (fortifyCountry1 == null) {
 			fortifyCountry1 = country;
 			controller.frame.CCC = controller.NeighboursList(country);
@@ -163,7 +170,8 @@ public class MyActionListner extends Observable implements ActionListener {
 	 * @throws IOException
 	 */
 	public void AttackPhase(Country country) throws IOException {
-
+		cardTypesList.clear();
+		controller.frame.jLabeCardl.setText(cardTypesList.toString());
 		changed();
 		if (attackCountry1 == null) {
 			attackCountry1 = country;
@@ -253,9 +261,14 @@ public class MyActionListner extends Observable implements ActionListener {
 			if (e.getActionCommand() == "Finish Reinforcement") {
 				if (controller.playerObjet(currentPlayer).getPlayerArmiesNotDeployed() > 0) {
 					controller.frame.error("Connot End Reinforcement Untill All armies are deployed");
+					cardTypesList.clear();
+					controller.frame.jLabeCardl.setText(cardTypesList.toString());
 				} else {
 					cardTypesList.clear();
 					controller.frame.buttonCard4.setEnabled(false);
+					controller.frame.buttonCard3.setEnabled(false);
+					controller.frame.buttonCard2.setEnabled(false);
+					controller.frame.buttonCard1.setEnabled(false);
 					currentPhase = "Finish Attack";
 					controller.frame.nextAction.setText("Finish Attack");
 					changed();
@@ -263,10 +276,15 @@ public class MyActionListner extends Observable implements ActionListener {
 					attackCountry2 = null;
 					cardTypesList.clear();
 					controller.frame.jLabeCardl.setText(cardTypesList.toString());
+					cardTypesList.clear();
+					controller.frame.jLabeCardl.setText(cardTypesList.toString());
 				}
 
 			} else if (e.getActionCommand() == "Finish Attack") {
 				controller.frame.buttonCard4.setEnabled(false);
+				controller.frame.buttonCard3.setEnabled(false);
+				controller.frame.buttonCard2.setEnabled(false);
+				controller.frame.buttonCard1.setEnabled(false);
 				changed();
 				currentPhase = "Finish Fortification";
 				controller.frame.nextAction.setText("Finish Fortification");
@@ -275,14 +293,21 @@ public class MyActionListner extends Observable implements ActionListener {
 				cardTypesList.clear();
 				controller.frame.jLabeCardl.setText(cardTypesList.toString());
 				FortificationPhase();
+				cardTypesList.clear();
+				controller.frame.jLabeCardl.setText(cardTypesList.toString());
 			} else if (e.getActionCommand() == "Finish Fortification") {
 				controller.frame.buttonCard4.setEnabled(true);
+				controller.frame.buttonCard3.setEnabled(true);
+				controller.frame.buttonCard2.setEnabled(true);
+				controller.frame.buttonCard1.setEnabled(true);
 				changed();
 				currentPhase = "Finish Reinforcement";
 				controller.frame.nextAction.setText("Finish Reinforcement");
 				cardTypesList.clear();
 				controller.frame.jLabeCardl.setText(cardTypesList.toString());
 				ReinforcementPhase();
+				cardTypesList.clear();
+				controller.frame.jLabeCardl.setText(cardTypesList.toString());
 			}
 		} else if (e.getActionCommand().split(" ")[0].equals("Infantry")) {
 			int no = Integer.parseInt(e.getActionCommand().split(" ")[1]);

@@ -216,6 +216,7 @@ public class AttackController {
 	 * @return string which player has won
 	 */
 	public String attackButton(Country attacker, Country defender, int attackerdice, int defenderdice, boolean allout) {
+		try {
 		if (attackerdice <= setNoOfDice(attacker, 'A') && defenderdice <= setNoOfDice(defender, 'D')) {
 			if (attacker.getNoOfArmies() >= 2 && defender.getNoOfArmies() >= 1) {
 				attackerdiceroll = new ArrayList<Integer>();
@@ -402,6 +403,10 @@ public class AttackController {
 		} else {
 			return "Set the dice with the maximum value given or less";
 		}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "Invalid Try Again";
 	}
 
 	/**

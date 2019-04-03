@@ -39,16 +39,16 @@ public class FortificationController {
 	 */
 	public boolean hasPathBFS2(Country source, Country destination) {
 		LinkedList<Country> nexttovisit = new LinkedList<Country>();
-		HashSet<Country> visited = new HashSet<Country>();
+		HashSet<String> visited = new HashSet<String>();
 		nexttovisit.add(source);
 		while (!nexttovisit.isEmpty()) {
 			Country node = nexttovisit.remove();
-			if (node.equals(destination)) {
+			if (node.getName().equals(destination.getName())) {
 				return true;
 			}
-			if (visited.contains(node))
+			if (visited.contains(node.getName()))
 				continue;
-			visited.add(node);
+			visited.add(node.getName());
 			for (Country child : node.getNeighbors()) {
 				if (child.getOwner().getPlayerId() == node.getOwner().getPlayerId()) {
 					nexttovisit.add(child);

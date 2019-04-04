@@ -45,6 +45,7 @@ public class SelectNoOfPlayers {
 	 * interface
 	 */
 	public static void assignCountries() {
+		System.out.println(SelectMap.NoOfGames+","+SelectMap.NoOfTurns);
 		Frame1 = new JFrame("Map");
 		Frame1.setSize(500, 500);
 

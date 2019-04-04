@@ -60,7 +60,7 @@ public class GameStartWindow {
 			public void actionPerformed(ActionEvent arg0) {
 				window.dispose();
 				GameMode=2;
-			}
+				SelectMap Map = new SelectMap();			}
 		});
 
 		resume_button.addActionListener(new ActionListener() {

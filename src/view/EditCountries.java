@@ -95,7 +95,6 @@ public class EditCountries {
 			public void actionPerformed(ActionEvent arg0) {
 				MapFrame.dispose();
 				SelectNoOfPlayers.assignCountries();
-
 			}
 		});
 

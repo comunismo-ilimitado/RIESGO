@@ -11,18 +11,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import controller.MainController;
+import controller.Tournament;
 
 public class SelectPlayerStrategies {
 
 //	private static JComboBox PNumberJCombo;
-	private  JButton ok_button;
-	private  JFrame frame;
-	private static  ArrayList<String> strategy_selected = new ArrayList<>();
+	private JButton ok_button;
+	private JFrame frame;
+	private static ArrayList<String> strategy_selected = new ArrayList<>();
 	ArrayList<JLabel> jlabel1 = new ArrayList<>();
 	ArrayList<JComboBox> jcombo_array = new ArrayList<>();
 
 	String[] single = { "Human", "Agressive", "Benevolent", "Random", "Cheater" };
-	String[] tournament = {  "Agressive", "Benevolent", "Random", "Cheater" };
+	String[] tournament = { "Agressive", "Benevolent", "Random", "Cheater" };
 
 	public SelectPlayerStrategies() {
 		setup();
@@ -34,12 +35,11 @@ public class SelectPlayerStrategies {
 		frame.setSize(500, SelectNoOfPlayers.NumberOfPlayers * 70 + 100);
 
 		String[] list = null;
-		if(GameStartWindow.GameMode==2)
-				list=tournament;
-		else 
-		list=single;
-	
-		     
+		if (GameStartWindow.GameMode == 2)
+			list = tournament;
+		else
+			list = single;
+
 		for (int i = 0, j = 10; i < SelectNoOfPlayers.NumberOfPlayers; i++, j += 50) {
 			jlabel1.add(new JLabel("Player" + (i + 1) + ":"));
 			jlabel1.get(i).setBounds(10, j, 250, 50);
@@ -66,14 +66,19 @@ public class SelectPlayerStrategies {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				// System.out.print("returns" + NumberOfPlayers);
 				for (int i = 0, j = 10; i < SelectNoOfPlayers.NumberOfPlayers; i++, j += 50) {
-					strategy_selected.add((String) jcombo_array.get(i).getSelectedItem());// = Integer.parseInt((String) PNumberJCombo.getSelectedItem());
+					strategy_selected.add((String) jcombo_array.get(i).getSelectedItem());// = Integer.parseInt((String)
+																							// PNumberJCombo.getSelectedItem());
 				}
 
 				frame.dispose();
 
+				if (GameStartWindow.GameMode == 2) {
+					Tournament temp= new Tournament();
+				}
+				else {
 				try {
 					MainController controll = new MainController();
 					controll.Function();
@@ -84,13 +89,14 @@ public class SelectPlayerStrategies {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				}
 			}
 
 		});
 	}
-	
-	public static ArrayList<String> getStrategies(){
-	 return strategy_selected;
+
+	public static ArrayList<String> getStrategies() {
+		return strategy_selected;
 	}
 
 }

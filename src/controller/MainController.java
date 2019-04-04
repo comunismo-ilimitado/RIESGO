@@ -29,14 +29,18 @@ public class MainController {
 		try {
 			frame2 = new MFrame2();
 			files = new ReadingFiles(frame2);
+			System.out.println("MapTyep:"+SelectMapType.MapType);
 			String address = "Resources/World.map";
 			if (SelectMapType.MapType == 1)
-				address = "Resources/" + SelectMap.getSelectedMap() + ".map";
+				address = "Resources/" + SelectMap.getSingleModeSelectedMap() + ".map";
 			else if (SelectMapType.MapType == 2)
 				address = "Resources/LoadedMap.map";
 			else if (SelectMapType.MapType == 3)
 				address = "Resources/UserMap.map";
-			files.Reads(address);
+			if (SelectMapType.MapType <4) {
+				files.Reads(address);					
+			}				
+		
 			for(int i=0;i<ReadingFiles.playerId.size();i++) {
 				ReadingFiles.playerId.get(i).setStratergy(SelectPlayerStrategies.getStrategies().get(i));
 			}

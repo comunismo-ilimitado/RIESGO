@@ -1,7 +1,7 @@
 package controller;
 import java.util.*;
 import model.*;
-public class CheaterStrategy {
+public class CheaterStrategy implements IStrategy {
 	public void reinforce(Player player){
 		List<Country> countries = player.getMyCountries(player);
 		for(int i=0;i<countries.size();i++) {
@@ -9,6 +9,7 @@ public class CheaterStrategy {
 			player.getMyCountries(player).get(i).setNoOfArmies(countries.get(i).getNoOfArmies());
 			ReadingFiles.CountryNameObject.put(countries.get(i).getName(), countries.get(i));
 		}
+		player.setPlayerTotalArmiesNotDeployed(0);
 	}
 	
 	public void attack(Player player) {

@@ -3,10 +3,11 @@ package controller;
 import java.util.*;
 import model.*;
 
-public class AggressiveStratery {
+public class AggressiveStratery implements IStrategy {
 
 	public void reinforce(Player player) {
 		exchangeCardsStartegy(player);
+		player.calcArmiesByControlValue(player);
 		List<Country> countries = player.getMyCountries(player);
 		Country strongestcountry = player.getMyCountries(player).get(getStrongestCountry(countries));
 		strongestcountry.setNoOfArmies(strongestcountry.getNoOfArmies() + player.getPlayerArmiesNotDeployed());

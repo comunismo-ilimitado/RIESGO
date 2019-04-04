@@ -3,9 +3,10 @@ package controller;
 import java.util.*;
 import model.*;
 
-public class RandomStrategy {
+public class RandomStrategy implements IStrategy {
 	public void reinforce(Player player) {
 		exchangeCardsStartegy(player);
+		player.calcArmiesByControlValue(player);
 		List<Country> countries = player.getMyCountries(player);
 		int index = (int) (Math.random() * countries.size());
 		Country country = countries.get(index);

@@ -3,8 +3,9 @@ package controller;
 import java.util.*;
 import model.*;
 
-public class BenevolentStrategy {
+public class BenevolentStrategy implements IStrategy {
 	public void reinforce(Player player) {
+		player.calcArmiesByControlValue(player);
 		List<Country> countries = player.getMyCountries(player);
 		Country country = countries.get(getWeakestCountryIndex(countries));
 		country.setNoOfArmies(country.getNoOfArmies() + player.getPlayerArmiesNotDeployed());

@@ -13,7 +13,7 @@ import java.util.List;
 import model.Continent;
 import model.Country;
 import model.Player;
-import view.AssignCountries;
+import view.SelectNoOfPlayers;
 import view.MFrame;
 import view.MFrame2;
 
@@ -116,7 +116,7 @@ public static boolean errors = false;
 			arrayListc.add(Color.decode("#ffff00"));
 			arrayListc.add(Color.decode("#FF6600"));
 
-			int noofplayers = AssignCountries.NumberOfPlayers;
+			int noofplayers = SelectNoOfPlayers.NumberOfPlayers;
 
 			for (int i = 0; i < noofplayers; i++) {
 				Player player = new Player(i);

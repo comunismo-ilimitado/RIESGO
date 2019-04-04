@@ -37,7 +37,7 @@ public class MFrame2 {
 	public void error(String message) {
 		JOptionPane.showMessageDialog(null, message);
 		String args[] = new String[0];
-		StartUpWindow.main(args);
+		GameStartWindow.main(args);
 
 	}
 }

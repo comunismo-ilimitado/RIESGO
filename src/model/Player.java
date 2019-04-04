@@ -229,6 +229,15 @@ public class Player {
 		return attackcontroller.getMaxValue(list);
 	}
 
+	public void setStratergy(String strategy) {
+		this.strategy = strategy;
+	}
+	public String getStatergy() {
+		return strategy;
+	} 
+
+	private String strategy = "Human"; 
+
 	/**
 	 * Player name
 	 */

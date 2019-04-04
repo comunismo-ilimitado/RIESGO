@@ -39,13 +39,13 @@ public class EditContinents {
 	public EditContinents() {
 		MFrame2 frame2 = new MFrame2();
 		ReadFile = new ReadingFiles(frame2);
-		String address = "Resources/" + MapSelection.MapSelected + ".map";
+		String address = "Resources/" + SelectMap.MapSelected + ".map";
 
-		if (StartUpWindow.MapType == 4)
-			address = "Resources/" + MapSelection.MapSelected + ".map";
-		else if (StartUpWindow.MapType == 5)
+		if (SelectMapType.MapType == 4)
+			address = "Resources/" + SelectMap.MapSelected + ".map";
+		else if (SelectMapType.MapType == 5)
 			address = "Resources/LoadedMap.map";
-		else if (StartUpWindow.MapType == 6)
+		else if (SelectMapType.MapType == 6)
 			address = "Resources/UserMap.map";
 		try {
 			ReadFile.Reads(address);

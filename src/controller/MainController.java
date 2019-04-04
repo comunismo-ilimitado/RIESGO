@@ -30,14 +30,16 @@ public class MainController {
 			frame2 = new MFrame2();
 			files = new ReadingFiles(frame2);
 			String address = "Resources/World.map";
-			if (StartUpWindow.MapType == 1)
-				address = "Resources/" + MapSelection.getSelectedMap() + ".map";
-			else if (StartUpWindow.MapType == 2)
+			if (SelectMapType.MapType == 1)
+				address = "Resources/" + SelectMap.getSelectedMap() + ".map";
+			else if (SelectMapType.MapType == 2)
 				address = "Resources/LoadedMap.map";
-			else if (StartUpWindow.MapType == 3)
+			else if (SelectMapType.MapType == 3)
 				address = "Resources/UserMap.map";
 			files.Reads(address);
-
+			for(int i=0;i<ReadingFiles.playerId.size();i++) {
+				ReadingFiles.playerId.get(i).setStratergy(SelectPlayerStrategies.getStrategies().get(i));
+			}
 			mapValidation = new MapValidation(files.CountryNameObject, files.ContinentNameObject);
 			mapValidation.CallAllMethods();
 			if (!files.errors && !mapValidation.error) {

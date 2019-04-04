@@ -39,7 +39,7 @@ public class LoadSelectedMap {
 			public void actionPerformed(ActionEvent e) {
 				//jumps to new window here
 				   Frame1.dispose();
-                   AssignCountries.assignCountries();				
+                   SelectNoOfPlayers.assignCountries();				
 			}
 			
 		});

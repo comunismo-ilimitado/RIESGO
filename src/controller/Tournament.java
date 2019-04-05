@@ -42,6 +42,7 @@ public class Tournament {
 				}
 				for (int turnno = 0; turnno < SelectMap.NoOfTurns; turnno++) {
 					System.out.print("\n");
+					
 					for (int playerindex = 0; playerindex < ReadingFiles.playerId.size(); playerindex++) {
 						Player p;
 						p = ReadingFiles.playerId.get(playerindex);
@@ -70,6 +71,7 @@ public class Tournament {
 						default:
 							break;
 						}
+						
 						if (p.getMyCountries(p).size() == ReadingFiles.CountriesNames.size()) {
 							win = true;
 							break;
@@ -80,13 +82,24 @@ public class Tournament {
 					} // player
 					for (int l = 0; l < ReadingFiles.playerId.size(); l++) {
 						Player p = ReadingFiles.playerId.get(l);
-						System.out.println("turn:" + (turnno+1) + " Player:" + (p.getPlayerId() + 1) + " Strat:"
+//						try {
+//							Thread.sleep(500);
+//						} catch (InterruptedException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+						
+						System.out.print("\nturn:" + (turnno + 1) + " Player:" + (p.getPlayerId() + 1) + "  "
 								+ p.getStatergy() + " total countries:" + p.getMyCountries(p).size());
 						if (p.getMyCountries(p).size() == ReadingFiles.CountriesNames.size()) {
-							System.out.print("****Player " + p.getStatergy() + " wins!");
+							System.out.println("\n****Player " + (p.getPlayerId() + 1)+" "+ p.getStatergy() + " wins!");
 //							System.exit(0);
 							win = true;
 							break;
+						}
+						if (p.getMyCountries(p).size() ==0) {
+//							ReadingFiles.playerId.remove(p);
+						System.out.print("(Player:" + (p.getPlayerId() + 1)+"Lost!)");
 						}
 
 					}
@@ -95,7 +108,7 @@ public class Tournament {
 
 				} // turn
 				if (win == false)
-					System.out.print("****No one wins!");
+					System.out.print("\n\n****No one wins!");
 
 			} // map
 		} // game

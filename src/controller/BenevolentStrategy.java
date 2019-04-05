@@ -7,7 +7,9 @@ public class BenevolentStrategy implements IStrategy {
 	public void reinforce(Player player) {
 		player.calcArmiesByControlValue(player);
 		List<Country> countries = player.getMyCountries(player);
-		Country country = countries.get(getWeakestCountryIndex(countries));
+		Country country=null;
+		if(countries.size()>getWeakestCountryIndex(countries))
+		 country = countries.get(getWeakestCountryIndex(countries));
 		country.setNoOfArmies(country.getNoOfArmies() + player.getPlayerArmiesNotDeployed());
 		player.getMyCountries(player).get(getWeakestCountryIndex(countries)).setNoOfArmies(country.getNoOfArmies());
 		player.setPlayerTotalArmiesNotDeployed(0);
@@ -66,7 +68,9 @@ public class BenevolentStrategy implements IStrategy {
 	}
 
 	public int getWeakestCountryIndex(List<Country> countries) {
-		Country country = countries.get(0);
+		Country country=null;
+		if(countries.size()>0)
+		 country = countries.get(0);
 		int index = 0;
 		for (int i = 1; i < countries.size(); i++) {
 			if (country.getNoOfArmies() > countries.get(i).getNoOfArmies()) {

@@ -70,15 +70,15 @@ public class MainController {
 				if (resume)
 					LoadSavedGame(bufferedReader);
 
-				
-				
+
+
 				for (int i = 0; i < ReadingFiles.playerId2.size(); i++) {
 					ReadingFiles.playerId2.get(i).setStratergy(SelectPlayerStrategies.getStrategies().get(i));
 				}
 				SetButtons();
 				PaintCountries();
 				SetDominationView();
-				
+
 				myactionlistner.ReinforcementPhase();
 				repaintAndRevalidate();
 			}
@@ -96,9 +96,6 @@ public class MainController {
 		frame.SetDominationView(files.players.size());
 		updateDominationView();
 
-	}
-	public void deTest() {
-		
 	}
 
 	public void LoadSavedGame(BufferedReader bufferedReader) {
@@ -133,7 +130,7 @@ public class MainController {
 					System.out.println(country[0]);
 					Country tempCountry = files.CountryNameObject.get(country[0]);
 					System.out.println("fefe");
-					tempPlayer.addCountriesOccupied(tempCountry);					
+					tempPlayer.addCountriesOccupied(tempCountry);
 					tempCountry.setNoOfArmies(Integer.parseInt(country[1]));
 					tempCountry.setPlayer(tempPlayer);
 				}
@@ -157,7 +154,7 @@ public class MainController {
 
 	/**
 	 * Add armies
-	 * 
+	 *
 	 * @param armies
 	 */
 	public void AddArmies(int armies) {
@@ -167,7 +164,7 @@ public class MainController {
 
 	/**
 	 * Set Button of country object
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	public void SetButtons() throws IOException {
@@ -176,7 +173,7 @@ public class MainController {
 
 	/**
 	 * Refresh
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	public void RefreshButtons() throws IOException {
@@ -187,7 +184,7 @@ public class MainController {
 
 	/**
 	 * List of country names
-	 * 
+	 *
 	 * @return
 	 */
 	public List<String> countriesNames() {
@@ -204,7 +201,7 @@ public class MainController {
 
 	/**
 	 * Total countries occupied
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -214,7 +211,7 @@ public class MainController {
 
 	/**
 	 * Country object
-	 * 
+	 *
 	 * @return
 	 */
 	public HashMap<String, Country> countryObjects() {
@@ -230,7 +227,7 @@ public class MainController {
 
 	/**
 	 * Frame for countries that are to be viewed
-	 * 
+	 *
 	 * @param country
 	 */
 	public void OnlyNeeded(List<Country> country) {
@@ -239,7 +236,7 @@ public class MainController {
 
 	/**
 	 * Player Number
-	 * 
+	 *
 	 * @return
 	 */
 	public int PlayerNo() {
@@ -252,7 +249,7 @@ public class MainController {
 
 	/**
 	 * Player object
-	 * 
+	 *
 	 * @param id:
 	 *            id of the player
 	 * @return
@@ -263,7 +260,7 @@ public class MainController {
 
 	/**
 	 * Gives list of neighbors
-	 * 
+	 *
 	 * @param country:
 	 *            country whose neighbor list you want
 	 * @return result: string of neighbors
@@ -279,7 +276,7 @@ public class MainController {
 
 	/**
 	 * Changes player of the country
-	 * 
+	 *
 	 * @param countryname:
 	 *            name of the country
 	 * @throws IOException
@@ -293,7 +290,7 @@ public class MainController {
 
 	/**
 	 * Calculates Size of each country button
-	 * 
+	 *
 	 * @param pl
 	 * @return value in float
 	 */
@@ -311,7 +308,7 @@ public class MainController {
 
 	/**
 	 * Giving values to each country button
-	 * 
+	 *
 	 * @return
 	 */
 	public ArrayList<Float> CountriesPercentage() {
@@ -325,7 +322,7 @@ public class MainController {
 
 	/**
 	 * Converts user input into map file
-	 * 
+	 *
 	 * @param list:
 	 *            list of continents
 	 * @return occu: String of continents
@@ -348,7 +345,7 @@ public class MainController {
 
 	/**
 	 * Converts user input into map file
-	 * 
+	 *
 	 * @param list:
 	 *            list of countries
 	 * @return occu: String of countries
@@ -368,7 +365,7 @@ public class MainController {
 
 	/**
 	 * list of countries that are occupied
-	 * 
+	 *
 	 * @return list
 	 */
 	public ArrayList<String> ContinentsOccupied() {

@@ -15,12 +15,11 @@ import java.util.*;
 
 import model.CardTypes;
 import model.Country;
-import model.Player;
 import view.*;
 
 /**
  * This class handles events of the User Interface
- * 
+ *
  * @author pazim
  * @version 3.o
  */
@@ -72,7 +71,7 @@ public class MyActionListner extends Observable implements ActionListener {
 
 	/**
 	 * This method display the armies that are not deployed
-	 * 
+	 *
 	 * @param country:
 	 *            object
 	 */
@@ -135,7 +134,7 @@ public class MyActionListner extends Observable implements ActionListener {
 
 	/**
 	 * This method does the validations of fortification phase
-	 * 
+	 *
 	 * @param country:
 	 *            country object
 	 * @throws IOException
@@ -186,7 +185,7 @@ public class MyActionListner extends Observable implements ActionListener {
 
 	/**
 	 * This method check validations of attack phase
-	 * 
+	 *
 	 * @param country:
 	 *            object
 	 * @throws IOException

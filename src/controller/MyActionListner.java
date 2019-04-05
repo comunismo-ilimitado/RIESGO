@@ -466,6 +466,8 @@ public class MyActionListner extends Observable implements ActionListener {
 					Country tempCountry=tempPlayer.getTotalCountriesOccupied().get(j);
 					writer.write(tempCountry.getName()+"***"+tempCountry.getNoOfArmies()+"\n");
 				}
+				writer.write("----CARDS----\n");
+				
 				
 				
 			}

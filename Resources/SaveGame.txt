@@ -1,41 +1,35 @@
 Resources/Montreal.map
 ----PLAYER----
 0
-Ahuntsic***4
-La Salle***4
-Hampstead***4
-Ile Bizard***4
-Pointe-Claire***4
+Outremont***3
+NDG***3
+Verdun***3
+Hampstead***3
+Westmount***3
+Villeray***3
+Pointe St-Charles***3
+Pointe-Claire***3
+Ile Bizard***3
+Saint-Laurent***3
+St-Leonard***3
+Ahuntsic***3
+Mont-Royal***2
+Dorval***2
+----CARDS----
 ----PLAYER----
 1
-Mercier***4
-Villeray***4
-Plateau***4
-Dorval***4
-NDG***4
-----PLAYER----
-2
-Westmount***4
-Pointe St-Charles***4
-St-Leonard***4
-Ste-Anne-de-Bellevue***4
-Kirkland***4
-----PLAYER----
-3
-RDP-PAT***4
-Beaconsfield***4
-Pierrefonds***4
-Verdun***4
-Senneville***4
-----PLAYER----
-4
-Ville-Marie***5
-Lachine***5
-Mont-Royal***5
-Anjou***5
-----PLAYER----
-5
-Montreal Nord***5
-Outremont***5
-Saint-Laurent***5
-Rosemont***5
+RDP-PAT***3
+Montreal Nord***3
+Rosemont***3
+Plateau***3
+Ville-Marie***3
+Kirkland***3
+Mercier***3
+Pierrefonds***3
+Beaconsfield***3
+Senneville***3
+Lachine***3
+La Salle***3
+Ste-Anne-de-Bellevue***2
+Anjou***2
+----CARDS----

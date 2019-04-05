@@ -18,7 +18,7 @@ public class SelectPlayerStrategies {
 //	private static JComboBox PNumberJCombo;
 	private JButton ok_button;
 	private JFrame frame;
-	private static ArrayList<String> strategy_selected = new ArrayList<>();
+	public static ArrayList<String> strategy_selected = new ArrayList<>();
 	ArrayList<JLabel> jlabel1 = new ArrayList<>();
 	ArrayList<JComboBox> jcombo_array = new ArrayList<>();
 

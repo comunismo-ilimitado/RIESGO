@@ -16,6 +16,9 @@ public class Player {
 	ReinforcementController reinforcementcontroller = new ReinforcementController();
 	FortificationController fortificationcontroller = new FortificationController();
 	AttackController attackcontroller = new AttackController();
+	public AggressiveStratergy aggressiveStratergy=new AggressiveStratergy();
+	public BenevolentStrategy benevolentStrategy=new BenevolentStrategy();
+	public CheaterStrategy cheaterStrategy=new CheaterStrategy();
 
 	/**
 	 * Gets list of total number of countries
@@ -57,6 +60,10 @@ public class Player {
 		return reinforcementcontroller.exchangeCards(list, player);
 	}
 
+	public void ClearArmies() {
+		total_countries_occupied.clear();
+		countries_occupied.clear();
+	}
 	/**
 	 * this method checks for the number of armies that are not deployed
 	 *

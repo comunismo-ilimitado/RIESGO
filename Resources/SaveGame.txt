@@ -1,35 +1,40 @@
 Resources/Montreal.map
+2
+2
 ----PLAYER----
 0
-Outremont***3
-NDG***3
-Verdun***3
-Hampstead***3
-Westmount***3
-Villeray***3
-Pointe St-Charles***3
-Pointe-Claire***3
-Ile Bizard***3
-Saint-Laurent***3
-St-Leonard***3
-Ahuntsic***3
-Mont-Royal***2
-Dorval***2
-----CARDS----
-----PLAYER----
-1
-RDP-PAT***3
-Montreal Nord***3
-Rosemont***3
-Plateau***3
-Ville-Marie***3
-Kirkland***3
+Benevolent
 Mercier***3
+Mont-Royal***3
+Anjou***3
+Ahuntsic***3
+RDP-PAT***3
+Hampstead***3
+Saint-Laurent***3
+Outremont***3
 Pierrefonds***3
 Beaconsfield***3
-Senneville***3
-Lachine***3
-La Salle***3
-Ste-Anne-de-Bellevue***2
-Anjou***2
+Rosemont***3
+Montreal Nord***3
+Lachine***2
+Pointe St-Charles***2
 ----CARDS----
+[Artillery]----PLAYER----
+1
+Human
+Ile Bizard***3
+St-Leonard***3
+Kirkland***3
+Dorval***3
+NDG***3
+Plateau***3
+Ste-Anne-de-Bellevue***3
+Verdun***3
+La Salle***3
+Senneville***3
+Pointe-Claire***3
+Westmount***3
+Villeray***2
+Ville-Marie***2
+----CARDS----
+[]

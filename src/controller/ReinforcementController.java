@@ -139,7 +139,7 @@ public class ReinforcementController {
 		for (Map.Entry<String, Continent> entry : ReadingFiles.ContinentNameObject.entrySet()) {
 			List<Country> temp = entry.getValue().getCountries();
 			int counter = 0;
-			for (int i = 0; i < entry.getValue().getCountries().size(); i++) {
+ 			for (int i = 0; i < entry.getValue().getCountries().size(); i++) {
 				if (entry.getValue().getCountries().get(i).getOwner().getPlayerId() == (player.getPlayerId()))
 					counter++;
 				else

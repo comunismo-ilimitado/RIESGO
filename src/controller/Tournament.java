@@ -6,6 +6,7 @@ import java.io.IOException;
 import model.Player;
 import view.MFrame2;
 import view.SelectMap;
+import view.SelectNoOfPlayers;
 import view.SelectPlayerStrategies;
 
 public class Tournament {
@@ -29,7 +30,7 @@ public class Tournament {
 
 				System.out.println("\nMap:"+ SelectMap.TourMapList.get(mapno));
 				try {
-					ReadFile.Reads("Resources/"+SelectMap.TourMapList.get(mapno)+".map" );
+					ReadFile.Reads("Resources/"+SelectMap.TourMapList.get(mapno)+".map",SelectNoOfPlayers.NumberOfPlayers );
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

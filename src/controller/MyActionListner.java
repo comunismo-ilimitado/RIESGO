@@ -3,8 +3,10 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -19,14 +21,13 @@ import view.*;
 /**
  * This class handles events of the User Interface
  * 
- * @author pazim and bhargav
- * @version 1.o
+ * @author pazim
+ * @version 3.o
  */
 
 @SuppressWarnings("deprecation")
 public class MyActionListner extends Observable implements ActionListener {
 	boolean gotCard = false;
-
 	MFrame frame;
 	MainController controller;
 	List<String> Phases;
@@ -37,10 +38,8 @@ public class MyActionListner extends Observable implements ActionListener {
 	Country fortifyCountry1, fortifyCountry2;
 	public int cardsSelected = 0;
 	List<CardTypes> cardTypesList = new ArrayList<CardTypes>();
-
 	public MyActionListner(MainController controller) {
 		this.controller = controller;
-
 		Phases = new ArrayList<>();
 		Phases.add("Finish Reinforcement");
 		Phases.add("Finish Attack");
@@ -48,7 +47,6 @@ public class MyActionListner extends Observable implements ActionListener {
 		currentPhase = Phases.get(0);
 		players = controller.PlayerNo();
 	}
-
 	public void playerUpdate() {
 		try {
 			if (controller.PlayerNo2() > 1) {
@@ -93,14 +91,35 @@ public class MyActionListner extends Observable implements ActionListener {
 	 * This method display number of armies player can deploy
 	 */
 	public void ReinforcementPhase() {
-		controller.frame.buttonCard4.setEnabled(true);
-		controller.frame.buttonCard3.setEnabled(true);
-		controller.frame.buttonCard2.setEnabled(true);
-		controller.frame.buttonCard1.setEnabled(true);
-		changed();
-		controller.frame.ActivateAll();
-		controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
-		controller.playerObjet(currentPlayer).calculateReinforcementArmies(controller.playerObjet(currentPlayer));
+		Player pl = controller.playerObjet(currentPlayer);
+		String stratergy = pl.getStatergy().trim();
+		if (stratergy.equals("Agressive")) {
+			System.out.println(stratergy);
+			controller.frame.error(stratergy);
+		} else if (stratergy.equals("Benevolent")) {
+			pl.benevolentStrategy.reinforce(pl);
+			pl.benevolentStrategy.attack(pl);
+			pl.benevolentStrategy.fortify(pl);
+			playerUpdate();
+			ReinforcementPhase();
+		} else if (stratergy.equals("Random")) {
+			System.out.println(stratergy);
+			controller.frame.error(stratergy);
+		} else if (stratergy.equals("Cheater")) {
+			System.out.println(stratergy);
+			controller.frame.error(stratergy);
+		} else if (stratergy.equals("Human")) {
+			controller.frame.error(stratergy);
+			controller.frame.buttonCard4.setEnabled(true);
+			controller.frame.buttonCard3.setEnabled(true);
+			controller.frame.buttonCard2.setEnabled(true);
+			controller.frame.buttonCard1.setEnabled(true);
+			changed();
+			controller.frame.ActivateAll();
+			controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
+			System.out.println(controller.playerObjet(currentPlayer) + "sadsd");
+			controller.playerObjet(currentPlayer).calculateReinforcementArmies(controller.playerObjet(currentPlayer));
+		}
 	}
 
 	/**
@@ -218,7 +237,8 @@ public class MyActionListner extends Observable implements ActionListener {
 				controller.RefreshButtons();
 			}
 
-			String reply = controller.attackController.attackButton(attackCountry1, attackCountry2, dice1, dice2, allout);
+			String reply = controller.attackController.attackButton(attackCountry1, attackCountry2, dice1, dice2,
+					allout);
 			System.out.println(reply);
 			if (reply.equals("Player won")) {
 				controller.frame.error(reply);
@@ -349,7 +369,7 @@ public class MyActionListner extends Observable implements ActionListener {
 				cardTypesList.clear();
 				controller.frame.jLabeCardl.setText(cardTypesList.toString());
 				controller.frame.noArmiesLeft = controller.playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
-			
+
 			} else {
 				controller.frame.error("Invalid Cards Selected");
 				cardTypesList.clear();
@@ -453,33 +473,47 @@ public class MyActionListner extends Observable implements ActionListener {
 	public int getArmiesPerPlayer() {
 		return controller.attackController.getTotalCountries(controller.playerObjet(currentPlayer));
 	}
+
 	public void SaveGameOnExit() {
-	    try {
-	    	File file=new File("Resources/SaveGame.txt");
+		try {
+			File file = new File("Resources/SaveGame.txt");
 			FileWriter writer = new FileWriter(file);
-			writer.write(controller.files.address+"\n");
-			for(int i=0;i<controller.PlayerNo2();i++) {
-				Player tempPlayer=controller.files.playerId2.get(i);
+			writer.write(controller.files.address + "\n");
+			writer.write(controller.files.playerId.size() + "\n");
+			writer.write(controller.files.playerId2.size() + "\n");
+			for (int i = 0; i < controller.PlayerNo2(); i++) {
+				Player tempPlayer = controller.files.playerId2.get(i);
 				writer.write("----PLAYER----\n");
-				writer.write(tempPlayer.getPlayerId()+"\n");
-				for(int j=0;j<tempPlayer.getTotalCountriesOccupied().size();j++) {
-					Country tempCountry=tempPlayer.getTotalCountriesOccupied().get(j);
-					writer.write(tempCountry.getName()+"***"+tempCountry.getNoOfArmies()+"\n");
+				writer.write(tempPlayer.getPlayerId() + "\n");
+				writer.write(tempPlayer.getStatergy() + "\n");
+
+				for (int j = 0; j < tempPlayer.getTotalCountriesOccupied().size(); j++) {
+					Country tempCountry = tempPlayer.getTotalCountriesOccupied().get(j);
+					writer.write(tempCountry.getName() + "***" + tempCountry.getNoOfArmies() + "\n");
 				}
 				writer.write("----CARDS----\n");
-				
-				
-				
+				writer.write(tempPlayer.getPlayerCards().toString());
+				//
+				//
 			}
-			
+			//
 			writer.close();
+			//
+			// FileOutputStream fileOut = new FileOutputStream("Resources/employee.ser");
+			// ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			// for (int i = 0; i < controller.PlayerNo2(); i++) {
+			// Player tempPlayer = controller.files.playerId2.get(i);
+			//
+			// out.writeObject(tempPlayer);
+			// }
+			// out.close();
+			// fileOut.close();
 			System.exit(0);
-			
-		} catch (IOException e) {
+
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}  
-
+		}
 
 	}
 

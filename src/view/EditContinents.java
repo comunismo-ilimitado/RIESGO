@@ -48,7 +48,7 @@ public class EditContinents {
 		else if (SelectMapType.MapType == 6)
 			address = "Resources/UserMap.map";
 		try {
-			ReadFile.Reads(address);
+			ReadFile.Reads(address,SelectNoOfPlayers.NumberOfPlayers);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

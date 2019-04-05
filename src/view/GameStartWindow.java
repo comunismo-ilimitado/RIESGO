@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import controller.MainController;
+
 /**
  * First Paga of Start up phase Start here
  *
@@ -67,6 +69,14 @@ public class GameStartWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				MainController controller=new MainController();
+				controller.resume=true;
+				try {
+					controller.Function();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				window.dispose();
 				
 			}

@@ -49,7 +49,7 @@ public static boolean errors = false;
 	 *            location of the map file
 	 * @throws IOException
 	 */
-	public void Reads(String address) throws IOException {
+	public void Reads(String address,int noofplayers) throws IOException {
 		try {
 			CountryNameObject = new HashMap<>();
 			CountriesNames = new ArrayList<>();
@@ -117,7 +117,6 @@ public static boolean errors = false;
 			arrayListc.add(Color.decode("#ffff00"));
 			arrayListc.add(Color.decode("#FF6600"));
 
-			int noofplayers = SelectNoOfPlayers.NumberOfPlayers;
 
 			for (int i = 0; i < noofplayers; i++) {
 				Player player = new Player(i);

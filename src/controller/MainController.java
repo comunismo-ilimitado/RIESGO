@@ -1,8 +1,14 @@
 package controller;
 
 import view.*;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,47 +29,56 @@ public class MainController {
 	ReinforcementController reinforcementController;
 	FortificationController fortificationController;
 	MapValidation mapValidation;
-
+	public boolean resume = false;
 	@SuppressWarnings("deprecation")
 	public void Function() throws Exception {
 		try {
 			frame2 = new MFrame2();
 			files = new ReadingFiles(frame2);
-			System.out.println("MapTyep:"+SelectMapType.MapType);
-			String address = "Resources/World.map";
-			if (SelectMapType.MapType == 1)
-				address = "Resources/" + SelectMap.getSingleModeSelectedMap() + ".map";
-			else if (SelectMapType.MapType == 2)
-				address = "Resources/LoadedMap.map";
-			else if (SelectMapType.MapType == 3)
-				address = "Resources/UserMap.map";
-			if (SelectMapType.MapType <4) {
-				files.Reads(address);					
-			}				
-		
-			for(int i=0;i<ReadingFiles.playerId.size();i++) {
-				ReadingFiles.playerId.get(i).setStratergy(SelectPlayerStrategies.getStrategies().get(i));
+
+			FileReader fileReader = new FileReader("Resources/SaveGame.txt");
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+			if (resume) {
+				files.Reads(bufferedReader.readLine(), Integer.parseInt(bufferedReader.readLine()));
+			} else {
+				String address = "Resources/World.map";
+				if (SelectMapType.MapType == 1)
+					address = "Resources/" + SelectMap.getSingleModeSelectedMap() + ".map";
+				else if (SelectMapType.MapType == 2)
+					address = "Resources/LoadedMap.map";
+				else if (SelectMapType.MapType == 3)
+					address = "Resources/UserMap.map";
+				if (SelectMapType.MapType < 4) {
+					files.Reads(address, SelectNoOfPlayers.NumberOfPlayers);
+				}
 			}
+
 			mapValidation = new MapValidation(files.CountryNameObject, files.ContinentNameObject);
 			mapValidation.CallAllMethods();
 			if (!files.errors && !mapValidation.error) {
 				myactionlistner = new MyActionListner(this);
 				frame = new MFrame(myactionlistner, ReadingFiles.image);
-				reinforcementController = new ReinforcementController();
-				attackController = new AttackController();
-				fortificationController = new FortificationController();
+				 reinforcementController = new ReinforcementController();
+				 attackController = new AttackController();
+				 fortificationController = new FortificationController();
 				frame.noArmiesLeft = playerObjet(0).getPlayerArmiesNotDeployed();
 
 				myactionlistner.addObserver(frame);
 				frame.fun();
+				temp();
+				if (resume)
+					LoadSavedGame(bufferedReader);
+
+				
+				
+				for (int i = 0; i < ReadingFiles.playerId2.size(); i++) {
+					ReadingFiles.playerId2.get(i).setStratergy(SelectPlayerStrategies.getStrategies().get(i));
+				}
 				SetButtons();
 				PaintCountries();
-				temp();
-
 				SetDominationView();
-				for (Continent val : files.ContinentNameObject.values()) {
-					System.out.println(val.getName() + " : -" + ListToStringCountries(val.getCountries()));
-				}
+				
 				myactionlistner.ReinforcementPhase();
 				repaintAndRevalidate();
 			}
@@ -82,8 +97,53 @@ public class MainController {
 		updateDominationView();
 
 	}
-	public void write() {
+	public void deTest() {
 		
+	}
+
+	public void LoadSavedGame(BufferedReader bufferedReader) {
+		try {
+			String temp = "";
+			String Everything = "";
+			while ((temp = bufferedReader.readLine()) != null) {
+				Everything = Everything + temp + "\n";
+			}
+			files.playerId2.clear();
+			SelectPlayerStrategies.strategy_selected.clear();
+			String[] PlayersLis = Everything.trim().split("----PLAYER----");
+			for (int i = 1; i < PlayersLis.length; i++) {
+				String[] cards = PlayersLis[i].trim().split("----CARDS----");
+				String[] countryandarmies = cards[0].trim().split("\n");
+				Player tempPlayer = files.playerId.get(Integer.parseInt(countryandarmies[0]));
+				System.out.println(tempPlayer);
+				files.playerId2.put(Integer.parseInt(countryandarmies[0]), tempPlayer);
+				SelectPlayerStrategies.strategy_selected.add(countryandarmies[1]);
+				String[] arrlis = cards[1].substring(2, cards[1].length() - 1).split(",");
+				ArrayList<CardTypes> arrayList = new ArrayList<>();
+				for (int k = 0; k < arrlis.length; k++) {
+					if (arrlis[k].trim().equals(""))
+						break;
+					arrayList.add(CardTypes.valueOf(arrlis[k].trim()));
+				}
+				System.out.println(countryandarmies.length+"------>");
+				// player.setPlayerCards(arrayList);
+				tempPlayer.ClearArmies();
+				for (int j = 2; j < countryandarmies.length; j++) {
+					String[] country = countryandarmies[j].split("\\*\\*\\*");
+					System.out.println(country[0]);
+					Country tempCountry = files.CountryNameObject.get(country[0]);
+					System.out.println("fefe");
+					tempPlayer.addCountriesOccupied(tempCountry);					
+					tempCountry.setNoOfArmies(Integer.parseInt(country[1]));
+					tempCountry.setPlayer(tempPlayer);
+				}
+
+			}
+			System.out.println(files.playerId2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -96,7 +156,8 @@ public class MainController {
 	}
 
 	/**
-	 * Add armies 
+	 * Add armies
+	 * 
 	 * @param armies
 	 */
 	public void AddArmies(int armies) {
@@ -184,15 +245,16 @@ public class MainController {
 	public int PlayerNo() {
 		return files.playerId.size();
 	}
+
 	public int PlayerNo2() {
 		return files.playerId2.size();
 	}
-	
 
 	/**
 	 * Player object
 	 * 
-	 * @param id: id of the player
+	 * @param id:
+	 *            id of the player
 	 * @return
 	 */
 	public Player playerObjet(int id) {
@@ -202,7 +264,8 @@ public class MainController {
 	/**
 	 * Gives list of neighbors
 	 * 
-	 * @param country: country whose neighbor list you want
+	 * @param country:
+	 *            country whose neighbor list you want
 	 * @return result: string of neighbors
 	 */
 	public String NeighboursList(Country country) {
@@ -217,7 +280,8 @@ public class MainController {
 	/**
 	 * Changes player of the country
 	 * 
-	 * @param countryname: name of the country
+	 * @param countryname:
+	 *            name of the country
 	 * @throws IOException
 	 */
 	public void ChangePlayerCountry(String countryname) throws IOException {
@@ -236,7 +300,7 @@ public class MainController {
 	public float calculations(Player pl) {
 		try {
 			float total = files.CountryNameObject.size();
-//			System.out.println(player);
+			// System.out.println(player);
 			float player_have = pl.getTotalCountriesOccupied().size();
 			return (player_have / total) * 100;
 		} catch (Exception e) {
@@ -262,7 +326,8 @@ public class MainController {
 	/**
 	 * Converts user input into map file
 	 * 
-	 * @param list: list of continents
+	 * @param list:
+	 *            list of continents
 	 * @return occu: String of continents
 	 */
 	public String ListToStringContinent(List<Continent> list) {
@@ -284,7 +349,8 @@ public class MainController {
 	/**
 	 * Converts user input into map file
 	 * 
-	 * @param list: list of countries
+	 * @param list:
+	 *            list of countries
 	 * @return occu: String of countries
 	 */
 	public String ListToStringCountries(List<Country> list) {
@@ -316,18 +382,18 @@ public class MainController {
 	public void temp() {
 		List<CardTypes> cardTypes = new ArrayList<>();
 		cardTypes.add(CardTypes.Artillery);
-		cardTypes.add(CardTypes.Artillery);
-		cardTypes.add(CardTypes.Artillery);
-		cardTypes.add(CardTypes.Infantry);
-		cardTypes.add(CardTypes.Infantry);
-		cardTypes.add(CardTypes.Infantry);
-		cardTypes.add(CardTypes.Infantry);
-		cardTypes.add(CardTypes.Cavalry);
-		cardTypes.add(CardTypes.Cavalry);
-		cardTypes.add(CardTypes.Cavalry);
-		cardTypes.add(CardTypes.Cavalry);
-		cardTypes.add(CardTypes.Cavalry);
-		cardTypes.add(CardTypes.Cavalry);
+//		cardTypes.add(CardTypes.Artillery);
+//		cardTypes.add(CardTypes.Artillery);
+//		cardTypes.add(CardTypes.Infantry);
+//		cardTypes.add(CardTypes.Infantry);
+//		cardTypes.add(CardTypes.Infantry);
+//		cardTypes.add(CardTypes.Infantry);
+//		cardTypes.add(CardTypes.Cavalry);
+//		cardTypes.add(CardTypes.Cavalry);
+//		cardTypes.add(CardTypes.Cavalry);
+//		cardTypes.add(CardTypes.Cavalry);
+//		cardTypes.add(CardTypes.Cavalry);
+//		cardTypes.add(CardTypes.Cavalry);
 		playerObjet(0).setPlayerCards(cardTypes);
 	}
 

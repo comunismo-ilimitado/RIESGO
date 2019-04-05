@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -11,6 +13,7 @@ import java.util.*;
 
 import model.CardTypes;
 import model.Country;
+import model.Player;
 import view.*;
 
 /**
@@ -449,6 +452,33 @@ public class MyActionListner extends Observable implements ActionListener {
 
 	public int getArmiesPerPlayer() {
 		return controller.attackController.getTotalCountries(controller.playerObjet(currentPlayer));
+	}
+	public void SaveGameOnExit() {
+	    try {
+	    	File file=new File("Resources/SaveGame.txt");
+			FileWriter writer = new FileWriter(file);
+			writer.write(controller.files.address+"\n");
+			for(int i=0;i<controller.PlayerNo2();i++) {
+				Player tempPlayer=controller.files.playerId2.get(i);
+				writer.write("----PLAYER----\n");
+				writer.write(tempPlayer.getPlayerId()+"\n");
+				for(int j=0;j<tempPlayer.getTotalCountriesOccupied().size();j++) {
+					Country tempCountry=tempPlayer.getTotalCountriesOccupied().get(j);
+					writer.write(tempCountry.getName()+"***"+tempCountry.getNoOfArmies()+"\n");
+				}
+				
+				
+			}
+			
+			writer.close();
+			System.exit(0);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+
+
 	}
 
 	public void changed() {

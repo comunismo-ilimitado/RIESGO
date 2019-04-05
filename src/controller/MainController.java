@@ -52,6 +52,7 @@ public class MainController {
 				frame.fun();
 				SetButtons();
 				PaintCountries();
+				temp();
 
 				SetDominationView();
 				for (Continent val : files.ContinentNameObject.values()) {
@@ -74,6 +75,9 @@ public class MainController {
 		frame.SetDominationView(files.players.size());
 		updateDominationView();
 
+	}
+	public void write() {
+		
 	}
 
 	/**

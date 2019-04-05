@@ -75,7 +75,7 @@ public class BrowseMapFile {
 				else
 				{
 					Window.dispose();
-					StartUpWindow.MapType=5;
+					SelectMapType.MapType=5;
 					EditContinents obj= new EditContinents();
 				}
 			}
@@ -138,7 +138,7 @@ public class BrowseMapFile {
 				else
 				{
 					Window.dispose();
-					AssignCountries.assignCountries();
+					SelectNoOfPlayers.assignCountries();
 				}
 					
 			}

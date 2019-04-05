@@ -37,7 +37,7 @@ public class EditCountries {
 
 	public EditCountries() {
 		MFrame2 frame2 = new MFrame2();
-		String address = "Resources/" + MapSelection.MapSelected + ".map";
+		String address = "Resources/" + SelectMap.MapSelected + ".map";
 		if (ReadingFiles.CountryNameObject != null)
 			System.out.println("Initial list of elements: " + ReadingFiles.CountriesNames);
 		System.out.println("Initial list of elements: " + ReadingFiles.ContinentNames);
@@ -94,8 +94,7 @@ public class EditCountries {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				MapFrame.dispose();
-				AssignCountries.assignCountries();
-
+				SelectNoOfPlayers.assignCountries();
 			}
 		});
 

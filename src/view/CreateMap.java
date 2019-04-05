@@ -142,7 +142,7 @@ public class CreateMap {
 				
 	
 					assign_countries_frame.dispose();
-					StartUpWindow.MapType=6;
+					SelectMapType.MapType=6;
 					EditContinents obj= new EditContinents();
 			}
 			}
@@ -301,7 +301,7 @@ public class CreateMap {
 					JOptionPane.showMessageDialog(null, "Map successfully Created");
 					Disp();
 					assign_neighbours_frame.dispose();
-					AssignCountries.assignCountries();
+					SelectNoOfPlayers.assignCountries();
 					SaveCreatedMap SaveMapObejct = new SaveCreatedMap();
 				}
 			}

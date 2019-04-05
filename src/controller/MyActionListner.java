@@ -63,7 +63,7 @@ public class MyActionListner extends Observable implements ActionListener {
 				controller.frame.error("YOU WON");
 				String[] args = { "" };
 
-				StartUpWindow.main(args);
+				GameStartWindow.main(args);
 				controller.frame.dispose();
 
 			}
@@ -222,9 +222,9 @@ public class MyActionListner extends Observable implements ActionListener {
 			System.out.println(reply);
 			if (reply.equals("Player won")) {
 				controller.frame.error(reply);
-				StartUpWindow startUpWindow = new StartUpWindow();
+				GameStartWindow gameStartWindow = new GameStartWindow();
 				String args[] = { "" };
-				startUpWindow.main(args);
+				gameStartWindow.main(args);
 			} else if (!reply.equals("")) {
 				controller.frame.error(reply);
 			}

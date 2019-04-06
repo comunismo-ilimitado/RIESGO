@@ -12,6 +12,7 @@ public class CheaterStrategy implements IStrategy {
 			ReadingFiles.CountryNameObject.put(countries.get(i).getName(), countries.get(i));
 		}
 		player.setPlayerTotalArmiesNotDeployed(0);
+		player.setPlayerCards(null);
 	}
 
 	public void attack(Player player) {

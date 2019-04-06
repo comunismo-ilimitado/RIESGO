@@ -98,6 +98,9 @@ public class AggressiveStratery implements IStrategy {
 					player.setCardExchangeValue(player.getCardExchangeValue() + 1);
 					player.setPlayerTotalArmiesNotDeployed(
 							player.getPlayerArmiesNotDeployed() + player.getCardExchangeValue() * 5);
+					cards.remove(CardTypes.Artillery);
+					cards.remove(CardTypes.Cavalry);
+					cards.remove(CardTypes.Infantry);
 					counter = counter + 1;
 				}
 				if (cards.contains(CardTypes.Artillery)) {

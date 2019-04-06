@@ -8,11 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-
 import java.util.List;
-
 import java.util.*;
-
 import model.CardTypes;
 import model.Country;
 import model.Player;
@@ -24,7 +21,6 @@ import view.*;
  * @author pazim
  * @version 3.o
  */
-
 @SuppressWarnings("deprecation")
 public class MyActionListner extends Observable implements ActionListener {
 	boolean gotCard = false;
@@ -51,6 +47,7 @@ public class MyActionListner extends Observable implements ActionListener {
 
 	public void playerUpdate() {
 		try {
+
 			if (controller.PlayerNo2() > 1) {
 				if (currentPlayer >= controller.PlayerNo2() - 1)
 					currentPlayer = 0;
@@ -62,10 +59,8 @@ public class MyActionListner extends Observable implements ActionListener {
 			} else {
 				controller.frame.error("YOU WON");
 				String[] args = { "" };
-
 				GameStartWindow.main(args);
 				controller.frame.dispose();
-
 			}
 		} catch (Exception e) {
 			playerUpdate();
@@ -92,31 +87,67 @@ public class MyActionListner extends Observable implements ActionListener {
 	/**
 	 * This method display number of armies player can deploy
 	 */
+	public void PhaseResume(String phase) {
+		if (phase.equals("Finish Reinforcement")) {
+			ReinforcementPhase();
+		} else if (phase.equals("Finish Attack")) {
+			controller.frame.ActivateAll();
+			controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
+			endReinforcement();
+		} else if (phase.equals("Finish Fortification")) {
+			controller.frame.ActivateAll();
+			controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
+			finishAttack();
+		}
+	}
+
 	public void ReinforcementPhase() {
+		try {
+			controller.RefreshButtons();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Player pl = controller.playerObjet(currentPlayer);
+		textarea("Player Playing :- " + pl);
 		String stratergy = pl.getStatergy().trim();
 		if (stratergy.equals("Agressive")) {
+			textarea(" Reinforcement Mode");
+
 			pl.aggressiveStratergy.reinforce(pl);
+			textarea(" Attack Mode");
 			pl.aggressiveStratergy.attack(pl);
+			textarea(" Fortification Mode");
 			pl.aggressiveStratergy.fortify(pl);
 			playerUpdate();
 			changed();
 			ReinforcementPhase();
 		} else if (stratergy.equals("Benevolent")) {
+			System.out.println("player2-");
+			textarea("Benevolent Stratergy");
+			textarea(" Reinforcement Mode");
 			pl.benevolentStrategy.reinforce(pl);
+			textarea(" Attack Mode");
 			pl.benevolentStrategy.attack(pl);
+			textarea(" Fortification Mode");
 			pl.benevolentStrategy.fortify(pl);
 			playerUpdate();
 			changed();
 			ReinforcementPhase();
 		} else if (stratergy.equals("Random")) {
+			textarea(" Reinforcement Mode");
+
 			pl.randomStrategy.reinforce(pl);
+			textarea(" Attack Mode");
+
 			pl.randomStrategy.attack(pl);
+			textarea(" Fortification Mode");
 			pl.randomStrategy.fortify(pl);
 			playerUpdate();
 			changed();
 			ReinforcementPhase();
 		} else if (stratergy.equals("Cheater")) {
+			textarea("Benevolent Stratergy");
 			pl.cheaterStrategy.reinforce(pl);
 			pl.cheaterStrategy.attack(pl);
 			pl.cheaterStrategy.fortify(pl);
@@ -124,6 +155,7 @@ public class MyActionListner extends Observable implements ActionListener {
 			changed();
 			ReinforcementPhase();
 		} else if (stratergy.equals("Human")) {
+			textarea(" Reinforcement Mode");
 			controller.frame.error("Its Player:- " + (currentPlayer + 1) + " Turn");
 			controller.frame.buttonCard4.setEnabled(true);
 			controller.frame.buttonCard3.setEnabled(true);
@@ -132,7 +164,6 @@ public class MyActionListner extends Observable implements ActionListener {
 			changed();
 			controller.frame.ActivateAll();
 			controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
-			System.out.println(controller.playerObjet(currentPlayer) + "sadsd");
 			controller.playerObjet(currentPlayer).calculateReinforcementArmies(controller.playerObjet(currentPlayer));
 		}
 	}
@@ -141,6 +172,8 @@ public class MyActionListner extends Observable implements ActionListener {
 	 * This method
 	 */
 	public void FortificationPhase() {
+		textarea(" Fortification Mode");
+
 		AttackController.card = false;
 		changed();
 		controller.frame.ActivateAll();
@@ -169,7 +202,6 @@ public class MyActionListner extends Observable implements ActionListener {
 				controller.frame.error("SAME COUNTRY SELECTED");
 				fortifyCountry1 = null;
 				fortifyCountry2 = null;
-
 			} else {
 				try {
 					String test1 = controller.frame.popupText(fortifyCountry1.getNoOfArmies() - 1);
@@ -193,10 +225,8 @@ public class MyActionListner extends Observable implements ActionListener {
 					// TODO: handle exception
 					controller.frame.error("Invalid Number");
 				}
-
 			}
 		}
-
 	}
 
 	/**
@@ -292,6 +322,42 @@ public class MyActionListner extends Observable implements ActionListener {
 		}
 	}
 
+	public void endReinforcement() {
+		cardTypesList.clear();
+		controller.frame.buttonCard4.setEnabled(false);
+		controller.frame.buttonCard3.setEnabled(false);
+		controller.frame.buttonCard2.setEnabled(false);
+		controller.frame.buttonCard1.setEnabled(false);
+		currentPhase = "Finish Attack";
+		controller.frame.nextAction.setText("Finish Attack");
+		changed();
+		attackCountry1 = null;
+		attackCountry2 = null;
+		cardTypesList.clear();
+		controller.frame.jLabeCardl.setText(cardTypesList.toString());
+		cardTypesList.clear();
+		controller.frame.jLabeCardl.setText(cardTypesList.toString());
+
+	}
+
+	public void finishAttack() {
+		controller.frame.buttonCard4.setEnabled(false);
+		controller.frame.buttonCard3.setEnabled(false);
+		controller.frame.buttonCard2.setEnabled(false);
+		controller.frame.buttonCard1.setEnabled(false);
+		changed();
+		currentPhase = "Finish Fortification";
+		controller.frame.nextAction.setText("Finish Fortification");
+		fortifyCountry1 = null;
+		fortifyCountry2 = null;
+		cardTypesList.clear();
+		controller.frame.jLabeCardl.setText(cardTypesList.toString());
+		FortificationPhase();
+		cardTypesList.clear();
+		controller.frame.jLabeCardl.setText(cardTypesList.toString());
+
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -302,37 +368,39 @@ public class MyActionListner extends Observable implements ActionListener {
 					cardTypesList.clear();
 					controller.frame.jLabeCardl.setText(cardTypesList.toString());
 				} else {
-					cardTypesList.clear();
-					controller.frame.buttonCard4.setEnabled(false);
-					controller.frame.buttonCard3.setEnabled(false);
-					controller.frame.buttonCard2.setEnabled(false);
-					controller.frame.buttonCard1.setEnabled(false);
-					currentPhase = "Finish Attack";
-					controller.frame.nextAction.setText("Finish Attack");
-					changed();
-					attackCountry1 = null;
-					attackCountry2 = null;
-					cardTypesList.clear();
-					controller.frame.jLabeCardl.setText(cardTypesList.toString());
-					cardTypesList.clear();
-					controller.frame.jLabeCardl.setText(cardTypesList.toString());
+					// cardTypesList.clear();
+					// controller.frame.buttonCard4.setEnabled(false);
+					// controller.frame.buttonCard3.setEnabled(false);
+					// controller.frame.buttonCard2.setEnabled(false);
+					// controller.frame.buttonCard1.setEnabled(false);
+					// currentPhase = "Finish Attack";
+					// controller.frame.nextAction.setText("Finish Attack");
+					// changed();
+					// attackCountry1 = null;
+					// attackCountry2 = null;
+					// cardTypesList.clear();
+					// controller.frame.jLabeCardl.setText(cardTypesList.toString());
+					// cardTypesList.clear();
+					// controller.frame.jLabeCardl.setText(cardTypesList.toString());
+					endReinforcement();
 				}
 
 			} else if (e.getActionCommand() == "Finish Attack") {
-				controller.frame.buttonCard4.setEnabled(false);
-				controller.frame.buttonCard3.setEnabled(false);
-				controller.frame.buttonCard2.setEnabled(false);
-				controller.frame.buttonCard1.setEnabled(false);
-				changed();
-				currentPhase = "Finish Fortification";
-				controller.frame.nextAction.setText("Finish Fortification");
-				fortifyCountry1 = null;
-				fortifyCountry2 = null;
-				cardTypesList.clear();
-				controller.frame.jLabeCardl.setText(cardTypesList.toString());
-				FortificationPhase();
-				cardTypesList.clear();
-				controller.frame.jLabeCardl.setText(cardTypesList.toString());
+				// controller.frame.buttonCard4.setEnabled(false);
+				// controller.frame.buttonCard3.setEnabled(false);
+				// controller.frame.buttonCard2.setEnabled(false);
+				// controller.frame.buttonCard1.setEnabled(false);
+				// changed();
+				// currentPhase = "Finish Fortification";
+				// controller.frame.nextAction.setText("Finish Fortification");
+				// fortifyCountry1 = null;
+				// fortifyCountry2 = null;
+				// cardTypesList.clear();
+				// controller.frame.jLabeCardl.setText(cardTypesList.toString());
+				// FortificationPhase();
+				// cardTypesList.clear();
+				// controller.frame.jLabeCardl.setText(cardTypesList.toString());
+				finishAttack();
 			} else if (e.getActionCommand() == "Finish Fortification") {
 				controller.frame.buttonCard4.setEnabled(true);
 				controller.frame.buttonCard3.setEnabled(true);
@@ -402,6 +470,7 @@ public class MyActionListner extends Observable implements ActionListener {
 					controller.frame.error("First Exchange Cards");
 
 				} else {
+
 					ReinforcementPhase2(temp2);
 					try {
 						controller.RefreshButtons();
@@ -460,17 +529,13 @@ public class MyActionListner extends Observable implements ActionListener {
 	public String getCardsType2() {
 		int aaa = 0;
 		List<CardTypes> type = controller.playerObjet(currentPlayer).getPlayerCards();
-
 		for (int i = 0; i < type.size(); i++) {
 			int x = type.get(i).compareTo(CardTypes.Artillery);
 			if (x == 0) {
 				aaa += 1;
 			}
-
 		}
-
 		return "" + aaa;
-
 	}
 
 	public String getSelectedCards() {
@@ -495,10 +560,9 @@ public class MyActionListner extends Observable implements ActionListener {
 			FileWriter writer = new FileWriter(file);
 			writer.write(controller.files.address + "\n");
 			writer.write(controller.files.playerId.size() + "\n");
-			writer.write(controller.files.playerId2.size() + "\n");
-			writer.write(currentPlayer+"\n");
-			writer.write(currentPhase+"\n");	
-			
+			writer.write(currentPlayer + "\n");
+			writer.write(currentPhase + "\n");
+			writer.write(controller.frame.area.getText());
 			for (int i = 0; i < controller.PlayerNo2(); i++) {
 				Player tempPlayer = controller.files.playerId2.get(i);
 				writer.write("----PLAYER----\n");
@@ -509,29 +573,25 @@ public class MyActionListner extends Observable implements ActionListener {
 					writer.write(tempCountry.getName() + "***" + tempCountry.getNoOfArmies() + "\n");
 				}
 				writer.write("----CARDS----\n");
-				writer.write(tempPlayer.getPlayerCards().toString());
-				//
-				//
+				writer.write(tempPlayer.getPlayerCards().toString() + "\n");
 			}
-			//
 			writer.close();
-			//
 			// FileOutputStream fileOut = new FileOutputStream("Resources/employee.ser");
 			// ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			// for (int i = 0; i < controller.PlayerNo2(); i++) {
 			// Player tempPlayer = controller.files.playerId2.get(i);
-			//
 			// out.writeObject(tempPlayer);
 			// }
 			// out.close();
 			// fileOut.close();
 			System.exit(0);
-
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
 
+	public void textarea(String string) {
+		controller.frame.area.append("\n" + string);
 	}
 
 	public void changed() {

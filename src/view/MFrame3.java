@@ -45,12 +45,6 @@ import model.Country;
  * @version 1.0
  */
 public class MFrame3 extends JFrame {
-	private JButton[] button;
-	JPanel jPanel2;
-	JButton nextAction;
-	JLabel jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel16, jLabel26, jLabel36, jLabel46, jLabel56, jLabel66,
-			jLabel17, jLabel27, jLabel37, jLabel47, jLabel57, jLabel67;
-	ArrayList<JLabel> jLabels, jLabels2;
 	
 	public MFrame3() {
 		super("PazimGoyal");

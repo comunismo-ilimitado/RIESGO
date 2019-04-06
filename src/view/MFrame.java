@@ -35,11 +35,13 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 import controller.MyActionListner;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Border;
 import model.CardTypes;
 import model.Country;
@@ -53,6 +55,7 @@ import model.Country;
 @SuppressWarnings("deprecation")
 public class MFrame extends JFrame implements Observer {
 	private JButton[] button;
+	public JTextArea area;
 	public JButton buttonCard1, buttonCard2, buttonCard3, buttonCard4;
 	JPanel jPanel2, jPanel6, jPanel7;
 	public JLabel jLabeCardl, jLabelCard2, jLabelCard3;
@@ -107,8 +110,13 @@ public class MFrame extends JFrame implements Observer {
 
 		JScrollPane scroller = new JScrollPane(label, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		jPanel.add(scroller);
+//		jPanel.add(scroller);
+		area=new JTextArea(100,100);
+		JScrollPane scroller2 = new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
+		jPanel.add(scroller2);
+	
 		// startup view
 		JPanel jPanel3 = new JPanel(new GridLayout(0, 1));
 
@@ -388,6 +396,7 @@ public class MFrame extends JFrame implements Observer {
 		UpdateGameDominationViewContinentOccupied(listinh);
 		cards();
 		NotifyAll();
+		
 	}
 
 }

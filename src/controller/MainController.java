@@ -23,6 +23,7 @@ public class MainController {
 	ReadingFiles files;
 	MFrame frame;
 	MFrame2 frame2;
+	String phase;
 	Player player;
 	MyActionListner myactionlistner;
 	AttackController attackController;
@@ -30,6 +31,7 @@ public class MainController {
 	FortificationController fortificationController;
 	MapValidation mapValidation;
 	public boolean resume = false;
+
 	@SuppressWarnings("deprecation")
 	public void Function() throws Exception {
 		try {
@@ -41,6 +43,7 @@ public class MainController {
 
 			if (resume) {
 				files.Reads(bufferedReader.readLine(), Integer.parseInt(bufferedReader.readLine()));
+
 			} else {
 				String address = "Resources/World.map";
 				if (SelectMapType.MapType == 1)
@@ -58,19 +61,22 @@ public class MainController {
 			mapValidation.CallAllMethods();
 			if (!files.errors && !mapValidation.error) {
 				myactionlistner = new MyActionListner(this);
-				frame = new MFrame(myactionlistner, ReadingFiles.image);
-				 reinforcementController = new ReinforcementController();
-				 attackController = new AttackController();
-				 fortificationController = new FortificationController();
-				frame.noArmiesLeft = playerObjet(0).getPlayerArmiesNotDeployed();
 
+				frame = new MFrame(myactionlistner, ReadingFiles.image);
+				reinforcementController = new ReinforcementController();
+				attackController = new AttackController();
+				fortificationController = new FortificationController();
+				frame.noArmiesLeft = playerObjet(0).getPlayerArmiesNotDeployed();
 				myactionlistner.addObserver(frame);
+				if (resume) {
+					int no = Integer.parseInt(bufferedReader.readLine());
+					myactionlistner.currentPlayer = no;
+					phase = bufferedReader.readLine();
+				}
 				frame.fun();
 				temp();
 				if (resume)
 					LoadSavedGame(bufferedReader);
-
-
 
 				for (int i = 0; i < ReadingFiles.playerId2.size(); i++) {
 					ReadingFiles.playerId2.get(i).setStratergy(SelectPlayerStrategies.getStrategies().get(i));
@@ -78,8 +84,11 @@ public class MainController {
 				SetButtons();
 				PaintCountries();
 				SetDominationView();
-
-				myactionlistner.ReinforcementPhase();
+				if (resume) {
+					myactionlistner.PhaseResume(phase);
+				} else {
+					myactionlistner.ReinforcementPhase();
+				}
 				repaintAndRevalidate();
 			}
 		} catch (Exception e) {
@@ -108,25 +117,29 @@ public class MainController {
 			files.playerId2.clear();
 			SelectPlayerStrategies.strategy_selected.clear();
 			String[] PlayersLis = Everything.trim().split("----PLAYER----");
+			frame.area.setText(PlayersLis[0]);
 			for (int i = 1; i < PlayersLis.length; i++) {
 				String[] cards = PlayersLis[i].trim().split("----CARDS----");
 				String[] countryandarmies = cards[0].trim().split("\n");
 				Player tempPlayer = files.playerId.get(Integer.parseInt(countryandarmies[0]));
 				files.playerId2.put(Integer.parseInt(countryandarmies[0]), tempPlayer);
+				tempPlayer.setStratergy(countryandarmies[1]);
+
 				SelectPlayerStrategies.strategy_selected.add(countryandarmies[1]);
-				String[] arrlis = cards[1].substring(2, cards[1].length() - 1).split(",");
-				ArrayList<CardTypes> arrayList = new ArrayList<>();
-				
+				System.out.println(tempPlayer);
 				tempPlayer.ClearArmies();
 				for (int j = 2; j < countryandarmies.length; j++) {
-					String[] country = countryandarmies[j].split("\\*\\*\\*");
-					System.out.println(country[0]);
-					Country tempCountry = files.CountryNameObject.get(country[0]);
-					System.out.println("fefe");
+					String[] country = countryandarmies[j].trim().split("\\*\\*\\*");
+					Country tempCountry = files.CountryNameObject.get(country[0].trim());
 					tempPlayer.addCountriesOccupied(tempCountry);
+
 					tempCountry.setNoOfArmies(Integer.parseInt(country[1]));
+
 					tempCountry.setPlayer(tempPlayer);
 				}
+				String[] arrlis = cards[1].substring(2, cards[1].length() - 1).split(",");
+				ArrayList<CardTypes> arrayList = new ArrayList<>();
+
 				for (int k = 0; k < arrlis.length; k++) {
 					if (arrlis[k].trim().equals(""))
 						break;
@@ -134,9 +147,7 @@ public class MainController {
 				}
 				// player.setPlayerCards(arrayList);
 
-
 			}
-			System.out.println(files.playerId2);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -176,6 +187,7 @@ public class MainController {
 	 *
 	 * @throws IOException
 	 */
+
 	public void RefreshButtons() throws IOException {
 		frame.Refresh(countryObjects());
 		PaintCountries();
@@ -379,18 +391,18 @@ public class MainController {
 	public void temp() {
 		List<CardTypes> cardTypes = new ArrayList<>();
 		cardTypes.add(CardTypes.Artillery);
-//		cardTypes.add(CardTypes.Artillery);
-//		cardTypes.add(CardTypes.Artillery);
-//		cardTypes.add(CardTypes.Infantry);
-//		cardTypes.add(CardTypes.Infantry);
-//		cardTypes.add(CardTypes.Infantry);
-//		cardTypes.add(CardTypes.Infantry);
-//		cardTypes.add(CardTypes.Cavalry);
-//		cardTypes.add(CardTypes.Cavalry);
-//		cardTypes.add(CardTypes.Cavalry);
-//		cardTypes.add(CardTypes.Cavalry);
-//		cardTypes.add(CardTypes.Cavalry);
-//		cardTypes.add(CardTypes.Cavalry);
+		// cardTypes.add(CardTypes.Artillery);
+		// cardTypes.add(CardTypes.Artillery);
+		// cardTypes.add(CardTypes.Infantry);
+		// cardTypes.add(CardTypes.Infantry);
+		// cardTypes.add(CardTypes.Infantry);
+		// cardTypes.add(CardTypes.Infantry);
+		// cardTypes.add(CardTypes.Cavalry);
+		// cardTypes.add(CardTypes.Cavalry);
+		// cardTypes.add(CardTypes.Cavalry);
+		// cardTypes.add(CardTypes.Cavalry);
+		// cardTypes.add(CardTypes.Cavalry);
+		// cardTypes.add(CardTypes.Cavalry);
 		playerObjet(0).setPlayerCards(cardTypes);
 	}
 

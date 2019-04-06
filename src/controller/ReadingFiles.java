@@ -56,6 +56,7 @@ public static boolean errors = false;
 			ContinentNames = new ArrayList<>();
 			ContinentNameObject = new HashMap<>();
 			// Reading Country File
+			this.address=address;
 			FileReader file = new FileReader(address);
 			BufferedReader bufferedReader = new BufferedReader(file);
 			String temp = "";

@@ -29,11 +29,11 @@ public class AggressiveStratery implements IStrategy {
 		while (strongestcountry.getNoOfArmies() > 1 && attackable.size() > 0) {
 			Country defender = attackable.get(getWeakestCountryIndex(attackable));
 			aC.attackButton(strongestcountry, defender, 0, 0, true);
-			countries.add(strongestcountry);
-			player.setTotalCountriesOccupied(countries);
-			countries.remove(strongestcountry);
-			ReadingFiles.CountryNameObject.put(strongestcountry.getName(), strongestcountry);
-			ReadingFiles.CountryNameObject.put(defender.getName(), defender);
+//			countries.add(strongestcountry);
+//			player.setTotalCountriesOccupied(countries);
+//			countries.remove(strongestcountry);
+//			ReadingFiles.CountryNameObject.put(strongestcountry.getName(), strongestcountry);
+//			ReadingFiles.CountryNameObject.put(defender.getName(), defender);
 			AttackController.card = true;
 		}
 		AttackController.card = false;
@@ -98,9 +98,6 @@ public class AggressiveStratery implements IStrategy {
 					player.setCardExchangeValue(player.getCardExchangeValue() + 1);
 					player.setPlayerTotalArmiesNotDeployed(
 							player.getPlayerArmiesNotDeployed() + player.getCardExchangeValue() * 5);
-					cards.remove(CardTypes.Artillery);
-					cards.remove(CardTypes.Cavalry);
-					cards.remove(CardTypes.Infantry);
 					counter = counter + 1;
 				}
 				if (cards.contains(CardTypes.Artillery)) {

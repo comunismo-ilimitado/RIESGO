@@ -496,8 +496,8 @@ public class MyActionListner extends Observable implements ActionListener {
 			writer.write(controller.files.address + "\n");
 			writer.write(controller.files.playerId.size() + "\n");
 			writer.write(controller.files.playerId2.size() + "\n");
-			writer.write(currentPlayer);
-			writer.write(currentPhase);	
+			writer.write(currentPlayer+"\n");
+			writer.write(currentPhase+"\n");	
 			
 			for (int i = 0; i < controller.PlayerNo2(); i++) {
 				Player tempPlayer = controller.files.playerId2.get(i);

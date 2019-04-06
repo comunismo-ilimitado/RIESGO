@@ -1,44 +1,42 @@
-Resources/Montreal.map
-3
-3
+Resources/World.map
+2
+2
+0
+Finish Reinforcement
 ----PLAYER----
 0
-Benevolent
-Outremont***4
-Dorval***4
-St-Leonard***4
-Hampstead***4
-Rosemont***6
-Ville-Marie***3
-Anjou***3
+Human
+Dorval***3
 Montreal Nord***3
-Ile Bizard***3
-Westmount***1
+Mercier***3
+Ste-Anne-de-Bellevue***3
+RDP-PAT***3
+Senneville***3
+Beaconsfield***3
+Pierrefonds***3
+St-Leonard***3
+Westmount***3
+Saint-Laurent***3
+Plateau***3
+Pointe-Claire***2
+Pointe St-Charles***2
 ----CARDS----
 [Artillery]----PLAYER----
 1
 Human
-Pointe St-Charles***4
-Ahuntsic***4
-Lachine***4
-Senneville***4
-Mont-Royal***4
-Pierrefonds***4
-RDP-PAT***7
-Saint-Laurent***4
-Ste-Anne-de-Bellevue***3
-----CARDS----
-[]----PLAYER----
-2
-Benevolent
-Beaconsfield***4
-Verdun***4
-Villeray***4
-Pointe-Claire***4
-NDG***4
-Kirkland***4
-Plateau***1
-La Salle***4
-Mercier***6
+Outremont***3
+Anjou***3
+Ile Bizard***3
+Ahuntsic***3
+Ville-Marie***3
+Kirkland***3
+NDG***3
+Lachine***3
+La Salle***3
+Verdun***3
+Hampstead***3
+Villeray***3
+Rosemont***2
+Mont-Royal***2
 ----CARDS----
 []

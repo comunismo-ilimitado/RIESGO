@@ -15,6 +15,7 @@ import java.util.*;
 
 import model.CardTypes;
 import model.Country;
+import model.Player;
 import view.*;
 
 /**
@@ -37,6 +38,7 @@ public class MyActionListner extends Observable implements ActionListener {
 	Country fortifyCountry1, fortifyCountry2;
 	public int cardsSelected = 0;
 	List<CardTypes> cardTypesList = new ArrayList<CardTypes>();
+
 	public MyActionListner(MainController controller) {
 		this.controller = controller;
 		Phases = new ArrayList<>();
@@ -46,6 +48,7 @@ public class MyActionListner extends Observable implements ActionListener {
 		currentPhase = Phases.get(0);
 		players = controller.PlayerNo();
 	}
+
 	public void playerUpdate() {
 		try {
 			if (controller.PlayerNo2() > 1) {
@@ -93,22 +96,35 @@ public class MyActionListner extends Observable implements ActionListener {
 		Player pl = controller.playerObjet(currentPlayer);
 		String stratergy = pl.getStatergy().trim();
 		if (stratergy.equals("Agressive")) {
-			System.out.println(stratergy);
-			controller.frame.error(stratergy);
+			pl.aggressiveStratergy.reinforce(pl);
+			pl.aggressiveStratergy.attack(pl);
+			pl.aggressiveStratergy.fortify(pl);
+			playerUpdate();
+			changed();
+			ReinforcementPhase();
 		} else if (stratergy.equals("Benevolent")) {
 			pl.benevolentStrategy.reinforce(pl);
 			pl.benevolentStrategy.attack(pl);
 			pl.benevolentStrategy.fortify(pl);
 			playerUpdate();
+			changed();
 			ReinforcementPhase();
 		} else if (stratergy.equals("Random")) {
-			System.out.println(stratergy);
-			controller.frame.error(stratergy);
+			pl.randomStrategy.reinforce(pl);
+			pl.randomStrategy.attack(pl);
+			pl.randomStrategy.fortify(pl);
+			playerUpdate();
+			changed();
+			ReinforcementPhase();
 		} else if (stratergy.equals("Cheater")) {
-			System.out.println(stratergy);
-			controller.frame.error(stratergy);
+			pl.cheaterStrategy.reinforce(pl);
+			pl.cheaterStrategy.attack(pl);
+			pl.cheaterStrategy.fortify(pl);
+			playerUpdate();
+			changed();
+			ReinforcementPhase();
 		} else if (stratergy.equals("Human")) {
-			controller.frame.error(stratergy);
+			controller.frame.error("Its Player:- " + (currentPlayer + 1) + " Turn");
 			controller.frame.buttonCard4.setEnabled(true);
 			controller.frame.buttonCard3.setEnabled(true);
 			controller.frame.buttonCard2.setEnabled(true);
@@ -480,12 +496,14 @@ public class MyActionListner extends Observable implements ActionListener {
 			writer.write(controller.files.address + "\n");
 			writer.write(controller.files.playerId.size() + "\n");
 			writer.write(controller.files.playerId2.size() + "\n");
+			writer.write(currentPlayer);
+			writer.write(currentPhase);	
+			
 			for (int i = 0; i < controller.PlayerNo2(); i++) {
 				Player tempPlayer = controller.files.playerId2.get(i);
 				writer.write("----PLAYER----\n");
 				writer.write(tempPlayer.getPlayerId() + "\n");
 				writer.write(tempPlayer.getStatergy() + "\n");
-
 				for (int j = 0; j < tempPlayer.getTotalCountriesOccupied().size(); j++) {
 					Country tempCountry = tempPlayer.getTotalCountriesOccupied().get(j);
 					writer.write(tempCountry.getName() + "***" + tempCountry.getNoOfArmies() + "\n");

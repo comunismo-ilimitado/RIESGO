@@ -112,18 +112,11 @@ public class MainController {
 				String[] cards = PlayersLis[i].trim().split("----CARDS----");
 				String[] countryandarmies = cards[0].trim().split("\n");
 				Player tempPlayer = files.playerId.get(Integer.parseInt(countryandarmies[0]));
-				System.out.println(tempPlayer);
 				files.playerId2.put(Integer.parseInt(countryandarmies[0]), tempPlayer);
 				SelectPlayerStrategies.strategy_selected.add(countryandarmies[1]);
 				String[] arrlis = cards[1].substring(2, cards[1].length() - 1).split(",");
 				ArrayList<CardTypes> arrayList = new ArrayList<>();
-				for (int k = 0; k < arrlis.length; k++) {
-					if (arrlis[k].trim().equals(""))
-						break;
-					arrayList.add(CardTypes.valueOf(arrlis[k].trim()));
-				}
-				System.out.println(countryandarmies.length+"------>");
-				// player.setPlayerCards(arrayList);
+				
 				tempPlayer.ClearArmies();
 				for (int j = 2; j < countryandarmies.length; j++) {
 					String[] country = countryandarmies[j].split("\\*\\*\\*");
@@ -134,6 +127,13 @@ public class MainController {
 					tempCountry.setNoOfArmies(Integer.parseInt(country[1]));
 					tempCountry.setPlayer(tempPlayer);
 				}
+				for (int k = 0; k < arrlis.length; k++) {
+					if (arrlis[k].trim().equals(""))
+						break;
+					arrayList.add(CardTypes.valueOf(arrlis[k].trim()));
+				}
+				// player.setPlayerCards(arrayList);
+
 
 			}
 			System.out.println(files.playerId2);

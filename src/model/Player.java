@@ -16,9 +16,10 @@ public class Player {
 	ReinforcementController reinforcementcontroller = new ReinforcementController();
 	FortificationController fortificationcontroller = new FortificationController();
 	AttackController attackcontroller = new AttackController();
-	public AggressiveStratergy aggressiveStratergy=new AggressiveStratergy();
+	public AggressiveStratery aggressiveStratergy=new AggressiveStratery();
 	public BenevolentStrategy benevolentStrategy=new BenevolentStrategy();
 	public CheaterStrategy cheaterStrategy=new CheaterStrategy();
+	public RandomStrategy randomStrategy=new RandomStrategy();
 
 	/**
 	 * Gets list of total number of countries

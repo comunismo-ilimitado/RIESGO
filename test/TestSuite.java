@@ -3,7 +3,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import ControllerTests.AggressiveStrategyTest;
 import ControllerTests.AttackTest;
+import ControllerTests.BenevolentStrategyTest;
+import ControllerTests.CheaterStrategyTest;
 import ControllerTests.FortificationTest;
 import ControllerTests.MapValidationTest;
 import ControllerTests.ReinforcementTest;
@@ -14,8 +17,10 @@ import ControllerTests.StartupPhaseTest;
 	MapValidationTest.class,
 	ReinforcementTest.class,
 	AttackTest.class,
-	StartupPhaseTest.class
-	
+	StartupPhaseTest.class,
+	AggressiveStrategyTest.class,
+	BenevolentStrategyTest.class,
+	CheaterStrategyTest.class
 })
 
 /**

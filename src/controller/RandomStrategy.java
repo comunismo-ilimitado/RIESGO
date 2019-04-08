@@ -34,8 +34,8 @@ public class RandomStrategy implements IStrategy {
 				defenderdiceroll = (int) (Math.random() * defenderdiceroll + 1);
 				aC.attackButton(attacker, defender, attackerdiceroll, defenderdiceroll, false);
 				noofattacks--;
-				ReadingFiles.CountryNameObject.put(attacker.getName(),attacker);
-				ReadingFiles.CountryNameObject.put(defender.getName(),defender);
+// 				ReadingFiles.CountryNameObject.put(attacker.getName(),attacker);
+// 				ReadingFiles.CountryNameObject.put(defender.getName(),defender);
 				AttackController.card = true;
 			}
 		}

@@ -13,7 +13,8 @@ public class BenevolentStrategy implements IStrategy {
 		country.setNoOfArmies(country.getNoOfArmies() + player.getPlayerArmiesNotDeployed());
 		player.getMyCountries(player).get(getWeakestCountryIndex(countries)).setNoOfArmies(country.getNoOfArmies());
 		player.setPlayerTotalArmiesNotDeployed(0);
-		ReadingFiles.CountryNameObject.put(country.getName(), country);
+		//ReadingFiles.CountryNameObject.put(country.getName(), country);
+		ReadingFiles.CountryNameObject.get(country.getName()).setNoOfArmies(country.getNoOfArmies());
 	}
 
 	public void attack(Player player) {
@@ -47,8 +48,10 @@ public class BenevolentStrategy implements IStrategy {
 				player.getMyCountries(player).get(index).setNoOfArmies(weakcountry.getNoOfArmies());
 				index=getIndex(strongestcountry, player.getMyCountries(player));
 				player.getMyCountries(player).get(index).setNoOfArmies(strongestcountry.getNoOfArmies());
-				ReadingFiles.CountryNameObject.put(weakcountry.getName(),weakcountry);
-				ReadingFiles.CountryNameObject.put(strongestcountry.getName(),strongestcountry);
+				ReadingFiles.CountryNameObject.get(weakcountry.getName()).setNoOfArmies(weakcountry.getNoOfArmies());
+//				ReadingFiles.CountryNameObject.put(strongestcountry.getName(),strongestcountry);
+				ReadingFiles.CountryNameObject.get(strongestcountry.getName()).setNoOfArmies(strongestcountry.getNoOfArmies());
+				
 				break;
 			} else {
 				weakcountry = countries.get(getWeakestCountryIndex(countries));

@@ -15,8 +15,8 @@ public class AggressiveStratery implements IStrategy {
 		strongestcountry.setNoOfArmies(strongestcountry.getNoOfArmies() + player.getPlayerArmiesNotDeployed());
 		player.getMyCountries(player).get(getStrongestCountry(countries))
 				.setNoOfArmies(strongestcountry.getNoOfArmies());
-		// ReadingFiles.CountryNameObject.get(strongestcountry.getName()).setNoOfArmies(strongestcountry.getNoOfArmies());
-		ReadingFiles.CountryNameObject.put(strongestcountry.getName(), strongestcountry);
+		ReadingFiles.CountryNameObject.get(strongestcountry.getName()).setNoOfArmies(strongestcountry.getNoOfArmies());
+		//ReadingFiles.CountryNameObject.put(strongestcountry.getName(), strongestcountry);
 		player.setPlayerTotalArmiesNotDeployed(0);
 	}
 
@@ -55,8 +55,11 @@ public class AggressiveStratery implements IStrategy {
 				player.setTotalCountriesOccupied(countries);
 				countries.remove(strongestcountry);
 				countries.remove(fotifyingcountry);
-				ReadingFiles.CountryNameObject.put(strongestcountry.getName(), strongestcountry);
-				ReadingFiles.CountryNameObject.put(fotifyingcountry.getName(), fotifyingcountry);
+//				ReadingFiles.CountryNameObject.put(strongestcountry.getName(),strongestcountry);
+//				ReadingFiles.CountryNameObject.put(fotifyingcountry.getName(),fotifyingcountry);
+				ReadingFiles.CountryNameObject.get(fotifyingcountry.getName()).setNoOfArmies(fotifyingcountry.getNoOfArmies());
+				ReadingFiles.CountryNameObject.get(strongestcountry.getName()).setNoOfArmies(strongestcountry.getNoOfArmies());
+				
 				break;
 			}
 		}

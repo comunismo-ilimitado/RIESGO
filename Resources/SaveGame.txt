@@ -1,44 +1,73 @@
 Resources/Montreal.map
-2
-0
+4
+3
 Finish Reinforcement
 
-Player Playing :- model.Player@10a2fa55
+Player Playing :- model.Player@59760630
+ Reinforcement Mode
+ Fortification Mode
+Player Playing :- model.Player@57a3d5b1
+ Reinforcement Mode
+ Fortification Mode
+Player Playing :- model.Player@1dbcb646
+Benevolent Stratergy
+Player Playing :- model.Player@9ceda06
+ Reinforcement Mode
+ Fortification Mode
+Player Playing :- model.Player@59760630
+ Reinforcement Mode
+ Fortification Mode
+Player Playing :- model.Player@57a3d5b1
+ Reinforcement Mode
+ Fortification Mode
+Player Playing :- model.Player@1dbcb646
+Benevolent Stratergy
+Player Playing :- model.Player@9ceda06
  Reinforcement Mode----PLAYER----
 0
 Human
-Hampstead***3
-NDG***3
-Ste-Anne-de-Bellevue***3
-Ahuntsic***3
-La Salle***3
-Plateau***3
-Anjou***3
-Lachine***3
-Kirkland***3
-Outremont***3
-Pierrefonds***3
-Villeray***3
-Senneville***2
-Pointe St-Charles***2
 ----CARDS----
 [Artillery]
 ----PLAYER----
 1
 Human
-Westmount***3
-Dorval***3
-Mercier***3
-Ile Bizard***3
-RDP-PAT***3
-Verdun***3
-Rosemont***3
-Ville-Marie***3
-St-Leonard***3
-Pointe-Claire***3
-Beaconsfield***3
-Saint-Laurent***3
-Montreal Nord***2
-Mont-Royal***2
+----CARDS----
+[]
+----PLAYER----
+2
+Cheater
+Westmount***5
+Dorval***20
+Mercier***5
+Hampstead***20
+NDG***20
+Ile Bizard***10
+RDP-PAT***7
+Ste-Anne-de-Bellevue***10
+Ahuntsic***8
+La Salle***16
+Verdun***8
+Plateau***7
+Anjou***1
+Rosemont***16
+Ville-Marie***4
+Lachine***16
+St-Leonard***16
+Pointe-Claire***16
+Beaconsfield***8
+Kirkland***8
+Outremont***16
+Saint-Laurent***16
+Pierrefonds***8
+Montreal Nord***8
+Villeray***16
+Senneville***16
+Mont-Royal***8
+Pointe St-Charles***16
+----CARDS----
+[]
+----PLAYER----
+3
+Human
 ----CARDS----
 []

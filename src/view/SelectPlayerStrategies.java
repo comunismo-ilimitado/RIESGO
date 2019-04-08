@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import controller.MainController;
 import controller.Tournament;
@@ -52,36 +53,34 @@ public class SelectPlayerStrategies {
 		}
 		ok_button = new JButton("OK");
 		ok_button.setBounds(290, SelectNoOfPlayers.NumberOfPlayers * 60, 100, 30);
-
 		frame.add(ok_button);
-
 		ok_button.setVisible(true);
-
 		frame.setLayout(null);
 		frame.setVisible(true);
 	}
 
 	public void GetSelectedValue() {
 		ok_button.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				// System.out.print("returns" + NumberOfPlayers);
 				for (int i = 0, j = 10; i < SelectNoOfPlayers.NumberOfPlayers; i++, j += 50) {
-					strategy_selected.add((String) jcombo_array.get(i).getSelectedItem());// = Integer.parseInt((String)
-																							// PNumberJCombo.getSelectedItem());
+					strategy_selected.add((String) jcombo_array.get(i).getSelectedItem());// = Integer.parseInt((String)																			// PNumberJCombo.getSelectedItem());
 				}
-
-				frame.dispose();
-
 				if (GameStartWindow.GameMode == 2) {
+					frame.dispose();
 					Tournament temp= new Tournament();
 				}
 				else {
 				try {
-					MainController controll = new MainController();
-					controll.Function();
+					if(strategy_selected.contains("Human")) {
+						frame.dispose();
+						MainController controll = new MainController();
+						controll.Function();
+					}else {
+						JOptionPane.showMessageDialog(null, "There Should be Atleast One Human Player. \n For all Computer Select Tournament Mode \n Select Atleast One Player");
+						strategy_selected.clear();
+					}
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -91,7 +90,6 @@ public class SelectPlayerStrategies {
 				}
 				}
 			}
-
 		});
 	}
 

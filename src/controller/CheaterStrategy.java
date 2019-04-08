@@ -6,6 +6,7 @@ import model.*;
 public class CheaterStrategy implements IStrategy {
 	public void reinforce(Player player) {
 		List<Country> countries = player.getMyCountries(player);
+		List<CardTypes> cardTypes=new  ArrayList<CardTypes>();
 		for (int i = 0; i < countries.size(); i++) {
 			countries.get(i).setNoOfArmies(countries.get(i).getNoOfArmies() * 2);
 			player.getMyCountries(player).get(i).setNoOfArmies(countries.get(i).getNoOfArmies());
@@ -13,7 +14,7 @@ public class CheaterStrategy implements IStrategy {
 			ReadingFiles.CountryNameObject.get(countries.get(i).getName()).setNoOfArmies(countries.get(i).getNoOfArmies());
 		}
 		player.setPlayerTotalArmiesNotDeployed(0);
-		player.setPlayerCards(null);
+		player.setPlayerCards(cardTypes);
 	}
 
 	public void attack(Player player) {
@@ -23,7 +24,7 @@ public class CheaterStrategy implements IStrategy {
 			List<Country> neighbors = aC.getMyNeighborsForAttack(mycountries.get(i));
 			for(int j=0;j<neighbors.size();j++) {
 				int index = getIndex(neighbors.get(j), mycountries.get(i).getNeighbors());
-				player.getMyCountries(player).get(i).getNeighbors().get(index).setPlayer(player);
+	//			player.getMyCountries(player).get(i).getNeighbors().get(index).setPlayer(player);
 				//mycountries.get(i).getNeighbors().get(index).setPlayer(player);
 				neighbors.get(j).setPlayer(player);
 				ReadingFiles.CountryNameObject.put(neighbors.get(j).getName(), neighbors.get(j));

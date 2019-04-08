@@ -363,7 +363,7 @@ public class Player {
 	 * Gets Countries Occupied
 	 */
 	public List<Country> getTotalCountriesOccupied() {
-		return total_countries_occupied;
+		return getMyCountries(this);
 	}
 
 	/**

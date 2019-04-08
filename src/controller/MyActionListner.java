@@ -165,9 +165,11 @@ public class MyActionListner extends Observable implements ActionListener {
 			controller.frame.ActivateAll();
 			controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
 			controller.playerObjet(currentPlayer).calculateReinforcementArmies(controller.playerObjet(currentPlayer));
+			
 		}
 	}
 
+	
 	/**
 	 * This method
 	 */

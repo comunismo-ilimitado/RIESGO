@@ -44,7 +44,8 @@ public class CheaterStrategy implements IStrategy {
 			if (aC.getMyNeighborsForAttack(mycountries.get(i)).size() > 0) {
 				mycountries.get(i).setNoOfArmies(mycountries.get(i).getNoOfArmies() * 2);
 				player.getMyCountries(player).get(i).setNoOfArmies(mycountries.get(i).getNoOfArmies());
-				ReadingFiles.CountryNameObject.put(mycountries.get(i).getName(), mycountries.get(i));
+// 				ReadingFiles.CountryNameObject.put(mycountries.get(i).getName(), mycountries.get(i));
+				ReadingFiles.CountryNameObject.get(mycountries.get(i).getName()).setNoOfArmies(mycountries.get(i).getNoOfArmies());
 			}
 		}
 	}

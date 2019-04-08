@@ -17,23 +17,23 @@ public class CheaterStrategy implements IStrategy {
 	}
 
 	public void attack(Player player) {
-//		AttackController aC = new AttackController();
+		AttackController aC = new AttackController();
 		List<Country> mycountries = player.getMyCountries(player);
 		for (int i = 0; i < mycountries.size(); i++) {
-//			List<Country> neighbors = aC.getMyNeighborsForAttack(mycountries.get(i));
-//			for(int j=0;j<neighbors.size();j++) {
-//				int index = getIndex(neighbors.get(j), mycountries.get(i).getNeighbors());
-//				player.getMyCountries(player).get(i).getNeighbors().get(index).setPlayer(player);
-//				//mycountries.get(i).getNeighbors().get(index).setPlayer(player);
-//				neighbors.get(j).setPlayer(player);
-//				ReadingFiles.CountryNameObject.put(neighbors.get(j).getName(), neighbors.get(j));
-//			}
-			List<Country> neighbors = mycountries.get(i).getNeighbors();
-			for (int j = 0; j < mycountries.size(); i++) {
-				player.getMyCountries(player).get(i).getNeighbors().get(j).setPlayer(player);
+			List<Country> neighbors = aC.getMyNeighborsForAttack(mycountries.get(i));
+			for(int j=0;j<neighbors.size();j++) {
+				int index = getIndex(neighbors.get(j), mycountries.get(i).getNeighbors());
+				player.getMyCountries(player).get(i).getNeighbors().get(index).setPlayer(player);
+				//mycountries.get(i).getNeighbors().get(index).setPlayer(player);
 				neighbors.get(j).setPlayer(player);
-				ReadingFiles.CountryNameObject.get(neighbors.get(j).getName()).setPlayer(player);
+				ReadingFiles.CountryNameObject.put(neighbors.get(j).getName(), neighbors.get(j));
 			}
+//			List<Country> neighbors = mycountries.get(i).getNeighbors();
+//			for (int j = 0; j < mycountries.size(); i++) {
+//				player.getMyCountries(player).get(i).getNeighbors().get(j).setPlayer(player);
+//				neighbors.get(j).setPlayer(player);
+//				ReadingFiles.CountryNameObject.get(neighbors.get(j).getName()).setPlayer(player);
+//			}
 		}
 	}
 

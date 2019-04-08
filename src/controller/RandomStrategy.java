@@ -73,6 +73,9 @@ public class RandomStrategy implements IStrategy {
 					player.setPlayerTotalArmiesNotDeployed(
 							player.getPlayerArmiesNotDeployed() + player.getCardExchangeValue() * 5);
 					counter = counter + 1;
+					cards.remove(CardTypes.Artillery);
+					cards.remove(CardTypes.Cavalry);
+					cards.remove(CardTypes.Infantry);
 				}
 				if (cards.contains(CardTypes.Artillery)) {
 					cards.remove(CardTypes.Artillery);

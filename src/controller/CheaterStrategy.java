@@ -31,7 +31,7 @@ public class CheaterStrategy implements IStrategy {
 			for (int j = 0; j < mycountries.size(); i++) {
 				player.getMyCountries(player).get(i).getNeighbors().get(j).setPlayer(player);
 				neighbors.get(j).setPlayer(player);
-				ReadingFiles.CountryNameObject.put(neighbors.get(j).getName(), neighbors.get(j));
+				ReadingFiles.CountryNameObject.get(neighbors.get(j).getName()).setPlayer(player);
 			}
 		}
 	}

@@ -13,7 +13,8 @@ public class RandomStrategy implements IStrategy {
 		country.setNoOfArmies(country.getNoOfArmies() + player.getPlayerArmiesNotDeployed());
 		player.setPlayerTotalArmiesNotDeployed(0);
 		player.getMyCountries(player).get(index).setNoOfArmies(country.getNoOfArmies());
-		ReadingFiles.CountryNameObject.put(country.getName(), country);
+		//ReadingFiles.CountryNameObject.put(country.getName(), country);
+		ReadingFiles.CountryNameObject.get(country.getName()).setNoOfArmies(country.getNoOfArmies());
 	}
 
 	public void attack(Player player) {
@@ -55,8 +56,10 @@ public class RandomStrategy implements IStrategy {
 			if(fortifying.getNoOfArmies()>1 && fC.hasPathBFS2(country, fortifying)) {
 				country.setNoOfArmies(country.getNoOfArmies()+fortifying.getNoOfArmies()-1);
 				fortifying.setNoOfArmies(1);
-				ReadingFiles.CountryNameObject.put(country.getName(),country);
-				ReadingFiles.CountryNameObject.put(fortifying.getName(),fortifying);
+				//ReadingFiles.CountryNameObject.put(country.getName(),country);
+				ReadingFiles.CountryNameObject.get(country.getName()).setNoOfArmies(country.getNoOfArmies());
+				ReadingFiles.CountryNameObject.get(fortifying.getName()).setNoOfArmies(fortifying.getNoOfArmies());
+				//ReadingFiles.CountryNameObject.put(fortifying.getName(),fortifying);
 				break;
 			}
 		}

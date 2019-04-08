@@ -35,6 +35,8 @@ public class AggressiveStratery implements IStrategy {
 //			ReadingFiles.CountryNameObject.put(strongestcountry.getName(), strongestcountry);
 //			ReadingFiles.CountryNameObject.put(defender.getName(), defender);
 			AttackController.card = true;
+			strongestcountry=ReadingFiles.CountryNameObject.get(strongestcountry.getName());
+			attackable = aC.getMyNeighborsForAttack(strongestcountry);
 		}
 		AttackController.card = false;
 	}

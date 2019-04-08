@@ -9,7 +9,8 @@ public class CheaterStrategy implements IStrategy {
 		for (int i = 0; i < countries.size(); i++) {
 			countries.get(i).setNoOfArmies(countries.get(i).getNoOfArmies() * 2);
 			player.getMyCountries(player).get(i).setNoOfArmies(countries.get(i).getNoOfArmies());
-			ReadingFiles.CountryNameObject.put(countries.get(i).getName(), countries.get(i));
+// 			ReadingFiles.CountryNameObject.put(countries.get(i).getName(), countries.get(i));
+			ReadingFiles.CountryNameObject.get(countries.get(i).getName()).setNoOfArmies(countries.get(i).getNoOfArmies());
 		}
 		player.setPlayerTotalArmiesNotDeployed(0);
 		player.setPlayerCards(null);

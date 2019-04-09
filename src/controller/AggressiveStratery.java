@@ -3,23 +3,42 @@ package controller;
 import java.util.*;
 import model.*;
 
+/**
+ * This class implements the Aggressive Strategy
+ * 
+ * @author Bhargav
+ * @version 1.0
+ *
+ */
 public class AggressiveStratery implements IStrategy {
 
+	/**
+	 * Reinforcement phase based on Aggressive Strategy rules
+	 * 
+	 * @param player: player object
+	 * 
+	 */
 	public void reinforce(Player player) {
 		exchangeCardsStartegy(player);
 		player.calcArmiesByControlValue(player);
 		List<Country> countries = player.getMyCountries(player);
-		Country strongestcountry=null;
-		if(player.getMyCountries(player).size()>getStrongestCountry(countries))
-		 strongestcountry = player.getMyCountries(player).get(getStrongestCountry(countries));
+		Country strongestcountry = null;
+		if (player.getMyCountries(player).size() > getStrongestCountry(countries))
+			strongestcountry = player.getMyCountries(player).get(getStrongestCountry(countries));
 		strongestcountry.setNoOfArmies(strongestcountry.getNoOfArmies() + player.getPlayerArmiesNotDeployed());
 		player.getMyCountries(player).get(getStrongestCountry(countries))
 				.setNoOfArmies(strongestcountry.getNoOfArmies());
 		ReadingFiles.CountryNameObject.get(strongestcountry.getName()).setNoOfArmies(strongestcountry.getNoOfArmies());
-		//ReadingFiles.CountryNameObject.put(strongestcountry.getName(), strongestcountry);
+
 		player.setPlayerTotalArmiesNotDeployed(0);
 	}
 
+	/**
+	 * Attack phase based on Aggressive Strategy rules
+	 * 
+	 * @param player: player object
+	 * 
+	 */
 	public void attack(Player player) {
 		AttackController aC = new AttackController();
 		List<Country> countries = player.getMyCountries(player);
@@ -29,18 +48,19 @@ public class AggressiveStratery implements IStrategy {
 		while (strongestcountry.getNoOfArmies() > 1 && attackable.size() > 0) {
 			Country defender = attackable.get(getWeakestCountryIndex(attackable));
 			aC.attackButton(strongestcountry, defender, 0, 0, true);
-//			countries.add(strongestcountry);
-//			player.setTotalCountriesOccupied(countries);
-//			countries.remove(strongestcountry);
-//			ReadingFiles.CountryNameObject.put(strongestcountry.getName(), strongestcountry);
-//			ReadingFiles.CountryNameObject.put(defender.getName(), defender);
 			AttackController.card = true;
-			strongestcountry=ReadingFiles.CountryNameObject.get(strongestcountry.getName());
+			strongestcountry = ReadingFiles.CountryNameObject.get(strongestcountry.getName());
 			attackable = aC.getMyNeighborsForAttack(strongestcountry);
 		}
 		AttackController.card = false;
 	}
 
+	/**
+	 * Fortify phase based on Aggressive Strategy rules
+	 * 
+	 * @param player: player object
+	 * 
+	 */
 	public void fortify(Player player) {
 		FortificationController fC = new FortificationController();
 		List<Country> countries = player.getMyCountries(player);
@@ -57,16 +77,22 @@ public class AggressiveStratery implements IStrategy {
 				player.setTotalCountriesOccupied(countries);
 				countries.remove(strongestcountry);
 				countries.remove(fotifyingcountry);
-//				ReadingFiles.CountryNameObject.put(strongestcountry.getName(),strongestcountry);
-//				ReadingFiles.CountryNameObject.put(fotifyingcountry.getName(),fotifyingcountry);
-				ReadingFiles.CountryNameObject.get(fotifyingcountry.getName()).setNoOfArmies(fotifyingcountry.getNoOfArmies());
-				ReadingFiles.CountryNameObject.get(strongestcountry.getName()).setNoOfArmies(strongestcountry.getNoOfArmies());
-				
+				ReadingFiles.CountryNameObject.get(fotifyingcountry.getName())
+						.setNoOfArmies(fotifyingcountry.getNoOfArmies());
+				ReadingFiles.CountryNameObject.get(strongestcountry.getName())
+						.setNoOfArmies(strongestcountry.getNoOfArmies());
+
 				break;
 			}
 		}
 	}
 
+	/**
+	 * Get index of the country with least number of armies
+	 * 
+	 * @param countries: list of counties
+	 * @return index
+	 */
 	public int getWeakestCountryIndex(List<Country> countries) {
 		Country country = countries.get(0);
 		int index = 0;
@@ -79,10 +105,16 @@ public class AggressiveStratery implements IStrategy {
 		return index;
 	}
 
+	/**
+	 * Get index of the country with maximum number of armies
+	 * 
+	 * @param countries: list of counties
+	 * @return index
+	 */
 	public int getStrongestCountry(List<Country> countries) {
 		Country strongestcountry = null;
-		if(countries.size()>0)
-		 strongestcountry = countries.get(0);
+		if (countries.size() > 0)
+			strongestcountry = countries.get(0);
 		int index = 0;
 		for (int i = 1; i < countries.size(); i++) {
 			if (countries.get(i).getNoOfArmies() > strongestcountry.getNoOfArmies()) {
@@ -93,6 +125,11 @@ public class AggressiveStratery implements IStrategy {
 		return index;
 	}
 
+	/**
+	 * Exchange cards based on Aggressive Strategy rules
+	 * 
+	 * @param player: player object
+	 */
 	public void exchangeCardsStartegy(Player player) {
 		if (player.getPlayerCards().size() >= 3) {
 			List<CardTypes> cards = player.getPlayerCards();

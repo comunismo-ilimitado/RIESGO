@@ -27,7 +27,7 @@ public class BenevolentStrategy implements IStrategy {
 		country.setNoOfArmies(country.getNoOfArmies() + player.getPlayerArmiesNotDeployed());
 		player.getMyCountries(player).get(getWeakestCountryIndex(countries)).setNoOfArmies(country.getNoOfArmies());
 		player.setPlayerTotalArmiesNotDeployed(0);
-		// ReadingFiles.CountryNameObject.put(country.getName(), country);
+		
 		ReadingFiles.CountryNameObject.get(country.getName()).setNoOfArmies(country.getNoOfArmies());
 	}
 

@@ -14,9 +14,14 @@ import javax.swing.JOptionPane;
 import controller.MainController;
 import controller.Tournament;
 
+/**
+ * This class implements user interface for player strategies
+ * 
+ * @author pazim
+ * @version 1.0
+ */
 public class SelectPlayerStrategies {
 
-//	private static JComboBox PNumberJCombo;
 	private JButton ok_button;
 	private JFrame frame;
 	public static ArrayList<String> strategy_selected = new ArrayList<>();
@@ -26,11 +31,17 @@ public class SelectPlayerStrategies {
 	String[] single = { "Human", "Agressive", "Benevolent", "Random", "Cheater" };
 	String[] tournament = { "Agressive", "Benevolent", "Random", "Cheater" };
 
+	/**
+	 * Select player strategies
+	 */
 	public SelectPlayerStrategies() {
 		setup();
 		GetSelectedValue();
 	}
 
+	/**
+	 * implements user interface for different player strategies
+	 */
 	public void setup() {
 		frame = new JFrame("Players Strategies");
 		frame.setSize(500, SelectNoOfPlayers.NumberOfPlayers * 70 + 100);
@@ -65,29 +76,31 @@ public class SelectPlayerStrategies {
 			public void actionPerformed(ActionEvent e) {
 				// System.out.print("returns" + NumberOfPlayers);
 				for (int i = 0, j = 10; i < SelectNoOfPlayers.NumberOfPlayers; i++, j += 50) {
-					strategy_selected.add((String) jcombo_array.get(i).getSelectedItem());// = Integer.parseInt((String)																			// PNumberJCombo.getSelectedItem());
+					strategy_selected.add((String) jcombo_array.get(i).getSelectedItem());// = Integer.parseInt((String)
+																							// //
+																							// PNumberJCombo.getSelectedItem());
 				}
 				if (GameStartWindow.GameMode == 2) {
 					frame.dispose();
-					Tournament temp= new Tournament();
-				}
-				else {
-				try {
-					if(strategy_selected.contains("Human")) {
-						frame.dispose();
-						MainController controll = new MainController();
-						controll.Function();
-					}else {
-						JOptionPane.showMessageDialog(null, "There Should be Atleast One Human Player. \n For all Computer Select Tournament Mode \n Select Atleast One Player");
-						strategy_selected.clear();
+					Tournament temp = new Tournament();
+				} else {
+					try {
+						if (strategy_selected.contains("Human")) {
+							frame.dispose();
+							MainController controll = new MainController();
+							controll.Function();
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"There Should be Atleast One Human Player. \n For all Computer Select Tournament Mode \n Select Atleast One Player");
+							strategy_selected.clear();
+						}
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 				}
 			}
 		});

@@ -11,6 +11,13 @@ import model.Continent;
 import model.Country;
 import view.MFrame2;
 
+
+/**
+ * this class validates the map
+ * @author pazim
+ *
+ */
+
 public class MapValidation {
 	ArrayList<String> arrayList = new ArrayList<>();
 	ArrayList<String> arrayList2 = new ArrayList<>();

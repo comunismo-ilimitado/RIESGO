@@ -9,6 +9,12 @@ import view.SelectMap;
 import view.SelectNoOfPlayers;
 import view.SelectPlayerStrategies;
 
+/**
+ * this class implements the Tournament Mode
+ * 
+ * @author Bhargav
+ * @version 1.0
+ */
 public class Tournament {
 	boolean win = false;
 
@@ -16,6 +22,9 @@ public class Tournament {
 		function();
 	}
 
+	/**
+	 * Function implements Rules of Tournament Mode
+	 */
 	public void function() {
 		MFrame2 frame2 = new MFrame2();
 		AggressiveStratery ag = new AggressiveStratery();
@@ -31,7 +40,8 @@ public class Tournament {
 				// game
 				win = false;
 				try {
-					ReadFile.Reads("Resources/"+SelectMap.TourMapList.get(mapno)+".map",SelectNoOfPlayers.NumberOfPlayers );
+					ReadFile.Reads("Resources/" + SelectMap.TourMapList.get(mapno) + ".map",
+							SelectNoOfPlayers.NumberOfPlayers);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -80,39 +90,34 @@ public class Tournament {
 						if (win == true)
 							break;
 
-					} // player
+					}
 					for (int l = 0; l < ReadingFiles.playerId.size(); l++) {
 						Player p = ReadingFiles.playerId.get(l);
-//						try {
-//							Thread.sleep(500);
-//						} catch (InterruptedException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
 
 						System.out.print("\nturn:" + (turnno + 1) + " Player:" + (p.getPlayerId() + 1) + "  "
 								+ p.getStatergy() + " total countries:" + p.getMyCountries(p).size());
 						if (p.getMyCountries(p).size() == ReadingFiles.CountriesNames.size()) {
-							System.out.println("\n****Player " + (p.getPlayerId() + 1)+" "+ p.getStatergy() + " wins!");
-//							System.exit(0);
+							System.out.println(
+									"\n****Player " + (p.getPlayerId() + 1) + " " + p.getStatergy() + " wins!");
+
 							win = true;
 							break;
 						}
-						if (p.getMyCountries(p).size() ==0) {
-//							ReadingFiles.playerId.remove(p);
-						System.out.print("(Player:" + (p.getPlayerId() + 1)+"Lost!)");
+						if (p.getMyCountries(p).size() == 0) {
+
+							System.out.print("(Player:" + (p.getPlayerId() + 1) + "Lost!)");
 						}
 
 					}
 					if (win == true)
 						break;
 
-				} // turn
+				}
 				if (win == false)
 					System.out.print("\n\n****No one wins!");
 
-			} // map
-		} // game
+			}
+		}
 		System.out.print("\n\n****END OF TOURNAMENT*****");
 	}
 

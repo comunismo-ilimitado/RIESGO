@@ -238,8 +238,8 @@ public class CheaterStrategyTest
 		int size_before = player1.getMyCountries(player1).size();
 		cs.attack(player1);
 		int size_after = player1.getMyCountries(player1).size();
-		if(size_before>size_after)
-			assertTrue(true);		
+		//if(size_before>size_after)
+			assertEquals(true,size_before<size_after);		
 	}
 	
 	@Test

@@ -232,10 +232,7 @@ public class BenevolentStrategyTest
 		Country c = countries.get(bs.getWeakestCountryIndex(countries));
 		int armies_before = c.getNoOfArmies();
 		bs.fortify(player1);
-		if(c.getNoOfArmies()>armies_before)
-		{
-		assertTrue(true);
-		}
+		assertEquals(true,c.getNoOfArmies()>armies_before);
 	}	
 
 }

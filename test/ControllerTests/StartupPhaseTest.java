@@ -50,8 +50,8 @@ public class StartupPhaseTest
 	@Test
 	public void testArmiesPerPlayer() throws IOException
 	{
-		rf.Reads(str);
-		assertEquals(45,ReadingFiles.ArmiesPerPlayer);
+		rf.Reads(str,2);
+		assertEquals(40,ReadingFiles.ArmiesPerPlayer);
 	}
 	
 }

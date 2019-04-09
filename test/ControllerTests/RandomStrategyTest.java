@@ -1,27 +1,27 @@
 package ControllerTests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import controller.AggressiveStratery;
+import controller.RandomStrategy;
 import controller.ReadingFiles;
 import model.CardTypes;
 import model.Continent;
 import model.Country;
 import model.Player;
 
-public class AggressiveStrategyTest 
+public class RandomStrategyTest
 {
-	AggressiveStratery ast;
+	RandomStrategy rs;
 	Player player1, player2, player3;
 	Country country1, country2, country3, country4, country5, country6, country7;
 	Continent continent1,continent2;
@@ -35,7 +35,7 @@ public class AggressiveStrategyTest
 	@Before
 	public void onStart()
 	{
-		ast = new AggressiveStratery();
+		rs = new RandomStrategy();
 		player1 = new Player(2);
 		country1 = new Country("India");
 		country2 = new Country("China");
@@ -152,7 +152,7 @@ public class AggressiveStrategyTest
 		player2.setTotalCountriesOccupied(n_list3);
 		player2.setPlayerCards(listp2);
 
-		country1.setNeighbors(n_list);
+		country1.setNeighbors(n_list3);
 		country1.setNoOfArmies(1);
 		country1.setPlayer(player2);
 
@@ -162,7 +162,7 @@ public class AggressiveStrategyTest
 
 		country3.setNeighbors(n_list);
 		country3.setNoOfArmies(6);
-		country3.setPlayer(player1);
+		country3.setPlayer(player2);
 
 		country6.setNeighbors(n_list);
 		country6.setNoOfArmies(1);
@@ -174,7 +174,7 @@ public class AggressiveStrategyTest
 
 		country4.setNeighbors(n_list1);
 		country4.setNoOfArmies(2);
-		country4.setPlayer(player1);
+		country4.setPlayer(player2);
 		
 		continent1.setContinentId(81);
 		continent1.setName("Asia");
@@ -215,47 +215,81 @@ public class AggressiveStrategyTest
 		ReadingFiles.playerId = temp1;
 
 	}
-
-	@Test
-	public void testStrongestPlayer()
-	{
-		Country temp = n_list.get(ast.getStrongestCountry(n_list));
-		assertEquals(country5,temp);
-		
-	}
 	
 	@Test
 	public void testReinforce()
 	{
-		List<Country> countries = player1.getMyCountries(player1);
-		int n = countries.get(ast.getStrongestCountry(countries)).getNoOfArmies() + player1.getPlayerArmiesNotDeployed();
-		ast.reinforce(player1);
-		assertEquals(n,countries.get(ast.getStrongestCountry(countries)).getNoOfArmies());
+		int flag = 0;
+		List<Country> list_before = player1.getMyCountries(player1);
+		Map<String,Integer> armyPerCountry	=	new HashMap<>();
+		for(int i=0;i<list_before.size();i++) {
+			armyPerCountry.put(list_before.get(i).getName(), list_before.get(i).getNoOfArmies());
+		}
+		rs.reinforce(player1);
+		list_before = player1.getMyCountries(player1);
+		for(int i=0;i<list_before.size();i++)
+		{
+			int beforeCount	=	armyPerCountry.get(list_before.get(i).getName());
+			int afterCount	=	list_before.get(i).getNoOfArmies();
+			if(beforeCount<afterCount) {
+				flag=1;
+				break;
+			}
+			
+		}
+		
+		assertEquals(true,flag==1);
 	}
 	
-	@Test 
+	@Test
 	public void testAttack()
 	{
-		List<Country> countries = player1.getMyCountries(player1);
-		Country c = countries.get(ast.getStrongestCountry(countries));
-		ast.attack(player1);
-		int a = c.getNoOfArmies();
-		List<Country> an = player1.getMyNeighborsForAttack(c);
-		if(a>1) {
-			assertEquals(an.size(),0);
+		int flag = 0;
+		List<Country> list_before = player1.getMyCountries(player1);
+		Map<String,Integer> armyPerCountry	=	new HashMap<>();
+		for(int i=0;i<list_before.size();i++) {
+			armyPerCountry.put(list_before.get(i).getName(), list_before.get(i).getNoOfArmies());
 		}
-		else {
-			assertEquals(a,1);
+		rs.attack(player1);
+		list_before = player1.getMyCountries(player1);
+		for(int i=0;i<list_before.size();i++)
+		{
+			int beforeCount	=	armyPerCountry.get(list_before.get(i).getName());
+			int afterCount	=	list_before.get(i).getNoOfArmies();
+			if(beforeCount!=afterCount) {
+				flag=1;
+				break;
+			}
+			
 		}
+		
+		assertEquals(true,flag==1);
+		
 	}
 	
-	@Test 
+	@Test
 	public void testFortify()
 	{
-		List<Country> countries  = player1.getMyCountries(player1);
-		Country c = countries.get(ast.getStrongestCountry(countries)); 
-		int armies_before_fortify = c.getNoOfArmies();
-		ast.fortify(player1);
-		assertEquals(true,c.getNoOfArmies()>armies_before_fortify);
+		int flag = 0;
+		List<Country> list_before = player1.getMyCountries(player1);
+		Map<String,Integer> armyPerCountry	=	new HashMap<>();
+		for(int i=0;i<list_before.size();i++) {
+			armyPerCountry.put(list_before.get(i).getName(), list_before.get(i).getNoOfArmies());
+		}
+		rs.attack(player1);
+		list_before = player1.getMyCountries(player1);
+		for(int i=0;i<list_before.size();i++)
+		{
+			int beforeCount	=	armyPerCountry.get(list_before.get(i).getName());
+			int afterCount	=	list_before.get(i).getNoOfArmies();
+			if(beforeCount!=afterCount) {
+				flag=1;
+				break;
+			}
+			
+		}
+		assertEquals(true,flag==1);
 	}
+	
+	
 }

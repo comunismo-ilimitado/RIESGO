@@ -111,12 +111,12 @@ public class MFrame extends JFrame implements Observer {
 		JScrollPane scroller = new JScrollPane(label, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 //		jPanel.add(scroller);
-		area=new JTextArea(100,100);
+		area = new JTextArea(100, 100);
 		JScrollPane scroller2 = new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 		jPanel.add(scroller2);
-	
+
 		// startup view
 		JPanel jPanel3 = new JPanel(new GridLayout(0, 1));
 
@@ -227,26 +227,23 @@ public class MFrame extends JFrame implements Observer {
 		pack();
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
-		
-			  @Override
-		        public void windowClosing(WindowEvent e) {
-		                // Ask for confirmation before terminating the program.
-		                int option = JOptionPane.showConfirmDialog(
-		                        null, 
-		                        "Do You Want to Save the Game. \n NOTE:- Saving the game will overwrite your previously saved games",
-		                        "Close Confirmation", 
-		                        JOptionPane.YES_NO_OPTION, 
-		                        JOptionPane.QUESTION_MESSAGE);
-		                if (option == JOptionPane.NO_OPTION) {
-		                        System.exit(0);
-		                }
-		                else if(option == JOptionPane.YES_OPTION){
-		                	Exit_Option();
 
-		                }
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// Ask for confirmation before terminating the program.
+				int option = JOptionPane.showConfirmDialog(null,
+						"Do You Want to Save the Game. \n NOTE:- Saving the game will overwrite your previously saved games",
+						"Close Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				if (option == JOptionPane.NO_OPTION) {
+					System.exit(0);
+				} else if (option == JOptionPane.YES_OPTION) {
+					Exit_Option();
 
-		        }
-		} );	setVisible(true);
+				}
+
+			}
+		});
+		setVisible(true);
 
 	}
 
@@ -261,14 +258,22 @@ public class MFrame extends JFrame implements Observer {
 		buttonCard3.setText("Cavalry " + myActionListner.getCardsType3());
 	}
 
+	/**
+	 * This method update the view
+	 */
+
 	public void NotifyAll() {
 		jLabel1.setText("Turn For Player :-" + (myActionListner.currentPlayer + 1));
 		jLabel2.setText("Armies Left:- " + noArmiesLeft);
-		jLabel3.setText("Total Armies :- " +myActionListner.getArmiesPerPlayer());
+		jLabel3.setText("Total Armies :- " + myActionListner.getArmiesPerPlayer());
 		jLabel4.setText("DICE 1:- " + AAA);
 		jLabel5.setText("DICE 2:- " + BBB);
 		jLabel6.setText("Current Phase :-" + nextAction.getText().split(" ")[1] + " Phase");
 	}
+
+	/**
+	 * This method update the view
+	 */
 
 	public void SetDominationView(int NoOfPlayers) {
 		for (int i = 0; i < NoOfPlayers; i++) {
@@ -276,6 +281,10 @@ public class MFrame extends JFrame implements Observer {
 			jPanel7.add(jLabels2.get(i));
 		}
 	}
+
+	/**
+	 * This method update the view
+	 */
 
 	public void UpdateGameDominationViewPercentage(ArrayList<Float> percent) {
 		for (int i = 0; i < percent.size(); i++) {
@@ -382,9 +391,10 @@ public class MFrame extends JFrame implements Observer {
 		}
 
 	}
+
 	public void Exit_Option() {
 		myActionListner.SaveGameOnExit();
-		
+
 	}
 
 	@Override
@@ -396,7 +406,7 @@ public class MFrame extends JFrame implements Observer {
 		UpdateGameDominationViewContinentOccupied(listinh);
 		cards();
 		NotifyAll();
-		
+
 	}
 
 }

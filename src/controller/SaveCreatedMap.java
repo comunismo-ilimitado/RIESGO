@@ -13,6 +13,12 @@ import model.Continent;
 import model.Country;
 import view.CreateMap;
 
+/**
+ * this class saves the created map
+ * @author pazim
+ *
+ */
+
 public class SaveCreatedMap {
 
 	BufferedWriter bw;

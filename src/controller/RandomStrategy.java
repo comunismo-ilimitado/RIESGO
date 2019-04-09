@@ -3,7 +3,21 @@ package controller;
 import java.util.*;
 import model.*;
 
+/**
+ * This class implements the Random Strategy
+ * 
+ * @author Bhargav
+ * @version 1.0
+ *
+ */
 public class RandomStrategy implements IStrategy {
+
+	/**
+	 * Reinforcement phase based on Random Strategy rules
+	 * 
+	 * @param player: player object
+	 * 
+	 */
 	public void reinforce(Player player) {
 		exchangeCardsStartegy(player);
 		player.calcArmiesByControlValue(player);
@@ -13,10 +27,15 @@ public class RandomStrategy implements IStrategy {
 		country.setNoOfArmies(country.getNoOfArmies() + player.getPlayerArmiesNotDeployed());
 		player.setPlayerTotalArmiesNotDeployed(0);
 		player.getMyCountries(player).get(index).setNoOfArmies(country.getNoOfArmies());
-		//ReadingFiles.CountryNameObject.put(country.getName(), country);
 		ReadingFiles.CountryNameObject.get(country.getName()).setNoOfArmies(country.getNoOfArmies());
 	}
 
+	/**
+	 * Attack phase based on Random Strategy rules
+	 * 
+	 * @param player: player object
+	 * 
+	 */
 	public void attack(Player player) {
 		AttackController aC = new AttackController();
 		List<Country> countries = player.getMyCountries(player);
@@ -35,36 +54,45 @@ public class RandomStrategy implements IStrategy {
 				defenderdiceroll = (int) (Math.random() * defenderdiceroll + 1);
 				aC.attackButton(attacker, defender, attackerdiceroll, defenderdiceroll, false);
 				noofattacks--;
-// 				ReadingFiles.CountryNameObject.put(attacker.getName(),attacker);
-// 				ReadingFiles.CountryNameObject.put(defender.getName(),defender);
 				AttackController.card = true;
 			}
 		}
 		AttackController.card = false;
 	}
-	
+
+	/**
+	 * Fortification phase based on Random Strategy rules
+	 * 
+	 * @param player: player object
+	 * 
+	 */
 	public void fortify(Player player) {
 		FortificationController fC = new FortificationController();
 		List<Country> countries = player.getMyCountries(player);
 		int index = (int) (Math.random() * countries.size());
 		Country country = countries.get(index);
 		countries.remove(index);
-		while(countries.size()>0) {
+		while (countries.size() > 0) {
 			index = (int) (Math.random() * countries.size());
 			Country fortifying = countries.get(index);
 			countries.remove(index);
-			if(fortifying.getNoOfArmies()>1 && fC.hasPathBFS2(country, fortifying)) {
-				country.setNoOfArmies(country.getNoOfArmies()+fortifying.getNoOfArmies()-1);
+			if (fortifying.getNoOfArmies() > 1 && fC.hasPathBFS2(country, fortifying)) {
+				country.setNoOfArmies(country.getNoOfArmies() + fortifying.getNoOfArmies() - 1);
 				fortifying.setNoOfArmies(1);
-				//ReadingFiles.CountryNameObject.put(country.getName(),country);
+
 				ReadingFiles.CountryNameObject.get(country.getName()).setNoOfArmies(country.getNoOfArmies());
 				ReadingFiles.CountryNameObject.get(fortifying.getName()).setNoOfArmies(fortifying.getNoOfArmies());
-				//ReadingFiles.CountryNameObject.put(fortifying.getName(),fortifying);
 				break;
 			}
 		}
 	}
 
+	/**
+	 * Exchange cards based on Random Strategy rules
+	 * 
+	 * @param player: player object
+	 * 
+	 */
 	public void exchangeCardsStartegy(Player player) {
 		if (player.getPlayerCards().size() >= 3) {
 			List<CardTypes> cards = player.getPlayerCards();

@@ -19,21 +19,29 @@ import model.Continent;
 import model.Country;
 import model.Player;
 
-public class CheaterStrategyTest 
-{
+/**
+ * This class tests Cheater Strategy
+ * 
+ * @author navjot
+ * @version 1.0
+ *
+ */
+public class CheaterStrategyTest {
 	CheaterStrategy cs;
 	Player player1, player2, player3;
 	Country country1, country2, country3, country4, country5, country6, country7;
-	Continent continent1,continent2;
+	Continent continent1, continent2;
 	HashMap<String, Country> temp;
-	HashMap<Integer,Player> temp1;
+	HashMap<Integer, Player> temp1;
 	HashMap<String, Continent> temp3;
-	List<Country> n_list,n_list1;
-	List<CardTypes> list1,list2,list3,list4;
-	
+	List<Country> n_list, n_list1;
+	List<CardTypes> list1, list2, list3, list4;
+
+	/**
+	 * Method called before each test
+	 */
 	@Before
-	public void onStart()
-	{
+	public void onStart() {
 		cs = new CheaterStrategy();
 		player1 = new Player(2);
 		country1 = new Country("India");
@@ -46,7 +54,7 @@ public class CheaterStrategyTest
 
 		continent1 = new Continent(4, "Asia");
 		continent2 = new Continent(5, "Africa");
-		
+
 		country1.setContinentId(1);
 		country1.setCountryId(11);
 		country1.setName("India");
@@ -98,12 +106,12 @@ public class CheaterStrategyTest
 		n_list2.add(country1);
 		n_list2.add(country3);
 		n_list2.add(country5);
-		
+
 		List<CardTypes> listp1 = new ArrayList<>();
 		listp1.add(CardTypes.Infantry);
 		listp1.add(CardTypes.Cavalry);
 		listp1.add(CardTypes.Cavalry);
-		
+
 		List<CardTypes> listp2 = new ArrayList<>();
 		listp2.add(CardTypes.Artillery);
 		listp2.add(CardTypes.Cavalry);
@@ -111,22 +119,22 @@ public class CheaterStrategyTest
 		listp2.add(CardTypes.Infantry);
 		listp2.add(CardTypes.Infantry);
 		listp2.add(CardTypes.Cavalry);
-		
+
 		list1 = new ArrayList<>();
 		list1.add(CardTypes.Artillery);
 		list1.add(CardTypes.Cavalry);
 		list1.add(CardTypes.Infantry);
-		
+
 		list2 = new ArrayList<>();
 		list2.add(CardTypes.Artillery);
 		list2.add(CardTypes.Artillery);
 		list2.add(CardTypes.Artillery);
-		
+
 		list3 = new ArrayList<>();
 		list3.add(CardTypes.Artillery);
 		list3.add(CardTypes.Cavalry);
 		list3.add(CardTypes.Artillery);
-		
+
 		list4 = new ArrayList<>();
 		list4.add(CardTypes.Artillery);
 		list4.add(CardTypes.Cavalry);
@@ -174,7 +182,7 @@ public class CheaterStrategyTest
 		country4.setNeighbors(n_list1);
 		country4.setNoOfArmies(2);
 		country4.setPlayer(player1);
-		
+
 		continent1.setContinentId(81);
 		continent1.setName("Asia");
 		continent1.setCountries(n_list);
@@ -184,7 +192,7 @@ public class CheaterStrategyTest
 		continent2.setName("Africa");
 		continent2.setCountries(n_list2);
 		continent2.setControlValue(5);
-		
+
 		ReadingFiles.CountryNameObject = new HashMap<>();
 		ReadingFiles.ContinentNameObject = new HashMap<>();
 		ReadingFiles.playerId = new HashMap<>();
@@ -205,7 +213,10 @@ public class CheaterStrategyTest
 		ReadingFiles.playerId.put(player1.getPlayerId(), player1);
 		ReadingFiles.playerId.put(player2.getPlayerId(), player2);
 	}
-	
+
+	/**
+	 * Method called after each test
+	 */
 	@After
 	public void atEnd() {
 		ReadingFiles.CountryNameObject.clear();
@@ -214,40 +225,44 @@ public class CheaterStrategyTest
 		ReadingFiles.playerId = temp1;
 
 	}
-	
+
+	/**
+	 * Method tests the reinforcement phase based on cheater strategy rules
+	 */
 	@Test
-	public void testReinforce()
-	{
+	public void testReinforce() {
 		int player_armies_before = 0;
 		int player_armies_after = 0;
-		for(int i=0;i<player1.getMyCountries(player1).size();i++)
-		{
-			player_armies_before+= player1.getMyCountries(player1).get(i).getNoOfArmies();
+		for (int i = 0; i < player1.getMyCountries(player1).size(); i++) {
+			player_armies_before += player1.getMyCountries(player1).get(i).getNoOfArmies();
 		}
 		cs.reinforce(player1);
-		for(int i=0;i<player1.getMyCountries(player1).size();i++)
-		{
-			player_armies_after+= player1.getMyCountries(player1).get(i).getNoOfArmies();
+		for (int i = 0; i < player1.getMyCountries(player1).size(); i++) {
+			player_armies_after += player1.getMyCountries(player1).get(i).getNoOfArmies();
 		}
-		assertEquals(player_armies_before*2,player_armies_after);
+		assertEquals(player_armies_before * 2, player_armies_after);
 	}
-	
+
+	/**
+	 * Method tests the attack phase based on cheater strategy rules
+	 */
 	@Test
-	public void testAttack()
-	{
+	public void testAttack() {
 		int size_before = player1.getMyCountries(player1).size();
 		cs.attack(player1);
 		int size_after = player1.getMyCountries(player1).size();
-		//if(size_before>size_after)
-			assertEquals(true,size_before<size_after);		
+		// if(size_before>size_after)
+		assertEquals(true, size_before < size_after);
 	}
-	
+
+	/**
+	 * Method tests the fortification phase based on cheater strategy rules
+	 */
 	@Test
-	public void testFortify()
-	{
+	public void testFortify() {
 		int armies_before = country3.getNoOfArmies();
 		cs.fortify(player1);
-		assertEquals(armies_before*2,country3.getNoOfArmies());
+		assertEquals(armies_before * 2, country3.getNoOfArmies());
 	}
 
 }

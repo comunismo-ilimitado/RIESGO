@@ -19,22 +19,29 @@ import model.Continent;
 import model.Country;
 import model.Player;
 
-public class AggressiveStrategyTest 
-{
+/**
+ * This class tests the Aggressive Strategy
+ * 
+ * @author navjot
+ * @version 1.0
+ *
+ */
+public class AggressiveStrategyTest {
 	AggressiveStratery ast;
 	Player player1, player2, player3;
 	Country country1, country2, country3, country4, country5, country6, country7;
-	Continent continent1,continent2;
+	Continent continent1, continent2;
 	HashMap<String, Country> temp;
-	HashMap<Integer,Player> temp1;
+	HashMap<Integer, Player> temp1;
 	HashMap<String, Continent> temp3;
-	List<Country> n_list,n_list1;
-	List<CardTypes> list1,list2,list3,list4;
-	
-	
+	List<Country> n_list, n_list1;
+	List<CardTypes> list1, list2, list3, list4;
+
+	/**
+	 * Method called before each test
+	 */
 	@Before
-	public void onStart()
-	{
+	public void onStart() {
 		ast = new AggressiveStratery();
 		player1 = new Player(2);
 		country1 = new Country("India");
@@ -47,7 +54,7 @@ public class AggressiveStrategyTest
 
 		continent1 = new Continent(4, "Asia");
 		continent2 = new Continent(5, "Africa");
-		
+
 		country1.setContinentId(1);
 		country1.setCountryId(11);
 		country1.setName("India");
@@ -99,12 +106,12 @@ public class AggressiveStrategyTest
 		n_list2.add(country1);
 		n_list2.add(country3);
 		n_list2.add(country5);
-		
+
 		List<CardTypes> listp1 = new ArrayList<>();
 		listp1.add(CardTypes.Infantry);
 		listp1.add(CardTypes.Cavalry);
 		listp1.add(CardTypes.Cavalry);
-		
+
 		List<CardTypes> listp2 = new ArrayList<>();
 		listp2.add(CardTypes.Artillery);
 		listp2.add(CardTypes.Cavalry);
@@ -112,22 +119,22 @@ public class AggressiveStrategyTest
 		listp2.add(CardTypes.Infantry);
 		listp2.add(CardTypes.Infantry);
 		listp2.add(CardTypes.Cavalry);
-		
+
 		list1 = new ArrayList<>();
 		list1.add(CardTypes.Artillery);
 		list1.add(CardTypes.Cavalry);
 		list1.add(CardTypes.Infantry);
-		
+
 		list2 = new ArrayList<>();
 		list2.add(CardTypes.Artillery);
 		list2.add(CardTypes.Artillery);
 		list2.add(CardTypes.Artillery);
-		
+
 		list3 = new ArrayList<>();
 		list3.add(CardTypes.Artillery);
 		list3.add(CardTypes.Cavalry);
 		list3.add(CardTypes.Artillery);
-		
+
 		list4 = new ArrayList<>();
 		list4.add(CardTypes.Artillery);
 		list4.add(CardTypes.Cavalry);
@@ -175,7 +182,7 @@ public class AggressiveStrategyTest
 		country4.setNeighbors(n_list1);
 		country4.setNoOfArmies(2);
 		country4.setPlayer(player1);
-		
+
 		continent1.setContinentId(81);
 		continent1.setName("Asia");
 		continent1.setCountries(n_list);
@@ -185,7 +192,7 @@ public class AggressiveStrategyTest
 		continent2.setName("Africa");
 		continent2.setCountries(n_list2);
 		continent2.setControlValue(5);
-		
+
 		ReadingFiles.CountryNameObject = new HashMap<>();
 		ReadingFiles.ContinentNameObject = new HashMap<>();
 		ReadingFiles.playerId = new HashMap<>();
@@ -206,7 +213,10 @@ public class AggressiveStrategyTest
 		ReadingFiles.playerId.put(player1.getPlayerId(), player1);
 		ReadingFiles.playerId.put(player2.getPlayerId(), player2);
 	}
-	
+
+	/**
+	 * Method called after each test
+	 */
 	@After
 	public void atEnd() {
 		ReadingFiles.CountryNameObject.clear();
@@ -216,46 +226,54 @@ public class AggressiveStrategyTest
 
 	}
 
+	/**
+	 * Method test the player with maximum number of armies
+	 */
 	@Test
-	public void testStrongestPlayer()
-	{
+	public void testStrongestPlayer() {
 		Country temp = n_list.get(ast.getStrongestCountry(n_list));
-		assertEquals(country5,temp);
-		
+		assertEquals(country5, temp);
+
 	}
-	
+
+	/**
+	 * Method tests the reinforcement phase based on aggressive strategy rules
+	 */
 	@Test
-	public void testReinforce()
-	{
+	public void testReinforce() {
 		List<Country> countries = player1.getMyCountries(player1);
-		int n = countries.get(ast.getStrongestCountry(countries)).getNoOfArmies() + player1.getPlayerArmiesNotDeployed();
+		int n = countries.get(ast.getStrongestCountry(countries)).getNoOfArmies()
+				+ player1.getPlayerArmiesNotDeployed();
 		ast.reinforce(player1);
-		assertEquals(n,countries.get(ast.getStrongestCountry(countries)).getNoOfArmies());
+		assertEquals(n, countries.get(ast.getStrongestCountry(countries)).getNoOfArmies());
 	}
-	
-	@Test 
-	public void testAttack()
-	{
+
+	/**
+	 * Method tests the attack phase based on aggressive strategy rules
+	 */
+	@Test
+	public void testAttack() {
 		List<Country> countries = player1.getMyCountries(player1);
 		Country c = countries.get(ast.getStrongestCountry(countries));
 		ast.attack(player1);
 		int a = c.getNoOfArmies();
 		List<Country> an = player1.getMyNeighborsForAttack(c);
-		if(a>1) {
-			assertEquals(an.size(),0);
-		}
-		else {
-			assertEquals(a,1);
+		if (a > 1) {
+			assertEquals(an.size(), 0);
+		} else {
+			assertEquals(a, 1);
 		}
 	}
-	
-	@Test 
-	public void testFortify()
-	{
-		List<Country> countries  = player1.getMyCountries(player1);
-		Country c = countries.get(ast.getStrongestCountry(countries)); 
+
+	/**
+	 * Method tests the fortification phase based on aggressive strategy rules
+	 */
+	@Test
+	public void testFortify() {
+		List<Country> countries = player1.getMyCountries(player1);
+		Country c = countries.get(ast.getStrongestCountry(countries));
 		int armies_before_fortify = c.getNoOfArmies();
 		ast.fortify(player1);
-		assertEquals(true,c.getNoOfArmies()>armies_before_fortify);
+		assertEquals(true, c.getNoOfArmies() > armies_before_fortify);
 	}
 }

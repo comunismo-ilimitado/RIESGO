@@ -18,6 +18,13 @@ import javax.swing.JScrollPane;
 import controller.ReadingFiles;
 import model.Country;
 
+
+/**
+ * This class edit the countries user view
+ * @author pazim
+ * @version 1.0
+ *
+ */
 public class EditCountries {
 	private static JFrame MapFrame;
 	private JLabel HeaderLabel;
@@ -35,6 +42,9 @@ public class EditCountries {
 	private JLabel[] countriesinside = new JLabel[150];
 	int len = 0;
 
+	/**
+	 * constructor
+	 */
 	public EditCountries() {
 		MFrame2 frame2 = new MFrame2();
 		String address = "Resources/" + SelectMap.MapSelected + ".map";
@@ -44,7 +54,10 @@ public class EditCountries {
 		setUp();
 		getSelectedContinent();
 	}
-
+	
+	/**
+	 * set up user view
+	 */
 	public void setUp() {
 		if (ReadingFiles.CountryNameObject != null)
 			MapFrame = new JFrame("Edit Map");

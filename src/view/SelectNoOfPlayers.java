@@ -73,6 +73,7 @@ public class SelectNoOfPlayers {
 		OKButton.setVisible(true);
 		PNumberJCombo.setVisible(true);
 		Label1.setVisible(true);
+		Frame1.setLocationRelativeTo(null);
 		Frame1.setLayout(null);
 		Frame1.setVisible(true);
 		NumberOfPlayers = GetSelectedValue();

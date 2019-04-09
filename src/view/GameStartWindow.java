@@ -93,7 +93,7 @@ public class GameStartWindow {
 		}else {
 			resume_button.setEnabled(true);
 		}
-
+		window.setLocationRelativeTo(null);
 		window.setLayout(null);
 		window.setVisible(true);
 	}

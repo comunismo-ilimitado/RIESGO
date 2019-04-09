@@ -111,6 +111,7 @@ public class SelectMap {
 		frame.add(no_of_games_combo_box);
 		HeaderLabel.setVisible(true);
 		ok_button.setVisible(true);
+		frame.setLocationRelativeTo(null);
 		frame.setLayout(null);
 		frame.setVisible(true);
 	}
@@ -166,6 +167,7 @@ public class SelectMap {
 		MapCombobox.setVisible(true);
 		ok_button.setVisible(true);
 		EditButton.setVisible(true);
+		frame.setLocationRelativeTo(null);
 		frame.setLayout(null);
 		frame.setVisible(true);
 

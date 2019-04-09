@@ -12,6 +12,13 @@ import javax.swing.*;
 import controller.ReadingFiles;
 import model.Country;
 
+
+/**
+ * This class edit the continent user view
+ * @author pazim
+ * @version 1.0
+ *
+ */
 public class EditContinents {
 	private static JFrame MapFrame;
 	private JLabel HeaderLabel;

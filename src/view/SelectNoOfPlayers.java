@@ -11,6 +11,14 @@ import javax.swing.JLabel;
 
 import controller.MainController;
 
+
+/**
+ * this class select number of player for the game
+ * @author pazim
+ * @version 1.0
+ * 
+ *
+ */
 public class SelectNoOfPlayers {
 
 	private static JComboBox PNumberJCombo;

@@ -20,6 +20,12 @@ import model.Player;
 import view.MFrame;
 import view.MFrame2;
 
+
+/**
+ * start up phase of the game
+ * @author pazim
+ * @version 1.1
+ */
 public class MainController {
 	ReadingFiles files;
 	MFrame frame;
@@ -111,6 +117,11 @@ public class MainController {
 
 	}
 
+	
+	/**
+	 * this method loads the saved game
+	 * @param bufferedReader
+	 */
 	public void LoadSavedGame(BufferedReader bufferedReader) {
 		try {
 			String temp = "";

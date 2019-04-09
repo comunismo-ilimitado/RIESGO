@@ -7,6 +7,13 @@ import java.util.*;
 
 import javax.swing.*;
 
+
+
+/**
+ * This class implements Select map
+ * @author pazim
+ *
+ */
 public class SelectMap {
 
 	private static JFrame frame;

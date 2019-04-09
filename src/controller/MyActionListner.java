@@ -57,10 +57,12 @@ public class MyActionListner extends Observable implements ActionListener {
 					playerUpdate();
 				}
 			} else {
-				controller.frame.error("YOU WON");
-				String[] args = { "" };
-				GameStartWindow.main(args);
+				controller.frame.error("Player :- "+controller.files.playerId2.keySet().toArray()[0]+" Wins");
+				System.exit(0);
+
+				
 				controller.frame.dispose();
+
 			}
 		} catch (Exception e) {
 			playerUpdate();
@@ -109,54 +111,55 @@ public class MyActionListner extends Observable implements ActionListener {
 			e.printStackTrace();
 		}
 		Player pl = controller.playerObjet(currentPlayer);
-		textarea("Player Playing :- " + pl);
+		textarea("---------------------------------");
+		textarea("Player Playing :- " +(currentPlayer+1));
 		String stratergy = pl.getStatergy().trim();
 		if (stratergy.equals("Agressive")) {
-			textarea(" Reinforcement Mode");
-
+			textarea("Currently in Reinforcement Mode");
 			pl.aggressiveStratergy.reinforce(pl);
-			textarea(" Attack Mode");
+			textarea("Currently in Attack Mode");
 			pl.aggressiveStratergy.attack(pl);
-			textarea(" Fortification Mode");
+			elemination(pl);
+			textarea("Currently in Fortification Mode");
 			pl.aggressiveStratergy.fortify(pl);
 			playerUpdate();
 			changed();
 			ReinforcementPhase();
 		} else if (stratergy.equals("Benevolent")) {
-			System.out.println("player2-");
-			textarea("Benevolent Stratergy");
-			textarea(" Reinforcement Mode");
+			textarea("Currently in Reinforcement Mode");
 			pl.benevolentStrategy.reinforce(pl);
-			textarea(" Attack Mode");
+			textarea("Currently in Attack Mode");
 			pl.benevolentStrategy.attack(pl);
-			textarea(" Fortification Mode");
+			elemination(pl);
+			textarea("Currently in Fortification Mode");
 			pl.benevolentStrategy.fortify(pl);
 			playerUpdate();
 			changed();
 			ReinforcementPhase();
 		} else if (stratergy.equals("Random")) {
-			textarea(" Reinforcement Mode");
-
+			textarea("Currently in Reinforcement Mode");
 			pl.randomStrategy.reinforce(pl);
-			textarea(" Attack Mode");
-
+			textarea("Currently in Attack Mode");
 			pl.randomStrategy.attack(pl);
-			textarea(" Fortification Mode");
+			elemination(pl);
+			textarea("Currently in Fortification Mode");
 			pl.randomStrategy.fortify(pl);
 			playerUpdate();
 			changed();
 			ReinforcementPhase();
 		} else if (stratergy.equals("Cheater")) {
-			textarea("Benevolent Stratergy");
+			textarea("Currently in Reinforcement Mode");
 			pl.cheaterStrategy.reinforce(pl);
+			textarea("Currently in Attack Mode");
 			pl.cheaterStrategy.attack(pl);
+			elemination(pl);
+			textarea("Currently in Fortification Mode");
 			pl.cheaterStrategy.fortify(pl);
 			playerUpdate();
 			changed();
 			ReinforcementPhase();
 		} else if (stratergy.equals("Human")) {
-			textarea(" Reinforcement Mode");
-			controller.frame.error("Its Player:- " + (currentPlayer + 1) + " Turn");
+			textarea("Currently in Reinforcement Mode");
 			controller.frame.buttonCard4.setEnabled(true);
 			controller.frame.buttonCard3.setEnabled(true);
 			controller.frame.buttonCard2.setEnabled(true);
@@ -165,16 +168,29 @@ public class MyActionListner extends Observable implements ActionListener {
 			controller.frame.ActivateAll();
 			controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
 			controller.playerObjet(currentPlayer).calculateReinforcementArmies(controller.playerObjet(currentPlayer));
+			controller.frame.error("Its Player:- " + (currentPlayer + 1) + " Turn");
 			
 		}
 	}
-
+public void elemination(Player attacker) {
+	for(int i=0;i<controller.PlayerNo2();i++) {
+		Player temp = controller.files.playerId2.get(controller.files.playerId2.keySet().toArray()[i]);
+	if (temp.getTotalCountriesOccupied().size() == 0) {
+		List<CardTypes> defcards = temp.getPlayerCards();
+		List<CardTypes> attcards = attacker.getPlayerCards();
+		attcards.addAll(defcards);
+		attacker.setPlayerCards(attcards);
+		ReadingFiles.playerId.get(attacker.getPlayerId()).setPlayerCards(attcards);
+		ReadingFiles.playerId2.remove(temp.getPlayerId());
+		ReadingFiles.players.remove(ReadingFiles.players.indexOf(temp.getPlayerId()));
+	}
+}}
 	
 	/**
 	 * This method
 	 */
 	public void FortificationPhase() {
-		textarea(" Fortification Mode");
+		textarea("Currently in Fortification Mode");
 
 		AttackController.card = false;
 		changed();
@@ -239,6 +255,7 @@ public class MyActionListner extends Observable implements ActionListener {
 	 * @throws IOException
 	 */
 	public void AttackPhase(Country country) throws IOException {
+		textarea("Attacking.... ");
 		cardTypesList.clear();
 		controller.frame.jLabeCardl.setText(cardTypesList.toString());
 		changed();
@@ -594,6 +611,7 @@ public class MyActionListner extends Observable implements ActionListener {
 
 	public void textarea(String string) {
 		controller.frame.area.append("\n" + string);
+		System.out.println(string);
 	}
 
 	public void changed() {

@@ -3,6 +3,7 @@ package controller;
 import view.*;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -38,12 +39,16 @@ public class MainController {
 			frame2 = new MFrame2();
 			files = new ReadingFiles(frame2);
 
-			FileReader fileReader = new FileReader("Resources/SaveGame.txt");
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-
+			FileReader fileReader;
+			BufferedReader bufferedReader = null;
+			File tempFile = new File("Resources/SaveGame.txt");
+			boolean exists = tempFile.exists();
+			if (exists) {
+				fileReader = new FileReader("Resources/SaveGame.txt");
+				bufferedReader = new BufferedReader(fileReader);
+			}
 			if (resume) {
 				files.Reads(bufferedReader.readLine(), Integer.parseInt(bufferedReader.readLine()));
-
 			} else {
 				String address = "Resources/World.map";
 				if (SelectMapType.MapType == 1)
@@ -56,7 +61,6 @@ public class MainController {
 					files.Reads(address, SelectNoOfPlayers.NumberOfPlayers);
 				}
 			}
-
 			mapValidation = new MapValidation(files.CountryNameObject, files.ContinentNameObject);
 			mapValidation.CallAllMethods();
 			if (!files.errors && !mapValidation.error) {

@@ -2,6 +2,7 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -84,7 +85,14 @@ public class GameStartWindow {
 
 		single_game_button.setVisible(true);
 		tournament_button.setVisible(true);
+		File tempFile = new File( "Resources/SaveGame.txt" ); 
+		boolean exists = tempFile.exists();
 		resume_button.setVisible(true);
+		if(!exists) {
+			resume_button.setEnabled(false);
+		}else {
+			resume_button.setEnabled(true);
+		}
 
 		window.setLayout(null);
 		window.setVisible(true);

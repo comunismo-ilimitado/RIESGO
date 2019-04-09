@@ -3,46 +3,61 @@ package controller;
 import java.util.*;
 import model.*;
 
+/**
+ * This class implements the Cheater Strategy
+ * 
+ * @author Bhargav
+ * @version 1.0
+ *
+ */
 public class CheaterStrategy implements IStrategy {
+
+	/**
+	 * Reinforcement phase based on Cheater Strategy rules
+	 * 
+	 * @param player: player object
+	 * 
+	 */
 	public void reinforce(Player player) {
 		List<Country> countries = player.getMyCountries(player);
-		List<CardTypes> cardTypes=new  ArrayList<CardTypes>();
+		List<CardTypes> cardTypes = new ArrayList<CardTypes>();
 		for (int i = 0; i < countries.size(); i++) {
 			countries.get(i).setNoOfArmies(countries.get(i).getNoOfArmies() * 2);
 			player.getMyCountries(player).get(i).setNoOfArmies(countries.get(i).getNoOfArmies());
-// 			ReadingFiles.CountryNameObject.put(countries.get(i).getName(), countries.get(i));
-			ReadingFiles.CountryNameObject.get(countries.get(i).getName()).setNoOfArmies(countries.get(i).getNoOfArmies());
+			ReadingFiles.CountryNameObject.get(countries.get(i).getName())
+					.setNoOfArmies(countries.get(i).getNoOfArmies());
 		}
 		player.setPlayerTotalArmiesNotDeployed(0);
 		player.setPlayerCards(cardTypes);
 	}
 
+	/**
+	 * Attack phase based on Cheater Strategy rules
+	 * 
+	 * @param player: player object
+	 * 
+	 */
 	public void attack(Player player) {
 		AttackController aC = new AttackController();
-		
+
 		List<Country> mycountries = player.getMyCountries(player);
 		for (int i = 0; i < mycountries.size(); i++) {
 			List<Country> neighbors = aC.getMyNeighborsForAttack(mycountries.get(i));
-			for(int j=0;j<neighbors.size();j++) {
+			for (int j = 0; j < neighbors.size(); j++) {
 				int index = getIndex(neighbors.get(j), mycountries.get(i).getNeighbors());
-	//			player.getMyCountries(player).get(i).getNeighbors().get(index).setPlayer(player);
-				//mycountries.get(i).getNeighbors().get(index).setPlayer(player);
 				neighbors.get(j).setPlayer(player);
 				ReadingFiles.CountryNameObject.put(neighbors.get(j).getName(), neighbors.get(j));
 			}
-			
-			
-			
-			
-//			List<Country> neighbors = mycountries.get(i).getNeighbors();
-//			for (int j = 0; j < mycountries.size(); i++) {
-//				player.getMyCountries(player).get(i).getNeighbors().get(j).setPlayer(player);
-//				neighbors.get(j).setPlayer(player);
-//				ReadingFiles.CountryNameObject.get(neighbors.get(j).getName()).setPlayer(player);
-//			}
+
 		}
 	}
 
+	/**
+	 * fortification phase based on Cheater Strategy rules
+	 * 
+	 * @param player: player object
+	 * 
+	 */
 	public void fortify(Player player) {
 		AttackController aC = new AttackController();
 		List<Country> mycountries = player.getMyCountries(player);
@@ -50,12 +65,20 @@ public class CheaterStrategy implements IStrategy {
 			if (aC.getMyNeighborsForAttack(mycountries.get(i)).size() > 0) {
 				mycountries.get(i).setNoOfArmies(mycountries.get(i).getNoOfArmies() * 2);
 				player.getMyCountries(player).get(i).setNoOfArmies(mycountries.get(i).getNoOfArmies());
-// 				ReadingFiles.CountryNameObject.put(mycountries.get(i).getName(), mycountries.get(i));
-				ReadingFiles.CountryNameObject.get(mycountries.get(i).getName()).setNoOfArmies(mycountries.get(i).getNoOfArmies());
+
+				ReadingFiles.CountryNameObject.get(mycountries.get(i).getName())
+						.setNoOfArmies(mycountries.get(i).getNoOfArmies());
 			}
 		}
 	}
 
+	/**
+	 * get index of the country
+	 * 
+	 * @param country: country name
+	 * @param countries: list of countries
+	 * @return index
+	 */
 	public int getIndex(Country country, List<Country> countries) {
 		for (int i = 0; i < countries.size(); i++) {
 			if (country.getName().equals(countries.get(i).getName())) {

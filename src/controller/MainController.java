@@ -84,7 +84,7 @@ public class MainController {
 					phase = bufferedReader.readLine();
 				}
 				frame.fun();
-				temp();
+				//temp();
 				if (resume)
 					LoadSavedGame(bufferedReader);
 
@@ -405,19 +405,6 @@ public class MainController {
 
 	public void temp() {
 		List<CardTypes> cardTypes = new ArrayList<>();
-		cardTypes.add(CardTypes.Artillery);
-		// cardTypes.add(CardTypes.Artillery);
-		// cardTypes.add(CardTypes.Artillery);
-		// cardTypes.add(CardTypes.Infantry);
-		// cardTypes.add(CardTypes.Infantry);
-		// cardTypes.add(CardTypes.Infantry);
-		// cardTypes.add(CardTypes.Infantry);
-		// cardTypes.add(CardTypes.Cavalry);
-		// cardTypes.add(CardTypes.Cavalry);
-		// cardTypes.add(CardTypes.Cavalry);
-		// cardTypes.add(CardTypes.Cavalry);
-		// cardTypes.add(CardTypes.Cavalry);
-		// cardTypes.add(CardTypes.Cavalry);
 		playerObjet(0).setPlayerCards(cardTypes);
 	}
 

@@ -18,6 +18,7 @@ import model.CardTypes;
 import model.Continent;
 import model.Country;
 import model.Player;
+import controller.HelperClass;;
 
 /**
  * This class tests Benevolent Strategy
@@ -27,6 +28,7 @@ import model.Player;
  *
  */
 public class BenevolentStrategyTest {
+	HelperClass helper = new HelperClass();
 	BenevolentStrategy bs;
 	Player player1, player2, player3;
 	Country country1, country2, country3, country4, country5, country6, country7;
@@ -232,7 +234,7 @@ public class BenevolentStrategyTest {
 	@Test
 	public void testReinforce() {
 		List<Country> countries = player1.getMyCountries(player1);
-		Country c = countries.get(bs.getWeakestCountryIndex(countries));
+		Country c = countries.get(helper.getWeakestCountryIndex(countries));
 		int armies = c.getNoOfArmies() + player1.getPlayerArmiesNotDeployed();
 		bs.reinforce(player1);
 		assertEquals(armies, c.getNoOfArmies());
@@ -244,7 +246,7 @@ public class BenevolentStrategyTest {
 	@Test
 	public void fortify() {
 		List<Country> countries = player1.getMyCountries(player1);
-		Country c = countries.get(bs.getWeakestCountryIndex(countries));
+		Country c = countries.get(helper.getWeakestCountryIndex(countries));
 		int armies_before = c.getNoOfArmies();
 		bs.fortify(player1);
 		assertEquals(true, c.getNoOfArmies() > armies_before);

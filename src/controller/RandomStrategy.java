@@ -79,7 +79,6 @@ public class RandomStrategy implements IStrategy {
 			if (fortifying.getNoOfArmies() > 1 && fC.hasPathBFS2(country, fortifying)) {
 				country.setNoOfArmies(country.getNoOfArmies() + fortifying.getNoOfArmies() - 1);
 				fortifying.setNoOfArmies(1);
-
 				ReadingFiles.CountryNameObject.get(country.getName()).setNoOfArmies(country.getNoOfArmies());
 				ReadingFiles.CountryNameObject.get(fortifying.getName()).setNoOfArmies(fortifying.getNoOfArmies());
 				break;

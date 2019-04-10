@@ -112,6 +112,8 @@ public class MFrame extends JFrame implements Observer {
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 //		jPanel.add(scroller);
 		area = new JTextArea(100, 100);
+
+		
 		JScrollPane scroller2 = new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 

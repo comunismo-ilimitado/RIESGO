@@ -39,7 +39,6 @@ public class CheaterStrategy implements IStrategy {
 	 */
 	public void attack(Player player) {
 		AttackController aC = new AttackController();
-
 		List<Country> mycountries = player.getMyCountries(player);
 		for (int i = 0; i < mycountries.size(); i++) {
 			List<Country> neighbors = aC.getMyNeighborsForAttack(mycountries.get(i));
@@ -48,7 +47,6 @@ public class CheaterStrategy implements IStrategy {
 				neighbors.get(j).setPlayer(player);
 				ReadingFiles.CountryNameObject.put(neighbors.get(j).getName(), neighbors.get(j));
 			}
-
 		}
 	}
 

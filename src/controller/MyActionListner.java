@@ -7,8 +7,6 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.*;
 import model.CardTypes;
 import model.Country;
@@ -49,19 +47,27 @@ public class MyActionListner extends Observable implements ActionListener {
 		try {
 
 			if (controller.PlayerNo2() > 1) {
-				if (currentPlayer >= controller.PlayerNo2() - 1)
-					currentPlayer = 0;
-				else
-					currentPlayer++;
-				if (!controller.files.playerId2.containsKey(currentPlayer)) {
-					playerUpdate();
+				ArrayList<Integer> arrayList = new ArrayList<>(ReadingFiles.playerId2.keySet());
+				int index = arrayList.indexOf(currentPlayer);
+				index=index+1;
+				if(index>=arrayList.size()) {
+					currentPlayer=controller.files.playerId2.get( arrayList.get(0)).getPlayerId();
 				}
-			} else {
-				controller.frame.error("Player :- "+controller.files.playerId2.keySet().toArray()[0]+" Wins");
-				System.exit(0);
-
+				else {
+					currentPlayer=controller.files.playerId2.get( arrayList.get(index)).getPlayerId();					
+				}
 				
+
+				/*
+				 * if (currentPlayer >= controller.PlayerNo2() - 1) currentPlayer = 0; else
+				 * currentPlayer++; if (!controller.files.playerId2.containsKey(currentPlayer))
+				 * { playerUpdate(); }
+				 */
+
+			} else {
+				controller.frame.error("Player :- " + controller.files.playerId2.keySet().toArray()[0] + " Wins");
 				controller.frame.dispose();
+				System.exit(0);
 
 			}
 		} catch (Exception e) {
@@ -111,49 +117,52 @@ public class MyActionListner extends Observable implements ActionListener {
 			e.printStackTrace();
 		}
 		Player pl = controller.playerObjet(currentPlayer);
+System.out.println("---------------------------------");
+		System.out.println("Current Player " + (currentPlayer + 1));
 		textarea("---------------------------------");
-		textarea("Player Playing :- " +(currentPlayer+1));
+		textarea("Player Playing :- " + (currentPlayer + 1));
 		String stratergy = pl.getStatergy().trim();
 		if (stratergy.equals("Agressive")) {
-			textarea("Currently in Reinforcement Mode");
+			textarea("Currently in Reinforcement Mode for Agressive");
 			pl.aggressiveStratergy.reinforce(pl);
-			textarea("Currently in Attack Mode");
+			textarea("Currently in Attack Mode for Agressive ");
 			pl.aggressiveStratergy.attack(pl);
+			System.out.println("Attack Finished");
 			elemination(pl);
-			textarea("Currently in Fortification Mode");
+			textarea("Currently in Fortification Mode for Agressive");
 			pl.aggressiveStratergy.fortify(pl);
 			playerUpdate();
 			changed();
 			ReinforcementPhase();
 		} else if (stratergy.equals("Benevolent")) {
-			textarea("Currently in Reinforcement Mode");
+			textarea("Currently in Reinforcement Mode Benevolent");
 			pl.benevolentStrategy.reinforce(pl);
-			textarea("Currently in Attack Mode");
+			textarea("Currently in Attack Mode Benevolent");
 			pl.benevolentStrategy.attack(pl);
 			elemination(pl);
-			textarea("Currently in Fortification Mode");
+			textarea("Currently in Fortification Mode Benevolent");
 			pl.benevolentStrategy.fortify(pl);
 			playerUpdate();
 			changed();
 			ReinforcementPhase();
 		} else if (stratergy.equals("Random")) {
-			textarea("Currently in Reinforcement Mode");
+			textarea("Currently in Reinforcement Mode Random");
 			pl.randomStrategy.reinforce(pl);
-			textarea("Currently in Attack Mode");
+			textarea("Currently in Attack Mode Random");
 			pl.randomStrategy.attack(pl);
 			elemination(pl);
-			textarea("Currently in Fortification Mode");
+			textarea("Currently in Fortification Mode Random");
 			pl.randomStrategy.fortify(pl);
 			playerUpdate();
 			changed();
 			ReinforcementPhase();
 		} else if (stratergy.equals("Cheater")) {
-			textarea("Currently in Reinforcement Mode");
+			textarea("Currently in Reinforcement Mode Cheater");
 			pl.cheaterStrategy.reinforce(pl);
-			textarea("Currently in Attack Mode");
+			textarea("Currently in Attack Mode Cheater");
 			pl.cheaterStrategy.attack(pl);
 			elemination(pl);
-			textarea("Currently in Fortification Mode");
+			textarea("Currently in Fortification Mode Cheater");
 			pl.cheaterStrategy.fortify(pl);
 			playerUpdate();
 			changed();
@@ -170,22 +179,43 @@ public class MyActionListner extends Observable implements ActionListener {
 			controller.playerObjet(currentPlayer).calculateReinforcementArmies(controller.playerObjet(currentPlayer));
 			controller.frame.error("Its Player:- " + (currentPlayer + 1) + " Turn");
 			
+
 		}
 	}
-public void elemination(Player attacker) {
-	for(int i=0;i<controller.PlayerNo2();i++) {
-		Player temp = controller.files.playerId2.get(controller.files.playerId2.keySet().toArray()[i]);
-	if (temp.getTotalCountriesOccupied().size() == 0) {
-		List<CardTypes> defcards = temp.getPlayerCards();
-		List<CardTypes> attcards = attacker.getPlayerCards();
-		attcards.addAll(defcards);
-		attacker.setPlayerCards(attcards);
-		ReadingFiles.playerId.get(attacker.getPlayerId()).setPlayerCards(attcards);
-		ReadingFiles.playerId2.remove(temp.getPlayerId());
-		ReadingFiles.players.remove(ReadingFiles.players.indexOf(temp.getPlayerId()));
+
+	public void elemination(Player attacker) {
+		//System.out.println(controller.files.playerId2.size());
+		//System.out.println(controller.files.playerId2.keySet());
+		ArrayList<Integer> arrayList=new ArrayList<>(ReadingFiles.playerId2.keySet());
+		for (int i = 0; i < arrayList.size(); i++) {
+			Player temp = controller.files.playerId2.get(arrayList.get(i));
+			//System.out.println("Chk For "+(temp.getPlayerId()+1)+ "And No of Countries Occupies "+temp.getTotalCountriesOccupied());
+			if (temp.getTotalCountriesOccupied().size() == 0) {
+				List<CardTypes> defcards = temp.getPlayerCards();
+				List<CardTypes> attcards = attacker.getPlayerCards();
+				attcards.addAll(defcards);
+				attacker.setPlayerCards(attcards);
+				ReadingFiles.playerId.get(attacker.getPlayerId()).setPlayerCards(attcards);
+				ReadingFiles.playerId2.remove(temp.getPlayerId());
+				ReadingFiles.players.remove(ReadingFiles.players.indexOf(temp.getPlayerId()));
+			}
+
+		}
+//		System.out.println("players left Now " + controller.PlayerNo2());
+	/*	for (int i = 0; i < controller.PlayerNo2(); i++) {
+			System.out.println("-->"
+					+ (controller.files.playerId2.get(controller.files.playerId2.keySet().toArray()[i]).getPlayerId()+1));
+		}
+*/
+		if (controller.files.playerId2.size() <= 1) {
+			controller.frame.error("Player :- " + controller.files.playerId2.keySet().toArray()[0] + " Wins");
+			controller.frame.dispose();
+			System.exit(0);
+
+		}
+
 	}
-}}
-	
+
 	/**
 	 * This method
 	 */
@@ -583,9 +613,11 @@ public void elemination(Player attacker) {
 			writer.write(currentPhase + "\n");
 			writer.write(controller.frame.area.getText());
 			for (int i = 0; i < controller.PlayerNo2(); i++) {
-				Player tempPlayer = controller.files.playerId2.get(i);
+				Player tempPlayer = controller.files.playerId2.get(controller.files.playerId2.keySet().toArray()[i]);
 				writer.write("----PLAYER----\n");
+				System.out.println("Error Report :-" + tempPlayer + "---" + controller.PlayerNo2());
 				writer.write(tempPlayer.getPlayerId() + "\n");
+				System.out.println();
 				writer.write(tempPlayer.getStatergy() + "\n");
 				for (int j = 0; j < tempPlayer.getTotalCountriesOccupied().size(); j++) {
 					Country tempCountry = tempPlayer.getTotalCountriesOccupied().get(j);
@@ -611,7 +643,7 @@ public void elemination(Player attacker) {
 
 	public void textarea(String string) {
 		controller.frame.area.append("\n" + string);
-		System.out.println(string);
+		// System.out.println(string);
 	}
 
 	public void changed() {

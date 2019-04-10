@@ -260,7 +260,7 @@ public class MainController {
 	}
 
 	public int PlayerNo2() {
-		return files.playerId2.size();
+		return ReadingFiles.playerId2.size();
 	}
 
 	/**

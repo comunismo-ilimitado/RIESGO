@@ -1,46 +1,117 @@
-Resources/India.map
-2
-0
+Resources/Montreal.map
+6
+5
 Finish Reinforcement
 
 ---------------------------------
 Player Playing :- 1
+Currently in Reinforcement Mode
+Currently in Fortification Mode
+---------------------------------
+Player Playing :- 2
+Currently in Reinforcement Mode Benevolent
+Currently in Attack Mode Benevolent
+Currently in Fortification Mode Benevolent
+---------------------------------
+Player Playing :- 3
+Currently in Reinforcement Mode for Agressive
+Currently in Attack Mode for Agressive 
+Currently in Fortification Mode for Agressive
+---------------------------------
+Player Playing :- 4
+Currently in Reinforcement Mode Random
+Currently in Attack Mode Random
+Currently in Fortification Mode Random
+---------------------------------
+Player Playing :- 5
+Currently in Reinforcement Mode Cheater
+Currently in Attack Mode Cheater
+Currently in Fortification Mode Cheater
+---------------------------------
+Player Playing :- 6
+Currently in Reinforcement Mode
+Currently in Fortification Mode
+---------------------------------
+Player Playing :- 1
+Currently in Reinforcement Mode
+Currently in Fortification Mode
+---------------------------------
+Player Playing :- 2
+Currently in Reinforcement Mode Benevolent
+Currently in Attack Mode Benevolent
+Currently in Fortification Mode Benevolent
+---------------------------------
+Player Playing :- 3
+Currently in Reinforcement Mode for Agressive
+Currently in Attack Mode for Agressive 
+Currently in Fortification Mode for Agressive
+---------------------------------
+Player Playing :- 4
+Currently in Reinforcement Mode Random
+Currently in Attack Mode Random
+Currently in Fortification Mode Random
+---------------------------------
+Player Playing :- 5
+Currently in Reinforcement Mode Cheater
+Currently in Attack Mode Cheater
+Currently in Fortification Mode Cheater
+---------------------------------
+Player Playing :- 6
 Currently in Reinforcement Mode----PLAYER----
 0
 Human
-uttar pradesh***3
-kashmir***3
-manipur***3
-chattisgarh***3
-meghalaya***3
-rajasthan***3
-andaman nicobar islands***3
-assam***3
-jharkhand***3
-kerala***3
-karnataka***2
-gujarat***2
-sikkim***2
-nagaland***2
-orissa***2
+Mercier***7
 ----CARDS----
 [Artillery]
 ----PLAYER----
 1
+Benevolent
+Anjou***7
+----CARDS----
+[]
+----PLAYER----
+2
+Agressive
+RDP-PAT***1
+Ahuntsic***1
+Pierrefonds***3
+Montreal Nord***1
+Villeray***1
+----CARDS----
+[Artillery, Artillery]
+----PLAYER----
+3
+Random
+Rosemont***1
+----CARDS----
+[]
+----PLAYER----
+4
+Cheater
+Westmount***20
+Dorval***10
+Hampstead***16
+NDG***16
+Ile Bizard***8
+Ste-Anne-de-Bellevue***10
+La Salle***20
+Verdun***8
+Plateau***2
+Ville-Marie***16
+Lachine***16
+Pointe-Claire***8
+Beaconsfield***20
+Kirkland***8
+Outremont***12
+Saint-Laurent***10
+Senneville***20
+Mont-Royal***14
+Pointe St-Charles***8
+----CARDS----
+[]
+----PLAYER----
+5
 Human
-tamil nadu***3
-madhya pradesh***3
-andhra pradesh***3
-tirupura***3
-uttaranchal***3
-haryana***3
-punjab***3
-bihar***3
-himachal pradesh***3
-west bengal***3
-mizoram***3
-maharastra***3
-goa***2
-arunachal pradesh***2
+St-Leonard***8
 ----CARDS----
 []

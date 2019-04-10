@@ -12,6 +12,8 @@ import model.*;
  */
 public class CheaterStrategy implements IStrategy {
 
+	HelperClass helper = new HelperClass();
+
 	/**
 	 * Reinforcement phase based on Cheater Strategy rules
 	 * 
@@ -43,9 +45,8 @@ public class CheaterStrategy implements IStrategy {
 		for (int i = 0; i < mycountries.size(); i++) {
 			List<Country> neighbors = aC.getMyNeighborsForAttack(mycountries.get(i));
 			for (int j = 0; j < neighbors.size(); j++) {
-				int index = getIndex(neighbors.get(j), mycountries.get(i).getNeighbors());
+				int index = helper.getIndex(neighbors.get(j), mycountries.get(i).getNeighbors());
 				neighbors.get(j).setPlayer(player);
-				//ReadingFiles.CountryNameObject.put(neighbors.get(j).getName(), neighbors.get(j));
 				ReadingFiles.CountryNameObject.get(neighbors.get(j).getName()).setPlayer(player);
 			}
 		}
@@ -71,19 +72,4 @@ public class CheaterStrategy implements IStrategy {
 		}
 	}
 
-	/**
-	 * get index of the country
-	 * 
-	 * @param country: country name
-	 * @param countries: list of countries
-	 * @return index
-	 */
-	public int getIndex(Country country, List<Country> countries) {
-		for (int i = 0; i < countries.size(); i++) {
-			if (country.getName().equals(countries.get(i).getName())) {
-				return i;
-			}
-		}
-		return -1;
-	}
 }

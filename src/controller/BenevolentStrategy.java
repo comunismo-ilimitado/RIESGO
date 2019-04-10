@@ -12,6 +12,8 @@ import model.*;
  */
 public class BenevolentStrategy implements IStrategy {
 
+	HelperClass helper = new HelperClass();
+
 	/**
 	 * Reinforcement phase based on Benevolent Strategy rules
 	 * 
@@ -22,12 +24,13 @@ public class BenevolentStrategy implements IStrategy {
 		player.calcArmiesByControlValue(player);
 		List<Country> countries = player.getMyCountries(player);
 		Country country = null;
-		if (countries.size() > getWeakestCountryIndex(countries))
-			country = countries.get(getWeakestCountryIndex(countries));
+		if (countries.size() > helper.getWeakestCountryIndex(countries))
+			country = countries.get(helper.getWeakestCountryIndex(countries));
 		country.setNoOfArmies(country.getNoOfArmies() + player.getPlayerArmiesNotDeployed());
-		player.getMyCountries(player).get(getWeakestCountryIndex(countries)).setNoOfArmies(country.getNoOfArmies());
+		player.getMyCountries(player).get(helper.getWeakestCountryIndex(countries))
+				.setNoOfArmies(country.getNoOfArmies());
 		player.setPlayerTotalArmiesNotDeployed(0);
-		
+
 		ReadingFiles.CountryNameObject.get(country.getName()).setNoOfArmies(country.getNoOfArmies());
 	}
 
@@ -50,7 +53,7 @@ public class BenevolentStrategy implements IStrategy {
 	public void fortify(Player player) {
 		FortificationController fC = new FortificationController();
 		List<Country> countries = player.getMyCountries(player);
-		Country weakcountry = countries.get(getWeakestCountryIndex(countries));
+		Country weakcountry = countries.get(helper.getWeakestCountryIndex(countries));
 		countries.remove(weakcountry);
 		List<Country> canfortifycountries = new ArrayList<>();
 		while (countries.size() > 0) {
@@ -70,57 +73,20 @@ public class BenevolentStrategy implements IStrategy {
 					weakcountry.setNoOfArmies(weakcountry.getNoOfArmies() + strongestcountry.getNoOfArmies() - 1);
 					strongestcountry.setNoOfArmies(1);
 				}
-				int index = getIndex(weakcountry, player.getMyCountries(player));
+				int index = helper.getIndex(weakcountry, player.getMyCountries(player));
 				player.getMyCountries(player).get(index).setNoOfArmies(weakcountry.getNoOfArmies());
-				index = getIndex(strongestcountry, player.getMyCountries(player));
+				index = helper.getIndex(strongestcountry, player.getMyCountries(player));
 				player.getMyCountries(player).get(index).setNoOfArmies(strongestcountry.getNoOfArmies());
 				ReadingFiles.CountryNameObject.get(weakcountry.getName()).setNoOfArmies(weakcountry.getNoOfArmies());
-//				ReadingFiles.CountryNameObject.put(strongestcountry.getName(),strongestcountry);
 				ReadingFiles.CountryNameObject.get(strongestcountry.getName())
 						.setNoOfArmies(strongestcountry.getNoOfArmies());
 
 				break;
 			} else {
-				weakcountry = countries.get(getWeakestCountryIndex(countries));
+				weakcountry = countries.get(helper.getWeakestCountryIndex(countries));
 				countries.remove(weakcountry);
 				canfortifycountries.clear();
 			}
 		}
-	}
-
-	/**
-	 * get index of the country
-	 * 
-	 * @param country: country name
-	 * @param countries: list of countries
-	 * @return index
-	 */
-	public int getIndex(Country country, List<Country> countries) {
-		for (int i = 0; i < countries.size(); i++) {
-			if (country.getName().equals(countries.get(i).getName())) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	/**
-	 * get index of the country with least number of armies
-	 * 
-	 * @param countries: list of countries
-	 * @return index
-	 */
-	public int getWeakestCountryIndex(List<Country> countries) {
-		Country country = null;
-		if (countries.size() > 0)
-			country = countries.get(0);
-		int index = 0;
-		for (int i = 1; i < countries.size(); i++) {
-			if (country.getNoOfArmies() > countries.get(i).getNoOfArmies()) {
-				country = countries.get(i);
-				index = i;
-			}
-		}
-		return index;
 	}
 }

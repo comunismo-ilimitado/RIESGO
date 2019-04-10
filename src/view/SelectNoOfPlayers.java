@@ -11,6 +11,14 @@ import javax.swing.JLabel;
 
 import controller.MainController;
 
+
+/**
+ * this class select number of player for the game
+ * @author pazim
+ * @version 1.0
+ * 
+ *
+ */
 public class SelectNoOfPlayers {
 
 	private static JComboBox PNumberJCombo;
@@ -65,6 +73,7 @@ public class SelectNoOfPlayers {
 		OKButton.setVisible(true);
 		PNumberJCombo.setVisible(true);
 		Label1.setVisible(true);
+		Frame1.setLocationRelativeTo(null);
 		Frame1.setLayout(null);
 		Frame1.setVisible(true);
 		NumberOfPlayers = GetSelectedValue();

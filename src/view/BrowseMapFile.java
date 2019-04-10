@@ -14,6 +14,12 @@ import java.nio.file.Paths;
 
 import javax.swing.*;
 
+
+/**
+ * This class browse the map file
+ * @author pazim
+ *@version 1.0
+ */
 public class BrowseMapFile {
 
 	private static JFrame Window;

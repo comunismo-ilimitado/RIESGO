@@ -86,6 +86,8 @@ public class SelectMapType {
 		select2.setVisible(true);
 		select3.setVisible(true);
 
+		window.setLocationRelativeTo(null);
+
 		window.setLayout(null);
 		window.setVisible(true);
 	}

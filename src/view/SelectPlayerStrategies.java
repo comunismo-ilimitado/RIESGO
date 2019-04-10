@@ -66,6 +66,7 @@ public class SelectPlayerStrategies {
 		ok_button.setBounds(290, SelectNoOfPlayers.NumberOfPlayers * 60, 100, 30);
 		frame.add(ok_button);
 		ok_button.setVisible(true);
+		frame.setLocationRelativeTo(null);
 		frame.setLayout(null);
 		frame.setVisible(true);
 	}

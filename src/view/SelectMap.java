@@ -53,7 +53,7 @@ public class SelectMap {
 	}
 	public void setUpTourScreen() {
 		ArrayList<String> maps= new ArrayList<>();
-		maps.addAll(Arrays.asList("Montreal","India","World","Europe","Canada","Asia","New York"));//add more maps
+		maps.addAll(Arrays.asList("Montreal","India","World","Europe","Asia"));//add more maps
 		
 		frame = new JFrame("S");
 		frame.setSize(700, maps.size()*90);
@@ -122,6 +122,7 @@ public class SelectMap {
 		addMap("India");
 		addMap("World");
 		addMap("Europe");
+		addMap("Asia");
 		setUpSingleScreen();
 		getSingleModeSelectedMap();
 	}

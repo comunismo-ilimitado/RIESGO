@@ -1,5 +1,5 @@
 [Map]
-author=Rustin Terry
+author=Concordia Students
 image=Asia.bmp
 wrap=yes
 scroll=horizontal
@@ -14,14 +14,13 @@ Indian Sub-Continent=2
 South East Asia=4
 Oceania=4
 Persia=8
-FaltuContinent=9
 
 
 [Territories]
-Saudi Arabia,77,295,Arabian Peninsula,Yemen,Omen,United Arab Emigrants,Qatar,Buhrain,Kuwait,Iraq,Jordan
+Saudi Arabia,77,295,Arabian Peninsula,Yemen,Omen,United Arab Emigrants,Qatar,Bahrain,Kuwait,Iraq,Jordan
 Kuwait,105,251,Arabian Peninsula,Saudi Arabia,Iraq,Iran
-Buhrain,120,277,Arabian Peninsula,Saudi Arabia,Qatar
-Qatar,119,301,Arabian Peninsula,Buhrain,Saudi Arabia,United Arab Emigrants
+Bahrain,120,277,Arabian Peninsula,Saudi Arabia,Qatar
+Qatar,119,301,Arabian Peninsula,Bahrain,Saudi Arabia,United Arab Emigrants
 United Arab Emigrants,146,311,Arabian Peninsula,Qatar,Saudi Arabia,Omen
 Omen,157,343,Arabian Peninsula,United Arab Emigrants,Saudi Arabia,Yemen
 Yemen,89,361,Arabian Peninsula,Saudi Arabia,Omen

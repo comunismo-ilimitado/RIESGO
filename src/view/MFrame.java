@@ -96,9 +96,7 @@ public class MFrame extends JFrame implements Observer {
 		JPanel jPanel = new JPanel(new GridLayout(2, 1));
 		// jPanel.setSize(new Dimension(500, 1000));
 		// jPanel.setBackground(Color.red);
-
 		// image pannel
-
 		BufferedImage image;
 		try {
 			image = ImageIO.read(new File("Resources/" + MapImage));

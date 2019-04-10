@@ -27,7 +27,7 @@ public class Tournament {
 		function();
 		results();
 		System.out.println(table);
-		TournamentResults t= new TournamentResults();
+//		TournamentResults t= new TournamentResults();
 	}
 
 	/**
@@ -184,20 +184,31 @@ public class Tournament {
 //	}
 
 	public void results() {
+		TournamentResults results=new TournamentResults();
+		results.setup(SelectMap.TourMapList.size()+1);
 		table+=String.format("%-16s","" );
+		results.adding("");
+		
+		
+		
 		for (int j = 0; j < SelectMap.TourMapList.size(); j++) {
 			table+=String.format("%-16s","|   Map"+(j+1) );
+			results.adding("Map "+(j+1));
 		}
 		table+="\n";
 		for (int i = 0; i < SelectMap.NoOfGames; i++) {
 			table+=String.format("%-16s","   Game"+(i+1) );
+			results.adding("Game"+(i+1));
 			for (int j = 0; j < SelectMap.TourMapList.size(); j++) {
 				table+=String.format("%-16s","|"+tablelist.get(i).get(j) );
 				System.out.println(tablelist.get(i).get(j));
+				results.adding(""+tablelist.get(i).get(j));
 				
 			}
 			table+="\n";
 		}
+		results.show();
+		
 
 	}
 

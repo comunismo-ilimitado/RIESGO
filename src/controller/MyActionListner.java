@@ -45,7 +45,6 @@ public class MyActionListner extends Observable implements ActionListener {
 
 	public void playerUpdate() {
 		try {
-
 			if (controller.PlayerNo2() > 1) {
 				ArrayList<Integer> arrayList = new ArrayList<>(ReadingFiles.playerId2.keySet());
 				int index = arrayList.indexOf(currentPlayer);
@@ -56,16 +55,13 @@ public class MyActionListner extends Observable implements ActionListener {
 				else {
 					currentPlayer=controller.files.playerId2.get( arrayList.get(index)).getPlayerId();					
 				}
-				
-
 				/*
 				 * if (currentPlayer >= controller.PlayerNo2() - 1) currentPlayer = 0; else
 				 * currentPlayer++; if (!controller.files.playerId2.containsKey(currentPlayer))
 				 * { playerUpdate(); }
 				 */
-
 			} else {
-				controller.frame.error("Player :- " + controller.files.playerId2.keySet().toArray()[0] + " Wins");
+				controller.frame.error("Player :- " + ((int)controller.files.playerId2.keySet().toArray()[0] +1 )+ " Wins");
 				controller.frame.dispose();
 				System.exit(0);
 
@@ -208,7 +204,7 @@ System.out.println("---------------------------------");
 		}
 */
 		if (controller.files.playerId2.size() <= 1) {
-			controller.frame.error("Player :- " + controller.files.playerId2.keySet().toArray()[0] + " Wins");
+			controller.frame.error("Player :- " + ((int)controller.files.playerId2.keySet().toArray()[0] +1)+ " Wins");
 			controller.frame.dispose();
 			System.exit(0);
 

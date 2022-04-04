@@ -74,7 +74,6 @@ public class MFrame extends JFrame implements Observer {
 	public String MapImage = "noimage.bmp";
 
 	public MFrame(MyActionListner myActionListner, String MapImage) {
-
 		super("PAzim");
 		this.myActionListner = myActionListner;
 		this.MapImage = MapImage;
@@ -126,6 +125,9 @@ public class MFrame extends JFrame implements Observer {
 		JPanel jPanel4 = new JPanel(new GridLayout(0, 1));
 		jPanel4.setBorder(new CompoundBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED),
 				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
+
+		// Cuadro informativo debajo del panel de texto
 		// jPanel4.setBackground(Color.RED);
 		jLabel1 = new JLabel("");
 		jLabel2 = new JLabel("");
@@ -142,6 +144,7 @@ public class MFrame extends JFrame implements Observer {
 
 		jPanel3.add(jPanel4);
 
+		// Cuadro de botones
 		// lower text
 		JPanel jPanel5 = new JPanel(new GridLayout(2, 4));
 		nextAction = new JButton("Finish Reinforcement");
@@ -157,7 +160,6 @@ public class MFrame extends JFrame implements Observer {
 		buttonCard2.addActionListener(myActionListner);
 		buttonCard3.addActionListener(myActionListner);
 		buttonCard4.addActionListener(myActionListner);
-
 		jPanel5.add(nextAction);
 		jPanel5.add(jLabeCardl);
 		jPanel5.add(jLabelCard2);
@@ -166,10 +168,10 @@ public class MFrame extends JFrame implements Observer {
 		jPanel5.add(buttonCard2);
 		jPanel5.add(buttonCard3);
 		jPanel5.add(buttonCard4);
-
 		// jPanel5.setBackground(Color.GREEN);
-
 		jPanel3.add(jPanel5);
+
+		// Cuadro de porcentaje de paises
 		jPanel6 = new JPanel(new GridLayout(0, 1));
 		jPanel6.setBorder(new CompoundBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED),
 				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
@@ -188,11 +190,11 @@ public class MFrame extends JFrame implements Observer {
 		jLabels.add(jLabel46);
 		jLabels.add(jLabel56);
 		jLabels.add(jLabel66);
-
 		jPanel3.add(jPanel6);
 
-		jPanel7 = new JPanel(new GridLayout(0, 1));
 
+		// Cuadro de continentes ocupados
+		jPanel7 = new JPanel(new GridLayout(0, 1));
 		jPanel7.setBorder(new CompoundBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED),
 				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 		jPanel7.setToolTipText("CONTINENTS");
@@ -210,9 +212,10 @@ public class MFrame extends JFrame implements Observer {
 		jLabels2.add(jLabel47);
 		jLabels2.add(jLabel57);
 		jLabels2.add(jLabel67);
-
 		jPanel3.add(jPanel7);
 
+
+		// Cuadricula de paises
 		jPanel2 = new JPanel(new GridLayout(0, 5));
 		// jPanel2.setBackground(Color.BLACK);
 		jPanel2.setSize(new Dimension(500, 1000));
@@ -227,7 +230,6 @@ public class MFrame extends JFrame implements Observer {
 		pack();
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
-
 			@Override
 			public void windowClosing(WindowEvent e) {
 				// Ask for confirmation before terminating the program.
@@ -238,21 +240,17 @@ public class MFrame extends JFrame implements Observer {
 					System.exit(0);
 				} else if (option == JOptionPane.YES_OPTION) {
 					Exit_Option();
-
 				}
-
 			}
 		});
 		setVisible(true);
-
 	}
 
 	/**
 	 * This method update the view
 	 */
-
+	// Anade el numero de cartas a cada boton
 	public void cards() {
-
 		buttonCard1.setText("Infantry " + myActionListner.getCardsType1());
 		buttonCard2.setText("Artillery " + myActionListner.getCardsType2());
 		buttonCard3.setText("Cavalry " + myActionListner.getCardsType3());
@@ -261,7 +259,7 @@ public class MFrame extends JFrame implements Observer {
 	/**
 	 * This method update the view
 	 */
-
+	// Rellena el panel 4
 	public void NotifyAll() {
 		jLabel1.setText("Turn For Player :-" + (myActionListner.currentPlayer + 1));
 		jLabel2.setText("Armies Left:- " + noArmiesLeft);
@@ -275,6 +273,7 @@ public class MFrame extends JFrame implements Observer {
 	 * This method update the view
 	 */
 
+	// Los tres siguientes actualizan el panel 6 y 7
 	public void SetDominationView(int NoOfPlayers) {
 		for (int i = 0; i < NoOfPlayers; i++) {
 			jPanel6.add(jLabels.get(i));
@@ -285,7 +284,6 @@ public class MFrame extends JFrame implements Observer {
 	/**
 	 * This method update the view
 	 */
-
 	public void UpdateGameDominationViewPercentage(ArrayList<Float> percent) {
 		for (int i = 0; i < percent.size(); i++) {
 			jLabels.get(i).setText("Player " + (i + 1) + " :- " + percent.get(i));
@@ -304,11 +302,11 @@ public class MFrame extends JFrame implements Observer {
 	 * @param countryObjects
 	 * @throws IOException
 	 */
-
+	// Rellena la cuadricula de paises y marca las tropas de cada uno
 	public void SetButtons(HashMap<String, Country> countryObjects) throws IOException {
 		List<String> count = new ArrayList<>(countryObjects.keySet());
 		button = new JButton[count.size()];
-		Random random = new Random();
+		Random random = new Random(); // NO SE USA
 		for (int i = 0; i < count.size(); i++) {
 			button[i] = new JButton(count.get(i) + " | " + countryObjects.get(count.get(i)).getNoOfArmies() + " | "
 					+ countryObjects.get(count.get(i)).getContinent().getName());
@@ -316,7 +314,6 @@ public class MFrame extends JFrame implements Observer {
 			jPanel2.add(button[i]);
 			button[i].addActionListener(myActionListner);
 		}
-
 	}
 
 	/**
@@ -324,6 +321,7 @@ public class MFrame extends JFrame implements Observer {
 	 * 
 	 * @param countryObjects
 	 */
+	// Anade los colores a los botones de paises
 	public void SetColorToAll(HashMap<String, Country> countryObjects) {
 		List<String> count = new ArrayList<>(countryObjects.keySet());
 		for (int i = 0; i < count.size(); i++) {
@@ -337,16 +335,17 @@ public class MFrame extends JFrame implements Observer {
 	 * @param countryObjects
 	 * @throws IOException
 	 */
+	// Actualiza el numero de tropas de cada pais
 	public void Refresh(HashMap<String, Country> countryObjects) throws IOException {
 		List<String> count = new ArrayList<>(countryObjects.keySet());
 		for (int i = 0; i < count.size(); i++) {
 			button[i].setText(count.get(i) + " | " + countryObjects.get(count.get(i)).getNoOfArmies() + " | "
 					+ countryObjects.get(count.get(i)).getContinent().getName());
 			button[i].setName(count.get(i));
-
 		}
 	}
 
+	// NO SE USA
 	public void RepaintAndRevalidate() {
 		revalidate();
 	}
@@ -355,12 +354,14 @@ public class MFrame extends JFrame implements Observer {
 		JOptionPane.showMessageDialog(null, string);
 	}
 
+	// Activa todos los botones
 	public void ActivateAll() {
 		for (int i = 0; i < button.length; i++) {
 			button[i].setEnabled(true);
 		}
 	}
 
+	// Los siguenes son mensajes emergentes
 	public String popupText(int a) {
 		return JOptionPane.showInputDialog("Enter Armies You wana Move Between, Maximum :-" + a);
 	}
@@ -379,6 +380,7 @@ public class MFrame extends JFrame implements Observer {
 			return false;
 	}
 
+	//
 	public void OnlyNeeded(List<Country> arrayList) {
 		List<String> temp = new ArrayList<>(hashButton.keySet());
 		for (int i = 0; i < arrayList.size(); i++) {
@@ -387,14 +389,11 @@ public class MFrame extends JFrame implements Observer {
 		for (int i = 0; i < temp.size(); i++) {
 			JButton tempb = hashButton.get(temp.get(i));
 			tempb.setEnabled(false);
-
 		}
-
 	}
 
 	public void Exit_Option() {
 		myActionListner.SaveGameOnExit();
-
 	}
 
 	@Override

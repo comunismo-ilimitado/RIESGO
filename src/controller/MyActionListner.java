@@ -367,6 +367,8 @@ System.out.println("---------------------------------");
 		}
 	}
 
+
+
 	public void endReinforcement() {
 		cardTypesList.clear();
 		controller.frame.buttonCard4.setEnabled(false);

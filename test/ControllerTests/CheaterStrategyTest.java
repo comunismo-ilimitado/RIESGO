@@ -12,8 +12,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import controller.CheaterStrategy;
-import controller.ReadingFiles;
+import controller.strategies.CheaterStrategy;
+import controller.editor.ReadingFiles;
 import model.CardTypes;
 import model.Continent;
 import model.Country;

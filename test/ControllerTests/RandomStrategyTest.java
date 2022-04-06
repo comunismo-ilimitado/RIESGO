@@ -12,8 +12,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import controller.RandomStrategy;
-import controller.ReadingFiles;
+import controller.strategies.RandomStrategy;
+import controller.editor.ReadingFiles;
 import model.CardTypes;
 import model.Continent;
 import model.Country;

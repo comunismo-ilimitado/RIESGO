@@ -1,117 +1,45 @@
 Resources/Montreal.map
-6
-5
+2
+0
 Finish Reinforcement
 
 ---------------------------------
 Player Playing :- 1
-Currently in Reinforcement Mode
-Currently in Fortification Mode
----------------------------------
-Player Playing :- 2
-Currently in Reinforcement Mode Benevolent
-Currently in Attack Mode Benevolent
-Currently in Fortification Mode Benevolent
----------------------------------
-Player Playing :- 3
-Currently in Reinforcement Mode for Agressive
-Currently in Attack Mode for Agressive 
-Currently in Fortification Mode for Agressive
----------------------------------
-Player Playing :- 4
-Currently in Reinforcement Mode Random
-Currently in Attack Mode Random
-Currently in Fortification Mode Random
----------------------------------
-Player Playing :- 5
-Currently in Reinforcement Mode Cheater
-Currently in Attack Mode Cheater
-Currently in Fortification Mode Cheater
----------------------------------
-Player Playing :- 6
-Currently in Reinforcement Mode
-Currently in Fortification Mode
----------------------------------
-Player Playing :- 1
-Currently in Reinforcement Mode
-Currently in Fortification Mode
----------------------------------
-Player Playing :- 2
-Currently in Reinforcement Mode Benevolent
-Currently in Attack Mode Benevolent
-Currently in Fortification Mode Benevolent
----------------------------------
-Player Playing :- 3
-Currently in Reinforcement Mode for Agressive
-Currently in Attack Mode for Agressive 
-Currently in Fortification Mode for Agressive
----------------------------------
-Player Playing :- 4
-Currently in Reinforcement Mode Random
-Currently in Attack Mode Random
-Currently in Fortification Mode Random
----------------------------------
-Player Playing :- 5
-Currently in Reinforcement Mode Cheater
-Currently in Attack Mode Cheater
-Currently in Fortification Mode Cheater
----------------------------------
-Player Playing :- 6
 Currently in Reinforcement Mode----PLAYER----
 0
 Human
-Mercier***7
+Westmount***3
+Dorval***3
+NDG***3
+Ahuntsic***3
+Verdun***3
+St-Leonard***3
+Pointe-Claire***3
+Beaconsfield***3
+Kirkland***3
+Saint-Laurent***3
+Pierrefonds***3
+Montreal Nord***3
+Mont-Royal***2
+Pointe St-Charles***2
 ----CARDS----
-[Artillery]
+[]
 ----PLAYER----
 1
-Benevolent
-Anjou***7
-----CARDS----
-[]
-----PLAYER----
-2
-Agressive
-RDP-PAT***1
-Ahuntsic***1
-Pierrefonds***3
-Montreal Nord***1
-Villeray***1
-----CARDS----
-[Artillery, Artillery]
-----PLAYER----
-3
 Random
-Rosemont***1
-----CARDS----
-[]
-----PLAYER----
-4
-Cheater
-Westmount***20
-Dorval***10
-Hampstead***16
-NDG***16
-Ile Bizard***8
-Ste-Anne-de-Bellevue***10
-La Salle***20
-Verdun***8
-Plateau***2
-Ville-Marie***16
-Lachine***16
-Pointe-Claire***8
-Beaconsfield***20
-Kirkland***8
-Outremont***12
-Saint-Laurent***10
-Senneville***20
-Mont-Royal***14
-Pointe St-Charles***8
-----CARDS----
-[]
-----PLAYER----
-5
-Human
-St-Leonard***8
+Mercier***3
+Hampstead***3
+Ile Bizard***3
+RDP-PAT***3
+Ste-Anne-de-Bellevue***3
+La Salle***3
+Plateau***3
+Anjou***3
+Rosemont***3
+Ville-Marie***3
+Lachine***3
+Outremont***3
+Villeray***2
+Senneville***2
 ----CARDS----
 []

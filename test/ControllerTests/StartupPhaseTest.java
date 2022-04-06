@@ -8,8 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import controller.ReadingFiles;
-import view.MFrame2;
+import controller.editor.ReadingFiles;
+import view.gameFrames.MFrame2;
 
 
 /**

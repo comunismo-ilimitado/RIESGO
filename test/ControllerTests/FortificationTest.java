@@ -9,8 +9,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import controller.FortificationController;
-import controller.ReadingFiles;
+import controller.controllers.FortificationController;
+import controller.editor.ReadingFiles;
 import model.Continent;
 import model.Country;
 import model.Player;

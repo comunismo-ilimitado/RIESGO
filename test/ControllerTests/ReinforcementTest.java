@@ -13,8 +13,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import controller.ReadingFiles;
-import controller.ReinforcementController;
+import controller.editor.ReadingFiles;
+import controller.controllers.ReinforcementController;
 import model.CardTypes;
 import model.Continent;
 import model.Country;
@@ -27,7 +27,7 @@ import model.Player;
  * @version 1.0
  */
 public class ReinforcementTest {
-	controller.ReinforcementController reinforcement;
+	ReinforcementController reinforcement;
 	Player player1, player2;
 	Country country1, country2, country3, country4, country5, country6, country7;
 	Continent continent1, continent2;

@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import controller.MapValidation;
+import controller.editor.MapValidation;
 import model.Continent;
 import model.Country;
 

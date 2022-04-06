@@ -12,13 +12,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import controller.BenevolentStrategy;
-import controller.ReadingFiles;
+import controller.strategies.BenevolentStrategy;
+import controller.editor.ReadingFiles;
 import model.CardTypes;
 import model.Continent;
 import model.Country;
 import model.Player;
-import controller.HelperClass;;
+import controller.controllers.HelperClass;
 
 /**
  * This class tests Benevolent Strategy

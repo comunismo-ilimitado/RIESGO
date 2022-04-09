@@ -1,6 +1,6 @@
 package view.gameFrames;
 
-import controller.game.MyActionListner;
+import controller.game.MyActionListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +19,7 @@ public class MFrame4 extends JFrame implements ActionListener {
     JButton button, button2;
     public static int no1, no2 = 1;
     public static boolean allout = false;
-    MyActionListner actionListner;
+    MyActionListener actionListner;
 
     public MFrame4() {
         super("Dices and All out ");

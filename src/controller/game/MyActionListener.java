@@ -6,7 +6,6 @@ import model.CardTypes;
 import model.Country;
 import model.Player;
 import view.menuFrames.GameStartWindow;
-import view.gameFrames.MFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,46 +23,44 @@ import java.util.Observable;
  * @version 3.o
  */
 @SuppressWarnings("deprecation")
-public class MyActionListner extends Observable implements ActionListener {
-    boolean gotCard = false;
-    MFrame frame;
+public class MyActionListener extends Observable implements ActionListener {
     MainController controller;
-    List<String> Phases;
+    List<String> phase;
     String currentPhase;
-    int players = 0;
+    private int players = 0;
     public int currentPlayer = 0;
     Country attackCountry1, attackCountry2;
     Country fortifyCountry1, fortifyCountry2;
-    public int cardsSelected = 0;
-    List<CardTypes> cardTypesList = new ArrayList<CardTypes>();
+    List<CardTypes> cardTypesList = new ArrayList<>();
 
-    public MyActionListner(MainController controller) {
+    /**
+     * @param controller
+     */
+    public MyActionListener(MainController controller) {
         this.controller = controller;
-        Phases = new ArrayList<>();
-        Phases.add("Finish Reinforcement");
-        Phases.add("Finish Attack");
-        Phases.add("Finish Fortification");
-        currentPhase = Phases.get(0);
+        phase = new ArrayList<>();
+        phase.add("Finish Reinforcement");
+        phase.add("Finish Attack");
+        phase.add("Finish Fortification");
+        currentPhase = phase.get(0);
         players = controller.PlayerNo();
     }
 
-    public void playerUpdate() {
+    /**
+     * This method changes the turn of the players
+     */
+    private void playerUpdate() {
         try {
-            if (controller.PlayerNo2() > 1) {
+            if (controller.PlayerNo2() > 1) { //Si el numero de jugadores es mayor que 1 se sigue jugando
                 ArrayList<Integer> arrayList = new ArrayList<>(ReadingFiles.playerId2.keySet());
                 int index = arrayList.indexOf(currentPlayer);
                 index = index + 1;
                 if (index >= arrayList.size()) {
-                    currentPlayer = ReadingFiles.playerId2.get(arrayList.get(0)).getPlayerId();
+                    currentPlayer = ReadingFiles.playerId2.get(arrayList.get(0)).getPlayerId(); //Le vuelve a tocar al primero
                 } else {
                     currentPlayer = ReadingFiles.playerId2.get(arrayList.get(index)).getPlayerId();
                 }
-                /*
-                 * if (currentPlayer >= controller.PlayerNo2() - 1) currentPlayer = 0; else
-                 * currentPlayer++; if (!controller.files.playerId2.containsKey(currentPlayer))
-                 * { playerUpdate(); }
-                 */
-            } else {
+            } else { //Si solo queda un jugador ha ganado ese jugador
                 controller.frame.error("Player :- " + ((int) ReadingFiles.playerId2.keySet().toArray()[0] + 1) + " Wins");
                 controller.frame.dispose();
                 System.exit(0);
@@ -79,7 +76,7 @@ public class MyActionListner extends Observable implements ActionListener {
      *
      * @param country: object
      */
-    public void ReinforcementPhase2(Country country) {
+    private void ReinforcementPhase2(Country country) {
         cardTypesList.clear();
         controller.frame.jLabeCardl.setText(cardTypesList.toString());
         // controll.AddArmies(currentPlayer);
@@ -99,7 +96,7 @@ public class MyActionListner extends Observable implements ActionListener {
         } else if (phase.equals("Finish Attack")) {
             controller.frame.ActivateAll();
             controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
-            endReinforcement();
+            finishReinforcement();
         } else if (phase.equals("Finish Fortification")) {
             controller.frame.ActivateAll();
             controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
@@ -107,6 +104,9 @@ public class MyActionListner extends Observable implements ActionListener {
         }
     }
 
+    /**
+     * This method runs the reinforcement phase
+     */
     public void ReinforcementPhase() {
         try {
             controller.RefreshButtons();
@@ -114,54 +114,54 @@ public class MyActionListner extends Observable implements ActionListener {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        Player pl = controller.playerObjet(currentPlayer);
+        Player player = controller.playerObjet(currentPlayer);
         System.out.println("---------------------------------");
         System.out.println("Current Player " + (currentPlayer + 1));
         textarea("---------------------------------");
         textarea("Player Playing :- " + (currentPlayer + 1));
-        String stratergy = pl.getStatergy().trim();
+        String stratergy = player.getStatergy().trim(); //Elimina los caracteres blancos iniciales y finales
         if (stratergy.equals("Agressive")) {
             textarea("Currently in Reinforcement Mode for Agressive");
-            pl.aggressiveStratergy.reinforce(pl);
+            player.aggressiveStratergy.reinforce(player);
             textarea("Currently in Attack Mode for Agressive ");
-            pl.aggressiveStratergy.attack(pl);
+            player.aggressiveStratergy.attack(player);
             System.out.println("Attack Finished");
-            elemination(pl);
+            elimination(player);
             textarea("Currently in Fortification Mode for Agressive");
-            pl.aggressiveStratergy.fortify(pl);
+            player.aggressiveStratergy.fortify(player);
             playerUpdate();
             changed();
             ReinforcementPhase();
         } else if (stratergy.equals("Benevolent")) {
             textarea("Currently in Reinforcement Mode Benevolent");
-            pl.benevolentStrategy.reinforce(pl);
+            player.benevolentStrategy.reinforce(player);
             textarea("Currently in Attack Mode Benevolent");
-            pl.benevolentStrategy.attack(pl);
-            elemination(pl);
+            player.benevolentStrategy.attack(player);
+            elimination(player);
             textarea("Currently in Fortification Mode Benevolent");
-            pl.benevolentStrategy.fortify(pl);
+            player.benevolentStrategy.fortify(player);
             playerUpdate();
             changed();
             ReinforcementPhase();
         } else if (stratergy.equals("Random")) {
             textarea("Currently in Reinforcement Mode Random");
-            pl.randomStrategy.reinforce(pl);
+            player.randomStrategy.reinforce(player);
             textarea("Currently in Attack Mode Random");
-            pl.randomStrategy.attack(pl);
-            elemination(pl);
+            player.randomStrategy.attack(player);
+            elimination(player);
             textarea("Currently in Fortification Mode Random");
-            pl.randomStrategy.fortify(pl);
+            player.randomStrategy.fortify(player);
             playerUpdate();
             changed();
             ReinforcementPhase();
         } else if (stratergy.equals("Cheater")) {
             textarea("Currently in Reinforcement Mode Cheater");
-            pl.cheaterStrategy.reinforce(pl);
+            player.cheaterStrategy.reinforce(player);
             textarea("Currently in Attack Mode Cheater");
-            pl.cheaterStrategy.attack(pl);
-            elemination(pl);
+            player.cheaterStrategy.attack(player);
+            elimination(player);
             textarea("Currently in Fortification Mode Cheater");
-            pl.cheaterStrategy.fortify(pl);
+            player.cheaterStrategy.fortify(player);
             playerUpdate();
             changed();
             ReinforcementPhase();
@@ -181,50 +181,43 @@ public class MyActionListner extends Observable implements ActionListener {
         }
     }
 
-    public void elemination(Player attacker) {
-        //System.out.println(controller.files.playerId2.size());
-        //System.out.println(controller.files.playerId2.keySet());
+    /**
+     * This method checks if someone doesnt have any country occupied and give his cards to the attacker player
+     * @param attacker
+     */
+    private void elimination(Player attacker) {
         ArrayList<Integer> arrayList = new ArrayList<>(ReadingFiles.playerId2.keySet());
         for (int i = 0; i < arrayList.size(); i++) {
             Player temp = ReadingFiles.playerId2.get(arrayList.get(i));
-            //System.out.println("Chk For "+(temp.getPlayerId()+1)+ "And No of Countries Occupies "+temp.getTotalCountriesOccupied());
             if (temp.getTotalCountriesOccupied().size() == 0) {
-                List<CardTypes> defcards = temp.getPlayerCards();
-                List<CardTypes> attcards = attacker.getPlayerCards();
-                attcards.addAll(defcards);
-                attacker.setPlayerCards(attcards);
+                List<CardTypes> defcards = temp.getPlayerCards(); //Lista de cartas del jugador eliminado
+                List<CardTypes> attcards = attacker.getPlayerCards(); //Lista de cartas del jugador que elimina
+                attcards.addAll(defcards);  //Se juntan ambas listas
+                attacker.setPlayerCards(attcards);  //Esta linea y la siguiente hacen lo mismo???
                 ReadingFiles.playerId.get(attacker.getPlayerId()).setPlayerCards(attcards);
                 ReadingFiles.playerId2.remove(temp.getPlayerId());
                 ReadingFiles.players.remove((Integer) temp.getPlayerId());
             }
 
         }
-//		System.out.println("players left Now " + controller.PlayerNo2());
-	/*	for (int i = 0; i < controller.PlayerNo2(); i++) {
-			System.out.println("-->"
-					+ (controller.files.playerId2.get(controller.files.playerId2.keySet().toArray()[i]).getPlayerId()+1));
-		}
-*/
-        if (ReadingFiles.playerId2.size() <= 1) {
+        if (ReadingFiles.playerId2.size() <= 1) { //Si despues de la eliminacion solo queda un jugador ha ganado
             controller.frame.error("Player :- " + ((int) ReadingFiles.playerId2.keySet().toArray()[0] + 1) + " Wins");
             controller.frame.dispose();
             System.exit(0);
 
         }
-
     }
 
     /**
      * This method
      */
-    public void FortificationPhase() {
+    private void FortificationPhase() {
         textarea("Currently in Fortification Mode");
-
         AttackController.card = false;
         changed();
         controller.frame.ActivateAll();
         controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
-        playerUpdate();
+        playerUpdate(); // El jugador actual se cambia antes de fortificar??
     }
 
     /**
@@ -249,7 +242,7 @@ public class MyActionListner extends Observable implements ActionListener {
                 fortifyCountry2 = null;
             } else {
                 try {
-                    String test1 = controller.frame.popupText(fortifyCountry1.getNoOfArmies() - 1);
+                    String test1 = controller.frame.popupText(fortifyCountry1.getNoOfArmies() - 1);  //Pregunta cuantas quiero transferir
                     String message = controller.playerObjet(currentPlayer).moveArmies(fortifyCountry1, fortifyCountry2,
                             Integer.parseInt(test1));
                     if (!message.equals("")) {
@@ -280,7 +273,7 @@ public class MyActionListner extends Observable implements ActionListener {
      * @param country: object
      * @throws IOException
      */
-    public void AttackPhase(Country country) throws IOException {
+    private void AttackPhase(Country country) throws IOException {
         textarea("Attacking.... ");
         cardTypesList.clear();
         controller.frame.jLabeCardl.setText(cardTypesList.toString());
@@ -288,8 +281,8 @@ public class MyActionListner extends Observable implements ActionListener {
         if (attackCountry1 == null) {
             attackCountry1 = country;
             controller.frame.ActivateAll();
-            List<Country> abc = controller.playerObjet(currentPlayer).getMyNeighborsForAttack(country);
-            if (abc.size() < 1) {
+            List<Country> neighbourList = controller.playerObjet(currentPlayer).getMyNeighboursForAttack(country);
+            if (neighbourList.size() < 1) {
                 controller.frame.ActivateAll();
                 attackCountry1 = null;
                 attackCountry2 = null;
@@ -297,7 +290,7 @@ public class MyActionListner extends Observable implements ActionListener {
                 controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
                 controller.RefreshButtons();
             } else {
-                controller.frame.OnlyNeeded(abc);
+                controller.frame.OnlyNeeded(neighbourList);
                 controller.RefreshButtons();
             }
         } else if (attackCountry2 == null) {
@@ -332,7 +325,6 @@ public class MyActionListner extends Observable implements ActionListener {
             System.out.println(reply);
             if (reply.equals("Player won")) {
                 controller.frame.error(reply);
-                GameStartWindow gameStartWindow = new GameStartWindow();
                 String[] args = {""};
                 GameStartWindow.main(args);
             } else if (!reply.equals("")) {
@@ -368,7 +360,7 @@ public class MyActionListner extends Observable implements ActionListener {
     }
 
 
-    public void endReinforcement() {
+    private void finishReinforcement() {
         cardTypesList.clear();
         controller.frame.buttonCard4.setEnabled(false);
         controller.frame.buttonCard3.setEnabled(false);
@@ -386,7 +378,7 @@ public class MyActionListner extends Observable implements ActionListener {
 
     }
 
-    public void finishAttack() {
+    private void finishAttack() {
         controller.frame.buttonCard4.setEnabled(false);
         controller.frame.buttonCard3.setEnabled(false);
         controller.frame.buttonCard2.setEnabled(false);
@@ -407,47 +399,19 @@ public class MyActionListner extends Observable implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-        if (Phases.contains(e.getActionCommand())) {
+        if (phase.contains(e.getActionCommand())) {
             if (e.getActionCommand() == "Finish Reinforcement") {
                 if (controller.playerObjet(currentPlayer).getPlayerArmiesNotDeployed() > 0) {
-                    controller.frame.error("Connot End Reinforcement Untill All armies are deployed");
+                    controller.frame.error("Cannot End Reinforcement Untill All armies are deployed");
                     cardTypesList.clear();
                     controller.frame.jLabeCardl.setText(cardTypesList.toString());
                 } else {
-                    // cardTypesList.clear();
-                    // controller.frame.buttonCard4.setEnabled(false);
-                    // controller.frame.buttonCard3.setEnabled(false);
-                    // controller.frame.buttonCard2.setEnabled(false);
-                    // controller.frame.buttonCard1.setEnabled(false);
-                    // currentPhase = "Finish Attack";
-                    // controller.frame.nextAction.setText("Finish Attack");
-                    // changed();
-                    // attackCountry1 = null;
-                    // attackCountry2 = null;
-                    // cardTypesList.clear();
-                    // controller.frame.jLabeCardl.setText(cardTypesList.toString());
-                    // cardTypesList.clear();
-                    // controller.frame.jLabeCardl.setText(cardTypesList.toString());
-                    endReinforcement();
+                    finishReinforcement();
                 }
 
             } else if (e.getActionCommand() == "Finish Attack") {
-                // controller.frame.buttonCard4.setEnabled(false);
-                // controller.frame.buttonCard3.setEnabled(false);
-                // controller.frame.buttonCard2.setEnabled(false);
-                // controller.frame.buttonCard1.setEnabled(false);
-                // changed();
-                // currentPhase = "Finish Fortification";
-                // controller.frame.nextAction.setText("Finish Fortification");
-                // fortifyCountry1 = null;
-                // fortifyCountry2 = null;
-                // cardTypesList.clear();
-                // controller.frame.jLabeCardl.setText(cardTypesList.toString());
-                // FortificationPhase();
-                // cardTypesList.clear();
-                // controller.frame.jLabeCardl.setText(cardTypesList.toString());
                 finishAttack();
-            } else if (e.getActionCommand() == "Finish Fortification") {
+            } else if (e.getActionCommand() == "Finish Fortification") { //Metodo finishFortification??
                 controller.frame.buttonCard4.setEnabled(true);
                 controller.frame.buttonCard3.setEnabled(true);
                 controller.frame.buttonCard2.setEnabled(true);

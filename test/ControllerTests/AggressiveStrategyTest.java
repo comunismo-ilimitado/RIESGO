@@ -257,7 +257,7 @@ public class AggressiveStrategyTest {
 		Country c = countries.get(ast.getStrongestCountry(countries));
 		ast.attack(player1);
 		int a = c.getNoOfArmies();
-		List<Country> an = player1.getMyNeighborsForAttack(c);
+		List<Country> an = player1.getMyNeighboursForAttack(c);
 		if (a > 1) {
 			assertEquals(an.size(), 0);
 		} else {

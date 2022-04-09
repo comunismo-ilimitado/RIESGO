@@ -34,7 +34,7 @@ public class MainController {
     MFrame2 frame2;
     String phase;
     Player player;
-    MyActionListner myactionlistner;
+    MyActionListener myactionlistner;
     AttackController attackController;
     ReinforcementController reinforcementController;
     FortificationController fortificationController;
@@ -72,7 +72,7 @@ public class MainController {
             mapValidation = new MapValidation(ReadingFiles.CountryNameObject, ReadingFiles.ContinentNameObject);
             mapValidation.CallAllMethods();
             if (!ReadingFiles.errors && !MapValidation.error) {
-                myactionlistner = new MyActionListner(this);
+                myactionlistner = new MyActionListener(this);
 
                 frame = new MFrame(myactionlistner, ReadingFiles.image);
                 reinforcementController = new ReinforcementController();

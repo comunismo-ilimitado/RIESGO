@@ -1,6 +1,6 @@
 package view.gameFrames;
 
-import controller.game.MyActionListner;
+import controller.game.MyActionListener;
 import model.Country;
 
 import javax.imageio.ImageIO;
@@ -35,7 +35,7 @@ public class MFrame extends JFrame implements Observer {
     JLabel jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel16, jLabel26, jLabel36, jLabel46, jLabel56,
             jLabel66, jLabel17, jLabel27, jLabel37, jLabel47, jLabel57, jLabel67;
     ArrayList<JLabel> jLabels, jLabels2;
-    MyActionListner myActionListner;
+    MyActionListener myActionListner;
     public int playerTurn;
     public int noArmiesLeft;
     public String BBB;
@@ -43,7 +43,7 @@ public class MFrame extends JFrame implements Observer {
     public String CCC;
     public String MapImage = "noimage.bmp";
 
-    public MFrame(MyActionListner myActionListner, String MapImage) {
+    public MFrame(MyActionListener myActionListner, String MapImage) {
         super("PAzim");
         this.myActionListner = myActionListner;
         this.MapImage = MapImage;
@@ -366,8 +366,8 @@ public class MFrame extends JFrame implements Observer {
     @Override
     public void update(Observable arg0, Object arg1) {
         // TODO Auto-generated method stu
-        ArrayList<Float> percent = ((MyActionListner) arg0).CountriesPercentage();
-        ArrayList<String> listinh = ((MyActionListner) arg0).ContinentsOccupied();
+        ArrayList<Float> percent = ((MyActionListener) arg0).CountriesPercentage();
+        ArrayList<String> listinh = ((MyActionListener) arg0).ContinentsOccupied();
         UpdateGameDominationViewPercentage(percent);
         UpdateGameDominationViewContinentOccupied(listinh);
         cards();

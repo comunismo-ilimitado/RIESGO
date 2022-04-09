@@ -175,7 +175,7 @@ public class Player {
      * @param country: Country object must be passed to fetch its neighbors
      * @return Returns List of countries which are neighbors of the given country
      */
-    public List<Country> getMyNeighborsForAttack(Country country) {
+    public List<Country> getMyNeighboursForAttack(Country country) {
         return attackcontroller.getMyNeighborsForAttack(country);
     }
 

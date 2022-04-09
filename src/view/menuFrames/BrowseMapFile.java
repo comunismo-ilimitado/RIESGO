@@ -96,6 +96,7 @@ public class BrowseMapFile {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 JFileChooser fc = new JFileChooser();
+                fc.setCurrentDirectory(Paths.get("").toFile());
                 int result = fc.showOpenDialog(null);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File f = fc.getSelectedFile();

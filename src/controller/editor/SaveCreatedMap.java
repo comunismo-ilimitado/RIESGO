@@ -5,6 +5,9 @@ import model.Country;
 import view.editorFrames.CreateMap;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -17,12 +20,20 @@ public class SaveCreatedMap {
 
     BufferedWriter bw;
 
+    private List<Continent> ContinentsObjectList = new ArrayList<>();
+    private List<Country> CountriesObjectList = new ArrayList<>();
+
     /**
      * Saves the map created by user
      */
-    public SaveCreatedMap() {
-        File f1 = new File("Resources/UserMap.map");
+    public SaveCreatedMap(CreateMap mapper) {
+        this.ContinentsObjectList = mapper.getContinentsObjectList();
+        this.CountriesObjectList = mapper.getCountriesObjectList();
+        File savedir = new File("Resources/");
+        int tag = 0;
         try {
+            tag = (int)Files.list(savedir.toPath()).limit(50).count();
+            File f1 = new File("Resources/UserMap"+tag+".map");
             if (f1.createNewFile())
                 System.out.println("File created");
             else
@@ -68,7 +79,7 @@ public class SaveCreatedMap {
 
             bw.newLine();
             WriteIntoFile("[Continents]");
-            for (Continent in : CreateMap.ContinentsObjectList) {
+            for (Continent in : ContinentsObjectList) {
                 WriteIntoFile(in.getName() + "=" + in.getControlValue());
             }
             bw.newLine();
@@ -77,7 +88,7 @@ public class SaveCreatedMap {
             Random rand1 = new Random();
             Random rand2 = new Random();
 
-            for (Continent cc : CreateMap.ContinentsObjectList) {
+            for (Continent cc : ContinentsObjectList) {
                 for (Country cn : cc.getCountries()) {
                     int value1 = rand1.nextInt(255);
                     int value2 = rand2.nextInt(255);

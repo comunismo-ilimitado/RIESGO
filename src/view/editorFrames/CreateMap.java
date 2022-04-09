@@ -14,10 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class create the map
- *
- * @author greeshma
- * @version 1.0
+ * Class dedicated for creating a custom map file.
  */
 public class CreateMap {
 
@@ -28,13 +25,13 @@ public class CreateMap {
     private JButton generate_map_button, add_continent_name_button;
     private JButton add_to_country_button, add_to_continent_button, next_button, done_button;
     private JComboBox continents_combo, countries_combo;
-    public static int NoOfCountries, NoOfContinents;
+    private int NoOfCountries, NoOfContinents;
     private final List<Continent> continents = new ArrayList<Continent>();
     private final JCheckBox[] check_boxes = new JCheckBox[150];
     private final JCheckBox[] check_boxes1 = new JCheckBox[150];
     DefaultListModel<String> countries_to_continent_list;
-    public static List<Continent> ContinentsObjectList = new ArrayList<>();
-    public static List<Country> CountriesObjectList = new ArrayList<>();
+    private List<Continent> ContinentsObjectList = new ArrayList<>();
+    private List<Country> CountriesObjectList = new ArrayList<>();
 
     private static JButton EditButton;
 
@@ -42,14 +39,12 @@ public class CreateMap {
 
     public CreateMap() {
         GetNumbers();
-        StartFrame();
-
     }
 
     /**
-     * This method creates map for the user interface
+     * This method shows UI for the "Get Numbers" phase,
      */
-    public void GetNumbers() {
+    private void GetNumbers() {
         get_number_frame = new JFrame("Create Map");
         get_number_frame.setSize(500, 500);
         no_of_countries_label = new JLabel("No. of Countries");
@@ -69,12 +64,37 @@ public class CreateMap {
         get_number_frame.add(generate_map_button);
         get_number_frame.setLayout(null);
         get_number_frame.setVisible(true);
+        PrepareValidationNumbers();
     }
 
     /**
-     * This method assigning countries to continents
+     * This method checks validations of the map numbers.
      */
-    public void AssignCountriesFrame() {
+    private void PrepareValidationNumbers() {
+
+        generate_map_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                NoOfCountries = Integer.parseInt(no_of_countries_text_field.getText());
+                NoOfContinents = Integer.parseInt(no_of_continents_text_field.getText());
+                if (NoOfCountries <= 2 || NoOfContinents <= 1) {
+                    JOptionPane.showMessageDialog(null, "Values should be greater than 2");
+                } else if (NoOfCountries < NoOfContinents) {
+                    JOptionPane.showMessageDialog(null, "NO of Countries shuld be greater than continents");
+                } else {
+                    get_number_frame.dispose();
+                    AssignCountriesFrame();
+                }
+
+            }
+        });
+
+    }
+
+    /**
+     * UI for assigning countries to continents
+     */
+    private void AssignCountriesFrame() {
         assign_countries_frame = new JFrame("Assign Countries To continents");
         assign_countries_panel = new JPanel();
         assign_countries_panel.setBounds(440, 80, 200, 200);
@@ -101,15 +121,86 @@ public class CreateMap {
         assign_countries_frame.add(control_value_text_field);
         assign_countries_frame.add(add_to_continent_button);
         assign_countries_frame.add(continents_combo);
-
         assign_countries_frame.setLayout(null);
+
+        for (int i = 1; i <= NoOfContinents; i++) {
+            continents_combo.addItem("Continent" + i);
+        }
+        for (int i = 0, j = 150; i < NoOfCountries; i++, j = j + 30) {
+            check_boxes[i] = new JCheckBox("Country" + (i + 1));
+            assign_countries_panel.add(check_boxes[i]);
+            check_boxes[i].setBounds(300, j, 150, 50);
+            check_boxes[i].setVisible(true);
+        }
         assign_countries_frame.setVisible(true);
+        ActionAddContinent();
+        ActionNextButtonFrame();
     }
 
     /**
-     * This method add neighbors to the countries
+     * Action Listener for adding a country to a continent
      */
-    public void AssignNeighboursFrame() {
+    private void ActionAddContinent() {
+        add_to_continent_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                List<Country> TempCountriesObject = new ArrayList<Country>();
+
+                for (int i = 0; i < NoOfCountries; i++) {
+                    if (check_boxes[i].isSelected()) {
+                        Country temp = new Country(check_boxes[i].getText());
+                        TempCountriesObject.add(temp);
+                        check_boxes[i].setVisible(false);
+                        assign_countries_panel.updateUI();
+                        check_boxes[i].setSelected(false);
+                    }
+                }
+                if(continents_combo.getSelectedItem() != null) {
+                    Continent tempc = new Continent(Integer.parseInt(control_value_text_field.getText()),
+                            (String) continents_combo.getSelectedItem());
+                    tempc.setCountries(TempCountriesObject);
+                    if (tempc.getName() != null) {
+                        ContinentsObjectList.add(tempc);
+                    }
+                    continents_combo.removeItem(continents_combo.getSelectedItem());
+                }
+            }
+        });
+    }
+
+    /**
+     * Validation for the continent information.
+     */
+    private void ActionNextButtonFrame() {
+        next_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                boolean check = false;
+                for (int i = 0; i < NoOfCountries; i++) {
+                    if (check_boxes[i].isVisible() == true) {
+                        check = true;
+                    }
+                }
+
+                if (continents_combo.getSelectedItem() != null) {
+                    JOptionPane.showMessageDialog(null, "Assign all Continents");
+                } else if (check == true) {
+                    JOptionPane.showMessageDialog(null, "Assign all Countries");
+                    assign_countries_frame.dispose();
+                    GetNumbers();
+                } else {
+                    assign_countries_frame.dispose();
+                    AssignNeighboursFrame();
+                }
+            }
+        });
+
+    }
+
+    /**
+     * UI for assigning neighbors to the countries already selected continents
+     */
+    private void AssignNeighboursFrame() {
 
         assign_neighbours_frame = new JFrame("Add Neighbours");
         assign_neighbours_panel = new JPanel();
@@ -126,149 +217,31 @@ public class CreateMap {
         countries_combo = new JComboBox();
         countries_combo.setBounds(10, 150, 200, 20);
 
-        EditButton = new JButton("EDIT");
-        EditButton.setBounds(275, 200, 90, 20);
-
-        EditButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-
-                if (countries_combo.getSelectedItem() != null) {
-                    JOptionPane.showMessageDialog(null, "Assign neighbours to all Countries");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Map successfully Created");
-                    Disp();
-                    assign_countries_frame.dispose();
-                    SaveCreatedMap SaveMapObejct = new SaveCreatedMap();
-
-
-                    assign_countries_frame.dispose();
-                    SelectMapType.MapType = 6;
-                    EditContinents obj = new EditContinents();
-                }
-            }
-        });
-
-        assign_neighbours_frame.add(EditButton);
-
         assign_neighbours_frame.add(assign_neighbours_panel);
         assign_neighbours_frame.add(done_button);
         assign_neighbours_frame.add(add_to_country_button);
         assign_neighbours_frame.add(countries_combo);
 
         assign_neighbours_frame.setLayout(null);
+
+        for (int i = 1; i <= NoOfCountries; i++) {
+            countries_combo.addItem("Country" + i);
+        }
+        for (int i = 0, j = 150; i < NoOfCountries; i++, j = j + 30) {
+            check_boxes1[i] = new JCheckBox("Country" + (i + 1));
+            assign_neighbours_panel.add(check_boxes1[i]);
+            check_boxes1[i].setBounds(300, j, 150, 50);
+            check_boxes1[i].setVisible(true);
+        }
         assign_neighbours_frame.setVisible(true);
-    }
-
-    /**
-     * This method checks validations of the map
-     */
-    public void StartFrame() {
-
-        generate_map_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                NoOfCountries = Integer.parseInt(no_of_countries_text_field.getText());
-                NoOfContinents = Integer.parseInt(no_of_continents_text_field.getText());
-                if (NoOfCountries <= 2 || NoOfContinents <= 1) {
-                    JOptionPane.showMessageDialog(null, "Values should be greater than 2");
-                } else if (NoOfCountries < NoOfContinents) {
-                    JOptionPane.showMessageDialog(null, "NO of Countries shuld be greater than continents");
-                } else {
-                    get_number_frame.dispose();
-                    AssignCountriesFrame();
-                    for (int i = 1; i <= NoOfContinents; i++) {
-                        continents_combo.addItem("Continent" + i);
-                    }
-                    for (int i = 0, j = 150; i < NoOfCountries; i++, j = j + 30) {
-                        check_boxes[i] = new JCheckBox("Country" + (i + 1));
-                        assign_countries_panel.add(check_boxes[i]);
-                        check_boxes[i].setBounds(300, j, 150, 50);
-                        check_boxes[i].setVisible(true);
-                    }
-                    ActionAddContinent();
-                    ActionNextButtonFrame();
-                }
-
-            }
-        });
+        ActionAssignNeighbours();
 
     }
 
     /**
-     * UI for assigning continents and adding countries to the continent
+     * Method for handling listeners buttons in the "neighbour" choosing phase
      */
-    public void ActionAddContinent() {
-        add_to_continent_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                List<Country> TempCountriesObject = new ArrayList<Country>();
-
-                for (int i = 0; i < NoOfCountries; i++) {
-                    if (check_boxes[i].isSelected()) {
-                        Country temp = new Country(check_boxes[i].getText());
-                        TempCountriesObject.add(temp);
-                        check_boxes[i].setVisible(false);
-                        assign_countries_panel.updateUI();
-                        check_boxes[i].setSelected(false);
-                    }
-                }
-                Continent tempc = new Continent(Integer.parseInt(control_value_text_field.getText()),
-                        (String) continents_combo.getSelectedItem());
-                tempc.setCountries(TempCountriesObject);
-                if (tempc.getName() != null) {
-                    ContinentsObjectList.add(tempc);
-                }
-                continents_combo.removeItem(continents_combo.getSelectedItem());
-            }
-        });
-    }
-
-    /**
-     * UI for assigning countries to the continents
-     */
-    public void ActionNextButtonFrame() {
-        next_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                int check = 0;
-                for (int i = 0; i < NoOfCountries; i++) {
-                    if (check_boxes[i].isVisible() == true) {
-                        check = 1;
-                    }
-                }
-
-                if (continents_combo.getSelectedItem() != null) {
-                    JOptionPane.showMessageDialog(null, "Assign all continents");
-                } else if (check == 1) {
-                    JOptionPane.showMessageDialog(null, "Assign all Countries");
-                    assign_countries_frame.dispose();
-                    GetNumbers();
-                    StartFrame();
-                } else {
-                    assign_countries_frame.dispose();
-                    AssignNeighboursFrame();
-
-                    for (int i = 1; i <= NoOfCountries; i++) {
-                        countries_combo.addItem("Country" + i);
-                    }
-                    for (int i = 0, j = 150; i < NoOfCountries; i++, j = j + 30) {
-                        check_boxes1[i] = new JCheckBox("Country" + (i + 1));
-                        assign_neighbours_panel.add(check_boxes1[i]);
-                        check_boxes1[i].setBounds(300, j, 150, 50);
-                        check_boxes1[i].setVisible(true);
-                    }
-                    ActionAssignNeighbours();
-                }
-            }
-        });
-
-    }
-
-    /**
-     * UI for assigning neighbors to the countries
-     */
-    public void ActionAssignNeighbours() {
+    private void ActionAssignNeighbours() {
         add_to_country_button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -281,18 +254,22 @@ public class CreateMap {
                         check_boxes1[i].setSelected(false);
                     }
                 }
-                Country tempct = new Country((String) countries_combo.getSelectedItem());
-                tempct.setNeighbors(TempCountriesObject2);
-                CountriesObjectList.add(tempct);
-                countries_combo.removeItem(countries_combo.getSelectedItem());
-                if (countries_combo.getSelectedItem() == null) {
-                    for (int j = 0; j < NoOfCountries; j++) {
-                        check_boxes1[j].setVisible(false);
-                        assign_neighbours_panel.updateUI();
+                if (countries_combo.getSelectedItem() != null) {
+                    Country tempct = new Country((String) countries_combo.getSelectedItem());
+                    tempct.setNeighbors(TempCountriesObject2);
+                    CountriesObjectList.add(tempct);
+                    countries_combo.removeItem(countries_combo.getSelectedItem());
+                    if (countries_combo.getSelectedItem() == null) {
+                        for (int j = 0; j < NoOfCountries; j++) {
+                            check_boxes1[j].setVisible(false);
+                            assign_neighbours_panel.updateUI();
+                        }
                     }
                 }
             }
         });
+
+        CreateMap mapper = this;
         done_button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -300,47 +277,32 @@ public class CreateMap {
                     JOptionPane.showMessageDialog(null, "Assign neighbours to all Countries");
                 } else {
                     JOptionPane.showMessageDialog(null, "Map successfully Created");
-                    Disp();
+                    PrepareCountryAndContinentData();
+
+                    DisplayDebug(); // uncomment if debugging
+
                     assign_neighbours_frame.dispose();
                     SelectNoOfPlayers.assignCountries();
-                    SaveCreatedMap SaveMapObejct = new SaveCreatedMap();
+                    SaveCreatedMap SaveMapObejct = new SaveCreatedMap(mapper);
                 }
             }
         });
 
     }
 
-    // Just for checking.. remove later
-    public void Disp() {
-        List<Country> Neighbours = new ArrayList<Country>();
-        for (Country in : CountriesObjectList) {
-            Neighbours = in.getNeighbors();
-            //	System.out.println("\nCountry name: " + in.getName() + "\nNeighbours:\n");
-            for (Country it : Neighbours) {
-                //		System.out.println(it.getName());
-            }
-
+    /**
+    *  Method for connecting country and continent lists
+    */
+    private void PrepareCountryAndContinentData() {
+        int i = 1;
+        for (Country cc : CountriesObjectList) {
+            cc.setCountryId(i);
+            i++;
         }
-        List<Country> CountriesinContinent = new ArrayList<Country>();
-        for (Continent in : ContinentsObjectList) {
-            CountriesinContinent = in.getCountries();
-            System.out.println(
-                    "\nContinent name: " + in.getName() + "\nControl Value:" + in.getControlValue() + "\nCountries:\n");
-            int i = 1;
-            for (Country cc : CountriesObjectList) {
-                cc.setCountryId(i);
-                i++;
-            }
-            i = 1;
-            for (Continent cc : ContinentsObjectList) {
-                cc.setContinentId(i);
-                i++;
-            }
-
-            for (Country it : CountriesinContinent) {
-                System.out.println(it.getName());
-            }
-
+        i = 1;
+        for (Continent cc : ContinentsObjectList) {
+            cc.setContinentId(i);
+            i++;
         }
         for (Continent tt : ContinentsObjectList) {
             for (Country cc : tt.getCountries()) {
@@ -352,6 +314,13 @@ public class CreateMap {
                 }
             }
         }
+
+    }
+
+    /**
+     * Display map information, only for debugging purposes.
+     **/
+    private void DisplayDebug() {
         for (Continent tt : ContinentsObjectList) {
             System.out.println("Continent:" + tt.getName());
             for (Country cc : tt.getCountries()) {
@@ -361,6 +330,13 @@ public class CreateMap {
                 }
             }
         }
+    }
 
+    public List<Continent> getContinentsObjectList() {
+        return ContinentsObjectList;
+    }
+
+    public List<Country> getCountriesObjectList() {
+        return CountriesObjectList;
     }
 }

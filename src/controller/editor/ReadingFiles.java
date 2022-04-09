@@ -25,7 +25,7 @@ public class ReadingFiles {
     public static HashMap<Integer, Player> playerId;
 
     public static HashMap<Integer, Player> playerId2;
-    public static boolean errors = false;
+    public boolean errors = false;
     public static List<Integer> players;
     public static List<String> CountriesNames, ContinentNames;
     public static HashMap<String, Country> CountryNameObject;
@@ -42,7 +42,8 @@ public class ReadingFiles {
     /**
      * This method will store all values from the map file in static variables
      *
-     * @param address: location of the map file
+     * @param address: File location of the map file
+     * @param noofplayers: Number of players
      * @throws IOException
      */
     public void Reads(String address, int noofplayers) throws IOException {
@@ -95,7 +96,7 @@ public class ReadingFiles {
                 Country temp1 = CountryNameObject.get(a[0].trim());
                 Continent temp2 = ContinentNameObject.get(a[3].trim().toLowerCase());
                 temp1.setContinent(temp2);
-                temp2.addCountrie(temp1);
+                temp2.addCountry(temp1);
                 for (int j = 4; j < a.length; j++) {
                     temp1.addNeighbors(CountryNameObject.get(a[j].trim()));
                 }
@@ -116,10 +117,12 @@ public class ReadingFiles {
 
             for (int i = 0; i < noofplayers; i++) {
                 Player player = new Player(i);
-                player.setPlayerColor(arrayListc.get(i));
+                player.setPlayerColor(arrayListc.get(i % (arrayListc.size()-1)));
                 playerId.put(i, player);
                 players.add(i);
             }
+
+            // TODO create a better randomizer function
             int n = noofplayers;
             for (int i = 0; i < CountriesNames2.size(); i++) {
                 for (int j = 0; j < noofplayers; j++) {

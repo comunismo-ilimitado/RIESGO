@@ -43,7 +43,7 @@ public class EditContinents {
     static List<String> Continents = new ArrayList<String>();
 
     /**
-     * Constructor
+     * Constructor, creates UI elements and loads a Map
      */
     public EditContinents() {
         MFrame2 frame2 = new MFrame2();
@@ -73,7 +73,7 @@ public class EditContinents {
     /**
      * Set the Continents in the view
      */
-    public void setUp() {
+    private void setUp() {
 
         if (ReadingFiles.CountryNameObject != null)
             MapFrame = new JFrame("Edit Map");
@@ -99,7 +99,7 @@ public class EditContinents {
         SetButton.setBounds(700, 700, 90, 20);
 
         NextButton = new JButton("NEXT");
-        NextButton.setBounds(1200, 800, 90, 20);
+        NextButton.setBounds(1000, 700, 90, 20);
 
         NextButton.addActionListener(new ActionListener() {
             @Override
@@ -154,11 +154,10 @@ public class EditContinents {
     }
 
     /**
-     * Gets selected continents
+     * Gets selected continent action listener ready
      *
-     * @return ContinentSelected: String of continent selected
      */
-    public String getSelectedContinent() {
+    private void getSelectedContinent() {
 
         SelectButton.addActionListener(new ActionListener() {
             @Override
@@ -190,8 +189,6 @@ public class EditContinents {
             }
 
         });
-
-        return ContinentSelected;
     }
 
 }

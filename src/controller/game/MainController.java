@@ -71,7 +71,7 @@ public class MainController {
             }
             mapValidation = new MapValidation(ReadingFiles.CountryNameObject, ReadingFiles.ContinentNameObject);
             mapValidation.CallAllMethods();
-            if (!ReadingFiles.errors && !MapValidation.error) {
+            if (!files.errors && !mapValidation.error) {
                 myactionlistner = new MyActionListner(this);
 
                 frame = new MFrame(myactionlistner, ReadingFiles.image);

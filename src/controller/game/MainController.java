@@ -97,9 +97,9 @@ public class MainController {
                 PaintCountries();
                 SetDominationView();
                 if (resume) {
-                    myactionlistner.PhaseResume(phase);
+                    myactionlistner.phaseResume(phase);
                 } else {
-                    myactionlistner.ReinforcementPhase();
+                    myactionlistner.reinforcementPhase();
                 }
                 repaintAndRevalidate();
             }

@@ -221,9 +221,9 @@ public class MFrame extends JFrame implements Observer {
      */
     // Anade el numero de cartas a cada boton
     public void cards() {
-        buttonCard1.setText("Infantry " + myActionListner.getCardsType1());
-        buttonCard2.setText("Artillery " + myActionListner.getCardsType2());
-        buttonCard3.setText("Cavalry " + myActionListner.getCardsType3());
+        buttonCard1.setText("Infantry " + myActionListner.getCardsTypeInfantry());
+        buttonCard2.setText("Artillery " + myActionListner.getCardsTypeArtillery());
+        buttonCard3.setText("Cavalry " + myActionListner.getCardsTypeCavalry());
     }
 
     /**
@@ -360,14 +360,14 @@ public class MFrame extends JFrame implements Observer {
     }
 
     public void Exit_Option() {
-        myActionListner.SaveGameOnExit();
+        myActionListner.saveGameOnExit();
     }
 
     @Override
     public void update(Observable arg0, Object arg1) {
         // TODO Auto-generated method stu
-        ArrayList<Float> percent = ((MyActionListener) arg0).CountriesPercentage();
-        ArrayList<String> listinh = ((MyActionListener) arg0).ContinentsOccupied();
+        ArrayList<Float> percent = ((MyActionListener) arg0).countriesPercentage();
+        ArrayList<String> listinh = ((MyActionListener) arg0).continentsOccupied();
         UpdateGameDominationViewPercentage(percent);
         UpdateGameDominationViewContinentOccupied(listinh);
         cards();

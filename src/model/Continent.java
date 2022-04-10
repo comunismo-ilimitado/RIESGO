@@ -103,7 +103,7 @@ public class Continent {
      *
      * @param Countrie: country object
      */
-    public void addCountrie(Country Countrie) {
+    public void addCountry(Country Countrie) {
         this.countries.add(Countrie);
     }
 

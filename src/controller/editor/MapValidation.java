@@ -8,7 +8,8 @@ import java.util.*;
 
 
 /**
- * this class validates the map
+ * Class used for precessing the integrity of country graph connectivity. Tries to solve
+ * for common problems such as Graph Connectivity and Neighbourhood bidirectionality
  *
  * @author pazim
  */
@@ -16,20 +17,20 @@ import java.util.*;
 public class MapValidation {
     ArrayList<String> arrayList = new ArrayList<>();
     ArrayList<String> arrayList2 = new ArrayList<>();
-    HashMap<String, Country> hashMap;
-    HashMap<String, Continent> hashMap2;
-    public static boolean error = false;
+    HashMap<String, Country> countryHashMap;
+    HashMap<String, Continent> continentHashMap;
+    public boolean error = false;
 
     /**
      * Parameterized constructor
      *
-     * @param hashMap
-     * @param hashMap2
+     * @param hashMap country hashmap
+     * @param hashMap2 continent hashmap
      * @author Pazim
      */
     public MapValidation(HashMap<String, Country> hashMap, HashMap<String, Continent> hashMap2) {
-        this.hashMap = hashMap;
-        this.hashMap2 = hashMap2;
+        this.countryHashMap = hashMap;
+        this.continentHashMap = hashMap2;
     }
 
     /**
@@ -38,8 +39,8 @@ public class MapValidation {
     public void BiDirectionalCheck() {
 
         try {
-            for (int i = 0; i < hashMap.size(); i++) {
-                Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
+            for (int i = 0; i < countryHashMap.size(); i++) {
+                Country temp = countryHashMap.get(countryHashMap.keySet().toArray()[i]);
                 int x = temp.getNeighbors().size();
                 for (int j = 0; j < x; j++) {
                     Country a = temp.getNeighbors().get(j);
@@ -77,14 +78,14 @@ public class MapValidation {
      * continent must not be empty
      */
     public void NoContinentIsUnused() {
-        ArrayList<Continent> temparrayList = new ArrayList<>(hashMap2.values());
+        ArrayList<Continent> temparrayList = new ArrayList<>(continentHashMap.values());
 
-        for (int i = 0; i < hashMap.size(); i++) {
+        for (int i = 0; i < countryHashMap.size(); i++) {
 
-            Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
+            Country temp = countryHashMap.get(countryHashMap.keySet().toArray()[i]);
             for (int j = 0; j < temp.getNeighbors().size(); j++) {
 
-                if (hashMap2.containsValue(temp.getContinent())) {
+                if (continentHashMap.containsValue(temp.getContinent())) {
                     temparrayList.remove(temp.getContinent());
                 } else {
                     arrayList.add("Continent not Found in Continent Object");
@@ -101,8 +102,8 @@ public class MapValidation {
      * country should not be its own neighbor
      */
     public void NotItsOwnNeighbour() {
-        for (int i = 0; i < hashMap.size(); i++) {
-            Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
+        for (int i = 0; i < countryHashMap.size(); i++) {
+            Country temp = countryHashMap.get(countryHashMap.keySet().toArray()[i]);
             if (temp.getNeighbors().contains(temp)) {
                 temp.getNeighbors().remove(temp);
                 arrayList2.add("Neighbour Of itself Removed");
@@ -115,7 +116,7 @@ public class MapValidation {
      * checks if no country or continent in the map file
      */
     public void NoContinentOrCountry() {
-        if (hashMap.size() < 1 || hashMap2.size() < 1) {
+        if (countryHashMap.size() < 1 || continentHashMap.size() < 1) {
             arrayList.add("NO COUNTRY OR CONTINENT");
         }
     }
@@ -124,10 +125,10 @@ public class MapValidation {
      * No two continents can have same country
      */
     public void ContinentHaveSameCountry() {
-        for (int i = 0; i < hashMap2.size(); i++) {
-            Continent temp = hashMap2.get(hashMap2.keySet().toArray()[i]);
-            for (int j = 0; j < hashMap2.size(); j++) {
-                Continent temp2 = hashMap2.get(hashMap2.keySet().toArray()[j]);
+        for (int i = 0; i < continentHashMap.size(); i++) {
+            Continent temp = continentHashMap.get(continentHashMap.keySet().toArray()[i]);
+            for (int j = 0; j < continentHashMap.size(); j++) {
+                Continent temp2 = continentHashMap.get(continentHashMap.keySet().toArray()[j]);
                 if (i != j || !temp.equals(temp2)) {
                     if (temp.getCountries().containsAll(temp2.getCountries())) {
                         arrayList.add("MULTIPLE CONTINENTS HAVE SAME COUNTRIES");
@@ -141,8 +142,8 @@ public class MapValidation {
      * if country doesn't have neighbors
      */
     public void EmptyNeighbours() {
-        for (int i = 0; i < hashMap.size(); i++) {
-            Country temp = hashMap.get(hashMap.keySet().toArray()[i]);
+        for (int i = 0; i < countryHashMap.size(); i++) {
+            Country temp = countryHashMap.get(countryHashMap.keySet().toArray()[i]);
             if (temp.getNeighbors().size() <= 0) {
                 arrayList.add("No Neighbours - Unresolver");
             }
@@ -153,7 +154,7 @@ public class MapValidation {
      * checks graph is connected or not
      */
     public void GraphConnectivity() {
-        Country start = hashMap.get(hashMap.keySet().toArray()[0]);
+        Country start = countryHashMap.get(countryHashMap.keySet().toArray()[0]);
         LinkedList<Country> nexttovisit = new LinkedList<Country>();
         HashSet<Country> visited = new HashSet<Country>();
         nexttovisit.add(start);
@@ -167,13 +168,13 @@ public class MapValidation {
                 nexttovisit.add(child);
             }
         }
-        if (visited.size() != hashMap.size()) {
+        if (visited.size() != countryHashMap.size()) {
             arrayList.add("Error Connectivity Graph");
         }
     }
 
     public void ContinentConectivity() {
-        Country start = hashMap.get(hashMap.keySet().toArray()[0]);
+        Country start = countryHashMap.get(countryHashMap.keySet().toArray()[0]);
         LinkedList<Country> nexttovisit = new LinkedList<Country>();
         HashSet<Country> visited = new HashSet<Country>();
         HashSet<Continent> vis = new HashSet<>();
@@ -189,7 +190,7 @@ public class MapValidation {
                 nexttovisit.add(child);
             }
         }
-        if (vis.size() != hashMap2.size()) {
+        if (vis.size() != continentHashMap.size()) {
             arrayList.add("Error Connectivity Graph");
         }
     }

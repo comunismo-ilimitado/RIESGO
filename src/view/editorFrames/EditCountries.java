@@ -37,7 +37,7 @@ public class EditCountries {
     int len = 0;
 
     /**
-     * constructor
+     * Class dedicated for handling Country edit
      */
     public EditCountries() {
         MFrame2 frame2 = new MFrame2();
@@ -50,9 +50,9 @@ public class EditCountries {
     }
 
     /**
-     * set up user view
+     * Sets the UI up
      */
-    public void setUp() {
+    private void setUp() {
         if (ReadingFiles.CountryNameObject != null)
             MapFrame = new JFrame("Edit Map");
         MapFrame.setSize(900, 900);
@@ -71,7 +71,7 @@ public class EditCountries {
         SetButton.setBounds(700, 700, 90, 20);
 
         NextButton = new JButton("NEXT");
-        NextButton.setBounds(1200, 800, 90, 20);
+        NextButton.setBounds(1000, 700, 90, 20);
 
         for (int i = 0, k = 0, j = 30; i < ReadingFiles.CountriesNames.size(); i++, j = j + 30) {
             check_boxes[i] = new JCheckBox(ReadingFiles.CountriesNames.get(i));

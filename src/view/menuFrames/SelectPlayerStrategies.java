@@ -27,7 +27,7 @@ public class SelectPlayerStrategies {
     String[] tournament = {"Agressive", "Benevolent", "Random", "Cheater"};
 
     /**
-     * Select player strategies
+     * Constructor for Select player strategies
      */
     public SelectPlayerStrategies() {
         setup();
@@ -35,7 +35,7 @@ public class SelectPlayerStrategies {
     }
 
     /**
-     * implements user interface for different player strategies
+     * Implements user interface for different player strategies
      */
     public void setup() {
         frame = new JFrame("Players Strategies");
@@ -66,19 +66,21 @@ public class SelectPlayerStrategies {
         frame.setVisible(true);
     }
 
+    /**
+     * This method save the strategies that have been selected, control errors
+     * and starts the tournament/singlemode game.
+     */
     public void GetSelectedValue() {
-        ok_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // System.out.print("returns" + NumberOfPlayers);
+        ok_button.addActionListener(event -> {
+                //Save strategies selected
                 for (int i = 0, j = 10; i < SelectNoOfPlayers.NumberOfPlayers; i++, j += 50) {
-                    strategy_selected.add((String) jcombo_array.get(i).getSelectedItem());// = Integer.parseInt((String)
-                    // //
-                    // PNumberJCombo.getSelectedItem());
+                    strategy_selected.add((String) jcombo_array.get(i).getSelectedItem());
                 }
+                //Start Tournament
                 if (GameStartWindow.GameMode == 2) {
                     frame.dispose();
                     Tournament temp = new Tournament();
+                //Start Singlemode game
                 } else {
                     try {
                         if (strategy_selected.contains("Human")) {
@@ -87,7 +89,7 @@ public class SelectPlayerStrategies {
                             controll.Function();
                         } else {
                             JOptionPane.showMessageDialog(null,
-                                    "There Should be Atleast One Human Player. \n For all Computer Select Tournament Mode \n Select Atleast One Player");
+                                    "There Should be Atleast One Human Player. \n For all Computer Select Tournament Mode \n Select At least One Player");
                             strategy_selected.clear();
                         }
                     } catch (IOException e1) {
@@ -98,10 +100,12 @@ public class SelectPlayerStrategies {
                         e1.printStackTrace();
                     }
                 }
-            }
         });
     }
 
+    /**
+     * @return ArrayList</String> of strategies that have been selected
+     */
     public static ArrayList<String> getStrategies() {
         return strategy_selected;
     }

@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * First Paga of Start up phase Start here
+ * Continuation of the start up phase
  */
 public class SelectMapType {
 
@@ -17,76 +17,56 @@ public class SelectMapType {
     public static int MapType = 0;
 
 
+    /**
+     * Constructor. It calls the setup() method.
+     */
     public SelectMapType() {
         setup();
     }
 
-    public static void main(String[] args) {
-//		StartUpWindow temp = new StartUpWindow();
-//		temp.setup();
-    }
-
+    /**
+     * This method implements the second user interface of the game.
+     */
     public void setup() {
         window = new JFrame("Start-up phase");
         window.setSize(500, 700);
-
         HeaderLabel = new JLabel("Choose the map");
         HeaderLabel.setBounds(120, 100, 150, 50);
-
         select1 = new JButton("Select from List");
         select1.setBounds(100, 200, 200, 50);
-
         select2 = new JButton("Load Map");
         select2.setBounds(100, 300, 200, 50);
-
         select3 = new JButton("Create New Map");
         select3.setBounds(100, 400, 200, 50);
-
         window.add(HeaderLabel);
         window.add(select1);
         window.add(select2);
         window.add(select3);
-
         HeaderLabel.setVisible(true);
-
-        select1.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
+        //"Select from list"
+        select1.addActionListener(event -> {
                 window.dispose();
                 MapType = 1;
-//				System.out.print("Select fromlist");
                 SelectMap Map = new SelectMap();
-            }
         });
-        select2.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
+        //"Load Map"
+        select2.addActionListener(event -> {
                 MapType = 2;
                 window.dispose();
                 BrowseMapFile Map = new BrowseMapFile();
-            }
         });
-
-        select3.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
+        //"Create New Map"
+        select3.addActionListener(event -> {
                 MapType = 3;
                 window.dispose();
                 CreateMap CreatedMap = new CreateMap();
-            }
         });
 
         select1.setVisible(true);
         select2.setVisible(true);
         select3.setVisible(true);
-
         window.setLocationRelativeTo(null);
-
         window.setLayout(null);
         window.setVisible(true);
     }
-
 }

@@ -31,7 +31,7 @@ public class ReinforcementController {
     }
 
     /**
-     * number of times player exchanges the cards
+     * Number of times player exchanges the cards
      *
      * @param list:   list of cards
      * @param player: player object must be given to fetch the player cards
@@ -69,12 +69,12 @@ public class ReinforcementController {
     }
 
     /**
-     * this method checks for the number of armies that are not deployed
+     * Checks the number of armies that are not deployed
      *
      * @param country source country of the player
      * @return some value of type string
      */
-    public String addarmies(Country country) {
+    public String addArmies(Country country) {
         int index = country.getOwner().getPlayerId();
         Player player = ReadingFiles.playerId.get(index);
         if (player.getPlayerArmiesNotDeployed() == 0) {
@@ -103,11 +103,10 @@ public class ReinforcementController {
     }
 
     /**
-     * this method calculates the number of armies each player gets to reinforce
+     * Calculates the number of armies each player gets to reinforce
      *
      * @param player: player object for which the armies are calculated
      */
-
     public void calculateReinforcementArmies(Player player) {
         int totalcountriesofplayer = 0;
         for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
@@ -129,12 +128,11 @@ public class ReinforcementController {
     }
 
     /**
-     * this method checks whether the player owns the whole continent or not
+     * Checks whether the player owns the whole continent or not.
      *
      * @param player: player object for which it will check
      * @return continents list of continents
      */
-
     public List<Continent> playerOwnsContinent(Player player) {
         List<Continent> continents = new ArrayList<Continent>();
         for (Map.Entry<String, Continent> entry : ReadingFiles.ContinentNameObject.entrySet()) {
@@ -155,7 +153,7 @@ public class ReinforcementController {
     }
 
     /**
-     * this method calculates the number of armies according to the control value
+     * Calculates the number of armies according to the control value
      *
      * @param player: player object for which it calculates
      * @return armies
@@ -170,7 +168,7 @@ public class ReinforcementController {
     }
 
     /**
-     * this method updates the number of armies player owns and armies not deployed
+     * Updates the number of armies player owns and armies not deployed
      *
      * @param player:  player object that updates
      * @param country: country object where armies updated
@@ -184,11 +182,10 @@ public class ReinforcementController {
     }
 
     /**
-     * this method checks whether player has deployed all his armies or not
+     * Checks whether player has deployed all his armies or not
      *
      * @param player: player object
      */
-
     public String endReinforcementCheck(Player player) {
         if (player.getPlayerArmiesNotDeployed() == 0) {
             return "Please deploy all your armies before proceeding to attack";

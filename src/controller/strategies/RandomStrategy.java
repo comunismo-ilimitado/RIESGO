@@ -25,7 +25,7 @@ public class RandomStrategy implements IStrategy {
      * @param player: player object
      */
     public void reinforce(Player player) {
-        helper.exchangeCardsStartegy(player);
+        helper.exchangeCardsStrategy(player);
         player.calcArmiesByControlValue(player);
         List<Country> countries = player.getMyCountries(player);
         int index = (int) (Math.random() * countries.size());

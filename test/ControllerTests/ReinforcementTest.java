@@ -263,7 +263,7 @@ public class ReinforcementTest {
 	 */
 	@Test
 	public void testAddArmies() {
-		assertEquals("", reinforcement.addarmies(country1));
+		assertEquals("", reinforcement.addArmies(country1));
 	}
 
 	/**
@@ -272,7 +272,7 @@ public class ReinforcementTest {
 	*/
 	@Test
 	public void test1AddArmies() {
-		assertEquals("NO ARMIES LEFT, PLEASE CLICK FINISH REINFORCEMENT", reinforcement.addarmies(country6));
+		assertEquals("NO ARMIES LEFT, PLEASE CLICK FINISH REINFORCEMENT", reinforcement.addArmies(country6));
 	}
 
 	/**

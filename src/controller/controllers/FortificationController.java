@@ -7,7 +7,7 @@ import model.Player;
 import java.util.*;
 
 /**
- * Fortification COntroller has all the methods required during fortification
+ * Fortification Controller has all the methods required during fortification
  * phase of the game
  *
  * @author bhargav
@@ -32,7 +32,7 @@ public class FortificationController {
     }
 
     /**
-     * Method to find if there a path between two countries or not
+     * Check if exists a path between two countries
      *
      * @param source:      The country which armies are being moved from
      * @param destination: The country which armies are being moved to
@@ -60,37 +60,34 @@ public class FortificationController {
     }
 
     /**
-     * Method to validate and move armies between two countries owned by the same
-     * player
+     * Validates and move armies between two countries owned by the same player
      *
-     * @param sourcecountry:       The country which armies are being moved from
-     * @param destinationcountry:  The country which armies are being moved to
-     * @param noofarmiestobemoved: Armies asked by player to move
+     * @param sourceCountry:       The country which armies are being moved from
+     * @param destinationCountry:  The country which armies are being moved to
+     * @param armiesToBeMoved: Armies asked by player to move
      * @return: Returns a string if there is any error or a null string if
      * validations succeed
      */
-    public String moveArmies(Country sourcecountry, Country destinationcountry, int noofarmiestobemoved) {
-        if (sourcecountry.getNoOfArmies() < 2) {
+    public String moveArmies(Country sourceCountry, Country destinationCountry, int armiesToBeMoved) {
+        if (sourceCountry.getNoOfArmies() < 2) {
             return "less army";
-        } else if (noofarmiestobemoved >= sourcecountry.getNoOfArmies()) {
-            int CanMove = sourcecountry.getNoOfArmies() - 1;
+        } else if (armiesToBeMoved >= sourceCountry.getNoOfArmies()) {
+            int CanMove = sourceCountry.getNoOfArmies() - 1;
             System.out.println(CanMove);
             return "You can only move" + CanMove;
-        } else if (!hasPathBFS2(sourcecountry, destinationcountry)) {
-
+        } else if (!hasPathBFS2(sourceCountry, destinationCountry)) {
             return "NO path";
-
         } else {
-            sourcecountry.setNoOfArmies(sourcecountry.getNoOfArmies() - noofarmiestobemoved);
-            int x = ReadingFiles.ContinentNameObject.get(sourcecountry.getContinent().getName()).getCountries()
-                    .indexOf(sourcecountry);
-            ReadingFiles.ContinentNameObject.get(sourcecountry.getContinent().getName()).getCountries().get(x)
-                    .setNoOfArmies(sourcecountry.getNoOfArmies());
-            destinationcountry.setNoOfArmies(destinationcountry.getNoOfArmies() + noofarmiestobemoved);
-            int y = ReadingFiles.ContinentNameObject.get(destinationcountry.getContinent().getName()).getCountries()
-                    .indexOf(destinationcountry);
-            ReadingFiles.ContinentNameObject.get(destinationcountry.getContinent().getName()).getCountries().get(y)
-                    .setNoOfArmies(destinationcountry.getNoOfArmies());
+            sourceCountry.setNoOfArmies(sourceCountry.getNoOfArmies() - armiesToBeMoved);
+            int x = ReadingFiles.ContinentNameObject.get(sourceCountry.getContinent().getName()).getCountries()
+                    .indexOf(sourceCountry);
+            ReadingFiles.ContinentNameObject.get(sourceCountry.getContinent().getName()).getCountries().get(x)
+                    .setNoOfArmies(sourceCountry.getNoOfArmies());
+            destinationCountry.setNoOfArmies(destinationCountry.getNoOfArmies() + armiesToBeMoved);
+            int y = ReadingFiles.ContinentNameObject.get(destinationCountry.getContinent().getName()).getCountries()
+                    .indexOf(destinationCountry);
+            ReadingFiles.ContinentNameObject.get(destinationCountry.getContinent().getName()).getCountries().get(y)
+                    .setNoOfArmies(destinationCountry.getNoOfArmies());
             return "";
         }
     }

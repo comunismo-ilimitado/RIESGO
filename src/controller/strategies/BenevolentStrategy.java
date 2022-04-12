@@ -75,9 +75,9 @@ public class BenevolentStrategy implements IStrategy {
                     weakcountry.setNoOfArmies(weakcountry.getNoOfArmies() + strongestcountry.getNoOfArmies() - 1);
                     strongestcountry.setNoOfArmies(1);
                 }
-                int index = helper.getIndex(weakcountry, player.getMyCountries(player));
+                int index = getCountryIndex(weakcountry, player.getMyCountries(player));
                 player.getMyCountries(player).get(index).setNoOfArmies(weakcountry.getNoOfArmies());
-                index = helper.getIndex(strongestcountry, player.getMyCountries(player));
+                index = getCountryIndex(strongestcountry, player.getMyCountries(player));
                 player.getMyCountries(player).get(index).setNoOfArmies(strongestcountry.getNoOfArmies());
                 ReadingFiles.CountryNameObject.get(weakcountry.getName()).setNoOfArmies(weakcountry.getNoOfArmies());
                 ReadingFiles.CountryNameObject.get(strongestcountry.getName())
@@ -90,5 +90,21 @@ public class BenevolentStrategy implements IStrategy {
                 canfortifycountries.clear();
             }
         }
+    }
+
+    /**
+     * Gets the index of the indicated country in a country list
+     *
+     * @param country:   country name
+     * @param countries: list of countries
+     * @return index
+     */
+    public int getCountryIndex(Country country, List<Country> countries) {
+        for (int i = 0; i < countries.size(); i++) {
+            if (country.getName().equals(countries.get(i).getName())) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

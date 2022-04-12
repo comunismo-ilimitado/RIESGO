@@ -7,30 +7,13 @@ import model.Player;
 import java.util.List;
 
 /**
- * Helper class to consolidate common required methods in startegies
+ * Helper class to consolidate common required methods in strategies
  *
  * @author bhargav
  */
 public class HelperClass {
-
     /**
-     * get index of the country
-     *
-     * @param country:   country name
-     * @param countries: list of countries
-     * @return index
-     */
-    public int getIndex(Country country, List<Country> countries) {
-        for (int i = 0; i < countries.size(); i++) {
-            if (country.getName().equals(countries.get(i).getName())) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * get index of the country with least number of armies
+     * Get the index of the country with fewer armies
      *
      * @param countries: list of countries
      * @return index
@@ -54,7 +37,7 @@ public class HelperClass {
      *
      * @param player: player object
      */
-    public void exchangeCardsStartegy(Player player) {
+    public void exchangeCardsStrategy(Player player) {
         if (player.getPlayerCards().size() >= 3) {
             List<CardTypes> cards = player.getPlayerCards();
             while (cards.size() >= 3) {

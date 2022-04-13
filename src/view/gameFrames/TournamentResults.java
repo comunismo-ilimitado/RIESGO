@@ -21,24 +21,13 @@ public class TournamentResults {
         window.setSize(500, 700);
         panel = new JPanel(new GridLayout(0, a));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
-
         HeaderLabel = new JLabel("Results");
         HeaderLabel.setBounds(120, 100, 150, 50);
-
-//		panel.add(HeaderLabel);
-        //	panel.add(field);
-
         HeaderLabel.setVisible(true);
-//		field.setVisible(true);
-
-
-        //	window.setLocationRelativeTo(null);
-        //	window.setLayout(null);
     }
 
     public void adding(String aaa) {
         JLabel jLabel = new JLabel(aaa);
-
         jLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panel.add(jLabel);
     }

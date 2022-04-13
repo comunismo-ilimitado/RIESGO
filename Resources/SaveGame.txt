@@ -8,38 +8,38 @@ Player Playing :- 1
 Currently in Reinforcement Mode----PLAYER----
 0
 Human
-Westmount***3
-Dorval***3
-NDG***3
+Westmount***6
+Hampstead***3
+RDP-PAT***4
 Ahuntsic***3
-Verdun***3
-St-Leonard***3
+Anjou***3
+Rosemont***3
 Pointe-Claire***3
 Beaconsfield***3
 Kirkland***3
+Outremont***3
 Saint-Laurent***3
-Pierrefonds***3
-Montreal Nord***3
+Villeray***3
 Mont-Royal***2
 Pointe St-Charles***2
 ----CARDS----
 []
 ----PLAYER----
 1
-Random
+Agressive
+Dorval***3
 Mercier***3
-Hampstead***3
+NDG***3
 Ile Bizard***3
-RDP-PAT***3
 Ste-Anne-de-Bellevue***3
 La Salle***3
+Verdun***3
 Plateau***3
-Anjou***3
-Rosemont***3
 Ville-Marie***3
 Lachine***3
-Outremont***3
-Villeray***2
+St-Leonard***3
+Pierrefonds***3
+Montreal Nord***2
 Senneville***2
 ----CARDS----
 []

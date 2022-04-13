@@ -53,12 +53,16 @@ public class MainController {
         return fortificationController;
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @SuppressWarnings("deprecation")
     public void Function() throws Exception {
         try {
             frame2 = new MFrame2();
             files = new ReadingFiles(frame2);
-
+            //Resume Game
             FileReader fileReader;
             BufferedReader bufferedReader = null;
             File tempFile = new File("Resources/SaveGame.txt");
@@ -69,7 +73,7 @@ public class MainController {
             }
             if (resume) {
                 files.Reads(bufferedReader.readLine(), Integer.parseInt(bufferedReader.readLine()));
-            } else {
+            } else { //Ruta de guardado de la partida (al crear una nueva)
                 String address = "Resources/World.map";
                 if (SelectMapType.MapType == 1)
                     address = "Resources/" + SelectMap.getSingleModeSelectedMap() + ".map";
@@ -81,11 +85,11 @@ public class MainController {
                     files.Reads(address, SelectNoOfPlayers.NumberOfPlayers);
                 }
             }
+            //Comprobación mapa
             mapValidation = new MapValidation(ReadingFiles.CountryNameObject, ReadingFiles.ContinentNameObject);
             mapValidation.CallAllMethods();
-            if (!files.errors && !mapValidation.error) {
+            if (!files.errors && !mapValidation.error) { //Booleanos que dicen si ha habido un error
                 myactionlistner = new MyActionListener(this);
-
                 frame = new MFrame(myactionlistner, ReadingFiles.image);
                 reinforcementController = new ReinforcementController();
                 attackController = new AttackController();
@@ -97,17 +101,20 @@ public class MainController {
                     myactionlistner.currentPlayer = no;
                     phase = bufferedReader.readLine();
                 }
+                //Se muestra la interfaz de juego
                 frame.fun();
-                //temp();
                 if (resume)
                     LoadSavedGame(bufferedReader);
-
+                //Cargar estrategias (Con playerId2) (es un clon de playerId)
                 for (int i = 0; i < ReadingFiles.playerId2.size(); i++) {
                     ReadingFiles.playerId2.get(i).setStrategy(SelectPlayerStrategies.getStrategies().get(i));
                 }
+                //Se crean los botones
                 SetButtons();
                 PaintCountries();
                 SetDominationView();
+                //Se resume la fase del juego cargado o
+                // se empieza por la fase de fortificación en un juego nuevo.
                 if (resume) {
                     myactionlistner.phaseResume(phase);
                 } else {
@@ -152,7 +159,6 @@ public class MainController {
                 Player tempPlayer = ReadingFiles.playerId.get(Integer.parseInt(countryandarmies[0]));
                 ReadingFiles.playerId2.put(Integer.parseInt(countryandarmies[0]), tempPlayer);
                 tempPlayer.setStrategy(countryandarmies[1]);
-
                 SelectPlayerStrategies.strategy_selected.add(countryandarmies[1]);
                 System.out.println(tempPlayer);
                 tempPlayer.ClearArmies();
@@ -160,21 +166,17 @@ public class MainController {
                     String[] country = countryandarmies[j].trim().split("\\*\\*\\*");
                     Country tempCountry = ReadingFiles.CountryNameObject.get(country[0].trim());
                     tempPlayer.addCountriesOccupied(tempCountry);
-
                     tempCountry.setNoOfArmies(Integer.parseInt(country[1]));
-
                     tempCountry.setPlayer(tempPlayer);
                 }
                 String[] arrlis = cards[1].substring(2, cards[1].length() - 1).split(",");
                 ArrayList<CardTypes> arrayList = new ArrayList<>();
-
                 for (int k = 0; k < arrlis.length; k++) {
                     if (arrlis[k].trim().equals(""))
                         break;
                     arrayList.add(CardTypes.valueOf(arrlis[k].trim()));
                 }
                 // player.setPlayerCards(arrayList);
-
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -188,17 +190,14 @@ public class MainController {
     public void updateDominationView() {
         frame.UpdateGameDominationViewPercentage(CountriesPercentage());
         frame.UpdateGameDominationViewContinentOccupied(ContinentsOccupied());
-
     }
 
     /**
-     * Add armies
-     *
+     * PENDIENTE
      * @param armies
      */
     public void AddArmies(int armies) {
         OnlyNeeded(neighbours(armies));
-
     }
 
     /**
@@ -215,7 +214,6 @@ public class MainController {
      *
      * @throws IOException
      */
-
     public void RefreshButtons() throws IOException {
         frame.Refresh(countryObjects());
         PaintCountries();
@@ -240,8 +238,7 @@ public class MainController {
     }
 
     /**
-     * Total countries occupied
-     *
+     * Total countries occupied by a player
      * @param id
      * @return
      */
@@ -250,9 +247,8 @@ public class MainController {
     }
 
     /**
-     * Country object
-     *
-     * @return
+     * Returns country object
+     * @return HashMap
      */
     public HashMap<String, Country> countryObjects() {
         return ReadingFiles.CountryNameObject;
@@ -267,7 +263,6 @@ public class MainController {
 
     /**
      * Frame for countries that are to be viewed
-     *
      * @param country
      */
     public void OnlyNeeded(List<Country> country) {
@@ -276,7 +271,6 @@ public class MainController {
 
     /**
      * Player Number
-     *
      * @return
      */
     public int PlayerNo() {
@@ -288,8 +282,7 @@ public class MainController {
     }
 
     /**
-     * Player object
-     *
+     * Returns player object
      * @param id: id of the player
      * @return
      */
@@ -299,7 +292,6 @@ public class MainController {
 
     /**
      * Gives list of neighbors
-     *
      * @param country: country whose neighbor list you want
      * @return result: string of neighbors
      */
@@ -314,7 +306,6 @@ public class MainController {
 
     /**
      * Changes player of the country
-     *
      * @param countryname: name of the country
      * @throws IOException
      */
@@ -327,14 +318,12 @@ public class MainController {
 
     /**
      * Calculates Size of each country button
-     *
      * @param pl
      * @return value in float
      */
     public float calculations(Player pl) {
         try {
             float total = ReadingFiles.CountryNameObject.size();
-            // System.out.println(player);
             float player_have = pl.getTotalCountriesOccupied().size();
             return (player_have / total) * 100;
         } catch (Exception e) {
@@ -345,21 +334,20 @@ public class MainController {
 
     /**
      * Giving values to each country button
-     *
      * @return
      */
     public ArrayList<Float> CountriesPercentage() {
         ArrayList<Float> arrayList = new ArrayList<>();
         for (int i = 0; i < PlayerNo(); i++) {
-            // System.out.println(playerObjet(i));
             arrayList.add(calculations(playerObjet(i)));
         }
         return arrayList;
     }
 
+    //Ahora hay dos métodos para pasar la información de una partida al archivo de guardado de mapa.
+
     /**
      * Converts user input into map file
-     *
      * @param list: list of continents
      * @return occu: String of continents
      */
@@ -399,8 +387,7 @@ public class MainController {
     }
 
     /**
-     * list of countries that are occupied
-     *
+     * Returns list of countries that are occupied
      * @return list
      */
     public ArrayList<String> ContinentsOccupied() {
@@ -411,6 +398,10 @@ public class MainController {
         return arrayList;
     }
 
+
+    /**
+     * Set the player cards to a player (not used)
+     */
     public void temp() {
         List<CardTypes> cardTypes = new ArrayList<>();
         playerObjet(0).setPlayerCards(cardTypes);

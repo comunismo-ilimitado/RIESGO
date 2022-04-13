@@ -11,6 +11,9 @@ import view.menuFrames.SelectMap;
 import view.menuFrames.SelectNoOfPlayers;
 import view.menuFrames.SelectPlayerStrategies;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,13 +28,20 @@ public class Tournament {
     public static String table = "";
     ArrayList<ArrayList> tablelist = new ArrayList<>();
     ArrayList<String> list = new ArrayList<>();
+    //Antigua TournamentResults
+    private JFrame window;
+    private JPanel panel;
+    private JLabel HeaderLabel;
+    private JTextArea field;
 
-    //   String[][] list=
+
+    /**
+     * Constructor for Tournament
+     */
     public Tournament() {
         function();
         results();
         System.out.println(table);
-//		TournamentResults t= new TournamentResults();
     }
 
     /**
@@ -45,13 +55,14 @@ public class Tournament {
         BenevolentStrategy bn = new BenevolentStrategy();
         ReadingFiles ReadFile = new ReadingFiles(frame2);
         System.out.println("\nNo of Games:" + SelectMap.NoOfGames);
+        //T odo esto escribe por pantalla como van sucediendo los juegos
+        //For para cada juego
         for (int gameno = 0; gameno < SelectMap.NoOfGames; gameno++) {
             System.out.println("\nGame:" + (gameno + 1));
             list = new ArrayList<>();
-
+            //For para cada mapa por juego
             for (int mapno = 0; mapno < SelectMap.TourMapList.size(); mapno++) {
-
-                // game
+                //Juego
                 win = false;
                 try {
                     ReadFile.Reads("Resources/" + SelectMap.TourMapList.get(mapno) + ".map",
@@ -60,18 +71,17 @@ public class Tournament {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                System.out.println("\n\nMap:" + SelectMap.TourMapList.get(mapno) + "\nTotalNo of countries:"
+                System.out.println("\n\nMap:" + SelectMap.TourMapList.get(mapno) + "\nTotal No of countries:"
                         + ReadingFiles.CountriesNames.size() + "\nNo of turns:" + SelectMap.NoOfTurns);
                 for (int m = 0; m < ReadingFiles.playerId.size(); m++) {
                     ReadingFiles.playerId.get(m).setStrategy(SelectPlayerStrategies.getStrategies().get(m));
                 }
+                //For para cada turno (dentro de un mapa dentro de un juego)
                 for (int turnno = 0; turnno < SelectMap.NoOfTurns; turnno++) {
                     System.out.println("\n turn:" + (turnno + 1));
-
                     for (int playerindex = 0; playerindex < ReadingFiles.playerId.size(); playerindex++) {
                         Player p;
                         p = ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[playerindex]);
-
                         switch (p.getStrategy()) {
                             case "Agressive":
                                 ag.reinforce(p);
@@ -101,61 +111,61 @@ public class Tournament {
                                 break;
                         }
                         removeLostPlayer();
-
+                        //Nota: Es al empezar el turno cuando se mira si alguien ha ganado.
+                        //removeLostPlayer() va quitando jugadores, y win==true cuando todas las countries son del ganador.
                         if (p.getMyCountries(p).size() == ReadingFiles.CountriesNames.size()) {
                             win = true;
                             break;
                         }
                         if (win == true)
                             break;
-
                     }
-
+                    //For de cada jugador en cada turno
                     for (int l = 0; l < ReadingFiles.playerId.size(); l++) {
-
                         Player p = ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[l]);
-
                         System.out.print("\nturn:" + (turnno + 1) + " Player:" + (p.getPlayerId() + 1) + "  "
                                 + p.getStrategy() + " total countries:" + p.getMyCountries(p).size());
+                        //Se anuncia victoria
                         if (p.getMyCountries(p).size() == ReadingFiles.CountriesNames.size()) {
-                            System.out.println(
-                                    "\n****Player " + (p.getPlayerId() + 1) + " " + p.getStrategy() + " wins!");
+                            System.out.println("\n****Player " + (p.getPlayerId() + 1) + " " + p.getStrategy() + " wins!");
+                            //Se añade a list
                             list.add(p.getStrategy());
                             System.out.println("added" + p.getStrategy());
-
                             win = true;
                             break;
                         }
                         if (p.getMyCountries(p).size() == 0) {
                             removeLostPlayer();
-
                             System.out.print("(Player:" + (p.getPlayerId() + 1) + "Lost!)");
                         }
-
                     }
-
                     if (win == true)
                         break;
 
                 }
+                //Caso empate
                 if (win == false) {
                     System.out.print("\n\n****No one wins!");
                     list.add("Draw");
                     System.out.println("added" + "Draw");
-
                 }
                 System.out.println("\nend of game!");
-
-
+                //Siguiente mapa
             }
+            //Por cada juego se añade la lista de ganadores de los distintos mapas (de ese juego) a tablelist.
             tablelist.add(list);
         }
         System.out.print("\n\n****END OF TOURNAMENT*****");
     }
 
+    /**
+     * This function is used to remove eliminated players from the game or announce winners.
+     */
     public void removeLostPlayer() {
+        //Se mira si ha ganado o debe ser eliminado para cada jugador.
         for (int i = 0; i < ReadingFiles.playerId.size(); i++) {
             Player p = ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[i]);
+            //Caso ganador.
             if (ReadingFiles.playerId.size() == 1) {
                 System.out.println("\n****Player "
                         + (ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[0]).getPlayerId() + 1)
@@ -165,6 +175,7 @@ public class Tournament {
                 System.out.println("added" + ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[0]).getStrategy());
                 ReadingFiles.playerId.remove(ReadingFiles.playerId.keySet().toArray()[0]);
             }
+            //Te quedas sin países, eres eliminado.
             if (p.getMyCountries(p).size() == 0) {
                 System.out.println("player " + p.getStrategy() + " removed");
                 ReadingFiles.playerId.remove(ReadingFiles.playerId.keySet().toArray()[i]);
@@ -173,6 +184,7 @@ public class Tournament {
                             + (ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[0]).getPlayerId() + 1)
                             + " " + ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[0]).getStrategy()
                             + " wins!");
+                    //Se añade a la lista de ganadores
                     list.add(ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[0]).getStrategy());
                     System.out.println("added" + ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[0]).getStrategy());
                     ReadingFiles.playerId.remove(ReadingFiles.playerId.keySet().toArray()[0]);
@@ -180,39 +192,47 @@ public class Tournament {
             }
         }
     }
-//	public static void main(String[] args) {
-////		SelectMap.NoOfGames
-////		SelectMap.TourMapList.size()
-//		Tournament t= new Tournament();t.results();
-//		System.out.println(t.table);
-//	}
 
+    /**
+     * This method prints and shows the result's table of the tournament
+     */
     public void results() {
-        TournamentResults results = new TournamentResults();
-        results.setup(SelectMap.TourMapList.size() + 1);
+        window = new JFrame("Tournament Results");
+        window.setSize(500, 700);
+        panel = new JPanel(new GridLayout(0, SelectMap.TourMapList.size()+1));
+        panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        HeaderLabel = new JLabel("Results");
+        HeaderLabel.setBounds(120, 100, 150, 50);
+        HeaderLabel.setVisible(true);
         table += String.format("%-16s", "");
-        results.adding("");
-
-
+        JLabel jLabel1 = new JLabel("");
+        jLabel1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        panel.add(jLabel1);
         for (int j = 0; j < SelectMap.TourMapList.size(); j++) {
             table += String.format("%-16s", "|   Map" + (j + 1));
-            results.adding("Map " + (j + 1));
+            JLabel jLabel2 = new JLabel("Map " + (j + 1));
+            jLabel2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            panel.add(jLabel2);
         }
         table += "\n";
         for (int i = 0; i < SelectMap.NoOfGames; i++) {
             table += String.format("%-16s", "   Game" + (i + 1));
-            results.adding("Game" + (i + 1));
+            JLabel jLabel3 = new JLabel("Game"+(i+1));
+            jLabel3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            panel.add(jLabel3);
+            //For para escribir por pantalla los resultados
             for (int j = 0; j < SelectMap.TourMapList.size(); j++) {
                 table += String.format("%-16s", "|" + tablelist.get(i).get(j));
                 System.out.println(tablelist.get(i).get(j));
-                results.adding("" + tablelist.get(i).get(j));
-
+                JLabel jLabel4 = new JLabel("" + tablelist.get(i).get(j));
+                jLabel4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                panel.add(jLabel4);
             }
             table += "\n";
         }
-        results.show();
-
-
+        //Escribe en interfaz (tabla) los resultados
+        window.add(panel);
+        window.setVisible(true);
     }
 
 }

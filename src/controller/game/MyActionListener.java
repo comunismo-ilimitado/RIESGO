@@ -24,17 +24,18 @@ import java.util.Observable;
  */
 @SuppressWarnings("deprecation")
 public class MyActionListener extends Observable implements ActionListener {
-    private MainController controller;
-    private List<String> phase;
+    private final MainController controller;
+    private final List<String> phase;
     private String currentPhase;
     private int players = 0;
     public int currentPlayer = 0;
     private Country attackCountry1, attackCountry2;
     private Country fortifyCountry1, fortifyCountry2;
-    private List<CardTypes> cardTypesList = new ArrayList<>();
+    private final List<CardTypes> cardTypesList = new ArrayList<>();
 
     /**
      * Builder of the class
+     *
      * @param controller
      */
     public MyActionListener(MainController controller) {
@@ -89,6 +90,7 @@ public class MyActionListener extends Observable implements ActionListener {
 
     /**
      * This method switches between phases when the user loads a game
+     *
      * @param phase
      */
     public void phaseResume(String phase) {
@@ -107,6 +109,7 @@ public class MyActionListener extends Observable implements ActionListener {
 
     /**
      * This method checks if someone doesnt have any country occupied and give his cards to the attacker player
+     *
      * @param attacker
      */
     private void elimination(Player attacker) {
@@ -193,7 +196,7 @@ public class MyActionListener extends Observable implements ActionListener {
     /**
      * This method checks the validation of the reinforcement phase
      */
-    private void reinforcementPhase(){
+    private void reinforcementPhase() {
         textarea("Currently in Reinforcement Mode");
         buttonCards(true);
         changed();
@@ -201,9 +204,6 @@ public class MyActionListener extends Observable implements ActionListener {
         controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
         controller.getReinforcementController().calculateReinforcementArmies(controller.playerObjet(currentPlayer));
         controller.frame.error("Its Player:- " + (currentPlayer + 1) + " Turn");
-
-
-        }
     }
 
     /**
@@ -313,6 +313,7 @@ public class MyActionListener extends Observable implements ActionListener {
         playerUpdate(); // El jugador actual se cambia antes de fortificar??
     }
 */
+
     /**
      * This method checks the validation of the fortification phase
      *
@@ -406,7 +407,7 @@ public class MyActionListener extends Observable implements ActionListener {
     /**
      * This method prepares the game for the next player (Human mode)
      */
-    private void finishFortification(){
+    private void finishFortification() {
         buttonCards(true);
         changed();
         currentPhase = "Finish Reinforcement";
@@ -422,7 +423,7 @@ public class MyActionListener extends Observable implements ActionListener {
     /**
      * This method prepares the game for the next player (CPU mode)
      */
-    private void finishCPU(){
+    private void finishCPU() {
         playerUpdate();
         changed();
         selectTypeOfPlayer();
@@ -431,7 +432,7 @@ public class MyActionListener extends Observable implements ActionListener {
     /**
      * This method enables or disables some buttons
      */
-    private void buttonCards(boolean bool){
+    private void buttonCards(boolean bool) {
         controller.frame.buttonCard4.setEnabled(bool);
         controller.frame.buttonCard3.setEnabled(bool);
         controller.frame.buttonCard2.setEnabled(bool);
@@ -440,6 +441,7 @@ public class MyActionListener extends Observable implements ActionListener {
 
     /**
      * This method controls the action of the buttons
+     *
      * @param event
      */
     @Override
@@ -597,9 +599,11 @@ public class MyActionListener extends Observable implements ActionListener {
     public ArrayList<Float> countriesPercentage() {
         return controller.CountriesPercentage();
     }
+
     public ArrayList<String> continentsOccupied() {
         return controller.ContinentsOccupied();
     }
+
     public int getArmiesPerPlayer() {
         return controller.attackController.getTotalCountries(controller.playerObjet(currentPlayer));
     }
@@ -639,6 +643,7 @@ public class MyActionListener extends Observable implements ActionListener {
 
     /**
      * This method writes on the graphic interface
+     *
      * @param string
      */
     private void textarea(String string) {

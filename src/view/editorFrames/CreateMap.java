@@ -30,8 +30,8 @@ public class CreateMap {
     private final JCheckBox[] check_boxes = new JCheckBox[150];
     private final JCheckBox[] check_boxes1 = new JCheckBox[150];
     DefaultListModel<String> countries_to_continent_list;
-    private List<Continent> ContinentsObjectList = new ArrayList<>();
-    private List<Country> CountriesObjectList = new ArrayList<>();
+    private final List<Continent> ContinentsObjectList = new ArrayList<>();
+    private final List<Country> CountriesObjectList = new ArrayList<>();
 
     private static JButton EditButton;
 

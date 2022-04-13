@@ -99,7 +99,7 @@ public class MainController {
                 if (resume) {
                     myactionlistner.phaseResume(phase);
                 } else {
-                    myactionlistner.reinforcementPhase();
+                    myactionlistner.selectTypeOfPlayer();
                 }
                 repaintAndRevalidate();
             }

@@ -221,9 +221,9 @@ public class MFrame extends JFrame implements Observer {
      */
     // Anade el numero de cartas a cada boton
     public void cards() {
-        buttonCard1.setText("Infantry " + myActionListner.getCardsTypeInfantry());
-        buttonCard2.setText("Artillery " + myActionListner.getCardsTypeArtillery());
-        buttonCard3.setText("Cavalry " + myActionListner.getCardsTypeCavalry());
+        buttonCard1.setText("Infantry " + myActionListner.getInfantryCards());
+        buttonCard2.setText("Artillery " + myActionListner.getArtilleryCards());
+        buttonCard3.setText("Cavalry " + myActionListner.getCavalryCards());
     }
 
     /**

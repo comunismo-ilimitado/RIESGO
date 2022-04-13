@@ -6,7 +6,6 @@ import controller.strategies.BenevolentStrategy;
 import controller.strategies.CheaterStrategy;
 import controller.strategies.RandomStrategy;
 import model.Player;
-import view.gameFrames.TournamentResults;
 import view.gameFrames.MFrame2;
 import view.menuFrames.SelectMap;
 import view.menuFrames.SelectNoOfPlayers;

@@ -41,6 +41,18 @@ public class MainController {
     MapValidation mapValidation;
     public boolean resume = false;
 
+    public AttackController getAttackController() {
+        return attackController;
+    }
+
+    public ReinforcementController getReinforcementController() {
+        return reinforcementController;
+    }
+
+    public FortificationController getFortificationController() {
+        return fortificationController;
+    }
+
     @SuppressWarnings("deprecation")
     public void Function() throws Exception {
         try {
@@ -91,7 +103,7 @@ public class MainController {
                     LoadSavedGame(bufferedReader);
 
                 for (int i = 0; i < ReadingFiles.playerId2.size(); i++) {
-                    ReadingFiles.playerId2.get(i).setStratergy(SelectPlayerStrategies.getStrategies().get(i));
+                    ReadingFiles.playerId2.get(i).setStrategy(SelectPlayerStrategies.getStrategies().get(i));
                 }
                 SetButtons();
                 PaintCountries();
@@ -139,7 +151,7 @@ public class MainController {
                 String[] countryandarmies = cards[0].trim().split("\n");
                 Player tempPlayer = ReadingFiles.playerId.get(Integer.parseInt(countryandarmies[0]));
                 ReadingFiles.playerId2.put(Integer.parseInt(countryandarmies[0]), tempPlayer);
-                tempPlayer.setStratergy(countryandarmies[1]);
+                tempPlayer.setStrategy(countryandarmies[1]);
 
                 SelectPlayerStrategies.strategy_selected.add(countryandarmies[1]);
                 System.out.println(tempPlayer);

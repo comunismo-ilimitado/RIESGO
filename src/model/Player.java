@@ -1,7 +1,5 @@
 package model;
 
-import controller.controllers.AttackController;
-import controller.controllers.FortificationController;
 import controller.controllers.ReinforcementController;
 import controller.strategies.AggressiveStratery;
 import controller.strategies.BenevolentStrategy;
@@ -21,9 +19,8 @@ import java.util.List;
 public class Player {
 
     ReinforcementController reinforcementcontroller = new ReinforcementController();
-    FortificationController fortificationcontroller = new FortificationController();
-    AttackController attackcontroller = new AttackController();
-    public AggressiveStratery aggressiveStratergy = new AggressiveStratery();
+
+    public AggressiveStratery aggressiveStrategy = new AggressiveStratery();
     public BenevolentStrategy benevolentStrategy = new BenevolentStrategy();
     public CheaterStrategy cheaterStrategy = new CheaterStrategy();
     public RandomStrategy randomStrategy = new RandomStrategy();
@@ -145,8 +142,8 @@ public class Player {
     /**
      * Sets Player cards
      */
-    public void setPlayerCards(List<CardTypes> Playercards) {
-        this.cards = Playercards;
+    public void setPlayerCards(List<CardTypes> PlayerCards) {
+        this.cards = PlayerCards;
     }
 
     /**
@@ -181,8 +178,31 @@ public class Player {
         this.card_exchange_counter = value;
     }
 
+    /**
+     * Gets players strategy
+     *
+     * @param strategy
+     */
+    public void setStrategy(String strategy) {
+        this.strategy = strategy;
+    }
+
+    /**
+     * Sets players strategy
+     *
+     * @return
+     */
+    public String getStrategy() {
+        return strategy;
+    }
+
     public void addCountriesOccupied(Country countriesOccupied) {
         this.total_countries_occupied.add(countriesOccupied);
+    }
+
+    public void ClearArmies() {
+        total_countries_occupied.clear();
+        countries_occupied.clear();
     }
 
     /**
@@ -196,41 +216,6 @@ public class Player {
     }
 
     /**
-     * number of times player exchanges the cards
-     *
-     * @param list:   list of cards
-     * @param player: player object must be given to fetch the player cards
-     * @return message how player can exchange cards
-     */
-    public String exchangeCards(List<CardTypes> list, Player player) {
-        return reinforcementcontroller.exchangeCards(list, player);
-    }
-
-    public void ClearArmies() {
-        total_countries_occupied.clear();
-        countries_occupied.clear();
-    }
-
-    /**
-     * this method checks for the number of armies that are not deployed
-     *
-     * @param country source country of the player
-     * @return some value of type string
-     */
-    public String addarmies(Country country) {
-        return reinforcementcontroller.addArmies(country);
-    }
-
-    /**
-     * this method calculates the number of armies each player gets to reinforce
-     *
-     * @param player: player object for which the armies are calculated
-     */
-    public void calculateReinforcementArmies(Player player) {
-        reinforcementcontroller.calculateReinforcementArmies(player);
-    }
-
-    /**
      * this method calculates the number of armies according to the control value
      *
      * @param player: player object for which it calculates
@@ -238,60 +223,5 @@ public class Player {
      */
     public int calcArmiesByControlValue(Player player) {
         return reinforcementcontroller.calcArmiesByControlValue(player);
-    }
-
-    /**
-     * Method to validate and move armies between two countries owned by the same
-     * player
-     *
-     * @param sourcecountry:       The country which armies are being moved from
-     * @param destinationcountry:  The country which armies are being moved to
-     * @param noofarmiestobemoved: Armies asked by player to move
-     * @return: Returns a string if there is any error or a null string if
-     * validations succeed
-     */
-    public String moveArmies(Country sourcecountry, Country destinationcountry, int noofarmiestobemoved) {
-        return fortificationcontroller.moveArmies(sourcecountry, destinationcountry, noofarmiestobemoved);
-    }
-
-    /**
-     * checks player can attack or not
-     *
-     * @param player: player object
-     * @return true if player can attack else false
-     */
-    public boolean canAttack(Player player) {
-        return attackcontroller.canAttack(player);
-    }
-
-    /**
-     * Gets the neighbors of a given country excluding the countries with the same
-     * owner as the given country and any countries with only one army
-     *
-     * @param country: Country object must be passed to fetch its neighbors
-     * @return Returns List of countries which are neighbors of the given country
-     */
-    public List<Country> getMyNeighboursForAttack(Country country) {
-        return attackcontroller.getMyNeighborsForAttack(country);
-    }
-
-    /**
-     * Gets number of dice for the attack and defense
-     *
-     * @param country: Country object must be passed to get number of armies to set
-     *                 dice
-     * @param ad:      To know its the attacker or defender to set dice based on that
-     * @return Number of Dice to be assigned
-     */
-    public int setNoOfDice(Country country, char ad) {
-        return attackcontroller.setNoOfDice(country, ad);
-    }
-
-    public void setStratergy(String strategy) {
-        this.strategy = strategy;
-    }
-
-    public String getStatergy() {
-        return strategy;
     }
 }

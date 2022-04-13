@@ -96,8 +96,7 @@ public class ReinforcementController {
         for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
             if (entry.getValue().getOwner().getPlayerId() == (player.getPlayerId())) {
                 countries.add(entry.getValue());
-            } else
-                continue;
+            }
         }
         return countries;
     }

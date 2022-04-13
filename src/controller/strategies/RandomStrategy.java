@@ -46,7 +46,7 @@ public class RandomStrategy implements IStrategy {
         List<Country> countries = player.getMyCountries(player);
         int index = (int) (Math.random() * countries.size());
         Country attacker = countries.get(index);
-        List<Country> attackable = aC.getMyNeighborsForAttack(attacker);
+        List<Country> attackable = aC.getMyNeighboursForAttack(attacker);
         if (attackable.size() > 0) {
             int noofattacks = (int) (Math.random() * 10 + 1);
             index = (int) (Math.random() * attackable.size());

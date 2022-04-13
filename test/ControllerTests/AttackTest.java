@@ -181,7 +181,7 @@ public class AttackTest
 	@Test
 	public void testGetMyNeighborsForAttack()
 	{
-		assertEquals(n_list,attack.getMyNeighborsForAttack(country1));
+		assertEquals(n_list,attack.getMyNeighboursForAttack(country1));
 	}
 	/**
 	*Tests attack simulator

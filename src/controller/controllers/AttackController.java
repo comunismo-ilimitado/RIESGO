@@ -92,15 +92,15 @@ public class AttackController {
      * @param country: Country object must be passed to fetch its neighbors
      * @return Returns List of countries which are neighbors of the given country
      */
-    public List<Country> getMyNeighborsForAttack(Country country) {
+    public List<Country> getMyNeighboursForAttack(Country country) {
         List<Country> neighbors = country.getNeighbors();
         List<Country> temp = new ArrayList<Country>();
-        for (int i = 0; i < neighbors.size(); i++) {
+        for (Country neighbor : neighbors) {
             try {
-                if (neighbors.get(i).getOwner().getPlayerId() == country.getOwner().getPlayerId()) {
-                    temp.add(neighbors.get(i));
+                if (neighbor.getOwner().getPlayerId() == country.getOwner().getPlayerId()) {
+                    temp.add(neighbor);
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         neighbors.removeAll(temp);

@@ -49,13 +49,13 @@ public class AggressiveStratery implements IStrategy {
         List<Country> countries = player.getMyCountries(player);
         Country strongestcountry = player.getMyCountries(player).get(getStrongestCountry(countries));
         countries.remove(strongestcountry);
-        List<Country> attackable = aC.getMyNeighborsForAttack(strongestcountry);
+        List<Country> attackable = aC.getMyNeighboursForAttack(strongestcountry);
         while (strongestcountry.getNoOfArmies() > 1 && attackable.size() > 0) {
             Country defender = attackable.get(helper.getWeakestCountryIndex(attackable));
             aC.attackButton(strongestcountry, defender, 0, 0, true);
             AttackController.card = true;
             strongestcountry = ReadingFiles.CountryNameObject.get(strongestcountry.getName());
-            attackable = aC.getMyNeighborsForAttack(strongestcountry);
+            attackable = aC.getMyNeighboursForAttack(strongestcountry);
         }
         AttackController.card = false;
     }

@@ -80,7 +80,7 @@ public class MyActionListener extends Observable implements ActionListener {
     private void armiesNotDeployed(Country country) {
         cardTypesList.clear();
         controller.frame.jLabeCardl.setText(cardTypesList.toString());
-        String message = controller.playerObjet(currentPlayer).addarmies(country);  //Suma 1 al territorio y resta 1 al jugador
+        String message = controller.getReinforcementController().addArmies(country);
         controller.frame.noArmiesLeft = controller.playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
         changed();
         if (!message.equals(""))
@@ -147,16 +147,16 @@ public class MyActionListener extends Observable implements ActionListener {
         System.out.println("Current Player " + (currentPlayer + 1));
         textarea("---------------------------------");
         textarea("Player Playing :- " + (currentPlayer + 1));
-        String stratergy = player.getStatergy().trim(); //Elimina los caracteres blancos iniciales y finales
+        String stratergy = player.getStrategy().trim(); //Elimina los caracteres blancos iniciales y finales
         if (stratergy.equals("Agressive")) {
             textarea("Currently in Reinforcement Mode for Agressive");
-            player.aggressiveStratergy.reinforce(player);
+            player.aggressiveStrategy.reinforce(player);
             textarea("Currently in Attack Mode for Agressive ");
-            player.aggressiveStratergy.attack(player);
+            player.aggressiveStrategy.attack(player);
             System.out.println("Attack Finished");
             elimination(player);
             textarea("Currently in Fortification Mode for Agressive");
-            player.aggressiveStratergy.fortify(player);
+            player.aggressiveStrategy.fortify(player);
             finishCPU();
         } else if (stratergy.equals("Benevolent")) {
             textarea("Currently in Reinforcement Mode Benevolent");
@@ -199,9 +199,11 @@ public class MyActionListener extends Observable implements ActionListener {
         changed();
         controller.frame.ActivateAll();
         controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
-        controller.playerObjet(currentPlayer).calculateReinforcementArmies(controller.playerObjet(currentPlayer));
+        controller.getReinforcementController().calculateReinforcementArmies(controller.playerObjet(currentPlayer));
         controller.frame.error("Its Player:- " + (currentPlayer + 1) + " Turn");
 
+
+        }
     }
 
     /**
@@ -218,7 +220,7 @@ public class MyActionListener extends Observable implements ActionListener {
         if (attackCountry1 == null) {
             attackCountry1 = country;
             controller.frame.ActivateAll();
-            List<Country> neighbourList = controller.playerObjet(currentPlayer).getMyNeighboursForAttack(country);
+            List<Country> neighbourList = controller.getAttackController().getMyNeighboursForAttack(country);
             if (neighbourList.size() < 1) {
                 controller.frame.ActivateAll();
                 attackCountry1 = null;
@@ -243,10 +245,11 @@ public class MyActionListener extends Observable implements ActionListener {
                 } else {
                     dice1 = Integer.parseInt(
                             controller.frame.popupTextNew("Enter No of Dices for player 1 --Minimum: 1 Maximum: "
-                                    + controller.playerObjet(currentPlayer).setNoOfDice(attackCountry1, 'A')));
+                                    + controller.getAttackController().setNoOfDice(attackCountry1, 'A')));
+
                     dice2 = Integer.parseInt(
                             controller.frame.popupTextNew("Enter No of Dices for player 2 --Minimum: 1 Maximum: "
-                                    + controller.playerObjet(currentPlayer).setNoOfDice(attackCountry2, 'D')));
+                                    + controller.getAttackController().setNoOfDice(attackCountry2, 'D')));
                 }
             } catch (Exception e) {
                 controller.frame.error("Invalid Entry Try again");
@@ -279,7 +282,7 @@ public class MyActionListener extends Observable implements ActionListener {
             controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
             controller.RefreshButtons();
             controller.PaintCountries();
-            boolean result = controller.playerObjet(currentPlayer).canAttack(controller.playerObjet(currentPlayer));
+            boolean result = controller.getAttackController().canAttack(controller.playerObjet(currentPlayer));
             if (!result) {
                /* controller.frame.buttonCard4.setEnabled(false);
                 changed();
@@ -333,7 +336,7 @@ public class MyActionListener extends Observable implements ActionListener {
             } else {
                 try {
                     String test1 = controller.frame.popupText(fortifyCountry1.getNoOfArmies() - 1);  //Pregunta cuantas quiero transferir
-                    String message = controller.playerObjet(currentPlayer).moveArmies(fortifyCountry1, fortifyCountry2,
+                    String message = controller.getFortificationController().moveArmies(fortifyCountry1, fortifyCountry2,
                             Integer.parseInt(test1));
                     if (!message.equals("")) {
                         controller.frame.error(message);
@@ -491,7 +494,7 @@ public class MyActionListener extends Observable implements ActionListener {
                 controller.frame.error("No Card Of this Type");
             }
         } else if (event.getActionCommand().equals("Exchange Cards")) {
-            String answer = controller.playerObjet(currentPlayer).exchangeCards(cardTypesList,
+            String answer = controller.getReinforcementController().exchangeCards(cardTypesList,
                     controller.playerObjet(currentPlayer));
             if (answer == "") {
                 cardTypesList.clear();
@@ -619,7 +622,7 @@ public class MyActionListener extends Observable implements ActionListener {
                 System.out.println("Error Report :-" + tempPlayer + "---" + controller.PlayerNo2());
                 writer.write(tempPlayer.getPlayerId() + "\n");
                 System.out.println();
-                writer.write(tempPlayer.getStatergy() + "\n");
+                writer.write(tempPlayer.getStrategy() + "\n");
                 for (int j = 0; j < tempPlayer.getTotalCountriesOccupied().size(); j++) {
                     Country tempCountry = tempPlayer.getTotalCountriesOccupied().get(j);
                     writer.write(tempCountry.getName() + "***" + tempCountry.getNoOfArmies() + "\n");

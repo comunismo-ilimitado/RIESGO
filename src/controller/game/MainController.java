@@ -5,21 +5,19 @@ import controller.controllers.FortificationController;
 import controller.controllers.ReinforcementController;
 import controller.editor.MapValidation;
 import controller.editor.ReadingFiles;
-import model.CardTypes;
-import model.Continent;
-import model.Country;
-import model.Player;
+import model.*;
 import view.gameFrames.MFrame;
 import view.gameFrames.MFrame2;
 import view.menuFrames.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Observable;
+
+import model.CardTypes;
+import model.Country;
 
 
 /**
@@ -28,18 +26,24 @@ import java.util.List;
  * @author pazim
  * @version 1.1
  */
-public class MainController {
+public class MainController extends Observable{
     ReadingFiles files;
     MFrame frame;
     MFrame2 frame2;
     String phase;
-    Player player;
     MyActionListener myactionlistner;
     AttackController attackController;
     ReinforcementController reinforcementController;
     FortificationController fortificationController;
     MapValidation mapValidation;
     public boolean resume = false;
+
+    public List<String> phaseList;
+    public String currentPhase;
+    public int currentPlayer = 0;
+    private Country attackCountry1, attackCountry2;
+    private Country fortifyCountry1, fortifyCountry2;
+      List<CardTypes> cardTypesList = new ArrayList<>();
 
     public AttackController getAttackController() {
         return attackController;
@@ -95,10 +99,10 @@ public class MainController {
                 attackController = new AttackController();
                 fortificationController = new FortificationController();
                 frame.noArmiesLeft = playerObjet(0).getPlayerArmiesNotDeployed();
-                myactionlistner.addObserver(frame);
+                addObserver(frame);
                 if (resume) {
                     int no = Integer.parseInt(bufferedReader.readLine());
-                    myactionlistner.currentPlayer = no;
+                    currentPlayer = no;
                     phase = bufferedReader.readLine();
                 }
                 //Se muestra la interfaz de juego
@@ -116,9 +120,9 @@ public class MainController {
                 //Se resume la fase del juego cargado o
                 // se empieza por la fase de fortificación en un juego nuevo.
                 if (resume) {
-                    myactionlistner.phaseResume(phase);
+                    phaseResume(phase);
                 } else {
-                    myactionlistner.selectTypeOfPlayer();
+                    selectTypeOfPlayer();
                 }
                 repaintAndRevalidate();
             }
@@ -407,4 +411,517 @@ public class MainController {
         playerObjet(0).setPlayerCards(cardTypes);
     }
 
+
+    //Métodos de myActionListener
+
+
+    /**
+     * This method changes the turn of the players
+     *
+     */
+    void playerUpdate() {
+        try {
+            if (PlayerNo2() > 1) { //Si el numero de jugadores es mayor que 1 se sigue jugando
+                ArrayList<Integer> arrayList = new ArrayList<>(ReadingFiles.playerId2.keySet());
+                int index = arrayList.indexOf(currentPlayer);
+                index = index + 1;
+                if (index >= arrayList.size()) {
+                    currentPlayer = ReadingFiles.playerId2.get(arrayList.get(0)).getPlayerId(); //Le vuelve a tocar al primero
+                } else {
+                    currentPlayer = ReadingFiles.playerId2.get(arrayList.get(index)).getPlayerId();
+                }
+            } else { //Si solo queda un jugador ha ganado ese jugador
+                frame.error("Player :- " + ((int) ReadingFiles.playerId2.keySet().toArray()[0] + 1) + " Wins");
+                frame.dispose();
+                System.exit(0);
+
+            }
+        } catch (Exception e) {
+            playerUpdate();
+        }
+    }
+
+
+    /**
+     * This method refresh the armies that are not deployed and the armies in a country
+     *
+     * @param country          : object
+     */
+    void armiesNotDeployed(Country country ) {
+        cardTypesList.clear();
+        frame.jLabeCardl.setText(cardTypesList.toString());
+        String message = getReinforcementController().addArmies(country);
+        frame.noArmiesLeft = playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
+        changed();
+        if (!message.equals(""))
+            frame.error(message);
+    }
+
+    /**
+     * This method switches between phases when the user loads a game
+     *
+     * @param phase
+     */
+    public void phaseResume(String phase) {
+        if (phase.equals("Finish Reinforcement")) {
+            selectTypeOfPlayer();
+        } else if (phase.equals("Finish Attack")) {
+            frame.ActivateAll();
+            OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
+            finishReinforcement();
+        } else if (phase.equals("Finish Fortification")) {
+            frame.ActivateAll();
+            OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
+            finishattack();
+        }
+    }
+
+    /**
+     * This method checks if someone doesnt have any country occupied and give his cards to the attacker player
+     *
+     * @param attacker
+     */
+    void elimination(Player attacker) {
+        ArrayList<Integer> arrayList = new ArrayList<>(ReadingFiles.playerId2.keySet());
+        for (int i = 0; i < arrayList.size(); i++) {
+            Player temp = ReadingFiles.playerId2.get(arrayList.get(i));
+            if (temp.getTotalCountriesOccupied().size() == 0) {
+                List<CardTypes> defcards = temp.getPlayerCards(); //Lista de cartas del jugador eliminado
+                List<CardTypes> attcards = attacker.getPlayerCards(); //Lista de cartas del jugador que elimina
+                attcards.addAll(defcards);  //Se juntan ambas listas
+                attacker.setPlayerCards(attcards);  //Esta linea y la siguiente hacen lo mismo???
+                ReadingFiles.playerId.get(attacker.getPlayerId()).setPlayerCards(attcards);
+                ReadingFiles.playerId2.remove(temp.getPlayerId());
+                ReadingFiles.players.remove((Integer) temp.getPlayerId());
+            }
+
+        }
+        if (ReadingFiles.playerId2.size() <= 1) { //Si despues de la eliminacion solo queda un jugador ha ganado
+            frame.error("Player :- " + ((int) ReadingFiles.playerId2.keySet().toArray()[0] + 1) + " Wins");
+            frame.dispose();
+            System.exit(0);
+
+        }
+    }
+
+    /**
+     * This method checks if the player is human or not and the difficulty of the CPU
+     *
+     */
+    public void selectTypeOfPlayer() {
+        try {
+            RefreshButtons();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        Player player = playerObjet(currentPlayer);
+        System.out.println("---------------------------------");
+        System.out.println("Current Player " + (currentPlayer + 1));
+        textarea("---------------------------------");
+        textarea("Player Playing :- " + (currentPlayer + 1));
+        String strategy = player.getStrategy().trim(); //Elimina los caracteres blancos iniciales y finales
+        if (strategy.equals("Agressive")) {
+            textarea("Currently in Reinforcement Mode for Agressive");
+            player.aggressiveStrategy.reinforce(player);
+            textarea("Currently in Attack Mode for Agressive ");
+            player.aggressiveStrategy.attack(player);
+            System.out.println("Attack Finished");
+            elimination(player);
+            textarea("Currently in Fortification Mode for Agressive");
+            player.aggressiveStrategy.fortify(player);
+            finishCPU();
+        } else if (strategy.equals("Benevolent")) {
+            textarea("Currently in Reinforcement Mode Benevolent");
+            player.benevolentStrategy.reinforce(player);
+            textarea("Currently in Attack Mode Benevolent");
+            player.benevolentStrategy.attack(player);
+            elimination(player);
+            textarea("Currently in Fortification Mode Benevolent");
+            player.benevolentStrategy.fortify(player);
+            finishCPU();
+        } else if (strategy.equals("Random")) {
+            textarea("Currently in Reinforcement Mode Random");
+            player.randomStrategy.reinforce(player);
+            textarea("Currently in Attack Mode Random");
+            player.randomStrategy.attack(player);
+            elimination(player);
+            textarea("Currently in Fortification Mode Random");
+            player.randomStrategy.fortify(player);
+            finishCPU();
+        } else if (strategy.equals("Cheater")) {
+            textarea("Currently in Reinforcement Mode Cheater");
+            player.cheaterStrategy.reinforce(player);
+            textarea("Currently in Attack Mode Cheater");
+            player.cheaterStrategy.attack(player);
+            elimination(player);
+            textarea("Currently in Fortification Mode Cheater");
+            player.cheaterStrategy.fortify(player);
+            finishCPU();
+        } else if (strategy.equals("Human")) {
+            reinforcementPhase();
+        }
+    }
+
+    /**
+     * This method checks the validation of the reinforcement phase
+     *
+     */
+    private void reinforcementPhase() {
+        textarea("Currently in Reinforcement Mode");
+        buttonCards(true);
+        changed();
+        frame.ActivateAll();
+        OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
+        getReinforcementController().calculateReinforcementArmies(playerObjet(currentPlayer));
+        frame.error("Its Player:- " + (currentPlayer + 1) + " Turn");
+    }
+
+    /**
+     * This method checks the validation of the attack phase
+     *
+     * @param country          : country object
+     * @throws IOException
+     */
+    void attackPhase(Country country) throws IOException {
+        textarea("Attacking.... ");
+        cardTypesList.clear();
+        frame.jLabeCardl.setText(cardTypesList.toString());
+        changed();
+        if (attackCountry1 == null) {
+            attackCountry1 = country;
+            frame.ActivateAll();
+            List<Country> neighbourList = getAttackController().getMyNeighboursForAttack(country);
+            if (neighbourList.size() < 1) {
+                frame.ActivateAll();
+                attackCountry1 = null;
+                attackCountry2 = null;
+                frame.error("No Neighbours to attack");
+                OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
+                RefreshButtons();
+            } else {
+                frame.OnlyNeeded(neighbourList);
+                RefreshButtons();
+            }
+        } else if (attackCountry2 == null) {
+            attackCountry2 = country;
+            int dice1 = 0;
+            int dice2 = 0;
+            boolean allout = false;
+
+            try {
+                allout = frame.Allout();
+                if (allout == true) {
+
+                } else {
+                    dice1 = Integer.parseInt(
+                            frame.popupTextNew("Enter No of Dices for player 1 --Minimum: 1 Maximum: "
+                                    + getAttackController().setNoOfDice(attackCountry1, 'A')));
+
+                    dice2 = Integer.parseInt(
+                            frame.popupTextNew("Enter No of Dices for player 2 --Minimum: 1 Maximum: "
+                                    + getAttackController().setNoOfDice(attackCountry2, 'D')));
+                }
+            } catch (Exception e) {
+                frame.error("Invalid Entry Try again");
+                frame.ActivateAll();
+                attackCountry1 = null;
+                attackCountry2 = null;
+                OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
+                RefreshButtons();
+            }
+
+            String reply = attackController.attackButton(attackCountry1, attackCountry2, dice1, dice2,
+                    allout);
+            System.out.println(reply);
+            if (reply.equals("Player won")) {
+                frame.error(reply);
+                String[] args = {""};
+                GameStartWindow.main(args);
+            } else if (!reply.equals("")) {
+                frame.error(reply);
+            }
+
+            frame.AAA = attackController.attackerdicerolloutput.toString();
+            frame.BBB = attackController.defenderdicerolloutput.toString();
+            changed();
+            attackController.attackerdicerolloutput.clear();
+            attackController.defenderdicerolloutput.clear();
+            frame.ActivateAll();
+            attackCountry1 = null;
+            attackCountry2 = null;
+            OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
+            RefreshButtons();
+            PaintCountries();
+            boolean result = getAttackController().canAttack(playerObjet(currentPlayer));
+            if (!result) {
+               /* controller.frame.buttonCard4.setEnabled(false);
+                changed();
+                currentPhase = "Finish Fortification";
+                controller.frame.nextAction.setText("Finish Fortification");
+                fortifyCountry1 = null;
+                fortifyCountry2 = null;
+                fortificationPhase();*/
+                finishattack();  //Puede dar algun error
+
+            }
+
+        } else {
+            attackCountry1 = null;
+            attackCountry2 = null;
+        }
+    }
+
+    /**
+     * This method checks the validation of the fortification phase
+     *
+     * @param country          : country object
+     * @throws IOException
+     */
+    void fortificationPhase(Country country) throws IOException {
+        cardTypesList.clear();
+        frame.jLabeCardl.setText(cardTypesList.toString());
+        if (fortifyCountry1 == null) {
+            fortifyCountry1 = country;
+            frame.CCC = NeighboursList(country);
+            changed();
+            frame.error("Select One More Country You Want to move your Armies to");
+        } else if (fortifyCountry2 == null) {
+            fortifyCountry2 = country;
+            if (fortifyCountry1.equals(fortifyCountry2)) {
+                frame.error("SAME COUNTRY SELECTED");
+                fortifyCountry1 = null;
+                fortifyCountry2 = null;
+            } else {
+                try {
+                    String test1 = frame.popupText(fortifyCountry1.getNoOfArmies() - 1);  //Pregunta cuantas quiero transferir
+                    String message = getFortificationController().moveArmies(fortifyCountry1, fortifyCountry2,
+                            Integer.parseInt(test1));
+                    if (!message.equals("")) {
+                        frame.error(message);
+                        fortifyCountry1 = null;
+                        fortifyCountry2 = null;
+                    } else {
+                        RefreshButtons();
+                        currentPhase = "Finish Reinforcement";
+                        frame.nextAction.setText("Finish Reinforcement");
+                        // playerUpdate();
+                        fortifyCountry1 = null;
+                        fortifyCountry2 = null;
+                        frame.ActivateAll();
+                        selectTypeOfPlayer();
+                    }
+                } catch (Exception e) {
+                    // TODO: handle exception
+                    frame.error("Invalid Number");
+                }
+            }
+        }
+    }
+
+    /**
+     * This method prepares the game for attack phase
+     *
+     */
+    void finishReinforcement() {
+        cardTypesList.clear();
+        buttonCards(false);
+        currentPhase = "Finish Attack";
+        frame.nextAction.setText("Finish Attack");
+        changed();
+        attackCountry1 = null;
+        attackCountry2 = null;
+        cardTypesList.clear();
+        frame.jLabeCardl.setText(cardTypesList.toString());
+        cardTypesList.clear();
+        frame.jLabeCardl.setText(cardTypesList.toString());
+
+    }
+
+    /**
+     * This method prepares the game for fortification phase
+     *
+     */
+    void finishattack() {
+        buttonCards(false);
+        changed();
+        currentPhase = "Finish Fortification";
+        frame.nextAction.setText("Finish Fortification");
+        fortifyCountry1 = null;
+        fortifyCountry2 = null;
+        cardTypesList.clear();
+        frame.jLabeCardl.setText(cardTypesList.toString());
+        //fortificationPhase();
+        textarea("Currently in Fortification Mode");
+        AttackController.card = false;
+        changed();
+        frame.ActivateAll();
+        OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
+        //playerUpdate(); // El jugador actual se cambia antes de fortificar??
+        cardTypesList.clear();
+        frame.jLabeCardl.setText(cardTypesList.toString());
+
+    }
+
+    /**
+     * This method prepares the game for the next player (Human mode)
+     *
+     */
+    void finishFortification() {
+        buttonCards(true);
+        changed();
+        currentPhase = "Finish Reinforcement";
+        frame.nextAction.setText("Finish Reinforcement");
+        cardTypesList.clear();
+        frame.jLabeCardl.setText(cardTypesList.toString());
+        playerUpdate();
+        selectTypeOfPlayer();
+        cardTypesList.clear();
+        frame.jLabeCardl.setText(cardTypesList.toString());
+    }
+
+    /**
+     * This method prepares the game for the next player (CPU mode)
+     *
+     */
+    private void finishCPU() {
+        playerUpdate();
+        changed();
+        selectTypeOfPlayer();
+    }
+
+    /**
+     * This method enables or disables some buttons
+     *
+     * @param bool
+     */
+    private void buttonCards(boolean bool) {
+        frame.buttonCard4.setEnabled(bool);
+        frame.buttonCard3.setEnabled(bool);
+        frame.buttonCard2.setEnabled(bool);
+        frame.buttonCard1.setEnabled(bool);
+    }
+
+    /**
+     * @return Number of infantry cards of the current player
+     */
+    public String getInfantryCards() {
+        int cont = 0;
+        List<CardTypes> type = playerObjet(currentPlayer).getPlayerCards();
+        for (int i = 0; i < type.size(); i++) {
+            int x = type.get(i).compareTo(CardTypes.Infantry);
+            if (x == 0) {
+                cont += 1;
+            }
+
+        }
+
+        return "" + cont;
+    }
+
+    /**
+     * @return Number of cavalry cards of the current player
+     */
+    public String getCavalryCards() {
+        int cont = 0;
+        List<CardTypes> type = playerObjet(currentPlayer).getPlayerCards();
+        for (int i = 0; i < type.size(); i++) {
+            int x = type.get(i).compareTo(CardTypes.Cavalry);
+            if (x == 0) {
+                cont += 1;
+            }
+
+        }
+
+        return "" + cont;
+    }
+
+    /**
+     * @return Number of artillery cards of the current player
+     */
+    public String getArtilleryCards() {
+        int cont = 0;
+        List<CardTypes> type = playerObjet(currentPlayer).getPlayerCards();
+        for (int i = 0; i < type.size(); i++) {
+            int x = type.get(i).compareTo(CardTypes.Artillery);
+            if (x == 0) {
+                cont += 1;
+            }
+        }
+        return "" + cont;
+    }
+
+    //Metodos de controller para MFrame ???
+    public ArrayList<Float> countriesPercentage() {
+        return CountriesPercentage();
+    }
+
+    public ArrayList<String> continentsOccupied() {
+        return ContinentsOccupied();
+    }
+
+    public int getArmiesPerPlayer() {
+        return attackController.getTotalCountries(playerObjet(currentPlayer));
+    }
+
+    /**
+     * This method saves the game in SaveGame.txt
+     *
+     */
+    public void saveGameOnExit() {
+        try {
+            File file = new File("Resources/SaveGame.txt");
+            FileWriter writer = new FileWriter(file);
+            writer.write(ReadingFiles.address + "\n");
+            writer.write(ReadingFiles.playerId.size() + "\n");
+            writer.write(currentPlayer + "\n");
+            writer.write(currentPhase + "\n");
+            writer.write(frame.area.getText());
+            for (int i = 0; i < PlayerNo2(); i++) {
+                Player tempPlayer = ReadingFiles.playerId2.get(ReadingFiles.playerId2.keySet().toArray()[i]);
+                writer.write("----PLAYER----\n");
+                System.out.println("Error Report :-" + tempPlayer + "---" + PlayerNo2());
+                writer.write(tempPlayer.getPlayerId() + "\n");
+                System.out.println();
+                writer.write(tempPlayer.getStrategy() + "\n");
+                for (int j = 0; j < tempPlayer.getTotalCountriesOccupied().size(); j++) {
+                    Country tempCountry = tempPlayer.getTotalCountriesOccupied().get(j);
+                    writer.write(tempCountry.getName() + "***" + tempCountry.getNoOfArmies() + "\n");
+                }
+                writer.write("----CARDS----\n");
+                writer.write(tempPlayer.getPlayerCards().toString() + "\n");
+            }
+            writer.close();
+            System.exit(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method writes on the graphic interface
+     *
+     * @param string
+     */
+    private void textarea(String string) {
+        frame.area.append("\n" + string);
+    }
+
+    public void changed() {
+        setChanged();
+        notifyObservers();
+    }
+    /*
+    /**
+     * This method
+     *
+    private void fortificationPhase() {
+        textarea("Currently in Fortification Mode");
+        AttackController.card = false;
+        changed();
+        controller.frame.ActivateAll();
+        controller.OnlyNeeded(controller.playerObjet(currentPlayer).getTotalCountriesOccupied());
+        playerUpdate(); // El jugador actual se cambia antes de fortificar??
+    }
+*/
 }

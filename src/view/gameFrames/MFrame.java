@@ -1,5 +1,6 @@
 package view.gameFrames;
 
+import controller.game.MainController;
 import controller.game.MyActionListener;
 import model.Country;
 
@@ -221,9 +222,9 @@ public class MFrame extends JFrame implements Observer {
      */
     // Anade el numero de cartas a cada boton
     public void cards() {
-        buttonCard1.setText("Infantry " + myActionListner.getInfantryCards());
-        buttonCard2.setText("Artillery " + myActionListner.getArtilleryCards());
-        buttonCard3.setText("Cavalry " + myActionListner.getCavalryCards());
+        buttonCard1.setText("Infantry " + myActionListner.controller.getInfantryCards());
+        buttonCard2.setText("Artillery " + myActionListner.controller.getArtilleryCards());
+        buttonCard3.setText("Cavalry " + myActionListner.controller.getCavalryCards());
     }
 
     /**
@@ -231,9 +232,9 @@ public class MFrame extends JFrame implements Observer {
      */
     // Rellena el panel 4
     public void NotifyAll() {
-        jLabel1.setText("Turn For Player :-" + (myActionListner.currentPlayer + 1));
+        jLabel1.setText("Turn For Player :-" + (myActionListner.controller.currentPlayer + 1));
         jLabel2.setText("Armies Left:- " + noArmiesLeft);
-        jLabel3.setText("Total Armies :- " + myActionListner.getArmiesPerPlayer());
+        jLabel3.setText("Total Armies :- " + myActionListner.controller.getArmiesPerPlayer());
         jLabel4.setText("DICE 1:- " + AAA);
         jLabel5.setText("DICE 2:- " + BBB);
         jLabel6.setText("Current Phase :-" + nextAction.getText().split(" ")[1] + " Phase");
@@ -360,14 +361,14 @@ public class MFrame extends JFrame implements Observer {
     }
 
     public void Exit_Option() {
-        myActionListner.saveGameOnExit();
+        myActionListner.controller.saveGameOnExit();
     }
 
     @Override
     public void update(Observable arg0, Object arg1) {
         // TODO Auto-generated method stu
-        ArrayList<Float> percent = ((MyActionListener) arg0).countriesPercentage();
-        ArrayList<String> listinh = ((MyActionListener) arg0).continentsOccupied();
+        ArrayList<Float> percent = ((MainController) arg0).countriesPercentage();
+        ArrayList<String> listinh = ((MainController) arg0).continentsOccupied();
         UpdateGameDominationViewPercentage(percent);
         UpdateGameDominationViewContinentOccupied(listinh);
         cards();

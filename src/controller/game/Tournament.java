@@ -1,7 +1,7 @@
 package controller.game;
 
 import controller.editor.ReadingFiles;
-import controller.strategies.AggressiveStratery;
+import controller.strategies.AggressiveStrategy;
 import controller.strategies.BenevolentStrategy;
 import controller.strategies.CheaterStrategy;
 import controller.strategies.RandomStrategy;
@@ -49,7 +49,7 @@ public class Tournament {
      */
     public void function() {
         MFrame2 frame2 = new MFrame2();
-        AggressiveStratery ag = new AggressiveStratery();
+        AggressiveStrategy ag = new AggressiveStrategy();
         CheaterStrategy ch = new CheaterStrategy();
         RandomStrategy rn = new RandomStrategy();
         BenevolentStrategy bn = new BenevolentStrategy();
@@ -82,7 +82,7 @@ public class Tournament {
                     for (int playerindex = 0; playerindex < ReadingFiles.getPlayerId().size(); playerindex++) {
                         Player p;
                         p = ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[playerindex]);
-                        switch (p.getStrategy()) {
+                        switch (p.getStrategyType()) {
                             case "Agressive":
                                 ag.reinforce(p);
                                 ag.attack(p);
@@ -124,13 +124,13 @@ public class Tournament {
                     for (int l = 0; l < ReadingFiles.getPlayerId().size(); l++) {
                         Player p = ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[l]);
                         System.out.print("\nturn:" + (turnno + 1) + " Player:" + (p.getPlayerId() + 1) + "  "
-                                + p.getStrategy() + " total countries:" + p.getMyCountries(p).size());
+                                + p.getStrategyType() + " total countries:" + p.getMyCountries(p).size());
                         //Se anuncia victoria
                         if (p.getMyCountries(p).size() == ReadingFiles.CountriesNames.size()) {
-                            System.out.println("\n****Player " + (p.getPlayerId() + 1) + " " + p.getStrategy() + " wins!");
+                            System.out.println("\n****Player " + (p.getPlayerId() + 1) + " " + p.getStrategyType() + " wins!");
                             //Se añade a list
-                            list.add(p.getStrategy());
-                            System.out.println("added" + p.getStrategy());
+                            list.add(p.getStrategyType());
+                            System.out.println("added" + p.getStrategyType());
                             win = true;
                             break;
                         }
@@ -169,24 +169,24 @@ public class Tournament {
             if (ReadingFiles.getPlayerId().size() == 1) {
                 System.out.println("\n****Player "
                         + (ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getPlayerId() + 1)
-                        + " " + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy()
+                        + " " + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategyType()
                         + " wins!");
-                list.add(ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy());
-                System.out.println("added" + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy());
+                list.add(ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategyType());
+                System.out.println("added" + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategyType());
                 ReadingFiles.getPlayerId().remove(ReadingFiles.getPlayerId().keySet().toArray()[0]);
             }
             //Te quedas sin países, eres eliminado.
             if (p.getMyCountries(p).size() == 0) {
-                System.out.println("player " + p.getStrategy() + " removed");
+                System.out.println("player " + p.getStrategyType() + " removed");
                 ReadingFiles.getPlayerId().remove(ReadingFiles.getPlayerId().keySet().toArray()[i]);
                 if (ReadingFiles.getPlayerId().size() == 1) {
                     System.out.println("\n****Player "
                             + (ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getPlayerId() + 1)
-                            + " " + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy()
+                            + " " + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategyType()
                             + " wins!");
                     //Se añade a la lista de ganadores
-                    list.add(ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy());
-                    System.out.println("added" + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy());
+                    list.add(ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategyType());
+                    System.out.println("added" + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategyType());
                     ReadingFiles.getPlayerId().remove(ReadingFiles.getPlayerId().keySet().toArray()[0]);
                 }
             }

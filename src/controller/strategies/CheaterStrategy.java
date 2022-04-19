@@ -1,7 +1,6 @@
 package controller.strategies;
 
 import controller.controllers.AttackController;
-import controller.controllers.HelperClass;
 import controller.editor.ReadingFiles;
 import model.CardTypes;
 import model.Country;
@@ -16,9 +15,7 @@ import java.util.List;
  * @author Bhargav
  * @version 1.0
  */
-public class CheaterStrategy implements IStrategy {
-
-    HelperClass helper = new HelperClass();
+public class CheaterStrategy extends Strategy {
 
     /**
      * Reinforcement phase based on Cheater Strategy rules
@@ -27,7 +24,7 @@ public class CheaterStrategy implements IStrategy {
      */
     public void reinforce(Player player) {
         List<Country> countries = player.getMyCountries(player);
-        List<CardTypes> cardTypes = new ArrayList<CardTypes>();
+        List<CardTypes> cardTypes = new ArrayList<>();
         for (int i = 0; i < countries.size(); i++) {
             countries.get(i).setNoOfArmies(countries.get(i).getNoOfArmies() * 2);
             player.getMyCountries(player).get(i).setNoOfArmies(countries.get(i).getNoOfArmies());
@@ -46,17 +43,17 @@ public class CheaterStrategy implements IStrategy {
     public void attack(Player player) {
         AttackController aC = new AttackController();
         List<Country> mycountries = player.getMyCountries(player);
-        for (int i = 0; i < mycountries.size(); i++) {
-            List<Country> neighbors = aC.getMyNeighboursForAttack(mycountries.get(i));
-            for (int j = 0; j < neighbors.size(); j++) {
-                neighbors.get(j).setPlayer(player);
-                ReadingFiles.CountryNameObject.get(neighbors.get(j).getName()).setPlayer(player);
+        for (Country mycountry : mycountries) {
+            List<Country> neighbors = aC.getMyNeighboursForAttack(mycountry);
+            for (Country neighbor : neighbors) {
+                neighbor.setPlayer(player);
+                ReadingFiles.CountryNameObject.get(neighbor.getName()).setPlayer(player);
             }
         }
     }
 
     /**
-     * fortification phase based on Cheater Strategy rules
+     * Fortification phase based on Cheater Strategy rules
      *
      * @param player: player object
      */

@@ -1,14 +1,12 @@
 package model;
 
-import controller.controllers.ReinforcementController;
-import controller.strategies.AggressiveStratery;
-import controller.strategies.BenevolentStrategy;
-import controller.strategies.CheaterStrategy;
-import controller.strategies.RandomStrategy;
+import controller.editor.ReadingFiles;
+import controller.strategies.*;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a player in the game
@@ -17,22 +15,12 @@ import java.util.List;
  * @version 1.1
  */
 public class Player {
-
-    ReinforcementController reinforcementcontroller = new ReinforcementController();
-
-    public AggressiveStratery aggressiveStrategy = new AggressiveStratery();
-    public BenevolentStrategy benevolentStrategy = new BenevolentStrategy();
-    public CheaterStrategy cheaterStrategy = new CheaterStrategy();
-    public RandomStrategy randomStrategy = new RandomStrategy();
-
-    private String strategy = "Human";
-    private String name;
+    private Strategy strategy;
+    private String strategyType;
     private int player_id;
-    private int total_armies;
     private int total_armies_not_deployed;
     private List<Country> total_countries_occupied;
     private final List<Country> countries_occupied;
-    private List<Continent> continents_occupied;
     private List<CardTypes> cards;
     private Color my_color;
     private int card_exchange_counter;
@@ -63,34 +51,6 @@ public class Player {
     }
 
     /**
-     * Gets Player name
-     */
-    public String getPlayerName() {
-        return name;
-    }
-
-    /**
-     * Sets Player name
-     */
-    public void setPlayerName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Gets Player Armies
-     */
-    public int getPlayerArmies() {
-        return total_armies;
-    }
-
-    /**
-     * Sets Player Armies
-     */
-    public void setPlayerArmies(int total_armies) {
-        this.total_armies = total_armies;
-    }
-
-    /**
      * Gets Player Armies that are not deployed
      */
     public int getPlayerArmiesNotDeployed() {
@@ -116,20 +76,6 @@ public class Player {
      */
     public void setTotalCountriesOccupied(List<Country> total_countries_occupied) {
         this.total_countries_occupied = total_countries_occupied;
-    }
-
-    /**
-     * Gets Continents Occupied
-     */
-    public List<Continent> getContinentsOccupied() {
-        return continents_occupied;
-    }
-
-    /**
-     * Sets Continents Occupied
-     */
-    public void setContinentsOccupied(List<Continent> continents_occupied) {
-        this.continents_occupied = continents_occupied;
     }
 
     /**
@@ -172,28 +118,43 @@ public class Player {
     /**
      * Sets count how many times player exchange the cards
      *
-     * @param value
      */
     public void setCardExchangeValue(int value) {
         this.card_exchange_counter = value;
     }
 
     /**
-     * Gets players strategy
+     * Sets players strategy
      *
-     * @param strategy
      */
     public void setStrategy(String strategy) {
-        this.strategy = strategy;
+        this.strategyType = strategy;
+        switch (strategy) {
+            case "Aggressive":
+                this.strategy = new AggressiveStrategy();
+                break;
+            case "Benevolent":
+                this.strategy = new BenevolentStrategy();
+                break;
+            case "Random":
+                this.strategy = new RandomStrategy();
+                break;
+            case "Cheater":
+                this.strategy = new CheaterStrategy();
+                break;
+        }
+    }
+
+    public Strategy getStrategy(){
+        return strategy;
     }
 
     /**
      * Sets players strategy
      *
-     * @return
      */
-    public String getStrategy() {
-        return strategy;
+    public String getStrategyType() {
+        return strategyType;
     }
 
     public void addCountriesOccupied(Country countriesOccupied) {
@@ -212,16 +173,46 @@ public class Player {
      * @return List of countries owned by the player
      */
     public List<Country> getMyCountries(Player player) {
-        return reinforcementcontroller.getMyCountries(player);
+        List<Country> countries = new ArrayList<>();
+        for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
+            if (entry.getValue().getOwner().getPlayerId() == (player.getPlayerId())) {
+                countries.add(entry.getValue());
+            }
+        }
+        return countries;
     }
 
     /**
-     * this method calculates the number of armies according to the control value
+     * Calculates the number of armies according to the control value
      *
-     * @param player: player object for which it calculates
      * @return armies
      */
-    public int calcArmiesByControlValue(Player player) {
-        return reinforcementcontroller.calcArmiesByControlValue(player);
+    public int calcArmiesByControlValue() {
+        List<Continent> continents = playerOwnsContinent();
+        int armies = 0;
+        for (Continent continent : continents) {
+            armies = armies + continent.getControlValue();
+        }
+        return armies;
+    }
+
+    /**
+     * Checks whether the player owns the whole continent or not.
+     *
+     * @return continents list of continents
+     */
+    public List<Continent> playerOwnsContinent() {
+        List<Continent> continents = new ArrayList<>();
+        for (Map.Entry<String, Continent> entry : ReadingFiles.ContinentNameObject.entrySet()) {
+            List<Country> temp = entry.getValue().getCountries();
+            int counter = 0;
+            for (int i = 0; i < entry.getValue().getCountries().size(); i++) {
+                if (entry.getValue().getCountries().get(i).getOwner().getPlayerId() == player_id)
+                    counter++;
+            }
+            if (temp.size() == counter)
+                continents.add(entry.getValue());
+        }
+        return continents;
     }
 }

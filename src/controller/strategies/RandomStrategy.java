@@ -2,7 +2,6 @@ package controller.strategies;
 
 import controller.controllers.AttackController;
 import controller.controllers.FortificationController;
-import controller.controllers.HelperClass;
 import controller.editor.ReadingFiles;
 import model.Country;
 import model.Player;
@@ -15,18 +14,15 @@ import java.util.List;
  * @author Bhargav
  * @version 1.0
  */
-public class RandomStrategy implements IStrategy {
-
-    HelperClass helper = new HelperClass();
-
+public class RandomStrategy extends Strategy {
     /**
      * Reinforcement phase based on Random Strategy rules
      *
      * @param player: player object
      */
     public void reinforce(Player player) {
-        helper.exchangeCardsStrategy(player);
-        player.calcArmiesByControlValue(player);
+        exchangeCardsStrategy(player);
+        player.calcArmiesByControlValue();
         List<Country> countries = player.getMyCountries(player);
         int index = (int) (Math.random() * countries.size());
         Country country = countries.get(index);

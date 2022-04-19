@@ -2,7 +2,6 @@ package controller.strategies;
 
 import controller.controllers.AttackController;
 import controller.controllers.FortificationController;
-import controller.controllers.HelperClass;
 import controller.editor.ReadingFiles;
 import model.Country;
 import model.Player;
@@ -15,9 +14,7 @@ import java.util.List;
  * @author Bhargav
  * @version 1.0
  */
-public class AggressiveStratery implements IStrategy {
-
-    HelperClass helper = new HelperClass();
+public class AggressiveStrategy extends Strategy {
 
     /**
      * Reinforcement phase based on Aggressive Strategy rules
@@ -25,8 +22,8 @@ public class AggressiveStratery implements IStrategy {
      * @param player: player object
      */
     public void reinforce(Player player) {
-        helper.exchangeCardsStrategy(player);
-        player.calcArmiesByControlValue(player);
+        exchangeCardsStrategy(player);
+        player.calcArmiesByControlValue();
         List<Country> countries = player.getMyCountries(player);
         Country strongestcountry = null;
         if (player.getMyCountries(player).size() > getStrongestCountry(countries))
@@ -51,7 +48,7 @@ public class AggressiveStratery implements IStrategy {
         countries.remove(strongestcountry);
         List<Country> attackable = aC.getMyNeighboursForAttack(strongestcountry);
         while (strongestcountry.getNoOfArmies() > 1 && attackable.size() > 0) {
-            Country defender = attackable.get(helper.getWeakestCountryIndex(attackable));
+            Country defender = attackable.get(getWeakestCountryIndex(attackable));
             aC.attackButton(strongestcountry, defender, 0, 0, true);
             AttackController.setCard(true);
             strongestcountry = ReadingFiles.CountryNameObject.get(strongestcountry.getName());
@@ -85,7 +82,6 @@ public class AggressiveStratery implements IStrategy {
                         .setNoOfArmies(fotifyingcountry.getNoOfArmies());
                 ReadingFiles.CountryNameObject.get(strongestcountry.getName())
                         .setNoOfArmies(strongestcountry.getNoOfArmies());
-
                 break;
             }
         }

@@ -397,7 +397,7 @@ public class MainController extends Observable{
     public ArrayList<String> ContinentsOccupied() {
         ArrayList<String> arrayList = new ArrayList<>();
         for (int i = 0; i < PlayerNo(); i++) {
-            arrayList.add(ListToStringContinent(reinforcementController.playerOwnsContinent(playerObjet(i))));
+            arrayList.add(ListToStringContinent(playerObjet(i).playerOwnsContinent()));
         }
         return arrayList;
     }
@@ -520,46 +520,19 @@ public class MainController extends Observable{
         System.out.println("Current Player " + (currentPlayer + 1));
         textarea("---------------------------------");
         textarea("Player Playing :- " + (currentPlayer + 1));
-        String strategy = player.getStrategy().trim(); //Elimina los caracteres blancos iniciales y finales
-        if (strategy.equals("Agressive")) {
-            textarea("Currently in Reinforcement Mode for Agressive");
-            player.aggressiveStrategy.reinforce(player);
-            textarea("Currently in Attack Mode for Agressive ");
-            player.aggressiveStrategy.attack(player);
+        String strategy = player.getStrategyType().trim(); //Elimina los caracteres blancos iniciales y finales
+        if (strategy.equals("Human")) {
+            reinforcementPhase();
+        } else {
+            textarea("Currently in Reinforcement Mode for " + player.getStrategyType() + " player");
+            player.getStrategy().reinforce(player);
+            textarea("Currently in Attack Mode for " + player.getStrategyType() + " player");
+            player.getStrategy().attack(player);
             System.out.println("Attack Finished");
             elimination(player);
-            textarea("Currently in Fortification Mode for Agressive");
-            player.aggressiveStrategy.fortify(player);
+            textarea("Currently in Fortification Mode for " + player.getStrategyType() + " player");
+            player.getStrategy().fortify(player);
             finishCPU();
-        } else if (strategy.equals("Benevolent")) {
-            textarea("Currently in Reinforcement Mode Benevolent");
-            player.benevolentStrategy.reinforce(player);
-            textarea("Currently in Attack Mode Benevolent");
-            player.benevolentStrategy.attack(player);
-            elimination(player);
-            textarea("Currently in Fortification Mode Benevolent");
-            player.benevolentStrategy.fortify(player);
-            finishCPU();
-        } else if (strategy.equals("Random")) {
-            textarea("Currently in Reinforcement Mode Random");
-            player.randomStrategy.reinforce(player);
-            textarea("Currently in Attack Mode Random");
-            player.randomStrategy.attack(player);
-            elimination(player);
-            textarea("Currently in Fortification Mode Random");
-            player.randomStrategy.fortify(player);
-            finishCPU();
-        } else if (strategy.equals("Cheater")) {
-            textarea("Currently in Reinforcement Mode Cheater");
-            player.cheaterStrategy.reinforce(player);
-            textarea("Currently in Attack Mode Cheater");
-            player.cheaterStrategy.attack(player);
-            elimination(player);
-            textarea("Currently in Fortification Mode Cheater");
-            player.cheaterStrategy.fortify(player);
-            finishCPU();
-        } else if (strategy.equals("Human")) {
-            reinforcementPhase();
         }
     }
 
@@ -883,7 +856,7 @@ public class MainController extends Observable{
                 System.out.println("Error Report :-" + tempPlayer + "---" + PlayerNo2());
                 writer.write(tempPlayer.getPlayerId() + "\n");
                 System.out.println();
-                writer.write(tempPlayer.getStrategy() + "\n");
+                writer.write(tempPlayer.getStrategyType() + "\n");
                 for (int j = 0; j < tempPlayer.getTotalCountriesOccupied().size(); j++) {
                     Country tempCountry = tempPlayer.getTotalCountriesOccupied().get(j);
                     writer.write(tempCountry.getName() + "***" + tempCountry.getNoOfArmies() + "\n");

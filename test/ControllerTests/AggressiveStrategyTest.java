@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import controller.controllers.AttackController;
+import controller.strategies.AggressiveStrategy;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import controller.strategies.AggressiveStratery;
 import controller.editor.ReadingFiles;
 import model.CardTypes;
 import model.Continent;
@@ -28,7 +27,7 @@ import model.Player;
  *
  */
 public class AggressiveStrategyTest {
-	AggressiveStratery ast;
+	AggressiveStrategy ast;
 	Player player1, player2, player3;
 	Country country1, country2, country3, country4, country5, country6, country7;
 	Continent continent1, continent2;
@@ -43,7 +42,7 @@ public class AggressiveStrategyTest {
 	 */
 	@Before
 	public void onStart() {
-		ast = new AggressiveStratery();
+		ast = new AggressiveStrategy();
 		player1 = new Player(2);
 		country1 = new Country("India");
 		country2 = new Country("China");

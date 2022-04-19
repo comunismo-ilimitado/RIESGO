@@ -1,7 +1,6 @@
 package controller.strategies;
 
 import controller.controllers.FortificationController;
-import controller.controllers.HelperClass;
 import controller.editor.ReadingFiles;
 import model.Country;
 import model.Player;
@@ -15,9 +14,8 @@ import java.util.List;
  * @author Bhargav
  * @version 1.0
  */
-public class BenevolentStrategy implements IStrategy {
+public class BenevolentStrategy extends Strategy {
 
-    HelperClass helper = new HelperClass();
 
     /**
      * Reinforcement phase based on Benevolent Strategy rules
@@ -25,13 +23,13 @@ public class BenevolentStrategy implements IStrategy {
      * @param player: player object
      */
     public void reinforce(Player player) {
-        player.calcArmiesByControlValue(player);
+        player.calcArmiesByControlValue();
         List<Country> countries = player.getMyCountries(player);
         Country country = null;
-        if (countries.size() > helper.getWeakestCountryIndex(countries))
-            country = countries.get(helper.getWeakestCountryIndex(countries));
+        if (countries.size() > getWeakestCountryIndex(countries))
+            country = countries.get(getWeakestCountryIndex(countries));
         country.setNoOfArmies(country.getNoOfArmies() + player.getPlayerArmiesNotDeployed());
-        player.getMyCountries(player).get(helper.getWeakestCountryIndex(countries))
+        player.getMyCountries(player).get(getWeakestCountryIndex(countries))
                 .setNoOfArmies(country.getNoOfArmies());
         player.setPlayerTotalArmiesNotDeployed(0);
 
@@ -55,7 +53,7 @@ public class BenevolentStrategy implements IStrategy {
     public void fortify(Player player) {
         FortificationController fC = new FortificationController();
         List<Country> countries = player.getMyCountries(player);
-        Country weakcountry = countries.get(helper.getWeakestCountryIndex(countries));
+        Country weakcountry = countries.get(getWeakestCountryIndex(countries));
         countries.remove(weakcountry);
         List<Country> canfortifycountries = new ArrayList<>();
         while (countries.size() > 0) {
@@ -85,7 +83,7 @@ public class BenevolentStrategy implements IStrategy {
 
                 break;
             } else {
-                weakcountry = countries.get(helper.getWeakestCountryIndex(countries));
+                weakcountry = countries.get(getWeakestCountryIndex(countries));
                 countries.remove(weakcountry);
                 canfortifycountries.clear();
             }

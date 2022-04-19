@@ -2,11 +2,9 @@ package controller.controllers;
 
 import controller.editor.ReadingFiles;
 import model.CardTypes;
-import model.Continent;
 import model.Country;
 import model.Player;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -38,9 +36,8 @@ public class ReinforcementController {
      * @return message how player can exchange cards
      */
     public String exchangeCards(List<CardTypes> list, Player player) {
-        HashSet<CardTypes> temp = new HashSet<>();
         List<CardTypes> playercards = player.getPlayerCards();
-        temp.addAll(list);
+        HashSet<CardTypes> temp = new HashSet<>(list);
         if (list.size() == 3) {
             if ((temp.size() == 1 && (temp.contains(CardTypes.Artillery) || temp.contains(CardTypes.Cavalry)
                     || temp.contains(CardTypes.Infantry)))
@@ -86,85 +83,29 @@ public class ReinforcementController {
     }
 
     /**
-     * Gets a list of countries that the player owns
-     *
-     * @param player: Player object must be given to fetch the countries
-     * @return List of countries owned by the player
-     */
-    public List<Country> getMyCountries(Player player) {
-        List<Country> countries = new ArrayList<Country>();
-        for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
-            if (entry.getValue().getOwner().getPlayerId() == (player.getPlayerId())) {
-                countries.add(entry.getValue());
-            }
-        }
-        return countries;
-    }
-
-    /**
      * Calculates the number of armies each player gets to reinforce
      *
      * @param player: player object for which the armies are calculated
      */
     public void calculateReinforcementArmies(Player player) {
-        int totalcountriesofplayer = 0;
+        int totalPlayerCountries = 0;
         for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
             if (entry.getValue().getOwner().getPlayerId() == (player.getPlayerId())) {
-                totalcountriesofplayer++;
-            } else
-                continue;
+                totalPlayerCountries++;
+            }
         }
-        float totalarmiestoreinforce;
-        totalarmiestoreinforce = (float) totalcountriesofplayer / 3;
+        float totalReinforcementArmies;
+        totalReinforcementArmies = (float) totalPlayerCountries / 3;
         int armies = 0;
-        if (totalarmiestoreinforce < 3.0) {
+        if (totalReinforcementArmies < 3.0) {
             armies = armies + 3;
         } else {
-            armies = armies + (int) totalarmiestoreinforce;
+            armies = armies + (int) totalReinforcementArmies;
         }
-        armies = armies + calcArmiesByControlValue(player);
+        armies = armies + player.calcArmiesByControlValue();
         player.setPlayerTotalArmiesNotDeployed(player.getPlayerArmiesNotDeployed() + armies);
     }
 
-    /**
-     * Checks whether the player owns the whole continent or not.
-     *
-     * @param player: player object for which it will check
-     * @return continents list of continents
-     */
-    public List<Continent> playerOwnsContinent(Player player) {
-        List<Continent> continents = new ArrayList<Continent>();
-        for (Map.Entry<String, Continent> entry : ReadingFiles.ContinentNameObject.entrySet()) {
-            List<Country> temp = entry.getValue().getCountries();
-            int counter = 0;
-            for (int i = 0; i < entry.getValue().getCountries().size(); i++) {
-                if (entry.getValue().getCountries().get(i).getOwner().getPlayerId() == (player.getPlayerId()))
-                    counter++;
-                else
-                    continue;
-            }
-            if (temp.size() == counter)
-                continents.add(entry.getValue());
-            else
-                continue;
-        }
-        return continents;
-    }
-
-    /**
-     * Calculates the number of armies according to the control value
-     *
-     * @param player: player object for which it calculates
-     * @return armies
-     */
-    public int calcArmiesByControlValue(Player player) {
-        List<Continent> continents = playerOwnsContinent(player);
-        int armies = 0;
-        for (int i = 0; i < continents.size(); i++) {
-            armies = armies + continents.get(i).getControlValue();
-        }
-        return armies;
-    }
 
     /**
      * Updates the number of armies player owns and armies not deployed

@@ -1,4 +1,4 @@
-package controller.controllers;
+package controller.strategies;
 
 import model.CardTypes;
 import model.Country;
@@ -11,7 +11,14 @@ import java.util.List;
  *
  * @author bhargav
  */
-public class HelperClass {
+public abstract class Strategy {
+
+    abstract public void reinforce(Player player);
+
+    abstract public void attack(Player player);
+
+    abstract public void fortify(Player player);
+
     /**
      * Get the index of the country with fewer armies
      *

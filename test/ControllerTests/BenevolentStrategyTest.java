@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import controller.strategies.Strategy;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,6 @@ import model.CardTypes;
 import model.Continent;
 import model.Country;
 import model.Player;
-import controller.controllers.HelperClass;
 
 /**
  * This class tests Benevolent Strategy
@@ -28,7 +28,7 @@ import controller.controllers.HelperClass;
  *
  */
 public class BenevolentStrategyTest {
-	HelperClass helper = new HelperClass();
+
 	BenevolentStrategy bs;
 	Player player1, player2, player3;
 	Country country1, country2, country3, country4, country5, country6, country7;
@@ -228,9 +228,9 @@ public class BenevolentStrategyTest {
 
 	}
 
-	/**
+/*	*//**
 	 * Method tests the reinforcement phase based on benevolent strategy rules
-	 */
+	 *//*
 	@Test
 	public void testReinforce() {
 		List<Country> countries = player1.getMyCountries(player1);
@@ -240,9 +240,9 @@ public class BenevolentStrategyTest {
 		assertEquals(armies, c.getNoOfArmies());
 	}
 
-	/**
+	*//**
 	 * Method tests the fortification phase based on aggressive strategy rules
-	 */
+	 *//*
 	@Test
 	public void fortify() {
 		List<Country> countries = player1.getMyCountries(player1);
@@ -250,6 +250,6 @@ public class BenevolentStrategyTest {
 		int armies_before = c.getNoOfArmies();
 		bs.fortify(player1);
 		assertEquals(true, c.getNoOfArmies() > armies_before);
-	}
+	}*/
 
 }

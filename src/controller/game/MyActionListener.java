@@ -18,7 +18,7 @@ import model.Country;
  */
 @SuppressWarnings("deprecation")
 public class MyActionListener implements ActionListener {
-    public final MainController controller;
+    private final MainController controller;
     private int players = 0;
 
     /**
@@ -28,11 +28,11 @@ public class MyActionListener implements ActionListener {
      */
     public MyActionListener(MainController controller) {
         this.controller = controller;
-        controller.phaseList = new ArrayList<>();
-        controller.phaseList.add("Finish Reinforcement");
-        controller.phaseList.add("Finish Attack");
-        controller.phaseList.add("Finish Fortification");
-        controller.currentPhase = controller.phaseList.get(0);
+        controller.setPhaseList(new ArrayList<>());
+        controller.getPhaseList().add("Finish Reinforcement");
+        controller.getPhaseList().add("Finish Attack");
+        controller.getPhaseList().add("Finish Fortification");
+        controller.setCurrentPhase(controller.getPhaseList().get(0));
         players = controller.PlayerNo();
     }
 
@@ -45,11 +45,11 @@ public class MyActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         // TODO Auto-generated method stub
-        if (controller.phaseList.contains(event.getActionCommand())) {
+        if (controller.getPhaseList().contains(event.getActionCommand())) {
 
             //Algun boton finish
             if (event.getActionCommand() == "Finish Reinforcement") {
-                if (controller.playerObjet(controller.currentPlayer).getPlayerArmiesNotDeployed() > 0) {  //Si quedan mas tropas -> Error
+                if (controller.playerObjet(controller.getCurrentPlayer()).getPlayerArmiesNotDeployed() > 0) {  //Si quedan mas tropas -> Error
                     controller.frame.error("Cannot End Reinforcement Untill All armies are deployed");
                     controller.cardTypesList.clear();
                     controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
@@ -95,11 +95,11 @@ public class MyActionListener implements ActionListener {
             }
         } else if (event.getActionCommand().equals("Exchange Cards")) {
             String answer = controller.getReinforcementController().exchangeCards(controller.cardTypesList,
-                    controller.playerObjet(controller.currentPlayer));
+                    controller.playerObjet(controller.getCurrentPlayer()));
             if (answer == "") {
                 controller.cardTypesList.clear();
                 controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
-                controller.frame.noArmiesLeft = controller.playerObjet(controller.currentPlayer).getPlayerArmiesNotDeployed();
+                controller.frame.noArmiesLeft = controller.playerObjet(controller.getCurrentPlayer()).getPlayerArmiesNotDeployed();
 
             } else {
                 controller.frame.error("Invalid Cards Selected");
@@ -110,11 +110,11 @@ public class MyActionListener implements ActionListener {
             controller.changed();
 
         } else {  //LLamada a las logicas de cada fase
-            controller.frame.noArmiesLeft = controller.playerObjet(controller.currentPlayer).getPlayerArmiesNotDeployed(); //Actualiza las tropas que quedan
+            controller.frame.noArmiesLeft = controller.playerObjet(controller.getCurrentPlayer()).getPlayerArmiesNotDeployed(); //Actualiza las tropas que quedan
             String Cname = event.getActionCommand().split("\\|")[0].trim();
             Country temp2 = controller.countryObjects().get(Cname); //Territorio seleccionado
-            if (controller.currentPhase.equals("Finish Reinforcement")) {
-                if (controller.playerObjet(controller.currentPlayer).getPlayerCards().size() >= 5) {
+            if (controller.getCurrentPhase().equals("Finish Reinforcement")) {
+                if (controller.playerObjet(controller.getCurrentPlayer()).getPlayerCards().size() >= 5) {
                     controller.frame.error("First Exchange Cards");
                 } else {
                     controller.armiesNotDeployed(temp2);   //Suma una tropa al territorio
@@ -124,14 +124,14 @@ public class MyActionListener implements ActionListener {
                         e1.printStackTrace();
                     }
                 }
-            } else if (controller.currentPhase.equals("Finish Fortification")) {
+            } else if (controller.getCurrentPhase().equals("Finish Fortification")) {
                 try {
                     controller.fortificationPhase(temp2);
                 } catch (IOException e2) {
                     e2.printStackTrace();
                 }
 
-            } else if (controller.currentPhase.equals("Finish Attack")) {
+            } else if (controller.getCurrentPhase().equals("Finish Attack")) {
                 try {
                     controller.attackPhase(temp2);
                 } catch (IOException e2) {
@@ -144,4 +144,7 @@ public class MyActionListener implements ActionListener {
 
     }
 
+    public MainController getController() {
+        return controller;
+    }
 }

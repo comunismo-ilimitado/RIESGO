@@ -36,26 +36,14 @@ public class MainController extends Observable{
     ReinforcementController reinforcementController;
     FortificationController fortificationController;
     MapValidation mapValidation;
-    public boolean resume = false;
-
-    public List<String> phaseList;
-    public String currentPhase;
-    public int currentPlayer = 0;
-    private Country attackCountry1, attackCountry2;
+    private boolean resume = false;
+    private List<String> phaseList;
+    private String currentPhase;
+    private int currentPlayer = 0;
+    private Country attackCountry1;
+    private Country attackCountry2;
     private Country fortifyCountry1, fortifyCountry2;
       List<CardTypes> cardTypesList = new ArrayList<>();
-
-    public AttackController getAttackController() {
-        return attackController;
-    }
-
-    public ReinforcementController getReinforcementController() {
-        return reinforcementController;
-    }
-
-    public FortificationController getFortificationController() {
-        return fortificationController;
-    }
 
     /**
      *
@@ -75,7 +63,7 @@ public class MainController extends Observable{
                 fileReader = new FileReader("Resources/SaveGame.txt");
                 bufferedReader = new BufferedReader(fileReader);
             }
-            if (resume) {
+            if (isResume()) {
                 files.Reads(bufferedReader.readLine(), Integer.parseInt(bufferedReader.readLine()));
             } else { //Ruta de guardado de la partida (al crear una nueva)
                 String address = "Resources/World.map";
@@ -90,24 +78,24 @@ public class MainController extends Observable{
                 }
             }
             //Comprobación mapa
-            mapValidation = new MapValidation(ReadingFiles.CountryNameObject, ReadingFiles.ContinentNameObject);
+            mapValidation = new MapValidation(ReadingFiles.getCountryNameObject(), ReadingFiles.getContinentNameObject());
             mapValidation.CallAllMethods();
             if (!files.isErrors() && !mapValidation.isError()) { //Booleanos que dicen si ha habido un error
                 myactionlistner = new MyActionListener(this);
-                frame = new MFrame(myactionlistner, ReadingFiles.image);
+                frame = new MFrame(myactionlistner, ReadingFiles.getImage());
                 reinforcementController = new ReinforcementController();
                 attackController = new AttackController();
                 fortificationController = new FortificationController();
                 frame.noArmiesLeft = playerObjet(0).getPlayerArmiesNotDeployed();
                 addObserver(frame);
-                if (resume) {
+                if (isResume()) {
                     int no = Integer.parseInt(bufferedReader.readLine());
-                    currentPlayer = no;
+                    setCurrentPlayer(no);
                     phase = bufferedReader.readLine();
                 }
                 //Se muestra la interfaz de juego
                 frame.fun();
-                if (resume)
+                if (isResume())
                     LoadSavedGame(bufferedReader);
                 //Cargar estrategias (Con playerId2) (es un clon de playerId)
                 for (int i = 0; i < ReadingFiles.getPlayerId2().size(); i++) {
@@ -119,7 +107,7 @@ public class MainController extends Observable{
                 SetDominationView();
                 //Se resume la fase del juego cargado o
                 // se empieza por la fase de fortificación en un juego nuevo.
-                if (resume) {
+                if (isResume()) {
                     phaseResume(phase);
                 } else {
                     selectTypeOfPlayer();
@@ -137,7 +125,7 @@ public class MainController extends Observable{
      * Set domination View
      */
     public void SetDominationView() {
-        frame.SetDominationView(ReadingFiles.players.size());
+        frame.SetDominationView(ReadingFiles.getPlayers().size());
         updateDominationView();
     }
 
@@ -168,7 +156,7 @@ public class MainController extends Observable{
                 tempPlayer.ClearArmies();
                 for (int j = 2; j < countryandarmies.length; j++) {
                     String[] country = countryandarmies[j].trim().split("\\*\\*\\*");
-                    Country tempCountry = ReadingFiles.CountryNameObject.get(country[0].trim());
+                    Country tempCountry = ReadingFiles.getCountryNameObject().get(country[0].trim());
                     tempPlayer.addCountriesOccupied(tempCountry);
                     tempCountry.setNoOfArmies(Integer.parseInt(country[1]));
                     tempCountry.setPlayer(tempPlayer);
@@ -230,7 +218,7 @@ public class MainController extends Observable{
      * @return
      */
     public List<String> countriesNames() {
-        return ReadingFiles.CountriesNames;
+        return ReadingFiles.getCountriesNames();
     }
 
     /**
@@ -255,7 +243,7 @@ public class MainController extends Observable{
      * @return HashMap
      */
     public HashMap<String, Country> countryObjects() {
-        return ReadingFiles.CountryNameObject;
+        return ReadingFiles.getCountryNameObject();
     }
 
     /**
@@ -327,7 +315,7 @@ public class MainController extends Observable{
      */
     public float calculations(Player pl) {
         try {
-            float total = ReadingFiles.CountryNameObject.size();
+            float total = ReadingFiles.getCountryNameObject().size();
             float player_have = pl.getTotalCountriesOccupied().size();
             return (player_have / total) * 100;
         } catch (Exception e) {
@@ -411,9 +399,7 @@ public class MainController extends Observable{
         playerObjet(0).setPlayerCards(cardTypes);
     }
 
-
     //Métodos de myActionListener
-
 
     /**
      * This method changes the turn of the players
@@ -423,12 +409,12 @@ public class MainController extends Observable{
         try {
             if (PlayerNo2() > 1) { //Si el numero de jugadores es mayor que 1 se sigue jugando
                 ArrayList<Integer> arrayList = new ArrayList<>(ReadingFiles.getPlayerId2().keySet());
-                int index = arrayList.indexOf(currentPlayer);
+                int index = arrayList.indexOf(getCurrentPlayer());
                 index = index + 1;
                 if (index >= arrayList.size()) {
-                    currentPlayer = ReadingFiles.getPlayerId2().get(arrayList.get(0)).getPlayerId(); //Le vuelve a tocar al primero
+                    setCurrentPlayer(ReadingFiles.getPlayerId2().get(arrayList.get(0)).getPlayerId()); //Le vuelve a tocar al primero
                 } else {
-                    currentPlayer = ReadingFiles.getPlayerId2().get(arrayList.get(index)).getPlayerId();
+                    setCurrentPlayer(ReadingFiles.getPlayerId2().get(arrayList.get(index)).getPlayerId());
                 }
             } else { //Si solo queda un jugador ha ganado ese jugador
                 frame.error("Player :- " + ((int) ReadingFiles.getPlayerId2().keySet().toArray()[0] + 1) + " Wins");
@@ -451,7 +437,7 @@ public class MainController extends Observable{
         cardTypesList.clear();
         frame.jLabeCardl.setText(cardTypesList.toString());
         String message = getReinforcementController().addArmies(country);
-        frame.noArmiesLeft = playerObjet(currentPlayer).getPlayerArmiesNotDeployed();
+        frame.noArmiesLeft = playerObjet(getCurrentPlayer()).getPlayerArmiesNotDeployed();
         changed();
         if (!message.equals(""))
             frame.error(message);
@@ -467,11 +453,11 @@ public class MainController extends Observable{
             selectTypeOfPlayer();
         } else if (phase.equals("Finish Attack")) {
             frame.ActivateAll();
-            OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
+            OnlyNeeded(playerObjet(getCurrentPlayer()).getTotalCountriesOccupied());
             finishReinforcement();
         } else if (phase.equals("Finish Fortification")) {
             frame.ActivateAll();
-            OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
+            OnlyNeeded(playerObjet(getCurrentPlayer()).getTotalCountriesOccupied());
             finishattack();
         }
     }
@@ -492,7 +478,7 @@ public class MainController extends Observable{
                 attacker.setPlayerCards(attcards);  //Esta linea y la siguiente hacen lo mismo???
                 ReadingFiles.getPlayerId().get(attacker.getPlayerId()).setPlayerCards(attcards);
                 ReadingFiles.getPlayerId2().remove(temp.getPlayerId());
-                ReadingFiles.players.remove((Integer) temp.getPlayerId());
+                ReadingFiles.getPlayers().remove((Integer) temp.getPlayerId());
             }
 
         }
@@ -515,9 +501,9 @@ public class MainController extends Observable{
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        Player player = playerObjet(currentPlayer);
+        Player player = playerObjet(getCurrentPlayer());
         System.out.println("---------------------------------");
-        System.out.println("Current Player " + (currentPlayer + 1));
+        System.out.println("Current Player " + (getCurrentPlayer() + 1));
         textarea("---------------------------------");
         textarea("Player Playing :- " + (currentPlayer + 1));
         String strategy = player.getStrategyType().trim(); //Elimina los caracteres blancos iniciales y finales
@@ -545,9 +531,9 @@ public class MainController extends Observable{
         buttonCards(true);
         changed();
         frame.ActivateAll();
-        OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
-        getReinforcementController().calculateReinforcementArmies(playerObjet(currentPlayer));
-        frame.error("Its Player:- " + (currentPlayer + 1) + " Turn");
+        OnlyNeeded(playerObjet(getCurrentPlayer()).getTotalCountriesOccupied());
+        getReinforcementController().calculateReinforcementArmies(playerObjet(getCurrentPlayer()));
+        frame.error("Its Player:- " + (getCurrentPlayer() + 1) + " Turn");
     }
 
     /**
@@ -561,16 +547,16 @@ public class MainController extends Observable{
         cardTypesList.clear();
         frame.jLabeCardl.setText(cardTypesList.toString());
         changed();
-        if (attackCountry1 == null) {
-            attackCountry1 = country;
+        if (getAttackCountry1() == null) {
+            setAttackCountry1(country);
             frame.ActivateAll();
             List<Country> neighbourList = getAttackController().getMyNeighboursForAttack(country);
             if (neighbourList.size() < 1) {
                 frame.ActivateAll();
-                attackCountry1 = null;
+                setAttackCountry1(null);
                 attackCountry2 = null;
                 frame.error("No Neighbours to attack");
-                OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
+                OnlyNeeded(playerObjet(getCurrentPlayer()).getTotalCountriesOccupied());
                 RefreshButtons();
             } else {
                 frame.OnlyNeeded(neighbourList);
@@ -589,7 +575,7 @@ public class MainController extends Observable{
                 } else {
                     dice1 = Integer.parseInt(
                             frame.popupTextNew("Enter No of Dices for player 1 --Minimum: 1 Maximum: "
-                                    + getAttackController().setNoOfDice(attackCountry1, 'A')));
+                                    + getAttackController().setNoOfDice(getAttackCountry1(), 'A')));
 
                     dice2 = Integer.parseInt(
                             frame.popupTextNew("Enter No of Dices for player 2 --Minimum: 1 Maximum: "
@@ -598,13 +584,13 @@ public class MainController extends Observable{
             } catch (Exception e) {
                 frame.error("Invalid Entry Try again");
                 frame.ActivateAll();
-                attackCountry1 = null;
+                setAttackCountry1(null);
                 attackCountry2 = null;
-                OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
+                OnlyNeeded(playerObjet(getCurrentPlayer()).getTotalCountriesOccupied());
                 RefreshButtons();
             }
 
-            String reply = attackController.attackButton(attackCountry1, attackCountry2, dice1, dice2,
+            String reply = attackController.attackButton(getAttackCountry1(), attackCountry2, dice1, dice2,
                     allout);
             System.out.println(reply);
             if (reply.equals("Player won")) {
@@ -621,12 +607,12 @@ public class MainController extends Observable{
             attackController.getAttackerdicerolloutput().clear();
             attackController.getDefenderdicerolloutput().clear();
             frame.ActivateAll();
-            attackCountry1 = null;
+            setAttackCountry1(null);
             attackCountry2 = null;
-            OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
+            OnlyNeeded(playerObjet(getCurrentPlayer()).getTotalCountriesOccupied());
             RefreshButtons();
             PaintCountries();
-            boolean result = getAttackController().canAttack(playerObjet(currentPlayer));
+            boolean result = getAttackController().canAttack(playerObjet(getCurrentPlayer()));
             if (!result) {
                /* controller.frame.buttonCard4.setEnabled(false);
                 changed();
@@ -640,7 +626,7 @@ public class MainController extends Observable{
             }
 
         } else {
-            attackCountry1 = null;
+            setAttackCountry1(null);
             attackCountry2 = null;
         }
     }
@@ -676,7 +662,7 @@ public class MainController extends Observable{
                         fortifyCountry2 = null;
                     } else {
                         RefreshButtons();
-                        currentPhase = "Finish Reinforcement";
+                        setCurrentPhase("Finish Reinforcement");
                         frame.nextAction.setText("Finish Reinforcement");
                         // playerUpdate();
                         fortifyCountry1 = null;
@@ -699,10 +685,10 @@ public class MainController extends Observable{
     void finishReinforcement() {
         cardTypesList.clear();
         buttonCards(false);
-        currentPhase = "Finish Attack";
+        setCurrentPhase("Finish Attack");
         frame.nextAction.setText("Finish Attack");
         changed();
-        attackCountry1 = null;
+        setAttackCountry1(null);
         attackCountry2 = null;
         cardTypesList.clear();
         frame.jLabeCardl.setText(cardTypesList.toString());
@@ -718,7 +704,7 @@ public class MainController extends Observable{
     void finishattack() {
         buttonCards(false);
         changed();
-        currentPhase = "Finish Fortification";
+        setCurrentPhase("Finish Fortification");
         frame.nextAction.setText("Finish Fortification");
         fortifyCountry1 = null;
         fortifyCountry2 = null;
@@ -729,7 +715,7 @@ public class MainController extends Observable{
         AttackController.setCard(false);
         changed();
         frame.ActivateAll();
-        OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
+        OnlyNeeded(playerObjet(getCurrentPlayer()).getTotalCountriesOccupied());
         //playerUpdate(); // El jugador actual se cambia antes de fortificar??
         cardTypesList.clear();
         frame.jLabeCardl.setText(cardTypesList.toString());
@@ -743,7 +729,7 @@ public class MainController extends Observable{
     void finishFortification() {
         buttonCards(true);
         changed();
-        currentPhase = "Finish Reinforcement";
+        setCurrentPhase("Finish Reinforcement");
         frame.nextAction.setText("Finish Reinforcement");
         cardTypesList.clear();
         frame.jLabeCardl.setText(cardTypesList.toString());
@@ -780,7 +766,7 @@ public class MainController extends Observable{
      */
     public String getInfantryCards() {
         int cont = 0;
-        List<CardTypes> type = playerObjet(currentPlayer).getPlayerCards();
+        List<CardTypes> type = playerObjet(getCurrentPlayer()).getPlayerCards();
         for (int i = 0; i < type.size(); i++) {
             int x = type.get(i).compareTo(CardTypes.Infantry);
             if (x == 0) {
@@ -797,7 +783,7 @@ public class MainController extends Observable{
      */
     public String getCavalryCards() {
         int cont = 0;
-        List<CardTypes> type = playerObjet(currentPlayer).getPlayerCards();
+        List<CardTypes> type = playerObjet(getCurrentPlayer()).getPlayerCards();
         for (int i = 0; i < type.size(); i++) {
             int x = type.get(i).compareTo(CardTypes.Cavalry);
             if (x == 0) {
@@ -814,7 +800,7 @@ public class MainController extends Observable{
      */
     public String getArtilleryCards() {
         int cont = 0;
-        List<CardTypes> type = playerObjet(currentPlayer).getPlayerCards();
+        List<CardTypes> type = playerObjet(getCurrentPlayer()).getPlayerCards();
         for (int i = 0; i < type.size(); i++) {
             int x = type.get(i).compareTo(CardTypes.Artillery);
             if (x == 0) {
@@ -834,7 +820,7 @@ public class MainController extends Observable{
     }
 
     public int getArmiesPerPlayer() {
-        return attackController.getTotalCountries(playerObjet(currentPlayer));
+        return attackController.getTotalCountries(playerObjet(getCurrentPlayer()));
     }
 
     /**
@@ -845,10 +831,10 @@ public class MainController extends Observable{
         try {
             File file = new File("Resources/SaveGame.txt");
             FileWriter writer = new FileWriter(file);
-            writer.write(ReadingFiles.address + "\n");
+            writer.write(ReadingFiles.getAddress() + "\n");
             writer.write(ReadingFiles.getPlayerId().size() + "\n");
-            writer.write(currentPlayer + "\n");
-            writer.write(currentPhase + "\n");
+            writer.write(getCurrentPlayer() + "\n");
+            writer.write(getCurrentPhase() + "\n");
             writer.write(frame.area.getText());
             for (int i = 0; i < PlayerNo2(); i++) {
                 Player tempPlayer = ReadingFiles.getPlayerId2().get(ReadingFiles.getPlayerId2().keySet().toArray()[i]);
@@ -856,7 +842,7 @@ public class MainController extends Observable{
                 System.out.println("Error Report :-" + tempPlayer + "---" + PlayerNo2());
                 writer.write(tempPlayer.getPlayerId() + "\n");
                 System.out.println();
-                writer.write(tempPlayer.getStrategyType() + "\n");
+                writer.write(tempPlayer.getStrategy() + "\n");
                 for (int j = 0; j < tempPlayer.getTotalCountriesOccupied().size(); j++) {
                     Country tempCountry = tempPlayer.getTotalCountriesOccupied().get(j);
                     writer.write(tempCountry.getName() + "***" + tempCountry.getNoOfArmies() + "\n");
@@ -884,6 +870,50 @@ public class MainController extends Observable{
         setChanged();
         notifyObservers();
     }
+
+    //Getters and setters
+    public AttackController getAttackController() {
+        return attackController;
+    }
+    public ReinforcementController getReinforcementController() {
+        return reinforcementController;
+    }
+    public FortificationController getFortificationController() {
+        return fortificationController;
+    }
+    public boolean isResume() {
+        return resume;
+    }
+    public void setResume(boolean resume) {
+        this.resume = resume;
+    }
+    public List<String> getPhaseList() {
+        return phaseList;
+    }
+    public void setPhaseList(List<String> phaseList) {
+        this.phaseList = phaseList;
+    }
+    public String getCurrentPhase() {
+        return currentPhase;
+    }
+    public void setCurrentPhase(String currentPhase) {
+        this.currentPhase = currentPhase;
+    }
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+    public Country getAttackCountry1() {
+        return attackCountry1;
+    }
+    public void setAttackCountry1(Country attackCountry1) {
+        this.attackCountry1 = attackCountry1;
+    }
+
+
+
     /*
     /**
      * This method

@@ -136,18 +136,18 @@ public class AttackTest
 		country4.setNoOfArmies(2);
 		country4.setPlayer(player1);
 		
-		ReadingFiles.CountryNameObject = new HashMap<>();
+		ReadingFiles.setCountryNameObject(new HashMap<>());
 		ReadingFiles.setPlayerId(new HashMap<>());
-		temp = ReadingFiles.CountryNameObject;
+		temp = ReadingFiles.getCountryNameObject();
 		ReadingFiles.setPlayerId(temp1);
 		ReadingFiles.getPlayerId().clear();
-		ReadingFiles.CountryNameObject.clear();
-		ReadingFiles.CountryNameObject.put(country1.getName(), country1);
-		ReadingFiles.CountryNameObject.put(country2.getName(), country2);
-		ReadingFiles.CountryNameObject.put(country3.getName(), country3);
-		ReadingFiles.CountryNameObject.put(country4.getName(), country4);
-		ReadingFiles.CountryNameObject.put(country5.getName(), country5);
-		ReadingFiles.CountryNameObject.put(country6.getName(), country6);
+		ReadingFiles.getCountryNameObject().clear();
+		ReadingFiles.getCountryNameObject().put(country1.getName(), country1);
+		ReadingFiles.getCountryNameObject().put(country2.getName(), country2);
+		ReadingFiles.getCountryNameObject().put(country3.getName(), country3);
+		ReadingFiles.getCountryNameObject().put(country4.getName(), country4);
+		ReadingFiles.getCountryNameObject().put(country5.getName(), country5);
+		ReadingFiles.getCountryNameObject().put(country6.getName(), country6);
 		
 		ReadingFiles.getPlayerId().put(player1.getPlayerId(),player1);
 		ReadingFiles.getPlayerId().put(player2.getPlayerId(),player2);
@@ -159,9 +159,9 @@ public class AttackTest
 	*/
 	@After
 	public void atEnd() {
-		ReadingFiles.CountryNameObject.clear();
+		ReadingFiles.getCountryNameObject().clear();
 		ReadingFiles.getPlayerId().clear();
-		ReadingFiles.CountryNameObject = temp;
+		ReadingFiles.setCountryNameObject(temp);
 		ReadingFiles.setPlayerId(temp1);
 
 	}

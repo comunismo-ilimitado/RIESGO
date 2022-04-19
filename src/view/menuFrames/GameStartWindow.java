@@ -3,8 +3,6 @@ package view.menuFrames;
 import controller.game.MainController;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 /**
@@ -55,7 +53,7 @@ public class GameStartWindow {
 
         resume_button.addActionListener(event -> {
                 MainController controller = new MainController();
-                controller.resume = true;
+                controller.setResume(true);
                 try {
                     controller.Function();
                 } catch (Exception e) {

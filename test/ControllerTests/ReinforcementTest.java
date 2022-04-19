@@ -193,19 +193,19 @@ public class ReinforcementTest {
 		continent2.setControlValue(5);
 		
 
-		ReadingFiles.CountryNameObject = new HashMap<>();
-		ReadingFiles.ContinentNameObject = new HashMap<>();
+		ReadingFiles.setCountryNameObject(new HashMap<>());
+		ReadingFiles.setContinentNameObject(new HashMap<>());
 		ReadingFiles.setPlayerId(new HashMap<>());
-		temp = ReadingFiles.ContinentNameObject;
-		ReadingFiles.ContinentNameObject.clear();
-		ReadingFiles.ContinentNameObject.put(continent1.getName(), continent1);
-		ReadingFiles.ContinentNameObject.put(continent2.getName(), continent2);
-		ReadingFiles.CountryNameObject.put(country1.getName(), country1);
-		ReadingFiles.CountryNameObject.put(country2.getName(), country2);
-		ReadingFiles.CountryNameObject.put(country3.getName(), country3);
-		ReadingFiles.CountryNameObject.put(country4.getName(), country4);
-		ReadingFiles.CountryNameObject.put(country5.getName(), country5);
-		ReadingFiles.CountryNameObject.put(country6.getName(), country6);
+		temp = ReadingFiles.getContinentNameObject();
+		ReadingFiles.getContinentNameObject().clear();
+		ReadingFiles.getContinentNameObject().put(continent1.getName(), continent1);
+		ReadingFiles.getContinentNameObject().put(continent2.getName(), continent2);
+		ReadingFiles.getCountryNameObject().put(country1.getName(), country1);
+		ReadingFiles.getCountryNameObject().put(country2.getName(), country2);
+		ReadingFiles.getCountryNameObject().put(country3.getName(), country3);
+		ReadingFiles.getCountryNameObject().put(country4.getName(), country4);
+		ReadingFiles.getCountryNameObject().put(country5.getName(), country5);
+		ReadingFiles.getCountryNameObject().put(country6.getName(), country6);
 		ReadingFiles.getPlayerId().put(player1.getPlayerId(), player1);
 		ReadingFiles.getPlayerId().put(player2.getPlayerId(), player2);
 	}
@@ -215,8 +215,8 @@ public class ReinforcementTest {
 	 */
 	@After
 	public void atEnd() {
-		ReadingFiles.ContinentNameObject.clear();
-		ReadingFiles.ContinentNameObject = temp;
+		ReadingFiles.getContinentNameObject().clear();
+		ReadingFiles.setContinentNameObject(temp);
 
 	}
 

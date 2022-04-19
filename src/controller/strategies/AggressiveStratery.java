@@ -31,7 +31,7 @@ public class AggressiveStrategy extends Strategy {
         strongestcountry.setNoOfArmies(strongestcountry.getNoOfArmies() + player.getPlayerArmiesNotDeployed());
         player.getMyCountries(player).get(getStrongestCountry(countries))
                 .setNoOfArmies(strongestcountry.getNoOfArmies());
-        ReadingFiles.CountryNameObject.get(strongestcountry.getName()).setNoOfArmies(strongestcountry.getNoOfArmies());
+        ReadingFiles.getCountryNameObject().get(strongestcountry.getName()).setNoOfArmies(strongestcountry.getNoOfArmies());
 
         player.setPlayerTotalArmiesNotDeployed(0);
     }
@@ -51,7 +51,7 @@ public class AggressiveStrategy extends Strategy {
             Country defender = attackable.get(getWeakestCountryIndex(attackable));
             aC.attackButton(strongestcountry, defender, 0, 0, true);
             AttackController.setCard(true);
-            strongestcountry = ReadingFiles.CountryNameObject.get(strongestcountry.getName());
+            strongestcountry = ReadingFiles.getCountryNameObject().get(strongestcountry.getName());
             attackable = aC.getMyNeighboursForAttack(strongestcountry);
         }
         AttackController.setCard(false);
@@ -78,10 +78,11 @@ public class AggressiveStrategy extends Strategy {
                 player.setTotalCountriesOccupied(countries);
                 countries.remove(strongestcountry);
                 countries.remove(fotifyingcountry);
-                ReadingFiles.CountryNameObject.get(fotifyingcountry.getName())
+                ReadingFiles.getCountryNameObject().get(fotifyingcountry.getName())
                         .setNoOfArmies(fotifyingcountry.getNoOfArmies());
-                ReadingFiles.CountryNameObject.get(strongestcountry.getName())
+                ReadingFiles.getCountryNameObject().get(strongestcountry.getName())
                         .setNoOfArmies(strongestcountry.getNoOfArmies());
+
                 break;
             }
         }

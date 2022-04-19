@@ -83,6 +83,22 @@ public class ReinforcementController {
     }
 
     /**
+     * Gets a list of countries that the player owns
+     *
+     * @param player: Player object must be given to fetch the countries
+     * @return List of countries owned by the player
+     */
+    public List<Country> getMyCountries(Player player) {
+        List<Country> countries = new ArrayList<Country>();
+        for (Map.Entry<String, Country> entry : ReadingFiles.getCountryNameObject().entrySet()) {
+            if (entry.getValue().getOwner().getPlayerId() == (player.getPlayerId())) {
+                countries.add(entry.getValue());
+            }
+        }
+        return countries;
+    }
+
+    /**
      * Calculates the number of armies each player gets to reinforce
      *
      * @param player: player object for which the armies are calculated
@@ -115,8 +131,8 @@ public class ReinforcementController {
      */
     public void updateValue(Player player, Country country) {
         country.setNoOfArmies(country.getNoOfArmies() + 1);
-        int x = ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().indexOf(country);
-        ReadingFiles.ContinentNameObject.get(country.getContinent().getName()).getCountries().get(x)
+        int x = ReadingFiles.getContinentNameObject().get(country.getContinent().getName()).getCountries().indexOf(country);
+        ReadingFiles.getContinentNameObject().get(country.getContinent().getName()).getCountries().get(x)
                 .setNoOfArmies(country.getNoOfArmies());
         player.setPlayerTotalArmiesNotDeployed(player.getPlayerArmiesNotDeployed() - 1);
     }

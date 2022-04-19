@@ -222,9 +222,9 @@ public class MFrame extends JFrame implements Observer {
      */
     // Anade el numero de cartas a cada boton
     public void cards() {
-        buttonCard1.setText("Infantry " + myActionListner.controller.getInfantryCards());
-        buttonCard2.setText("Artillery " + myActionListner.controller.getArtilleryCards());
-        buttonCard3.setText("Cavalry " + myActionListner.controller.getCavalryCards());
+        buttonCard1.setText("Infantry " + myActionListner.getController().getInfantryCards());
+        buttonCard2.setText("Artillery " + myActionListner.getController().getArtilleryCards());
+        buttonCard3.setText("Cavalry " + myActionListner.getController().getCavalryCards());
     }
 
     /**
@@ -232,9 +232,9 @@ public class MFrame extends JFrame implements Observer {
      */
     // Rellena el panel 4
     public void NotifyAll() {
-        jLabel1.setText("Turn For Player :-" + (myActionListner.controller.currentPlayer + 1));
+        jLabel1.setText("Turn For Player :-" + (myActionListner.getController().getCurrentPlayer() + 1));
         jLabel2.setText("Armies Left:- " + noArmiesLeft);
-        jLabel3.setText("Total Armies :- " + myActionListner.controller.getArmiesPerPlayer());
+        jLabel3.setText("Total Armies :- " + myActionListner.getController().getArmiesPerPlayer());
         jLabel4.setText("DICE 1:- " + AAA);
         jLabel5.setText("DICE 2:- " + BBB);
         jLabel6.setText("Current Phase :-" + nextAction.getText().split(" ")[1] + " Phase");
@@ -361,7 +361,7 @@ public class MFrame extends JFrame implements Observer {
     }
 
     public void Exit_Option() {
-        myActionListner.controller.saveGameOnExit();
+        myActionListner.getController().saveGameOnExit();
     }
 
     @Override

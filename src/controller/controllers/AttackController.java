@@ -27,7 +27,7 @@ public class AttackController {
      */
     public int getTotalCountries() {
         int count = 0;
-        for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
+        for (Map.Entry<String, Country> entry : ReadingFiles.getCountryNameObject().entrySet()) {
             count += entry.getValue().getNoOfArmies();
         }
         return count;
@@ -40,7 +40,7 @@ public class AttackController {
      */
     public int getTotalCountries(Player player) {
         int count = 0;
-        for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
+        for (Map.Entry<String, Country> entry : ReadingFiles.getCountryNameObject().entrySet()) {
             if (entry.getValue().getOwner().getPlayerId() == player.getPlayerId()) {
                 count += entry.getValue().getNoOfArmies();
             }
@@ -77,7 +77,7 @@ public class AttackController {
      */
     public List<Country> getMyCountries(Player player) {
         List<Country> countries = new ArrayList<Country>();
-        for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
+        for (Map.Entry<String, Country> entry : ReadingFiles.getCountryNameObject().entrySet()) {
             if (entry.getValue().getOwner().getPlayerId() == player.getPlayerId()) {
                 countries.add(entry.getValue());
             }
@@ -176,7 +176,7 @@ public class AttackController {
      */
     public void updateOwner(Country country, Player player) {
         country.setPlayer(player);
-        ReadingFiles.CountryNameObject.get(country.getName()).setPlayer(player);
+        ReadingFiles.getCountryNameObject().get(country.getName()).setPlayer(player);
         return;
     }
 
@@ -253,7 +253,7 @@ public class AttackController {
                                     attacker.getOwner().setPlayerCards(attcards);
                                     ReadingFiles.getPlayerId().get(attacker.getOwner().getPlayerId()).setPlayerCards(attcards);
                                     ReadingFiles.getPlayerId2().remove(elimination.getPlayerId());
-                                    ReadingFiles.players.remove((Integer) elimination.getPlayerId());
+                                    ReadingFiles.getPlayers().remove((Integer) elimination.getPlayerId());
                                 }
                                 if (!card) {
                                     int cardnumber = (int) (Math.random() * 3 + 1);
@@ -336,7 +336,7 @@ public class AttackController {
                                 attacker.getOwner().setPlayerCards(attcards);
                                 ReadingFiles.getPlayerId().get(attacker.getOwner().getPlayerId()).setPlayerCards(attcards);
                                 ReadingFiles.getPlayerId2().remove(elimination.getPlayerId());
-                                ReadingFiles.players.remove((Integer) elimination.getPlayerId());
+                                ReadingFiles.getPlayers().remove((Integer) elimination.getPlayerId());
                             }
                             if (!card) {
                                 int cardnumber = (int) (Math.random() * 3 + 1);

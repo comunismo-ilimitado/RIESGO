@@ -62,9 +62,9 @@ public class EditContinents {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        if (ReadingFiles.CountryNameObject != null)
-            System.out.println("Initial list of elements: " + ReadingFiles.CountriesNames);
-        System.out.println("Initial list of elements: " + ReadingFiles.ContinentNames);
+        if (ReadingFiles.getCountryNameObject() != null)
+            System.out.println("Initial list of elements: " + ReadingFiles.getCountriesNames());
+        System.out.println("Initial list of elements: " + ReadingFiles.getContinentNames());
 
         setUp();
         getSelectedContinent();
@@ -75,7 +75,7 @@ public class EditContinents {
      */
     private void setUp() {
 
-        if (ReadingFiles.CountryNameObject != null)
+        if (ReadingFiles.getCountryNameObject() != null)
             MapFrame = new JFrame("Edit Map");
         MapFrame.setSize(900, 900);
 
@@ -85,12 +85,12 @@ public class EditContinents {
         HeaderLabel2 = new JLabel("Contains");
         HeaderLabel2.setBounds(600, 20, 150, 50);
 
-        String[] Maps = ReadingFiles.ContinentNames.toArray(new String[0]);
+        String[] Maps = ReadingFiles.getContinentNames().toArray(new String[0]);
         ContinentsCombo = new JComboBox(Maps);
         ContinentsCombo.setBounds(120, 150, 200, 20);
 
-        for (int i = 0, k = 0, j = 30; i < ReadingFiles.CountriesNames.size(); i++, j = j + 30) {
-            CheckBoxes[i] = new JCheckBox(ReadingFiles.CountriesNames.get(i));
+        for (int i = 0, k = 0, j = 30; i < ReadingFiles.getCountriesNames().size(); i++, j = j + 30) {
+            CheckBoxes[i] = new JCheckBox(ReadingFiles.getCountriesNames().get(i));
         }
         SelectButton = new JButton("SELECT");
         SelectButton.setBounds(175, 200, 90, 20);
@@ -113,20 +113,20 @@ public class EditContinents {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 ArrayList<Country> countries = new ArrayList<>();
-                for (int i = 0; i < ReadingFiles.CountriesNames.size(); i++) {
+                for (int i = 0; i < ReadingFiles.getCountriesNames().size(); i++) {
                     if (CheckBoxes[i].isSelected()) {
-                        countries.add(ReadingFiles.CountryNameObject.get(CheckBoxes[i].getText()));
+                        countries.add(ReadingFiles.getCountryNameObject().get(CheckBoxes[i].getText()));
                         System.out.println(
-                                "caught:" + ReadingFiles.CountryNameObject.get(CheckBoxes[i].getText()).getName());
-                        ReadingFiles.CountryNameObject.get(CheckBoxes[i].getText())
-                                .setContinent(ReadingFiles.ContinentNameObject.get(ContinentSelected));
+                                "caught:" + ReadingFiles.getCountryNameObject().get(CheckBoxes[i].getText()).getName());
+                        ReadingFiles.getCountryNameObject().get(CheckBoxes[i].getText())
+                                .setContinent(ReadingFiles.getContinentNameObject().get(ContinentSelected));
                         System.out.println("cont:"
-                                + ReadingFiles.CountryNameObject.get(CheckBoxes[i].getText()).getContinent().getName());
+                                + ReadingFiles.getCountryNameObject().get(CheckBoxes[i].getText()).getContinent().getName());
                         CheckBoxes[i].setSelected(false);
                         JOptionPane.showMessageDialog(null, CheckBoxes[i].getText() + " added to " + ContinentSelected);
                     }
                 }
-                ReadingFiles.ContinentNameObject.get(ContinentSelected).setCountries(countries);
+                ReadingFiles.getContinentNameObject().get(ContinentSelected).setCountries(countries);
             }
         });
 
@@ -170,9 +170,9 @@ public class EditContinents {
                 // TODO Auto-generated method stub
                 ContinentSelected = (String) ContinentsCombo.getSelectedItem();
                 System.out.print(ContinentSelected);
-                for (int i = 0, k = 0, j = 30; i < ReadingFiles.CountriesNames.size(); i++, j = j + 30) {
-                    for (model.Country s : ReadingFiles.ContinentNameObject.get(ContinentSelected).getCountries()) {
-                        if (s.getName().compareTo(ReadingFiles.CountriesNames.get(i)) == 0) {
+                for (int i = 0, k = 0, j = 30; i < ReadingFiles.getCountriesNames().size(); i++, j = j + 30) {
+                    for (model.Country s : ReadingFiles.getContinentNameObject().get(ContinentSelected).getCountries()) {
+                        if (s.getName().compareTo(ReadingFiles.getCountriesNames().get(i)) == 0) {
                             CountriesCheck[k] = new JLabel("yes");
 
                             MapFrame.add(CountriesCheck[k]);

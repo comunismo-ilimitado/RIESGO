@@ -22,7 +22,7 @@ public class FortificationController {
      */
     public List<Country> getMyCountries(Player player) {
         List<Country> countries = new ArrayList<Country>();
-        for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
+        for (Map.Entry<String, Country> entry : ReadingFiles.getCountryNameObject().entrySet()) {
             if (entry.getValue().getOwner().getPlayerId() == (player.getPlayerId())) {
                 countries.add(entry.getValue());
             } else
@@ -79,14 +79,14 @@ public class FortificationController {
             return "NO path";
         } else {
             sourceCountry.setNoOfArmies(sourceCountry.getNoOfArmies() - armiesToBeMoved);
-            int x = ReadingFiles.ContinentNameObject.get(sourceCountry.getContinent().getName()).getCountries()
+            int x = ReadingFiles.getContinentNameObject().get(sourceCountry.getContinent().getName()).getCountries()
                     .indexOf(sourceCountry);
-            ReadingFiles.ContinentNameObject.get(sourceCountry.getContinent().getName()).getCountries().get(x)
+            ReadingFiles.getContinentNameObject().get(sourceCountry.getContinent().getName()).getCountries().get(x)
                     .setNoOfArmies(sourceCountry.getNoOfArmies());
             destinationCountry.setNoOfArmies(destinationCountry.getNoOfArmies() + armiesToBeMoved);
-            int y = ReadingFiles.ContinentNameObject.get(destinationCountry.getContinent().getName()).getCountries()
+            int y = ReadingFiles.getContinentNameObject().get(destinationCountry.getContinent().getName()).getCountries()
                     .indexOf(destinationCountry);
-            ReadingFiles.ContinentNameObject.get(destinationCountry.getContinent().getName()).getCountries().get(y)
+            ReadingFiles.getContinentNameObject().get(destinationCountry.getContinent().getName()).getCountries().get(y)
                     .setNoOfArmies(destinationCountry.getNoOfArmies());
             return "";
         }

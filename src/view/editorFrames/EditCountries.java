@@ -42,9 +42,9 @@ public class EditCountries {
     public EditCountries() {
         MFrame2 frame2 = new MFrame2();
         String address = "Resources/" + SelectMap.MapSelected + ".map";
-        if (ReadingFiles.CountryNameObject != null)
-            System.out.println("Initial list of elements: " + ReadingFiles.CountriesNames);
-        System.out.println("Initial list of elements: " + ReadingFiles.ContinentNames);
+        if (ReadingFiles.getCountryNameObject() != null)
+            System.out.println("Initial list of elements: " + ReadingFiles.getCountriesNames());
+        System.out.println("Initial list of elements: " + ReadingFiles.getContinentNames());
         setUp();
         getSelectedContinent();
     }
@@ -53,14 +53,14 @@ public class EditCountries {
      * Sets the UI up
      */
     private void setUp() {
-        if (ReadingFiles.CountryNameObject != null)
+        if (ReadingFiles.getCountryNameObject() != null)
             MapFrame = new JFrame("Edit Map");
         MapFrame.setSize(900, 900);
 
         HeaderLabel = new JLabel("Countries");
         HeaderLabel.setBounds(50, 50, 150, 50);
 
-        String[] Maps = ReadingFiles.CountriesNames.toArray(new String[0]);
+        String[] Maps = ReadingFiles.getCountriesNames().toArray(new String[0]);
         ContinentsCombo = new JComboBox(Maps);
         ContinentsCombo.setBounds(120, 150, 200, 20);
 
@@ -73,8 +73,8 @@ public class EditCountries {
         NextButton = new JButton("NEXT");
         NextButton.setBounds(1000, 700, 90, 20);
 
-        for (int i = 0, k = 0, j = 30; i < ReadingFiles.CountriesNames.size(); i++, j = j + 30) {
-            check_boxes[i] = new JCheckBox(ReadingFiles.CountriesNames.get(i));
+        for (int i = 0, k = 0, j = 30; i < ReadingFiles.getCountriesNames().size(); i++, j = j + 30) {
+            check_boxes[i] = new JCheckBox(ReadingFiles.getCountriesNames().get(i));
         }
 
         SetButton.addActionListener(new ActionListener() {
@@ -82,9 +82,9 @@ public class EditCountries {
             public void actionPerformed(ActionEvent arg0) {
                 ArrayList<Country> neighbours = new ArrayList<>();
 
-                for (int i = 0; i < ReadingFiles.CountriesNames.size(); i++) {
+                for (int i = 0; i < ReadingFiles.getCountriesNames().size(); i++) {
                     if (check_boxes[i].isSelected()) {
-                        Country temp = ReadingFiles.CountryNameObject.get(check_boxes[i].getText());
+                        Country temp = ReadingFiles.getCountryNameObject().get(check_boxes[i].getText());
                         neighbours.add(temp);
 
                         System.out.println("caught:" + temp.getName());
@@ -92,7 +92,7 @@ public class EditCountries {
                         JOptionPane.showMessageDialog(null, check_boxes[i].getText() + " added to " + CountrySelected);
                     }
                 }
-                ReadingFiles.CountryNameObject.get(CountrySelected).setNeighbors(neighbours);
+                ReadingFiles.getCountryNameObject().get(CountrySelected).setNeighbors(neighbours);
 
             }
         });
@@ -138,10 +138,10 @@ public class EditCountries {
                 len = 0;
                 CountrySelected = (String) ContinentsCombo.getSelectedItem();
                 System.out.print(CountrySelected);
-                for (int i = 0, k = 0, j = 30; i < ReadingFiles.CountriesNames.size(); i++, j = j + 30) {
+                for (int i = 0, k = 0, j = 30; i < ReadingFiles.getCountriesNames().size(); i++, j = j + 30) {
 
-                    for (model.Country s : ReadingFiles.CountryNameObject.get(CountrySelected).getNeighbors()) {
-                        if (s.getName().compareTo(ReadingFiles.CountriesNames.get(i)) == 0) {
+                    for (model.Country s : ReadingFiles.getCountryNameObject().get(CountrySelected).getNeighbors()) {
+                        if (s.getName().compareTo(ReadingFiles.getCountriesNames().get(i)) == 0) {
                             countriesinside[k] = new JLabel("yes");
 
                             MapFrame.add(countriesinside[k]);

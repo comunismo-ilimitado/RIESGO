@@ -1,6 +1,7 @@
 package controller.strategies;
 
 import controller.controllers.FortificationController;
+import controller.controllers.HelperClass;
 import controller.editor.ReadingFiles;
 import model.Country;
 import model.Player;
@@ -33,7 +34,7 @@ public class BenevolentStrategy extends Strategy {
                 .setNoOfArmies(country.getNoOfArmies());
         player.setPlayerTotalArmiesNotDeployed(0);
 
-        ReadingFiles.CountryNameObject.get(country.getName()).setNoOfArmies(country.getNoOfArmies());
+        ReadingFiles.getCountryNameObject().get(country.getName()).setNoOfArmies(country.getNoOfArmies());
     }
 
     /**
@@ -77,8 +78,8 @@ public class BenevolentStrategy extends Strategy {
                 player.getMyCountries(player).get(index).setNoOfArmies(weakcountry.getNoOfArmies());
                 index = getCountryIndex(strongestcountry, player.getMyCountries(player));
                 player.getMyCountries(player).get(index).setNoOfArmies(strongestcountry.getNoOfArmies());
-                ReadingFiles.CountryNameObject.get(weakcountry.getName()).setNoOfArmies(weakcountry.getNoOfArmies());
-                ReadingFiles.CountryNameObject.get(strongestcountry.getName())
+                ReadingFiles.getCountryNameObject().get(weakcountry.getName()).setNoOfArmies(weakcountry.getNoOfArmies());
+                ReadingFiles.getCountryNameObject().get(strongestcountry.getName())
                         .setNoOfArmies(strongestcountry.getNoOfArmies());
 
                 break;

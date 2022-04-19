@@ -20,6 +20,8 @@ public class MapValidation {
     HashMap<String, Country> countryHashMap;
     HashMap<String, Continent> continentHashMap;
     private boolean error = false;
+
+    //Getter
     public boolean isError() {
         return error;
     }

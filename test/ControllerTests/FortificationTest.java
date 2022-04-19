@@ -151,9 +151,9 @@ public class FortificationTest {
 		continent2.setCountries(n_list2);
 		continent2.setControlValue(5);
 
-		ReadingFiles.ContinentNameObject = new HashMap<>();
-		ReadingFiles.ContinentNameObject.put(continent1.getName(), continent1);
-		ReadingFiles.ContinentNameObject.put(continent2.getName(), continent2);
+		ReadingFiles.setContinentNameObject(new HashMap<>());
+		ReadingFiles.getContinentNameObject().put(continent1.getName(), continent1);
+		ReadingFiles.getContinentNameObject().put(continent2.getName(), continent2);
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package controller.strategies;
 
 import controller.controllers.AttackController;
+import controller.controllers.HelperClass;
 import controller.editor.ReadingFiles;
 import model.CardTypes;
 import model.Country;
@@ -28,7 +29,7 @@ public class CheaterStrategy extends Strategy {
         for (int i = 0; i < countries.size(); i++) {
             countries.get(i).setNoOfArmies(countries.get(i).getNoOfArmies() * 2);
             player.getMyCountries(player).get(i).setNoOfArmies(countries.get(i).getNoOfArmies());
-            ReadingFiles.CountryNameObject.get(countries.get(i).getName())
+            ReadingFiles.getCountryNameObject().get(countries.get(i).getName())
                     .setNoOfArmies(countries.get(i).getNoOfArmies());
         }
         player.setPlayerTotalArmiesNotDeployed(0);
@@ -47,7 +48,7 @@ public class CheaterStrategy extends Strategy {
             List<Country> neighbors = aC.getMyNeighboursForAttack(mycountry);
             for (Country neighbor : neighbors) {
                 neighbor.setPlayer(player);
-                ReadingFiles.CountryNameObject.get(neighbor.getName()).setPlayer(player);
+                ReadingFiles.getCountryNameObject().get(neighbors.get(j).getName()).setPlayer(player);
             }
         }
     }
@@ -65,7 +66,7 @@ public class CheaterStrategy extends Strategy {
                 mycountries.get(i).setNoOfArmies(mycountries.get(i).getNoOfArmies() * 2);
                 player.getMyCountries(player).get(i).setNoOfArmies(mycountries.get(i).getNoOfArmies());
 
-                ReadingFiles.CountryNameObject.get(mycountries.get(i).getName())
+                ReadingFiles.getCountryNameObject().get(mycountries.get(i).getName())
                         .setNoOfArmies(mycountries.get(i).getNoOfArmies());
             }
         }

@@ -3,6 +3,7 @@ package controller.editor;
 import model.Continent;
 import model.Country;
 import model.Player;
+import view.gameFrames.BoardController;
 import view.gameFrames.MFrame2;
 
 import java.awt.*;
@@ -31,10 +32,10 @@ public class ReadingFiles {
     private static HashMap<String, Continent> ContinentNameObject;
     private static String address = "Resources/World.map";
     private static String image = "noimage.bmp";
-    MFrame2 frame2;
     private static int ArmiesPerPlayer;
-    public ReadingFiles(MFrame2 frame2) {
-        this.frame2 = frame2;
+    BoardController board;
+    public ReadingFiles(BoardController controller) {
+        this.board = controller;
     }
 
     /**
@@ -42,7 +43,7 @@ public class ReadingFiles {
      *
      * @param address: File location of the map file
      * @param noofplayers: Number of players
-     * @throws IOException
+     * @throws IOException Error in reading
      */
     public void Reads(String address, int noofplayers) throws IOException {
         try {
@@ -55,10 +56,10 @@ public class ReadingFiles {
             ReadingFiles.setAddress(address);
             FileReader file = new FileReader(address);
             BufferedReader bufferedReader = new BufferedReader(file);
-            String temp = "";
+            String temp;
             StringBuffer buffer = new StringBuffer();
             while ((temp = bufferedReader.readLine()) != null) {
-                buffer.append(temp + "\n");
+                buffer.append(temp).append("\n");
             }
             bufferedReader.close();
             String string = "\\[.*]";
@@ -77,20 +78,20 @@ public class ReadingFiles {
             String CountriesString = aaa[3].trim();
             String[] tempContinentArray = ContinentsString.split("\n");
 
-            for (int i = 0; i < tempContinentArray.length; i++) {
-                String temporary = tempContinentArray[i].split("=")[0].trim().toLowerCase();
-                int value = Integer.parseInt(tempContinentArray[i].split("=")[1].trim());
+            for (String s : tempContinentArray) {
+                String temporary = s.split("=")[0].trim().toLowerCase();
+                int value = Integer.parseInt(s.split("=")[1].trim());
                 getContinentNames().add(temporary);
                 getContinentNameObject().put(temporary, new Continent(value, temporary));
             }
             String[] tempCountryArray = CountriesString.split("\n");
-            for (int i = 0; i < tempCountryArray.length; i++) {
-                String a = tempCountryArray[i].split(",")[0].trim();
+            for (String s : tempCountryArray) {
+                String a = s.split(",")[0].trim();
                 getCountriesNames().add(a);
                 getCountryNameObject().put(a, new Country(a));
             }
-            for (int i = 0; i < tempCountryArray.length; i++) {
-                String[] a = tempCountryArray[i].split(",");
+            for (String s : tempCountryArray) {
+                String[] a = s.split(",");
                 Country temp1 = getCountryNameObject().get(a[0].trim());
                 Continent temp2 = getContinentNameObject().get(a[3].trim().toLowerCase());
                 temp1.setContinent(temp2);
@@ -100,7 +101,7 @@ public class ReadingFiles {
                 }
             }
 
-            List<String> CountriesNames2 = new ArrayList<String>(getCountryNameObject().keySet());
+            List<String> CountriesNames2 = new ArrayList<>(getCountryNameObject().keySet());
             Collections.shuffle(CountriesNames2);
 
             setPlayers(new ArrayList<>());
@@ -121,7 +122,6 @@ public class ReadingFiles {
             }
 
             // TODO create a better randomizer function
-            int n = noofplayers;
             for (int i = 0; i < CountriesNames2.size(); i++) {
                 for (int j = 0; j < noofplayers; j++) {
                     if ((i + j) < CountriesNames2.size()) {
@@ -131,7 +131,7 @@ public class ReadingFiles {
                         tempPlayer.addCountriesOccupied(temp1);
                     }
                 }
-                i = i + n - 1;
+                i = i + noofplayers - 1;
             }
 
             setArmiesPerPlayer(50 - (5 * noofplayers));
@@ -155,7 +155,7 @@ public class ReadingFiles {
             e.printStackTrace();
             errors = true;
             System.out.println("ERROR IN MAP READING \n" + e);
-            frame2.error("Error In MAP READING START AGAIN\n" + e);
+            board.boardError("Error In MAP READING START AGAIN\n" + e);
         }
 
     }

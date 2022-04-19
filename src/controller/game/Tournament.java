@@ -6,6 +6,8 @@ import controller.strategies.BenevolentStrategy;
 import controller.strategies.CheaterStrategy;
 import controller.strategies.RandomStrategy;
 import model.Player;
+import view.gameFrames.BoardController;
+import view.gameFrames.GameUIController;
 import view.gameFrames.MFrame2;
 import view.menuFrames.SelectMap;
 import view.menuFrames.SelectNoOfPlayers;
@@ -33,7 +35,7 @@ public class Tournament {
     private JPanel panel;
     private JLabel HeaderLabel;
     private JTextArea field;
-
+    private BoardController boardController;
 
     /**
      * Constructor for Tournament
@@ -48,12 +50,12 @@ public class Tournament {
      * Function implements Rules of Tournament Mode
      */
     public void function() {
-        MFrame2 frame2 = new MFrame2();
+        BoardController boardController = new GameUIController();
         AggressiveStrategy ag = new AggressiveStrategy();
         CheaterStrategy ch = new CheaterStrategy();
         RandomStrategy rn = new RandomStrategy();
         BenevolentStrategy bn = new BenevolentStrategy();
-        ReadingFiles ReadFile = new ReadingFiles(frame2);
+        ReadingFiles ReadFile = new ReadingFiles(boardController);
         System.out.println("\nNo of Games:" + SelectMap.NoOfGames);
         //T odo esto escribe por pantalla como van sucediendo los juegos
         //For para cada juego

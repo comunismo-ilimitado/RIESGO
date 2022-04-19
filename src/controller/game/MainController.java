@@ -6,6 +6,8 @@ import controller.controllers.ReinforcementController;
 import controller.editor.MapValidation;
 import controller.editor.ReadingFiles;
 import model.*;
+import view.gameFrames.BoardController;
+import view.gameFrames.GameUIController;
 import view.gameFrames.MFrame;
 import view.gameFrames.MFrame2;
 import view.menuFrames.*;
@@ -29,7 +31,7 @@ import model.Country;
 public class MainController extends Observable{
     ReadingFiles files;
     MFrame frame;
-    MFrame2 frame2;
+    BoardController boardController;
     String phase;
     MyActionListener myactionlistner;
     AttackController attackController;
@@ -52,8 +54,8 @@ public class MainController extends Observable{
     @SuppressWarnings("deprecation")
     public void Function() throws Exception {
         try {
-            frame2 = new MFrame2();
-            files = new ReadingFiles(frame2);
+            boardController = new GameUIController();
+            files = new ReadingFiles(boardController);
             //Resume Game
             FileReader fileReader;
             BufferedReader bufferedReader = null;
@@ -117,7 +119,7 @@ public class MainController extends Observable{
         } catch (Exception e) {
             System.out.println("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n" + e);
             e.printStackTrace();
-            frame2.error("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n" + e);
+            boardController.boardError("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n" + e);
         }
     }
 

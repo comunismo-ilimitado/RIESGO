@@ -48,18 +48,22 @@ public class MyActionListener implements ActionListener {
         if (controller.getPhaseList().contains(event.getActionCommand())) {
 
             //Algun boton finish
-            if (event.getActionCommand() == "Finish Reinforcement") {
-                if (controller.playerObjet(controller.getCurrentPlayer()).getPlayerArmiesNotDeployed() > 0) {  //Si quedan mas tropas -> Error
-                    controller.frame.error("Cannot End Reinforcement Untill All armies are deployed");
-                    controller.cardTypesList.clear();
-                    controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
-                } else {  //Si no termina fase refuerzo
-                    controller.finishReinforcement();
-                }
-            } else if (event.getActionCommand() == "Finish Attack") {
-                controller.finishattack();
-            } else if (event.getActionCommand() == "Finish Fortification") { //Metodo finishFortification??
-                controller.finishFortification();
+            switch (event.getActionCommand()) {
+                case "Finish Reinforcement":
+                    if (controller.playerObjet(controller.getCurrentPlayer()).getPlayerArmiesNotDeployed() > 0) {  //Si quedan mas tropas -> Error
+                        controller.frame.error("Cannot End Reinforcement Untill All armies are deployed");
+                        controller.cardTypesList.clear();
+                        controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
+                    } else {  //Si no termina fase refuerzo
+                        controller.finishReinforcement();
+                    }
+                    break;
+                case "Finish Attack":
+                    controller.finishattack();
+                    break;
+                case "Finish Fortification":  //Metodo finishFortification??
+                    controller.finishFortification();
+                    break;
             }
 
             //Algun boton carta
@@ -110,34 +114,39 @@ public class MyActionListener implements ActionListener {
             controller.changed();
 
         } else {  //LLamada a las logicas de cada fase
+            System.out.println("Llegaste aqui vaquero felicidades!");
             controller.frame.noArmiesLeft = controller.playerObjet(controller.getCurrentPlayer()).getPlayerArmiesNotDeployed(); //Actualiza las tropas que quedan
             String Cname = event.getActionCommand().split("\\|")[0].trim();
             Country temp2 = controller.countryObjects().get(Cname); //Territorio seleccionado
-            if (controller.getCurrentPhase().equals("Finish Reinforcement")) {
-                if (controller.playerObjet(controller.getCurrentPlayer()).getPlayerCards().size() >= 5) {
-                    controller.frame.error("First Exchange Cards");
-                } else {
-                    controller.armiesNotDeployed(temp2);   //Suma una tropa al territorio
-                    try {
-                        controller.RefreshButtons();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
+            switch (controller.getCurrentPhase()) {
+                case "Finish Reinforcement":
+                    if (controller.playerObjet(controller.getCurrentPlayer()).getPlayerCards().size() >= 5) {
+                        controller.frame.error("First Exchange Cards");
+                    } else {
+                        controller.armiesNotDeployed(temp2);   //Suma una tropa al territorio
+                        try {
+                            controller.RefreshButtons();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
                     }
-                }
-            } else if (controller.getCurrentPhase().equals("Finish Fortification")) {
-                try {
-                    controller.fortificationPhase(temp2);
-                } catch (IOException e2) {
-                    e2.printStackTrace();
-                }
+                    break;
+                case "Finish Fortification":
+                    try {
+                        controller.fortificationPhase(temp2);
+                    } catch (IOException e2) {
+                        e2.printStackTrace();
+                    }
 
-            } else if (controller.getCurrentPhase().equals("Finish Attack")) {
-                try {
-                    controller.attackPhase(temp2);
-                } catch (IOException e2) {
-                    e2.printStackTrace();
-                }
+                    break;
+                case "Finish Attack":
+                    try {
+                        controller.attackPhase(temp2);
+                    } catch (IOException e2) {
+                        e2.printStackTrace();
+                    }
 
+                    break;
             }
 
         }

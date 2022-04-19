@@ -2,6 +2,8 @@ package view.editorFrames;
 
 import controller.editor.ReadingFiles;
 import model.Country;
+import view.gameFrames.BoardController;
+import view.gameFrames.GameUIController;
 import view.gameFrames.MFrame2;
 import view.menuFrames.SelectMap;
 import view.menuFrames.SelectMapType;
@@ -46,8 +48,8 @@ public class EditContinents {
      * Constructor, creates UI elements and loads a Map
      */
     public EditContinents() {
-        MFrame2 frame2 = new MFrame2();
-        ReadFile = new ReadingFiles(frame2);
+        BoardController controller = new GameUIController();
+        ReadFile = new ReadingFiles(controller);
         String address = "Resources/" + SelectMap.MapSelected + ".map";
 
         if (SelectMapType.MapType == 4)

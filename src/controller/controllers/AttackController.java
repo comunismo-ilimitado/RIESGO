@@ -16,11 +16,11 @@ import java.util.Map;
  * @version 1.0.0
  */
 public class AttackController {
-    public List<Integer> attackerdiceroll;
-    public List<Integer> defenderdiceroll;
-    public List<String> attackerdicerolloutput = new ArrayList<>();
-    public List<String> defenderdicerolloutput = new ArrayList<>();
-    public static boolean card;
+    private List<Integer> attackerdiceroll;
+    private List<Integer> defenderdiceroll;
+    private List<String> attackerdicerolloutput = new ArrayList<>();
+    private List<String> defenderdicerolloutput = new ArrayList<>();
+    private static boolean card;
 
     /**
      * Gets list of total number of countries
@@ -231,16 +231,16 @@ public class AttackController {
                             if (defender.getNoOfArmies() == 0) {
                                 Player elimination = defender.getOwner();
 
-                                List<Country> newlistofcountriesatt = ReadingFiles.playerId
+                                List<Country> newlistofcountriesatt = ReadingFiles.getPlayerId()
                                         .get(attacker.getOwner().getPlayerId()).getTotalCountriesOccupied();
                                 newlistofcountriesatt.add(defender);
-                                ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+                                ReadingFiles.getPlayerId().get(attacker.getOwner().getPlayerId())
                                         .setTotalCountriesOccupied(newlistofcountriesatt);
                                 attacker.getOwner().setTotalCountriesOccupied(newlistofcountriesatt);
-                                List<Country> newlistofcountriesdef = ReadingFiles.playerId
+                                List<Country> newlistofcountriesdef = ReadingFiles.getPlayerId()
                                         .get(defender.getOwner().getPlayerId()).getTotalCountriesOccupied();
                                 newlistofcountriesdef.remove(defender);
-                                ReadingFiles.playerId.get(defender.getOwner().getPlayerId())
+                                ReadingFiles.getPlayerId().get(defender.getOwner().getPlayerId())
                                         .setTotalCountriesOccupied(newlistofcountriesdef);
                                 defender.getOwner().setTotalCountriesOccupied(newlistofcountriesdef);
                                 updateOwner(defender, attacker.getOwner());
@@ -251,8 +251,8 @@ public class AttackController {
                                     List<CardTypes> attcards = attacker.getOwner().getPlayerCards();
                                     attcards.addAll(defcards);
                                     attacker.getOwner().setPlayerCards(attcards);
-                                    ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(attcards);
-                                    ReadingFiles.playerId2.remove(elimination.getPlayerId());
+                                    ReadingFiles.getPlayerId().get(attacker.getOwner().getPlayerId()).setPlayerCards(attcards);
+                                    ReadingFiles.getPlayerId2().remove(elimination.getPlayerId());
                                     ReadingFiles.players.remove((Integer) elimination.getPlayerId());
                                 }
                                 if (!card) {
@@ -262,20 +262,20 @@ public class AttackController {
                                         newsetofcards = attacker.getOwner().getPlayerCards();
                                         newsetofcards.add(CardTypes.Artillery);
                                         attacker.getOwner().setPlayerCards(newsetofcards);
-                                        ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+                                        ReadingFiles.getPlayerId().get(attacker.getOwner().getPlayerId())
                                                 .setPlayerCards(newsetofcards);
 
                                     } else if (cardnumber == 2) {
                                         newsetofcards = attacker.getOwner().getPlayerCards();
                                         newsetofcards.add(CardTypes.Cavalry);
                                         attacker.getOwner().setPlayerCards(newsetofcards);
-                                        ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+                                        ReadingFiles.getPlayerId().get(attacker.getOwner().getPlayerId())
                                                 .setPlayerCards(newsetofcards);
                                     } else if (cardnumber == 3) {
                                         newsetofcards = attacker.getOwner().getPlayerCards();
                                         newsetofcards.add(CardTypes.Infantry);
                                         attacker.getOwner().setPlayerCards(newsetofcards);
-                                        ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+                                        ReadingFiles.getPlayerId().get(attacker.getOwner().getPlayerId())
                                                 .setPlayerCards(newsetofcards);
                                     }
                                     card = true;
@@ -314,16 +314,16 @@ public class AttackController {
                         }
                         if (defender.getNoOfArmies() == 0) {
                             Player elimination = defender.getOwner();
-                            List<Country> newlistofcountriesatt = ReadingFiles.playerId
+                            List<Country> newlistofcountriesatt = ReadingFiles.getPlayerId()
                                     .get(attacker.getOwner().getPlayerId()).getTotalCountriesOccupied();
                             newlistofcountriesatt.add(defender);
-                            ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+                            ReadingFiles.getPlayerId().get(attacker.getOwner().getPlayerId())
                                     .setTotalCountriesOccupied(newlistofcountriesatt);
                             attacker.getOwner().setTotalCountriesOccupied(newlistofcountriesatt);
-                            List<Country> newlistofcountriesdef = ReadingFiles.playerId
+                            List<Country> newlistofcountriesdef = ReadingFiles.getPlayerId()
                                     .get(defender.getOwner().getPlayerId()).getTotalCountriesOccupied();
                             newlistofcountriesdef.remove(defender);
-                            ReadingFiles.playerId.get(defender.getOwner().getPlayerId())
+                            ReadingFiles.getPlayerId().get(defender.getOwner().getPlayerId())
                                     .setTotalCountriesOccupied(newlistofcountriesdef);
                             defender.getOwner().setTotalCountriesOccupied(newlistofcountriesdef);
                             updateOwner(defender, attacker.getOwner());
@@ -334,8 +334,8 @@ public class AttackController {
                                 List<CardTypes> attcards = attacker.getOwner().getPlayerCards();
                                 attcards.addAll(defcards);
                                 attacker.getOwner().setPlayerCards(attcards);
-                                ReadingFiles.playerId.get(attacker.getOwner().getPlayerId()).setPlayerCards(attcards);
-                                ReadingFiles.playerId2.remove(elimination.getPlayerId());
+                                ReadingFiles.getPlayerId().get(attacker.getOwner().getPlayerId()).setPlayerCards(attcards);
+                                ReadingFiles.getPlayerId2().remove(elimination.getPlayerId());
                                 ReadingFiles.players.remove((Integer) elimination.getPlayerId());
                             }
                             if (!card) {
@@ -345,20 +345,20 @@ public class AttackController {
                                     newsetofcards = attacker.getOwner().getPlayerCards();
                                     newsetofcards.add(CardTypes.Artillery);
                                     attacker.getOwner().setPlayerCards(newsetofcards);
-                                    ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+                                    ReadingFiles.getPlayerId().get(attacker.getOwner().getPlayerId())
                                             .setPlayerCards(newsetofcards);
 
                                 } else if (cardnumber == 2) {
                                     newsetofcards = attacker.getOwner().getPlayerCards();
                                     newsetofcards.add(CardTypes.Cavalry);
                                     attacker.getOwner().setPlayerCards(newsetofcards);
-                                    ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+                                    ReadingFiles.getPlayerId().get(attacker.getOwner().getPlayerId())
                                             .setPlayerCards(newsetofcards);
                                 } else if (cardnumber == 3) {
                                     newsetofcards = attacker.getOwner().getPlayerCards();
                                     newsetofcards.add(CardTypes.Infantry);
                                     attacker.getOwner().setPlayerCards(newsetofcards);
-                                    ReadingFiles.playerId.get(attacker.getOwner().getPlayerId())
+                                    ReadingFiles.getPlayerId().get(attacker.getOwner().getPlayerId())
                                             .setPlayerCards(newsetofcards);
                                 }
                                 card = true;
@@ -399,5 +399,22 @@ public class AttackController {
                 continue;
         }
         return max;
+    }
+
+    //GETTERS AND SETTERS
+    public List<String> getAttackerdicerolloutput() {
+        return attackerdicerolloutput;
+    }
+
+    public List<String> getDefenderdicerolloutput() {
+        return defenderdicerolloutput;
+    }
+
+    public static boolean isCard() {
+        return card;
+    }
+
+    public static void setCard(boolean card) {
+        AttackController.card = card;
     }
 }

@@ -53,11 +53,11 @@ public class AggressiveStratery implements IStrategy {
         while (strongestcountry.getNoOfArmies() > 1 && attackable.size() > 0) {
             Country defender = attackable.get(helper.getWeakestCountryIndex(attackable));
             aC.attackButton(strongestcountry, defender, 0, 0, true);
-            AttackController.card = true;
+            AttackController.setCard(true);
             strongestcountry = ReadingFiles.CountryNameObject.get(strongestcountry.getName());
             attackable = aC.getMyNeighboursForAttack(strongestcountry);
         }
-        AttackController.card = false;
+        AttackController.setCard(false);
     }
 
     /**

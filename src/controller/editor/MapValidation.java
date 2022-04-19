@@ -19,8 +19,10 @@ public class MapValidation {
     ArrayList<String> arrayList2 = new ArrayList<>();
     HashMap<String, Country> countryHashMap;
     HashMap<String, Continent> continentHashMap;
-    public boolean error = false;
-
+    private boolean error = false;
+    public boolean isError() {
+        return error;
+    }
     /**
      * Parameterized constructor
      *

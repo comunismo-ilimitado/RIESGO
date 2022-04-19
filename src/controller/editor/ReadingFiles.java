@@ -21,11 +21,9 @@ import java.util.List;
  * @version 1.1
  */
 public class ReadingFiles {
-
-    public static HashMap<Integer, Player> playerId;
-
-    public static HashMap<Integer, Player> playerId2;
-    public boolean errors = false;
+    private static HashMap<Integer, Player> playerId;
+    private static HashMap<Integer, Player> playerId2;
+    private boolean errors = false;
     public static List<Integer> players;
     public static List<String> CountriesNames, ContinentNames;
     public static HashMap<String, Country> CountryNameObject;
@@ -161,4 +159,19 @@ public class ReadingFiles {
         }
 
     }
+
+    //Getters and setters
+    public static HashMap<Integer, Player> getPlayerId() {
+        return playerId;
+    }
+    public static void setPlayerId(HashMap<Integer, Player> playerId) {
+        ReadingFiles.playerId = playerId;
+    }
+    public static HashMap<Integer, Player> getPlayerId2() {
+        return playerId2;
+    }
+    public boolean isErrors() {
+        return errors;
+    }
 }
+

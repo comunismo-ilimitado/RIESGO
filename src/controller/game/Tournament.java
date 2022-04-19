@@ -73,15 +73,15 @@ public class Tournament {
                 }
                 System.out.println("\n\nMap:" + SelectMap.TourMapList.get(mapno) + "\nTotal No of countries:"
                         + ReadingFiles.CountriesNames.size() + "\nNo of turns:" + SelectMap.NoOfTurns);
-                for (int m = 0; m < ReadingFiles.playerId.size(); m++) {
-                    ReadingFiles.playerId.get(m).setStrategy(SelectPlayerStrategies.getStrategies().get(m));
+                for (int m = 0; m < ReadingFiles.getPlayerId().size(); m++) {
+                    ReadingFiles.getPlayerId().get(m).setStrategy(SelectPlayerStrategies.getStrategies().get(m));
                 }
                 //For para cada turno (dentro de un mapa dentro de un juego)
                 for (int turnno = 0; turnno < SelectMap.NoOfTurns; turnno++) {
                     System.out.println("\n turn:" + (turnno + 1));
-                    for (int playerindex = 0; playerindex < ReadingFiles.playerId.size(); playerindex++) {
+                    for (int playerindex = 0; playerindex < ReadingFiles.getPlayerId().size(); playerindex++) {
                         Player p;
-                        p = ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[playerindex]);
+                        p = ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[playerindex]);
                         switch (p.getStrategy()) {
                             case "Agressive":
                                 ag.reinforce(p);
@@ -121,8 +121,8 @@ public class Tournament {
                             break;
                     }
                     //For de cada jugador en cada turno
-                    for (int l = 0; l < ReadingFiles.playerId.size(); l++) {
-                        Player p = ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[l]);
+                    for (int l = 0; l < ReadingFiles.getPlayerId().size(); l++) {
+                        Player p = ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[l]);
                         System.out.print("\nturn:" + (turnno + 1) + " Player:" + (p.getPlayerId() + 1) + "  "
                                 + p.getStrategy() + " total countries:" + p.getMyCountries(p).size());
                         //Se anuncia victoria
@@ -163,31 +163,31 @@ public class Tournament {
      */
     public void removeLostPlayer() {
         //Se mira si ha ganado o debe ser eliminado para cada jugador.
-        for (int i = 0; i < ReadingFiles.playerId.size(); i++) {
-            Player p = ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[i]);
+        for (int i = 0; i < ReadingFiles.getPlayerId().size(); i++) {
+            Player p = ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[i]);
             //Caso ganador.
-            if (ReadingFiles.playerId.size() == 1) {
+            if (ReadingFiles.getPlayerId().size() == 1) {
                 System.out.println("\n****Player "
-                        + (ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[0]).getPlayerId() + 1)
-                        + " " + ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[0]).getStrategy()
+                        + (ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getPlayerId() + 1)
+                        + " " + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy()
                         + " wins!");
-                list.add(ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[0]).getStrategy());
-                System.out.println("added" + ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[0]).getStrategy());
-                ReadingFiles.playerId.remove(ReadingFiles.playerId.keySet().toArray()[0]);
+                list.add(ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy());
+                System.out.println("added" + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy());
+                ReadingFiles.getPlayerId().remove(ReadingFiles.getPlayerId().keySet().toArray()[0]);
             }
             //Te quedas sin países, eres eliminado.
             if (p.getMyCountries(p).size() == 0) {
                 System.out.println("player " + p.getStrategy() + " removed");
-                ReadingFiles.playerId.remove(ReadingFiles.playerId.keySet().toArray()[i]);
-                if (ReadingFiles.playerId.size() == 1) {
+                ReadingFiles.getPlayerId().remove(ReadingFiles.getPlayerId().keySet().toArray()[i]);
+                if (ReadingFiles.getPlayerId().size() == 1) {
                     System.out.println("\n****Player "
-                            + (ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[0]).getPlayerId() + 1)
-                            + " " + ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[0]).getStrategy()
+                            + (ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getPlayerId() + 1)
+                            + " " + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy()
                             + " wins!");
                     //Se añade a la lista de ganadores
-                    list.add(ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[0]).getStrategy());
-                    System.out.println("added" + ReadingFiles.playerId.get(ReadingFiles.playerId.keySet().toArray()[0]).getStrategy());
-                    ReadingFiles.playerId.remove(ReadingFiles.playerId.keySet().toArray()[0]);
+                    list.add(ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy());
+                    System.out.println("added" + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy());
+                    ReadingFiles.getPlayerId().remove(ReadingFiles.getPlayerId().keySet().toArray()[0]);
                 }
             }
         }

@@ -92,7 +92,7 @@ public class MainController extends Observable{
             //Comprobación mapa
             mapValidation = new MapValidation(ReadingFiles.CountryNameObject, ReadingFiles.ContinentNameObject);
             mapValidation.CallAllMethods();
-            if (!files.errors && !mapValidation.error) { //Booleanos que dicen si ha habido un error
+            if (!files.isErrors() && !mapValidation.isError()) { //Booleanos que dicen si ha habido un error
                 myactionlistner = new MyActionListener(this);
                 frame = new MFrame(myactionlistner, ReadingFiles.image);
                 reinforcementController = new ReinforcementController();
@@ -110,8 +110,8 @@ public class MainController extends Observable{
                 if (resume)
                     LoadSavedGame(bufferedReader);
                 //Cargar estrategias (Con playerId2) (es un clon de playerId)
-                for (int i = 0; i < ReadingFiles.playerId2.size(); i++) {
-                    ReadingFiles.playerId2.get(i).setStrategy(SelectPlayerStrategies.getStrategies().get(i));
+                for (int i = 0; i < ReadingFiles.getPlayerId2().size(); i++) {
+                    ReadingFiles.getPlayerId2().get(i).setStrategy(SelectPlayerStrategies.getStrategies().get(i));
                 }
                 //Se crean los botones
                 SetButtons();
@@ -153,15 +153,15 @@ public class MainController extends Observable{
             while ((temp = bufferedReader.readLine()) != null) {
                 Everything = Everything + temp + "\n";
             }
-            ReadingFiles.playerId2.clear();
+            ReadingFiles.getPlayerId2().clear();
             SelectPlayerStrategies.strategy_selected.clear();
             String[] PlayersLis = Everything.trim().split("----PLAYER----");
             frame.area.setText(PlayersLis[0]);
             for (int i = 1; i < PlayersLis.length; i++) {
                 String[] cards = PlayersLis[i].trim().split("----CARDS----");
                 String[] countryandarmies = cards[0].trim().split("\n");
-                Player tempPlayer = ReadingFiles.playerId.get(Integer.parseInt(countryandarmies[0]));
-                ReadingFiles.playerId2.put(Integer.parseInt(countryandarmies[0]), tempPlayer);
+                Player tempPlayer = ReadingFiles.getPlayerId().get(Integer.parseInt(countryandarmies[0]));
+                ReadingFiles.getPlayerId2().put(Integer.parseInt(countryandarmies[0]), tempPlayer);
                 tempPlayer.setStrategy(countryandarmies[1]);
                 SelectPlayerStrategies.strategy_selected.add(countryandarmies[1]);
                 System.out.println(tempPlayer);
@@ -247,7 +247,7 @@ public class MainController extends Observable{
      * @return
      */
     public List<Country> neighbours(Integer id) {
-        return ReadingFiles.playerId.get(id).getTotalCountriesOccupied();
+        return ReadingFiles.getPlayerId().get(id).getTotalCountriesOccupied();
     }
 
     /**
@@ -278,11 +278,11 @@ public class MainController extends Observable{
      * @return
      */
     public int PlayerNo() {
-        return ReadingFiles.playerId.size();
+        return ReadingFiles.getPlayerId().size();
     }
 
     public int PlayerNo2() {
-        return ReadingFiles.playerId2.size();
+        return ReadingFiles.getPlayerId2().size();
     }
 
     /**
@@ -291,7 +291,7 @@ public class MainController extends Observable{
      * @return
      */
     public Player playerObjet(int id) {
-        return ReadingFiles.playerId.get(id);
+        return ReadingFiles.getPlayerId().get(id);
     }
 
     /**
@@ -315,7 +315,7 @@ public class MainController extends Observable{
      */
     public void ChangePlayerCountry(String countryname) throws IOException {
         Country country = countryObjects().get(countryname);
-        country.setPlayer(ReadingFiles.playerId.get(0));
+        country.setPlayer(ReadingFiles.getPlayerId().get(0));
         RefreshButtons();
 
     }
@@ -422,16 +422,16 @@ public class MainController extends Observable{
     void playerUpdate() {
         try {
             if (PlayerNo2() > 1) { //Si el numero de jugadores es mayor que 1 se sigue jugando
-                ArrayList<Integer> arrayList = new ArrayList<>(ReadingFiles.playerId2.keySet());
+                ArrayList<Integer> arrayList = new ArrayList<>(ReadingFiles.getPlayerId2().keySet());
                 int index = arrayList.indexOf(currentPlayer);
                 index = index + 1;
                 if (index >= arrayList.size()) {
-                    currentPlayer = ReadingFiles.playerId2.get(arrayList.get(0)).getPlayerId(); //Le vuelve a tocar al primero
+                    currentPlayer = ReadingFiles.getPlayerId2().get(arrayList.get(0)).getPlayerId(); //Le vuelve a tocar al primero
                 } else {
-                    currentPlayer = ReadingFiles.playerId2.get(arrayList.get(index)).getPlayerId();
+                    currentPlayer = ReadingFiles.getPlayerId2().get(arrayList.get(index)).getPlayerId();
                 }
             } else { //Si solo queda un jugador ha ganado ese jugador
-                frame.error("Player :- " + ((int) ReadingFiles.playerId2.keySet().toArray()[0] + 1) + " Wins");
+                frame.error("Player :- " + ((int) ReadingFiles.getPlayerId2().keySet().toArray()[0] + 1) + " Wins");
                 frame.dispose();
                 System.exit(0);
 
@@ -482,22 +482,22 @@ public class MainController extends Observable{
      * @param attacker
      */
     void elimination(Player attacker) {
-        ArrayList<Integer> arrayList = new ArrayList<>(ReadingFiles.playerId2.keySet());
+        ArrayList<Integer> arrayList = new ArrayList<>(ReadingFiles.getPlayerId2().keySet());
         for (int i = 0; i < arrayList.size(); i++) {
-            Player temp = ReadingFiles.playerId2.get(arrayList.get(i));
+            Player temp = ReadingFiles.getPlayerId2().get(arrayList.get(i));
             if (temp.getTotalCountriesOccupied().size() == 0) {
                 List<CardTypes> defcards = temp.getPlayerCards(); //Lista de cartas del jugador eliminado
                 List<CardTypes> attcards = attacker.getPlayerCards(); //Lista de cartas del jugador que elimina
                 attcards.addAll(defcards);  //Se juntan ambas listas
                 attacker.setPlayerCards(attcards);  //Esta linea y la siguiente hacen lo mismo???
-                ReadingFiles.playerId.get(attacker.getPlayerId()).setPlayerCards(attcards);
-                ReadingFiles.playerId2.remove(temp.getPlayerId());
+                ReadingFiles.getPlayerId().get(attacker.getPlayerId()).setPlayerCards(attcards);
+                ReadingFiles.getPlayerId2().remove(temp.getPlayerId());
                 ReadingFiles.players.remove((Integer) temp.getPlayerId());
             }
 
         }
-        if (ReadingFiles.playerId2.size() <= 1) { //Si despues de la eliminacion solo queda un jugador ha ganado
-            frame.error("Player :- " + ((int) ReadingFiles.playerId2.keySet().toArray()[0] + 1) + " Wins");
+        if (ReadingFiles.getPlayerId2().size() <= 1) { //Si despues de la eliminacion solo queda un jugador ha ganado
+            frame.error("Player :- " + ((int) ReadingFiles.getPlayerId2().keySet().toArray()[0] + 1) + " Wins");
             frame.dispose();
             System.exit(0);
 
@@ -642,11 +642,11 @@ public class MainController extends Observable{
                 frame.error(reply);
             }
 
-            frame.AAA = attackController.attackerdicerolloutput.toString();
-            frame.BBB = attackController.defenderdicerolloutput.toString();
+            frame.AAA = attackController.getAttackerdicerolloutput().toString();
+            frame.BBB = attackController.getDefenderdicerolloutput().toString();
             changed();
-            attackController.attackerdicerolloutput.clear();
-            attackController.defenderdicerolloutput.clear();
+            attackController.getAttackerdicerolloutput().clear();
+            attackController.getDefenderdicerolloutput().clear();
             frame.ActivateAll();
             attackCountry1 = null;
             attackCountry2 = null;
@@ -753,7 +753,7 @@ public class MainController extends Observable{
         frame.jLabeCardl.setText(cardTypesList.toString());
         //fortificationPhase();
         textarea("Currently in Fortification Mode");
-        AttackController.card = false;
+        AttackController.setCard(false);
         changed();
         frame.ActivateAll();
         OnlyNeeded(playerObjet(currentPlayer).getTotalCountriesOccupied());
@@ -873,12 +873,12 @@ public class MainController extends Observable{
             File file = new File("Resources/SaveGame.txt");
             FileWriter writer = new FileWriter(file);
             writer.write(ReadingFiles.address + "\n");
-            writer.write(ReadingFiles.playerId.size() + "\n");
+            writer.write(ReadingFiles.getPlayerId().size() + "\n");
             writer.write(currentPlayer + "\n");
             writer.write(currentPhase + "\n");
             writer.write(frame.area.getText());
             for (int i = 0; i < PlayerNo2(); i++) {
-                Player tempPlayer = ReadingFiles.playerId2.get(ReadingFiles.playerId2.keySet().toArray()[i]);
+                Player tempPlayer = ReadingFiles.getPlayerId2().get(ReadingFiles.getPlayerId2().keySet().toArray()[i]);
                 writer.write("----PLAYER----\n");
                 System.out.println("Error Report :-" + tempPlayer + "---" + PlayerNo2());
                 writer.write(tempPlayer.getPlayerId() + "\n");

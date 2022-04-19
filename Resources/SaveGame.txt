@@ -1,45 +1,59 @@
 Resources/Montreal.map
 2
 0
-Finish Reinforcement
+Finish Attack
 
 ---------------------------------
 Player Playing :- 1
-Currently in Reinforcement Mode----PLAYER----
+Currently in Reinforcement Mode
+Attacking.... 
+Attacking.... 
+Attacking.... 
+Currently in Fortification Mode
+---------------------------------
+Player Playing :- 2
+Currently in Reinforcement Mode Cheater
+Currently in Attack Mode Cheater
+Currently in Fortification Mode Cheater
+---------------------------------
+Player Playing :- 1
+Currently in Reinforcement Mode
+Attacking.... 
+Attacking.... ----PLAYER----
 0
 Human
-Westmount***6
-Hampstead***3
-RDP-PAT***4
-Ahuntsic***3
-Anjou***3
-Rosemont***3
-Pointe-Claire***3
-Beaconsfield***3
-Kirkland***3
-Outremont***3
-Saint-Laurent***3
-Villeray***3
-Mont-Royal***2
-Pointe St-Charles***2
+Verdun***7
 ----CARDS----
 []
 ----PLAYER----
 1
-Agressive
+Cheater
+Westmount***6
 Dorval***3
 Mercier***3
+Hampstead***6
 NDG***3
-Ile Bizard***3
-Ste-Anne-de-Bellevue***3
-La Salle***3
-Verdun***3
-Plateau***3
-Ville-Marie***3
-Lachine***3
-St-Leonard***3
+Ile Bizard***6
+RDP-PAT***6
+Ste-Anne-de-Bellevue***4
+Ahuntsic***6
+La Salle***6
+Plateau***1
+Anjou***6
+Rosemont***4
+Ville-Marie***6
+Lachine***6
+St-Leonard***6
+Pointe-Claire***6
+Beaconsfield***3
+Kirkland***3
+Outremont***4
+Saint-Laurent***6
 Pierrefonds***3
-Montreal Nord***2
-Senneville***2
+Montreal Nord***3
+Villeray***2
+Senneville***4
+Mont-Royal***4
+Pointe St-Charles***4
 ----CARDS----
 []

@@ -195,7 +195,7 @@ public class ReinforcementTest {
 
 		ReadingFiles.CountryNameObject = new HashMap<>();
 		ReadingFiles.ContinentNameObject = new HashMap<>();
-		ReadingFiles.playerId = new HashMap<>();
+		ReadingFiles.setPlayerId(new HashMap<>());
 		temp = ReadingFiles.ContinentNameObject;
 		ReadingFiles.ContinentNameObject.clear();
 		ReadingFiles.ContinentNameObject.put(continent1.getName(), continent1);
@@ -206,8 +206,8 @@ public class ReinforcementTest {
 		ReadingFiles.CountryNameObject.put(country4.getName(), country4);
 		ReadingFiles.CountryNameObject.put(country5.getName(), country5);
 		ReadingFiles.CountryNameObject.put(country6.getName(), country6);
-		ReadingFiles.playerId.put(player1.getPlayerId(), player1);
-		ReadingFiles.playerId.put(player2.getPlayerId(), player2);
+		ReadingFiles.getPlayerId().put(player1.getPlayerId(), player1);
+		ReadingFiles.getPlayerId().put(player2.getPlayerId(), player2);
 	}
 
 	/**

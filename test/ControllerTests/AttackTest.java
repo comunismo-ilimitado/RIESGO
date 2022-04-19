@@ -137,10 +137,10 @@ public class AttackTest
 		country4.setPlayer(player1);
 		
 		ReadingFiles.CountryNameObject = new HashMap<>();
-		ReadingFiles.playerId = new HashMap<>();
+		ReadingFiles.setPlayerId(new HashMap<>());
 		temp = ReadingFiles.CountryNameObject;
-		temp1 = ReadingFiles.playerId;
-		ReadingFiles.playerId.clear();
+		ReadingFiles.setPlayerId(temp1);
+		ReadingFiles.getPlayerId().clear();
 		ReadingFiles.CountryNameObject.clear();
 		ReadingFiles.CountryNameObject.put(country1.getName(), country1);
 		ReadingFiles.CountryNameObject.put(country2.getName(), country2);
@@ -149,8 +149,8 @@ public class AttackTest
 		ReadingFiles.CountryNameObject.put(country5.getName(), country5);
 		ReadingFiles.CountryNameObject.put(country6.getName(), country6);
 		
-		ReadingFiles.playerId.put(player1.getPlayerId(),player1);
-		ReadingFiles.playerId.put(player2.getPlayerId(),player2);
+		ReadingFiles.getPlayerId().put(player1.getPlayerId(),player1);
+		ReadingFiles.getPlayerId().put(player2.getPlayerId(),player2);
 		
 	}
 	/**
@@ -160,9 +160,9 @@ public class AttackTest
 	@After
 	public void atEnd() {
 		ReadingFiles.CountryNameObject.clear();
-		ReadingFiles.playerId.clear();
+		ReadingFiles.getPlayerId().clear();
 		ReadingFiles.CountryNameObject = temp;
-		ReadingFiles.playerId = temp1;
+		ReadingFiles.setPlayerId(temp1);
 
 	}
 	/**

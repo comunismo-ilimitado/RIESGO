@@ -76,7 +76,7 @@ public class ReinforcementController {
      */
     public String addArmies(Country country) {
         int index = country.getOwner().getPlayerId();
-        Player player = ReadingFiles.playerId.get(index);
+        Player player = ReadingFiles.getPlayerId().get(index);
         if (player.getPlayerArmiesNotDeployed() == 0) {
             return "NO ARMIES LEFT, PLEASE CLICK FINISH REINFORCEMENT";
         } else {

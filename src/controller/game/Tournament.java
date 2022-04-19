@@ -82,7 +82,7 @@ public class Tournament {
                     for (int playerindex = 0; playerindex < ReadingFiles.getPlayerId().size(); playerindex++) {
                         Player p;
                         p = ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[playerindex]);
-                        switch (p.getStrategy()) {
+                        switch (p.getStrategyType()) {
                             case "Agressive":
                                 ag.reinforce(p);
                                 ag.attack(p);
@@ -129,7 +129,7 @@ public class Tournament {
                         if (p.getMyCountries(p).size() == ReadingFiles.getCountriesNames().size()) {
                             System.out.println("\n****Player " + (p.getPlayerId() + 1) + " " + p.getStrategy() + " wins!");
                             //Se añade a list
-                            list.add(p.getStrategy());
+                            list.add(p.getStrategyType());
                             System.out.println("added" + p.getStrategy());
                             win = true;
                             break;
@@ -171,7 +171,7 @@ public class Tournament {
                         + (ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getPlayerId() + 1)
                         + " " + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy()
                         + " wins!");
-                list.add(ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy());
+                list.add(ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategyType());
                 System.out.println("added" + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy());
                 ReadingFiles.getPlayerId().remove(ReadingFiles.getPlayerId().keySet().toArray()[0]);
             }
@@ -185,7 +185,7 @@ public class Tournament {
                             + " " + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy()
                             + " wins!");
                     //Se añade a la lista de ganadores
-                    list.add(ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy());
+                    list.add(ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategyType());
                     System.out.println("added" + ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[0]).getStrategy());
                     ReadingFiles.getPlayerId().remove(ReadingFiles.getPlayerId().keySet().toArray()[0]);
                 }

@@ -1,7 +1,6 @@
 package controller.strategies;
 
 import controller.controllers.AttackController;
-import controller.controllers.HelperClass;
 import controller.editor.ReadingFiles;
 import model.CardTypes;
 import model.Country;
@@ -48,7 +47,7 @@ public class CheaterStrategy extends Strategy {
             List<Country> neighbors = aC.getMyNeighboursForAttack(mycountry);
             for (Country neighbor : neighbors) {
                 neighbor.setPlayer(player);
-                ReadingFiles.getCountryNameObject().get(neighbors.get(j).getName()).setPlayer(player);
+                ReadingFiles.getCountryNameObject().get(neighbor.getName()).setPlayer(player);
             }
         }
     }

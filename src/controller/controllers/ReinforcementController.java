@@ -4,7 +4,6 @@ import controller.editor.ReadingFiles;
 import model.CardTypes;
 import model.Country;
 import model.Player;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -83,29 +82,13 @@ public class ReinforcementController {
     }
 
     /**
-     * Gets a list of countries that the player owns
-     *
-     * @param player: Player object must be given to fetch the countries
-     * @return List of countries owned by the player
-     */
-    public List<Country> getMyCountries(Player player) {
-        List<Country> countries = new ArrayList<Country>();
-        for (Map.Entry<String, Country> entry : ReadingFiles.getCountryNameObject().entrySet()) {
-            if (entry.getValue().getOwner().getPlayerId() == (player.getPlayerId())) {
-                countries.add(entry.getValue());
-            }
-        }
-        return countries;
-    }
-
-    /**
      * Calculates the number of armies each player gets to reinforce
      *
      * @param player: player object for which the armies are calculated
      */
     public void calculateReinforcementArmies(Player player) {
         int totalPlayerCountries = 0;
-        for (Map.Entry<String, Country> entry : ReadingFiles.CountryNameObject.entrySet()) {
+        for (Map.Entry<String, Country> entry : ReadingFiles.getCountryNameObject().entrySet()) {
             if (entry.getValue().getOwner().getPlayerId() == (player.getPlayerId())) {
                 totalPlayerCountries++;
             }

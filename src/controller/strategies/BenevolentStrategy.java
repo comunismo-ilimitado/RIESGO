@@ -1,7 +1,6 @@
 package controller.strategies;
 
 import controller.controllers.FortificationController;
-import controller.controllers.HelperClass;
 import controller.editor.ReadingFiles;
 import model.Country;
 import model.Player;

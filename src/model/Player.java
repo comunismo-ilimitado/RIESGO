@@ -37,6 +37,19 @@ public class Player {
     }
 
     /**
+     * Gets strategyType
+     */
+    public String getStrategyType() {
+        return strategyType;
+    }
+
+    /**
+     * Sets strategyType
+     */
+    public void setStrategyType(String strategyType) {
+        this.strategyType = strategyType;
+    }
+    /**
      * Gets player_id
      */
     public int getPlayerId() {
@@ -48,34 +61,6 @@ public class Player {
      */
     public void setPlayerId(int player_id) {
         this.player_id = player_id;
-    }
-
-    /**
-     * Gets Player name
-     */
-    public String getPlayerName() {
-        return name;
-    }
-
-    /**
-     * Sets Player name
-     */
-    public void setPlayerName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Gets Player Armies
-     */
-    public int getPlayerArmies() {
-        return total_armies;
-    }
-
-    /**
-     * Sets Player Armies
-     */
-    public void setPlayerArmies(int total_armies) {
-        this.total_armies = total_armies;
     }
 
     /**
@@ -104,20 +89,6 @@ public class Player {
      */
     public void setTotalCountriesOccupied(List<Country> total_countries_occupied) {
         this.total_countries_occupied = total_countries_occupied;
-    }
-
-    /**
-     * Gets Continents Occupied
-     */
-    public List<Continent> getContinentsOccupied() {
-        return continents_occupied;
-    }
-
-    /**
-     * Sets Continents Occupied
-     */
-    public void setContinentsOccupied(List<Continent> continents_occupied) {
-        this.continents_occupied = continents_occupied;
     }
 
     /**
@@ -208,13 +179,18 @@ public class Player {
      * @return List of countries owned by the player
      */
     public List<Country> getMyCountries(Player player) {
-        return reinforcementcontroller.getMyCountries(player);
+            List<Country> countries = new ArrayList<>();
+            for (Map.Entry<String, Country> entry : ReadingFiles.getCountryNameObject().entrySet()) {
+                if (entry.getValue().getOwner().getPlayerId() == (player.getPlayerId())) {
+                    countries.add(entry.getValue());
+                }
+            }
+            return countries;
     }
 
     /**
      * this method calculates the number of armies according to the control value
      *
-     * @param player: player object for which it calculates
      * @return armies
      */
     public int calcArmiesByControlValue() {
@@ -233,7 +209,7 @@ public class Player {
      */
     public List<Continent> playerOwnsContinent() {
         List<Continent> continents = new ArrayList<>();
-        for (Map.Entry<String, Continent> entry : ReadingFiles.ContinentNameObject.entrySet()) {
+        for (Map.Entry<String, Continent> entry : ReadingFiles.getContinentNameObject().entrySet()) {
             List<Country> temp = entry.getValue().getCountries();
             int counter = 0;
             for (int i = 0; i < entry.getValue().getCountries().size(); i++) {

@@ -25,9 +25,9 @@ public class BenevolentStrategy extends Strategy {
     public void reinforce(Player player) {
         player.calcArmiesByControlValue();
         List<Country> countries = player.getMyCountries(player);
-        Country country = null;
-        if (countries.size() > getWeakestCountryIndex(countries))
-            country = countries.get(getWeakestCountryIndex(countries));
+        //if (countries.size() > getWeakestCountryIndex(countries))
+        Country   country = countries.get(getWeakestCountryIndex(countries));
+        int i = player.getPlayerArmiesNotDeployed(); // este valor siempre es 0 por lo que no
         country.setNoOfArmies(country.getNoOfArmies() + player.getPlayerArmiesNotDeployed());
         player.getMyCountries(player).get(getWeakestCountryIndex(countries))
                 .setNoOfArmies(country.getNoOfArmies());
@@ -42,7 +42,7 @@ public class BenevolentStrategy extends Strategy {
      * @param player: player object
      */
     public void attack(Player player) {
-        return;
+
     }
 
     /**
@@ -55,10 +55,12 @@ public class BenevolentStrategy extends Strategy {
         List<Country> countries = player.getMyCountries(player);
         Country weakcountry = countries.get(getWeakestCountryIndex(countries));
         countries.remove(weakcountry);
+        int k ;
         List<Country> canfortifycountries = new ArrayList<>();
         while (countries.size() > 0) {
+           k = weakcountry.getNoOfArmies(); //k<=1
             for (int i = 0; i < countries.size(); i++) {
-                if (countries.get(i).getNoOfArmies() > 1 && fC.hasPathBFS2(weakcountry, countries.get(i))) {
+                if (countries.get(i).getNoOfArmies() > k && fC.hasPathBFS2(weakcountry, countries.get(i))) {// paises con mismo numero de tropas no se pasan tropas.
                     canfortifycountries.add(countries.get(i));
                 }
             }
@@ -70,8 +72,9 @@ public class BenevolentStrategy extends Strategy {
                     }
                 }
                 if (strongestcountry != null) {
-                    weakcountry.setNoOfArmies(weakcountry.getNoOfArmies() + strongestcountry.getNoOfArmies() - 1);
-                    strongestcountry.setNoOfArmies(1);
+                    int j = strongestcountry.getNoOfArmies()/2; // se repaten la mitad de las tropas al país débil
+                    weakcountry.setNoOfArmies(weakcountry.getNoOfArmies() +  j);
+                    strongestcountry.setNoOfArmies(strongestcountry.getNoOfArmies() - j );
                 }
                 int index = getCountryIndex(weakcountry, player.getMyCountries(player));
                 player.getMyCountries(player).get(index).setNoOfArmies(weakcountry.getNoOfArmies());

@@ -1,14 +1,9 @@
 package controller.game;
 
 import controller.editor.ReadingFiles;
-import controller.strategies.AggressiveStrategy;
-import controller.strategies.BenevolentStrategy;
-import controller.strategies.CheaterStrategy;
-import controller.strategies.RandomStrategy;
 import model.Player;
 import view.gameFrames.BoardController;
 import view.gameFrames.GameUIController;
-import view.gameFrames.MFrame2;
 import view.menuFrames.SelectMap;
 import view.menuFrames.SelectNoOfPlayers;
 import view.menuFrames.SelectPlayerStrategies;
@@ -41,7 +36,7 @@ public class Tournament {
      * Constructor for Tournament
      */
     public Tournament() {
-        function();
+        simulateGame();
         results();
         System.out.println(table);
     }
@@ -49,18 +44,18 @@ public class Tournament {
     /**
      * Function implements Rules of Tournament Mode
      */
-    public void function() {
+    public void simulateGame() {
         BoardController boardController = new GameUIController();
-        AggressiveStrategy ag = new AggressiveStrategy();
-        CheaterStrategy ch = new CheaterStrategy();
-        RandomStrategy rn = new RandomStrategy();
-        BenevolentStrategy bn = new BenevolentStrategy();
         ReadingFiles ReadFile = new ReadingFiles(boardController);
+
         System.out.println("\nNo of Games:" + SelectMap.NoOfGames);
-        //T odo esto escribe por pantalla como van sucediendo los juegos
-        //For para cada juego
+
+        // Todo esto escribe por pantalla como van sucediendo los juegos
+        // For para cada juego
         for (int gameno = 0; gameno < SelectMap.NoOfGames; gameno++) {
+
             System.out.println("\nGame:" + (gameno + 1));
+
             list = new ArrayList<>();
             //For para cada mapa por juego
             for (int mapno = 0; mapno < SelectMap.TourMapList.size(); mapno++) {
@@ -73,7 +68,7 @@ public class Tournament {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                System.out.println("\n\nMap:" + SelectMap.TourMapList.get(mapno) + "\nTotal No of countries:"
+                System.out.println("\nMap:" + SelectMap.TourMapList.get(mapno) + "\nTotal No of countries:"
                         + ReadingFiles.getCountriesNames().size() + "\nNo of turns:" + SelectMap.NoOfTurns);
                 for (int m = 0; m < ReadingFiles.getPlayerId().size(); m++) {
                     ReadingFiles.getPlayerId().get(m).setStrategy(SelectPlayerStrategies.getStrategies().get(m));
@@ -84,34 +79,11 @@ public class Tournament {
                     for (int playerindex = 0; playerindex < ReadingFiles.getPlayerId().size(); playerindex++) {
                         Player p;
                         p = ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[playerindex]);
-                        switch (p.getStrategyType()) {
-                            case "Agressive":
-                                ag.reinforce(p);
-                                ag.attack(p);
-                                ag.fortify(p);
-                                removeLostPlayer();
-                                break;
-                            case "Benevolent":
-                                bn.reinforce(p);
-                                bn.attack(p);
-                                bn.fortify(p);
-                                removeLostPlayer();
-                                break;
-                            case "Random":
-                                rn.reinforce(p);
-                                rn.attack(p);
-                                rn.fortify(p);
-                                removeLostPlayer();
-                                break;
-                            case "Cheater":
-                                ch.reinforce(p);
-                                ch.attack(p);
-                                ch.fortify(p);
-                                removeLostPlayer();
-                                break;
-                            default:
-                                break;
-                        }
+                        p.setStrategy(p.getStrategyType());
+
+                        p.getStrategy().reinforce(p);
+                        p.getStrategy().attack(p);
+                        p.getStrategy().fortify(p);
                         removeLostPlayer();
                         //Nota: Es al empezar el turno cuando se mira si alguien ha ganado.
                         //removeLostPlayer() va quitando jugadores, y win==true cuando todas las countries son del ganador.
@@ -119,14 +91,14 @@ public class Tournament {
                             win = true;
                             break;
                         }
-                        if (win == true)
+                        if (win)
                             break;
                     }
                     //For de cada jugador en cada turno
                     for (int l = 0; l < ReadingFiles.getPlayerId().size(); l++) {
                         Player p = ReadingFiles.getPlayerId().get(ReadingFiles.getPlayerId().keySet().toArray()[l]);
                         System.out.print("\nturn:" + (turnno + 1) + " Player:" + (p.getPlayerId() + 1) + "  "
-                                + p.getStrategy() + " total countries:" + p.getMyCountries(p).size());
+                                + p.getStrategyType() + " total countries: " + p.getMyCountries(p).size());
                         //Se anuncia victoria
                         if (p.getMyCountries(p).size() == ReadingFiles.getCountriesNames().size()) {
                             System.out.println("\n****Player " + (p.getPlayerId() + 1) + " " + p.getStrategy() + " wins!");
@@ -141,12 +113,12 @@ public class Tournament {
                             System.out.print("(Player:" + (p.getPlayerId() + 1) + "Lost!)");
                         }
                     }
-                    if (win == true)
+                    if (win)
                         break;
 
                 }
                 //Caso empate
-                if (win == false) {
+                if (!win) {
                     System.out.print("\n\n****No one wins!");
                     list.add("Draw");
                     System.out.println("added" + "Draw");
@@ -201,7 +173,7 @@ public class Tournament {
     public void results() {
         window = new JFrame("Tournament Results");
         window.setSize(500, 700);
-        panel = new JPanel(new GridLayout(0, SelectMap.TourMapList.size()+1));
+        panel = new JPanel(new GridLayout(0, SelectMap.TourMapList.size() + 1));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
         HeaderLabel = new JLabel("Results");
         HeaderLabel.setBounds(120, 100, 150, 50);
@@ -236,5 +208,4 @@ public class Tournament {
         window.add(panel);
         window.setVisible(true);
     }
-
 }

@@ -23,8 +23,8 @@ public class SelectPlayerStrategies {
     ArrayList<JLabel> jlabel1 = new ArrayList<>();
     ArrayList<JComboBox> jcombo_array = new ArrayList<>();
 
-    String[] single = {"Human", "Agressive", "Benevolent", "Random", "Cheater"};
-    String[] tournament = {"Agressive", "Benevolent", "Random", "Cheater"};
+    String[] single = {"Human", "Aggressive", "Benevolent", "Random", "Cheater"};
+    String[] tournament = {"Aggressive", "Benevolent", "Random", "Cheater"};
 
     /**
      * Constructor for Select player strategies

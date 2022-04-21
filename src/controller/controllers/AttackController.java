@@ -1,10 +1,13 @@
 package controller.controllers;
 
 import controller.editor.ReadingFiles;
+import controller.game.MainController;
 import model.CardTypes;
 import model.Country;
 import model.Player;
+import view.menuFrames.GameStartWindow;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -416,5 +419,101 @@ public class AttackController {
 
     public static void setCard(boolean card) {
         AttackController.card = card;
+    }
+
+    /**
+     * This method checks the validation of the attack phase
+     *
+     * @param country        : country object
+     * @param mainController
+     * @throws IOException
+     */
+    public void attackPhase(Country country, MainController mainController) throws IOException {
+        mainController.textarea("Attacking.... ");
+        mainController.getCardTypesList().clear();
+        mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+        mainController.changed();
+        if (mainController.getAttackCountry1() == null) {
+            mainController.setAttackCountry1(country);
+            mainController.getFrame().ActivateAll();
+            List<Country> neighbourList = mainController.getAttackController().getMyNeighboursForAttack(country);
+            if (neighbourList.size() < 1) {
+                mainController.getFrame().ActivateAll();
+                mainController.setAttackCountry1(null);
+                mainController.setAttackCountry2(null);
+                mainController.getFrame().error("No Neighbours to attack");
+                mainController.OnlyNeeded(mainController.playerObjet(mainController.getCurrentPlayer()).getTotalCountriesOccupied());
+                mainController.RefreshButtons();
+            } else {
+                mainController.getFrame().OnlyNeeded(neighbourList);
+                mainController.RefreshButtons();
+            }
+        } else if (mainController.getAttackCountry2() == null) {
+            mainController.setAttackCountry2(country);
+            int dice1 = 0;
+            int dice2 = 0;
+            boolean allout = false;
+
+            try {
+                allout = mainController.getFrame().Allout();
+                if (allout == true) {
+
+                } else {
+                    dice1 = Integer.parseInt(
+                            mainController.getFrame().popupTextNew("Enter No of Dices for player 1 --Minimum: 1 Maximum: "
+                                    + mainController.getAttackController().setNoOfDice(mainController.getAttackCountry1(), 'A')));
+
+                    dice2 = Integer.parseInt(
+                            mainController.getFrame().popupTextNew("Enter No of Dices for player 2 --Minimum: 1 Maximum: "
+                                    + mainController.getAttackController().setNoOfDice(mainController.getAttackCountry2(), 'D')));
+                }
+            } catch (Exception e) {
+                mainController.getFrame().error("Invalid Entry Try again");
+                mainController.getFrame().ActivateAll();
+                mainController.setAttackCountry1(null);
+                mainController.setAttackCountry2(null);
+                mainController.OnlyNeeded(mainController.playerObjet(mainController.getCurrentPlayer()).getTotalCountriesOccupied());
+                mainController.RefreshButtons();
+            }
+
+            String reply = attackButton(mainController.getAttackCountry1(), mainController.getAttackCountry2(), dice1, dice2,
+                    allout);
+            System.out.println(reply);
+            if (reply.equals("Player won")) {
+                mainController.getFrame().error(reply);
+                String[] args = {""};
+                GameStartWindow.main(args);
+            } else if (!reply.equals("")) {
+                mainController.getFrame().error(reply);
+            }
+
+            mainController.getFrame().AAA = getAttackerdicerolloutput().toString();
+            mainController.getFrame().BBB = getDefenderdicerolloutput().toString();
+            mainController.changed();
+            getAttackerdicerolloutput().clear();
+            getDefenderdicerolloutput().clear();
+            mainController.getFrame().ActivateAll();
+            mainController.setAttackCountry1(null);
+            mainController.setAttackCountry2(null);
+            mainController.OnlyNeeded(mainController.playerObjet(mainController.getCurrentPlayer()).getTotalCountriesOccupied());
+            mainController.RefreshButtons();
+            mainController.PaintCountries();
+            boolean result = mainController.getAttackController().canAttack(mainController.playerObjet(mainController.getCurrentPlayer()));
+            if (!result) {
+               /* controller.frame.buttonCard4.setEnabled(false);
+                changed();
+                currentPhase = "Finish Fortification";
+                controller.frame.nextAction.setText("Finish Fortification");
+                fortifyCountry1 = null;
+                fortifyCountry2 = null;
+                fortificationPhase();*/
+                mainController.finishattack();  //Puede dar algun error
+
+            }
+
+        } else {
+            mainController.setAttackCountry1(null);
+            mainController.setAttackCountry2(null);
+        }
     }
 }

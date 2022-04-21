@@ -1,6 +1,7 @@
 package controller.controllers;
 
 import controller.editor.ReadingFiles;
+import controller.game.MainController;
 import model.CardTypes;
 import model.Country;
 import model.Player;
@@ -130,5 +131,20 @@ public class ReinforcementController {
             return "Please deploy all your armies before proceeding to attack";
         } else
             return null;
+    }
+
+    /**
+     * This method checks the validation of the reinforcement phase
+     *
+     * @param mainController
+     */
+    public void reinforcementPhase(MainController mainController) {
+        mainController.textarea("Currently in Reinforcement Mode");
+        mainController.buttonCards(true);
+        mainController.changed();
+        mainController.getFrame().ActivateAll();
+        mainController.OnlyNeeded(mainController.playerObjet(mainController.getCurrentPlayer()).getTotalCountriesOccupied());
+        mainController.getReinforcementController().calculateReinforcementArmies(mainController.playerObjet(mainController.getCurrentPlayer()));
+        mainController.getFrame().error("Its Player:- " + (mainController.getCurrentPlayer() + 1) + " Turn");
     }
 }

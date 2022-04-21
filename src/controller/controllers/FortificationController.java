@@ -1,9 +1,11 @@
 package controller.controllers;
 
 import controller.editor.ReadingFiles;
+import controller.game.MainController;
 import model.Country;
 import model.Player;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -90,5 +92,68 @@ public class FortificationController {
                     .setNoOfArmies(destinationCountry.getNoOfArmies());
             return "";
         }
+    }
+
+    /**
+     * This method checks the validation of the fortification phase
+     *
+     * @param country        : country object
+     * @param mainController
+     * @throws IOException
+     */
+    public void fortificationPhase(Country country, MainController mainController) throws IOException {
+        mainController.getCardTypesList().clear();
+        mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+        if (mainController.getFortifyCountry1() == null) {
+            mainController.setFortifyCountry1(country);
+            mainController.getFrame().CCC = NeighboursList(country);
+            mainController.changed();
+            mainController.getFrame().error("Select One More Country You Want to move your Armies to");
+        } else if (mainController.getFortifyCountry2() == null) {
+            mainController.setFortifyCountry2(country);
+            if (mainController.getFortifyCountry1().equals(mainController.getFortifyCountry2())) {
+                mainController.getFrame().error("SAME COUNTRY SELECTED");
+                mainController.setFortifyCountry1(null);
+                mainController.setFortifyCountry2(null);
+            } else {
+                try {
+                    String test1 = mainController.getFrame().popupText(mainController.getFortifyCountry1().getNoOfArmies() - 1);  //Pregunta cuantas quiero transferir
+                    String message = mainController.getFortificationController().moveArmies(mainController.getFortifyCountry1(), mainController.getFortifyCountry2(),
+                            Integer.parseInt(test1));
+                    if (!message.equals("")) {
+                        mainController.getFrame().error(message);
+                        mainController.setFortifyCountry1(null);
+                        mainController.setFortifyCountry2(null);
+                    } else {
+                        mainController.RefreshButtons();
+                        mainController.setCurrentPhase("Finish Reinforcement");
+                        mainController.getFrame().nextAction.setText("Finish Reinforcement");
+                        // playerUpdate();
+                        mainController.setFortifyCountry1(null);
+                        mainController.setFortifyCountry2(null);
+                        mainController.getFrame().ActivateAll();
+                        mainController.selectTypeOfPlayer();
+                    }
+                } catch (Exception e) {
+                    // TODO: handle exception
+                    mainController.getFrame().error("Invalid Number");
+                }
+            }
+        }
+    }
+
+    /**
+     * Gives list of neighbors
+     *
+     * @param country : country whose neighbor list you want
+     * @return result: string of neighbors
+     */
+    public String NeighboursList(Country country) {
+        List<Country> countrylist = country.getNeighbors();
+        String result = "";
+        for (int i = 0; i < countrylist.size(); i++) {
+            result = result.concat(countrylist.get(i).getName() + ",");
+        }
+        return result;
     }
 }

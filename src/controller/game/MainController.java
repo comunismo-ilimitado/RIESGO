@@ -9,7 +9,6 @@ import model.*;
 import view.gameFrames.BoardController;
 import view.gameFrames.GameUIController;
 import view.gameFrames.MFrame;
-import view.gameFrames.MFrame2;
 import view.menuFrames.*;
 
 import java.io.*;
@@ -36,7 +35,7 @@ public class MainController extends Observable{
     MyActionListener myactionlistner;
     AttackController attackController;
     ReinforcementController reinforcementController;
-    FortificationController fortificationController;
+    public FortificationController fortificationController;
     MapValidation mapValidation;
     private boolean resume = false;
     private List<String> phaseList;
@@ -46,6 +45,7 @@ public class MainController extends Observable{
     private Country attackCountry2;
     private Country fortifyCountry1, fortifyCountry2;
       List<CardTypes> cardTypesList = new ArrayList<>();
+
 
     /**
      *
@@ -285,20 +285,6 @@ public class MainController extends Observable{
     }
 
     /**
-     * Gives list of neighbors
-     * @param country: country whose neighbor list you want
-     * @return result: string of neighbors
-     */
-    public String NeighboursList(Country country) {
-        List<Country> countrylist = country.getNeighbors();
-        String result = "";
-        for (int i = 0; i < countrylist.size(); i++) {
-            result = result.concat(countrylist.get(i).getName() + ",");
-        }
-        return result;
-    }
-
-    /**
      * Changes player of the country
      * @param countryname: name of the country
      * @throws IOException
@@ -510,7 +496,7 @@ public class MainController extends Observable{
         textarea("Player Playing :- " + (currentPlayer + 1));
         String strategy = player.getStrategyType().trim(); //Elimina los caracteres blancos iniciales y finales
         if (strategy.equals("Human")) {
-            reinforcementPhase();
+            reinforcementController.reinforcementPhase(this);
         } else {
             textarea("Currently in Reinforcement Mode for " + player.getStrategyType() + " player");
             player.getStrategy().reinforce(player);
@@ -521,162 +507,6 @@ public class MainController extends Observable{
             textarea("Currently in Fortification Mode for " + player.getStrategyType() + " player");
             player.getStrategy().fortify(player);
             finishCPU();
-        }
-    }
-
-    /**
-     * This method checks the validation of the reinforcement phase
-     *
-     */
-    private void reinforcementPhase() {
-        textarea("Currently in Reinforcement Mode");
-        buttonCards(true);
-        changed();
-        frame.ActivateAll();
-        OnlyNeeded(playerObjet(getCurrentPlayer()).getTotalCountriesOccupied());
-        getReinforcementController().calculateReinforcementArmies(playerObjet(getCurrentPlayer()));
-        frame.error("Its Player:- " + (getCurrentPlayer() + 1) + " Turn");
-    }
-
-    /**
-     * This method checks the validation of the attack phase
-     *
-     * @param country          : country object
-     * @throws IOException
-     */
-    void attackPhase(Country country) throws IOException {
-        textarea("Attacking.... ");
-        cardTypesList.clear();
-        frame.jLabeCardl.setText(cardTypesList.toString());
-        changed();
-        if (getAttackCountry1() == null) {
-            setAttackCountry1(country);
-            frame.ActivateAll();
-            List<Country> neighbourList = getAttackController().getMyNeighboursForAttack(country);
-            if (neighbourList.size() < 1) {
-                frame.ActivateAll();
-                setAttackCountry1(null);
-                attackCountry2 = null;
-                frame.error("No Neighbours to attack");
-                OnlyNeeded(playerObjet(getCurrentPlayer()).getTotalCountriesOccupied());
-                RefreshButtons();
-            } else {
-                frame.OnlyNeeded(neighbourList);
-                RefreshButtons();
-            }
-        } else if (attackCountry2 == null) {
-            attackCountry2 = country;
-            int dice1 = 0;
-            int dice2 = 0;
-            boolean allout = false;
-
-            try {
-                allout = frame.Allout();
-                if (allout == true) {
-
-                } else {
-                    dice1 = Integer.parseInt(
-                            frame.popupTextNew("Enter No of Dices for player 1 --Minimum: 1 Maximum: "
-                                    + getAttackController().setNoOfDice(getAttackCountry1(), 'A')));
-
-                    dice2 = Integer.parseInt(
-                            frame.popupTextNew("Enter No of Dices for player 2 --Minimum: 1 Maximum: "
-                                    + getAttackController().setNoOfDice(attackCountry2, 'D')));
-                }
-            } catch (Exception e) {
-                frame.error("Invalid Entry Try again");
-                frame.ActivateAll();
-                setAttackCountry1(null);
-                attackCountry2 = null;
-                OnlyNeeded(playerObjet(getCurrentPlayer()).getTotalCountriesOccupied());
-                RefreshButtons();
-            }
-
-            String reply = attackController.attackButton(getAttackCountry1(), attackCountry2, dice1, dice2,
-                    allout);
-            System.out.println(reply);
-            if (reply.equals("Player won")) {
-                frame.error(reply);
-                String[] args = {""};
-                GameStartWindow.main(args);
-            } else if (!reply.equals("")) {
-                frame.error(reply);
-            }
-
-            frame.AAA = attackController.getAttackerdicerolloutput().toString();
-            frame.BBB = attackController.getDefenderdicerolloutput().toString();
-            changed();
-            attackController.getAttackerdicerolloutput().clear();
-            attackController.getDefenderdicerolloutput().clear();
-            frame.ActivateAll();
-            setAttackCountry1(null);
-            attackCountry2 = null;
-            OnlyNeeded(playerObjet(getCurrentPlayer()).getTotalCountriesOccupied());
-            RefreshButtons();
-            PaintCountries();
-            boolean result = getAttackController().canAttack(playerObjet(getCurrentPlayer()));
-            if (!result) {
-               /* controller.frame.buttonCard4.setEnabled(false);
-                changed();
-                currentPhase = "Finish Fortification";
-                controller.frame.nextAction.setText("Finish Fortification");
-                fortifyCountry1 = null;
-                fortifyCountry2 = null;
-                fortificationPhase();*/
-                finishattack();  //Puede dar algun error
-
-            }
-
-        } else {
-            setAttackCountry1(null);
-            attackCountry2 = null;
-        }
-    }
-
-    /**
-     * This method checks the validation of the fortification phase
-     *
-     * @param country          : country object
-     * @throws IOException
-     */
-    void fortificationPhase(Country country) throws IOException {
-        cardTypesList.clear();
-        frame.jLabeCardl.setText(cardTypesList.toString());
-        if (fortifyCountry1 == null) {
-            fortifyCountry1 = country;
-            frame.CCC = NeighboursList(country);
-            changed();
-            frame.error("Select One More Country You Want to move your Armies to");
-        } else if (fortifyCountry2 == null) {
-            fortifyCountry2 = country;
-            if (fortifyCountry1.equals(fortifyCountry2)) {
-                frame.error("SAME COUNTRY SELECTED");
-                fortifyCountry1 = null;
-                fortifyCountry2 = null;
-            } else {
-                try {
-                    String test1 = frame.popupText(fortifyCountry1.getNoOfArmies() - 1);  //Pregunta cuantas quiero transferir
-                    String message = getFortificationController().moveArmies(fortifyCountry1, fortifyCountry2,
-                            Integer.parseInt(test1));
-                    if (!message.equals("")) {
-                        frame.error(message);
-                        fortifyCountry1 = null;
-                        fortifyCountry2 = null;
-                    } else {
-                        RefreshButtons();
-                        setCurrentPhase("Finish Reinforcement");
-                        frame.nextAction.setText("Finish Reinforcement");
-                        // playerUpdate();
-                        fortifyCountry1 = null;
-                        fortifyCountry2 = null;
-                        frame.ActivateAll();
-                        selectTypeOfPlayer();
-                    }
-                } catch (Exception e) {
-                    // TODO: handle exception
-                    frame.error("Invalid Number");
-                }
-            }
         }
     }
 
@@ -703,7 +533,7 @@ public class MainController extends Observable{
      * This method prepares the game for fortification phase
      *
      */
-    void finishattack() {
+    public void finishattack() {
         buttonCards(false);
         changed();
         setCurrentPhase("Finish Fortification");
@@ -756,7 +586,7 @@ public class MainController extends Observable{
      *
      * @param bool
      */
-    private void buttonCards(boolean bool) {
+    public void buttonCards(boolean bool) {
         frame.buttonCard4.setEnabled(bool);
         frame.buttonCard3.setEnabled(bool);
         frame.buttonCard2.setEnabled(bool);
@@ -864,7 +694,7 @@ public class MainController extends Observable{
      *
      * @param string
      */
-    private void textarea(String string) {
+    public void textarea(String string) {
         frame.area.append("\n" + string);
     }
 
@@ -913,9 +743,30 @@ public class MainController extends Observable{
     public void setAttackCountry1(Country attackCountry1) {
         this.attackCountry1 = attackCountry1;
     }
-
-
-
+    public void setAttackCountry2(Country attackCountry2) {
+        this.attackCountry2 = attackCountry2;
+    }
+    public Country getAttackCountry2() {
+        return attackCountry2;
+    }
+    public MFrame getFrame() {
+        return frame;
+    }
+    public List<CardTypes> getCardTypesList() {
+        return cardTypesList;
+    }
+    public void setFortifyCountry1(Country fortifyCountry1) {
+        this.fortifyCountry1 = fortifyCountry1;
+    }
+    public Country getFortifyCountry1() {
+        return fortifyCountry1;
+    }
+    public Country getFortifyCountry2() {
+        return fortifyCountry2;
+    }
+    public void setFortifyCountry2(Country fortifyCountry2) {
+        this.fortifyCountry2 = fortifyCountry2;
+    }
     /*
     /**
      * This method

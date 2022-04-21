@@ -133,7 +133,7 @@ public class MyActionListener implements ActionListener {
                     break;
                 case "Finish Fortification":
                     try {
-                        controller.fortificationPhase(temp2);
+                        controller.fortificationController.fortificationPhase(temp2, controller);
                     } catch (IOException e2) {
                         e2.printStackTrace();
                     }
@@ -141,7 +141,7 @@ public class MyActionListener implements ActionListener {
                     break;
                 case "Finish Attack":
                     try {
-                        controller.attackPhase(temp2);
+                        controller.attackController.attackPhase(temp2, controller);
                     } catch (IOException e2) {
                         e2.printStackTrace();
                     }

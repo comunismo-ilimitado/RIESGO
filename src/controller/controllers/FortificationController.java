@@ -156,4 +156,22 @@ public class FortificationController {
         }
         return result;
     }
+
+    /**
+     * This method prepares the game for the next player (Human mode)
+     *
+     * @param mainController
+     */
+    public void finishFortification(MainController mainController) {
+        mainController.buttonCards(true);
+        mainController.changed();
+        mainController.setCurrentPhase("Finish Reinforcement");
+        mainController.getFrame().nextAction.setText("Finish Reinforcement");
+        mainController.getCardTypesList().clear();
+        mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+        mainController.playerUpdate();
+        mainController.selectTypeOfPlayer();
+        mainController.getCardTypesList().clear();
+        mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+    }
 }

@@ -1,10 +1,12 @@
 package controller.game;
 
 import controller.controllers.AttackController;
+import controller.controllers.BoardFacade;
 import controller.controllers.FortificationController;
 import controller.controllers.ReinforcementController;
 import controller.editor.MapValidation;
 import controller.editor.ReadingFiles;
+import controller.net.Board;
 import model.*;
 import view.gameFrames.BoardController;
 import view.gameFrames.GameUIController;
@@ -44,7 +46,10 @@ public class MainController extends Observable{
     private Country attackCountry1;
     private Country attackCountry2;
     private Country fortifyCountry1, fortifyCountry2;
-      List<CardTypes> cardTypesList = new ArrayList<>();
+    List<CardTypes> cardTypesList = new ArrayList<>();
+    private volatile Board board;
+    private BoardFacade boardFacade;
+
 
 
     /**
@@ -54,6 +59,10 @@ public class MainController extends Observable{
     @SuppressWarnings("deprecation")
     public void Function() throws Exception {
         try {
+
+            board = new Board();
+            boardFacade = new BoardFacade(this);
+
             boardController = new GameUIController();
             files = new ReadingFiles(boardController);
             //Resume Game
@@ -767,6 +776,15 @@ public class MainController extends Observable{
     public void setFortifyCountry2(Country fortifyCountry2) {
         this.fortifyCountry2 = fortifyCountry2;
     }
+
+    public BoardFacade getBoardFacade() {
+        return boardFacade;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
     /*
     /**
      * This method

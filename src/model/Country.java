@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @author Team 1
  * @version 1.0.0
  */
-public class Country {
+public class Country implements Serializable {
 
     /**
      * country_id This contains unique id of the country of type integer

@@ -83,31 +83,6 @@ public class ReinforcementController {
     }
 
     /**
-     * Calculates the number of armies each player gets to reinforce
-     *
-     * @param player: player object for which the armies are calculated
-     */
-    public void calculateReinforcementArmies(Player player) {
-        int totalPlayerCountries = 0;
-        for (Map.Entry<String, Country> entry : ReadingFiles.getCountryNameObject().entrySet()) {
-            if (entry.getValue().getOwner().getPlayerId() == (player.getPlayerId())) {
-                totalPlayerCountries++;
-            }
-        }
-        float totalReinforcementArmies;
-        totalReinforcementArmies = (float) totalPlayerCountries / 3;
-        int armies = 0;
-        if (totalReinforcementArmies < 3.0) {
-            armies = armies + 3;
-        } else {
-            armies = armies + (int) totalReinforcementArmies;
-        }
-        armies = armies + player.calcArmiesByControlValue();
-        player.setPlayerTotalArmiesNotDeployed(player.getPlayerArmiesNotDeployed() + armies);
-    }
-
-
-    /**
      * Updates the number of armies player owns and armies not deployed
      *
      * @param player:  player object that updates
@@ -144,7 +119,7 @@ public class ReinforcementController {
         mainController.changed();
         mainController.getFrame().ActivateAll();
         mainController.OnlyNeeded(mainController.playerObjet(mainController.getCurrentPlayer()).getTotalCountriesOccupied());
-        mainController.getReinforcementController().calculateReinforcementArmies(mainController.playerObjet(mainController.getCurrentPlayer()));
+        mainController.playerObjet(mainController.getCurrentPlayer()).calculateReinforcementArmies();
         mainController.getFrame().error("Its Player:- " + (mainController.getCurrentPlayer() + 1) + " Turn");
     }
 }

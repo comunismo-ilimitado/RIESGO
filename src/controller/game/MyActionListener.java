@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import model.CardTypes;
 import model.Country;
+import model.Player;
 
 /**
  * This class handles events of the User Interface and manages the action of the phases
@@ -16,6 +17,7 @@ import model.Country;
  * @author pazim
  * @version 3.o
  */
+
 @SuppressWarnings("deprecation")
 public class MyActionListener implements ActionListener {
     private final MainController controller;
@@ -50,7 +52,9 @@ public class MyActionListener implements ActionListener {
             //Algun boton finish
             switch (event.getActionCommand()) {
                 case "Finish Reinforcement":
-                    if (controller.playerObjet(controller.getCurrentPlayer()).getPlayerArmiesNotDeployed() > 0) {  //Si quedan mas tropas -> Error
+                    Player player = controller.playerObjet(controller.getCurrentPlayer());
+                    if (player.getPlayerArmiesNotDeployed() > 0) {  //Si quedan mas tropas -> Error
+                        getController().getBoardFacade().sendErrorMessage("Cannot End Reinforcement Until All armies are deployed", player);
                         controller.frame.error("Cannot End Reinforcement Untill All armies are deployed");
                         controller.cardTypesList.clear();
                         controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());

@@ -4,6 +4,7 @@ import controller.editor.ReadingFiles;
 import controller.strategies.*;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,26 +15,27 @@ import java.util.Map;
  * @author bhargav
  * @version 1.1
  */
-public class Player {
+public class Player implements Serializable {
     private Strategy strategy;
     private String strategyType;
-    private int player_id;
-    private int total_armies_not_deployed;
-    private List<Country> total_countries_occupied;
-    private final List<Country> countries_occupied;
+    private int playerId;
+    private String playerName;
+    private int totalArmiesNotDeployed;
+    private List<Country> totalCountriesOccupied;
+    private final List<Country> countriesOccupied;
     private List<CardTypes> cards;
-    private Color my_color;
-    private int card_exchange_counter;
+    private Color myColor;
+    private int cardExchangeCounter;
 
     /**
      * Default Constructor
      */
     public Player(int player_id) {
-        this.player_id = player_id;
-        this.total_countries_occupied = new ArrayList<>();
-        this.countries_occupied = new ArrayList<>();
+        this.playerId = player_id;
+        this.totalCountriesOccupied = new ArrayList<>();
+        this.countriesOccupied = new ArrayList<>();
         this.cards = new ArrayList<>();
-        card_exchange_counter = 0;
+        cardExchangeCounter = 0;
     }
 
     /**
@@ -53,28 +55,28 @@ public class Player {
      * Gets player_id
      */
     public int getPlayerId() {
-        return player_id;
+        return playerId;
     }
 
     /**
      * Sets player_id
      */
     public void setPlayerId(int player_id) {
-        this.player_id = player_id;
+        this.playerId = player_id;
     }
 
     /**
      * Gets Player Armies that are not deployed
      */
     public int getPlayerArmiesNotDeployed() {
-        return total_armies_not_deployed;
+        return totalArmiesNotDeployed;
     }
 
     /**
      * Sets Player Armies that are not deployed
      */
     public void setPlayerTotalArmiesNotDeployed(int total_armies_not_deployed) {
-        this.total_armies_not_deployed = total_armies_not_deployed;
+        this.totalArmiesNotDeployed = total_armies_not_deployed;
     }
 
     /**
@@ -88,7 +90,7 @@ public class Player {
      * Sets Countries Occupied
      */
     public void setTotalCountriesOccupied(List<Country> total_countries_occupied) {
-        this.total_countries_occupied = total_countries_occupied;
+        this.totalCountriesOccupied = total_countries_occupied;
     }
 
     /**
@@ -109,14 +111,14 @@ public class Player {
      * Gets player color
      */
     public Color getPlayerColor() {
-        return my_color;
+        return myColor;
     }
 
     /**
      * Sets player color
      */
     public void setPlayerColor(Color color) {
-        this.my_color = color;
+        this.myColor = color;
     }
 
     /**
@@ -125,7 +127,7 @@ public class Player {
      * @return integer value
      */
     public int getCardExchangeValue() {
-        return card_exchange_counter;
+        return cardExchangeCounter;
     }
 
     /**
@@ -134,7 +136,7 @@ public class Player {
      * @param value
      */
     public void setCardExchangeValue(int value) {
-        this.card_exchange_counter = value;
+        this.cardExchangeCounter = value;
     }
 
     /**
@@ -164,12 +166,12 @@ public class Player {
     }
 
     public void addCountriesOccupied(Country countriesOccupied) {
-        this.total_countries_occupied.add(countriesOccupied);
+        this.totalCountriesOccupied.add(countriesOccupied);
     }
 
     public void ClearArmies() {
-        total_countries_occupied.clear();
-        countries_occupied.clear();
+        totalCountriesOccupied.clear();
+        countriesOccupied.clear();
     }
 
     /**
@@ -213,12 +215,55 @@ public class Player {
             List<Country> temp = entry.getValue().getCountries();
             int counter = 0;
             for (int i = 0; i < entry.getValue().getCountries().size(); i++) {
-                if (entry.getValue().getCountries().get(i).getOwner().getPlayerId() == player_id)
+                if (entry.getValue().getCountries().get(i).getOwner().getPlayerId() == playerId)
                     counter++;
             }
             if (temp.size() == counter)
                 continents.add(entry.getValue());
         }
         return continents;
+    }
+
+    public static class PlayerConfiguration{
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
+
+    /**
+     * Calculates the number of armies each player gets to reinforce
+     */
+    public void calculateReinforcementArmies() {
+        int totalPlayerCountries = 0;
+        for (Map.Entry<String, Country> entry : ReadingFiles.getCountryNameObject().entrySet()) {
+            if (entry.getValue().getOwner().getPlayerId() == (getPlayerId())) {
+                totalPlayerCountries++;
+            }
+        }
+        float totalReinforcementArmies;
+        totalReinforcementArmies = (float) totalPlayerCountries / 3;
+        int armies = 0;
+        if (totalReinforcementArmies < 3.0) {
+            armies = armies + 3;
+        } else {
+            armies = armies + (int) totalReinforcementArmies;
+        }
+        armies = armies + calcArmiesByControlValue();
+        setPlayerTotalArmiesNotDeployed(getPlayerArmiesNotDeployed() + armies);
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 }

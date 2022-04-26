@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @author bhargav
  * @version 1.0
  */
-public class Continent {
+public class Continent implements Serializable {
 
     /**
      * Constructor to instantiate continent class
@@ -101,10 +102,10 @@ public class Continent {
     /**
      * adds countries to the continent
      *
-     * @param Countrie: country object
+     * @param Countries: country object
      */
-    public void addCountry(Country Countrie) {
-        this.countries.add(Countrie);
+    public void addCountry(Country Countries) {
+        this.countries.add(Countries);
     }
 
     /**

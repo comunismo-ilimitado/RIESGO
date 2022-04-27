@@ -37,6 +37,18 @@ public class Board extends NetPackages.Package {
         return players;
     }
 
+    public void setContinents(HashMap<String, Continent> continents) {
+        this.continents = continents;
+    }
+
+    public void setCountries(HashMap<String, Country> countries) {
+        this.countries = countries;
+    }
+
+    public void setPlayers(HashMap<Integer, Player> players) {
+        this.players = players;
+    }
+
     public HashMap<Integer, ErrorMessage> getErrors() {
         return errors;
     }

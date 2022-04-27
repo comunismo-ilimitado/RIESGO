@@ -17,6 +17,7 @@ public class ClientController {
     public ClientController(){
         this.client = new Client(this);
         clientUpdate = new ClientUpdate();
+        conf = new Player.PlayerConfiguration();
     }
 
     public Client getClient() {
@@ -27,9 +28,17 @@ public class ClientController {
         return serverBoard;
     }
 
+    public void updatePlayer(){
+
+        Player player =  getServerBoard().getPlayers().values()
+                        .stream().filter(pla -> pla.getPlayerName().equals(getPlayerConfiguration().getName()))
+                        .findFirst().orElse(null);
+        getClientUpdate().getPlayer().setPlayerName(player.getPlayerName());
+        getClientUpdate().getPlayer().setPlayerId(player.getPlayerId());
+    }
+
     public void sendAction(ClientUpdate.ClientAction action) {
         clientUpdate.getActions().add(action);
-        System.out.println("Holla");
         client.send();
     }
 

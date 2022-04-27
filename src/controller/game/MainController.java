@@ -62,11 +62,7 @@ public class MainController extends Observable{
     public void Function() throws Exception {
         try {
 
-            board = new Board();
-            boardFacade = new BoardFacade(this);
 
-            Server server = new Server(this);
-            server.start();
 
             boardController = new GameUIController();
             files = new ReadingFiles(boardController);
@@ -97,6 +93,7 @@ public class MainController extends Observable{
             mapValidation = new MapValidation(ReadingFiles.getCountryNameObject(), ReadingFiles.getContinentNameObject());
             mapValidation.CallAllMethods();
             if (!files.isErrors() && !mapValidation.isError()) { //Booleanos que dicen si ha habido un error
+
                 myactionlistner = new MyActionListener(this);
                 frame = new MFrame(myactionlistner, ReadingFiles.getImage());
                 reinforcementController = new ReinforcementController();
@@ -104,6 +101,14 @@ public class MainController extends Observable{
                 fortificationController = new FortificationController();
                 frame.noArmiesLeft = playerObjet(0).getPlayerArmiesNotDeployed();
                 addObserver(frame);
+
+                board = new Board();
+                boardFacade = new BoardFacade(this);
+                boardFacade.copyInformation();
+
+                server = new Server(this);
+                server.start();
+
                 if (isResume()) {
                     int no = Integer.parseInt(bufferedReader.readLine());
                     setCurrentPlayer(no);
@@ -129,6 +134,7 @@ public class MainController extends Observable{
                     selectTypeOfPlayer();
                 }
                 repaintAndRevalidate();
+
             }
         } catch (Exception e) {
             System.out.println("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n" + e);

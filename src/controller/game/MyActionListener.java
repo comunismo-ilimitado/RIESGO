@@ -178,6 +178,8 @@ public class MyActionListener implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent event) {
+        System.out.println("Evento: "+event.getActionCommand());
+
         Player player = controller.playerObjet(controller.getCurrentPlayer());
         // Si se trata de un boton de terminar fase
         if (controller.getPhaseList().contains(event.getActionCommand())) {

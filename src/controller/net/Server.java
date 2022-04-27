@@ -5,6 +5,7 @@ import model.Player;
 
 import java.io.IOException;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class Server implements Runnable{
         this.controller = controller;
         users = new HashMap<>();
         thread = new Thread(this);
+        updates = new ArrayList<>();
         try {
             sock = new DatagramSocket(PORT);
         } catch (SocketException e) {
@@ -80,16 +82,17 @@ public class Server implements Runnable{
                 user.lastresp = System.currentTimeMillis();
                 users.put(ci.name, user);
                 System.out.println("User connected: "+ci.name);
+                setHasUpdated(true);
             }
         }
         if(received instanceof ClientUpdate){
             ClientUpdate cu = (ClientUpdate)received;
-            System.out.println("Señal recibida 1");
-            if(getUsers().containsKey(cu.getPlayer().getPlayerName())) {
+            if(getUsers().containsKey(cu.getPlayer().getPlayerName())
+                    && controller.getCurrentPlayer() == cu.getPlayer().getPlayerId()) {
                 synchronized (this) {
                     getUpdates().add(cu);
                     if(cu.getActions().size() != 0) {
-                        System.out.println("Señal recibida");
+                        System.out.println("Signal received: "+cu.getActions().get(0).getActionCommand());
                         controller.getMyactionListener().clientActionPerformed(cu.getActions().get(0));
                     }
                     setHasUpdated(true);

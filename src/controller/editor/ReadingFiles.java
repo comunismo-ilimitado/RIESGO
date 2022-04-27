@@ -117,6 +117,7 @@ public class ReadingFiles {
             for (int i = 0; i < noofplayers; i++) {
                 Player player = new Player(i);
                 player.setPlayerColor(arrayListc.get(i % (arrayListc.size()-1)));
+                player.setPlayerName("Player "+Integer.toString(i));
                 playerId.put(i, player);
                 getPlayers().add(i);
             }

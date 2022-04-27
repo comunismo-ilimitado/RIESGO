@@ -43,7 +43,7 @@ public class Client implements Runnable{
     public void connect(String ip){
 
         NetPackages.ClientInfo ci = new NetPackages.ClientInfo();
-        ci.name = "Player 1";//controller.getPlayerConfiguration().getName();
+        ci.name = controller.getPlayerConfiguration().getName();
         DatagramPacket pack = new DatagramPacket(new byte[0xfff], 0xfff);
         pack.setData(ci.getBytes());
 

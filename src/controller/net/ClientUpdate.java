@@ -16,6 +16,10 @@ public class ClientUpdate extends NetPackages.Package {
         return player;
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
     public ClientUpdate(){
         actions = new ArrayList<>();
         player = new Player(0);

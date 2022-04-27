@@ -1,5 +1,6 @@
 package controller.controllers;
 
+import controller.editor.ReadingFiles;
 import controller.game.MainController;
 import controller.net.Board;
 import controller.net.ClientUpdate;
@@ -23,6 +24,12 @@ public class BoardFacade {
         msg.setId(id);
 
         controller.getBoard().getErrors().put(id, msg);
+    }
+
+    public void copyInformation(){
+        controller.getBoard().setPlayers(ReadingFiles.getPlayerId2());
+        //controller.getBoard().setContinents(ReadingFiles.getContinentNameObject());
+        //controller.getBoard().setCountries(ReadingFiles.getCountryNameObject());
     }
 
     /**

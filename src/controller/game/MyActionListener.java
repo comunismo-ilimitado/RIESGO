@@ -196,14 +196,14 @@ public class MyActionListener implements ActionListener {
                         controller.cardTypesList.clear();
                         controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
                     } else {  //Si no termina fase refuerzo
-                        controller.finishReinforcement();
+                        controller.reinforcementController.finishReinforcement(controller);
                     }
                     break;
                 case "Finish Attack":
-                    controller.finishattack();
+                    controller.attackController.finishattack(controller);
                     break;
-                case "Finish Fortification":  //Metodo finishFortification??
-                    controller.finishFortification();
+                case "Finish Fortification":  //Metodo finishFortification
+                    controller.fortificationController.finishFortification(controller);
                     break;
             }
 

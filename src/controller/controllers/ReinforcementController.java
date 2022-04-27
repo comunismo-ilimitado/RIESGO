@@ -122,4 +122,24 @@ public class ReinforcementController {
         mainController.playerObjet(mainController.getCurrentPlayer()).calculateReinforcementArmies();
         mainController.getFrame().error("Its Player:- " + (mainController.getCurrentPlayer() + 1) + " Turn");
     }
+
+    /**
+     * This method prepares the game for attack phase
+     *
+     * @param mainController
+     */
+    public void finishReinforcement(MainController mainController) {
+        mainController.getCardTypesList().clear();
+        mainController.buttonCards(false);
+        mainController.setCurrentPhase("Finish Attack");
+        mainController.getFrame().nextAction.setText("Finish Attack");
+        mainController.changed();
+        mainController.setAttackCountry1(null);
+        mainController.setAttackCountry2(null);
+        mainController.getCardTypesList().clear();
+        mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+        mainController.getCardTypesList().clear();
+        mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+
+    }
 }

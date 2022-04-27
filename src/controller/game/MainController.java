@@ -37,7 +37,7 @@ public class MainController extends Observable{
     Server server;
     String phase;
     MyActionListener myactionlistner;
-    AttackController attackController;
+    public AttackController attackController;
     ReinforcementController reinforcementController;
     public FortificationController fortificationController;
     MapValidation mapValidation;
@@ -61,9 +61,6 @@ public class MainController extends Observable{
     @SuppressWarnings("deprecation")
     public void Function() throws Exception {
         try {
-
-
-
             boardController = new GameUIController();
             files = new ReadingFiles(boardController);
             //Resume Game
@@ -205,15 +202,6 @@ public class MainController extends Observable{
         frame.UpdateGameDominationViewPercentage(CountriesPercentage());
         frame.UpdateGameDominationViewContinentOccupied(ContinentsOccupied());
     }
-
-    /**
-     * PENDIENTE
-     * @param armies
-     */
-    public void AddArmies(int armies) {
-        OnlyNeeded(neighbours(armies));
-    }
-
     /**
      * Set Button of country object
      *
@@ -235,29 +223,11 @@ public class MainController extends Observable{
     }
 
     /**
-     * List of country names
-     *
-     * @return
-     */
-    public List<String> countriesNames() {
-        return ReadingFiles.getCountriesNames();
-    }
-
-    /**
      * Calls repaint and re-validate
      */
     public void repaintAndRevalidate() {
         frame.revalidate();
         frame.repaint();
-    }
-
-    /**
-     * Total countries occupied by a player
-     * @param id
-     * @return
-     */
-    public List<Country> neighbours(Integer id) {
-        return ReadingFiles.getPlayerId().get(id).getTotalCountriesOccupied();
     }
 
     /**
@@ -302,18 +272,6 @@ public class MainController extends Observable{
      */
     public Player playerObjet(int id) {
         return ReadingFiles.getPlayerId().get(id);
-    }
-
-    /**
-     * Changes player of the country
-     * @param countryname: name of the country
-     * @throws IOException
-     */
-    public void ChangePlayerCountry(String countryname) throws IOException {
-        Country country = countryObjects().get(countryname);
-        country.setPlayer(ReadingFiles.getPlayerId().get(0));
-        RefreshButtons();
-
     }
 
     /**
@@ -368,25 +326,6 @@ public class MainController extends Observable{
     }
 
     /**
-     * Converts user input into map file
-     *
-     * @param list: list of countries
-     * @return occu: String of countries
-     */
-    public String ListToStringCountries(List<Country> list) {
-        String occu = "";
-        try {
-            for (int i = 0; i < list.size(); i++) {
-                occu = occu + ", " + list.get(i).getName();
-            }
-            return occu;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "NONE";
-        }
-    }
-
-    /**
      * Returns list of countries that are occupied
      * @return list
      */
@@ -398,22 +337,13 @@ public class MainController extends Observable{
         return arrayList;
     }
 
-
-    /**
-     * Set the player cards to a player (not used)
-     */
-    public void temp() {
-        List<CardTypes> cardTypes = new ArrayList<>();
-        playerObjet(0).setPlayerCards(cardTypes);
-    }
-
     //Métodos de myActionListener
 
     /**
      * This method changes the turn of the players
      *
      */
-    void playerUpdate() {
+    public void playerUpdate() {
         try {
             if (PlayerNo2() > 1) { //Si el numero de jugadores es mayor que 1 se sigue jugando
                 ArrayList<Integer> arrayList = new ArrayList<>(ReadingFiles.getPlayerId2().keySet());
@@ -462,11 +392,11 @@ public class MainController extends Observable{
         } else if (phase.equals("Finish Attack")) {
             frame.ActivateAll();
             OnlyNeeded(playerObjet(getCurrentPlayer()).getTotalCountriesOccupied());
-            finishReinforcement();
+            reinforcementController.finishReinforcement(this);
         } else if (phase.equals("Finish Fortification")) {
             frame.ActivateAll();
             OnlyNeeded(playerObjet(getCurrentPlayer()).getTotalCountriesOccupied());
-            finishattack();
+            attackController.finishattack(this);
         }
     }
 
@@ -528,67 +458,6 @@ public class MainController extends Observable{
             player.getStrategy().fortify(player);
             finishCPU();
         }
-    }
-
-    /**
-     * This method prepares the game for attack phase
-     *
-     */
-    void finishReinforcement() {
-        cardTypesList.clear();
-        buttonCards(false);
-        setCurrentPhase("Finish Attack");
-        frame.nextAction.setText("Finish Attack");
-        changed();
-        setAttackCountry1(null);
-        attackCountry2 = null;
-        cardTypesList.clear();
-        frame.jLabeCardl.setText(cardTypesList.toString());
-        cardTypesList.clear();
-        frame.jLabeCardl.setText(cardTypesList.toString());
-
-    }
-
-    /**
-     * This method prepares the game for fortification phase
-     *
-     */
-    public void finishattack() {
-        buttonCards(false);
-        changed();
-        setCurrentPhase("Finish Fortification");
-        frame.nextAction.setText("Finish Fortification");
-        fortifyCountry1 = null;
-        fortifyCountry2 = null;
-        cardTypesList.clear();
-        frame.jLabeCardl.setText(cardTypesList.toString());
-        //fortificationPhase();
-        textarea("Currently in Fortification Mode");
-        AttackController.setCard(false);
-        changed();
-        frame.ActivateAll();
-        OnlyNeeded(playerObjet(getCurrentPlayer()).getTotalCountriesOccupied());
-        //playerUpdate(); // El jugador actual se cambia antes de fortificar??
-        cardTypesList.clear();
-        frame.jLabeCardl.setText(cardTypesList.toString());
-
-    }
-
-    /**
-     * This method prepares the game for the next player (Human mode)
-     *
-     */
-    void finishFortification() {
-        buttonCards(true);
-        changed();
-        setCurrentPhase("Finish Reinforcement");
-        frame.nextAction.setText("Finish Reinforcement");
-        cardTypesList.clear();
-        frame.jLabeCardl.setText(cardTypesList.toString());
-        playerUpdate();
-        selectTypeOfPlayer();
-        cardTypesList.clear();
-        frame.jLabeCardl.setText(cardTypesList.toString());
     }
 
     /**

@@ -507,7 +507,7 @@ public class AttackController {
                 fortifyCountry1 = null;
                 fortifyCountry2 = null;
                 fortificationPhase();*/
-                mainController.finishattack();  //Puede dar algun error
+                mainController.attackController.finishattack(mainController);  //Puede dar algun error
 
             }
 
@@ -515,5 +515,31 @@ public class AttackController {
             mainController.setAttackCountry1(null);
             mainController.setAttackCountry2(null);
         }
+    }
+
+    /**
+     * This method prepares the game for fortification phase
+     *
+     * @param mainController
+     */
+    public void finishattack(MainController mainController) {
+        mainController.buttonCards(false);
+        mainController.changed();
+        mainController.setCurrentPhase("Finish Fortification");
+        mainController.getFrame().nextAction.setText("Finish Fortification");
+        mainController.setFortifyCountry1(null);
+        mainController.setFortifyCountry2(null);
+        mainController.getCardTypesList().clear();
+        mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+        //fortificationPhase();
+        mainController.textarea("Currently in Fortification Mode");
+        setCard(false);
+        mainController.changed();
+        mainController.getFrame().ActivateAll();
+        mainController.OnlyNeeded(mainController.playerObjet(mainController.getCurrentPlayer()).getTotalCountriesOccupied());
+        //playerUpdate(); // El jugador actual se cambia antes de fortificar??
+        mainController.getCardTypesList().clear();
+        mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+
     }
 }

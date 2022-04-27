@@ -14,6 +14,16 @@ public class Board extends NetPackages.Package {
 
     private static HashMap<Integer, ErrorMessage> errors;
 
+    private static HashMap<Integer, ClientUpdate.ClientAction> actions;
+
+
+    public Board(){
+        countries = new HashMap<>();
+        continents = new HashMap<>();
+        players = new HashMap<>();
+        errors = new HashMap<>();
+        actions = new HashMap<>();
+    }
 
     public HashMap<String, Continent> getContinents() {
         return continents;
@@ -29,6 +39,10 @@ public class Board extends NetPackages.Package {
 
     public HashMap<Integer, ErrorMessage> getErrors() {
         return errors;
+    }
+
+    public HashMap<Integer, ClientUpdate.ClientAction> getActions() {
+        return actions;
     }
 
     public static class ErrorMessage{

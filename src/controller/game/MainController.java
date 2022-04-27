@@ -7,6 +7,7 @@ import controller.controllers.ReinforcementController;
 import controller.editor.MapValidation;
 import controller.editor.ReadingFiles;
 import controller.net.Board;
+import controller.net.Server;
 import model.*;
 import view.gameFrames.BoardController;
 import view.gameFrames.GameUIController;
@@ -33,6 +34,7 @@ public class MainController extends Observable{
     ReadingFiles files;
     MFrame frame;
     BoardController boardController;
+    Server server;
     String phase;
     MyActionListener myactionlistner;
     AttackController attackController;
@@ -62,6 +64,9 @@ public class MainController extends Observable{
 
             board = new Board();
             boardFacade = new BoardFacade(this);
+
+            Server server = new Server(this);
+            server.start();
 
             boardController = new GameUIController();
             files = new ReadingFiles(boardController);
@@ -783,6 +788,14 @@ public class MainController extends Observable{
 
     public Board getBoard() {
         return board;
+    }
+
+    public MyActionListener getMyactionListener() {
+        return myactionlistner;
+    }
+
+    public Server getServer() {
+        return server;
     }
 
     /*

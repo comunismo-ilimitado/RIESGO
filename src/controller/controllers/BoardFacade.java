@@ -2,6 +2,7 @@ package controller.controllers;
 
 import controller.game.MainController;
 import controller.net.Board;
+import controller.net.ClientUpdate;
 import model.Player;
 
 public class BoardFacade {
@@ -22,6 +23,14 @@ public class BoardFacade {
         msg.setId(id);
 
         controller.getBoard().getErrors().put(id, msg);
+    }
+
+    /**
+     *  This function registers in the board that there has been a client action
+     * */
+    public void performedClientAction(ClientUpdate.ClientAction action){
+        int id = controller.getBoard().getActions().size();
+        controller.getBoard().getActions().put(id, action);
     }
 
 }

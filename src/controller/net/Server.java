@@ -1,7 +1,6 @@
 package controller.net;
 
 import controller.game.MainController;
-import jdk.tools.jmod.Main;
 import model.Player;
 
 import java.io.IOException;
@@ -42,7 +41,7 @@ public class Server implements Runnable{
         thread.start();
     }
 
-    public void update(){
+    public synchronized void update(){
         needsUpdate = true;
     }
 
@@ -85,9 +84,16 @@ public class Server implements Runnable{
         }
         if(received instanceof ClientUpdate){
             ClientUpdate cu = (ClientUpdate)received;
+            System.out.println("Señal recibida 1");
             if(getUsers().containsKey(cu.getPlayer().getPlayerName())) {
-                getUpdates().add(cu);
-                setHasUpdated(true);
+                synchronized (this) {
+                    getUpdates().add(cu);
+                    if(cu.getActions().size() != 0) {
+                        System.out.println("Señal recibida");
+                        controller.getMyactionListener().clientActionPerformed(cu.getActions().get(0));
+                    }
+                    setHasUpdated(true);
+                }
             }
         }
 
@@ -100,9 +106,11 @@ public class Server implements Runnable{
     public void run() {
         while(running) {
             listen();
-            if (isNeedsUpdate()) {
-                send();
-                setNeedsUpdate(false);
+            synchronized (this) {
+                if (isNeedsUpdate()) {
+                    setNeedsUpdate(false);
+                    send();
+                }
             }
         }
     }
@@ -111,23 +119,24 @@ public class Server implements Runnable{
         return users;
     }
 
-    public List<ClientUpdate> getUpdates() {
+    public synchronized List<ClientUpdate> getUpdates() {
         return updates;
     }
 
-    public boolean hasUpdated() {
+    public synchronized boolean hasUpdated() {
         return hasUpdated;
     }
 
-    public void setHasUpdated(boolean hasUpdated) {
+    public synchronized void setHasUpdated(boolean hasUpdated) {
         this.hasUpdated = hasUpdated;
     }
 
-    private boolean isNeedsUpdate() {
-        return needsUpdate;
+    private synchronized boolean isNeedsUpdate() {
+        return true;
+        //return needsUpdate;
     }
 
-    public void setNeedsUpdate(boolean needsUpdate) {
+    public synchronized void setNeedsUpdate(boolean needsUpdate) {
         this.needsUpdate = needsUpdate;
     }
 

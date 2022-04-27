@@ -1,9 +1,9 @@
 package controller.net;
 
+import controller.controllers.net.ClientController;
 import model.Player;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
@@ -13,12 +13,14 @@ public class Client implements Runnable{
 
     Thread thread;
     DatagramSocket sock;
-    public static volatile ClientUpdate cu = new ClientUpdate();
-    Player.PlayerConfiguration conf;
+
     volatile boolean running = false;
     volatile boolean sended = false;
 
-    public Client(){
+    ClientController controller;
+
+    public Client(ClientController controller){
+        this.controller = controller;
         try {
             sock = new DatagramSocket();
         } catch (SocketException e) {
@@ -32,13 +34,6 @@ public class Client implements Runnable{
         running = true;
     }
 
-    // Funcion de prueba de cliente
-    // TODO borrar la funcion
-    public static void main(String[] args){
-        Client client = new Client();
-        client.connect("localhost");
-    }
-
     public void close(){
         running = false;
         sock.close();
@@ -48,7 +43,7 @@ public class Client implements Runnable{
     public void connect(String ip){
 
         NetPackages.ClientInfo ci = new NetPackages.ClientInfo();
-        ci.name = conf.getName();
+        ci.name = "Player 1";//controller.getPlayerConfiguration().getName();
         DatagramPacket pack = new DatagramPacket(new byte[0xfff], 0xfff);
         pack.setData(ci.getBytes());
 
@@ -65,9 +60,44 @@ public class Client implements Runnable{
         sended = true;
     }
 
+    public void send(){
+        DatagramPacket dp = new DatagramPacket(new byte[0xfff], 0xfff);
+        dp.setData(controller.getClientUpdate().getBytes());
+        try {
+            sock.send(dp);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // TODO decidir si habra acciones multiples
+        controller.getClientUpdate().getActions().clear();
+    }
+
+    public void listen(){
+
+        DatagramPacket pack = new DatagramPacket(new byte[0xfff], 0xfff);
+        Object rec = new Object();
+
+        try {
+
+            sock.receive(pack);
+            rec = NetPackages.Package.bytesToObject(pack.getData());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        if(rec instanceof Board){
+            controller.setServerBoard((Board) rec);
+            //controller.actionPerformed(controller.getServerBoard().getActions().values().iterator().next());
+        }
+    }
+
     @Override
     public void run() {
-
+        while (running){
+            listen();
+        }
     }
 
 }

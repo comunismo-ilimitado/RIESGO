@@ -1,45 +1,45 @@
 Resources/Montreal.map
 2
 0
-Finish Reinforcement
+Finish Attack
 
 ---------------------------------
 Player Playing :- 1
 Currently in Reinforcement Mode----PLAYER----
 0
 null
-NDG***3
-Ile Bizard***3
-Ahuntsic***3
-La Salle***3
-Anjou***3
+Dorval***3
+Mercier***3
+RDP-PAT***3
+Plateau***7
+Rosemont***3
 Ville-Marie***3
-Lachine***3
-St-Leonard***3
+Pointe-Claire***3
 Beaconsfield***3
+Kirkland***3
 Outremont***3
-Saint-Laurent***3
+Pierrefonds***3
 Montreal Nord***3
 Villeray***2
-Senneville***2
+Mont-Royal***2
 ----CARDS----
 []
 ----PLAYER----
 1
 null
 Westmount***3
-Dorval***3
-Mercier***3
 Hampstead***3
-RDP-PAT***3
+NDG***3
+Ile Bizard***3
 Ste-Anne-de-Bellevue***3
+Ahuntsic***3
+La Salle***3
 Verdun***3
-Plateau***3
-Rosemont***3
-Pointe-Claire***3
-Kirkland***3
-Pierrefonds***3
-Mont-Royal***2
+Anjou***3
+Lachine***3
+St-Leonard***3
+Saint-Laurent***3
+Senneville***2
 Pointe St-Charles***2
 ----CARDS----
 []

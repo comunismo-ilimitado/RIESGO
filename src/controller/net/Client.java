@@ -11,6 +11,8 @@ import java.net.SocketException;
 
 public class Client implements Runnable{
 
+    public static int MAX_SIZE = 0xffff;
+
     Thread thread;
     DatagramSocket sock;
 
@@ -44,7 +46,7 @@ public class Client implements Runnable{
 
         NetPackages.ClientInfo ci = new NetPackages.ClientInfo();
         ci.name = controller.getPlayerConfiguration().getName();
-        DatagramPacket pack = new DatagramPacket(new byte[0xfff], 0xfff);
+        DatagramPacket pack = new DatagramPacket(new byte[MAX_SIZE], MAX_SIZE);
         pack.setData(ci.getBytes());
 
         try {
@@ -61,7 +63,7 @@ public class Client implements Runnable{
     }
 
     public void send(){
-        DatagramPacket dp = new DatagramPacket(new byte[0xfff], 0xfff);
+        DatagramPacket dp = new DatagramPacket(new byte[MAX_SIZE], MAX_SIZE);
         dp.setData(controller.getClientUpdate().getBytes());
         try {
             sock.send(dp);
@@ -75,7 +77,7 @@ public class Client implements Runnable{
 
     public void listen(){
 
-        DatagramPacket pack = new DatagramPacket(new byte[0xfff], 0xfff);
+        DatagramPacket pack = new DatagramPacket(new byte[MAX_SIZE], MAX_SIZE);
         Object rec = new Object();
 
         try {

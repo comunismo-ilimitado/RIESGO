@@ -11,6 +11,8 @@ import java.util.List;
 
 public class Server implements Runnable{
 
+    public static int MAX_SIZE = 0xffff;
+
     public static int PORT = 57565;
 
     private int maxplayers = 3;
@@ -67,7 +69,7 @@ public class Server implements Runnable{
     }
 
     public void listen(){
-        DatagramPacket dp = new DatagramPacket(new byte[1024], 1024);
+        DatagramPacket dp = new DatagramPacket(new byte[MAX_SIZE], MAX_SIZE);
         Object received = null;
         try {
             sock.receive(dp);

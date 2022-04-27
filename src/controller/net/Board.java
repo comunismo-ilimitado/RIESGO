@@ -1,16 +1,23 @@
 package controller.net;
 
+import model.CardTypes;
 import model.Continent;
 import model.Country;
 import model.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Board extends NetPackages.Package {
+
+    private String mapName;
 
     private HashMap<String, Country> countries;
     private HashMap<String, Continent> continents;
     private HashMap<Integer, Player> players;
+
+    private List<CardTypes> cardTypesList;
 
     private static HashMap<Integer, ErrorMessage> errors;
 
@@ -23,6 +30,7 @@ public class Board extends NetPackages.Package {
         players = new HashMap<>();
         errors = new HashMap<>();
         actions = new HashMap<>();
+        cardTypesList = new ArrayList<>();
     }
 
     public HashMap<String, Continent> getContinents() {
@@ -49,12 +57,28 @@ public class Board extends NetPackages.Package {
         this.players = players;
     }
 
+    public void setMapName(String mapName) {
+        this.mapName = mapName;
+    }
+
+    public String getMapName() {
+        return mapName;
+    }
+
     public HashMap<Integer, ErrorMessage> getErrors() {
         return errors;
     }
 
     public HashMap<Integer, ClientUpdate.ClientAction> getActions() {
         return actions;
+    }
+
+    public void setCardTypesList(List<CardTypes> cardTypesList) {
+        this.cardTypesList = cardTypesList;
+    }
+
+    public List<CardTypes> getCardTypesList() {
+        return cardTypesList;
     }
 
     public static class ErrorMessage{

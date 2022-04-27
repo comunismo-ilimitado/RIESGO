@@ -590,6 +590,7 @@ public class MainController extends Observable{
     public void changed() {
         setChanged();
         notifyObservers();
+        server.update();
     }
 
     //Getters and setters

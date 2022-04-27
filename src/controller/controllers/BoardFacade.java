@@ -4,7 +4,11 @@ import controller.editor.ReadingFiles;
 import controller.game.MainController;
 import controller.net.Board;
 import controller.net.ClientUpdate;
+import model.CardTypes;
 import model.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoardFacade {
 
@@ -28,9 +32,18 @@ public class BoardFacade {
 
     public void copyInformation(){
         controller.getBoard().setPlayers(ReadingFiles.getPlayerId2());
-        //controller.getBoard().setContinents(ReadingFiles.getContinentNameObject());
-        //controller.getBoard().setCountries(ReadingFiles.getCountryNameObject());
+        controller.getBoard().setContinents(ReadingFiles.getContinentNameObject());
+        controller.getBoard().setCountries(ReadingFiles.getCountryNameObject());
     }
+
+    public void setSelectedCards(List<CardTypes> selectedCards){
+        controller.getBoard().setCardTypesList(selectedCards);
+    }
+
+    public void setMapName(String name){
+        controller.getBoard().setMapName(name);
+    }
+
 
     /**
      *  This function registers in the board that there has been a client action

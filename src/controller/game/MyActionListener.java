@@ -255,6 +255,7 @@ public class MyActionListener implements ActionListener {
                 controller.cardTypesList.clear();
                 controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
                 controller.frame.noArmiesLeft = controller.playerObjet(controller.getCurrentPlayer()).getPlayerArmiesNotDeployed();
+                controller.getBoardFacade().setSelectedCards(controller.cardTypesList);
 
             } else {
                 controller.frame.error("Invalid Cards Selected");

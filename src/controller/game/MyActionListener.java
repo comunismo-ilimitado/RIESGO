@@ -54,8 +54,10 @@ public class MyActionListener implements ActionListener {
 
                         // TODO Remove UI references
                         controller.frame.error("Cannot End Reinforcement Until All armies are deployed");
+                        controller.getBoardFacade().sendErrorMessage("Cannot End Reinforcement Until All armies are deployed",player);
                         controller.cardTypesList.clear();
                         controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
+                        controller.getBoardFacade().setSelectedCards(controller.cardTypesList);
                     } else {  //Si no termina fase refuerzo
                         controller.reinforcementController.finishReinforcement(controller);
                     }
@@ -77,6 +79,7 @@ public class MyActionListener implements ActionListener {
                 // TODO borrar referncias graficas
                 controller.frame.buttonCard1.setText("Infantry " + (no - 1));
                 controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
+                controller.getBoardFacade().setSelectedCards(controller.cardTypesList);
 
             } else {
                 controller.frame.error("No Card Of this Type");
@@ -91,6 +94,7 @@ public class MyActionListener implements ActionListener {
                 // TODO borrar referncias graficas
                 controller.frame.buttonCard3.setText("Cavalry " + (no - 1));
                 controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
+                controller.getBoardFacade().setSelectedCards(controller.cardTypesList);
             } else {
                 controller.frame.error("No Card Of this Type");
                 getController().getBoardFacade().sendErrorMessage("No Card Of this Type", player);
@@ -103,6 +107,7 @@ public class MyActionListener implements ActionListener {
                 // TODO borrar referncias graficas
                 controller.frame.buttonCard2.setText("Artillery " + (no - 1));
                 controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
+                controller.getBoardFacade().setSelectedCards(controller.cardTypesList);
 
             } else {
                 controller.frame.error("No Card Of this Type");
@@ -115,12 +120,15 @@ public class MyActionListener implements ActionListener {
             if (answer == "") {
                 controller.cardTypesList.clear();
                 controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
+                controller.getBoardFacade().setSelectedCards(controller.cardTypesList);
                 controller.frame.noArmiesLeft = controller.playerObjet(controller.getCurrentPlayer()).getPlayerArmiesNotDeployed();
 
             } else {
                 controller.frame.error("Invalid Cards Selected");
+                controller.getBoardFacade().sendErrorMessage("Invalid Cards Selected",player);
                 controller.cardTypesList.clear();
                 controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
+                controller.getBoardFacade().setSelectedCards(controller.cardTypesList);
 
             }
             controller.changed();
@@ -193,8 +201,10 @@ public class MyActionListener implements ActionListener {
 
                         // TODO Remove UI references
                         controller.frame.error("Cannot End Reinforcement Until All armies are deployed");
+                        controller.getBoardFacade().sendErrorMessage("Cannot End Reinforcement Until All armies are deployed",player);
                         controller.cardTypesList.clear();
                         controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
+                        controller.getBoardFacade().setSelectedCards(controller.cardTypesList);
                     } else {  //Si no termina fase refuerzo
                         controller.reinforcementController.finishReinforcement(controller);
                     }
@@ -216,6 +226,7 @@ public class MyActionListener implements ActionListener {
                 // TODO borrar referncias graficas
                 controller.frame.buttonCard1.setText("Infantry " + (no - 1));
                 controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
+                controller.getBoardFacade().setSelectedCards(controller.cardTypesList);
 
             } else {
                 controller.frame.error("No Card Of this Type");
@@ -230,6 +241,7 @@ public class MyActionListener implements ActionListener {
                 // TODO borrar referncias graficas
                 controller.frame.buttonCard3.setText("Cavalry " + (no - 1));
                 controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
+                controller.getBoardFacade().setSelectedCards(controller.cardTypesList);
             } else {
                 controller.frame.error("No Card Of this Type");
                 getController().getBoardFacade().sendErrorMessage("No Card Of this Type", player);
@@ -242,6 +254,7 @@ public class MyActionListener implements ActionListener {
                 // TODO borrar referncias graficas
                 controller.frame.buttonCard2.setText("Artillery " + (no - 1));
                 controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
+                controller.getBoardFacade().setSelectedCards(controller.cardTypesList);
 
             } else {
                 controller.frame.error("No Card Of this Type");
@@ -259,8 +272,10 @@ public class MyActionListener implements ActionListener {
 
             } else {
                 controller.frame.error("Invalid Cards Selected");
+                controller.getBoardFacade().sendErrorMessage("Invalid Cards Selected",player);
                 controller.cardTypesList.clear();
                 controller.frame.jLabeCardl.setText(controller.cardTypesList.toString());
+                controller.getBoardFacade().setSelectedCards(controller.cardTypesList);
 
             }
             controller.changed();

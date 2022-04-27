@@ -356,6 +356,8 @@ public class MainController extends Observable{
                 }
             } else { //Si solo queda un jugador ha ganado ese jugador
                 frame.error("Player :- " + ((int) ReadingFiles.getPlayerId2().keySet().toArray()[0] + 1) + " Wins");
+                getBoardFacade().sendErrorMessage("Player :- " + ((int) ReadingFiles.getPlayerId2().keySet().toArray()[0] + 1) + " Wins",
+                        playerObjet(getCurrentPlayer()));
                 frame.dispose();
                 System.exit(0);
 
@@ -374,6 +376,7 @@ public class MainController extends Observable{
     void armiesNotDeployed(Country country ) {
         cardTypesList.clear();
         frame.jLabeCardl.setText(cardTypesList.toString());
+        getBoardFacade().setSelectedCards(getCardTypesList());
         String message = getReinforcementController().addArmies(country);
         frame.noArmiesLeft = playerObjet(getCurrentPlayer()).getPlayerArmiesNotDeployed();
         changed();
@@ -422,6 +425,8 @@ public class MainController extends Observable{
         }
         if (ReadingFiles.getPlayerId2().size() <= 1) { //Si despues de la eliminacion solo queda un jugador ha ganado
             frame.error("Player :- " + ((int) ReadingFiles.getPlayerId2().keySet().toArray()[0] + 1) + " Wins");
+            getBoardFacade().sendErrorMessage("Player :- " + ((int) ReadingFiles.getPlayerId2().keySet().toArray()[0] + 1) + " Wins",
+                    playerObjet(getCurrentPlayer()));
             frame.dispose();
             System.exit(0);
 

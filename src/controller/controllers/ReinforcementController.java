@@ -121,6 +121,8 @@ public class ReinforcementController {
         mainController.OnlyNeeded(mainController.playerObjet(mainController.getCurrentPlayer()).getTotalCountriesOccupied());
         mainController.playerObjet(mainController.getCurrentPlayer()).calculateReinforcementArmies();
         mainController.getFrame().error("Its Player:- " + (mainController.getCurrentPlayer() + 1) + " Turn");
+        mainController.getBoardFacade().sendErrorMessage("Its Player:- " + (mainController.getCurrentPlayer() + 1) + " Turn",
+                mainController.playerObjet(mainController.getCurrentPlayer()));
     }
 
     /**
@@ -138,8 +140,10 @@ public class ReinforcementController {
         mainController.setAttackCountry2(null);
         mainController.getCardTypesList().clear();
         mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+        mainController.getBoardFacade().setSelectedCards(mainController.getCardTypesList());
         mainController.getCardTypesList().clear();
         mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+        mainController.getBoardFacade().setSelectedCards(mainController.getCardTypesList());
 
     }
 }

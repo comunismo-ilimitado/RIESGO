@@ -432,6 +432,7 @@ public class AttackController {
         mainController.textarea("Attacking.... ");
         mainController.getCardTypesList().clear();
         mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+        mainController.getBoardFacade().setSelectedCards(mainController.getCardTypesList());
         mainController.changed();
         if (mainController.getAttackCountry1() == null) {
             mainController.setAttackCountry1(country);
@@ -442,6 +443,7 @@ public class AttackController {
                 mainController.setAttackCountry1(null);
                 mainController.setAttackCountry2(null);
                 mainController.getFrame().error("No Neighbours to attack");
+                mainController.getBoardFacade().sendErrorMessage("No Neighbours to attack",mainController.playerObjet(mainController.getCurrentPlayer()));
                 mainController.OnlyNeeded(mainController.playerObjet(mainController.getCurrentPlayer()).getTotalCountriesOccupied());
                 mainController.RefreshButtons();
             } else {
@@ -469,6 +471,7 @@ public class AttackController {
                 }
             } catch (Exception e) {
                 mainController.getFrame().error("Invalid Entry Try again");
+                mainController.getBoardFacade().sendErrorMessage("Invalid Entry Try again",mainController.playerObjet(mainController.getCurrentPlayer()));
                 mainController.getFrame().ActivateAll();
                 mainController.setAttackCountry1(null);
                 mainController.setAttackCountry2(null);
@@ -481,6 +484,7 @@ public class AttackController {
             System.out.println(reply);
             if (reply.equals("Player won")) {
                 mainController.getFrame().error(reply);
+                mainController.getBoardFacade().sendErrorMessage(reply,mainController.playerObjet(mainController.getCurrentPlayer()));
                 String[] args = {""};
                 GameStartWindow.main(args);
             } else if (!reply.equals("")) {
@@ -531,6 +535,7 @@ public class AttackController {
         mainController.setFortifyCountry2(null);
         mainController.getCardTypesList().clear();
         mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+        mainController.getBoardFacade().setSelectedCards(mainController.getCardTypesList());
         //fortificationPhase();
         mainController.textarea("Currently in Fortification Mode");
         setCard(false);
@@ -540,6 +545,7 @@ public class AttackController {
         //playerUpdate(); // El jugador actual se cambia antes de fortificar??
         mainController.getCardTypesList().clear();
         mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+        mainController.getBoardFacade().setSelectedCards(mainController.getCardTypesList());
 
     }
 }

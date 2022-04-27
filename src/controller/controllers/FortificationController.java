@@ -104,15 +104,20 @@ public class FortificationController {
     public void fortificationPhase(Country country, MainController mainController) throws IOException {
         mainController.getCardTypesList().clear();
         mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+        mainController.getBoardFacade().setSelectedCards(mainController.getCardTypesList());
         if (mainController.getFortifyCountry1() == null) {
             mainController.setFortifyCountry1(country);
             mainController.getFrame().CCC = NeighboursList(country);
             mainController.changed();
             mainController.getFrame().error("Select One More Country You Want to move your Armies to");
+            mainController.getBoardFacade().sendErrorMessage("Select One More Country You Want to move your Armies to"
+                    ,mainController.playerObjet(mainController.getCurrentPlayer()));
         } else if (mainController.getFortifyCountry2() == null) {
             mainController.setFortifyCountry2(country);
             if (mainController.getFortifyCountry1().equals(mainController.getFortifyCountry2())) {
                 mainController.getFrame().error("SAME COUNTRY SELECTED");
+                mainController.getBoardFacade().sendErrorMessage("SAME COUNTRY SELECTED",
+                        mainController.playerObjet(mainController.getCurrentPlayer()));
                 mainController.setFortifyCountry1(null);
                 mainController.setFortifyCountry2(null);
             } else {
@@ -122,6 +127,8 @@ public class FortificationController {
                             Integer.parseInt(test1));
                     if (!message.equals("")) {
                         mainController.getFrame().error(message);
+                        mainController.getBoardFacade().sendErrorMessage(message,
+                                mainController.playerObjet(mainController.getCurrentPlayer()));
                         mainController.setFortifyCountry1(null);
                         mainController.setFortifyCountry2(null);
                     } else {
@@ -137,6 +144,8 @@ public class FortificationController {
                 } catch (Exception e) {
                     // TODO: handle exception
                     mainController.getFrame().error("Invalid Number");
+                    mainController.getBoardFacade().sendErrorMessage("Invalid Number",
+                            mainController.playerObjet(mainController.getCurrentPlayer()));
                 }
             }
         }
@@ -169,9 +178,11 @@ public class FortificationController {
         mainController.getFrame().nextAction.setText("Finish Reinforcement");
         mainController.getCardTypesList().clear();
         mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+        mainController.getBoardFacade().setSelectedCards(mainController.getCardTypesList());
         mainController.playerUpdate();
         mainController.selectTypeOfPlayer();
         mainController.getCardTypesList().clear();
         mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
+        mainController.getBoardFacade().setSelectedCards(mainController.getCardTypesList());
     }
 }

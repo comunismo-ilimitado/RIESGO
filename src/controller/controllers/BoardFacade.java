@@ -40,6 +40,8 @@ public class BoardFacade {
         controller.getBoard().setCardTypesList(selectedCards);
     }
 
+
+
     public void setMapName(String name){
         controller.getBoard().setMapName(name);
     }

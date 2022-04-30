@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-image: url('../Resources/TestingUI/Images/fondo.jpg');" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.HelloController">
+   <children>
+
+      <ImageView fitHeight="1284.0" fitWidth="2098.0" layoutY="-141.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/fondo.jpg" />
+         </image>
+      </ImageView>
+
+      <VBox prefHeight="1080.0" prefWidth="379.0">
+         <children>
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#play" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="360.0" prefWidth="379.0" style="-fx-background-color: #FFFFFF;" text="JUGAR" />
+            <Button layoutX="10.0" layoutY="143.0" mnemonicParsing="false" onMouseClicked="#settings" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="360.0" prefWidth="393.0" style="-fx-background-color: #FFFFFF;" text="AJUSTES" />
+            <Button mnemonicParsing="false" onMouseClicked="#exitGame" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="360.0" prefWidth="387.0" style="-fx-background-color: #FFFFFF;" text="SALIR" />
+         </children>
+      </VBox>
+      <ImageView fitHeight="507.0" fitWidth="1207.0" layoutX="602.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

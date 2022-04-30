@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-image: url('../Resources/TestingUI/Images/fondo.jpg');" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.HelloController">
+   <children>
+      <ImageView fitHeight="1319.0" fitWidth="1996.0" layoutX="-50.0" layoutY="-99.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/fondo.jpg" />
+         </image>
+      </ImageView>
+      <DialogPane contentText="IDIOMA" layoutX="325.0" layoutY="212.0" prefHeight="53.0" prefWidth="66.0" style="-fx-scale-x: 5; -fx-scale-y: 5; -fx-background-color: transparent;" />
+      <Button layoutX="480.0" layoutY="423.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Español" />
+      <Button layoutX="133.0" layoutY="423.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Inglés" />
+      <Button layoutX="14.0" layoutY="910.0" mnemonicParsing="false" onMouseClicked="#back" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="157.0" prefWidth="257.0" text="Atrás">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
+      <DialogPane contentText="RESOLUCIÓN" layoutX="1473.0" layoutY="227.0" prefHeight="57.0" prefWidth="98.0" style="-fx-scale-x: 5; -fx-scale-y: 5; -fx-background-color: transparent;" />
+      <Button layoutX="1628.0" layoutY="414.0" mnemonicParsing="false" onMouseClicked="#changeResolution2" prefHeight="50.0" prefWidth="100.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Pequeña" />
+      <Button layoutX="1249.0" layoutY="414.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Grande" />
+      <Button layoutX="1649.0" layoutY="910.0" mnemonicParsing="false" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="157.0" prefWidth="257.0" text="Créditos">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="130.0" fitWidth="121.0" layoutX="910.0" layoutY="881.0" onMouseClicked="#howToPlay" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/interrogacion.jpg" />
+         </image>
+      </ImageView>
+      <DialogPane contentText="¿Cómo jugar?" layoutX="912.0" layoutY="791.0" prefHeight="53.0" prefWidth="96.0" style="-fx-scale-x: 4; -fx-scale-y: 4; -fx-background-color: transparent;" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #9b9b9b;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.HelloController">
+   <children>
+      <ChoiceBox layoutX="312.0" layoutY="175.0" prefHeight="50.0" prefWidth="96.0" style="-fx-background-color: #9b9b9b;" value="2 jugadores">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="2 jugadores" />
+               <String fx:value="3 jugadores" />
+               <String fx:value="4 jugadores" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <ChoiceBox layoutX="313.0" layoutY="335.0" prefHeight="50.0" prefWidth="96.0" value="Mundo">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Mundo" />
+               <String fx:value="Europa" />
+               <String fx:value="Montreal" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <Button layoutX="42.0" layoutY="610.0" onMouseClicked="#back" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" mnemonicParsing="false" prefHeight="68.0" prefWidth="129.0" style="-fx-background-color: #6d99d5;" text="Atras" />
+      <Button layoutX="550.0" layoutY="610.0" onMouseClicked="#back" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" mnemonicParsing="false" prefHeight="68.0" prefWidth="129.0" style="-fx-background-color: #6d99d5;" text="Jugar" />
+      <TextFlow layoutX="59.0" layoutY="44.0" prefHeight="200.0" prefWidth="200.0" />
+      <DialogPane contentText="Seleccione el mapa" layoutX="297.0" layoutY="261.0" prefHeight="42.0" prefWidth="129.0" style="-fx-background-color: #9b9b9b;" />
+      <DialogPane contentText="Seleccione el numero de jugadores" layoutX="252.0" layoutY="87.0" prefHeight="50.0" prefWidth="217.0" style="-fx-background-color: #9b9b9b;" />
+   </children>
+</AnchorPane>

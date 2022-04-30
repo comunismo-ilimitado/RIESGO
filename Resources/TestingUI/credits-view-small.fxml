@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image: url('../Resources/TestingUI/Images/fondo.jpg');" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.HelloController">
+    <children>
+        <ImageView fitHeight="861.0" fitWidth="1304.0" layoutX="-5.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Images/fondo.jpg" />
+            </image>
+        </ImageView>
+        <DialogPane contentText="RIESGO" layoutX="604.0" layoutY="67.0" prefHeight="53.0" prefWidth="73.0" style="-fx-scale-x: 3; -fx-scale-y: 3; -fx-background-color: transparent;" />
+      <DialogPane contentText="Creado por:" layoutX="431.0" layoutY="187.0" prefHeight="53.0" prefWidth="177.0" style="-fx-scale-x: 3; -fx-scale-y: 3; -fx-background-color: transparent;" />
+      <DialogPane contentText="-Jesús González Gironda" layoutX="559.0" layoutY="594.0" prefHeight="53.0" prefWidth="219.0" style="-fx-scale-x: 3; -fx-scale-y: 3; -fx-background-color: transparent;" />
+      <DialogPane contentText="-Gonzalo Ortega Carpintero" layoutX="532.0" layoutY="514.0" prefHeight="53.0" prefWidth="192.0" style="-fx-scale-x: 3; -fx-scale-y: 3; -fx-background-color: transparent;" />
+      <DialogPane contentText="-Guillermo Grande Santi" layoutX="507.0" layoutY="434.0" prefHeight="53.0" prefWidth="167.0" style="-fx-scale-x: 3; -fx-scale-y: 3; -fx-background-color: transparent;" />
+      <DialogPane contentText="-Alejandro López Adrados" layoutX="548.0" layoutY="354.0" prefHeight="53.0" prefWidth="208.0" style="-fx-scale-x: 3; -fx-scale-y: 3; -fx-background-color: transparent;" />
+      <DialogPane contentText="-Jorge Vega Arias" layoutX="460.0" layoutY="274.0" prefHeight="53.0" prefWidth="120.0" style="-fx-scale-x: 3; -fx-scale-y: 3; -fx-background-color: transparent;" />
+      <Button layoutX="1134.0" layoutY="632.0" mnemonicParsing="false" onMouseClicked="#back" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="68.0" prefWidth="132.0" text="Volver">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>

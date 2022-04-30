@@ -23,7 +23,7 @@
       <DialogPane contentText="RESOLUCIÓN" layoutX="1473.0" layoutY="227.0" prefHeight="57.0" prefWidth="98.0" style="-fx-scale-x: 5; -fx-scale-y: 5; -fx-background-color: transparent;" />
       <Button layoutX="1628.0" layoutY="414.0" mnemonicParsing="false" onMouseClicked="#changeResolution2" prefHeight="50.0" prefWidth="100.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Pequeña" />
       <Button layoutX="1249.0" layoutY="414.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Grande" />
-      <Button layoutX="1649.0" layoutY="910.0" mnemonicParsing="false" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="157.0" prefWidth="257.0" text="Créditos">
+      <Button layoutX="1649.0" layoutY="910.0" mnemonicParsing="false" onMouseClicked="#credits" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="157.0" prefWidth="257.0" text="Créditos">
          <font>
             <Font size="30.0" />
          </font>

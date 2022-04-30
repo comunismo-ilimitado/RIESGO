@@ -14,7 +14,7 @@ public class HelloFX extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         stage.setTitle("RIESGO");
         stage.setFullScreen(false);
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.minWidthProperty().bind(scene.heightProperty().multiply(2));
         stage.minHeightProperty().bind(scene.widthProperty().divide(2));

@@ -6,11 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,17 +53,64 @@ public class HelloController {
         }
     }
 
+    public void changeImageSettings(MouseEvent mouseEvent) {
+        ImageView imageView = (ImageView) mouseEvent.getSource();
+        if (imageView.getId().equals("settings")) {
+            File file = new File("Resources/TestingUI/Images/settingsLogoOn.jpg");
+            Image image = new Image(file.toURI().toString());
+            imageView.setImage(image);
+        } else if (imageView.getId().equals("exit")) {
+            File file = new File("Resources/TestingUI/Images/exit2.jpg");
+            Image image = new Image(file.toURI().toString());
+            imageView.setImage(image);
+        }
+    }
+
+    public void returnImageSettings(MouseEvent mouseEvent) throws FileNotFoundException {
+        ImageView imageView = (ImageView) mouseEvent.getSource();
+        if (imageView.getId().equals("settings")) {
+            File file = new File("Resources/TestingUI/Images/settingsLogo.jpg");
+            Image image = new Image(file.toURI().toString());
+            imageView.setImage(image);
+        } else if(imageView.getId().equals("exit")){
+            File file = new File("Resources/TestingUI/Images/exit.jpg");
+            Image image = new Image(file.toURI().toString());
+            imageView.setImage(image);
+        }
+    }
+
     public void settings(MouseEvent event) {
+        try {
+            Parent root;
+            Scene scene;
+            ImageView imageView = (ImageView) event.getSource();
+
+            if (imageView.getScene().getHeight() == 720) {
+                root = FXMLLoader.load(getClass().getResource("settings-view-small.fxml"));
+                scene = new Scene(root, 1280, 720);
+            } else {
+                root = FXMLLoader.load(getClass().getResource("settings-view-big.fxml"));
+                scene = new Scene(root, 1920, 1080);
+            }
+            Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+            appStage.setScene(scene);
+            appStage.toFront();
+            appStage.show();
+        } catch (Exception e) {
+        }
+    }
+
+    public void credits(MouseEvent event) {
         try {
             Parent root;
             Scene scene;
             Button button = (Button) event.getSource();
             if (button.getScene().getHeight() == 720) {
-                root = FXMLLoader.load(getClass().getResource("settings-view-small.fxml"));
-                 scene = new Scene(root, 1280, 720);
+                root = FXMLLoader.load(getClass().getResource("credits-view-small.fxml"));
+                scene = new Scene(root, 1280, 720);
             } else {
-                root = FXMLLoader.load(getClass().getResource("settings-view-big.fxml"));
-                 scene = new Scene(root, 1920, 1080);
+                root = FXMLLoader.load(getClass().getResource("credits-view-big.fxml"));
+                scene = new Scene(root, 1920, 1080);
             }
             Stage appStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);

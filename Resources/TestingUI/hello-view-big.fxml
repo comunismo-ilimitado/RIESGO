@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-image: url('../Resources/TestingUI/Images/fondo.jpg');" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.HelloController">
    <children>
@@ -18,10 +16,6 @@
             <Image url="@Images/riskLogo.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="765.0" layoutY="731.0" mnemonicParsing="false" onMouseClicked="#play" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="252.0" prefWidth="412.0" style="-fx-background-color: #FFFFFF;" text="JUGAR">
-         <font>
-            <Font size="40.0" />
-         </font></Button>
       <ImageView fx:id="settings" fitHeight="286.0" fitWidth="308.0" layoutX="175.0" layoutY="714.0" onMouseClicked="#settings" onMouseEntered="#changeImageSettings" onMouseExited="#returnImageSettings" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/settingsLogo.jpg" />
@@ -30,6 +24,11 @@
       <ImageView fx:id="exit" fitHeight="225.0" fitWidth="227.0" layoutX="1523.0" layoutY="744.0" onMouseClicked="#exitGame" onMouseEntered="#changeImageSettings" onMouseExited="#returnImageSettings" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/exit.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="play" fitHeight="225.0" fitWidth="225.0" layoutX="848.0" layoutY="748.0" onMouseClicked="#play" onMouseEntered="#changeImageSettings" onMouseExited="#returnImageSettings" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/play.jpg" />
          </image>
       </ImageView>
    </children>

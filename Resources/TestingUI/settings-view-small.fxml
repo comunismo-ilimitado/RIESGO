@@ -12,27 +12,27 @@
             <Image url="@Images/fondo.jpg" />
          </image>
       </ImageView>
-      <DialogPane contentText="IDIOMA" layoutX="241.0" layoutY="159.0" prefHeight="53.0" prefWidth="66.0" style="-fx-scale-x: 3; -fx-scale-y: 3; -fx-background-color: transparent;" />
-      <Button layoutX="344.0" layoutY="323.0" mnemonicParsing="false" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Español" />
-      <Button layoutX="151.0" layoutY="323.0" mnemonicParsing="false" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Inglés" />
-      <Button layoutX="14.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#back" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="93.0" prefWidth="179.0" text="Atrás">
+      <DialogPane contentText="IDIOMA" layoutX="277.0" layoutY="147.0" prefHeight="53.0" prefWidth="66.0" style="-fx-scale-x: 3; -fx-scale-y: 3; -fx-background-color: transparent;" />
+      <Button layoutX="387.0" layoutY="296.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Español" />
+      <Button layoutX="139.0" layoutY="296.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Inglés" />
+      <Button layoutX="38.0" layoutY="582.0" mnemonicParsing="false" onMouseClicked="#back" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="93.0" prefWidth="179.0" text="Atrás">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <DialogPane contentText="RESOLUCIÓN" layoutX="894.0" layoutY="159.0" prefHeight="53.0" prefWidth="96.0" style="-fx-scale-x: 3; -fx-scale-y: 3; -fx-background-color: transparent;" />
-      <Button layoutX="1030.0" layoutY="323.0" mnemonicParsing="false" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Pequeña" />
-      <Button layoutX="781.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#changeResolution1" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Grande" />
-      <Button layoutX="1086.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#credits" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="93.0" prefWidth="179.0" text="Créditos">
+      <DialogPane contentText="RESOLUCIÓN" layoutX="888.0" layoutY="147.0" prefHeight="53.0" prefWidth="96.0" style="-fx-scale-x: 3; -fx-scale-y: 3; -fx-background-color: transparent;" />
+      <Button layoutX="1040.0" layoutY="296.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Pequeña" />
+      <Button layoutX="759.0" layoutY="296.0" mnemonicParsing="false" onMouseClicked="#changeResolution1" prefHeight="40.0" prefWidth="80.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Grande" />
+      <Button layoutX="1062.0" layoutY="582.0" mnemonicParsing="false" onMouseClicked="#credits" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="93.0" prefWidth="179.0" text="Créditos">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <ImageView fitHeight="101.0" fitWidth="71.0" layoutX="575.0" layoutY="607.0" onMouseClicked="#howToPlay" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="101.0" fitWidth="71.0" layoutX="576.0" layoutY="582.0" onMouseClicked="#howToPlay" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/interrogacion.jpg" />
          </image>
       </ImageView>
-      <DialogPane contentText="¿Cómo jugar?" layoutX="563.0" layoutY="534.0" prefHeight="53.0" prefWidth="96.0" style="-fx-scale-x: 2; -fx-scale-y: 2; -fx-background-color: transparent;" />
+      <DialogPane contentText="¿Cómo jugar?" layoutX="563.0" layoutY="503.0" prefHeight="53.0" prefWidth="96.0" style="-fx-scale-x: 2; -fx-scale-y: 2; -fx-background-color: transparent;" />
    </children>
 </AnchorPane>

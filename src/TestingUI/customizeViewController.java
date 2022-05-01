@@ -28,6 +28,10 @@ public class customizeViewController implements Initializable {
     private ComboBox<String> combo1jugador;
     @FXML
     private ComboBox<String> combo2jugador;
+    @FXML
+    private ComboBox<String> combo3jugador;
+    @FXML
+    private ComboBox<String> combo4jugador;
 
     private String[] players = {"2 jugadores", "3 jugadores", "4 jugadores"};
     private String[] maps = {"Mundo", "Europa"};
@@ -41,21 +45,37 @@ public class customizeViewController implements Initializable {
         try {
             combo1jugador.getItems().addAll(strategies);
             combo2jugador.getItems().addAll(strategies);
+            combo3jugador.getItems().addAll(strategies);
+            combo4jugador.getItems().addAll(strategies);
         }catch(Exception e){
 
         }
     }
 
     private void getItem(ActionEvent event) {
+        ComboBox box = (ComboBox) event.getSource();
+        Double res = box.getScene().getWidth();
         String player = comboJugadores.getValue();
         try {
             Parent root = null;
             if (player.equals("2 jugadores")) {
-                root = FXMLLoader.load(getClass().getResource("customize-view-small-2players.fxml"));
+                if(res==720) {
+                    root = FXMLLoader.load(getClass().getResource("customize-view-small-2players.fxml"));
+                } else{
+                    root = FXMLLoader.load(getClass().getResource("customize-view-big-2players.fxml"));
+                }
             } else if (player.equals("3 jugadores")) {
-                root = FXMLLoader.load(getClass().getResource("customize-view-small-3players.fxml"));
+                if(res==720) {
+                    root = FXMLLoader.load(getClass().getResource("customize-view-small-3players.fxml"));
+                } else{
+                    root = FXMLLoader.load(getClass().getResource("customize-view-big-3players.fxml"));
+                }
             } else if (player.equals("4 jugadores")) {
-                System.out.println("a");
+                if(res==720) {
+                    root = FXMLLoader.load(getClass().getResource("customize-view-small-4players.fxml"));
+                } else{
+                    root = FXMLLoader.load(getClass().getResource("customize-view-big-4players.fxml"));
+                }
             }
             Scene scene = new Scene(root);
             Stage appStage = (Stage) ((ComboBox) event.getSource()).getScene().getWindow();

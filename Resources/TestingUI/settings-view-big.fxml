@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-image: url('../Resources/TestingUI/Images/fondo.jpg');" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-image: url('../Resources/TestingUI/Images/fondo.jpg');" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.HelloController">
    <children>
       <ImageView fitHeight="1319.0" fitWidth="1996.0" layoutX="-50.0" layoutY="-99.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -15,12 +15,7 @@
       <DialogPane contentText="IDIOMA" layoutX="473.0" layoutY="217.0" prefHeight="53.0" prefWidth="66.0" style="-fx-scale-x: 6; -fx-scale-y: 6; -fx-background-color: transparent;" />
       <Button layoutX="653.0" layoutY="415.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="140.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Español" />
       <Button layoutX="204.0" layoutY="415.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="140.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Inglés" />
-      <Button layoutX="101.0" layoutY="845.0" mnemonicParsing="false" onMouseClicked="#back" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="157.0" prefWidth="257.0" text="Atrás">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Button>
-      <DialogPane contentText="RESOLUCIÓN" layoutX="1413.0" layoutY="215.0" prefHeight="57.0" prefWidth="98.0" style="-fx-scale-x: 6; -fx-scale-y: 6; -fx-background-color: transparent;" />
+      <DialogPane contentText="RESOLUCIÓN" layoutX="1461.0" layoutY="217.0" prefHeight="57.0" prefWidth="116.0" style="-fx-scale-x: 6; -fx-scale-y: 6; -fx-background-color: transparent;" />
       <Button layoutX="1597.0" layoutY="415.0" mnemonicParsing="false" onMouseClicked="#changeResolution2" prefHeight="75.0" prefWidth="140.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Pequeña" />
       <Button layoutX="1174.0" layoutY="415.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="140.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Grande" />
       <Button layoutX="1550.0" layoutY="845.0" mnemonicParsing="false" onMouseClicked="#credits" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="157.0" prefWidth="257.0" text="Créditos">
@@ -33,6 +28,11 @@
             <Image url="@Images/interrogacion.jpg" />
          </image>
       </ImageView>
-      <DialogPane contentText="¿Cómo jugar?" layoutX="912.0" layoutY="733.0" prefHeight="53.0" prefWidth="96.0" style="-fx-scale-x: 4; -fx-scale-y: 4; -fx-background-color: transparent;" />
+      <ImageView fx:id="atras" fitHeight="174.0" fitWidth="306.0" layoutY="866.0" onMouseClicked="#back" onMouseEntered="#imageOut" onMouseExited="#imageIn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Flecha_atras1.png" />
+         </image>
+      </ImageView>
+      <DialogPane contentText="¿Cómo jugar?" layoutX="912.0" layoutY="732.0" prefHeight="57.0" prefWidth="99.0" style="-fx-scale-x: 4; -fx-scale-y: 4; -fx-background-color: transparent;" />
    </children>
 </AnchorPane>

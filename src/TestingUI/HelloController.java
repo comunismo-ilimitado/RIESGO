@@ -3,7 +3,6 @@ package TestingUI;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -51,7 +50,7 @@ public class HelloController {
         }
     }
 
-    public void changeImageSettings(MouseEvent mouseEvent) {
+    public void imageOut(MouseEvent mouseEvent) {
         ImageView imageView = (ImageView) mouseEvent.getSource();
         if (imageView.getId().equals("settings")) {
             File file = new File("Resources/TestingUI/Images/settingsLogoOn.jpg");
@@ -65,10 +64,14 @@ public class HelloController {
             File file = new File("Resources/TestingUI/Images/play2.jpg");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
+        } else if (imageView.getId().equals("atras")) {
+            File file = new File("Resources/TestingUI/Images/Flecha_atras2.png");
+            Image image = new Image(file.toURI().toString());
+            imageView.setImage(image);
         }
     }
 
-    public void returnImageSettings(MouseEvent mouseEvent) throws FileNotFoundException {
+    public void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
         ImageView imageView = (ImageView) mouseEvent.getSource();
         if (imageView.getId().equals("settings")) {
             File file = new File("Resources/TestingUI/Images/settingsLogo.jpg");
@@ -80,6 +83,10 @@ public class HelloController {
             imageView.setImage(image);
         } else if (imageView.getId().equals("play")) {
             File file = new File("Resources/TestingUI/Images/play.jpg");
+            Image image = new Image(file.toURI().toString());
+            imageView.setImage(image);
+        } else if (imageView.getId().equals("atras")) {
+            File file = new File("Resources/TestingUI/Images/Flecha_atras1.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         }
@@ -163,34 +170,20 @@ public class HelloController {
     public void back(MouseEvent event) {
         try {
             Parent root;
-            Button button = (Button) event.getSource();
-            if (button.getScene().getHeight() == 720) {
+            ImageView imageView = (ImageView) event.getSource();
+            if (imageView.getScene().getHeight() == 720) {
                 root = FXMLLoader.load(getClass().getResource("hello-view-small.fxml"));
             } else {
                 root = FXMLLoader.load(getClass().getResource("hello-view-big.fxml"));
             }
             Scene scene = new Scene(root);
-            Stage appStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);
             appStage.toFront();
             appStage.show();
 
         } catch (Exception e) {
         }
-    }
-
-    public void imageOut(MouseEvent mouseEvent) {
-        ImageView image = (ImageView) mouseEvent.getSource();
-        File file = new File("Resources/TestingUI/botonJugar.png.png");
-        Image newImage = new Image(file.toURI().toString());
-        image.setImage(newImage);
-    }
-
-    public void imageIn(MouseEvent mouseEvent) {
-        ImageView image = (ImageView) mouseEvent.getSource();
-        File file = new File("Resources/TestingUI/botonJugar.png-2.png");
-        Image newImage = new Image(file.toURI().toString());
-        image.setImage(newImage);
     }
 
 }

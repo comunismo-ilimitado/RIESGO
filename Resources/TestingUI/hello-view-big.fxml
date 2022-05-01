@@ -16,17 +16,17 @@
             <Image url="@Images/riskLogo.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="settings" fitHeight="286.0" fitWidth="308.0" layoutX="175.0" layoutY="714.0" onMouseClicked="#settings" onMouseEntered="#changeImageSettings" onMouseExited="#returnImageSettings" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="settings" fitHeight="286.0" fitWidth="308.0" layoutX="175.0" layoutY="714.0" onMouseClicked="#settings" onMouseEntered="#imageOut" onMouseExited="#imageIn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/settingsLogo.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="exit" fitHeight="225.0" fitWidth="227.0" layoutX="1523.0" layoutY="744.0" onMouseClicked="#exitGame" onMouseEntered="#changeImageSettings" onMouseExited="#returnImageSettings" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="exit" fitHeight="225.0" fitWidth="227.0" layoutX="1523.0" layoutY="744.0" onMouseClicked="#exitGame" onMouseEntered="#imageOut" onMouseExited="#imageIn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/exit.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="play" fitHeight="225.0" fitWidth="225.0" layoutX="848.0" layoutY="748.0" onMouseClicked="#play" onMouseEntered="#changeImageSettings" onMouseExited="#returnImageSettings" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="play" fitHeight="225.0" fitWidth="225.0" layoutX="848.0" layoutY="748.0" onMouseClicked="#play" onMouseEntered="#imageOut" onMouseExited="#imageIn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/play.jpg" />
          </image>

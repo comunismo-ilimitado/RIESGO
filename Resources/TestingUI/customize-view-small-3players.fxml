@@ -11,8 +11,11 @@
             <Image url="@fondo.jpg" />
          </image>
       </ImageView>
-      <ComboBox fx:id="comboJugadores" layoutX="273.0" layoutY="183.0" prefHeight="50.0" prefWidth="185.0" promptText="Seleccione los jugadores" />
-      <ComboBox fx:id="comboMapas" layoutX="273.0" layoutY="402.0" prefHeight="50.0" prefWidth="185.0" promptText="Seleccione el mapa" />
+      <ComboBox fx:id="comboJugadores" layoutX="273.0" layoutY="183.0" prefHeight="50.0" prefWidth="175.0" value="2 jugadores" />
+      <ComboBox fx:id="comboMapas" layoutX="273.0" layoutY="402.0" prefHeight="50.0" prefWidth="175.0" value="Seleccione el mapa" />
+      <ComboBox fx:id="combo1jugador" layoutX="43.0" layoutY="305.0" prefWidth="150.0" value="Humano" />
+      <ComboBox fx:id="combo2jugador" layoutX="512.0" layoutY="305.0" prefWidth="150.0" value="Humano" />
+      <ComboBox fx:id="combo3jugador" layoutX="285.0" layoutY="305.0" prefWidth="150.0" value="Humano"/>
       <ImageView fx:id="atras" fitHeight="89.0" fitWidth="159.0" layoutX="14.0" layoutY="515.0" onMouseClicked="#back" onMouseEntered="#imageIn" onMouseExited="#imageOut" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Flecha_atras1.png" />

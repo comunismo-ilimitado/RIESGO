@@ -1,24 +1,22 @@
 package TestingUI;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.awt.*;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.io.File;
 
 public class HelloController {
-    @FXML
-    private Label welcomeText;
+
 
     public void exitGame() {
         System.exit(0);
@@ -39,9 +37,9 @@ public class HelloController {
             Parent root;
             ImageView imageView = (ImageView) event.getSource();
             if (imageView.getScene().getHeight() == 720) {
-                 root = FXMLLoader.load(getClass().getResource("customize-view-small.fxml"));
+                root = FXMLLoader.load(getClass().getResource("customize-view-small.fxml"));
             } else {
-                 root = FXMLLoader.load(getClass().getResource("customize-view-big.fxml"));
+                root = FXMLLoader.load(getClass().getResource("customize-view-big.fxml"));
             }
             Scene scene = new Scene(root);
             Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
@@ -60,7 +58,7 @@ public class HelloController {
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("exit")) {
-            File file = new File("Resources/TestingUI/Images/exit2.jpg");
+            File file = new File("Resources/TestingUI/Images/exit.jpg");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("play")) {
@@ -76,8 +74,8 @@ public class HelloController {
             File file = new File("Resources/TestingUI/Images/settingsLogo.jpg");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
-        } else if(imageView.getId().equals("exit")){
-            File file = new File("Resources/TestingUI/Images/exit.jpg");
+        } else if (imageView.getId().equals("exit")) {
+            File file = new File("Resources/TestingUI/Images/exit2.jpg");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("play")) {
@@ -157,7 +155,7 @@ public class HelloController {
             Desktop.getDesktop().browse(new URI("https://www.hasbro.com/common/documents/dad2886d1c4311ddbd0b0800200c9a66/ADE84A6E50569047F504839559C5FEBF.pdf"));
         } catch (URISyntaxException ex) {
             System.out.println(ex);
-        }catch(IOException e){
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
@@ -180,4 +178,19 @@ public class HelloController {
         } catch (Exception e) {
         }
     }
+
+    public void imageOut(MouseEvent mouseEvent) {
+        ImageView image = (ImageView) mouseEvent.getSource();
+        File file = new File("Resources/TestingUI/botonJugar.png.png");
+        Image newImage = new Image(file.toURI().toString());
+        image.setImage(newImage);
+    }
+
+    public void imageIn(MouseEvent mouseEvent) {
+        ImageView image = (ImageView) mouseEvent.getSource();
+        File file = new File("Resources/TestingUI/botonJugar.png-2.png");
+        Image newImage = new Image(file.toURI().toString());
+        image.setImage(newImage);
+    }
+
 }

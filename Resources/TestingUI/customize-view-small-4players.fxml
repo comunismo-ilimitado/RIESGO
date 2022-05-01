@@ -11,8 +11,10 @@
             <Image url="@fondo.jpg" />
          </image>
       </ImageView>
-      <ComboBox fx:id="comboJugadores" layoutX="273.0" layoutY="183.0" prefHeight="50.0" prefWidth="185.0" promptText="Seleccione los jugadores" />
-      <ComboBox fx:id="comboMapas" layoutX="273.0" layoutY="402.0" prefHeight="50.0" prefWidth="185.0" promptText="Seleccione el mapa" />
+      <ComboBox fx:id="comboJugadores" layoutX="273.0" layoutY="183.0" prefHeight="50.0" prefWidth="175.0" value="2 jugadores" />
+      <ComboBox fx:id="comboMapas" layoutX="273.0" layoutY="402.0" prefHeight="50.0" prefWidth="175.0" value="Seleccione el mapa" />
+      <ComboBox fx:id="combo1jugador" layoutX="43.0" layoutY="305.0" prefWidth="150.0" value="Humano" />
+      <ComboBox fx:id="combo2jugadores" layoutX="512.0" layoutY="305.0" prefWidth="150.0" value="Humano" />
       <ImageView fx:id="atras" fitHeight="89.0" fitWidth="159.0" layoutX="14.0" layoutY="515.0" onMouseClicked="#back" onMouseEntered="#imageIn" onMouseExited="#imageOut" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Flecha_atras1.png" />
@@ -24,5 +26,6 @@
          </image>
       </ImageView>
       <DialogPane contentText="CONFIGURACIÓN DE PARTIDA" layoutX="260.0" layoutY="51.0" prefHeight="57.0" prefWidth="201.0" style="-fx-scale-x: 3; -fx-scale-y: 3; -fx-background-color: transparent;" />
+      <ComboBox layoutX="286.0" layoutY="306.0" prefWidth="150.0" promptText="combo3jugadores" />
    </children>
 </AnchorPane>

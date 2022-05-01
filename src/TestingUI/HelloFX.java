@@ -16,8 +16,6 @@ public class HelloFX extends Application {
         stage.setFullScreen(false);
         stage.setResizable(false);
         stage.setScene(scene);
-        stage.minWidthProperty().bind(scene.heightProperty().multiply(2));
-        stage.minHeightProperty().bind(scene.widthProperty().divide(2));
         stage.show();
 
     }

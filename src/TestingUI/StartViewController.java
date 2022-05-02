@@ -38,12 +38,7 @@ public class StartViewController {
     private void play(MouseEvent event) {
         try {
             Parent root;
-            ImageView imageView = (ImageView) event.getSource();
-            if (imageView.getScene().getHeight() == 720) {
-                root = FXMLLoader.load(getClass().getResource("customize-view-small.fxml"));
-            } else {
-                root = FXMLLoader.load(getClass().getResource("customize-view-big.fxml"));
-            }
+            root = FXMLLoader.load(getClass().getResource("customize-view.fxml"));
             Scene scene = new Scene(root);
             Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);
@@ -109,15 +104,8 @@ public class StartViewController {
         try {
             Parent root;
             Scene scene;
-            ImageView imageView = (ImageView) event.getSource();
-
-            if (imageView.getScene().getHeight() == 720) {
-                root = FXMLLoader.load(getClass().getResource("settings-view-small.fxml"));
-                scene = new Scene(root, 1280, 720);
-            } else {
-                root = FXMLLoader.load(getClass().getResource("settings-view-big.fxml"));
-                scene = new Scene(root, 1920, 1080);
-            }
+            root = FXMLLoader.load(getClass().getResource("settings-view.fxml"));
+            scene = new Scene(root, 1280, 720);
             Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);
             appStage.toFront();
@@ -132,13 +120,8 @@ public class StartViewController {
             Parent root;
             Scene scene;
             Button button = (Button) event.getSource();
-            if (button.getScene().getHeight() == 720) {
-                root = FXMLLoader.load(getClass().getResource("credits-view-small.fxml"));
-                scene = new Scene(root, 1280, 720);
-            } else {
-                root = FXMLLoader.load(getClass().getResource("credits-view-big.fxml"));
-                scene = new Scene(root, 1920, 1080);
-            }
+            root = FXMLLoader.load(getClass().getResource("credits-view.fxml"));
+            scene = new Scene(root, 1280, 720);
             Stage appStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);
             appStage.toFront();
@@ -149,38 +132,16 @@ public class StartViewController {
 
     @FXML
     private void changeResolution1(MouseEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("settings-view-big.fxml"));
-            Scene scene = new Scene(root, 1920, 1080);
-            Stage appStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            appStage.setScene(scene);
-            appStage.toFront();
-            appStage.show();
-        } catch (Exception e) {
-        }
-    }
 
-    @FXML
-    private void changeResolution2(MouseEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("settings-view-small.fxml"));
-            Scene scene = new Scene(root, 1280, 720);
-            Stage appStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            appStage.setScene(scene);
-            appStage.toFront();
-            appStage.show();
-        } catch (Exception e) {
-        }
+        System.out.println("Cambio de tamanio");
     }
 
     @FXML
     private void howToPlay(MouseEvent event) {
         try {
             Desktop.getDesktop().browse(new URI("https://www.hasbro.com/common/documents/dad2886d1c4311ddbd0b0800200c9a66/ADE84A6E50569047F504839559C5FEBF.pdf"));
-        } catch (URISyntaxException ex) {
+        } catch (URISyntaxException | IOException ex) {
             System.out.println(ex);
-        } catch (IOException e) {
-            System.out.println(e);
         }
     }
 
@@ -189,11 +150,7 @@ public class StartViewController {
         try {
             Parent root;
             ImageView imageView = (ImageView) event.getSource();
-            if (imageView.getScene().getHeight() == 720) {
-                root = FXMLLoader.load(getClass().getResource("hello-view-small.fxml"));
-            } else {
-                root = FXMLLoader.load(getClass().getResource("hello-view-big.fxml"));
-            }
+            root = FXMLLoader.load(getClass().getResource("start-view.fxml"));
             Scene scene = new Scene(root);
             Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);

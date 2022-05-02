@@ -3,26 +3,37 @@ package TestingUI;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.CacheHint;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+
 import javafx.scene.paint.Color;
 
+import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
 
 public class MapController implements Initializable {
     @FXML
+    private Pane exitPane, errorPane, dicePane;
+    @FXML
+    private Label errorLabel;
+    @FXML
+    private ImageView playerDice1, playerDice2, playerDice3, opponentDice1, opponentDice2, opponentDice3;
+    private Image[] dice = new Image[6];
+    @FXML
     private ImageView alaska, alberta, argentina, brazil, britain, centralAmerica, china, congo, eastAfrica,
             easternAustralia, easternUS, egypt, greenland, iceland, india, indonesia, irkutsk, japan, kamchatka,
             kazakhstan, madagascar, middleEast, mongolia, northAfrica, northernEurope, northWestTerritory, ontario,
             papuaNewGuinea, peru, quebec, scandinavia, siam, siberia, southAfrica, southernEurope, ukraine, ural,
             venezuela, westernAustralia, westernEurope, westernUS, yakutsk;
-
     private HashMap<String, ImageView> colorReference = new HashMap<>();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -68,6 +79,19 @@ public class MapController implements Initializable {
         colorReference.put("0xbf80bfff", papuaNewGuinea);
         colorReference.put("0xcc80ccff", westernAustralia);
         colorReference.put("0xd980d9ff", easternAustralia);
+
+        File file = new File("Resources/TestingUI/Images/Dice/one.png");
+        dice[0] = new Image(file.toURI().toString());
+        file = new File("Resources/TestingUI/Images/Dice/two.png");
+        dice[1] = new Image(file.toURI().toString());
+        file = new File("Resources/TestingUI/Images/Dice/three.png");
+        dice[2] = new Image(file.toURI().toString());
+        file = new File("Resources/TestingUI/Images/Dice/four.png");
+        dice[3] = new Image(file.toURI().toString());
+        file = new File("Resources/TestingUI/Images/Dice/five.png");
+        dice[4] = new Image(file.toURI().toString());
+        file = new File("Resources/TestingUI/Images/Dice/six.png");
+        dice[5] = new Image(file.toURI().toString());
     }
 
     @FXML
@@ -95,5 +119,49 @@ public class MapController implements Initializable {
         country.setEffect(colorSettings);
         country.setCache(true);
         country.setCacheHint(CacheHint.SPEED);
+    }
+    @FXML
+    private void nextPhase() {
+        errorPane.setVisible(true);
+        errorLabel.setText("Hace falta desplegar todas las tropas");
+        System.out.println("Siguiente fase");
+    }
+    @FXML
+    private void exchangeCards() {
+        dicePane.setVisible(true);
+
+        File file = new File("Resources/TestingUI/Images/Dice/one.png");
+        Image dice1 = new Image(file.toURI().toString());
+
+        playerDice1.setImage(dice[(int) Math.random() % 6 + 1]);
+        playerDice2.setImage(dice[(int) Math.random() % 6 + 1]);
+        playerDice3.setVisible(false);
+        opponentDice1.setImage(dice[(int) Math.random() % 6 + 1]);
+        opponentDice2.setImage(dice[(int) Math.random() % 6 + 1]);
+        opponentDice3.setImage(dice[(int) Math.random() % 6 + 1]);
+
+        System.out.println("Intercambio de cartas");
+    }
+    @FXML
+    private void settings() {
+        System.out.println("Ajustes");
+    }
+    @FXML
+    private void leaveGame() {
+        exitPane.setVisible(true);
+    }
+    @FXML
+    private void yesButton() {
+         System.exit(0);
+    }
+    @FXML
+    private void noButton() {
+        System.exit(0);
+    }
+    @FXML
+    private void returnGame() {
+        exitPane.setVisible(false);
+        errorPane.setVisible(false);
+        dicePane.setVisible(false);
     }
 }

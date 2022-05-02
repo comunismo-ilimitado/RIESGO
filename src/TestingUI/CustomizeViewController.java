@@ -121,11 +121,7 @@ public class CustomizeViewController implements Initializable {
         try{
             Parent root;
             ImageView image = (ImageView) event.getSource();
-            if (image.getScene().getHeight() == 720) {
-                root = FXMLLoader.load(getClass().getResource("hello-view-small.fxml"));
-            } else {
-                root = FXMLLoader.load(getClass().getResource("hello-view-big.fxml"));
-            }
+            root = FXMLLoader.load(getClass().getResource("start-view.fxml"));
             Scene scene = new Scene(root);
             Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);

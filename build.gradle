@@ -52,7 +52,7 @@ jar {
 }
 
 javafx {
-    version = "17.0.1"
+    version = "18"
     modules = ['javafx.controls', 'javafx.fxml']
 }
 

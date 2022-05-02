@@ -19,7 +19,7 @@ group 'urjc.grupo5'
 version '1.0'
 
 ext {
-    javaMainClass = "TestingUI.HelloFX"
+    javaMainClass = "TestingUI.MainUI"
 }
 
 repositories {

@@ -18,7 +18,7 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.*;
 
-public class customizeViewController implements Initializable {
+public class CustomizeViewController implements Initializable {
     @FXML
     private ComboBox<String> comboJugadores;
     @FXML
@@ -135,10 +135,10 @@ public class customizeViewController implements Initializable {
         }
     }
 
-    public void game(MouseEvent event) {
-        try{
-            Parent root;
-            root = FXMLLoader.load(getClass().getResource("map-view.fxml"));
+    @FXML
+    private void game(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("map-view.fxml"));;
             Scene scene = new Scene(root);
             Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);
@@ -146,7 +146,6 @@ public class customizeViewController implements Initializable {
             appStage.show();
         } catch (Exception e) {
         }
-        System.out.println("Juego");
     }
 }
 

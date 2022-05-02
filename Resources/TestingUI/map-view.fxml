@@ -4,18 +4,229 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.MapController">
    <children>
       <ImageView fx:id="fullMap" fitHeight="720.0" fitWidth="1280.0" layoutX="-170.0" layoutY="-13.0" onMouseClicked="#mapSelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <image>
-            <Image url="@Map/FullMap.png" />
+            <Image url="@Map/ColorMap.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="westernEurope" fitHeight="720.0" fitWidth="1280.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <ImageView fx:id="blackMap" fitHeight="720.0" fitWidth="1280.0" layoutX="10.0" layoutY="10.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/BlackMap.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="alaska" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Alaska.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="alberta" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Alberta.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="argentina" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Argentina.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="brazil" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Brazil.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="britain" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Britain.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="centralAmerica" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/CentralAmerica.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="china" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/China.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="congo" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Congo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="eastAfrica" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/EastAfrica.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="easternAustralia" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/EasternAustralia.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="easternUS" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/EasternUS.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="egypt" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Egypt.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="greenland" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Greenland.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="iceland" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Iceland.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="india" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/India.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="indonesia" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Indonesia.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="irkutsk" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Irkutsk.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="japan" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Japan.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="kamchatka" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Kamchatka.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="kazakhstan" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Kazakhstan.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="madagascar" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Madagascar.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="middleEast" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/MiddleEast.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="mongolia" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Mongolia.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="northAfrica" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/NorthAfrica.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="northernEurope" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/NorthernEurope.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="northWestTerritory" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/NorthWestTerritory.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="ontario" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Ontario.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="papuaNewGuinea" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/PapuaNewGuinea.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="peru" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Peru.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="quebec" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Quebec.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="scandinavia" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Scandinavia.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="siam" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Siam.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="siberia" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <image>
+         <Image url="@Map/Siberia.png" />
+      </image>
+      </ImageView>
+      <ImageView fx:id="southAfrica" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/SouthAfrica.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="southernEurope" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/SouthernEurope.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="ukraine" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Ukraine.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="ural" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Ural.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="venezuela" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Venezuela.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="westernAustralia" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/WesternAustralia.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="westernEurope" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <image>
             <Image url="@Map/WesternEurope.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="westernUS" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/WesternUS.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="yakutsk" fitHeight="720.0" fitWidth="1280.0" layoutX="20.0" layoutY="20.0" mouseTransparent="true" onMouseClicked="#countrySelected" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@Map/Yakutsk.png" />
+         </image>
+      </ImageView>
+
+
    </children>
 </AnchorPane>

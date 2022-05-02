@@ -6,11 +6,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
 
-public class HelloFX extends Application {
+public class MainUI extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloFX.class.getResource("hello-view-small.fxml"));
+
+        FXMLLoader fxmlLoader = new FXMLLoader(MainUI.class.getResource("hello-view-small.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         stage.setTitle("RIESGO");
         stage.setFullScreen(false);

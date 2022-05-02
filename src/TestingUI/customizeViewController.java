@@ -6,18 +6,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class customizeViewController implements Initializable {
     @FXML
@@ -25,13 +24,11 @@ public class customizeViewController implements Initializable {
     @FXML
     private ComboBox<String> comboMapas;
     @FXML
-    private ComboBox<String> combo1jugador;
+    private ComboBox<String> b21, b22, b31, b32, b33, b41, b42, b43, b44;
+
+    //private List<ComboBox<String>> boxList = List.of(b21, b22, b31, b32, b33, b41, b42, b43, b44);
     @FXML
-    private ComboBox<String> combo2jugador;
-    @FXML
-    private ComboBox<String> combo3jugador;
-    @FXML
-    private ComboBox<String> combo4jugador;
+    private HBox two, three, four;
 
     private String[] players = {"2 jugadores", "3 jugadores", "4 jugadores"};
     private String[] maps = {"Mundo", "Europa"};
@@ -41,41 +38,48 @@ public class customizeViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         comboJugadores.getItems().addAll(players);
         comboMapas.getItems().addAll(maps);
-        comboJugadores.setOnAction(this::getItem);
-        try {
-            combo1jugador.getItems().addAll(strategies);
-            combo2jugador.getItems().addAll(strategies);
-            combo3jugador.getItems().addAll(strategies);
-            combo4jugador.getItems().addAll(strategies);
-        }catch(Exception e){
 
-        }
+        /*for (ComboBox<String> box : boxList) {
+            box.getItems().addAll(strategies);
+        }*/
+
+        b21.getItems().addAll(strategies);
+        b22.getItems().addAll(strategies);
+        b31.getItems().addAll(strategies);
+        b32.getItems().addAll(strategies);
+        b33.getItems().addAll(strategies);
+        b41.getItems().addAll(strategies);
+        b42.getItems().addAll(strategies);
+        b43.getItems().addAll(strategies);
+        b44.getItems().addAll(strategies);
+
+        comboJugadores.setOnAction(this::getItem);
+
+        two.setVisible(false);
+        three.setVisible(false);
+        four.setVisible(false);
+
     }
 
     private void getItem(ActionEvent event) {
         ComboBox box = (ComboBox) event.getSource();
         Double res = box.getScene().getWidth();
         String player = comboJugadores.getValue();
+
         try {
             Parent root = null;
             if (player.equals("2 jugadores")) {
-                if(res==720) {
-                    root = FXMLLoader.load(getClass().getResource("customize-view-small-2players.fxml"));
-                } else{
-                    root = FXMLLoader.load(getClass().getResource("customize-view-big-2players.fxml"));
-                }
+                two.setVisible(true);
+                three.setVisible(false);
+                four.setVisible(false);
             } else if (player.equals("3 jugadores")) {
-                if(res==720) {
-                    root = FXMLLoader.load(getClass().getResource("customize-view-small-3players.fxml"));
-                } else{
-                    root = FXMLLoader.load(getClass().getResource("customize-view-big-3players.fxml"));
-                }
+                two.setVisible(false);
+                three.setVisible(true);
+                four.setVisible(false);
             } else if (player.equals("4 jugadores")) {
-                if(res==720) {
-                    root = FXMLLoader.load(getClass().getResource("customize-view-small-4players.fxml"));
-                } else{
-                    root = FXMLLoader.load(getClass().getResource("customize-view-big-4players.fxml"));
-                }
+                two.setVisible(false);
+                three.setVisible(false);
+                four.setVisible(true);
             }
             Scene scene = new Scene(root);
             Stage appStage = (Stage) ((ComboBox) event.getSource()).getScene().getWindow();
@@ -132,6 +136,16 @@ public class customizeViewController implements Initializable {
     }
 
     public void game(MouseEvent event) {
+        try{
+            Parent root;
+            root = FXMLLoader.load(getClass().getResource("map-view.fxml"));
+            Scene scene = new Scene(root);
+            Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+            appStage.setScene(scene);
+            appStage.toFront();
+            appStage.show();
+        } catch (Exception e) {
+        }
         System.out.println("Juego");
     }
 }

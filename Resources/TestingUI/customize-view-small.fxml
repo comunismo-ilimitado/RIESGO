@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.customizeViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.customizeViewController">
    <children>
-      <ImageView fitHeight="919.0" fitWidth="1083.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="855.0" fitWidth="1397.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/fondo.jpg" />
          </image>
       </ImageView>
       <ComboBox fx:id="comboJugadores" layoutX="273.0" layoutY="183.0" prefHeight="50.0" prefWidth="185.0" promptText="Seleccione los jugadores" />
       <ComboBox fx:id="comboMapas" layoutX="273.0" layoutY="402.0" prefHeight="50.0" prefWidth="185.0" promptText="Seleccione el mapa" />
+
       <ImageView fx:id="atras" fitHeight="89.0" fitWidth="159.0" layoutX="14.0" layoutY="515.0" onMouseClicked="#back" onMouseEntered="#imageIn" onMouseExited="#imageOut" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Flecha_atras1.png" />
@@ -23,6 +29,37 @@
             <Image url="@Images/Flecha_adelante1.png" />
          </image>
       </ImageView>
-      <DialogPane contentText="CONFIGURACIÓN DE PARTIDA" layoutX="260.0" layoutY="51.0" prefHeight="57.0" prefWidth="201.0" style="-fx-scale-x: 3; -fx-scale-y: 3; -fx-background-color: transparent;" />
+      <Label layoutX="284.0" layoutY="107.0" text="Configuración de la partida">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <HBox fx:id="two" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" visible="false">
+         <children>
+            <ComboBox fx:id="b21" prefWidth="150.0" promptText="uno" value="Humano" />
+            <Separator prefWidth="200.0" visible="false" />
+            <ComboBox fx:id="b22" prefWidth="150.0" promptText="dos" value="Humano" />
+         </children>
+      </HBox>
+      <HBox fx:id="three" alignment="CENTER" layoutX="169.0" layoutY="269.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ComboBox fx:id="b31" prefWidth="150.0" promptText="uno" value="Humano" />
+            <Separator prefWidth="200.0" visible="false" />
+            <ComboBox fx:id="b32" prefWidth="150.0" promptText="dos" value="Humano" />
+            <Separator prefWidth="200.0" visible="false" />
+            <ComboBox fx:id="b33" prefWidth="150.0" promptText="tres" value="Humano" />
+         </children>
+      </HBox>
+      <HBox fx:id="four" alignment="CENTER" layoutX="243.0" layoutY="260.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ComboBox fx:id="b41" prefWidth="150.0" promptText="uno" value="Humano" />
+            <Separator prefWidth="200.0" visible="false" />
+            <ComboBox fx:id="b42" prefWidth="150.0" promptText="dos" value="Humano" />
+            <Separator prefWidth="200.0" visible="false" />
+            <ComboBox fx:id="b43" prefWidth="150.0" promptText="tres" value="Humano" />
+            <Separator prefWidth="200.0" visible="false" />
+            <ComboBox fx:id="b44" prefWidth="150.0" promptText="cuatro" value="Humano" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

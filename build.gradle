@@ -5,8 +5,8 @@ plugins {
     id 'org.beryx.jlink' version '2.24.1'
 }
 // Sources
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.9
+targetCompatibility = 1.9
 sourceSets {
     main.java.srcDirs = ['src']
     main.resources.srcDirs = ['Resources']

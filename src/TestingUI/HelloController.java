@@ -1,5 +1,6 @@
 package TestingUI;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -48,6 +49,12 @@ public class HelloController {
 
         } catch (Exception e) {
         }
+    }
+
+    @FXML
+    private void hideTitle(MouseEvent event){
+        ImageView title = (ImageView) event.getSource();
+        title.setVisible(false);
     }
 
     public void imageOut(MouseEvent mouseEvent) {

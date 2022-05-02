@@ -17,22 +17,25 @@ import java.io.File;
 
 public class StartViewController {
 
-
-    public void exitGame() {
+    @FXML
+    private void exitGame() {
         System.exit(0);
     }
 
-    public void changeColorEnter2(MouseEvent mouseEvent) {
+    @FXML
+    private void changeColorEnter2(MouseEvent mouseEvent) {
         Button button = (Button) mouseEvent.getSource();
         button.setStyle("-fx-background-color: #E19C1B");
     }
 
-    public void changeColorOut2(MouseEvent mouseEvent) {
+    @FXML
+    private void changeColorOut2(MouseEvent mouseEvent) {
         Button button = (Button) mouseEvent.getSource();
         button.setStyle("-fx-background-color: #FFFFFF");
     }
 
-    public void play(MouseEvent event) {
+    @FXML
+    private void play(MouseEvent event) {
         try {
             Parent root;
             ImageView imageView = (ImageView) event.getSource();
@@ -57,7 +60,8 @@ public class StartViewController {
         title.setVisible(false);
     }
 
-    public void imageOut(MouseEvent mouseEvent) {
+    @FXML
+    private void imageOut(MouseEvent mouseEvent) {
         ImageView imageView = (ImageView) mouseEvent.getSource();
         if (imageView.getId().equals("settings")) {
             File file = new File("Resources/TestingUI/Images/settingsLogoOn.jpg");
@@ -78,7 +82,8 @@ public class StartViewController {
         }
     }
 
-    public void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
+    @FXML
+    private void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
         ImageView imageView = (ImageView) mouseEvent.getSource();
         if (imageView.getId().equals("settings")) {
             File file = new File("Resources/TestingUI/Images/settingsLogo.jpg");
@@ -99,7 +104,8 @@ public class StartViewController {
         }
     }
 
-    public void settings(MouseEvent event) {
+    @FXML
+    private void settings(MouseEvent event) {
         try {
             Parent root;
             Scene scene;
@@ -120,7 +126,8 @@ public class StartViewController {
         }
     }
 
-    public void credits(MouseEvent event) {
+    @FXML
+    private void credits(MouseEvent event) {
         try {
             Parent root;
             Scene scene;
@@ -140,7 +147,8 @@ public class StartViewController {
         }
     }
 
-    public void changeResolution1(MouseEvent event) {
+    @FXML
+    private void changeResolution1(MouseEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("settings-view-big.fxml"));
             Scene scene = new Scene(root, 1920, 1080);
@@ -152,7 +160,8 @@ public class StartViewController {
         }
     }
 
-    public void changeResolution2(MouseEvent event) {
+    @FXML
+    private void changeResolution2(MouseEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("settings-view-small.fxml"));
             Scene scene = new Scene(root, 1280, 720);
@@ -164,7 +173,8 @@ public class StartViewController {
         }
     }
 
-    public void howToPlay(MouseEvent event) {
+    @FXML
+    private void howToPlay(MouseEvent event) {
         try {
             Desktop.getDesktop().browse(new URI("https://www.hasbro.com/common/documents/dad2886d1c4311ddbd0b0800200c9a66/ADE84A6E50569047F504839559C5FEBF.pdf"));
         } catch (URISyntaxException ex) {
@@ -174,7 +184,8 @@ public class StartViewController {
         }
     }
 
-    public void back(MouseEvent event) {
+    @FXML
+    private void back(MouseEvent event) {
         try {
             Parent root;
             ImageView imageView = (ImageView) event.getSource();

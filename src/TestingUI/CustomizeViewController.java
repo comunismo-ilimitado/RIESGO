@@ -38,11 +38,9 @@ public class CustomizeViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         comboJugadores.getItems().addAll(players);
         comboMapas.getItems().addAll(maps);
-
         /*for (ComboBox<String> box : boxList) {
             box.getItems().addAll(strategies);
         }*/
-
         b21.getItems().addAll(strategies);
         b22.getItems().addAll(strategies);
         b31.getItems().addAll(strategies);
@@ -90,7 +88,8 @@ public class CustomizeViewController implements Initializable {
         }
     }
 
-    public void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
+    @FXML
+    private void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
         ImageView imageView = (ImageView) mouseEvent.getSource();
         if (imageView.getId().equals("atras")) {
             File file = new File("Resources/TestingUI/Images/Flecha_atras2.png");
@@ -103,7 +102,8 @@ public class CustomizeViewController implements Initializable {
         }
     }
 
-    public void imageOut(MouseEvent mouseEvent) throws FileNotFoundException {
+    @FXML
+    private void imageOut(MouseEvent mouseEvent) throws FileNotFoundException {
         ImageView imageView = (ImageView) mouseEvent.getSource();
         if (imageView.getId().equals("atras")) {
             File file = new File("Resources/TestingUI/Images/Flecha_atras1.png");
@@ -116,7 +116,8 @@ public class CustomizeViewController implements Initializable {
         }
     }
 
-    public void back(MouseEvent event) {
+    @FXML
+    private void back(MouseEvent event) {
         try{
             Parent root;
             ImageView image = (ImageView) event.getSource();

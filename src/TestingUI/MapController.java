@@ -88,8 +88,7 @@ public class MapController implements Initializable {
     @FXML
     private void mapSelected(MouseEvent event) {
         ImageView country = (ImageView) event.getSource();
-        Color color = country.getImage().getPixelReader().getColor((int) event.getX()*3, (int) event.getY()*3);
-
+        Color color = country.getImage().getPixelReader().getColor((int) event.getX(), (int) event.getY());
         country = colorReference.get(color.toString());
         Lighting colorSettings = new Lighting();
         colorSettings.setLight(new Light.Distant(45, 45, Color.AQUA));

@@ -1,64 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.customizeViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.customizeViewController">
    <children>
       <ImageView fitHeight="855.0" fitWidth="1397.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/fondo.jpg" />
          </image>
       </ImageView>
-      <ComboBox fx:id="comboJugadores" layoutX="273.0" layoutY="183.0" prefHeight="50.0" prefWidth="185.0" promptText="Seleccione los jugadores" />
-      <ComboBox fx:id="comboMapas" layoutX="273.0" layoutY="402.0" prefHeight="50.0" prefWidth="185.0" promptText="Seleccione el mapa" />
+      <ComboBox fx:id="comboJugadores" layoutX="547.0" layoutY="183.0" prefHeight="50.0" prefWidth="185.0" promptText="Seleccione los jugadores" style="-fx-scale-x: 1.5; -fx-scale-y: 1.5;" />
+      <ComboBox fx:id="comboMapas" layoutX="547.0" layoutY="464.0" prefHeight="50.0" prefWidth="185.0" promptText="Seleccione el mapa" style="-fx-scale-x: 1.5; -fx-scale-y: 1.5;" />
 
-      <ImageView fx:id="atras" fitHeight="89.0" fitWidth="159.0" layoutX="14.0" layoutY="515.0" onMouseClicked="#back" onMouseEntered="#imageIn" onMouseExited="#imageOut" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="atras" fitHeight="89.0" fitWidth="159.0" layoutX="22.0" layoutY="604.0" onMouseClicked="#back" onMouseEntered="#imageIn" onMouseExited="#imageOut" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Flecha_atras1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="adelante" fitHeight="89.0" fitWidth="175.0" layoutX="562.0" layoutY="515.0" onMouseClicked="#game" onMouseEntered="#imageIn" onMouseExited="#imageOut" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="adelante" fitHeight="89.0" fitWidth="175.0" layoutX="1109.0" layoutY="604.0" onMouseClicked="#game" onMouseEntered="#imageIn" onMouseExited="#imageOut" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Flecha_adelante1.png" />
          </image>
       </ImageView>
-      <Label layoutX="284.0" layoutY="107.0" text="Configuración de la partida">
+      <Label layoutX="398.0" layoutY="65.0" prefHeight="80.0" prefWidth="484.0" text="Configuración de la partida">
          <font>
-            <Font size="36.0" />
+            <Font size="40.0" />
          </font>
       </Label>
-      <HBox fx:id="two" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" visible="false">
+      <HBox fx:id="two" alignment="CENTER" layoutX="293.0" layoutY="280.0" prefHeight="100.0" prefWidth="693.0">
          <children>
-            <ComboBox fx:id="b21" prefWidth="150.0" promptText="uno" value="Humano" />
+            <ComboBox fx:id="b21" prefHeight="39.0" prefWidth="175.0" promptText="uno" value="Humano" />
             <Separator prefWidth="200.0" visible="false" />
-            <ComboBox fx:id="b22" prefWidth="150.0" promptText="dos" value="Humano" />
+            <ComboBox fx:id="b22" prefHeight="39.0" prefWidth="175.0" promptText="dos" value="Humano" />
          </children>
       </HBox>
-      <HBox fx:id="three" alignment="CENTER" layoutX="169.0" layoutY="269.0" prefHeight="100.0" prefWidth="200.0">
+      <HBox fx:id="three" alignment="CENTER" layoutX="286.0" layoutY="280.0" prefHeight="100.0" prefWidth="706.0">
          <children>
-            <ComboBox fx:id="b31" prefWidth="150.0" promptText="uno" value="Humano" />
+            <ComboBox fx:id="b31" prefHeight="41.0" prefWidth="175.0" promptText="uno" value="Humano" />
             <Separator prefWidth="200.0" visible="false" />
-            <ComboBox fx:id="b32" prefWidth="150.0" promptText="dos" value="Humano" />
+            <ComboBox fx:id="b32" prefHeight="40.0" prefWidth="175.0" promptText="dos" value="Humano" />
             <Separator prefWidth="200.0" visible="false" />
-            <ComboBox fx:id="b33" prefWidth="150.0" promptText="tres" value="Humano" />
+            <ComboBox fx:id="b33" prefHeight="40.0" prefWidth="175.0" promptText="tres" value="Humano" />
          </children>
       </HBox>
-      <HBox fx:id="four" alignment="CENTER" layoutX="243.0" layoutY="260.0" prefHeight="100.0" prefWidth="200.0">
+      <HBox fx:id="four" alignment="CENTER" layoutX="132.0" layoutY="280.0" prefHeight="100.0" prefWidth="1014.0">
          <children>
-            <ComboBox fx:id="b41" prefWidth="150.0" promptText="uno" value="Humano" />
+            <ComboBox fx:id="b41" prefHeight="40.0" prefWidth="175.0" promptText="uno" value="Humano" />
             <Separator prefWidth="200.0" visible="false" />
-            <ComboBox fx:id="b42" prefWidth="150.0" promptText="dos" value="Humano" />
+            <ComboBox fx:id="b42" prefHeight="40.0" prefWidth="175.0" promptText="dos" value="Humano" />
             <Separator prefWidth="200.0" visible="false" />
-            <ComboBox fx:id="b43" prefWidth="150.0" promptText="tres" value="Humano" />
+            <ComboBox fx:id="b43" prefHeight="40.0" prefWidth="175.0" promptText="tres" value="Humano" />
             <Separator prefWidth="200.0" visible="false" />
-            <ComboBox fx:id="b44" prefWidth="150.0" promptText="cuatro" value="Humano" />
+            <ComboBox fx:id="b44" prefHeight="40.0" prefWidth="175.0" promptText="cuatro" value="Humano" />
          </children>
       </HBox>
    </children>

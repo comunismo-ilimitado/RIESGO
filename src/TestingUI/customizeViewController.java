@@ -120,7 +120,7 @@ public class customizeViewController implements Initializable {
         try{
             Parent root;
             ImageView image = (ImageView) event.getSource();
-            if (image.getScene().getWidth() == 720) {
+            if (image.getScene().getHeight() == 720) {
                 root = FXMLLoader.load(getClass().getResource("hello-view-small.fxml"));
             } else {
                 root = FXMLLoader.load(getClass().getResource("hello-view-big.fxml"));

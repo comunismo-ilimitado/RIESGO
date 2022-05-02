@@ -12,12 +12,10 @@
             <Image url="@Images/fondo.jpg" />
          </image>
       </ImageView>
-      <DialogPane contentText="IDIOMA" layoutX="473.0" layoutY="217.0" prefHeight="53.0" prefWidth="66.0" style="-fx-scale-x: 6; -fx-scale-y: 6; -fx-background-color: transparent;" />
-      <Button layoutX="653.0" layoutY="415.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="140.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Español" />
-      <Button layoutX="204.0" layoutY="415.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="140.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Inglés" />
-      <DialogPane contentText="RESOLUCIÓN" layoutX="1461.0" layoutY="217.0" prefHeight="57.0" prefWidth="116.0" style="-fx-scale-x: 6; -fx-scale-y: 6; -fx-background-color: transparent;" />
-      <Button layoutX="1597.0" layoutY="415.0" mnemonicParsing="false" onMouseClicked="#changeResolution2" prefHeight="75.0" prefWidth="140.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Pequeña" />
-      <Button layoutX="1174.0" layoutY="415.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="140.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Grande" />
+      <Button layoutX="653.0" layoutY="415.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="120.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Español" />
+      <Button layoutX="204.0" layoutY="415.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="120.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Inglés" />
+      <Button layoutX="1597.0" layoutY="415.0" mnemonicParsing="false" onMouseClicked="#changeResolution2" prefHeight="60.0" prefWidth="120.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Pequeña" />
+      <Button layoutX="1174.0" layoutY="415.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="120.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Grande" />
       <Button layoutX="1550.0" layoutY="845.0" mnemonicParsing="false" onMouseClicked="#credits" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="157.0" prefWidth="257.0" text="Créditos">
          <font>
             <Font size="30.0" />
@@ -33,6 +31,20 @@
             <Image url="@Images/Flecha_atras1.png" />
          </image>
       </ImageView>
-      <DialogPane contentText="¿Cómo jugar?" layoutX="912.0" layoutY="732.0" prefHeight="57.0" prefWidth="99.0" style="-fx-scale-x: 4; -fx-scale-y: 4; -fx-background-color: transparent;" />
+      <Label layoutX="403.0" layoutY="189.0" text="IDIOMA">
+         <font>
+            <Font size="60.0" />
+         </font>
+      </Label>
+      <Label layoutX="1285.0" layoutY="198.0" text="RESOLUCIÓN">
+         <font>
+            <Font size="60.0" />
+         </font>
+      </Label>
+      <Label layoutX="838.0" layoutY="752.0" text="¿Cómo jugar?">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

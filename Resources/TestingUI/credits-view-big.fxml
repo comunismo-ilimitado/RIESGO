@@ -5,24 +5,52 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-image: url('../Resources/TestingUI/Images/fondo.jpg');" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-image: url('../Resources/TestingUI/Images/fondo.jpg');" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.HelloController">
     <children>
-        <ImageView fitHeight="1290.0" fitWidth="2218.0" layoutX="-5.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="1303.0" fitWidth="2119.0" layoutX="-5.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@Images/fondo.jpg" />
             </image>
         </ImageView>
-        <DialogPane contentText="RIESGO" layoutX="880.0" layoutY="77.0" prefHeight="53.0" prefWidth="73.0" style="-fx-scale-x: 5; -fx-scale-y: 5; -fx-background-color: transparent;" />
-      <DialogPane contentText="Creado por:" layoutX="626.0" layoutY="210.0" prefHeight="53.0" prefWidth="177.0" style="-fx-scale-x: 5; -fx-scale-y: 5; -fx-background-color: transparent;" />
-      <DialogPane contentText="-Jesús González Gironda" layoutX="928.0" layoutY="871.0" prefHeight="53.0" prefWidth="219.0" style="-fx-scale-x: 5; -fx-scale-y: 5; -fx-background-color: transparent;" />
-      <DialogPane contentText="-Gonzalo Ortega Carpintero" layoutX="874.0" layoutY="739.0" prefHeight="53.0" prefWidth="192.0" style="-fx-scale-x: 5; -fx-scale-y: 5; -fx-background-color: transparent;" />
-      <DialogPane contentText="-Guillermo Grande Santi" layoutX="824.0" layoutY="609.0" prefHeight="53.0" prefWidth="167.0" style="-fx-scale-x: 5; -fx-scale-y: 5; -fx-background-color: transparent;" />
-      <DialogPane contentText="-Alejandro López Adrados" layoutX="906.0" layoutY="476.0" prefHeight="53.0" prefWidth="208.0" style="-fx-scale-x: 5; -fx-scale-y: 5; -fx-background-color: transparent;" />
-      <DialogPane contentText="-Jorge Vega Arias" layoutX="730.0" layoutY="343.0" prefHeight="53.0" prefWidth="120.0" style="-fx-scale-x: 5; -fx-scale-y: 5; -fx-background-color: transparent;" />
-      <Button layoutX="1611.0" layoutY="897.0" mnemonicParsing="false" onMouseClicked="#back" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="169.0" prefWidth="295.0" text="Volver">
-         <font>
-            <Font size="46.0" />
-         </font>
-      </Button>
+        <ImageView fx:id="atras" fitHeight="152.0" fitWidth="269.0" layoutX="-18.0" layoutY="903.0" onMouseClicked="#back" onMouseEntered="#imageOut" onMouseExited="#imageIn" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Images/Flecha_atras1.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="832.0" layoutY="68.0" prefHeight="103.0" prefWidth="279.0" text="RIESGO">
+            <font>
+                <Font size="70.0" />
+            </font>
+        </Label>
+        <Label layoutX="527.0" layoutY="235.0" prefHeight="73.0" prefWidth="347.0" text="Creador por:">
+            <font>
+                <Font size="50.0" />
+            </font>
+        </Label>
+        <Label layoutX="646.0" layoutY="350.0" prefHeight="73.0" prefWidth="442.0" text="-Jorge Vega Arias">
+            <font>
+                <Font size="50.0" />
+            </font>
+        </Label>
+        <Label layoutX="646.0" layoutY="467.0" prefHeight="73.0" prefWidth="718.0" text="-Alejandro López Adrados">
+            <font>
+                <Font size="50.0" />
+            </font>
+        </Label>
+        <Label layoutX="646.0" layoutY="569.0" prefHeight="73.0" prefWidth="695.0" text="-Guillermo Grande Santi">
+            <font>
+                <Font size="50.0" />
+            </font>
+        </Label>
+        <Label layoutX="646.0" layoutY="670.0" prefHeight="73.0" prefWidth="695.0" text="-Gonzalo Ortega Carpintero">
+            <font>
+                <Font size="50.0" />
+            </font>
+        </Label>
+        <Label layoutX="646.0" layoutY="769.0" prefHeight="73.0" prefWidth="674.0" text="-Jesús González Gironda">
+            <font>
+                <Font size="50.0" />
+            </font>
+        </Label>
     </children>
 </AnchorPane>

@@ -17,7 +17,7 @@
             <Font size="40.0" />
          </font>
       </Label>
-      <Label layoutX="292.0" layoutY="185.0" prefHeight="72.0" prefWidth="269.0" text="Creador por:">
+      <Label layoutX="292.0" layoutY="185.0" prefHeight="72.0" prefWidth="269.0" text="%madebyTag">
          <font>
             <Font size="40.0" />
          </font>
@@ -42,7 +42,7 @@
             <Font size="40.0" />
          </font>
       </Label>
-      <Label layoutX="381.0" layoutY="588.0" prefHeight="72.0" prefWidth="501.0" text="-Jesús González Gironda">
+      <Label layoutX="381.0" layoutY="588.0" prefHeight="72.0" prefWidth="501.0" text="-Jesús González Gironda 8=D">
          <font>
             <Font size="40.0" />
          </font>

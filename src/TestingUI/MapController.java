@@ -1,8 +1,11 @@
 package TestingUI;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.CacheHint;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
@@ -12,8 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -142,10 +147,51 @@ public class MapController implements Initializable {
 
         System.out.println("Intercambio de cartas");
     }
+
     @FXML
-    private void settings() {
-        System.out.println("Ajustes");
+    private void back(MouseEvent event) {
+        try{
+            Parent root;
+            ImageView image = (ImageView) event.getSource();
+            ResourceBundle bundle =  ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
+            root = FXMLLoader.load(getClass().getResource("start-view.fxml"),bundle);
+            Scene scene = new Scene(root);
+            Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+            appStage.setScene(scene);
+            appStage.toFront();
+            appStage.show();
+        } catch (Exception e) {
+        }
     }
+
+    @FXML
+    private void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
+        ImageView imageView = (ImageView) mouseEvent.getSource();
+        if (imageView.getId().equals("atras")) {
+            File file = new File("Resources/TestingUI/Images/Flecha_atras2.png");
+            Image image = new Image(file.toURI().toString());
+            imageView.setImage(image);
+        } else if (imageView.getId().equals("adelante")) {
+            File file = new File("Resources/TestingUI/Images/Flecha_adelante2.png");
+            Image image = new Image(file.toURI().toString());
+            imageView.setImage(image);
+        }
+    }
+
+    @FXML
+    private void imageOut(MouseEvent mouseEvent) throws FileNotFoundException {
+        ImageView imageView = (ImageView) mouseEvent.getSource();
+        if (imageView.getId().equals("atras")) {
+            File file = new File("Resources/TestingUI/Images/Flecha_atras1.png");
+            Image image = new Image(file.toURI().toString());
+            imageView.setImage(image);
+        } else if (imageView.getId().equals("adelante")) {
+            File file = new File("Resources/TestingUI/Images/Flecha_adelante1.png");
+            Image image = new Image(file.toURI().toString());
+            imageView.setImage(image);
+        }
+    }
+
     @FXML
     private void leaveGame() {
         exitPane.setVisible(true);

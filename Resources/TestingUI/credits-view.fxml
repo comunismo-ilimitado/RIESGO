@@ -5,13 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image: url('../Resources/TestingUI/Images/fondo.jpg');" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.StartViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.StartViewController">
     <children>
-        <ImageView fitHeight="861.0" fitWidth="1304.0" layoutX="-5.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@Images/fondo.jpg" />
-            </image>
-        </ImageView>
       <ImageView fx:id="atras" fitHeight="87.0" fitWidth="153.0" layoutX="-5.0" layoutY="616.0" onMouseClicked="#back" onMouseEntered="#imageOut" onMouseExited="#imageIn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Flecha_atras1.png" />

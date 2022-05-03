@@ -170,19 +170,6 @@ public class CustomizeViewController implements Initializable {
                     break;
                 }
             }
-            else {
-                try {
-                    ResourceBundle bundle = ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
-                    Parent root = FXMLLoader.load(getClass().getResource("map-view.fxml"), bundle);
-                    Scene scene = new Scene(root);
-                    Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-                    appStage.setScene(scene);
-                    appStage.toFront();
-                    appStage.show();
-                } catch (Exception e) {
-                    System.out.println("Fallo carga en map-view");
-                }
-            }
         } else if(comboJugadores.getValue() == null) {
             errorLabel.setText("Debe introducir un número válido de jugadores");
             errorPane.setVisible(true);
@@ -190,6 +177,19 @@ public class CustomizeViewController implements Initializable {
             errorLabel.setText("Debe introducir un mapa válido");
             errorPane.setVisible(true);
         }
+    }
+
+    private void loadView(MouseEvent event, String view){
+            try {
+                ResourceBundle bundle = ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
+                Parent root = FXMLLoader.load(getClass().getResource(view), bundle);
+                Scene scene = new Scene(root);
+                Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+                appStage.setScene(scene);
+                appStage.toFront();
+                appStage.show();
+            } catch (Exception e) {
+            }
     }
 
     @FXML

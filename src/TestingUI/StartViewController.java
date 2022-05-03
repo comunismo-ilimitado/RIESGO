@@ -50,17 +50,7 @@ public class StartViewController {
     @FXML
     private void localButtonAction(MouseEvent event){
         onlinePane.setVisible(false);
-        try {
-            Parent root;
-            ResourceBundle bundle =  ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
-            root = FXMLLoader.load(getClass().getResource("customize-view.fxml"), bundle);
-            Scene scene = new Scene(root);
-            Stage appStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            appStage.setScene(scene);
-            appStage.toFront();
-            appStage.show();
-        } catch (Exception e) {
-        }
+        loadView(event, "customize-view.fxml");
     }
     @FXML
     private void onlineButtonAction(){
@@ -152,32 +142,11 @@ public class StartViewController {
 
     @FXML
     private void settings(MouseEvent event) {
-        try {
-            Parent root;
-            Scene scene;
-            root = FXMLLoader.load(getClass().getResource("settings-view.fxml"));
-            scene = new Scene(root, 1280, 720);
-            Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-            appStage.setScene(scene);
-            appStage.toFront();
-            appStage.show();
-        } catch (Exception e) {
-        }
+        loadView(event, "settings-view.fxml");
     }
     @FXML
     private void credits(MouseEvent event) {
-        try {
-            Parent root;
-            Scene scene;
-            Button button = (Button) event.getSource();
-            root = FXMLLoader.load(getClass().getResource("credits-view.fxml"));
-            scene = new Scene(root, 1280, 720);
-            Stage appStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            appStage.setScene(scene);
-            appStage.toFront();
-            appStage.show();
-        } catch (Exception e) {
-        }
+        loadView(event, "credits-view.fxml");
     }
     @FXML
     private void howToPlay() {
@@ -189,19 +158,7 @@ public class StartViewController {
     }
     @FXML
     private void back(MouseEvent event) {
-        try {
-            Parent root;
-            ImageView imageView = (ImageView) event.getSource();
-            ResourceBundle bundle =  ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
-            root = FXMLLoader.load(getClass().getResource("start-view.fxml"),bundle);
-            Scene scene = new Scene(root);
-            Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-            appStage.setScene(scene);
-            appStage.toFront();
-            appStage.show();
-
-        } catch (Exception e) {
-        }
+        loadView(event, "start-view.fxml");
     }
     @FXML
     private void setEnglish() {

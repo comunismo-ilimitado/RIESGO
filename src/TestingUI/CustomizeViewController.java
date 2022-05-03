@@ -1,5 +1,6 @@
 package TestingUI;
 
+import controller.strategies.Strategy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -138,15 +140,43 @@ public class CustomizeViewController implements Initializable {
 
     @FXML
     private void game(MouseEvent event) {
-        try {
-            ResourceBundle bundle =  ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
-            Parent root = FXMLLoader.load(getClass().getResource("map-view.fxml"),bundle);;
-            Scene scene = new Scene(root);
-            Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-            appStage.setScene(scene);
-            appStage.toFront();
-            appStage.show();
-        } catch (Exception e) {
+        if ((comboJugadores.getValue() != null ) && (comboMapas.getValue() != null)) {
+            if ((!b21.getValue().equals(resources.getString("human"))) && (!b22.getValue().equals(resources.getString("human"))) &&
+                (!b31.getValue().equals(resources.getString("human"))) && (!b32.getValue().equals(resources.getString("human"))) &&
+                (!b33.getValue().equals(resources.getString("human"))) && (!b41.getValue().equals(resources.getString("human"))) &&
+                (!b42.getValue().equals(resources.getString("human"))) && (!b43.getValue().equals(resources.getString("human"))) &&
+                (!b44.getValue().equals(resources.getString("human")))) {
+                try {
+                    ResourceBundle bundle = ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
+                    Parent root = FXMLLoader.load(getClass().getResource("results-view.fxml"), bundle);
+                    Scene scene = new Scene(root);
+                    Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+                    appStage.setScene(scene);
+                    appStage.toFront();
+                    appStage.show();
+                } catch (Exception e) {
+                    System.out.println("Fallo carga en results-view");
+                }
+            }
+            else {
+                try {
+                    ResourceBundle bundle = ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
+                    Parent root = FXMLLoader.load(getClass().getResource("map-view.fxml"), bundle);
+                    Scene scene = new Scene(root);
+                    Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+                    appStage.setScene(scene);
+                    appStage.toFront();
+                    appStage.show();
+                } catch (Exception e) {
+                    System.out.println("Fallo carga en map-view");
+                }
+            }
+        } else if(comboJugadores.getValue() == null) {
+            errorLabel.setText("Debe introducir un número válido de jugadores");
+            errorPane.setVisible(true);
+        } else {
+            errorLabel.setText("Debe introducir un mapa válido");
+            errorPane.setVisible(true);
         }
     }
 

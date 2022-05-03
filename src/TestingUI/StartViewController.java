@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;/**/
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -18,9 +19,15 @@ import java.net.URISyntaxException;
 import java.io.File;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javafx.scene.layout.Pane;
 
 public class StartViewController {
 
+    private String ip;
+    @FXML
+    private Pane onlinePane, ipPane, rolPane;
+    @FXML
+    private TextField ipField;
     @FXML
     private void exitGame() {
         System.exit(0);

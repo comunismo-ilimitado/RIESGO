@@ -14,6 +14,7 @@ import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.io.File;
+import java.util.Locale;
 
 public class StartViewController {
 
@@ -159,6 +160,14 @@ public class StartViewController {
 
         } catch (Exception e) {
         }
+    }
+    @FXML
+    private void setEnglish() {
+        MainUI.locale = new Locale("en","UK");
+    }
+    @FXML
+    private void setSpanish() {
+        MainUI.locale = new Locale("es","ES");
     }
 
 }

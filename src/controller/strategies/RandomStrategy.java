@@ -26,7 +26,8 @@ public class RandomStrategy extends Strategy {
         List<Country> countries = player.getMyCountries(player);
         int index = (int) (Math.random() * countries.size());
         Country country = countries.get(index);
-        country.setNoOfArmies(country.getNoOfArmies() + player.getPlayerArmiesNotDeployed());
+        int j = player.getPlayerArmiesNotDeployed();
+        country.setNoOfArmies(country.getNoOfArmies() + j );
         player.setPlayerTotalArmiesNotDeployed(0);
         player.getMyCountries(player).get(index).setNoOfArmies(country.getNoOfArmies());
         ReadingFiles.getCountryNameObject().get(country.getName()).setNoOfArmies(country.getNoOfArmies());

@@ -7,10 +7,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class MainUI extends Application {
+
+    static Locale locale;
+
     @Override
     public void start(Stage stage) throws IOException {
+        locale = new Locale("es","ES");
+        ResourceBundle bundle =  ResourceBundle.getBundle("riesgoBundle", locale);
         FXMLLoader fxmlLoader = new FXMLLoader(MainUI.class.getResource("start-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         stage.setTitle("RIESGO");

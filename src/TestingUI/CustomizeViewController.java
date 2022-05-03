@@ -41,7 +41,7 @@ public class CustomizeViewController implements Initializable {
 
     private int numberOfPlayers;
     private String[] players = new String[3];
-    private String[] maps = {"Mundo", "Europa"};
+    private String[] maps = new String[2];
     private String[] strategies = {"Human", "Aficionado", "Profesional", "Maestro"};
 
     @Override
@@ -50,6 +50,8 @@ public class CustomizeViewController implements Initializable {
         for (int i = 0; i < players.length; i++) {
             players[i] = i + 2 + " " + resources.getString("players");
         }
+        maps[0] = resources.getString("worldTag");
+        maps[1] = resources.getString("europeTag");
         comboJugadores.getItems().addAll(players);
         comboMapas.getItems().addAll(maps);
         /*for (ComboBox<String> box : boxList) {
@@ -171,10 +173,10 @@ public class CustomizeViewController implements Initializable {
                 }
             }
         } else if(comboJugadores.getValue() == null) {
-            errorLabel.setText("Debe introducir un número válido de jugadores");
+            errorLabel.setText(resources.getString("invalidnumofplayersTag"));
             errorPane.setVisible(true);
         } else {
-            errorLabel.setText("Debe introducir un mapa válido");
+            errorLabel.setText(resources.getString("invalidmapTag"));
             errorPane.setVisible(true);
         }
     }

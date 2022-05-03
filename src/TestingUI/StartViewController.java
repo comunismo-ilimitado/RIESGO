@@ -130,6 +130,26 @@ public class StartViewController {
             imageView.setImage(image);
         }
     }
+
+    private void loadView(MouseEvent event, String view){
+        try {
+            Parent root;
+            ResourceBundle bundle = ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
+            root = FXMLLoader.load(getClass().getResource(view), bundle);
+            Scene scene = new Scene(root);
+            Stage appStage = null;
+            if(event.getSource().getClass().toString().equals("class javafx.scene.control.Button")) {
+                appStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            }else{
+                appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+            }
+            appStage.setScene(scene);
+            appStage.toFront();
+            appStage.show();
+        } catch (Exception e) {
+        }
+    }
+
     @FXML
     private void settings(MouseEvent event) {
         try {

@@ -693,12 +693,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="settings" layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#settings" prefHeight="75.0" prefWidth="243.0" style="-fx-background-color: #2D3339;" text="%settingsTag" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="leaveGame" layoutX="10.0" layoutY="535.0" mnemonicParsing="false" onAction="#leaveGame" prefHeight="75.0" prefWidth="243.0" style="-fx-background-color: #2D3339;" text="%surrenderTag" textFill="WHITE">
+            <Button fx:id="leaveGame" layoutX="10.0" layoutY="535.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="75.0" prefWidth="243.0" style="-fx-background-color: #2D3339;" text="%surrenderTag" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>

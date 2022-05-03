@@ -42,7 +42,7 @@ public class CustomizeViewController implements Initializable {
     private int numberOfPlayers;
     private String[] players = new String[3];
     private String[] maps = {"Mundo", "Europa"};
-    private String[] strategies = {"Humano", "Aficionado", "Profesional", "Maestro"};
+    private String[] strategies = {"Human", "Aficionado", "Profesional", "Maestro"};
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -141,21 +141,33 @@ public class CustomizeViewController implements Initializable {
     @FXML
     private void game(MouseEvent event) {
         if ((comboJugadores.getValue() != null ) && (comboMapas.getValue() != null)) {
-            if ((!b21.getValue().equals(resources.getString("human"))) && (!b22.getValue().equals(resources.getString("human"))) &&
-                (!b31.getValue().equals(resources.getString("human"))) && (!b32.getValue().equals(resources.getString("human"))) &&
-                (!b33.getValue().equals(resources.getString("human"))) && (!b41.getValue().equals(resources.getString("human"))) &&
-                (!b42.getValue().equals(resources.getString("human"))) && (!b43.getValue().equals(resources.getString("human"))) &&
-                (!b44.getValue().equals(resources.getString("human")))) {
-                try {
-                    ResourceBundle bundle = ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
-                    Parent root = FXMLLoader.load(getClass().getResource("results-view.fxml"), bundle);
-                    Scene scene = new Scene(root);
-                    Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-                    appStage.setScene(scene);
-                    appStage.toFront();
-                    appStage.show();
-                } catch (Exception e) {
-                    System.out.println("Fallo carga en results-view");
+            switch(numberOfPlayers){
+                case 2: {
+                    if ((!b21.getValue().equals(resources.getString("human"))) && (!b22.getValue().equals(resources.getString("human")))) {
+                        loadView(event, "results-view.fxml");
+                    } else {
+                        loadView(event, "map-view.fxml");
+                    }
+                    break;
+                }
+                case 3: {
+                    if ((!b31.getValue().equals(resources.getString("human"))) && (!b32.getValue().equals(resources.getString("human"))) &&
+                            (!b33.getValue().equals(resources.getString("human")))) {
+                        loadView(event, "results-view.fxml");
+                    } else {
+                        loadView(event, "map-view.fxml");
+                    }
+                    break;
+                }
+                case 4: {
+                    if ((!b41.getValue().equals(resources.getString("human"))) && (!b42.getValue().equals(resources.getString("human")))
+                            && (!b43.getValue().equals(resources.getString("human"))) &&
+                            (!b44.getValue().equals(resources.getString("human")))) {
+                        loadView(event, "results-view.fxml");
+                    } else {
+                        loadView(event, "map-view.fxml");
+                    }
+                    break;
                 }
             }
             else {

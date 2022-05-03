@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
@@ -150,18 +151,7 @@ public class MapController implements Initializable {
 
     @FXML
     private void back(MouseEvent event) {
-        try{
-            Parent root;
-            ImageView image = (ImageView) event.getSource();
-            ResourceBundle bundle =  ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
-            root = FXMLLoader.load(getClass().getResource("start-view.fxml"),bundle);
-            Scene scene = new Scene(root);
-            Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-            appStage.setScene(scene);
-            appStage.toFront();
-            appStage.show();
-        } catch (Exception e) {
-        }
+        loadView(event, "start-view.fxml");
     }
 
     @FXML
@@ -192,10 +182,6 @@ public class MapController implements Initializable {
         }
     }
 
-    @FXML
-    private void leaveGame() {
-        exitPane.setVisible(true);
-    }
     @FXML
     private void yesButton() {
          System.exit(0);

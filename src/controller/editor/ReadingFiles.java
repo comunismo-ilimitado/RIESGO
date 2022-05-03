@@ -4,7 +4,6 @@ import model.Continent;
 import model.Country;
 import model.Player;
 import view.gameFrames.BoardController;
-import view.gameFrames.MFrame2;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -30,8 +29,8 @@ public class ReadingFiles {
     private static List<String> ContinentNames;
     private static HashMap<String, Country> CountryNameObject;
     private static HashMap<String, Continent> ContinentNameObject;
-    private static String address = "Resources/World.map";
-    private static String image = "noimage.bmp";
+    private static String address = "Resources/OldResources/World.map";
+    private static String image = "OldResources/OldResources/noimage.bmp";
     private static int ArmiesPerPlayer;
     BoardController board;
     public ReadingFiles(BoardController controller) {

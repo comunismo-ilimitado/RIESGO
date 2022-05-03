@@ -75,13 +75,13 @@ public class MainController extends Observable{
             if (isResume()) {
                 files.Reads(bufferedReader.readLine(), Integer.parseInt(bufferedReader.readLine()));
             } else { //Ruta de guardado de la partida (al crear una nueva)
-                String address = "Resources/World.map";
+                String address = "Resources/OldResources/World.map";
                 if (SelectMapType.MapType == 1)
-                    address = "Resources/" + SelectMap.getSingleModeSelectedMap() + ".map";
+                    address = "Resources/OldResources/" + SelectMap.getSingleModeSelectedMap() + ".map";
                 else if (SelectMapType.MapType == 2)
-                    address = "Resources/LoadedMap.map";
+                    address = "Resources/OldResources/LoadedMap.map";
                 else if (SelectMapType.MapType == 3)
-                    address = "Resources/UserMap.map";
+                    address = "Resources/OldResources/UserMap.map";
                 if (SelectMapType.MapType < 4) {
                     files.Reads(address, SelectNoOfPlayers.NumberOfPlayers);
                 }

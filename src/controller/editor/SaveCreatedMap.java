@@ -33,7 +33,7 @@ public class SaveCreatedMap {
         int tag = 0;
         try {
             tag = (int)Files.list(savedir.toPath()).limit(50).count();
-            File f1 = new File("Resources/UserMap"+tag+".map");
+            File f1 = new File("Resources/OldResources/UserMap"+tag+".map");
             if (f1.createNewFile())
                 System.out.println("File created");
             else

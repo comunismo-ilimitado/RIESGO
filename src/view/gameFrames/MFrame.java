@@ -42,12 +42,10 @@ public class MFrame extends JFrame implements Observer {
     public String BBB;
     public String AAA;
     public String CCC;
-    public String MapImage = "noimage.bmp";
 
     public MFrame(MyActionListener myActionListner, String MapImage) {
         super("PAzim");
         this.myActionListner = myActionListner;
-        this.MapImage = MapImage;
     }
 
     /**
@@ -67,17 +65,7 @@ public class MFrame extends JFrame implements Observer {
         // jPanel.setSize(new Dimension(500, 1000));
         // jPanel.setBackground(Color.red);
         // image pannel
-        BufferedImage image;
-        try {
-            image = ImageIO.read(new File("Resources/" + MapImage));
-        } catch (Exception e) {
-            image = ImageIO.read(new File("Resources/noimage.bmp"));
 
-        }
-        JLabel label = new JLabel(new ImageIcon(image));
-
-        JScrollPane scroller = new JScrollPane(label, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 //		jPanel.add(scroller);
         area = new JTextArea(100, 100);
 

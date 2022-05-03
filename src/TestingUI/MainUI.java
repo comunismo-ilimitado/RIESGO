@@ -16,7 +16,7 @@ public class MainUI extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        locale = new Locale("es","ES");
+        locale = new Locale("en","UK");
         ResourceBundle bundle =  ResourceBundle.getBundle("riesgoBundle", locale);
         FXMLLoader fxmlLoader = new FXMLLoader(MainUI.class.getResource("start-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);

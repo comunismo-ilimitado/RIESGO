@@ -69,7 +69,7 @@ public class BrowseMapFile {
                 Location = Loc.getText();
                 try {
                     Path source = Paths.get(Location);
-                    String dest = "Resources/LoadedMap.map";
+                    String dest = "Resources/OldResources/LoadedMap.map";
                     File fResource = new File(dest);
                     fResource.createNewFile();
                     OutputStream fos = new FileOutputStream(fResource);

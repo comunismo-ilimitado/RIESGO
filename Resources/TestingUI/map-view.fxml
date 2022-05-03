@@ -237,6 +237,434 @@
             </ImageView>
          </children>
       </Pane>
+      <Pane fx:id="countryLabels" mouseTransparent="true" prefHeight="720.0" prefWidth="1280.0">
+         <children>
+            <Label alignment="CENTER" layoutX="262.0" layoutY="103.0" prefHeight="54.0" prefWidth="74.0" text="%alaskaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="354.0" layoutY="147.0" prefHeight="54.0" prefWidth="74.0" text="%albertaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="458.0" layoutY="554.0" prefHeight="54.0" prefWidth="74.0" text="%argentinaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="524.0" layoutY="445.0" prefHeight="54.0" prefWidth="74.0" text="%brazilTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="624.0" layoutY="217.0" prefHeight="54.0" prefWidth="74.0" text="%britainTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="376.0" layoutY="333.0" prefHeight="54.0" prefWidth="74.0" text="%centralAmericaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="998.0" layoutY="298.0" prefHeight="54.0" prefWidth="74.0" text="%chinaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="751.0" layoutY="510.0" prefHeight="54.0" prefWidth="74.0" text="%congoTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="813.0" layoutY="472.0" prefHeight="54.0" prefWidth="74.0" text="%eastAfricaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="1160.0" layoutY="581.0" prefHeight="54.0" prefWidth="74.0" text="%easternAustraliaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="438.0" layoutY="255.0" prefHeight="54.0" prefWidth="74.0" text="%easternUSTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="751.0" layoutY="375.0" prefHeight="54.0" prefWidth="74.0" text="%egyptTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="550.0" layoutY="66.0" prefHeight="54.0" prefWidth="74.0" text="%greenlandTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="640.0" layoutY="130.0" prefHeight="54.0" prefWidth="74.0" text="%icelandTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="939.0" layoutY="361.0" prefHeight="54.0" prefWidth="74.0" text="%indiaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="1035.0" layoutY="499.0" prefHeight="54.0" prefWidth="74.0" text="%indonesiaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="1019.0" layoutY="166.0" prefHeight="54.0" prefWidth="74.0" text="%irkutskTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="1137.0" layoutY="244.0" prefHeight="54.0" prefWidth="74.0" text="%japanTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="1123.0" layoutY="85.0" prefHeight="54.0" prefWidth="74.0" text="%kamchatkaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="887.0" layoutY="244.0" prefHeight="54.0" prefWidth="74.0" text="%kazakhstanTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="850.0" layoutY="599.0" prefHeight="54.0" prefWidth="74.0" text="%madagascarTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="828.0" layoutY="348.0" prefHeight="54.0" prefWidth="74.0" text="%middleEastTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="1035.0" layoutY="228.0" prefHeight="54.0" prefWidth="74.0" text="%mongoliaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="665.0" layoutY="388.0" prefHeight="54.0" prefWidth="74.0" text="%northAfricaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="714.0" layoutY="217.0" prefHeight="54.0" prefWidth="74.0" text="%northernEuropeTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="376.0" layoutY="93.0" prefHeight="54.0" prefWidth="74.0" text="%northWestTerritoryTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="428.0" layoutY="166.0" prefHeight="54.0" prefWidth="74.0" text="%ontarioTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="1123.0" layoutY="464.0" prefHeight="54.0" prefWidth="74.0" text="%papuaNewGuineaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="438.0" layoutY="464.0" prefHeight="54.0" prefWidth="74.0" text="%peruTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="495.0" layoutY="166.0" prefHeight="54.0" prefWidth="74.0" text="%quebecTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="725.0" layoutY="120.0" prefHeight="54.0" prefWidth="74.0" text="%scandinaviaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="1028.0" layoutY="388.0" prefHeight="54.0" prefWidth="74.0" text="%siamTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="954.0" layoutY="93.0" prefHeight="54.0" prefWidth="74.0" text="%siberiaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="762.0" layoutY="599.0" prefHeight="54.0" prefWidth="74.0" text="%southAfricaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="725.0" layoutY="287.0" prefHeight="54.0" prefWidth="74.0" text="%southernEuropeTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="799.0" layoutY="174.0" prefHeight="54.0" prefWidth="74.0" text="%ukraineTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="902.0" layoutY="139.0" prefHeight="54.0" prefWidth="74.0" text="%uralTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="438.0" layoutY="375.0" prefHeight="54.0" prefWidth="74.0" text="%venezuelaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="1086.0" layoutY="599.0" prefHeight="54.0" prefWidth="74.0" text="%westernAustraliaTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="640.0" layoutY="314.0" prefHeight="54.0" prefWidth="74.0" text="%westernEuropeTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="354.0" layoutY="217.0" prefHeight="54.0" prefWidth="74.0" text="%westernUSTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="1035.0" layoutY="76.0" prefHeight="54.0" prefWidth="74.0" text="%yakutskTag" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="countryUnits" mouseTransparent="true" prefHeight="720.0" prefWidth="1280.0">
+         <children>
+            <Label fx:id="alaskaUnits" alignment="CENTER" layoutX="262.0" layoutY="117.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="albertaUnits" alignment="CENTER" layoutX="354.0" layoutY="161.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="argentinaUnits" alignment="CENTER" layoutX="458.0" layoutY="568.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="brazilUnits" alignment="CENTER" layoutX="524.0" layoutY="459.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="britainUnits" alignment="CENTER" layoutX="624.0" layoutY="231.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="centralAmericaUnits" alignment="CENTER" layoutX="376.0" layoutY="347.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="chinaUnits" alignment="CENTER" layoutX="998.0" layoutY="312.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="congoUnits" alignment="CENTER" layoutX="751.0" layoutY="524.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="eastAfricaUnits" alignment="CENTER" layoutX="813.0" layoutY="486.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="easternAustraliaUnits" alignment="CENTER" layoutX="1160.0" layoutY="595.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="easternUSUnits" alignment="CENTER" layoutX="438.0" layoutY="269.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="egyptUnits" alignment="CENTER" layoutX="751.0" layoutY="389.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="greenlandUnits" alignment="CENTER" layoutX="550.0" layoutY="80.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="icelandUnits" alignment="CENTER" layoutX="640.0" layoutY="144.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="indiaUnits" alignment="CENTER" layoutX="939.0" layoutY="375.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="indonesiaUnits" alignment="CENTER" layoutX="1035.0" layoutY="513.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="irkutskUnits" alignment="CENTER" layoutX="1019.0" layoutY="180.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="japanUnits" alignment="CENTER" layoutX="1137.0" layoutY="258.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="kamchatkaUnits" alignment="CENTER" layoutX="1123.0" layoutY="99.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="kazakhstanUnits" alignment="CENTER" layoutX="887.0" layoutY="258.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="madagascarUnits" alignment="CENTER" layoutX="850.0" layoutY="613.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="middleEastUnits" alignment="CENTER" layoutX="828.0" layoutY="362.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="mongoliaUnits" alignment="CENTER" layoutX="1035.0" layoutY="242.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="northAfricaUnits" alignment="CENTER" layoutX="665.0" layoutY="402.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="northernEuropeUnits" alignment="CENTER" layoutX="714.0" layoutY="231.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="northWestTerritoryUnits" alignment="CENTER" layoutX="376.0" layoutY="107.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="ontarioUnits" alignment="CENTER" layoutX="428.0" layoutY="180.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="papuaNewGuineaUnits" alignment="CENTER" layoutX="1123.0" layoutY="478.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="peruUnits" alignment="CENTER" layoutX="438.0" layoutY="478.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="quebecUnits" alignment="CENTER" layoutX="495.0" layoutY="180.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="scandinaviaUnits" alignment="CENTER" layoutX="725.0" layoutY="134.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="siamUnits" alignment="CENTER" layoutX="1028.0" layoutY="402.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="siberiaUnits" alignment="CENTER" layoutX="954.0" layoutY="107.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="southAfricaUnits" alignment="CENTER" layoutX="762.0" layoutY="613.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="southernEuropeUnits" alignment="CENTER" layoutX="725.0" layoutY="301.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="ukraineUnits" alignment="CENTER" layoutX="799.0" layoutY="188.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="uralkaUnits" alignment="CENTER" layoutX="902.0" layoutY="153.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="venezuelaUnits" alignment="CENTER" layoutX="438.0" layoutY="389.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="westernAustraliaUnits" alignment="CENTER" layoutX="1086.0" layoutY="613.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="westernEuropeUnits" alignment="CENTER" layoutX="640.0" layoutY="328.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="westernUSUnits" alignment="CENTER" layoutX="354.0" layoutY="231.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="yakutskUnits" alignment="CENTER" layoutX="1035.0" layoutY="90.0" prefHeight="54.0" prefWidth="74.0" text="0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
       <VBox fx:id="controls" prefHeight="720.0" prefWidth="239.0" style="-fx-background-color: #161A1C;">
          <children>
             <Label fx:id="currentPlayer" alignment="CENTER" prefHeight="67.0" prefWidth="239.0" text="%faseTag" textFill="WHITE">
@@ -376,7 +804,5 @@
             </HBox>
          </children>
       </Pane>
-
-
    </children>
 </AnchorPane>

@@ -62,7 +62,7 @@ public class Tournament {
                 //Juego
                 win = false;
                 try {
-                    ReadFile.Reads("Resources/" + SelectMap.TourMapList.get(mapno) + ".map",
+                    ReadFile.Reads("Resources/OldResources/" + SelectMap.TourMapList.get(mapno) + ".map",
                             SelectNoOfPlayers.NumberOfPlayers);
                 } catch (IOException e) {
                     // TODO Auto-generated catch block

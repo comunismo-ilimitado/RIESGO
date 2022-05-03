@@ -50,14 +50,14 @@ public class EditContinents {
     public EditContinents() {
         BoardController controller = new GameUIController();
         ReadFile = new ReadingFiles(controller);
-        String address = "Resources/" + SelectMap.MapSelected + ".map";
+        String address = "Resources/OldResources/" + SelectMap.MapSelected + ".map";
 
         if (SelectMapType.MapType == 4)
-            address = "Resources/" + SelectMap.MapSelected + ".map";
+            address = "Resources/OldResources/" + SelectMap.MapSelected + ".map";
         else if (SelectMapType.MapType == 5)
-            address = "Resources/LoadedMap.map";
+            address = "Resources/OldResources/LoadedMap.map";
         else if (SelectMapType.MapType == 6)
-            address = "Resources/UserMap.map";
+            address = "Resources/OldResources/UserMap.map";
         try {
             ReadFile.Reads(address, SelectNoOfPlayers.NumberOfPlayers);
         } catch (IOException e) {

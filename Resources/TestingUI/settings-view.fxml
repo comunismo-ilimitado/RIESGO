@@ -7,23 +7,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image: url('../Resources/TestingUI/Images/fondo.jpg');" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.StartViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.StartViewController">
    <children>
-      <ImageView fitHeight="861.0" fitWidth="1304.0" layoutY="-141.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/fondo.jpg" />
-         </image>
-      </ImageView>
-      <Button layoutX="387.0" layoutY="296.0" mnemonicParsing="false" onAction="#setSpanish" prefHeight="40.0" prefWidth="80.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Español" />
-      <Button layoutX="139.0" layoutY="296.0" mnemonicParsing="false" onAction="#setEnglish" prefHeight="40.0" prefWidth="80.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Inglés" />
-      <Button layoutX="1040.0" layoutY="296.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Pequeña" />
-      <Button layoutX="759.0" layoutY="296.0" mnemonicParsing="false" onMouseClicked="#changeResolution1" prefHeight="40.0" prefWidth="80.0" style="-fx-scale-x: 2; -fx-scale-y: 2;" text="Grande" />
-      <Button layoutX="1062.0" layoutY="582.0" mnemonicParsing="false" onMouseClicked="#credits" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="93.0" prefWidth="179.0" text="Créditos">
+      <Button layoutX="116.0" layoutY="222.0" mnemonicParsing="false" onAction="#setSpanish" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="Español" />
+      <Button layoutX="116.0" layoutY="172.0" mnemonicParsing="false" onAction="#setEnglish" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="Inglés" />
+      <Button layoutX="234.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#credits" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="Créditos">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <ImageView fitHeight="101.0" fitWidth="71.0" layoutX="576.0" layoutY="582.0" onMouseClicked="#howToPlay" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="101.0" fitWidth="71.0" layoutX="403.0" layoutY="172.0" onMouseClicked="#howToPlay" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/interrogacion.jpg" />
          </image>
@@ -33,19 +26,14 @@
             <Image url="@Images/Flecha_atras1.png" />
          </image>
       </ImageView>
-      <Label layoutX="229.0" layoutY="144.0" text="IDIOMA">
+      <Label layoutX="122.0" layoutY="104.0" text="IDIOMA">
          <font>
-            <Font size="40.0" />
+            <Font name="Bradley Hand ITC" size="40.0" />
          </font>
       </Label>
-      <Label layoutX="817.0" layoutY="144.0" text="RESOLUCIÓN">
+      <Label layoutX="327.0" layoutY="104.0" text="¿Cómo jugar?">
          <font>
-            <Font size="40.0" />
-         </font>
-      </Label>
-      <Label layoutX="539.0" layoutY="528.0" text="¿Cómo jugar?">
-         <font>
-            <Font size="24.0" />
+            <Font name="Bradley Hand ITC" size="40.0" />
          </font>
       </Label>
    </children>

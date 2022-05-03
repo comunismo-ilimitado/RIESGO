@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image: url('../Resources/TestingUI/Images/fondo.jpg');" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.StartViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.StartViewController">
    <children>
-
-      <ImageView fitHeight="861.0" fitWidth="1304.0" layoutY="-141.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/fondo.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="428.0" fitWidth="781.0" layoutX="245.0" layoutY="69.0" onMouseClicked="#hideTitle" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="428.0" fitWidth="781.0" layoutX="245.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/riesgoTitle.png" />
          </image>
@@ -32,5 +32,50 @@
             <Image url="@Images/play.jpg" />
          </image>
       </ImageView>
+      <Pane fx:id="onlinePane" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" visible="false">
+         <children>
+            <VBox alignment="CENTER" layoutY="434.0" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="62.0" prefWidth="1280.0">
+                     <children>
+                        <Button fx:id="localButton" mnemonicParsing="false" onMouseClicked="#localButtonAction" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #2D3339;" text="%localTag" textFill="WHITE" />
+                        <Separator prefHeight="0.0" prefWidth="108.0" visible="false" />
+                        <Button fx:id="onlineButton" mnemonicParsing="false" onAction="#onlineButtonAction" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #2D3339;" text="%onlineTag" textFill="WHITE" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane fx:id="ipPane" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" visible="false">
+         <children>
+            <VBox alignment="CENTER" layoutY="434.0" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="62.0" prefWidth="1280.0">
+                     <children>
+                        <TextField fx:id="ipField" prefHeight="26.0" prefWidth="412.0" promptText="%introduceIPTag" style="-fx-background-color: #E5E5E5;" />
+                        <Separator prefHeight="0.0" prefWidth="108.0" visible="false" />
+                        <Button fx:id="sendButton" mnemonicParsing="false" onAction="#sendButtonAction" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #2D3339;" text="%okTag" textFill="WHITE" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane fx:id="rolPane" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" visible="false">
+         <children>
+            <VBox alignment="CENTER" layoutY="434.0" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="62.0" prefWidth="1280.0">
+                     <children>
+                        <Button fx:id="hostButton" mnemonicParsing="false" onAction="#hostButtonAction" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #2D3339;" text="%hostTag" textFill="WHITE" />
+                        <Separator prefHeight="0.0" prefWidth="108.0" visible="false" />
+                        <Button fx:id="guestButton" mnemonicParsing="false" onAction="#guestButtonAction" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #2D3339;" text="%guestTag" textFill="WHITE" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

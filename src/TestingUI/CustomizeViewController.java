@@ -11,18 +11,25 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CustomizeViewController implements Initializable {
+
+    private ResourceBundle resources;
     @FXML
-    private ComboBox<String> comboJugadores;
+    private ComboBox<String> comboJugadores, comboMapas;
     @FXML
-    private ComboBox<String> comboMapas;
+    private Label errorLabel;
+    @FXML
+    private Pane errorPane;
     @FXML
     private ComboBox<String> b21, b22, b31, b32, b33, b41, b42, b43, b44;
 
@@ -30,12 +37,17 @@ public class CustomizeViewController implements Initializable {
     @FXML
     private HBox two, three, four;
 
-    private String[] players = {"2 jugadores", "3 jugadores", "4 jugadores"};
+    private int numberOfPlayers;
+    private String[] players = new String[3];
     private String[] maps = {"Mundo", "Europa"};
     private String[] strategies = {"Humano", "Aficionado", "Profesional", "Maestro"};
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.resources = resources;
+        for (int i = 0; i < players.length; i++) {
+            players[i] = i + 2 + " " + resources.getString("players");
+        }
         comboJugadores.getItems().addAll(players);
         comboMapas.getItems().addAll(maps);
         /*for (ComboBox<String> box : boxList) {
@@ -60,31 +72,22 @@ public class CustomizeViewController implements Initializable {
     }
 
     private void getItem(ActionEvent event) {
-        ComboBox box = (ComboBox) event.getSource();
-        Double res = box.getScene().getWidth();
         String player = comboJugadores.getValue();
-
-        try {
-            Parent root = null;
-            if (player.equals("2 jugadores")) {
-                two.setVisible(true);
-                three.setVisible(false);
-                four.setVisible(false);
-            } else if (player.equals("3 jugadores")) {
-                two.setVisible(false);
-                three.setVisible(true);
-                four.setVisible(false);
-            } else if (player.equals("4 jugadores")) {
-                two.setVisible(false);
-                three.setVisible(false);
-                four.setVisible(true);
-            }
-            Scene scene = new Scene(root);
-            Stage appStage = (Stage) ((ComboBox) event.getSource()).getScene().getWindow();
-            appStage.setScene(scene);
-            appStage.toFront();
-            appStage.show();
-        } catch (Exception e) {
+        if (Pattern.compile("2.*").matcher(player).matches()) {
+            two.setVisible(true);
+            three.setVisible(false);
+            four.setVisible(false);
+            numberOfPlayers = 2;
+        } else if (Pattern.compile("3.*").matcher(player).matches()) {
+            two.setVisible(false);
+            three.setVisible(true);
+            four.setVisible(false);
+            numberOfPlayers = 3;
+        } else if (Pattern.compile("4.*").matcher(player).matches()) {
+            two.setVisible(false);
+            three.setVisible(false);
+            four.setVisible(true);
+            numberOfPlayers = 4;
         }
     }
 
@@ -145,6 +148,11 @@ public class CustomizeViewController implements Initializable {
             appStage.show();
         } catch (Exception e) {
         }
+    }
+
+    @FXML
+    private void returnGame() {
+        errorPane.setVisible(false);
     }
 }
 

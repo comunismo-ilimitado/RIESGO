@@ -1,5 +1,7 @@
 package TestingUI;
 
+import com.sun.tools.javac.Main;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,40 +25,62 @@ public class StartViewController {
     private void exitGame() {
         System.exit(0);
     }
-
     @FXML
     private void changeColorEnter2(MouseEvent mouseEvent) {
         Button button = (Button) mouseEvent.getSource();
         button.setStyle("-fx-background-color: #E19C1B");
     }
-
     @FXML
     private void changeColorOut2(MouseEvent mouseEvent) {
         Button button = (Button) mouseEvent.getSource();
         button.setStyle("-fx-background-color: #FFFFFF");
     }
+    @FXML
+    private void play() {
+        onlinePane.setVisible(true);
+    }
 
     @FXML
-    private void play(MouseEvent event) {
+    private void localButtonAction(MouseEvent event){
+        onlinePane.setVisible(false);
         try {
             Parent root;
-            root = FXMLLoader.load(getClass().getResource("customize-view.fxml"));
+            ResourceBundle bundle =  ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
+            root = FXMLLoader.load(getClass().getResource("customize-view.fxml"), bundle);
             Scene scene = new Scene(root);
-            Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+            Stage appStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);
             appStage.toFront();
             appStage.show();
-
         } catch (Exception e) {
         }
     }
-
     @FXML
-    private void hideTitle(MouseEvent event){
-        ImageView title = (ImageView) event.getSource();
-        title.setVisible(false);
+    private void onlineButtonAction(){
+        onlinePane.setVisible(false);
+        rolPane.setVisible(true);
     }
-
+    @FXML
+    private void hostButtonAction(){
+        rolPane.setVisible(false);
+        //¿QUÉ MÁS?
+    }
+    @FXML
+    private void guestButtonAction(){
+        rolPane.setVisible(false);
+        ipPane.setVisible(true);
+    }
+    @FXML
+    private void sendButtonAction(){
+        ip = ipField.getCharacters().toString();
+        System.out.println(ip);
+    }
+    @FXML
+    private void returnGame() {
+        onlinePane.setVisible(false);
+        rolPane.setVisible(false);
+        ipPane.setVisible(false);
+    }
     @FXML
     private void imageOut(MouseEvent mouseEvent) {
         ImageView imageView = (ImageView) mouseEvent.getSource();
@@ -78,7 +102,6 @@ public class StartViewController {
             imageView.setImage(image);
         }
     }
-
     @FXML
     private void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
         ImageView imageView = (ImageView) mouseEvent.getSource();
@@ -100,7 +123,6 @@ public class StartViewController {
             imageView.setImage(image);
         }
     }
-
     @FXML
     private void settings(MouseEvent event) {
         try {
@@ -115,7 +137,6 @@ public class StartViewController {
         } catch (Exception e) {
         }
     }
-
     @FXML
     private void credits(MouseEvent event) {
         try {
@@ -131,22 +152,14 @@ public class StartViewController {
         } catch (Exception e) {
         }
     }
-
     @FXML
-    private void changeResolution1(MouseEvent event) {
-
-        System.out.println("Cambio de tamanio");
-    }
-
-    @FXML
-    private void howToPlay(MouseEvent event) {
+    private void howToPlay() {
         try {
             Desktop.getDesktop().browse(new URI("https://www.hasbro.com/common/documents/dad2886d1c4311ddbd0b0800200c9a66/ADE84A6E50569047F504839559C5FEBF.pdf"));
         } catch (URISyntaxException | IOException ex) {
             System.out.println(ex);
         }
     }
-
     @FXML
     private void back(MouseEvent event) {
         try {
@@ -171,5 +184,4 @@ public class StartViewController {
     private void setSpanish() {
         MainUI.locale = new Locale("es","ES");
     }
-
 }

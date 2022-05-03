@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #E5E5E5;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.CustomizeViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #E5E5E5;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.CustomizeViewController">
    <children>
 
       <ImageView fx:id="atras" fitHeight="89.0" fitWidth="159.0" layoutX="22.0" layoutY="604.0" onMouseClicked="#back" onMouseEntered="#imageIn" onMouseExited="#imageOut" pickOnBounds="true" preserveRatio="true">
@@ -24,7 +18,7 @@
             <Image url="@Images/Flecha_adelante1.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="333.0" layoutY="70.0" prefHeight="80.0" prefWidth="615.0" text="%configurationTag">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="333.0" layoutY="70.0" prefHeight="80.0" prefWidth="655.0" text="%configurationTag">
          <font>
             <Font name="Bradley Hand ITC" size="48.0" />
          </font>
@@ -63,7 +57,7 @@
                   </HBox>
                </children>
             </Pane>
-            <ComboBox fx:id="comboMapas" prefHeight="30.0" prefWidth="200.0" promptText="Seleccione el mapa" style="-fx-background-color: #ACACAC;" />
+            <ComboBox fx:id="comboMapas" prefHeight="30.0" prefWidth="200.0" promptText="%mapselectionTag" style="-fx-background-color: #ACACAC;" />
          </children>
       </VBox>
       <Pane fx:id="errorPane" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" visible="false">

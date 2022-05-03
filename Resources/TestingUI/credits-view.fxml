@@ -5,44 +5,44 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.StartViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.StartViewController">
     <children>
       <ImageView fx:id="atras" fitHeight="87.0" fitWidth="153.0" layoutX="-5.0" layoutY="616.0" onMouseClicked="#back" onMouseEntered="#imageOut" onMouseExited="#imageIn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Flecha_atras1.png" />
          </image>
       </ImageView>
-      <Label layoutX="561.0" layoutY="72.0" prefHeight="72.0" prefWidth="140.0" text="RIESGO">
+      <Label layoutX="561.0" layoutY="72.0" prefHeight="72.0" prefWidth="331.0" text="RIESGO">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
-      <Label layoutX="292.0" layoutY="185.0" prefHeight="72.0" prefWidth="269.0" text="%madebyTag">
+      <Label layoutX="292.0" layoutY="185.0" prefHeight="72.0" prefWidth="595.0" text="%madebyTag">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
-      <Label layoutX="381.0" layoutY="265.0" prefHeight="72.0" prefWidth="360.0" text="-Jorge Vega Arias">
+      <Label layoutX="381.0" layoutY="265.0" prefHeight="72.0" prefWidth="532.0" text="-Jorge Vega Arias">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
-      <Label layoutX="378.0" layoutY="345.0" prefHeight="72.0" prefWidth="501.0" text="-Alejandro López Adrados">
+      <Label layoutX="378.0" layoutY="345.0" prefHeight="72.0" prefWidth="615.0" text="-Alejandro López Adrados">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
-      <Label layoutX="381.0" layoutY="425.0" prefHeight="72.0" prefWidth="501.0" text="-Guillermo Grande Santi">
+      <Label layoutX="381.0" layoutY="425.0" prefHeight="72.0" prefWidth="659.0" text="-Guillermo Grande Santi">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
-      <Label layoutX="381.0" layoutY="505.0" prefHeight="72.0" prefWidth="501.0" text="-Gonzalo Ortega Carpintero">
+      <Label layoutX="381.0" layoutY="505.0" prefHeight="72.0" prefWidth="595.0" text="-Gonzalo Ortega Carpintero">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
-      <Label layoutX="381.0" layoutY="588.0" prefHeight="72.0" prefWidth="501.0" text="-Jesús González Gironda 8=D">
+      <Label layoutX="381.0" layoutY="588.0" prefHeight="72.0" prefWidth="679.0" text="-Jesús González Gironda 8=D">
          <font>
             <Font size="40.0" />
          </font>

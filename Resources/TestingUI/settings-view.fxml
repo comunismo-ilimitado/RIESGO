@@ -9,9 +9,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.StartViewController">
    <children>
-      <Button layoutX="116.0" layoutY="222.0" mnemonicParsing="false" onAction="#setSpanish" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="Español" />
-      <Button layoutX="116.0" layoutY="172.0" mnemonicParsing="false" onAction="#setEnglish" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="Inglés" />
-      <Button layoutX="234.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#credits" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="Créditos">
+      <Button layoutX="116.0" layoutY="222.0" mnemonicParsing="false" onAction="#setSpanish" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="%spanishTag" />
+      <Button layoutX="116.0" layoutY="172.0" mnemonicParsing="false" onAction="#setEnglish" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="%englishTag" />
+      <Button layoutX="234.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#credits" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="%creditsTag">
          <font>
             <Font size="30.0" />
          </font>
@@ -26,12 +26,12 @@
             <Image url="@Images/Flecha_atras1.png" />
          </image>
       </ImageView>
-      <Label layoutX="122.0" layoutY="104.0" text="IDIOMA">
+      <Label layoutX="122.0" layoutY="104.0" text="%languageTag">
          <font>
             <Font name="Bradley Hand ITC" size="40.0" />
          </font>
       </Label>
-      <Label layoutX="327.0" layoutY="104.0" text="¿Cómo jugar?">
+      <Label layoutX="327.0" layoutY="104.0" text="%howtoplayTag">
          <font>
             <Font name="Bradley Hand ITC" size="40.0" />
          </font>

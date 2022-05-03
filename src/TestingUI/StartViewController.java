@@ -15,6 +15,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.io.File;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class StartViewController {
 
@@ -151,7 +152,8 @@ public class StartViewController {
         try {
             Parent root;
             ImageView imageView = (ImageView) event.getSource();
-            root = FXMLLoader.load(getClass().getResource("start-view.fxml"));
+            ResourceBundle bundle =  ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
+            root = FXMLLoader.load(getClass().getResource("start-view.fxml"),bundle);
             Scene scene = new Scene(root);
             Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);

@@ -239,38 +239,38 @@
       </Pane>
       <VBox fx:id="controls" prefHeight="720.0" prefWidth="239.0" style="-fx-background-color: #161A1C;">
          <children>
-            <Label fx:id="currentPlayer" alignment="CENTER" prefHeight="67.0" prefWidth="239.0" text="Fase Actual: " textFill="WHITE">
+            <Label fx:id="currentPlayer" alignment="CENTER" prefHeight="67.0" prefWidth="239.0" text="%faseTag" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="currentPlayer1" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="64.0" prefWidth="239.0" text="Jugador Actual: " textFill="WHITE">
+            <Label fx:id="currentPlayer1" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="64.0" prefWidth="239.0" text="%playerTag" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="statics" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="125.0" prefWidth="246.0" text="Ms Estadisticas" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="statics" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="125.0" prefWidth="246.0" text="%statsTag" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <Separator orientation="VERTICAL" prefHeight="123.0" prefWidth="239.0" visible="false" />
-            <Button fx:id="nextFase" mnemonicParsing="false" onAction="#nextPhase" prefHeight="71.0" prefWidth="239.0" style="-fx-background-color: #2D3339;" text="Siguiente Fase" textFill="WHITE">
+            <Button fx:id="nextFase" mnemonicParsing="false" onAction="#nextPhase" prefHeight="71.0" prefWidth="239.0" style="-fx-background-color: #2D3339;" text="%nextfaseTag" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="exchangeCards" mnemonicParsing="false" onAction="#exchangeCards" prefHeight="75.0" prefWidth="243.0" style="-fx-background-color: #2D3339;" text="Intercambiar cartas" textFill="WHITE">
+            <Button fx:id="exchangeCards" mnemonicParsing="false" onAction="#exchangeCards" prefHeight="75.0" prefWidth="243.0" style="-fx-background-color: #2D3339;" text="%cardexchangeTag" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="settings" layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#settings" prefHeight="75.0" prefWidth="243.0" style="-fx-background-color: #2D3339;" text="Ajustes" textFill="WHITE">
+            <Button fx:id="settings" layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#settings" prefHeight="75.0" prefWidth="243.0" style="-fx-background-color: #2D3339;" text="%settingsTag" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="leaveGame" layoutX="10.0" layoutY="535.0" mnemonicParsing="false" onAction="#leaveGame" prefHeight="75.0" prefWidth="243.0" style="-fx-background-color: #2D3339;" text="Abandonar partida" textFill="WHITE">
+            <Button fx:id="leaveGame" layoutX="10.0" layoutY="535.0" mnemonicParsing="false" onAction="#leaveGame" prefHeight="75.0" prefWidth="243.0" style="-fx-background-color: #2D3339;" text="%surrenderTag" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>

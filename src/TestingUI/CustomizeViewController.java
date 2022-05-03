@@ -121,7 +121,8 @@ public class CustomizeViewController implements Initializable {
         try{
             Parent root;
             ImageView image = (ImageView) event.getSource();
-            root = FXMLLoader.load(getClass().getResource("start-view.fxml"));
+            ResourceBundle bundle =  ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
+            root = FXMLLoader.load(getClass().getResource("start-view.fxml"),bundle);
             Scene scene = new Scene(root);
             Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);
@@ -135,7 +136,8 @@ public class CustomizeViewController implements Initializable {
     @FXML
     private void game(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("map-view.fxml"));;
+            ResourceBundle bundle =  ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
+            Parent root = FXMLLoader.load(getClass().getResource("map-view.fxml"),bundle);;
             Scene scene = new Scene(root);
             Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);

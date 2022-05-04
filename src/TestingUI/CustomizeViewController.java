@@ -60,7 +60,7 @@ public class CustomizeViewController extends GameController implements Initializ
         five.getItems().addAll(strategies);
         six.getItems().addAll(strategies);
 
-        twoBox.setDisable(true);
+        //twoBox.setDisable(true);
         threeBox.setDisable(true);
         fourBox.setDisable(true);
         fiveBox.setDisable(true);
@@ -83,31 +83,38 @@ public class CustomizeViewController extends GameController implements Initializ
      * Sets the number of players and their strategies.
      */
     private void setPlayers() {
+        ReadingFiles.playerNames = new ArrayList<>();
         numberOfPlayers = 0;
         if (!Objects.equals(one.getValue(), resources.getString("noneTag"))) {
             numberOfPlayers++;
             ReadingFiles.strategy_selected.add(one.getValue());
-        }
+            ReadingFiles.playerNames.add(name1.getText());
+        }else{return;}
         if (!Objects.equals(two.getValue(), resources.getString("noneTag"))) {
             numberOfPlayers++;
             ReadingFiles.strategy_selected.add(two.getValue());
-        }
+            ReadingFiles.playerNames.add(name2.getText());
+        }else{return;}
         if (!Objects.equals(three.getValue(), resources.getString("noneTag"))) {
             numberOfPlayers++;
             ReadingFiles.strategy_selected.add(three.getValue());
-        }
+            ReadingFiles.playerNames.add(name3.getText());
+        }else{return;}
         if (!Objects.equals(four.getValue(), resources.getString("noneTag"))) {
             numberOfPlayers++;
             ReadingFiles.strategy_selected.add(four.getValue());
-        }
+            ReadingFiles.playerNames.add(name4.getText());
+        }else{return;}
         if (!Objects.equals(five.getValue(), resources.getString("noneTag"))) {
             numberOfPlayers++;
             ReadingFiles.strategy_selected.add(five.getValue());
-        }
+            ReadingFiles.playerNames.add(name5.getText());
+        }else{return;}
         if (!Objects.equals(six.getValue(), resources.getString("noneTag"))) {
             numberOfPlayers++;
             ReadingFiles.strategy_selected.add(six.getValue());
-        }
+            ReadingFiles.playerNames.add(name6.getText());
+        }else{return;}
     }
 
     @FXML

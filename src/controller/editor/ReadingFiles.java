@@ -31,7 +31,7 @@ public class ReadingFiles {
     public static String FileName;  //Si se usa
     public static String mapName = "Resources/OldResources/World.map";
     private boolean errors = false;
-    private static List<String> player_names;
+    public static List<String> playerNames;
     private static List<Integer> players;
     private static List<String> CountriesNames;
     private static List<String> ContinentNames;
@@ -44,6 +44,7 @@ public class ReadingFiles {
 
     public ReadingFiles() {
     }
+
 
     /**
      * This method will store all values from the map file in static variables
@@ -124,16 +125,16 @@ public class ReadingFiles {
             colorList.add(Color.decode("#DECBE4"));
             colorList.add(Color.decode("#8C8C8C"));
 
-            if(player_names == null){
-                player_names = new ArrayList<>();
+            if(playerNames == null){
+                playerNames = new ArrayList<>();
                 for (int i = 0; i < noofplayers; i++) {
-                    player_names.add("Player "+Integer.toString(i));
+                    playerNames.add("Player "+Integer.toString(i));
                 }
             }
             for (int i = 0; i < noofplayers; i++) {
                 Player player = new Player(i);
                 player.setPlayerColor(colorList.get(i % (colorList.size())));
-                player.setPlayerName(player_names.get(i));
+                player.setPlayerName(playerNames.get(i));
                 playerId.put(i, player);
                 getPlayers().add(i);
             }

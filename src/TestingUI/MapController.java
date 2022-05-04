@@ -115,7 +115,6 @@ public class MapController extends GameController implements Initializable {
     private int lastAction = -1;
 
 
-
     public void update(){
         ClientController controller = getContainer().getClientController();
         //Gestion de errores
@@ -147,7 +146,9 @@ public class MapController extends GameController implements Initializable {
                     @Override
                     public void run() {
                         java.awt.Color c = country.getOwner().getPlayerColor();
-                        setColorOfCountry(country, Color.color(c.getRed() / 255.0, c.getGreen() / 255.0, c.getBlue() / 255.0));
+                        System.out.println("Player :"+c.toString());
+                        System.out.println("Read: "+Color.rgb(c.getRed(), c.getGreen(), c.getBlue()).toString());
+                        setColorOfCountry(country, Color.rgb(c.getRed(), c.getGreen(), c.getBlue()));
                     }
                 });
             }
@@ -172,11 +173,19 @@ public class MapController extends GameController implements Initializable {
         }
     }
 
+    public double changeHue(Color color){
+        if(color.getHue() > 180){
+            return -color.getHue() + 180;
+        }else{
+            return  color.getHue();
+        }
+    }
+
     public void setColorOfCountry(Country country, Color color){
         ImageView imageView = colorReference.get(country.getColor());
         ColorAdjust blackout = new ColorAdjust();
-        blackout.setSaturation(0.7);
-        blackout.setHue((color.getHue()-220.0)/360.0);
+        blackout.setSaturation(0.6);
+        blackout.setHue(changeHue(color));
         imageView.setEffect(blackout);
         imageView.setCache(true);
         imageView.setCacheHint(CacheHint.SPEED);

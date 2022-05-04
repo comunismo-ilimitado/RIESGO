@@ -36,5 +36,10 @@
             <Font name="Bradley Hand ITC" size="40.0" />
          </font>
       </Label>
+      <ImageView fitHeight="720.0" fitWidth="1453.0" layoutX="157.0" layoutY="-17.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Drawings/ajustes.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

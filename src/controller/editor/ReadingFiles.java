@@ -116,13 +116,13 @@ public class ReadingFiles {
 
             setPlayers(new ArrayList<>());
             playerId = new HashMap<>();
-            List<Color> arrayListc = new ArrayList<>();
-            arrayListc.add(Color.decode("#B3CDE3"));
-            arrayListc.add(Color.decode("#FBB4AE"));
-            arrayListc.add(Color.decode("#CCEBC5"));
-            arrayListc.add(Color.decode("#FED9A6"));
-            arrayListc.add(Color.decode("#DECBE4"));
-            arrayListc.add(Color.decode("#FF6600"));
+            List<Color> colorList = new ArrayList<>();
+            colorList.add(Color.decode("#B3CDE3"));
+            colorList.add(Color.decode("#FBB4AE"));
+            colorList.add(Color.decode("#CCEBC5"));
+            colorList.add(Color.decode("#FED9A6"));
+            colorList.add(Color.decode("#DECBE4"));
+            colorList.add(Color.decode("#8C8C8C"));
 
             if(player_names == null){
                 player_names = new ArrayList<>();
@@ -132,7 +132,7 @@ public class ReadingFiles {
             }
             for (int i = 0; i < noofplayers; i++) {
                 Player player = new Player(i);
-                player.setPlayerColor(arrayListc.get(i % (arrayListc.size()-1)));
+                player.setPlayerColor(colorList.get(i % (colorList.size())));
                 player.setPlayerName(player_names.get(i));
                 playerId.put(i, player);
                 getPlayers().add(i);

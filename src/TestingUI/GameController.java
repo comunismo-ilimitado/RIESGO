@@ -40,6 +40,7 @@ public class GameController {
             }
 
         } catch (Exception e) {
+            System.out.println("Error de carga de " + view);
         }
     }
 

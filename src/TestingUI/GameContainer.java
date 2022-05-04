@@ -12,14 +12,18 @@ import java.util.ResourceBundle;
 
 public class GameContainer {
 
-    String mapsLocation = "Resources/TestingUI/Images/Map";
-    Locale locale;
-    ResourceBundle bundle;
-    Stage stage;
-    FXMLLoader fxmlLoader;
+    private String mapsLocation = "Resources/TestingUI/Images/Map";
 
-    ClientController clientController;
-    ServerController serverController;
+
+
+    private String ip;
+    private Locale locale;
+    private ResourceBundle bundle;
+    private Stage stage;
+    private FXMLLoader fxmlLoader;
+
+    private ClientController clientController;
+    private ServerController serverController;
 
 
     public void setMapsLocation(String mapsLocation) {
@@ -76,5 +80,11 @@ public class GameContainer {
 
     public void setServerController(ServerController serverController) {
         this.serverController = serverController;
+    }
+    public String getIp() {
+        return ip;
+    }
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }

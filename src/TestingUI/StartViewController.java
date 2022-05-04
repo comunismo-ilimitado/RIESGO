@@ -23,7 +23,6 @@ import javafx.scene.layout.Pane;
 
 public class StartViewController extends GameController{
 
-    private String ip;
     @FXML
     private Pane onlinePane, ipPane, rolPane;
     @FXML
@@ -51,6 +50,8 @@ public class StartViewController extends GameController{
     @FXML
     private void localButtonAction(MouseEvent event){
         onlinePane.setVisible(false);
+        // For local play, it sets a special IP
+        getContainer().setIp("localHost");
         loadView("customize-view.fxml");
     }
     @FXML
@@ -61,7 +62,9 @@ public class StartViewController extends GameController{
     @FXML
     private void hostButtonAction(){
         rolPane.setVisible(false);
-        //¿QUÉ MÁS?
+        // For host play, it sets a special IP
+        getContainer().setIp("localHost");
+        loadView("customize-view.fxml");
     }
     @FXML
     private void guestButtonAction(){
@@ -70,8 +73,8 @@ public class StartViewController extends GameController{
     }
     @FXML
     private void sendButtonAction(){
-        ip = ipField.getCharacters().toString();
-        System.out.println(ip);
+        getContainer().setIp(ipField.getCharacters().toString());
+        loadView("customize-view.fxml");
     }
     @FXML
     private void returnGame() {

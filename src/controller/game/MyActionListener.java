@@ -246,6 +246,7 @@ public class MyActionListener implements ActionListener {
             }
 
         }
+        getController().getServer().update();
     }
 
 

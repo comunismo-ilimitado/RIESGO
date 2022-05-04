@@ -6,53 +6,44 @@ Finish Reinforcement
 ---------------------------------
 Player Playing :- 1
 Currently in Reinforcement Mode
-Attacking.... 
-Currently in Fortification Mode
----------------------------------
-Player Playing :- 2
-Currently in Reinforcement Mode
-Currently in Fortification Mode
----------------------------------
-Player Playing :- 1
-Currently in Reinforcement Mode
 Currently in Fortification Mode
 ---------------------------------
 Player Playing :- 2
 Currently in Reinforcement Mode----PLAYER----
 0
 null
-Dorval***1
+Westmount***7
+Dorval***3
 Mercier***3
-Hampstead***3
-RDP-PAT***3
+Ile Bizard***3
 Ahuntsic***3
-Verdun***8
+La Salle***3
+Verdun***3
+Lachine***3
+Pointe-Claire***3
+Beaconsfield***3
+Outremont***3
+Pierrefonds***3
+Senneville***2
+Mont-Royal***2
+----CARDS----
+[]
+----PLAYER----
+1
+null
+Hampstead***3
+NDG***3
+RDP-PAT***3
+Ste-Anne-de-Bellevue***3
 Plateau***3
 Anjou***3
 Rosemont***3
 Ville-Marie***3
-Lachine***2
 St-Leonard***3
-Beaconsfield***3
-Kirkland***2
-Senneville***2
-----CARDS----
-[Artillery]
-----PLAYER----
-1
-null
-Westmount***7
-NDG***3
-Ile Bizard***3
-Ste-Anne-de-Bellevue***3
-La Salle***3
-Pointe-Claire***3
-Outremont***3
+Kirkland***3
 Saint-Laurent***3
-Pierrefonds***3
 Montreal Nord***3
-Villeray***3
-Mont-Royal***2
+Villeray***2
 Pointe St-Charles***2
 ----CARDS----
 []

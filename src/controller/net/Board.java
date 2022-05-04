@@ -5,6 +5,7 @@ import model.Continent;
 import model.Country;
 import model.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,11 +20,11 @@ public class Board extends NetPackages.Package {
 
     private List<CardTypes> cardTypesList;
 
-    private static HashMap<Integer, ErrorMessage> errors;
+    private HashMap<Integer, ErrorMessage> errors;
 
-    private static HashMap<Integer, ClientUpdate.ClientAction> actions;
+    private HashMap<Integer, ClientUpdate.ClientAction> actions;
 
-    private static HashMap<Integer, String> serverInfo;
+    private HashMap<Integer, String> serverInfo;
 
 
     public Board(){
@@ -83,15 +84,15 @@ public class Board extends NetPackages.Package {
         return cardTypesList;
     }
 
-    public static HashMap<Integer, String> getServerInfo() {
+    public HashMap<Integer, String> getServerInfo() {
         return serverInfo;
     }
 
-    public static void setServerInfo(HashMap<Integer, String> serverInfo) {
-        Board.serverInfo = serverInfo;
+    public void setServerInfo(HashMap<Integer, String> serverInfo) {
+        this.serverInfo = serverInfo;
     }
 
-    public static class ErrorMessage{
+    public static class ErrorMessage implements Serializable {
         String text;
         Player player;
         int id = 0;

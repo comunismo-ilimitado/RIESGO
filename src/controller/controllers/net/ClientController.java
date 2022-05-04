@@ -42,6 +42,12 @@ public class ClientController {
         client.send();
     }
 
+
+
+    public void update(){
+
+    }
+
     public void actionPerformed(ClientUpdate.ClientAction action){
         System.out.println(action.getActionCommand());
     }

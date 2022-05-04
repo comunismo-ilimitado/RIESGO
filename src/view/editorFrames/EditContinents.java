@@ -2,10 +2,6 @@ package view.editorFrames;
 
 import controller.editor.ReadingFiles;
 import model.Country;
-import view.gameFrames.MFrame2;
-import view.menuFrames.SelectMap;
-import view.menuFrames.SelectMapType;
-import view.menuFrames.SelectNoOfPlayers;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -47,16 +43,16 @@ public class EditContinents {
      */
     public EditContinents() {
         ReadFile = new ReadingFiles();
-        String address = "Resources/OldResources/" + SelectMap.MapSelected + ".map";
+        String address = "Resources/OldResources/" + ReadingFiles.MapSelected + ".map";
 
-        if (SelectMapType.MapType == 4)
-            address = "Resources/OldResources/" + SelectMap.MapSelected + ".map";
-        else if (SelectMapType.MapType == 5)
+        if (ReadingFiles.MapType == 4)
+            address = "Resources/OldResources/" + ReadingFiles.MapSelected + ".map";
+        else if (ReadingFiles.MapType == 5)
             address = "Resources/OldResources/LoadedMap.map";
-        else if (SelectMapType.MapType == 6)
+        else if (ReadingFiles.MapType == 6)
             address = "Resources/OldResources/UserMap.map";
         try {
-            ReadFile.Reads(address, SelectNoOfPlayers.NumberOfPlayers);
+            ReadFile.Reads(address, ReadingFiles.NumberOfPlayers);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

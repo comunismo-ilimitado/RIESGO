@@ -3,7 +3,6 @@ package view.editorFrames;
 import controller.editor.ReadingFiles;
 import model.Country;
 import view.gameFrames.MFrame2;
-import view.menuFrames.SelectMap;
 import view.menuFrames.SelectNoOfPlayers;
 
 import javax.swing.*;
@@ -41,7 +40,7 @@ public class EditCountries {
      */
     public EditCountries() {
         MFrame2 frame2 = new MFrame2();
-        String address = "Resources/" + SelectMap.MapSelected + ".map";
+        String address = "Resources/" + ReadingFiles.MapSelected + ".map";
         if (ReadingFiles.getCountryNameObject() != null)
             System.out.println("Initial list of elements: " + ReadingFiles.getCountriesNames());
         System.out.println("Initial list of elements: " + ReadingFiles.getContinentNames());

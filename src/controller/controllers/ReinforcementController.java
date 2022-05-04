@@ -1,13 +1,12 @@
 package controller.controllers;
 
 import controller.editor.ReadingFiles;
-import controller.game.MainController;
+import controller.game.ServerController;
 import model.CardTypes;
 import model.Country;
 import model.Player;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 /**
  * This controller class has all the methods needs for the reinforcement phase
@@ -113,7 +112,7 @@ public class ReinforcementController {
      *
      * @param mainController
      */
-    public void reinforcementPhase(MainController mainController) {
+    public void reinforcementPhase(ServerController mainController) {
         mainController.textarea("Currently in Reinforcement Mode");
         mainController.buttonCards(true);
         mainController.changed();
@@ -130,7 +129,7 @@ public class ReinforcementController {
      *
      * @param mainController
      */
-    public void finishReinforcement(MainController mainController) {
+    public void finishReinforcement(ServerController mainController) {
         mainController.getCardTypesList().clear();
         mainController.buttonCards(false);
         mainController.setCurrentPhase("Finish Attack");

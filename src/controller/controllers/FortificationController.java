@@ -1,7 +1,7 @@
 package controller.controllers;
 
 import controller.editor.ReadingFiles;
-import controller.game.MainController;
+import controller.game.ServerController;
 import model.Country;
 import model.Player;
 
@@ -100,7 +100,7 @@ public class FortificationController {
      * @param mainController
      * @throws IOException
      */
-    public void fortificationPhase(String test1, MainController mainController) throws IOException {
+    public void fortificationPhase(String test1, ServerController mainController) throws IOException {
         mainController.getCardTypesList().clear();
         mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
         mainController.getBoardFacade().setSelectedCards(mainController.getCardTypesList());
@@ -158,7 +158,7 @@ public class FortificationController {
      *
      * @param mainController
      */
-    public void finishFortification(MainController mainController) {
+    public void finishFortification(ServerController mainController) {
         mainController.buttonCards(true);
         mainController.changed();
         mainController.setCurrentPhase("Finish Reinforcement");

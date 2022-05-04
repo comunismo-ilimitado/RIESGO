@@ -1,5 +1,8 @@
 package TestingUI;
 
+import controller.controllers.net.ClientController;
+import controller.editor.ReadingFiles;
+import controller.game.ServerController;
 import controller.strategies.Strategy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.Country;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -143,6 +147,28 @@ public class CustomizeViewController extends GameController implements Initializ
                     if ((!b21.getValue().equals(resources.getString("human"))) && (!b22.getValue().equals(resources.getString("human")))) {
                         loadView("results-view.fxml");
                     } else {
+
+                        getContainer().setClientController(new ClientController());
+                        getContainer().setServerController(new ServerController());
+                        ReadingFiles.MapType = 4;
+                        ReadingFiles.mapName = "Resources/TestingUI/Maps/World.map";
+                        ReadingFiles.NumberOfPlayers = 2;
+                        ReadingFiles.strategy_selected.add("Human");
+                        ReadingFiles.strategy_selected.add("Human");
+
+                        try {
+                            getContainer().getServerController().Function();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        getContainer().getClientController().getPlayerConfiguration().setName("Player 1");
+                        getContainer().getClientController().getClient().connect("localhost");
+                        getContainer().getClientController().getClient().start();
+                        System.out.println("Esperando respuesta del server...");
+                        while(getContainer().getClientController().getServerBoard() == null){}
+                        System.out.println("Respuesta recibida!");
+                        getContainer().getClientController().updatePlayer();
                         loadView("map-view.fxml");
                     }
                     break;

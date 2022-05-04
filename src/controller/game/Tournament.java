@@ -3,7 +3,6 @@ package controller.game;
 import controller.editor.ReadingFiles;
 import model.Player;
 import view.menuFrames.SelectMap;
-import view.menuFrames.SelectNoOfPlayers;
 import view.menuFrames.SelectPlayerStrategies;
 
 import javax.swing.*;
@@ -60,7 +59,7 @@ public class Tournament {
                 win = false;
                 try {
                     ReadFile.Reads("Resources/OldResources/" + SelectMap.TourMapList.get(mapno) + ".map",
-                            SelectNoOfPlayers.NumberOfPlayers);
+                            ReadingFiles.NumberOfPlayers);
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

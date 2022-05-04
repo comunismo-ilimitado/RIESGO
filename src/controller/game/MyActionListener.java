@@ -22,7 +22,7 @@ import model.Player;
 
 @SuppressWarnings("deprecation")
 public class MyActionListener implements ActionListener {
-    private final MainController controller;
+    private final ServerController controller;
     private int players = 0;
 
     /**
@@ -30,7 +30,7 @@ public class MyActionListener implements ActionListener {
      *
      * @param controller
      */
-    public MyActionListener(MainController controller) {
+    public MyActionListener(ServerController controller) {
         this.controller = controller;
         controller.setPhaseList(new ArrayList<>());
         controller.getPhaseList().add("Finish Reinforcement");
@@ -485,7 +485,7 @@ public class MyActionListener implements ActionListener {
 
     }
 
-    public MainController getController() {
+    public ServerController getController() {
         return controller;
     }
 }

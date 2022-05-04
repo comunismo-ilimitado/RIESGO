@@ -1,10 +1,9 @@
 package view.menuFrames;
 
+import controller.editor.ReadingFiles;
 import view.editorFrames.EditContinents;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,8 +23,6 @@ public class SelectMap {
     private static JComboBox MapCombobox;
     private static JButton EditButton;
     private final ArrayList<JCheckBox> check_boxes = new ArrayList<>();
-    //Las variables son privadas y se obtienen mediante getters
-    public static String MapSelected = "";
     public static List<String> TourMapList = new ArrayList<String>();
     public static int NoOfGames = 0;
     public static int NoOfTurns = 0;
@@ -124,8 +121,8 @@ public class SelectMap {
         EditButton.setBounds(275, 200, 90, 20);
         EditButton.addActionListener(actionEvent -> {
             frame.dispose();
-            MapSelected = (String) MapCombobox.getSelectedItem();
-            SelectMapType.MapType = 4;
+            ReadingFiles.MapSelected = (String) MapCombobox.getSelectedItem();
+            ReadingFiles.MapType = 4;
             EditContinents obj = new EditContinents();
         });
         frame.add(HeaderLabel);
@@ -152,10 +149,10 @@ public class SelectMap {
     public static String getSingleModeSelectedMap() {
         ok_button.addActionListener(actionEvent -> {
             // TODO Auto-generated method stub
-            MapSelected = (String) MapCombobox.getSelectedItem();
+            ReadingFiles.MapSelected = (String) MapCombobox.getSelectedItem();
             frame.dispose();
             SelectNoOfPlayers.assignCountries();
         });
-        return MapSelected;
+        return ReadingFiles.MapSelected;
     }
 }

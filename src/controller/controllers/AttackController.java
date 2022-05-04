@@ -1,7 +1,7 @@
 package controller.controllers;
 
 import controller.editor.ReadingFiles;
-import controller.game.MainController;
+import controller.game.ServerController;
 import model.CardTypes;
 import model.Country;
 import model.Player;
@@ -428,7 +428,7 @@ public class AttackController {
      * @param mainController
      * @throws IOException
      */
-    public void attackPhase(String dice, String ad, MainController mainController) throws IOException {
+    public void attackPhase(String dice, String ad, ServerController mainController) throws IOException {
         Player player = mainController.playerObjet(mainController.getCurrentPlayer());
         mainController.textarea("Attacking.... ");
         mainController.getCardTypesList().clear();
@@ -516,28 +516,28 @@ public class AttackController {
     /**
      * This method prepares the game for fortification phase
      *
-     * @param mainController
+     * @param serverController
      */
-    public void finishattack(MainController mainController) {
-        mainController.buttonCards(false);
-        mainController.changed();
-        mainController.setCurrentPhase("Finish Fortification");
-        mainController.getFrame().nextAction.setText("Finish Fortification");
-        mainController.setFortifyCountry1(null);
-        mainController.setFortifyCountry2(null);
-        mainController.getCardTypesList().clear();
-        mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
-        mainController.getBoardFacade().setSelectedCards(mainController.getCardTypesList());
+    public void finishattack(ServerController serverController) {
+        serverController.buttonCards(false);
+        serverController.changed();
+        serverController.setCurrentPhase("Finish Fortification");
+        serverController.getFrame().nextAction.setText("Finish Fortification");
+        serverController.setFortifyCountry1(null);
+        serverController.setFortifyCountry2(null);
+        serverController.getCardTypesList().clear();
+        serverController.getFrame().jLabeCardl.setText(serverController.getCardTypesList().toString());
+        serverController.getBoardFacade().setSelectedCards(serverController.getCardTypesList());
         //fortificationPhase();
-        mainController.textarea("Currently in Fortification Mode");
+        serverController.textarea("Currently in Fortification Mode");
         setCard(false);
-        mainController.changed();
-        mainController.getFrame().ActivateAll();
-        mainController.OnlyNeeded(mainController.playerObjet(mainController.getCurrentPlayer()).getTotalCountriesOccupied());
+        serverController.changed();
+        serverController.getFrame().ActivateAll();
+        serverController.OnlyNeeded(serverController.playerObjet(serverController.getCurrentPlayer()).getTotalCountriesOccupied());
         //playerUpdate(); // El jugador actual se cambia antes de fortificar??
-        mainController.getCardTypesList().clear();
-        mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
-        mainController.getBoardFacade().setSelectedCards(mainController.getCardTypesList());
+        serverController.getCardTypesList().clear();
+        serverController.getFrame().jLabeCardl.setText(serverController.getCardTypesList().toString());
+        serverController.getBoardFacade().setSelectedCards(serverController.getCardTypesList());
 
     }
 }

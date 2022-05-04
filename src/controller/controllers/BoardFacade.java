@@ -1,20 +1,19 @@
 package controller.controllers;
 
 import controller.editor.ReadingFiles;
-import controller.game.MainController;
+import controller.game.ServerController;
 import controller.net.Board;
 import controller.net.ClientUpdate;
 import model.CardTypes;
 import model.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BoardFacade {
 
-    MainController controller;
+    ServerController controller;
 
-    public BoardFacade(MainController controller){
+    public BoardFacade(ServerController controller){
         this.controller = controller;
     }
 

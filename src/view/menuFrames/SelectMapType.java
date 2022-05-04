@@ -1,10 +1,9 @@
 package view.menuFrames;
 
+import controller.editor.ReadingFiles;
 import view.editorFrames.CreateMap;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Continuation of the start up phase
@@ -14,7 +13,6 @@ public class SelectMapType {
     private JFrame window;
     private JLabel HeaderLabel;
     private JButton select1, select2, select3;
-    public static int MapType = 0;
 
 
     /**
@@ -46,18 +44,18 @@ public class SelectMapType {
         //"Select from list"
         select1.addActionListener(event -> {
                 window.dispose();
-                MapType = 1;
+                ReadingFiles.MapType = 1;
                 SelectMap Map = new SelectMap();
         });
         //"Load Map"
         select2.addActionListener(event -> {
-                MapType = 2;
+                ReadingFiles.MapType = 2;
                 window.dispose();
                 BrowseMapFile Map = new BrowseMapFile();
         });
         //"Create New Map"
         select3.addActionListener(event -> {
-                MapType = 3;
+                ReadingFiles.MapType = 3;
                 window.dispose();
                 CreateMap CreatedMap = new CreateMap();
         });

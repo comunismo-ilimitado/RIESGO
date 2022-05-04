@@ -1,10 +1,8 @@
 package view.menuFrames;
 
-import view.editorFrames.EditContinents;
+import controller.editor.ReadingFiles;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,8 +25,6 @@ public class BrowseMapFile {
     private static JButton Browse;
     private JButton load;
     private static JLabel Loc = null;
-    private static String Location;
-    private static String FileName;  //Si se usa
     private static JButton EditButton;
 
     public BrowseMapFile() {
@@ -52,11 +48,11 @@ public class BrowseMapFile {
         EditButton = new JButton("EDIT");
         EditButton.setBounds(275, 200, 90, 20);
         EditButton.addActionListener(actionEvent -> {  //Boton edit
-            if (Location == null)
+            if (ReadingFiles.Location == null)
                 JOptionPane.showMessageDialog(null, "No file Selected!");
             else {
                 Window.dispose();
-                SelectMapType.MapType = 5;
+                ReadingFiles.MapType = 5;
             }
         });
         Browse.addActionListener(actionEvent -> {  //Boton browse
@@ -66,9 +62,9 @@ public class BrowseMapFile {
             if (result == JFileChooser.APPROVE_OPTION) {
                 File f = fc.getSelectedFile();
                 Loc.setText(f.getAbsolutePath());
-                Location = Loc.getText();
+                ReadingFiles.Location = Loc.getText();
                 try {
-                    Path source = Paths.get(Location);
+                    Path source = Paths.get(ReadingFiles.Location);
                     String dest = "Resources/OldResources/LoadedMap.map";
                     File fResource = new File(dest);
                     fResource.createNewFile();
@@ -78,7 +74,7 @@ public class BrowseMapFile {
                     // TODO Auto-generated catch bLock
                     e.printStackTrace();
                 }
-                FileName = f.getName();
+                ReadingFiles.FileName = f.getName();
             }
 
         });
@@ -89,7 +85,7 @@ public class BrowseMapFile {
         Window.add(EditButton);
         header_label.setVisible(true);
         load.addActionListener(actionEvent -> {  //Boton load
-            if (Location == null)
+            if (ReadingFiles.Location == null)
                 JOptionPane.showMessageDialog(null, "No file Selected!");
             else {
                 Window.dispose();

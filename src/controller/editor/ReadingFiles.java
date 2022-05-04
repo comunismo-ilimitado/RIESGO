@@ -21,9 +21,17 @@ import java.util.List;
  * @version 1.1
  */
 public class ReadingFiles {
+    //Las variables son privadas y se obtienen mediante getters
+    public static String MapSelected = "";
+    public static int MapType = 0;
+    public static int NumberOfPlayers = 1; //Habria que hacer un getter
     private static HashMap<Integer, Player> playerId;
     private static HashMap<Integer, Player> playerId2;
+    public static String Location;
+    public static String FileName;  //Si se usa
+    public static String mapName = "Resources/OldResources/World.map";
     private boolean errors = false;
+    private static List<String> player_names;
     private static List<Integer> players;
     private static List<String> CountriesNames;
     private static List<String> ContinentNames;
@@ -31,6 +39,7 @@ public class ReadingFiles {
     private static HashMap<String, Continent> ContinentNameObject;
     private static String address = "Resources/OldResources/World.map";
     private static String image = "OldResources/OldResources/noimage.bmp";
+    public static ArrayList<String> strategy_selected = new ArrayList<>();
     private static int ArmiesPerPlayer;
 
     public ReadingFiles() {
@@ -49,7 +58,7 @@ public class ReadingFiles {
             setCountriesNames(new ArrayList<>());
             setContinentNames(new ArrayList<>());
             setContinentNameObject(new HashMap<>());
-
+            System.out.println(address);
             // Reading Country File
             ReadingFiles.setAddress(address);
             FileReader file = new FileReader(address);
@@ -61,8 +70,8 @@ public class ReadingFiles {
             }
             bufferedReader.close();
             String string = "\\[.*]";
-            String[] aaa = buffer.toString().trim().replaceAll("\n+", "\n").split(string);
-            String InfoString = aaa[1].trim();
+            String[] fileSections = buffer.toString().trim().replaceAll("\n+", "\n").split(string);
+            String InfoString = fileSections[1].trim();
             String[] findInfo = InfoString.split("\n");
             for (int i = 0; i < InfoString.length(); i++) {
                 String[] temp1 = findInfo[i].split("=");
@@ -72,8 +81,11 @@ public class ReadingFiles {
                 }
             }
 
-            String ContinentsString = aaa[2].trim();
-            String CountriesString = aaa[3].trim();
+            String ContinentsString = fileSections[2].trim();
+            String CountriesString = fileSections[3].trim();
+            System.out.println(fileSections.length);
+            String ColorCodesString = fileSections[4].trim();
+
             String[] tempContinentArray = ContinentsString.split("\n");
 
             for (String s : tempContinentArray) {
@@ -112,15 +124,20 @@ public class ReadingFiles {
             arrayListc.add(Color.decode("#ffff00"));
             arrayListc.add(Color.decode("#FF6600"));
 
+            if(player_names == null){
+                player_names = new ArrayList<>();
+                for (int i = 0; i < noofplayers; i++) {
+                    player_names.add("Player "+Integer.toString(i));
+                }
+            }
             for (int i = 0; i < noofplayers; i++) {
                 Player player = new Player(i);
                 player.setPlayerColor(arrayListc.get(i % (arrayListc.size()-1)));
-                player.setPlayerName("Player "+Integer.toString(i));
+                player.setPlayerName(player_names.get(i));
                 playerId.put(i, player);
                 getPlayers().add(i);
             }
 
-            // TODO create a better randomizer function
             for (int i = 0; i < CountriesNames2.size(); i++) {
                 for (int j = 0; j < noofplayers; j++) {
                     if ((i + j) < CountriesNames2.size()) {
@@ -149,6 +166,13 @@ public class ReadingFiles {
                 }
             }
             playerId2 = (HashMap<Integer, Player>) playerId.clone();
+
+            String[] colorCodes = ColorCodesString.split("\n");
+            for(String colorCode : colorCodes){
+                String[] cCode = colorCode.split(",");
+                if(getCountryNameObject().containsKey(cCode[0]))
+                    getCountryNameObject().get(cCode[0]).setColor(cCode[1]);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

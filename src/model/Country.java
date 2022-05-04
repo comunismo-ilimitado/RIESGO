@@ -12,6 +12,16 @@ import java.util.List;
  */
 public class Country implements Serializable {
 
+    private String color = "0x1a1a1aff";
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     /**
      * country_id This contains unique id of the country of type integer
      */

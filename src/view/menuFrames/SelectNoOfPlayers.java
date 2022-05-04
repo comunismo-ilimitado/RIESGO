@@ -1,8 +1,8 @@
 package view.menuFrames;
 
+import controller.editor.ReadingFiles;
+
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 
 /**
@@ -16,7 +16,6 @@ public class SelectNoOfPlayers {
     private static JComboBox PNumberJCombo;
     private static JButton OKButton;
     private static JFrame Frame1;
-    public static int NumberOfPlayers = 1; //Habria que hacer un getter
 
     /**
      * returns the number of player chosen as an integer
@@ -25,11 +24,11 @@ public class SelectNoOfPlayers {
      */
     private static int GetSelectedValue() {
         OKButton.addActionListener(event -> {
-            NumberOfPlayers = Integer.parseInt((String) PNumberJCombo.getSelectedItem());
+            ReadingFiles.NumberOfPlayers = Integer.parseInt((String) PNumberJCombo.getSelectedItem());
             Frame1.dispose();
             SelectPlayerStrategies p = new SelectPlayerStrategies();
         });
-        return NumberOfPlayers;
+        return ReadingFiles.NumberOfPlayers;
     }
 
     /**
@@ -56,7 +55,7 @@ public class SelectNoOfPlayers {
         Frame1.setLocationRelativeTo(null);
         Frame1.setLayout(null);
         Frame1.setVisible(true);
-        NumberOfPlayers = GetSelectedValue();
+        ReadingFiles.NumberOfPlayers = GetSelectedValue();
     }
 
 }

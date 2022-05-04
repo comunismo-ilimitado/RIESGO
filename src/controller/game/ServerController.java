@@ -28,7 +28,7 @@ import model.Country;
  * @author pazim
  * @version 1.1
  */
-public class MainController extends Observable{
+public class ServerController extends Observable{
     ReadingFiles files;
     MFrame frame;
     Server server;
@@ -49,7 +49,7 @@ public class MainController extends Observable{
     private volatile Board board;
     private BoardFacade boardFacade;
     int dice1 = -1, dice2 = -1;
-
+    private boolean loaded = false;
 
     /**
      *
@@ -58,6 +58,7 @@ public class MainController extends Observable{
     @SuppressWarnings("deprecation")
     public void Function() throws Exception {
         try {
+
             files = new ReadingFiles();
             //Resume Game
             FileReader fileReader;
@@ -71,15 +72,15 @@ public class MainController extends Observable{
             if (isResume()) {
                 files.Reads(bufferedReader.readLine(), Integer.parseInt(bufferedReader.readLine()));
             } else { //Ruta de guardado de la partida (al crear una nueva)
-                String address = "Resources/OldResources/World.map";
-                if (SelectMapType.MapType == 1)
+                String address = ReadingFiles.mapName;
+                if (ReadingFiles.MapType == 1)
                     address = "Resources/OldResources/" + SelectMap.getSingleModeSelectedMap() + ".map";
-                else if (SelectMapType.MapType == 2)
+                else if (ReadingFiles.MapType == 2)
                     address = "Resources/OldResources/LoadedMap.map";
-                else if (SelectMapType.MapType == 3)
+                else if (ReadingFiles.MapType == 3)
                     address = "Resources/OldResources/UserMap.map";
-                if (SelectMapType.MapType < 4) {
-                    files.Reads(address, SelectNoOfPlayers.NumberOfPlayers);
+                if (ReadingFiles.MapType >= 4) {
+                    files.Reads(address, ReadingFiles.NumberOfPlayers);
                 }
             }
             //Comprobación mapa
@@ -156,7 +157,7 @@ public class MainController extends Observable{
                 Everything = Everything + temp + "\n";
             }
             ReadingFiles.getPlayerId2().clear();
-            SelectPlayerStrategies.strategy_selected.clear();
+            ReadingFiles.strategy_selected.clear();
             String[] PlayersLis = Everything.trim().split("----PLAYER----");
             frame.area.setText(PlayersLis[0]);
             for (int i = 1; i < PlayersLis.length; i++) {
@@ -165,7 +166,7 @@ public class MainController extends Observable{
                 Player tempPlayer = ReadingFiles.getPlayerId().get(Integer.parseInt(countryandarmies[0]));
                 ReadingFiles.getPlayerId2().put(Integer.parseInt(countryandarmies[0]), tempPlayer);
                 tempPlayer.setStrategy(countryandarmies[1]);
-                SelectPlayerStrategies.strategy_selected.add(countryandarmies[1]);
+                ReadingFiles.strategy_selected.add(countryandarmies[1]);
                 System.out.println(tempPlayer);
                 tempPlayer.ClearArmies();
                 for (int j = 2; j < countryandarmies.length; j++) {

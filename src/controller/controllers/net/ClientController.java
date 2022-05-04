@@ -24,7 +24,7 @@ public class ClientController {
         return client;
     }
 
-    public synchronized Board getServerBoard() {
+    public Board getServerBoard() {
         return serverBoard;
     }
 

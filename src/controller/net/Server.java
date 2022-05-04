@@ -1,6 +1,6 @@
 package controller.net;
 
-import controller.game.MainController;
+import controller.game.ServerController;
 import model.Player;
 
 import java.io.IOException;
@@ -26,9 +26,9 @@ public class Server implements Runnable{
 
     private volatile List<ClientUpdate> updates;
 
-    private MainController controller;
+    private ServerController controller;
 
-    public Server(MainController controller) {
+    public Server(ServerController controller) {
         this.controller = controller;
         users = new HashMap<>();
         thread = new Thread(this);

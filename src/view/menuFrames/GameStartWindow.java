@@ -1,6 +1,6 @@
 package view.menuFrames;
 
-import controller.game.MainController;
+import controller.game.ServerController;
 
 import javax.swing.*;
 import java.io.File;
@@ -52,7 +52,7 @@ public class GameStartWindow {
         });
 
         resume_button.addActionListener(event -> {
-                MainController controller = new MainController();
+                ServerController controller = new ServerController();
                 controller.setResume(true);
                 try {
                     controller.Function();

@@ -3,6 +3,7 @@ package TestingUI;
 import com.sun.tools.javac.Main;
 import controller.controllers.net.ClientController;
 
+import controller.game.ServerController;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
@@ -11,14 +12,23 @@ import java.util.ResourceBundle;
 
 public class GameContainer {
 
+    String mapsLocation = "Resources/TestingUI/Images/Map";
     Locale locale;
     ResourceBundle bundle;
     Stage stage;
     FXMLLoader fxmlLoader;
 
     ClientController clientController;
+    ServerController serverController;
 
 
+    public void setMapsLocation(String mapsLocation) {
+        this.mapsLocation = mapsLocation;
+    }
+
+    public String getMapsLocation() {
+        return mapsLocation;
+    }
 
     public void setFxmlLoader(FXMLLoader fxmlLoader) {
         this.fxmlLoader = fxmlLoader;
@@ -50,5 +60,21 @@ public class GameContainer {
 
     public void setLocale(Locale locale) {
         this.locale = locale;
+    }
+
+    public ClientController getClientController() {
+        return clientController;
+    }
+
+    public void setClientController(ClientController clientController) {
+        this.clientController = clientController;
+    }
+
+    public ServerController getServerController() {
+        return serverController;
+    }
+
+    public void setServerController(ServerController serverController) {
+        this.serverController = serverController;
     }
 }

@@ -1,11 +1,10 @@
 package view.menuFrames;
 
-import controller.game.MainController;
+import controller.editor.ReadingFiles;
+import controller.game.ServerController;
 import controller.game.Tournament;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -19,7 +18,7 @@ public class SelectPlayerStrategies {
 
     private JButton ok_button;
     private JFrame frame;
-    public static ArrayList<String> strategy_selected = new ArrayList<>();
+
     ArrayList<JLabel> jlabel1 = new ArrayList<>();
     ArrayList<JComboBox> jcombo_array = new ArrayList<>();
 
@@ -39,7 +38,7 @@ public class SelectPlayerStrategies {
      */
     public void setup() {
         frame = new JFrame("Players Strategies");
-        frame.setSize(500, SelectNoOfPlayers.NumberOfPlayers * 70 + 100);
+        frame.setSize(500, ReadingFiles.NumberOfPlayers * 70 + 100);
 
         String[] list = null;
         if (GameStartWindow.GameMode == 2)
@@ -47,7 +46,7 @@ public class SelectPlayerStrategies {
         else
             list = single;
 
-        for (int i = 0, j = 10; i < SelectNoOfPlayers.NumberOfPlayers; i++, j += 50) {
+        for (int i = 0, j = 10; i < ReadingFiles.NumberOfPlayers; i++, j += 50) {
             jlabel1.add(new JLabel("Player" + (i + 1) + ":"));
             jlabel1.get(i).setBounds(10, j, 250, 50);
             jcombo_array.add(new JComboBox(list));
@@ -58,7 +57,7 @@ public class SelectPlayerStrategies {
             jlabel1.get(i).setVisible(true);
         }
         ok_button = new JButton("OK");
-        ok_button.setBounds(290, SelectNoOfPlayers.NumberOfPlayers * 60, 100, 30);
+        ok_button.setBounds(290, ReadingFiles.NumberOfPlayers * 60, 100, 30);
         frame.add(ok_button);
         ok_button.setVisible(true);
         frame.setLocationRelativeTo(null);
@@ -73,8 +72,8 @@ public class SelectPlayerStrategies {
     public void GetSelectedValue() {
         ok_button.addActionListener(event -> {
                 //Save strategies selected
-                for (int i = 0, j = 10; i < SelectNoOfPlayers.NumberOfPlayers; i++, j += 50) {
-                    strategy_selected.add((String) jcombo_array.get(i).getSelectedItem());
+                for (int i = 0, j = 10; i < ReadingFiles.NumberOfPlayers; i++, j += 50) {
+                    ReadingFiles.strategy_selected.add((String) jcombo_array.get(i).getSelectedItem());
                 }
                 //Start Tournament
                 if (GameStartWindow.GameMode == 2) {
@@ -83,14 +82,14 @@ public class SelectPlayerStrategies {
                 //Start Singlemode game
                 } else {
                     try {
-                        if (strategy_selected.contains("Human")) {
+                        if (ReadingFiles.strategy_selected.contains("Human")) {
                             frame.dispose();
-                            MainController control = new MainController();
+                            ServerController control = new ServerController();
                             control.Function();
                         } else {
                             JOptionPane.showMessageDialog(null,
                                     "There Should be Atleast One Human Player. \n For all Computer Select Tournament Mode \n Select At least One Player");
-                            strategy_selected.clear();
+                            ReadingFiles.strategy_selected.clear();
                         }
                     } catch (IOException e1) {
                         // TODO Auto-generated catch block
@@ -107,7 +106,7 @@ public class SelectPlayerStrategies {
      * @return ArrayList</String> of strategies that have been selected
      */
     public static ArrayList<String> getStrategies() {
-        return strategy_selected;
+        return ReadingFiles.strategy_selected;
     }
 
 }

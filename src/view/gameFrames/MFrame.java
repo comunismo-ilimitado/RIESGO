@@ -1,18 +1,15 @@
 package view.gameFrames;
 
-import controller.game.MainController;
+import controller.game.ServerController;
 import controller.game.MyActionListener;
 import model.Country;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.*;
@@ -356,8 +353,8 @@ public class MFrame extends JFrame implements Observer {
     @Override
     public void update(Observable arg0, Object arg1) {
         // TODO Auto-generated method stu
-        ArrayList<Float> percent = ((MainController) arg0).countriesPercentage();
-        ArrayList<String> listinh = ((MainController) arg0).continentsOccupied();
+        ArrayList<Float> percent = ((ServerController) arg0).countriesPercentage();
+        ArrayList<String> listinh = ((ServerController) arg0).continentsOccupied();
         UpdateGameDominationViewPercentage(percent);
         UpdateGameDominationViewContinentOccupied(listinh);
         cards();

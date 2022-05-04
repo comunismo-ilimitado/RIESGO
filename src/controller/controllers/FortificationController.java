@@ -97,58 +97,45 @@ public class FortificationController {
     /**
      * This method checks the validation of the fortification phase
      *
-     * @param country        : country object
      * @param mainController
      * @throws IOException
      */
-    public void fortificationPhase(Country country, MainController mainController) throws IOException {
+    public void fortificationPhase(String test1, MainController mainController) throws IOException {
         mainController.getCardTypesList().clear();
         mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
         mainController.getBoardFacade().setSelectedCards(mainController.getCardTypesList());
-        if (mainController.getFortifyCountry1() == null) {
-            mainController.setFortifyCountry1(country);
-            mainController.getFrame().CCC = NeighboursList(country);
-            mainController.changed();
-            mainController.getFrame().error("Select One More Country You Want to move your Armies to");
-            mainController.getBoardFacade().sendErrorMessage("Select One More Country You Want to move your Armies to"
-                    ,mainController.playerObjet(mainController.getCurrentPlayer()));
-        } else if (mainController.getFortifyCountry2() == null) {
-            mainController.setFortifyCountry2(country);
-            if (mainController.getFortifyCountry1().equals(mainController.getFortifyCountry2())) {
-                mainController.getFrame().error("SAME COUNTRY SELECTED");
-                mainController.getBoardFacade().sendErrorMessage("SAME COUNTRY SELECTED",
+
+        if(mainController.getFortifyCountry2() == null || mainController.getFortifyCountry2() == null){
+            mainController.getBoardFacade().sendErrorMessage("No countries selected to reinforce",
+                    mainController.playerObjet(mainController.getCurrentPlayer()));
+            return;
+        }
+        try {
+            String message = mainController.getFortificationController().moveArmies(mainController.getFortifyCountry1(), mainController.getFortifyCountry2(),
+                    Integer.parseInt(test1));
+            if (!message.equals("")) {
+                mainController.getFrame().error(message);
+                mainController.getBoardFacade().sendErrorMessage(message,
                         mainController.playerObjet(mainController.getCurrentPlayer()));
                 mainController.setFortifyCountry1(null);
                 mainController.setFortifyCountry2(null);
             } else {
-                try {
-                    String test1 = mainController.getFrame().popupText(mainController.getFortifyCountry1().getNoOfArmies() - 1);  //Pregunta cuantas quiero transferir
-                    String message = mainController.getFortificationController().moveArmies(mainController.getFortifyCountry1(), mainController.getFortifyCountry2(),
-                            Integer.parseInt(test1));
-                    if (!message.equals("")) {
-                        mainController.getFrame().error(message);
-                        mainController.getBoardFacade().sendErrorMessage(message,
-                                mainController.playerObjet(mainController.getCurrentPlayer()));
-                        mainController.setFortifyCountry1(null);
-                        mainController.setFortifyCountry2(null);
-                    } else {
-                        mainController.RefreshButtons();
-                        mainController.setCurrentPhase("Finish Reinforcement");
-                        mainController.getFrame().nextAction.setText("Finish Reinforcement");
-                        // playerUpdate();
-                        mainController.setFortifyCountry1(null);
-                        mainController.setFortifyCountry2(null);
-                        mainController.getFrame().ActivateAll();
-                        mainController.selectTypeOfPlayer();
-                    }
-                } catch (Exception e) {
-                    // TODO: handle exception
-                    mainController.getFrame().error("Invalid Number");
-                    mainController.getBoardFacade().sendErrorMessage("Invalid Number",
-                            mainController.playerObjet(mainController.getCurrentPlayer()));
-                }
+                mainController.RefreshButtons();
+                mainController.setCurrentPhase("Finish Reinforcement");
+                mainController.getFrame().nextAction.setText("Finish Reinforcement");
+                // playerUpdate();
+                mainController.setFortifyCountry1(null);
+                mainController.setFortifyCountry2(null);
+                mainController.getFrame().ActivateAll();
+                mainController.selectTypeOfPlayer();
             }
+        } catch (Exception e) {
+            // TODO: handle exception
+            mainController.getFrame().error("Invalid Number");
+            mainController.getBoardFacade().sendErrorMessage("Invalid Number",
+                    mainController.playerObjet(mainController.getCurrentPlayer()));
         }
+
     }
 
     /**

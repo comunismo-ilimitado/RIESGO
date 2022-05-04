@@ -89,12 +89,12 @@ public class Server implements Runnable{
         }
         if(received instanceof ClientUpdate){
             ClientUpdate cu = (ClientUpdate)received;
-            if(getUsers().containsKey(cu.getPlayer().getPlayerName())
-                    && controller.getCurrentPlayer() == cu.getPlayer().getPlayerId()) {
+            if(getUsers().containsKey(cu.getPlayer().getPlayerName())) {
                 synchronized (this) {
                     getUpdates().add(cu);
                     if(cu.getActions().size() != 0) {
                         System.out.println("Signal received: "+cu.getActions().get(0).getActionCommand());
+                        cu.getActions().get(0).setPlayer(controller.playerObjet(cu.getPlayer().getPlayerId()));
                         controller.getMyactionListener().clientActionPerformed(cu.getActions().get(0));
                     }
                     setHasUpdated(true);

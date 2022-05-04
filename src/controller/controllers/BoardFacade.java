@@ -40,6 +40,10 @@ public class BoardFacade {
         controller.getBoard().setCardTypesList(selectedCards);
     }
 
+    public void sendServerInfo(String string){
+        controller.getBoard().getServerInfo().put(controller.getBoard().getServerInfo().size(), string);
+    }
+
 
 
     public void setMapName(String name){

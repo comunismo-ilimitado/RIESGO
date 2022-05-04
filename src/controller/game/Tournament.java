@@ -2,8 +2,6 @@ package controller.game;
 
 import controller.editor.ReadingFiles;
 import model.Player;
-import view.gameFrames.BoardController;
-import view.gameFrames.GameUIController;
 import view.menuFrames.SelectMap;
 import view.menuFrames.SelectNoOfPlayers;
 import view.menuFrames.SelectPlayerStrategies;
@@ -30,7 +28,6 @@ public class Tournament {
     private JPanel panel;
     private JLabel HeaderLabel;
     private JTextArea field;
-    private BoardController boardController;
 
     /**
      * Constructor for Tournament
@@ -45,8 +42,8 @@ public class Tournament {
      * Function implements Rules of Tournament Mode
      */
     public void simulateGame() {
-        BoardController boardController = new GameUIController();
-        ReadingFiles ReadFile = new ReadingFiles(boardController);
+
+        ReadingFiles ReadFile = new ReadingFiles();
 
         System.out.println("\nNo of Games:" + SelectMap.NoOfGames);
 

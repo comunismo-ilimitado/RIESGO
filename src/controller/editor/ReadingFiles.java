@@ -3,7 +3,7 @@ package controller.editor;
 import model.Continent;
 import model.Country;
 import model.Player;
-import view.gameFrames.BoardController;
+
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -32,9 +32,8 @@ public class ReadingFiles {
     private static String address = "Resources/OldResources/World.map";
     private static String image = "OldResources/OldResources/noimage.bmp";
     private static int ArmiesPerPlayer;
-    BoardController board;
-    public ReadingFiles(BoardController controller) {
-        this.board = controller;
+
+    public ReadingFiles() {
     }
 
     /**
@@ -155,7 +154,6 @@ public class ReadingFiles {
             e.printStackTrace();
             errors = true;
             System.out.println("ERROR IN MAP READING \n" + e);
-            board.boardError("Error In MAP READING START AGAIN\n" + e);
         }
 
     }

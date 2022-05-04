@@ -9,8 +9,6 @@ import controller.editor.ReadingFiles;
 import controller.net.Board;
 import controller.net.Server;
 import model.*;
-import view.gameFrames.BoardController;
-import view.gameFrames.GameUIController;
 import view.gameFrames.MFrame;
 import view.menuFrames.*;
 
@@ -33,7 +31,6 @@ import model.Country;
 public class MainController extends Observable{
     ReadingFiles files;
     MFrame frame;
-    BoardController boardController;
     Server server;
     String phase;
     MyActionListener myactionlistner;
@@ -51,7 +48,7 @@ public class MainController extends Observable{
     List<CardTypes> cardTypesList = new ArrayList<>();
     private volatile Board board;
     private BoardFacade boardFacade;
-
+    int dice1 = -1, dice2 = -1;
 
 
     /**
@@ -61,8 +58,7 @@ public class MainController extends Observable{
     @SuppressWarnings("deprecation")
     public void Function() throws Exception {
         try {
-            boardController = new GameUIController();
-            files = new ReadingFiles(boardController);
+            files = new ReadingFiles();
             //Resume Game
             FileReader fileReader;
             BufferedReader bufferedReader = null;
@@ -136,7 +132,6 @@ public class MainController extends Observable{
         } catch (Exception e) {
             System.out.println("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n" + e);
             e.printStackTrace();
-            boardController.boardError("ERROR IN MAP Reading. Cant Use This Map File. Please Restart \n" + e);
         }
     }
 
@@ -677,6 +672,22 @@ public class MainController extends Observable{
 
     public Server getServer() {
         return server;
+    }
+
+    public int getDice1() {
+        return dice1;
+    }
+
+    public int getDice2() {
+        return dice2;
+    }
+
+    public void setDice1(int dice1) {
+        this.dice1 = dice1;
+    }
+
+    public void setDice2(int dice2) {
+        this.dice2 = dice2;
     }
 
     /*

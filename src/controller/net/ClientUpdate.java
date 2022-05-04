@@ -31,6 +31,7 @@ public class ClientUpdate extends NetPackages.Package {
 
     public static class ClientAction extends NetPackages.Package {
         String actionCommand;
+        Player player;
 
         public String getActionCommand() {
             return actionCommand;
@@ -38,6 +39,14 @@ public class ClientUpdate extends NetPackages.Package {
 
         public void setActionCommand(String actionCommand) {
             this.actionCommand = actionCommand;
+        }
+
+        public Player getPlayer() {
+            return player;
+        }
+
+        public void setPlayer(Player player) {
+            this.player = player;
         }
     }
 }

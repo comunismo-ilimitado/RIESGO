@@ -23,6 +23,8 @@ public class Board extends NetPackages.Package {
 
     private static HashMap<Integer, ClientUpdate.ClientAction> actions;
 
+    private static HashMap<Integer, String> serverInfo;
+
 
     public Board(){
         countries = new HashMap<>();
@@ -79,6 +81,14 @@ public class Board extends NetPackages.Package {
 
     public List<CardTypes> getCardTypesList() {
         return cardTypesList;
+    }
+
+    public static HashMap<Integer, String> getServerInfo() {
+        return serverInfo;
+    }
+
+    public static void setServerInfo(HashMap<Integer, String> serverInfo) {
+        Board.serverInfo = serverInfo;
     }
 
     public static class ErrorMessage{

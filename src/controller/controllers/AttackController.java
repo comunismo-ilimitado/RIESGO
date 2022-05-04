@@ -423,35 +423,29 @@ public class AttackController {
 
     /**
      * This method checks the validation of the attack phase
-     *
-     * @param country        : country object
+     * @param dice the number of dices
+     * @param ad "A" for attacker "D" for defendant
      * @param mainController
      * @throws IOException
      */
-    public void attackPhase(Country country, MainController mainController) throws IOException {
+    public void attackPhase(String dice, String ad, MainController mainController) throws IOException {
+        Player player = mainController.playerObjet(mainController.getCurrentPlayer());
         mainController.textarea("Attacking.... ");
         mainController.getCardTypesList().clear();
         mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
         mainController.getBoardFacade().setSelectedCards(mainController.getCardTypesList());
         mainController.changed();
-        if (mainController.getAttackCountry1() == null) {
-            mainController.setAttackCountry1(country);
-            mainController.getFrame().ActivateAll();
-            List<Country> neighbourList = mainController.getAttackController().getMyNeighboursForAttack(country);
-            if (neighbourList.size() < 1) {
-                mainController.getFrame().ActivateAll();
-                mainController.setAttackCountry1(null);
-                mainController.setAttackCountry2(null);
-                mainController.getFrame().error("No Neighbours to attack");
-                mainController.getBoardFacade().sendErrorMessage("No Neighbours to attack",mainController.playerObjet(mainController.getCurrentPlayer()));
-                mainController.OnlyNeeded(mainController.playerObjet(mainController.getCurrentPlayer()).getTotalCountriesOccupied());
-                mainController.RefreshButtons();
-            } else {
-                mainController.getFrame().OnlyNeeded(neighbourList);
-                mainController.RefreshButtons();
+        boolean allout = false;
+        if (ad.equals("A")){
+            mainController.setDice1(Integer.parseInt(dice));
+            if(mainController.getDice1() == -2){
+                allout = true;
             }
-        } else if (mainController.getAttackCountry2() == null) {
-            mainController.setAttackCountry2(country);
+        }else if(ad.equals("D")){
+            mainController.setDice2(Integer.parseInt(dice));
+        }
+        if((mainController.getDice1() != -1 && mainController.getDice2() != -1)||allout){
+            /*
             int dice1 = 0;
             int dice2 = 0;
             boolean allout = false;
@@ -464,7 +458,7 @@ public class AttackController {
                     dice1 = Integer.parseInt(
                             mainController.getFrame().popupTextNew("Enter No of Dices for player 1 --Minimum: 1 Maximum: "
                                     + mainController.getAttackController().setNoOfDice(mainController.getAttackCountry1(), 'A')));
-
+                    System.out.println("Dice 1 : "+ Integer.toString(dice1));
                     dice2 = Integer.parseInt(
                             mainController.getFrame().popupTextNew("Enter No of Dices for player 2 --Minimum: 1 Maximum: "
                                     + mainController.getAttackController().setNoOfDice(mainController.getAttackCountry2(), 'D')));
@@ -477,10 +471,9 @@ public class AttackController {
                 mainController.setAttackCountry2(null);
                 mainController.OnlyNeeded(mainController.playerObjet(mainController.getCurrentPlayer()).getTotalCountriesOccupied());
                 mainController.RefreshButtons();
-            }
-
-            String reply = attackButton(mainController.getAttackCountry1(), mainController.getAttackCountry2(), dice1, dice2,
-                    allout);
+            }*/
+            String reply = attackButton(mainController.getAttackCountry1(), mainController.getAttackCountry2(), mainController.getDice1(),
+                    mainController.getDice2(), allout);
             System.out.println(reply);
             if (reply.equals("Player won")) {
                 mainController.getFrame().error(reply);
@@ -502,6 +495,8 @@ public class AttackController {
             mainController.OnlyNeeded(mainController.playerObjet(mainController.getCurrentPlayer()).getTotalCountriesOccupied());
             mainController.RefreshButtons();
             mainController.PaintCountries();
+            mainController.setDice1(-1);
+            mainController.setDice2(-1);
             boolean result = mainController.getAttackController().canAttack(mainController.playerObjet(mainController.getCurrentPlayer()));
             if (!result) {
                /* controller.frame.buttonCard4.setEnabled(false);
@@ -515,9 +510,6 @@ public class AttackController {
 
             }
 
-        } else {
-            mainController.setAttackCountry1(null);
-            mainController.setAttackCountry2(null);
         }
     }
 

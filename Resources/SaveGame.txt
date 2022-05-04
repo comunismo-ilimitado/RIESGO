@@ -1,18 +1,17 @@
 Resources/TestingUI/Maps/World.map
-6
 5
+0
 Finish Reinforcement
 
 ---------------------------------
 Player Playing :- 1
-Currently in Reinforcement Mode for Aggressive player
-Currently in Attack Mode for Aggressive player
-Currently in Fortification Mode for Aggressive player
+Currently in Reinforcement Mode
+Currently in Fortification Mode
 ---------------------------------
 Player Playing :- 2
-Currently in Reinforcement Mode for Cheater player
-Currently in Attack Mode for Cheater player
-Currently in Fortification Mode for Cheater player
+Currently in Reinforcement Mode for Benevolent player
+Currently in Attack Mode for Benevolent player
+Currently in Fortification Mode for Benevolent player
 ---------------------------------
 Player Playing :- 3
 Currently in Reinforcement Mode for Random player
@@ -20,85 +19,80 @@ Currently in Attack Mode for Random player
 Currently in Fortification Mode for Random player
 ---------------------------------
 Player Playing :- 4
-Currently in Reinforcement Mode for Random player
-Currently in Attack Mode for Random player
-Currently in Fortification Mode for Random player
+Currently in Reinforcement Mode for Aggressive player
+Currently in Attack Mode for Aggressive player
+Currently in Fortification Mode for Aggressive player
 ---------------------------------
 Player Playing :- 5
-Currently in Reinforcement Mode for Random player
-Currently in Attack Mode for Random player
-Currently in Fortification Mode for Random player
+Currently in Reinforcement Mode for Aggressive player
+Currently in Attack Mode for Aggressive player
+Currently in Fortification Mode for Aggressive player
 ---------------------------------
-Player Playing :- 6
+Player Playing :- 1
 Currently in Reinforcement Mode----PLAYER----
 0
-controller.strategies.AggressiveStrategy@26e41156
-Western Australia***1
-Middle East***1
+null
+Western Australia***3
+Papua New Guinea***3
+Alberta***3
+Scandinavia***6
 Brazil***3
-Western Europe***3
-Venezuela***3
-Indonesia***2
+Ukraine***3
+Britain***3
+Venezuela***2
+Southern Europe***2
 ----CARDS----
-[Infantry]
+[]
 ----PLAYER----
 1
-controller.strategies.CheaterStrategy@4c3bec56
-Ural***6
-Alberta***3
-Madagascar***3
-Kazakhstan***10
-Scandinavia***6
-Iceland***6
+controller.strategies.BenevolentStrategy@17ac22eb
+Egypt***3
+North Africa***3
 Yakutsk***3
-Mongolia***6
-China***6
-North West Territory***6
-Siberia***6
-Alaska***3
-Kamchatka***6
-Eastern United States***6
-Quebec***3
-Ukraine***6
-Britain***6
-Congo***6
-Irkutsk***6
-South Africa***6
-Western United States***6
-Ontario***4
-Greenland***2
-East Africa***4
+Mongolia***3
+North West Territory***2
+Eastern United States***3
+Congo***3
+Ontario***3
+East Africa***2
 ----CARDS----
 []
 ----PLAYER----
 2
-controller.strategies.RandomStrategy@225b7b24
-Siam***3
-India***1
+controller.strategies.RandomStrategy@7ceff2ef
+Central America***4
+Kazakhstan***3
+Iceland***3
+Siberia***3
+Kamchatka***1
+Eastern Australia***3
+Argentina***3
+Irkutsk***1
 ----CARDS----
 []
 ----PLAYER----
 3
-controller.strategies.RandomStrategy@c46d752
-Papua New Guinea***1
-Egypt***1
-North Africa***5
+controller.strategies.AggressiveStrategy@255bed3b
+Siam***1
+Middle East***5
+Japan***3
+India***3
+South Africa***3
+Peru***3
+Indonesia***3
 ----CARDS----
-[]
+[Cavalry]
 ----PLAYER----
 4
-controller.strategies.RandomStrategy@5d07b11b
-Central America***1
-Eastern Australia***3
-Peru***3
-----CARDS----
-[]
-----PLAYER----
-5
-null
-Argentina***3
+controller.strategies.AggressiveStrategy@19c7a832
+Ural***1
+Madagascar***3
+China***3
+Alaska***3
 Northern Europe***3
-Japan***3
-Southern Europe***2
+Quebec***3
+Western Europe***3
+Western United States***3
+Greenland***3
 ----CARDS----
-[]
+[Artillery]

@@ -79,43 +79,34 @@ public class CustomizeViewController extends GameController implements Initializ
         sixBox.setDisable(Objects.equals(five.getValue(), resources.getString("noneTag")) || fiveBox.isDisable());
     }
 
-    @FXML
-    private void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
-        ImageView imageView = (ImageView) mouseEvent.getSource();
-        if (imageView.getId().equals("atras")) {
-            File file = new File("Resources/TestingUI/Images/Flecha_atras2.png");
-            Image image = new Image(file.toURI().toString());
-            imageView.setImage(image);
-        } else if (imageView.getId().equals("adelante")) {
-            File file = new File("Resources/TestingUI/Images/Flecha_adelante2.png");
-            Image image = new Image(file.toURI().toString());
-            imageView.setImage(image);
+    /**
+     * Sets the number of players and their strategies.
+     */
+    private void setPlayers() {
+        numberOfPlayers = 0;
+        if (!Objects.equals(one.getValue(), resources.getString("noneTag"))) {
+            numberOfPlayers++;
+            ReadingFiles.strategy_selected.add(one.getValue());
         }
-    }
-
-    @FXML
-    private void imageOut(MouseEvent mouseEvent) throws FileNotFoundException {
-        ImageView imageView = (ImageView) mouseEvent.getSource();
-        if (imageView.getId().equals("atras")) {
-            File file = new File("Resources/TestingUI/Images/Flecha_atras1.png");
-            Image image = new Image(file.toURI().toString());
-            imageView.setImage(image);
-        } else if (imageView.getId().equals("adelante")) {
-            File file = new File("Resources/TestingUI/Images/Flecha_adelante1.png");
-            Image image = new Image(file.toURI().toString());
-            imageView.setImage(image);
+        if (!Objects.equals(two.getValue(), resources.getString("noneTag"))) {
+            numberOfPlayers++;
+            ReadingFiles.strategy_selected.add(two.getValue());
         }
-    }
-
-    @FXML
-    private void back(MouseEvent event) {
-        try{
-            Parent root;
-            ImageView image = (ImageView) event.getSource();
-
-            loadView("start-view.fxml");
-
-        } catch (Exception e) {
+        if (!Objects.equals(three.getValue(), resources.getString("noneTag"))) {
+            numberOfPlayers++;
+            ReadingFiles.strategy_selected.add(three.getValue());
+        }
+        if (!Objects.equals(four.getValue(), resources.getString("noneTag"))) {
+            numberOfPlayers++;
+            ReadingFiles.strategy_selected.add(four.getValue());
+        }
+        if (!Objects.equals(five.getValue(), resources.getString("noneTag"))) {
+            numberOfPlayers++;
+            ReadingFiles.strategy_selected.add(five.getValue());
+        }
+        if (!Objects.equals(six.getValue(), resources.getString("noneTag"))) {
+            numberOfPlayers++;
+            ReadingFiles.strategy_selected.add(six.getValue());
         }
     }
 

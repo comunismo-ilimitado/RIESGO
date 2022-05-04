@@ -376,8 +376,10 @@ public class ServerController extends Observable{
         String message = getReinforcementController().addArmies(country);
         frame.noArmiesLeft = playerObjet(getCurrentPlayer()).getPlayerArmiesNotDeployed();
         changed();
-        if (!message.equals(""))
+        if (!message.equals("")) {
             frame.error(message);
+            getBoardFacade().sendErrorMessage(message, playerObjet(getCurrentPlayer()));
+        }
     }
 
     /**

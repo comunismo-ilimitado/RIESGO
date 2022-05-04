@@ -41,7 +41,6 @@ public class ClientController {
     }
 
     public void updatePlayer(){
-
         Player player =  getServerBoard().getPlayers().values()
                         .stream().filter(pla -> pla.getPlayerName().equals(getPlayerConfiguration().getName()))
                         .findFirst().orElse(null);
@@ -57,15 +56,8 @@ public class ClientController {
 
 
     public void update(){
-        System.out.println("Cosas1");
-        if(mapController != null) {
-            System.out.println("Cosas");
-            String error = "dwwddwwd";
-            if (!getServerBoard().getErrors().isEmpty())
-                error = getServerBoard().getErrors().get(getServerBoard().getErrors().size() - 1).text;
-            mapController.errorLabel.setText(error);
-            mapController.errorPane.setVisible(true);
-        }
+        if(mapController != null)
+            mapController.update();
     }
 
     public void actionPerformed(ClientUpdate.ClientAction action){

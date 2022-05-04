@@ -1,6 +1,11 @@
 package TestingUI;
 
+import controller.controllers.net.ClientController;
+import controller.net.Board;
+import controller.net.Client;
 import controller.net.ClientUpdate;
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,8 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Light;
-import javafx.scene.effect.Lighting;
+import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.ImageView;
@@ -106,7 +110,87 @@ public class MapController extends GameController implements Initializable {
         dice[5] = new Image(file.toURI().toString());
     }
 
+    private int lastError = -1;
+    private int lastInfo = -1;
+    private int lastAction = -1;
 
+
+
+    public void update(){
+        ClientController controller = getContainer().getClientController();
+        //Gestion de errores
+        {
+            if (!controller.getServerBoard().getErrors().isEmpty()) {
+                if(controller.getServerBoard().getErrors().size() != lastError) {
+                    lastError = controller.getServerBoard().getErrors().size();
+                    Board.ErrorMessage error = controller.getServerBoard().getErrors().get(lastError-1);
+                    if(error.getPlayer().getPlayerName().equals(controller.getPlayerConfiguration().getName())) {
+                        System.out.println("Error: " + error.text);
+                        String finalError = error.text;
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                errorLabel.setText(finalError);
+                                errorPane.setVisible(true);
+                            }
+                        });
+                    }
+                }
+            }
+        }
+
+        // Actualizar paises
+        {
+            HashMap<String, Country> countries = getContainer().getClientController().getServerBoard().getCountries();
+            for (Country country : countries.values()) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        java.awt.Color c = country.getOwner().getPlayerColor();
+                        setColorOfCountry(country, Color.color(c.getRed() / 255.0, c.getGreen() / 255.0, c.getBlue() / 255.0));
+                    }
+                });
+            }
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Country country = getContainer().getClientController().getServerBoard().getSelectedCountry1();
+                    if(country != null)
+                        setColorOfCountry(country, Color.AQUA);
+                    country = getContainer().getClientController().getServerBoard().getSelectedCountry2();
+                    if(country != null)
+                        setColorOfCountry(country, Color.AQUA);
+                }
+            });
+
+        }
+
+        {
+            if(lastAction != controller.getServerBoard().getActions().size()) {
+                lastAction = controller.getServerBoard().getActions().size();
+            }
+        }
+    }
+
+    public void setColorOfCountry(Country country, Color color){
+        ImageView imageView = colorReference.get(country.getColor());
+        ColorAdjust blackout = new ColorAdjust();
+        blackout.setSaturation(0.7);
+        blackout.setHue((color.getHue()-220.0)/360.0);
+        imageView.setEffect(blackout);
+        imageView.setCache(true);
+        imageView.setCacheHint(CacheHint.SPEED);
+    }
+
+    public void setShadedColorCountry(Country country, Color color){
+        ImageView imageView = colorReference.get(country.getColor());
+        Lighting colorSettings = new Lighting();
+        colorSettings.setLight(new Light.Distant(45, 45, Color.AQUA));
+
+        imageView.setEffect(colorSettings);
+        imageView.setCache(true);
+        imageView.setCacheHint(CacheHint.SPEED);
+    }
 
     @FXML
     private void countrySelected(MouseEvent event) {
@@ -115,24 +199,19 @@ public class MapController extends GameController implements Initializable {
         blackout.setLight(new Light.Distant(45, 45, Color.AQUA));
 
         Color color = country.getImage().getPixelReader().getColor((int) event.getX(), (int) event.getY());
-        System.out.println(color.toString());
 
         country.setEffect(blackout);
         country.setCache(true);
         country.setCacheHint(CacheHint.SPEED);
-        System.out.println("Country: "+country.getId());
+        setColorOfCountry(colorCountry.get(color.toString()), Color.AQUA);
     }
     @FXML
     private void mapSelected(MouseEvent event) {
         ImageView country = (ImageView) event.getSource();
         Color color = country.getImage().getPixelReader().getColor((int) event.getX(), (int) event.getY());
         country = colorReference.get(color.toString());
-        Lighting colorSettings = new Lighting();
-        colorSettings.setLight(new Light.Distant(45, 45, Color.AQUA));
-        country.setEffect(colorSettings);
-        country.setCache(true);
-        country.setCacheHint(CacheHint.SPEED);
-        System.out.println(country.getId());
+        if(country == null) return;
+
         ClientUpdate.ClientAction action = new ClientUpdate.ClientAction();
         action.setActionCommand(colorCountry.get(color.toString()).getName()+" |5|");
         getContainer().getClientController().sendAction(action);

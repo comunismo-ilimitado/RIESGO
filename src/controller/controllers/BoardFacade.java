@@ -25,7 +25,6 @@ public class BoardFacade {
         Board.ErrorMessage msg = new Board.ErrorMessage(errortext, player);
         int id = controller.getBoard().getErrors().size();
         msg.setId(id);
-
         controller.getBoard().getErrors().put(id, msg);
     }
 
@@ -33,6 +32,10 @@ public class BoardFacade {
         controller.getBoard().setPlayers(ReadingFiles.getPlayerId2());
         controller.getBoard().setContinents(ReadingFiles.getContinentNameObject());
         controller.getBoard().setCountries(ReadingFiles.getCountryNameObject());
+        controller.getBoard().setSelectedCountry1(controller.getAttackCountry1());
+        controller.getBoard().setSelectedCountry1(controller.getAttackCountry2());
+        controller.getBoard().setCurrentPhase(controller.getCurrentPhase());
+
     }
 
     public void setSelectedCards(List<CardTypes> selectedCards){

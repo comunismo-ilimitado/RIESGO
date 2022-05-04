@@ -1,33 +1,33 @@
 [Map]
-author=Sean O'Connor
+author=22E05
 warn=yes
 image=world (small).bmp
 wrap=yes
 scroll=horizontal
 
 [Continents]
-North America=5
-South America=2
-Africa=3
-Europe=5
-Asia=7
-Australia=2
+North America=9
+South America=4
+Africa=6
+Europe=7
+Asia=12
+Oceania=4
 
 [Territories]
-Alaska,30,46,North America,Northwest Territory,Alberta,Kamchatka
-Northwest Territory,59,42,North America,Alaska,Alberta,Ontario,Greenland
-Alberta,58,67,North America,Alaska,Northwest Territory,Ontario,Western United States
-Greenland,121,30,North America,Northwest Territory,Ontario,Quebec,Iceland
-Ontario,80,72,North America,Northwest Territory,Alberta,Greenland,Quebec,Western United States,Eastern United States
+Alaska,30,46,North America,North West Territory,Alberta,Kamchatka
+North West Territory,59,42,North America,Alaska,Alberta,Ontario,Greenland
+Alberta,58,67,North America,Alaska,North West Territory,Ontario,Western United States
+Greenland,121,30,North America,North West Territory,Ontario,Quebec,Iceland
+Ontario,80,72,North America,North West Territory,Alberta,Greenland,Quebec,Western United States,Eastern United States
 Quebec,106,75,North America,Greenland,Ontario,Eastern United States
 Western United States,59,95,North America,Alberta,Ontario,Eastern United States,Central America
 Eastern United States,84,97,North America,Ontario,Quebec,Western United States,Central America
-Central America,75,123,North America,Western United States,Eastern United States,Venezuala
+Central America,75,123,North America,Western United States,Eastern United States,Venezuela
 
-Venezuala,94,146,South America,Central America,Peru,Brazil
-Peru,91,168,South America,Venezuala,Brazil,Argentina
+Venezuela,94,146,South America,Central America,Peru,Brazil
+Peru,91,168,South America,Venezuela,Brazil,Argentina
 Argentina,104,203,South America,Peru,Brazil
-Brazil,115,165,South America,Venezuala,Peru,Argentina,North Africa
+Brazil,115,165,South America,Venezuela,Peru,Argentina,North Africa
 
 North Africa,159,139,Africa,Brazil,Western Europe,Southern Europe,Egypt,East Africa,Congo
 Congo,177,164,Africa,North Africa,East Africa,South Africa
@@ -36,33 +36,72 @@ Madagascar,207,181,Africa,East Africa,South Africa
 East Africa,192,153,Africa,Egypt,Middle East,Congo,North Africa,South Africa,Madagascar
 Egypt,181,130,Africa,Southern Europe,North Africa,Middle East,East Africa
 
-Iceland,144,67,Europe,Greenland,Great Britain,Scandinavia
-Great Britain,156,91,Europe,Iceland,Scandinavia,Western Europe,Northern Europe
-Western Europe,160,109,Europe,Great Britain,Northern Europe,Southern Europe,North Africa
-Scandinavia,170,74,Europe,Iceland,Great Britain,Northern Europe,Ukraine
-Northern Europe,177,90,Europe,Great Britain,Scandinavia,Ukraine,Southern Europe,Western Europe
+Iceland,144,67,Europe,Greenland,Britain,Scandinavia
+Britain,156,91,Europe,Iceland,Scandinavia,Western Europe,Northern Europe
+Western Europe,160,109,Europe,Britain,Northern Europe,Southern Europe,North Africa
+Scandinavia,170,74,Europe,Iceland,Britain,Northern Europe,Ukraine
+Northern Europe,177,90,Europe,Britain,Scandinavia,Ukraine,Southern Europe,Western Europe
 Southern Europe,184,102,Europe,Northern Europe,Ukraine,Middle East,Egypt,North Africa,Western Europe
-Ukraine,202,84,Europe,Ural,Afghanistan,Middle East,Southern Europe,Northern Europe,Scandinavia
+Ukraine,202,84,Europe,Ural,Kazakhstan,Middle East,Southern Europe,Northern Europe,Scandinavia
 
-Middle East,206,123,Asia,Ukraine,Afghanistan,India,Southern Europe,Egypt,East Africa
-Ural,243,64,Asia,Siberia,China,Afghanistan,Ukraine
-Afghanistan,230,108,Asia,Ural,China,India,Middle East,Ukraine
-India,242,128,Asia,China,Siam,Afghanistan,Middle East
-Siberia,274,68,Asia,Yatusk,Irkutsk,Mongolia,China,Ural
-China,269,112,Asia,Ural,Siberia,Mongolia,Siam,India,Afghanistan
+Middle East,206,123,Asia,Ukraine,Kazakhstan,India,Southern Europe,Egypt,East Africa
+Ural,243,64,Asia,Siberia,China,Kazakhstan,Ukraine
+Kazakhstan,230,108,Asia,Ural,China,India,Middle East,Ukraine
+India,242,128,Asia,China,Siam,Kazakhstan,Middle East
+Siberia,274,68,Asia,Yakutsk,Irkutsk,Mongolia,China,Ural
+China,269,112,Asia,Ural,Siberia,Mongolia,Siam,India,Kazakhstan
 Siam,270,139,Asia,China,India,Indonesia
 Mongolia,296,101,Asia,Siberia,Irkutsk,Japan,China,Kamchatka
-Irkutsk,299,76,Asia,Siberia,Yatusk,Kamchatka,Mongolia
-Yatusk,320,52,Asia,Siberia,Irkutsk,Kamchatka
-Kamchatka,344,65,Asia,Yatusk,Irkutsk,Japan,Alaska,Mongolia
+Irkutsk,299,76,Asia,Siberia,Yakutsk,Kamchatka,Mongolia
+Yakutsk,320,52,Asia,Siberia,Irkutsk,Kamchatka
+Kamchatka,344,65,Asia,Yakutsk,Irkutsk,Japan,Alaska,Mongolia
 Japan,322,104,Asia,Kamchatka,Mongolia
 
-Indonesia,292,159,Australia,Siam,New Guinea,Western Australia
-New Guinea,329,158,Australia,Indonesia,Western Australia,Eastern Australia
-Western Australia,313,188,Australia,Indonesia,New Guinea,Eastern Australia
-Eastern Australia,334,189,Australia,Western Australia,New Guinea
-
-
+Indonesia,292,159,Oceania,Siam,Papua New Guinea,Western Australia
+Papua New Guinea,329,158,Oceania,Indonesia,Western Australia,Eastern Australia
+Western Australia,313,188,Oceania,Indonesia,Papua New Guinea,Eastern Australia
+Eastern Australia,334,189,Oceania,Western Australia,Papua New Guinea
 
 [ColorCode]
-Alaska,0x1a1a1aff
+Alaska,0x0d0d0dff
+North West Territory,0x1a1a1aff
+Greenland,0x262626ff
+Alberta,0x333333ff
+Ontario,0x404040ff
+Quebec,0x4d4d4dff
+Western United States,0x595959ff
+Eastern Unites States,0x666666ff
+Central America,0x737373ff
+Venezuela,0x808080ff
+Peru,0x8c8c8cff
+Brazil,0x999999ff
+Argentina,0xa6a6a6ff
+Iceland,0xb3b3b3ff
+Scandinavia,0xbfbfbfff
+Ukraine,0xccccccff
+Britain,0xd9d9d9ff
+Northern Europe,0xe6e6e6ff
+Western Europe,0xf2f2f2ff
+Southern Europe,0xffffffff
+North Africa,0xe680e6ff
+Egypt,0xf280f2ff
+East Africa,0xff80ffff
+Congo,0x0d0d80ff
+South Africa,0x1a1a80ff
+madagascar,0x262680ff
+Ural,0x0d800dff
+Siberia,0x1a801aff
+Yakutsk,0x268026ff
+Kamchatka,0x338033ff
+Irkutsk,0x408040ff
+Kazakhstan,0x4d804dff
+China,0x598059ff
+Mongolia,0x668066ff
+Japan,0x738073ff
+Middle East,0x8c808cff
+India,0x998099ff
+Siam,0xa680a6ff
+Indonesia,0xb380b3ff
+Papua New Guinea,0xbf80bfff
+Western Australia,0xcc80ccff
+Eastern Australia,0xd980d9ff

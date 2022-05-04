@@ -45,6 +45,8 @@ public class MyActionListener implements ActionListener {
         System.out.println("Evento: " + event.getActionCommand());
 
 
+        boolean success = false;
+
         // ERROR MANAGEMENT
 
         // If empty command received

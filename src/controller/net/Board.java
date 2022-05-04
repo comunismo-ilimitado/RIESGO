@@ -13,10 +13,14 @@ import java.util.List;
 public class Board extends NetPackages.Package {
 
     private String mapName = "world";
+    private String currentPhase = "";
 
     private HashMap<String, Country> countries;
     private HashMap<String, Continent> continents;
     private HashMap<Integer, Player> players;
+
+    private Country selectedCountry1;
+    private Country selectedCountry2;
 
     private List<CardTypes> cardTypesList;
 
@@ -64,6 +68,14 @@ public class Board extends NetPackages.Package {
         this.mapName = mapName;
     }
 
+    public void setCurrentPhase(String currentPhase) {
+        this.currentPhase = currentPhase;
+    }
+
+    public String getCurrentPhase() {
+        return currentPhase;
+    }
+
     public String getMapName() {
         return mapName;
     }
@@ -74,6 +86,22 @@ public class Board extends NetPackages.Package {
 
     public HashMap<Integer, ClientUpdate.ClientAction> getActions() {
         return actions;
+    }
+
+    public void setSelectedCountry1(Country selectedCountry1) {
+        this.selectedCountry1 = selectedCountry1;
+    }
+
+    public Country getSelectedCountry1() {
+        return selectedCountry1;
+    }
+
+    public void setSelectedCountry2(Country selectedCountry2) {
+        this.selectedCountry2 = selectedCountry2;
+    }
+
+    public Country getSelectedCountry2() {
+        return selectedCountry2;
     }
 
     public void setCardTypesList(List<CardTypes> cardTypesList) {
@@ -100,6 +128,10 @@ public class Board extends NetPackages.Package {
         public ErrorMessage(String errortext, Player player){
             this.text = errortext;
             this.player = player;
+        }
+
+        public Player getPlayer() {
+            return player;
         }
 
         public void setId(int id) {

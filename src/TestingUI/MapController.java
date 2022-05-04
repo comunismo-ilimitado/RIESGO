@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 
-public class MapController implements Initializable {
+public class MapController extends GameController implements Initializable {
     @FXML
     private Pane exitPane, errorPane, dicePane;
     @FXML
@@ -41,6 +41,8 @@ public class MapController implements Initializable {
             papuaNewGuinea, peru, quebec, scandinavia, siam, siberia, southAfrica, southernEurope, ukraine, ural,
             venezuela, westernAustralia, westernEurope, westernUS, yakutsk;
     private HashMap<String, ImageView> colorReference = new HashMap<>();
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colorReference.put("0x0d0d0dff", alaska);
@@ -151,26 +153,7 @@ public class MapController implements Initializable {
 
     @FXML
     private void back(MouseEvent event) {
-        loadView(event, "start-view.fxml");
-    }
-
-    private void loadView(MouseEvent event, String view){
-        try {
-            Parent root;
-            ResourceBundle bundle = ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
-            root = FXMLLoader.load(getClass().getResource(view), bundle);
-            Scene scene = new Scene(root);
-            Stage appStage = null;
-            if(event.getSource().getClass().toString().equals("class javafx.scene.control.Button")) {
-                 appStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            }else{
-                 appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-            }
-            appStage.setScene(scene);
-            appStage.toFront();
-            appStage.show();
-        } catch (Exception e) {
-        }
+        loadView("start-view.fxml");
     }
 
     @FXML

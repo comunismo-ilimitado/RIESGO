@@ -310,7 +310,8 @@ public class MFrame extends JFrame implements Observer {
     }
 
     public void error(String string) {
-        JOptionPane.showMessageDialog(null, string);
+        System.out.println(string);
+        //JOptionPane.showMessageDialog(null, string);
     }
 
     // Activa todos los botones

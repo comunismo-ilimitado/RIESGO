@@ -23,7 +23,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomizeViewController implements Initializable {
+public class CustomizeViewController extends GameController implements Initializable {
 
     private ResourceBundle resources;
     @FXML
@@ -128,13 +128,8 @@ public class CustomizeViewController implements Initializable {
         try{
             Parent root;
             ImageView image = (ImageView) event.getSource();
-            ResourceBundle bundle =  ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
-            root = FXMLLoader.load(getClass().getResource("start-view.fxml"),bundle);
-            Scene scene = new Scene(root);
-            Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-            appStage.setScene(scene);
-            appStage.toFront();
-            appStage.show();
+
+            loadView("start-view.fxml");
 
         } catch (Exception e) {
         }
@@ -146,18 +141,18 @@ public class CustomizeViewController implements Initializable {
             switch(numberOfPlayers){
                 case 2: {
                     if ((!b21.getValue().equals(resources.getString("human"))) && (!b22.getValue().equals(resources.getString("human")))) {
-                        loadView(event, "results-view.fxml");
+                        loadView("results-view.fxml");
                     } else {
-                        loadView(event, "map-view.fxml");
+                        loadView("map-view.fxml");
                     }
                     break;
                 }
                 case 3: {
                     if ((!b31.getValue().equals(resources.getString("human"))) && (!b32.getValue().equals(resources.getString("human"))) &&
                             (!b33.getValue().equals(resources.getString("human")))) {
-                        loadView(event, "results-view.fxml");
+                        loadView("results-view.fxml");
                     } else {
-                        loadView(event, "map-view.fxml");
+                        loadView("map-view.fxml");
                     }
                     break;
                 }
@@ -165,9 +160,9 @@ public class CustomizeViewController implements Initializable {
                     if ((!b41.getValue().equals(resources.getString("human"))) && (!b42.getValue().equals(resources.getString("human")))
                             && (!b43.getValue().equals(resources.getString("human"))) &&
                             (!b44.getValue().equals(resources.getString("human")))) {
-                        loadView(event, "results-view.fxml");
+                        loadView("results-view.fxml");
                     } else {
-                        loadView(event, "map-view.fxml");
+                        loadView("map-view.fxml");
                     }
                     break;
                 }
@@ -179,19 +174,6 @@ public class CustomizeViewController implements Initializable {
             errorLabel.setText(resources.getString("invalidmapTag"));
             errorPane.setVisible(true);
         }
-    }
-
-    private void loadView(MouseEvent event, String view){
-            try {
-                ResourceBundle bundle = ResourceBundle.getBundle("riesgoBundle", MainUI.locale);
-                Parent root = FXMLLoader.load(getClass().getResource(view), bundle);
-                Scene scene = new Scene(root);
-                Stage appStage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-                appStage.setScene(scene);
-                appStage.toFront();
-                appStage.show();
-            } catch (Exception e) {
-            }
     }
 
     @FXML

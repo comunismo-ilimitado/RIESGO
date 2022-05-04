@@ -1,45 +1,104 @@
-Resources/OldResources/Montreal.map
-2
-0
+Resources/TestingUI/Maps/World.map
+6
+5
 Finish Reinforcement
 
 ---------------------------------
 Player Playing :- 1
+Currently in Reinforcement Mode for Aggressive player
+Currently in Attack Mode for Aggressive player
+Currently in Fortification Mode for Aggressive player
+---------------------------------
+Player Playing :- 2
+Currently in Reinforcement Mode for Cheater player
+Currently in Attack Mode for Cheater player
+Currently in Fortification Mode for Cheater player
+---------------------------------
+Player Playing :- 3
+Currently in Reinforcement Mode for Random player
+Currently in Attack Mode for Random player
+Currently in Fortification Mode for Random player
+---------------------------------
+Player Playing :- 4
+Currently in Reinforcement Mode for Random player
+Currently in Attack Mode for Random player
+Currently in Fortification Mode for Random player
+---------------------------------
+Player Playing :- 5
+Currently in Reinforcement Mode for Random player
+Currently in Attack Mode for Random player
+Currently in Fortification Mode for Random player
+---------------------------------
+Player Playing :- 6
 Currently in Reinforcement Mode----PLAYER----
 0
-null
-Westmount***3
-Mercier***3
-Ile Bizard***3
-RDP-PAT***3
-Ahuntsic***3
-Plateau***3
-Lachine***3
-St-Leonard***3
-Pointe-Claire***3
-Beaconsfield***3
-Kirkland***3
-Pierrefonds***3
-Mont-Royal***2
-Pointe St-Charles***2
+controller.strategies.AggressiveStrategy@26e41156
+Western Australia***1
+Middle East***1
+Brazil***3
+Western Europe***3
+Venezuela***3
+Indonesia***2
+----CARDS----
+[Infantry]
+----PLAYER----
+1
+controller.strategies.CheaterStrategy@4c3bec56
+Ural***6
+Alberta***3
+Madagascar***3
+Kazakhstan***10
+Scandinavia***6
+Iceland***6
+Yakutsk***3
+Mongolia***6
+China***6
+North West Territory***6
+Siberia***6
+Alaska***3
+Kamchatka***6
+Eastern United States***6
+Quebec***3
+Ukraine***6
+Britain***6
+Congo***6
+Irkutsk***6
+South Africa***6
+Western United States***6
+Ontario***4
+Greenland***2
+East Africa***4
 ----CARDS----
 []
 ----PLAYER----
-1
+2
+controller.strategies.RandomStrategy@225b7b24
+Siam***3
+India***1
+----CARDS----
+[]
+----PLAYER----
+3
+controller.strategies.RandomStrategy@c46d752
+Papua New Guinea***1
+Egypt***1
+North Africa***5
+----CARDS----
+[]
+----PLAYER----
+4
+controller.strategies.RandomStrategy@5d07b11b
+Central America***1
+Eastern Australia***3
+Peru***3
+----CARDS----
+[]
+----PLAYER----
+5
 null
-Dorval***3
-Hampstead***3
-NDG***3
-Ste-Anne-de-Bellevue***3
-La Salle***3
-Verdun***3
-Anjou***3
-Rosemont***3
-Ville-Marie***3
-Outremont***3
-Saint-Laurent***3
-Montreal Nord***3
-Villeray***2
-Senneville***2
+Argentina***3
+Northern Europe***3
+Japan***3
+Southern Europe***2
 ----CARDS----
 []

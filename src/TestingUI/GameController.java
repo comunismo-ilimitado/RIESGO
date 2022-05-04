@@ -30,12 +30,14 @@ public class GameController {
             getContainer().setFxmlLoader(loader);
             if(getContainer().getFxmlLoader().getController() instanceof GameController){
                 ((GameController)getContainer().getFxmlLoader().getController()).setContainer(getContainer());
-                ((GameController)getContainer().getFxmlLoader().getController()).onLoad();
             }
             Stage appStage = getContainer().getStage();
             appStage.setScene(scene);
             appStage.toFront();
             appStage.show();
+            if(getContainer().getFxmlLoader().getController() instanceof GameController){
+                ((GameController)getContainer().getFxmlLoader().getController()).onLoad();
+            }
 
         } catch (Exception e) {
         }

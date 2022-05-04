@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Board extends NetPackages.Package {
 
-    private String mapName;
+    private String mapName = "world";
 
     private HashMap<String, Country> countries;
     private HashMap<String, Continent> continents;

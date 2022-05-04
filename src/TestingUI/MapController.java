@@ -1,5 +1,6 @@
 package TestingUI;
 
+import controller.net.ClientUpdate;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,19 +42,45 @@ public class MapController extends GameController implements Initializable {
 
     public void setCountries() {
         HashMap<String, Country> countries = getContainer().getClientController().getServerBoard().getCountries();
-        for(Country country : countries.values()) {
-            colorCountry.put(country.getColor(), country);
-            File file = new File(getContainer().getMapsLocation()+getContainer().getServerController().getBoard().getMapName()
-                    +"/"+country.getName()+".png");
+
+        {
+            File file = new File(getContainer().getMapsLocation() + "/" + getContainer().getServerController().getBoard().getMapName()
+                    + "/" + "BlackMap" + ".png");
             Image image = new Image(file.toURI().toString());
             ImageView imageView = new ImageView(image);
-            imageView.setFitWidth(720.0);
-            imageView.setFitHeight(1280.0);
             imageView.setMouseTransparent(true);
             imageView.setPickOnBounds(true);
             imageView.setPreserveRatio(true);
             countriesPane.getChildren().add(imageView);
         }
+        {
+            File file = new File(getContainer().getMapsLocation() + "/" + getContainer().getServerController().getBoard().getMapName()
+                    + "/" + "ColorMap" + ".png");
+            Image image = new Image(file.toURI().toString());
+            ImageView imageView = new ImageView(image);
+            imageView.setMouseTransparent(true);
+            imageView.setPickOnBounds(true);
+            imageView.setPreserveRatio(true);
+            countriesPane.getChildren().add(imageView);
+        }
+
+
+
+        for(Country country : countries.values()) {
+            colorCountry.put(country.getColor(), country);
+            File file = new File(getContainer().getMapsLocation()+"/"+getContainer().getServerController().getBoard().getMapName()
+                    +"/"+country.getName()+".png");
+            Image image = new Image(file.toURI().toString());
+            ImageView imageView = new ImageView(image);
+            imageView.setMouseTransparent(true);
+            imageView.setPickOnBounds(true);
+            imageView.setPreserveRatio(true);
+            imageView.setOnMouseClicked(this::mapSelected);
+            countriesPane.getChildren().add(imageView);
+            colorReference.put(country.getColor(), imageView);
+        }
+
+
     }
 
     @Override
@@ -105,6 +132,9 @@ public class MapController extends GameController implements Initializable {
         country.setCache(true);
         country.setCacheHint(CacheHint.SPEED);
         System.out.println(country.getId());
+        ClientUpdate.ClientAction action = new ClientUpdate.ClientAction();
+        action.setActionCommand(colorCountry.get(color.toString()).getName()+" |5|");
+        getContainer().getClientController().sendAction(action);
     }
     @FXML
     private void nextPhase() {

@@ -117,11 +117,11 @@ public class ReadingFiles {
             setPlayers(new ArrayList<>());
             playerId = new HashMap<>();
             List<Color> arrayListc = new ArrayList<>();
-            arrayListc.add(Color.cyan);
-            arrayListc.add(Color.GREEN);
-            arrayListc.add(Color.WHITE);
-            arrayListc.add(Color.PINK);
-            arrayListc.add(Color.decode("#ffff00"));
+            arrayListc.add(Color.decode("#B3CDE3"));
+            arrayListc.add(Color.decode("#FBB4AE"));
+            arrayListc.add(Color.decode("#CCEBC5"));
+            arrayListc.add(Color.decode("#FED9A6"));
+            arrayListc.add(Color.decode("#DECBE4"));
             arrayListc.add(Color.decode("#FF6600"));
 
             if(player_names == null){

@@ -94,8 +94,6 @@ public class Client implements Runnable{
             controller.update();
             // TODO borrar estas linea
             System.out.println("Respuesta recibida");
-            if(!controller.getServerBoard().getErrors().isEmpty())
-                System.out.println(controller.getServerBoard().getErrors().get(controller.getServerBoard().getErrors().size()-1).text);
             // hasta aqui
         }
     }

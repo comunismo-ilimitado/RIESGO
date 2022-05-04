@@ -30,9 +30,9 @@ import java.util.ResourceBundle;
 
 public class MapController extends GameController implements Initializable {
     @FXML
-    private Pane exitPane, errorPane, dicePane, countriesPane;
+    public Pane exitPane, errorPane, dicePane, countriesPane;
     @FXML
-    private Label errorLabel;
+    public Label errorLabel;
     @FXML
     private ImageView playerDice1, playerDice2, playerDice3, opponentDice1, opponentDice2, opponentDice3;
     private Image[] dice = new Image[6];
@@ -85,6 +85,7 @@ public class MapController extends GameController implements Initializable {
 
     @Override
     public void onLoad() {
+        getContainer().getClientController().setMapController(this);
         setCountries();
     }
 

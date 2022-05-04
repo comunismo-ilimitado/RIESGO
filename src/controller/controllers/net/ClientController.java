@@ -1,5 +1,7 @@
 package controller.controllers.net;
 
+import TestingUI.GameContainer;
+import TestingUI.MapController;
 import controller.net.Board;
 import controller.net.Client;
 import controller.net.ClientUpdate;
@@ -14,10 +16,20 @@ public class ClientController {
 
     private int lastActionId;
 
+    private MapController mapController;
+
     public ClientController(){
         this.client = new Client(this);
         clientUpdate = new ClientUpdate();
         conf = new Player.PlayerConfiguration();
+    }
+
+    public void setMapController(MapController mapController) {
+        this.mapController = mapController;
+    }
+
+    public MapController getMapController() {
+        return mapController;
     }
 
     public Client getClient() {
@@ -45,7 +57,15 @@ public class ClientController {
 
 
     public void update(){
-
+        System.out.println("Cosas1");
+        if(mapController != null) {
+            System.out.println("Cosas");
+            String error = "dwwddwwd";
+            if (!getServerBoard().getErrors().isEmpty())
+                error = getServerBoard().getErrors().get(getServerBoard().getErrors().size() - 1).text;
+            mapController.errorLabel.setText(error);
+            mapController.errorPane.setVisible(true);
+        }
     }
 
     public void actionPerformed(ClientUpdate.ClientAction action){

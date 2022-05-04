@@ -246,6 +246,8 @@ public class MyActionListener implements ActionListener {
             }
 
         }
+
+        getController().getBoardFacade().copyInformation();
         getController().getServer().update();
     }
 
@@ -482,6 +484,8 @@ public class MyActionListener implements ActionListener {
             }
 
         }
+
+        getController().getServer().send();
 
     }
 

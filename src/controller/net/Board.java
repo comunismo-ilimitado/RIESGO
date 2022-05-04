@@ -93,7 +93,7 @@ public class Board extends NetPackages.Package {
     }
 
     public static class ErrorMessage implements Serializable {
-        String text;
+        public String text;
         Player player;
         int id = 0;
 

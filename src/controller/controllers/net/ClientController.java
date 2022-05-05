@@ -54,6 +54,10 @@ public class ClientController {
     }
 
 
+    public void exit(){
+        client.end();
+    }
+
 
     public void update(){
         if(mapController != null)

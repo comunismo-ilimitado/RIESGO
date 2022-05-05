@@ -2,17 +2,12 @@ package TestingUI;
 
 import controller.controllers.net.ClientController;
 import controller.net.Board;
-import controller.net.Client;
 import controller.net.ClientUpdate;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.*;
 import javafx.scene.image.Image;
@@ -21,27 +16,27 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
+import javafx.scene.text.TextAlignment;
 import model.Country;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
 
 public class MapController extends GameController implements Initializable {
     @FXML
-    public Pane exitPane, errorPane, dicePane, countriesPane;
+    public Pane exitPane, errorPane, dicePane, countriesPane, countryLabels;
     @FXML
-    public Label errorLabel;
+    public Label errorLabel, currentPhase, currentPlayer, statics;
     @FXML
     private ImageView playerDice1, playerDice2, playerDice3, opponentDice1, opponentDice2, opponentDice3;
     private Image[] dice = new Image[6];
 
     private HashMap<String, ImageView> colorReference = new HashMap<>();
+    private HashMap<String, Label> colorReferLabel = new HashMap<>();
     private HashMap<String, Country> colorCountry = new HashMap<>();
 
     public void setCountries() {
@@ -82,6 +77,14 @@ public class MapController extends GameController implements Initializable {
             imageView.setOnMouseClicked(this::mapSelected);
             countriesPane.getChildren().add(imageView);
             colorReference.put(country.getColor(), imageView);
+
+            Label label = new Label(country.getName()+"\n 0 ");
+            label.setAlignment(Pos.CENTER);
+            label.setTextAlignment(TextAlignment.CENTER);
+            label.setLayoutX(country.getPosx());
+            label.setLayoutY(country.getPosy());
+            countryLabels.getChildren().add(label);
+            colorReferLabel.put(country.getColor(), label);
         }
 
 
@@ -91,6 +94,7 @@ public class MapController extends GameController implements Initializable {
     public void onLoad() {
         getContainer().getClientController().setMapController(this);
         setCountries();
+        update();
     }
 
     @Override
@@ -138,6 +142,29 @@ public class MapController extends GameController implements Initializable {
             }
         }
 
+        //Actualizar fase
+        {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    currentPhase.setText(getContainer().getBundle().getString("faseTag")+"\n"
+                            +getContainer().getClientController().getServerBoard().getCurrentPhase());
+                }
+            });
+        }
+
+
+        // Actualizar Current player
+        {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    currentPlayer.setText(getContainer().getBundle().getString("playerTag")+"\n"
+                            +getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName());
+                }
+            });
+        }
+
         // Actualizar paises
         {
             HashMap<String, Country> countries = getContainer().getClientController().getServerBoard().getCountries();
@@ -146,21 +173,30 @@ public class MapController extends GameController implements Initializable {
                     @Override
                     public void run() {
                         java.awt.Color c = country.getOwner().getPlayerColor();
-                        System.out.println("Player :"+c.toString());
-                        System.out.println("Read: "+Color.rgb(c.getRed(), c.getGreen(), c.getBlue()).toString());
                         setColorOfCountry(country, Color.rgb(c.getRed(), c.getGreen(), c.getBlue()));
+                        colorReferLabel.get(country.getColor()).setText(country.getName()+"\n"+country.getNoOfArmies());
                     }
                 });
             }
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    Country country = getContainer().getClientController().getServerBoard().getSelectedCountry1();
-                    if(country != null)
-                        setColorOfCountry(country, Color.AQUA);
-                    country = getContainer().getClientController().getServerBoard().getSelectedCountry2();
-                    if(country != null)
-                        setColorOfCountry(country, Color.AQUA);
+                    boolean dices = false;
+                    Country country = getContainer().getClientController().getServerBoard().getAttackCountry1();
+                    if(country != null){
+                        if(getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName()
+                                .equals(getContainer().getClientController().getPlayerConfiguration().getName()))
+                            setShadedColorCountry(country, Color.AQUA);
+                        dices = true;
+                    }
+
+                    country = getContainer().getClientController().getServerBoard().getAttackCountry2();
+                    if(country != null){
+                        if(getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName()
+                                .equals(getContainer().getClientController().getPlayerConfiguration().getName()))
+                            setShadedColorCountry(country, Color.AQUA);
+                        dices = true;
+                    }
                 }
             });
 
@@ -174,10 +210,10 @@ public class MapController extends GameController implements Initializable {
     }
 
     public double changeHue(Color color){
-        if(color.getHue() > 180){
-            return -color.getHue() + 180;
+        if(color.getHue() > 180.0){
+            return 360.0-color.getHue()/180.0;
         }else{
-            return  color.getHue();
+            return  color.getHue()/180.0;
         }
     }
 
@@ -227,9 +263,11 @@ public class MapController extends GameController implements Initializable {
     }
     @FXML
     private void nextPhase() {
-        errorPane.setVisible(true);
-        errorLabel.setText("Hace falta desplegar todas las tropas");
-        System.out.println("Siguiente fase");
+
+        ClientUpdate.ClientAction action = new ClientUpdate.ClientAction();
+        action.setActionCommand(getContainer().getClientController().getServerBoard().getCurrentPhase());
+        getContainer().getClientController().sendAction(action);
+
     }
     @FXML
     private void exchangeCards() {
@@ -250,6 +288,10 @@ public class MapController extends GameController implements Initializable {
 
     @FXML
     private void back(MouseEvent event) {
+        if(getContainer().getClientController() != null)
+            getContainer().getClientController().exit();
+        if(getContainer().getServerController() != null)
+            getContainer().getServerController().exit();
         loadView("start-view.fxml");
     }
 

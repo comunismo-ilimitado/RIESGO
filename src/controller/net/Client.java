@@ -98,6 +98,10 @@ public class Client implements Runnable{
         }
     }
 
+    public void end(){
+        running = false;
+    }
+
     @Override
     public void run() {
         while (running){

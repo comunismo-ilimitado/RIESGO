@@ -581,6 +581,11 @@ public class ServerController extends Observable{
         }
     }
 
+    public void exit(){
+        getServer().end();
+        frame.dispose();
+    }
+
     /**
      * This method writes on the graphic interface
      *

@@ -14,35 +14,35 @@ Asia=12
 Oceania=4
 
 [Territories]
-Alaska,30,46,North America,North West Territory,Alberta,Kamchatka
-North West Territory,59,42,North America,Alaska,Alberta,Ontario,Greenland
-Alberta,58,67,North America,Alaska,North West Territory,Ontario,Western United States
-Greenland,121,30,North America,North West Territory,Ontario,Quebec,Iceland
-Ontario,80,72,North America,North West Territory,Alberta,Greenland,Quebec,Western United States,Eastern United States
-Quebec,106,75,North America,Greenland,Ontario,Eastern United States
-Western United States,59,95,North America,Alberta,Ontario,Eastern United States,Central America
-Eastern United States,84,97,North America,Ontario,Quebec,Western United States,Central America
-Central America,75,123,North America,Western United States,Eastern United States,Venezuela
+Alaska,262,103,North America,North West Territory,Alberta,Kamchatka
+North West Territory,376,107,North America,Alaska,Alberta,Ontario,Greenland
+Alberta,354,147,North America,Alaska,North West Territory,Ontario,Western United States
+Greenland,550,80,North America,North West Territory,Ontario,Quebec,Iceland
+Ontario,427,180,North America,North West Territory,Alberta,Greenland,Quebec,Western United States,Eastern United States
+Quebec,495,180,North America,Greenland,Ontario,Eastern United States
+Western United States,354,231,North America,Alberta,Ontario,Eastern United States,Central America
+Eastern United States,438,269,North America,Ontario,Quebec,Western United States,Central America
+Central America,376,347,North America,Western United States,Eastern United States,Venezuela
 
-Venezuela,94,146,South America,Central America,Peru,Brazil
-Peru,91,168,South America,Venezuela,Brazil,Argentina
-Argentina,104,203,South America,Peru,Brazil
-Brazil,115,165,South America,Venezuela,Peru,Argentina,North Africa
+Venezuela,438,389,South America,Central America,Peru,Brazil
+Peru,438,478,South America,Venezuela,Brazil,Argentina
+Argentina,458,568,South America,Peru,Brazil
+Brazil,524,459,South America,Venezuela,Peru,Argentina,North Africa
 
-North Africa,159,139,Africa,Brazil,Western Europe,Southern Europe,Egypt,East Africa,Congo
-Congo,177,164,Africa,North Africa,East Africa,South Africa
-South Africa,180,186,Africa,Congo,East Africa,Madagascar
-Madagascar,207,181,Africa,East Africa,South Africa
-East Africa,192,153,Africa,Egypt,Middle East,Congo,North Africa,South Africa,Madagascar
-Egypt,181,130,Africa,Southern Europe,North Africa,Middle East,East Africa
+North Africa,665,402,Africa,Brazil,Western Europe,Southern Europe,Egypt,East Africa,Congo
+Congo,751,524,Africa,North Africa,East Africa,South Africa
+South Africa,762,613,Africa,Congo,East Africa,Madagascar
+Madagascar,850,613,Africa,East Africa,South Africa
+East Africa,813,486,Africa,Egypt,Middle East,Congo,North Africa,South Africa,Madagascar
+Egypt,751,389,Africa,Southern Europe,North Africa,Middle East,East Africa
 
-Iceland,144,67,Europe,Greenland,Britain,Scandinavia
-Britain,156,91,Europe,Iceland,Scandinavia,Western Europe,Northern Europe
-Western Europe,160,109,Europe,Britain,Northern Europe,Southern Europe,North Africa
-Scandinavia,170,74,Europe,Iceland,Britain,Northern Europe,Ukraine
-Northern Europe,177,90,Europe,Britain,Scandinavia,Ukraine,Southern Europe,Western Europe
-Southern Europe,184,102,Europe,Northern Europe,Ukraine,Middle East,Egypt,North Africa,Western Europe
-Ukraine,202,84,Europe,Ural,Kazakhstan,Middle East,Southern Europe,Northern Europe,Scandinavia
+Iceland,640,144,Europe,Greenland,Britain,Scandinavia
+Britain,624,231,Europe,Iceland,Scandinavia,Western Europe,Northern Europe
+Western Europe,640,328,Europe,Britain,Northern Europe,Southern Europe,North Africa
+Scandinavia,725,134,Europe,Iceland,Britain,Northern Europe,Ukraine
+Northern Europe,714,231,Europe,Britain,Scandinavia,Ukraine,Southern Europe,Western Europe
+Southern Europe,725,301,Europe,Northern Europe,Ukraine,Middle East,Egypt,North Africa,Western Europe
+Ukraine,799,188,Europe,Ural,Kazakhstan,Middle East,Southern Europe,Northern Europe,Scandinavia
 
 Middle East,206,123,Asia,Ukraine,Kazakhstan,India,Southern Europe,Egypt,East Africa
 Ural,243,64,Asia,Siberia,China,Kazakhstan,Ukraine

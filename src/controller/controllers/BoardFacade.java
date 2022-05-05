@@ -32,9 +32,16 @@ public class BoardFacade {
         controller.getBoard().setPlayers(ReadingFiles.getPlayerId2());
         controller.getBoard().setContinents(ReadingFiles.getContinentNameObject());
         controller.getBoard().setCountries(ReadingFiles.getCountryNameObject());
-        controller.getBoard().setSelectedCountry1(controller.getAttackCountry1());
-        controller.getBoard().setSelectedCountry1(controller.getAttackCountry2());
+
+        controller.getBoard().setAttackCountry1(controller.getAttackCountry1());
+        controller.getBoard().setAttackCountry2(controller.getAttackCountry2());
+        controller.getBoard().setSelectedCountry1(controller.getFortifyCountry1());
+        controller.getBoard().setSelectedCountry2(controller.getFortifyCountry2());
+
+
         controller.getBoard().setCurrentPhase(controller.getCurrentPhase());
+
+        controller.getBoard().setCurrentPlayer(controller.playerObjet(controller.getCurrentPlayer()));
 
     }
 

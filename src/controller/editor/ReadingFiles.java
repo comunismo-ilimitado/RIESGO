@@ -3,6 +3,7 @@ package controller.editor;
 import model.Continent;
 import model.Country;
 import model.Player;
+import org.junit.experimental.max.CouldNotReadCoreException;
 
 
 import java.awt.*;
@@ -99,7 +100,10 @@ public class ReadingFiles {
             for (String s : tempCountryArray) {
                 String a = s.split(",")[0].trim();
                 getCountriesNames().add(a);
-                getCountryNameObject().put(a, new Country(a));
+                Country c = new Country(a);
+                c.setPosx(Integer.parseInt(s.split(",")[1].trim()));
+                c.setPosy(Integer.parseInt(s.split(",")[2].trim()));
+                getCountryNameObject().put(a, c);
             }
             for (String s : tempCountryArray) {
                 String[] a = s.split(",");

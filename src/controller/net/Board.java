@@ -15,9 +15,14 @@ public class Board extends NetPackages.Package {
     private String mapName = "world";
     private String currentPhase = "";
 
+    private Player currentPlayer;
+
     private HashMap<String, Country> countries;
     private HashMap<String, Continent> continents;
     private HashMap<Integer, Player> players;
+
+    private Country attackCountry1;
+    private Country attackCountry2;
 
     private Country selectedCountry1;
     private Country selectedCountry2;
@@ -38,6 +43,14 @@ public class Board extends NetPackages.Package {
         errors = new HashMap<>();
         actions = new HashMap<>();
         cardTypesList = new ArrayList<>();
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     public HashMap<String, Continent> getContinents() {
@@ -88,20 +101,36 @@ public class Board extends NetPackages.Package {
         return actions;
     }
 
-    public void setSelectedCountry1(Country selectedCountry1) {
-        this.selectedCountry1 = selectedCountry1;
+    public void setAttackCountry1(Country attackCountry1) {
+        this.attackCountry1 = attackCountry1;
     }
 
-    public Country getSelectedCountry1() {
-        return selectedCountry1;
+    public Country getAttackCountry1() {
+        return attackCountry1;
     }
 
     public void setSelectedCountry2(Country selectedCountry2) {
         this.selectedCountry2 = selectedCountry2;
     }
 
+    public void setSelectedCountry1(Country selectedCountry1) {
+        this.selectedCountry1 = selectedCountry1;
+    }
+
     public Country getSelectedCountry2() {
         return selectedCountry2;
+    }
+
+    public Country getSelectedCountry1() {
+        return selectedCountry1;
+    }
+
+    public void setAttackCountry2(Country attackCountry2) {
+        this.attackCountry2 = attackCountry2;
+    }
+
+    public Country getAttackCountry2() {
+        return attackCountry2;
     }
 
     public void setCardTypesList(List<CardTypes> cardTypesList) {

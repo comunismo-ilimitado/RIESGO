@@ -68,6 +68,11 @@ public class Server implements Runnable{
         }
     }
 
+    public void end(){
+        running = false;
+        sock.close();
+    }
+
     public void listen(){
         DatagramPacket dp = new DatagramPacket(new byte[MAX_SIZE], MAX_SIZE);
         Object received = null;

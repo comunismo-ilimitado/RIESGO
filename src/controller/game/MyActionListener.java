@@ -218,7 +218,9 @@ public class MyActionListener implements ActionListener {
                     try {
                         if (getController().getAttackCountry1() == null) {
                             getController().setAttackCountry1(country);
+
                             getController().getFrame().ActivateAll();
+
                             List<Country> neighbourList = getController().getAttackController().getMyNeighboursForAttack(country);
                             if (neighbourList.size() < 1) {
                                 getController().getFrame().ActivateAll();
@@ -243,12 +245,10 @@ public class MyActionListener implements ActionListener {
                     } catch (IOException e2) {
                         e2.printStackTrace();
                     }
-
                     break;
             }
 
         }
-
         getController().getBoardFacade().copyInformation();
         getController().getServer().update();
     }
@@ -486,7 +486,8 @@ public class MyActionListener implements ActionListener {
             }
 
         }
-
+        getController().getBoardFacade().copyInformation();
+        getController().getServer().update();
         getController().getServer().send();
 
     }

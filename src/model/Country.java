@@ -14,6 +14,24 @@ public class Country implements Serializable {
 
     private String color = "0x1a1a1aff";
 
+    private int posx = 0, posy = 0;
+
+    public void setPosx(int posx) {
+        this.posx = posx;
+    }
+
+    public int getPosx() {
+        return posx;
+    }
+
+    public void setPosy(int posy) {
+        this.posy = posy;
+    }
+
+    public int getPosy() {
+        return posy;
+    }
+
     public String getColor() {
         return color;
     }

@@ -88,37 +88,61 @@ public class CustomizeViewController extends GameController implements Initializ
         if (!Objects.equals(one.getValue(), resources.getString("noneTag"))) {
             numberOfPlayers++;
             ReadingFiles.strategy_selected.add(one.getValue());
-            ReadingFiles.playerNames.add(name1.getText());
+            if(name1.getText()!=null) {
+                ReadingFiles.playerNames.add(name1.getText());
+            }else{
+                ReadingFiles.playerNames.add(resources.getString("player1Tag"));
+            }
         }else{return;}
         if (!Objects.equals(two.getValue(), resources.getString("noneTag"))) {
             numberOfPlayers++;
             ReadingFiles.strategy_selected.add(two.getValue());
-            ReadingFiles.playerNames.add(name2.getText());
+            if(name2.getText()!=null) {
+                ReadingFiles.playerNames.add(name2.getText());
+            }else{
+                ReadingFiles.playerNames.add(resources.getString("player2Tag"));
+            }
         }else{return;}
         if (!Objects.equals(three.getValue(), resources.getString("noneTag"))) {
             numberOfPlayers++;
             ReadingFiles.strategy_selected.add(three.getValue());
-            ReadingFiles.playerNames.add(name3.getText());
+            if(name3.getText()!=null) {
+                ReadingFiles.playerNames.add(name3.getText());
+            }else{
+                ReadingFiles.playerNames.add(resources.getString("player3Tag"));
+            }
         }else{return;}
         if (!Objects.equals(four.getValue(), resources.getString("noneTag"))) {
             numberOfPlayers++;
             ReadingFiles.strategy_selected.add(four.getValue());
-            ReadingFiles.playerNames.add(name4.getText());
+            if(name4.getText()!=null) {
+                ReadingFiles.playerNames.add(name4.getText());
+            }else{
+                ReadingFiles.playerNames.add(resources.getString("player4Tag"));
+            }
         }else{return;}
         if (!Objects.equals(five.getValue(), resources.getString("noneTag"))) {
             numberOfPlayers++;
             ReadingFiles.strategy_selected.add(five.getValue());
-            ReadingFiles.playerNames.add(name5.getText());
+            if(name5.getText()!=null) {
+                ReadingFiles.playerNames.add(name5.getText());
+            }else{
+                ReadingFiles.playerNames.add(resources.getString("player5Tag"));
+            }
         }else{return;}
         if (!Objects.equals(six.getValue(), resources.getString("noneTag"))) {
             numberOfPlayers++;
             ReadingFiles.strategy_selected.add(six.getValue());
-            ReadingFiles.playerNames.add(name6.getText());
+            if(name6.getText()!=null) {
+                ReadingFiles.playerNames.add(name6.getText());
+            }else{
+                ReadingFiles.playerNames.add(resources.getString("player6Tag"));
+            }
         }else{return;}
     }
 
     @FXML
-    private void game(MouseEvent event) {
+    private void game() {
         setPlayers();
         if (numberOfPlayers < 2) {
             errorLabel.setText(resources.getString("invalidNumOfPlayersTag"));

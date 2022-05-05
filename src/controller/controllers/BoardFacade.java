@@ -37,10 +37,9 @@ public class BoardFacade {
         controller.getBoard().setAttackCountry2(controller.getAttackCountry2());
         controller.getBoard().setSelectedCountry1(controller.getFortifyCountry1());
         controller.getBoard().setSelectedCountry2(controller.getFortifyCountry2());
-
-
         controller.getBoard().setCurrentPhase(controller.getCurrentPhase());
-
+        controller.getBoard().setCountriesPercentage(controller.countriesPercentage().get(controller.getCurrentPlayer()));
+        controller.getBoard().setContinentsOccupied(controller.continentsOccupied().get(controller.getCurrentPlayer()));
         controller.getBoard().setCurrentPlayer(controller.playerObjet(controller.getCurrentPlayer()));
 
     }

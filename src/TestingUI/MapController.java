@@ -165,6 +165,18 @@ public class MapController extends GameController implements Initializable {
             });
         }
 
+        // Actualizar Estadisticas
+        {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    statics.setText(getContainer().getBundle().getString("statsTag")+"\n Occupied countries: "
+                            +getContainer().getClientController().getServerBoard().getCountriesPercentage()+" %\n Continents occupied: "+
+                            getContainer().getClientController().getServerBoard().getContinentsOccupied());
+                }
+            });
+        }
+
         // Actualizar paises
         {
             HashMap<String, Country> countries = getContainer().getClientController().getServerBoard().getCountries();

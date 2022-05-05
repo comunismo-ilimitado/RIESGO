@@ -44,23 +44,23 @@ Northern Europe,177,90,Europe,Britain,Scandinavia,Ukraine,Southern Europe,Wester
 Southern Europe,184,102,Europe,Northern Europe,Ukraine,Middle East,Egypt,North Africa,Western Europe
 Ukraine,202,84,Europe,Ural,Kazakhstan,Middle East,Southern Europe,Northern Europe,Scandinavia
 
-Middle East,206,123,Asia,Ukraine,Kazakhstan,India,Southern Europe,Egypt,East Africa
-Ural,243,64,Asia,Siberia,China,Kazakhstan,Ukraine
-Kazakhstan,230,108,Asia,Ural,China,India,Middle East,Ukraine
-India,242,128,Asia,China,Siam,Kazakhstan,Middle East
-Siberia,274,68,Asia,Yakutsk,Irkutsk,Mongolia,China,Ural
-China,269,112,Asia,Ural,Siberia,Mongolia,Siam,India,Kazakhstan
-Siam,270,139,Asia,China,India,Indonesia
-Mongolia,296,101,Asia,Siberia,Irkutsk,Japan,China,Kamchatka
-Irkutsk,299,76,Asia,Siberia,Yakutsk,Kamchatka,Mongolia
-Yakutsk,320,52,Asia,Siberia,Irkutsk,Kamchatka
-Kamchatka,344,65,Asia,Yakutsk,Irkutsk,Japan,Alaska,Mongolia
-Japan,322,104,Asia,Kamchatka,Mongolia
+Middle East,828,348,Asia,Ukraine,Kazakhstan,India,Southern Europe,Egypt,East Africa
+Ural,902,139,Asia,Siberia,China,Kazakhstan,Ukraine
+Kazakhstan,887,244,Asia,Ural,China,India,Middle East,Ukraine
+India,939,361,Asia,China,Siam,Kazakhstan,Middle East
+Siberia,954,93,Asia,Yakutsk,Irkutsk,Mongolia,China,Ural
+China,998,298,Asia,Ural,Siberia,Mongolia,Siam,India,Kazakhstan
+Siam,1028,388,Asia,China,India,Indonesia
+Mongolia,1035,228,Asia,Siberia,Irkutsk,Japan,China,Kamchatka
+Irkutsk,1019,166,Asia,Siberia,Yakutsk,Kamchatka,Mongolia
+Yakutsk,1035,76,Asia,Siberia,Irkutsk,Kamchatka
+Kamchatka,1123,85,Asia,Yakutsk,Irkutsk,Japan,Alaska,Mongolia
+Japan,1137,244,Asia,Kamchatka,Mongolia
 
-Indonesia,292,159,Oceania,Siam,Papua New Guinea,Western Australia
-Papua New Guinea,329,158,Oceania,Indonesia,Western Australia,Eastern Australia
-Western Australia,313,188,Oceania,Indonesia,Papua New Guinea,Eastern Australia
-Eastern Australia,334,189,Oceania,Western Australia,Papua New Guinea
+Indonesia,1035,499,Oceania,Siam,Papua New Guinea,Western Australia
+Papua New Guinea,1123,464,Oceania,Indonesia,Western Australia,Eastern Australia
+Western Australia,1086,599,Oceania,Indonesia,Papua New Guinea,Eastern Australia
+Eastern Australia,1160,581,Oceania,Western Australia,Papua New Guinea
 
 [ColorCode]
 Alaska,0x0d0d0dff
@@ -70,7 +70,7 @@ Alberta,0x333333ff
 Ontario,0x404040ff
 Quebec,0x4d4d4dff
 Western United States,0x595959ff
-Eastern Unites States,0x666666ff
+Eastern United States,0x666666ff
 Central America,0x737373ff
 Venezuela,0x808080ff
 Peru,0x8c8c8cff

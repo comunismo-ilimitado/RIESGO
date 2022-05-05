@@ -14,7 +14,8 @@ public class Board extends NetPackages.Package {
 
     private String mapName = "world";
     private String currentPhase = "";
-
+    private float countriesPercentage;
+    private String continentsOccupied = "";
     private Player currentPlayer;
 
     private HashMap<String, Country> countries;
@@ -166,5 +167,21 @@ public class Board extends NetPackages.Package {
         public void setId(int id) {
             this.id = id;
         }
+    }
+
+    public void setCountriesPercentage(float countriesPercentage) {
+        this.countriesPercentage = countriesPercentage;
+    }
+
+    public float getCountriesPercentage() {
+        return countriesPercentage;
+    }
+
+    public String getContinentsOccupied() {
+        return continentsOccupied;
+    }
+
+    public void setContinentsOccupied(String continentsOccupied) {
+        this.continentsOccupied = continentsOccupied;
     }
 }

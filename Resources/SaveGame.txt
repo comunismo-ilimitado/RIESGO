@@ -1,98 +1,59 @@
 Resources/TestingUI/Maps/World.map
-5
+2
 0
-Finish Reinforcement
+Finish Attack
 
----------------------------------
-Player Playing :- 1
-Currently in Reinforcement Mode
-Currently in Fortification Mode
----------------------------------
-Player Playing :- 2
-Currently in Reinforcement Mode for Benevolent player
-Currently in Attack Mode for Benevolent player
-Currently in Fortification Mode for Benevolent player
----------------------------------
-Player Playing :- 3
-Currently in Reinforcement Mode for Random player
-Currently in Attack Mode for Random player
-Currently in Fortification Mode for Random player
----------------------------------
-Player Playing :- 4
-Currently in Reinforcement Mode for Aggressive player
-Currently in Attack Mode for Aggressive player
-Currently in Fortification Mode for Aggressive player
----------------------------------
-Player Playing :- 5
-Currently in Reinforcement Mode for Aggressive player
-Currently in Attack Mode for Aggressive player
-Currently in Fortification Mode for Aggressive player
 ---------------------------------
 Player Playing :- 1
 Currently in Reinforcement Mode----PLAYER----
 0
 null
-Western Australia***3
-Papua New Guinea***3
-Alberta***3
-Scandinavia***6
-Brazil***3
-Ukraine***3
-Britain***3
+Ural***2
+Central America***2
+Western Australia***2
+Papua New Guinea***2
+Alberta***2
+Egypt***2
+North Africa***2
+Madagascar***2
+Kazakhstan***2
+Scandinavia***2
+Iceland***2
+China***2
+North West Territory***2
+Eastern Australia***2
+Argentina***9
+Ukraine***2
+Britain***2
+Western Europe***2
 Venezuela***2
-Southern Europe***2
+South Africa***1
+Greenland***1
 ----CARDS----
 []
 ----PLAYER----
 1
-controller.strategies.BenevolentStrategy@17ac22eb
-Egypt***3
-North Africa***3
-Yakutsk***3
-Mongolia***3
-North West Territory***2
-Eastern United States***3
-Congo***3
-Ontario***3
-East Africa***2
+null
+Siam***2
+Middle East***2
+Yakutsk***2
+Mongolia***2
+Siberia***2
+Brazil***2
+Alaska***2
+Kamchatka***2
+Northern Europe***2
+Eastern United States***2
+Japan***2
+Quebec***2
+Congo***2
+India***2
+Irkutsk***2
+Southern Europe***2
+Western United States***2
+Ontario***2
+Peru***2
+East Africa***1
+Indonesia***1
 ----CARDS----
 []
-----PLAYER----
-2
-controller.strategies.RandomStrategy@7ceff2ef
-Central America***4
-Kazakhstan***3
-Iceland***3
-Siberia***3
-Kamchatka***1
-Eastern Australia***3
-Argentina***3
-Irkutsk***1
-----CARDS----
-[]
-----PLAYER----
-3
-controller.strategies.AggressiveStrategy@255bed3b
-Siam***1
-Middle East***5
-Japan***3
-India***3
-South Africa***3
-Peru***3
-Indonesia***3
-----CARDS----
-[Cavalry]
-----PLAYER----
-4
-controller.strategies.AggressiveStrategy@19c7a832
-Ural***1
-Madagascar***3
-China***3
-Alaska***3
-Northern Europe***3
-Quebec***3
-Western Europe***3
-Western United States***3
-Greenland***3
-----CARDS----
-[Artillery]

@@ -677,7 +677,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="statics" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="125.0" prefWidth="246.0" text="%statsTag" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="stats" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="125.0" prefWidth="246.0" text="%statsTag" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>

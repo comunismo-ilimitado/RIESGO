@@ -218,8 +218,17 @@ public class MyActionListener implements ActionListener {
                     try {
                         if (getController().getAttackCountry1() == null) {
                             getController().setAttackCountry1(country);
-
                             getController().getFrame().ActivateAll();
+
+                            if (!getController().getBoard().getCurrentPlayer().getMyCountries(getController().getBoard().getCurrentPlayer()).contains(getController().getAttackCountry1())) {
+                                getController().getFrame().ActivateAll();
+                                getController().setAttackCountry1(null);
+                                getController().setAttackCountry2(null);
+                                getController().getFrame().error("You can't attack with a country from other player");
+                                getController().getBoardFacade().sendErrorMessage("You can't attack with a country from other player",getController().playerObjet(getController().getCurrentPlayer()));
+                                getController().OnlyNeeded(getController().playerObjet(getController().getCurrentPlayer()).getTotalCountriesOccupied());
+                                getController().RefreshButtons();
+                            }
 
                             List<Country> neighbourList = getController().getAttackController().getMyNeighboursForAttack(country);
                             if (neighbourList.size() < 1) {
@@ -237,7 +246,21 @@ public class MyActionListener implements ActionListener {
                             }
                         } else if (getController().getAttackCountry2() == null) {
                             getController().setAttackCountry2(country);
-
+                            if (getController().getAttackCountry2().getOwner().getPlayerId()==getController().getBoard().getCurrentPlayer().getPlayerId()) {
+                                getController().setAttackCountry1(null);
+                                getController().setAttackCountry2(null);
+                                getController().getFrame().error("You can't attack your own country");
+                                getController().getBoardFacade().sendErrorMessage("You can't attack your own country",getController().playerObjet(getController().getCurrentPlayer()));
+                                getController().OnlyNeeded(getController().playerObjet(getController().getCurrentPlayer()).getTotalCountriesOccupied());
+                                getController().RefreshButtons();
+                            } else if (!getController().getAttackCountry1().getNeighbors().contains(getController().getAttackCountry2())) {
+                                getController().setAttackCountry1(null);
+                                getController().setAttackCountry2(null);
+                                getController().getFrame().error("You can't attack a country that is not your neighbor");
+                                getController().getBoardFacade().sendErrorMessage("You can't attack a country that is not your neighbor",getController().playerObjet(getController().getCurrentPlayer()));
+                                getController().OnlyNeeded(getController().playerObjet(getController().getCurrentPlayer()).getTotalCountriesOccupied());
+                                getController().RefreshButtons();
+                            }
                         } else {
                             getController().setAttackCountry1(null);
                             getController().setAttackCountry2(null);

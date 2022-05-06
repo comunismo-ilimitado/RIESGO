@@ -43,45 +43,29 @@ Poland,0,0,Central Europe,Ukraine,Belarus,Baltic Countries,Hungary,Austria,Germa
 
 
 [ColorCode]
-Alaska,0x0d0d0dff
-North West Territory,0x1a1a1aff
-Greenland,0x262626ff
-Alberta,0x333333ff
-Ontario,0x404040ff
-Quebec,0x4d4d4dff
-Western United States,0x595959ff
-Eastern United States,0x666666ff
-Central America,0x737373ff
-Venezuela,0x808080ff
-Peru,0x8c8c8cff
-Brazil,0x999999ff
-Argentina,0xa6a6a6ff
-Iceland,0xb3b3b3ff
-Scandinavia,0xbfbfbfff
-Ukraine,0xccccccff
-Britain,0xd9d9d9ff
-Northern Europe,0xe6e6e6ff
-Western Europe,0xf2f2f2ff
-Southern Europe,0xffffffff
-North Africa,0xe680e6ff
-Egypt,0xf280f2ff
-East Africa,0xff80ffff
-Congo,0x0d0d80ff
-South Africa,0x1a1a80ff
-Madagascar,0x262680ff
-Ural,0x0d800dff
-Siberia,0x1a801aff
-Yakutsk,0x268026ff
-Kamchatka,0x338033ff
-Irkutsk,0x408040ff
-Kazakhstan,0x4d804dff
-China,0x598059ff
-Mongolia,0x668066ff
-Japan,0x738073ff
-Middle East,0x8c808cff
-India,0x998099ff
-Siam,0xa680a6ff
-Indonesia,0xb380b3ff
-Papua New Guinea,0xbf80bfff
-Western Australia,0xcc80ccff
-Eastern Australia,0xd980d9ff
+Austria,0x0d0d0dff
+Baltic Countries,0x1a1a1aff
+Belarus,0x262626ff
+Belgium,0x333333ff
+Bulgaria,0x404040ff
+Denmark,0x4d4d4dff
+Finland,0x595959ff
+France,0x666666ff
+Georgia,0x737373ff
+Germany,0x808080ff
+Greece,0x8c8c8cff
+Hungary,0x999999ff
+Iceland,0xa6a6a6ff
+Italy,0xb3b3b3ff
+Kazakhstan,0xbfbfbfff
+Norway,0xccccccff
+Poland,0xd9d9d9ff
+Portugal,0xe6e6e6ff
+Romany,0xf2f2f2ff
+Russia,0xffffffff
+Spain,0xe680e6ff
+Sweden,0xf280f2ff
+Turkey,0xff80ffff
+Ukraine,0x0d0d80ff
+United Kingdom,0x1a1a80ff
+

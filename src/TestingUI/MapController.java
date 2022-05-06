@@ -33,7 +33,7 @@ public class MapController extends GameController implements Initializable {
     @FXML
     public Pane exitPane, errorPane, dicePane, countriesPane, countryLabels, diceChoosePane, fortificationPane;
     @FXML
-    public Label errorLabel, currentPhase, currentPlayer, stats, showNumberDice, numberDice, fortificationNumber;
+    public Label errorLabel, currentPhase, currentPlayer, stats, showNumberDice, numberDice, fortificationNumber, attackResponseLabel;
     @FXML
     private ImageView playerDice1, playerDice2, playerDice3, opponentDice1, opponentDice2;
 
@@ -199,32 +199,35 @@ public class MapController extends GameController implements Initializable {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    Country attacker = getContainer().getClientController().getServerBoard().getAttackCountry1();
-                    if (attacker != null) {
-                        if (getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName()
-                                .equals(getContainer().getClientController().getPlayerConfiguration().getName()))
-                            setShadedColorCountry(attacker, Color.AQUA);
-                    }
-                    Country defender = getContainer().getClientController().getServerBoard().getAttackCountry2();
-                    if (defender != null) {
-                        if (getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName()
-                                .equals(getContainer().getClientController().getPlayerConfiguration().getName()))
-                            setShadedColorCountry(defender, Color.AQUA);
-                        int attackDiceAvailable = AttackController.setNoOfDice(attacker, 'A');
-                        if (attackDiceAvailable == 0) {
-                            errorLabel.setText(getContainer().getBundle().getString("noAttackTag"));
-                            errorPane.setVisible(true);
-                        } else {
+                    if(getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName()
+                            .equals(getContainer().getClientController().getPlayerConfiguration().getName())) {
 
-                            if (!waitingAttackResponse) {
-                                showNumberDice.setText(getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName() + ": " +
-                                        getContainer().getBundle().getString("howManyDiceTag"));
-                                numberDice.setText("1");
-                                diceChoosePane.setVisible(true);
+                        Country attacker = getContainer().getClientController().getServerBoard().getAttackCountry1();
+                        if (attacker != null) {
+                            if (getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName()
+                                    .equals(getContainer().getClientController().getPlayerConfiguration().getName()))
+                                setShadedColorCountry(attacker, Color.AQUA);
+                        }
+                        Country defender = getContainer().getClientController().getServerBoard().getAttackCountry2();
+                        if (defender != null) {
+                            if (getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName()
+                                    .equals(getContainer().getClientController().getPlayerConfiguration().getName()))
+                                setShadedColorCountry(defender, Color.AQUA);
+                            int attackDiceAvailable = AttackController.setNoOfDice(attacker, 'A');
+                            if (attackDiceAvailable == 0) {
+                                errorLabel.setText(getContainer().getBundle().getString("noAttackTag"));
+                                errorPane.setVisible(true);
+                            } else {
+                                if (!waitingAttackResponse) {
+                                    showNumberDice.setText(getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName() + ": " +
+                                            getContainer().getBundle().getString("howManyDiceTag"));
+                                    numberDice.setText("1");
+                                    diceChoosePane.setVisible(true);
+                                }
+
                             }
 
                         }
-
                     }
                 }
             });
@@ -233,22 +236,26 @@ public class MapController extends GameController implements Initializable {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    Country donor = getContainer().getClientController().getServerBoard().getSelectedCountry1();
-                    if (donor != null) {
-                        if (getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName()
-                                .equals(getContainer().getClientController().getPlayerConfiguration().getName()))
-                            setShadedColorCountry(donor, Color.AQUA);
-                    }else{
-                        waitingFortifyResponse = false;
-                    }
-                    Country beneficiary = getContainer().getClientController().getServerBoard().getSelectedCountry2();
-                    if (beneficiary != null) {
-                        if (getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName()
-                                .equals(getContainer().getClientController().getPlayerConfiguration().getName()))
-                            setShadedColorCountry(beneficiary, Color.AQUA);
-                        if (!waitingFortifyResponse) {
-                            fortificationPane.setVisible(true);
+                    if(getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName()
+                            .equals(getContainer().getClientController().getPlayerConfiguration().getName())) {
+
+                        Country donor = getContainer().getClientController().getServerBoard().getSelectedCountry1();
+                        if (donor != null) {
+                            if (getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName()
+                                    .equals(getContainer().getClientController().getPlayerConfiguration().getName()))
+                                setShadedColorCountry(donor, Color.AQUA);
+                        } else {
                             waitingFortifyResponse = false;
+                        }
+                        Country beneficiary = getContainer().getClientController().getServerBoard().getSelectedCountry2();
+                        if (beneficiary != null) {
+                            if (getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName()
+                                    .equals(getContainer().getClientController().getPlayerConfiguration().getName()))
+                                setShadedColorCountry(beneficiary, Color.AQUA);
+                            if (!waitingFortifyResponse) {
+                                fortificationPane.setVisible(true);
+                                waitingFortifyResponse = false;
+                            }
                         }
                     }
                 }
@@ -266,20 +273,40 @@ public class MapController extends GameController implements Initializable {
                                 if(info.contains("Attack Response")){
                                     waitingAttackResponse = false;
                                     String[] attackresponse = info.split(" ");
-                                    String dice1 = attackresponse[2];
-                                    String dice2 = attackresponse[3];
-                                    String attackerCountryName = attackresponse[4];
-                                    Country attackCountry = getContainer().getClientController().getServerBoard()
-                                            .getCountries().get(attackerCountryName);
-                                    String defenderCountryName = attackresponse[5];
-                                    Country defenderCountry = getContainer().getClientController().getServerBoard()
-                                            .getCountries().get(attackerCountryName);
-                                    Integer[] dices1 = Arrays.stream(dice1
-                                            .split(",")).map(Integer::parseInt).toArray(Integer[]::new);
+                                    if(getContainer().getClientController().getPlayerConfiguration().getName().equals(attackresponse[6].replace(",", " "))){
+                                        String dice1 = attackresponse[2];
+                                        String dice2 = attackresponse[3];
+                                        String attackerCountryName = attackresponse[4].replace(",", " ");
+                                        Country attackCountry = getContainer().getClientController().getServerBoard()
+                                                .getCountries().get(attackerCountryName);
+                                        String defenderCountryName = attackresponse[5].replace(",", " ");
+                                        Country defenderCountry = getContainer().getClientController().getServerBoard()
+                                                .getCountries().get(attackerCountryName);
+                                        Integer[] dices1 = Arrays.stream(dice1
+                                                .split(",")).map(Integer::parseInt).toArray(Integer[]::new);
 
-                                    Integer[] dices2 = Arrays.stream(dice2
-                                            .split(",")).map(Integer::parseInt).toArray(Integer[]::new);
-                                    showDiceImages(dices1,dices2);
+                                        Integer[] dices2 = Arrays.stream(dice2
+                                                .split(",")).map(Integer::parseInt).toArray(Integer[]::new);
+                                        // TODO translate text
+                                        showDiceImages(dices1,dices2, "Successfully attacked country!");
+                                    }
+                                    if(getContainer().getClientController().getPlayerConfiguration().getName().equals(attackresponse[7].replace(",", " "))){
+                                        String dice1 = attackresponse[2];
+                                        String dice2 = attackresponse[3];
+                                        String attackerCountryName = attackresponse[4];
+                                        Country attackCountry = getContainer().getClientController().getServerBoard()
+                                                .getCountries().get(attackerCountryName);
+                                        String defenderCountryName = attackresponse[5];
+                                        Country defenderCountry = getContainer().getClientController().getServerBoard()
+                                                .getCountries().get(attackerCountryName);
+                                        Integer[] dices1 = Arrays.stream(dice1
+                                                .split(",")).map(Integer::parseInt).toArray(Integer[]::new);
+
+                                        Integer[] dices2 = Arrays.stream(dice2
+                                                .split(",")).map(Integer::parseInt).toArray(Integer[]::new);
+                                        // TODO translate text
+                                        showDiceImages(dices1,dices2, "You have been attacked");
+                                    }
                                 }
                             }
                         }
@@ -296,7 +323,8 @@ public class MapController extends GameController implements Initializable {
         }
     }
 
-    private void showDiceImages(Integer[] dices1, Integer[] dices2) {
+    private void showDiceImages(Integer[] dices1, Integer[] dices2, String info) {
+        attackResponseLabel.setText(info);
         dicePane.setVisible(true);
         switch(dices1.length){
             case 1:{
@@ -539,11 +567,23 @@ public class MapController extends GameController implements Initializable {
      */
     @FXML
     private void returnGame() {
+        cancelProcesses();
         exitPane.setVisible(false);
         errorPane.setVisible(false);
         dicePane.setVisible(false);
         diceChoosePane.setVisible(false);
         fortificationPane.setVisible(false);
+    }
+
+    private void cancelProcesses() {
+        if (diceChoosePane.isVisible()){
+            Country attacker = getContainer().getClientController().getServerBoard().getAttackCountry1();
+            getContainer().getClientController().sendAction(new ClientUpdate.ClientAction(attacker.getName(), null));
+        }
+        if(fortificationPane.isVisible()){
+            Country attacker = getContainer().getClientController().getServerBoard().getSelectedCountry1();
+            getContainer().getClientController().sendAction(new ClientUpdate.ClientAction(attacker.getName(), null));
+        }
     }
 
     @FXML

@@ -437,6 +437,7 @@ public class AttackController {
         mainController.getFrame().jLabeCardl.setText(mainController.getCardTypesList().toString());
         mainController.getBoardFacade().setSelectedCards(mainController.getCardTypesList());
         mainController.changed();
+        Player attackedPlayer = mainController.getAttackCountry2().getOwner();
         boolean allout = false;
         if (ad.equals("A")){
             mainController.setDice1(Integer.parseInt(dice));
@@ -463,7 +464,10 @@ public class AttackController {
                 String ds2 = getDefenderdicerolloutput().toString().replace(" ", "")
                         .replace("[", "").replace("]", "");
                 String response = "Attack Response "+ds1+" "+ds2;
-                response += " "+mainController.getAttackCountry1().getName()+" "+mainController.getAttackCountry2().getName();
+                response += " "+mainController.getAttackCountry1().getName().replace(" ", ",")
+                        +" "+mainController.getAttackCountry2().getName().replace(" ", ",");
+                response += " "+mainController.getAttackCountry1().getOwner().getPlayerName().replace(" ", ",")+" "
+                        +attackedPlayer.getPlayerName().replace(" ", ",");
                 mainController.getBoardFacade().sendServerInfo(response);
             }
 
@@ -506,8 +510,8 @@ public class AttackController {
         serverController.changed();
         serverController.setCurrentPhase("Finish Fortification");
         serverController.getFrame().nextAction.setText("Finish Fortification");
-        serverController.setFortifyCountry1(null);
-        serverController.setFortifyCountry2(null);
+        serverController.setAttackCountry1(null);
+        serverController.setAttackCountry1(null);
         serverController.getCardTypesList().clear();
         serverController.getFrame().jLabeCardl.setText(serverController.getCardTypesList().toString());
         serverController.getBoardFacade().setSelectedCards(serverController.getCardTypesList());

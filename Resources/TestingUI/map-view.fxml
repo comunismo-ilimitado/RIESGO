@@ -93,62 +93,74 @@
       </Pane>
       <Pane fx:id="dicePane" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" visible="false">
          <children>
-            <HBox alignment="CENTER" layoutY="252.0" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
+            <VBox layoutY="252.0" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <Label fx:id="attackResponseLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" textFill="WHITE">
+                     <padding>
+                        <Insets left="100.0" />
+                     </padding>
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
                      <children>
-                        <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="324.0" text="%tutirada" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <HBox prefHeight="100.0" prefWidth="448.0">
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView fx:id="playerDice1" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Images/Dice/one.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fx:id="playerDice2" fitHeight="100.0" fitWidth="100.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Images/Dice/two.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fx:id="playerDice3" fitHeight="100.0" fitWidth="100.0" layoutX="210.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Images/Dice/three.png" />
-                                 </image>
-                              </ImageView>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="324.0" text="%tutirada" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="448.0">
+                                 <children>
+                                    <ImageView fx:id="playerDice1" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/Dice/one.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="playerDice2" fitHeight="100.0" fitWidth="100.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/Dice/two.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="playerDice3" fitHeight="100.0" fitWidth="100.0" layoutX="210.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/Dice/three.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
                            </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <Separator prefWidth="200.0" visible="false" />
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="320.0" text="%tiradadecontincanteTag" textFill="WHITE">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <HBox prefHeight="96.0" prefWidth="450.0">
+                        </VBox>
+                        <Separator prefWidth="200.0" visible="false" />
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView fx:id="opponentDice1" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Images/Dice/one.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fx:id="opponentDice2" fitHeight="100.0" fitWidth="100.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Images/Dice/two.png" />
-                                 </image>
-                              </ImageView>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="320.0" text="%tiradadecontincanteTag" textFill="WHITE">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="96.0" prefWidth="450.0">
+                                 <children>
+                                    <ImageView fx:id="opponentDice1" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/Dice/one.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="opponentDice2" fitHeight="100.0" fitWidth="100.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/Dice/two.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
                            </children>
-                        </HBox>
+                        </VBox>
                      </children>
-                  </VBox>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
          </children>
       </Pane>
       <Pane fx:id="diceChoosePane" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" visible="false">
@@ -200,9 +212,9 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
                      <children>
-                        <Label fx:id="selectFortificationLabel" alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="400.0" textFill="WHITE">
+                        <Label fx:id="selectFortificationLabel" alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="400.0" text="Label" textFill="WHITE">
                            <font>
-                              <Font size="14.0" />
+                              <Font size="34.0" />
                            </font>
                         </Label>
                      </children>

@@ -465,6 +465,10 @@ public class MyActionListener implements ActionListener {
                         }
                         String test1 = getController().getFrame().popupText(getController().getFortifyCountry1().getNoOfArmies() - 1);  //Pregunta cuantas quiero transferir
                         actionPerformed(new ActionEvent(this, 1, "Reinforce " + test1));
+                    } else{
+                        System.out.println("wdwdd");
+                        getController().setFortifyCountry1(null);
+                        getController().setFortifyCountry2(null);
                     }
 
 

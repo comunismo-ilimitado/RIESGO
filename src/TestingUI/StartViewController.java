@@ -1,6 +1,7 @@
 package TestingUI;
 
 import com.sun.tools.javac.Main;
+import controller.controllers.net.ClientController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +27,7 @@ public class StartViewController extends GameController{
     @FXML
     private Pane onlinePane, ipPane, rolPane;
     @FXML
-    private TextField ipField;
+    private TextField ipField, nameField;
 
     @FXML
     private void exitGame() {
@@ -74,7 +75,24 @@ public class StartViewController extends GameController{
     @FXML
     private void sendButtonAction(){
         getContainer().setIp(ipField.getCharacters().toString());
-        loadView("customize-view.fxml");
+
+        getContainer().setClientController(new ClientController());
+
+        getContainer().getClientController().getPlayerConfiguration().setName(nameField.getText());
+        getContainer().getClientController().getClient().connect(getContainer().getIp());
+        getContainer().getClientController().getClient().start();
+
+        System.out.println("Esperando respuesta del server...");
+
+        while (getContainer().getClientController().getServerBoard() == null) {}
+
+        System.out.println("Respuesta recibida!");
+
+        getContainer().getClientController().updatePlayer();
+
+        loadView("map-view.fxml");
+
+        loadView("map.fxml");
     }
     @FXML
     private void returnGame() {

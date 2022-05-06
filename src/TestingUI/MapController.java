@@ -546,12 +546,5 @@ public class MapController extends GameController implements Initializable {
         fortificationPane.setVisible(false);
     }
 
-    @FXML
-    private void soundOn(){
-        getContainer().playMusic();
-    }
-    @FXML
-    private void soundOff(){
-        getContainer().stopMusic();
-    }
+
 }

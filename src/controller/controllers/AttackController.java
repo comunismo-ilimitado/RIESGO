@@ -139,7 +139,7 @@ public class AttackController {
      * @param playerRol:      To know its the attacker or defender to set dice based on that
      * @return Number of Dice to be assigned
      */
-    public int setNoOfDice(Country country, char playerRol) {
+    public static int setNoOfDice(Country country, char playerRol) {
         try {
             if (playerRol == 'A') {
                 if (country.getNoOfArmies() == 1)
@@ -288,7 +288,7 @@ public class AttackController {
                             }
                         }
                         if (attacker.getOwner().getTotalCountriesOccupied().size() == getTotalCountries()) {
-                            return "Player " + attacker.getOwner().getPlayerId() + " wins";
+                            return "Player " + attacker.getOwner().getPlayerId() + " wins!";
                         }
                         return "";
                     } else {
@@ -370,7 +370,7 @@ public class AttackController {
                             }
                         }
                         if (attacker.getOwner().getTotalCountriesOccupied().size() == getTotalCountries()) {
-                            return "Player won";
+                            return "Player"+attacker.getOwner().getPlayerName()+" wins!";
                         }
                         return "";
                     }
@@ -447,43 +447,24 @@ public class AttackController {
             mainController.setDice2(Integer.parseInt(dice));
         }
         if((mainController.getDice1() != -1 && mainController.getDice2() != -1)||allout){
-            /*
-            int dice1 = 0;
-            int dice2 = 0;
-            boolean allout = false;
 
-            try {
-                allout = mainController.getFrame().Allout();
-                if (allout == true) {
-
-                } else {
-                    dice1 = Integer.parseInt(
-                            mainController.getFrame().popupTextNew("Enter No of Dices for player 1 --Minimum: 1 Maximum: "
-                                    + mainController.getAttackController().setNoOfDice(mainController.getAttackCountry1(), 'A')));
-                    System.out.println("Dice 1 : "+ Integer.toString(dice1));
-                    dice2 = Integer.parseInt(
-                            mainController.getFrame().popupTextNew("Enter No of Dices for player 2 --Minimum: 1 Maximum: "
-                                    + mainController.getAttackController().setNoOfDice(mainController.getAttackCountry2(), 'D')));
-                }
-            } catch (Exception e) {
-                mainController.getFrame().error("Invalid Entry Try again");
-                mainController.getBoardFacade().sendErrorMessage("Invalid Entry Try again",mainController.playerObjet(mainController.getCurrentPlayer()));
-                mainController.getFrame().ActivateAll();
-                mainController.setAttackCountry1(null);
-                mainController.setAttackCountry2(null);
-                mainController.OnlyNeeded(mainController.playerObjet(mainController.getCurrentPlayer()).getTotalCountriesOccupied());
-                mainController.RefreshButtons();
-            }*/
             String reply = attackButton(mainController.getAttackCountry1(), mainController.getAttackCountry2(), mainController.getDice1(),
                     mainController.getDice2(), allout);
-            System.out.println(reply);
-            if (reply.equals("Player won")) {
+            if (reply.contains(" wins!")) {
                 mainController.getFrame().error(reply);
                 mainController.getBoardFacade().sendErrorMessage(reply,mainController.playerObjet(mainController.getCurrentPlayer()));
                 String[] args = {""};
                 GameStartWindow.main(args);
             } else if (!reply.equals("")) {
-                mainController.getFrame().error(reply);
+                mainController.getBoardFacade().sendErrorMessage(reply,mainController.playerObjet(mainController.getCurrentPlayer()));
+            } else{
+                String ds1 = getAttackerdicerolloutput().toString().replace(" ", "")
+                        .replace("[", "").replace("]", "");
+                String ds2 = getDefenderdicerolloutput().toString().replace(" ", "")
+                        .replace("[", "").replace("]", "");
+                String response = "Attack Response "+ds1+" "+ds2;
+                response += " "+mainController.getAttackCountry1().getName()+" "+mainController.getAttackCountry2().getName();
+                mainController.getBoardFacade().sendServerInfo(response);
             }
 
             mainController.getFrame().AAA = getAttackerdicerolloutput().toString();

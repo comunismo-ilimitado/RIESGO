@@ -551,7 +551,7 @@ public class ServerController extends Observable{
      * This method saves the game in SaveGame.txt
      *
      */
-    public void saveGameOnExit() {
+    public void saveGame() {
         try {
             File file = new File("Resources/SaveGame.txt");
             FileWriter writer = new FileWriter(file);
@@ -575,7 +575,6 @@ public class ServerController extends Observable{
                 writer.write(tempPlayer.getPlayerCards().toString() + "\n");
             }
             writer.close();
-            System.exit(0);
         } catch (Exception e) {
             e.printStackTrace();
         }

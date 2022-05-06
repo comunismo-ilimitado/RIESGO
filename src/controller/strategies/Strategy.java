@@ -4,6 +4,7 @@ import model.CardTypes;
 import model.Country;
 import model.Player;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  *
  * @author bhargav
  */
-public abstract class Strategy {
+public abstract class Strategy implements Serializable {
 
     abstract public void reinforce(Player player);
 

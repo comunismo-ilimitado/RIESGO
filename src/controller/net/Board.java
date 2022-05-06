@@ -43,6 +43,7 @@ public class Board extends NetPackages.Package {
         players = new HashMap<>();
         errors = new HashMap<>();
         actions = new HashMap<>();
+        serverInfo = new HashMap<>();
         cardTypesList = new ArrayList<>();
     }
 

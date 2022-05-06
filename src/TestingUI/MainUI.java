@@ -19,25 +19,43 @@ public class MainUI extends Application {
     public void start(Stage stage) throws IOException {
         Locale locale = new Locale("en","UK");
         ResourceBundle bundle =  ResourceBundle.getBundle("riesgoBundle", locale);
+
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(MainUI.class.getResource("start-view.fxml"), bundle);
         container = new GameContainer();
         container.setLocale(locale);
         container.setBundle(bundle);
         container.setStage(stage);
         container.setFxmlLoader(fxmlLoader);
+        container.setMusic();
+       // container.playMusic();
+        //container.stopMusic();
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         ((GameController)fxmlLoader.getController()).setContainer(container);
         stage.setTitle("RIESGO");
         stage.setFullScreen(false);
         stage.setResizable(false);
         stage.setScene(scene);
+
         File file = new File("Resources/TestingUI/Images/riesgoTitle.png");
         stage.getIcons().add(new Image(file.toURI().toString()));
         stage.show();
 
     }
 
+    @Override
+    public void stop() throws Exception {
+        if (container.getClientController() != null)
+            container.getClientController().exit();
+        if (container.getServerController() != null)
+            container.getServerController().exit();
+        super.stop();
+    }
+
     public static void main(String[] args) {
         launch();
     }
+
+
 }

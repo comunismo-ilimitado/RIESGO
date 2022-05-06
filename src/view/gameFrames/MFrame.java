@@ -347,7 +347,7 @@ public class MFrame extends JFrame implements Observer {
     }
 
     public void Exit_Option() {
-        myActionListner.getController().saveGameOnExit();
+        myActionListner.getController().saveGame();
     }
 
     @Override

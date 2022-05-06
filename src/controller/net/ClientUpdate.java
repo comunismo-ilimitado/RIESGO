@@ -33,6 +33,14 @@ public class ClientUpdate extends NetPackages.Package {
         String actionCommand;
         Player player;
 
+        public ClientAction() {
+
+        }
+        public ClientAction(String actionCommand, Player player) {
+            this.actionCommand = actionCommand;
+            this.player = player;
+        }
+
         public String getActionCommand() {
             return actionCommand;
         }

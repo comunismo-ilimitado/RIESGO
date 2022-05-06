@@ -22,6 +22,7 @@ public class BoardFacade {
      *
      * */
     public void sendErrorMessage(String errortext, Player player){
+
         Board.ErrorMessage msg = new Board.ErrorMessage(errortext, player);
         int id = controller.getBoard().getErrors().size();
         msg.setId(id);

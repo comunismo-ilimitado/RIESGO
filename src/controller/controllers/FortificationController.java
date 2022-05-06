@@ -40,7 +40,7 @@ public class FortificationController {
      * @param destination: The country which armies are being moved to
      * @return Returns true if there is a path to move the armies between countries
      */
-    public boolean hasPathBFS2(Country source, Country destination) {
+    public static boolean hasPathBFS2(Country source, Country destination) {
         LinkedList<Country> nexttovisit = new LinkedList<Country>();
         HashSet<String> visited = new HashSet<String>();
         nexttovisit.add(source);
@@ -120,14 +120,11 @@ public class FortificationController {
                 mainController.setFortifyCountry1(null);
                 mainController.setFortifyCountry2(null);
             } else {
-                mainController.RefreshButtons();
-                mainController.setCurrentPhase("Finish Reinforcement");
-                mainController.getFrame().nextAction.setText("Finish Reinforcement");
-                // playerUpdate();
+                mainController.getBoardFacade().sendServerInfo("Reinforced");
                 mainController.setFortifyCountry1(null);
                 mainController.setFortifyCountry2(null);
-                mainController.getFrame().ActivateAll();
-                mainController.selectTypeOfPlayer();
+                finishFortification(mainController);
+
             }
         } catch (Exception e) {
             // TODO: handle exception

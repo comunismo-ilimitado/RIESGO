@@ -13,7 +13,7 @@
             <Font name="Bradley Hand ITC" size="48.0" />
          </font>
       </Label>
-      <ImageView fx:id="adelante" fitHeight="89.0" fitWidth="175.0" layoutX="1119.0" layoutY="614.0" onMouseClicked="#back" onMouseEntered="#imageIn" onMouseExited="#imageOut" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="adelante" fitHeight="89.0" fitWidth="175.0" layoutX="1119.0" layoutY="614.0" onMouseClicked="#exit" onMouseEntered="#imageIn" onMouseExited="#imageOut" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Flecha_adelante1.png" />
          </image>

@@ -1,0 +1,71 @@
+[Map]
+author=22E05
+warn=yes
+image=world (small).bmp
+wrap=yes
+scroll=horizontal
+
+[Continents]
+North Europe=5
+East Europe=7
+South Europe=4
+Central Europe=9
+
+[Territories]
+Norway,0,0,North Europe,Sweden,Finland,United Kingdom,Denmark,Iceland,Russia
+Sweden,0,0,North Europe,Norway,Finland,Denmark,Baltic Countries
+Finland,0,0,North Europe,Sweden,Norway,Baltic Countries,Russia
+Iceland,0,0,North Europe,Norway,United Kingdom
+United Kingdom,0,0,North Europe,Iceland,Norway,France,Portugal
+
+Russia,0,0,East Europe,Finland,Norway,Baltic Countries,Belarus,Ukraine,Georgia,Kazakhstan
+Kazakhstan,0,0,East Europe,Russia,Georgia
+Georgia,0,0,East Europe,Russia,Kazakhstan,Turkey
+Turkey,0,0,East Europe,Georgia,Greece,Ukraine
+Ukraine,0,0,East Europe,Russia,Belarus,Romany,Turkey,Poland,Hungary
+Belarus,0,0,East Europe,Baltic Countries,Poland,Ukraine,Russia
+Baltic Countries,0,0,East Europe,Finland,Sweden,Russia,Belarus,Poland
+
+Spain,0,0,South Europe,Portugal,France,Italy
+Portugal,0,0,South Europe,Spain,United Kingdom
+Italy,0,0,South Europe,Hungary,Austria,France,Greece,Spain
+Greece,0,0,South Europe,Turkey,Bulgaria,Italy
+
+Romany,0,0,Central Europe,Ukraine,Hungary,Bulgaria
+Bulgaria,0,0,Central Europe,Romany,Greece,Hungary
+Hungary,0,0,Central Europe,Italy,Austria,Poland,Ukraine,Romany,Bulgaria
+Austria,0,0,Central Europe,Italy,France,Germany,Poland,Hungary
+Germany,0,0,Central Europe,Austria,Poland,France,Denmark,Belgium
+France,0,0,Central Europe,United Kingdom,Belgium,Germany,Spain,Austria,Italy
+Belgium,0,0,Central Europe,Germany,France
+Denmark,0,0,Central Europe,Norway,Sweden,Germany
+Poland,0,0,Central Europe,Ukraine,Belarus,Baltic Countries,Hungary,Austria,Germany
+
+
+[ColorCode]
+Austria,0x0d0d0dff
+Baltic Countries,0x1a1a1aff
+Belarus,0x262626ff
+Belgium,0x333333ff
+Bulgaria,0x404040ff
+Denmark,0x4d4d4dff
+Finland,0x595959ff
+France,0x666666ff
+Georgia,0x737373ff
+Germany,0x808080ff
+Greece,0x8c8c8cff
+Hungary,0x999999ff
+Iceland,0xa6a6a6ff
+Italy,0xb3b3b3ff
+Kazakhstan,0xbfbfbfff
+Norway,0xccccccff
+Poland,0xd9d9d9ff
+Portugal,0xe6e6e6ff
+Romany,0xf2f2f2ff
+Russia,0xffffffff
+Spain,0xe680e6ff
+Sweden,0xf280f2ff
+Turkey,0xff80ffff
+Ukraine,0x0d0d80ff
+United Kingdom,0x1a1a80ff
+

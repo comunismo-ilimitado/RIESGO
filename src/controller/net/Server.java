@@ -15,7 +15,7 @@ public class Server implements Runnable{
 
     public static int PORT = 57565;
 
-    private int maxplayers = 3;
+    private int maxplayers = 6;
     DatagramSocket sock;
 
     Thread thread;
@@ -84,7 +84,7 @@ public class Server implements Runnable{
         }
         if(received instanceof NetPackages.ClientInfo){
             NetPackages.ClientInfo ci = (NetPackages.ClientInfo)received;
-            if(users.size() < maxplayers && !users.containsKey(ci.name)){
+            if(users.size() < maxplayers){
                 User user = new User(ci.name, dp.getSocketAddress());
                 user.lastresp = System.currentTimeMillis();
                 users.put(ci.name, user);

@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
 import model.Country;
 import model.Player;
@@ -35,6 +36,9 @@ public class MapController extends GameController implements Initializable {
     public Label errorLabel, currentPhase, currentPlayer, stats, showNumberDice, numberDice, fortificationNumber;
     @FXML
     private ImageView playerDice1, playerDice2, playerDice3, opponentDice1, opponentDice2;
+
+    @FXML
+    private Circle colorCircle;
 
     private boolean waitingAttackResponse = false;
     private boolean waitingFortifyResponse = false;
@@ -158,6 +162,8 @@ public class MapController extends GameController implements Initializable {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
+                    java.awt.Color c = getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerColor();
+                    colorCircle.setFill(Color.rgb(c.getRed(), c.getGreen(), c.getBlue()));
                     currentPlayer.setText(getContainer().getBundle().getString("playerTag") + "\n"
                             + getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName());
                 }
@@ -337,7 +343,7 @@ public class MapController extends GameController implements Initializable {
     public void setColorOfCountry(Country country, Color color) {
         ImageView imageView = colorReference.get(country.getColor());
         ColorAdjust blackout = new ColorAdjust();
-        blackout.setSaturation(0.6);
+        blackout.setSaturation(color.getSaturation());
         blackout.setHue(changeHue(color));
         imageView.setEffect(blackout);
         imageView.setCache(true);

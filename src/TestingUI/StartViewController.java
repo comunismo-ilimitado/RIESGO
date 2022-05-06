@@ -174,4 +174,12 @@ public class StartViewController extends GameController{
         getContainer().setLocale(new Locale("es","ES"));
         loadView("settings-view.fxml");
     }
+    @FXML
+    private void soundOn(){
+        getContainer().playMusic();
+    }
+    @FXML
+    private void soundOff(){
+        getContainer().stopMusic();
+    }
 }

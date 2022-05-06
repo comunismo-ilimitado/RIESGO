@@ -136,19 +136,21 @@ public class AttackController {
      *
      * @param country: Country object must be passed to get number of armies to set
      *                 dice
-     * @param ad:      To know its the attacker or defender to set dice based on that
+     * @param playerRol:      To know its the attacker or defender to set dice based on that
      * @return Number of Dice to be assigned
      */
-    public int setNoOfDice(Country country, char ad) {
+    public int setNoOfDice(Country country, char playerRol) {
         try {
-            if (ad == 'A') {
-                if (country.getNoOfArmies() == 2)
+            if (playerRol == 'A') {
+                if (country.getNoOfArmies() == 1)
+                    return 0;
+                else if (country.getNoOfArmies() == 2)
                     return 1;
                 else if (country.getNoOfArmies() == 3)
                     return 2;
                 else
                     return 3;
-            } else if (ad == 'D') {
+            } else if (playerRol == 'D') {
                 if (country.getNoOfArmies() == 1)
                     return 1;
                 else

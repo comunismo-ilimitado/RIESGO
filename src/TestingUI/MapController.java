@@ -5,20 +5,25 @@ import controller.controllers.net.ClientController;
 import controller.net.Board;
 import controller.net.ClientUpdate;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
+import model.CardTypes;
 import model.Country;
 import model.Player;
 
@@ -27,22 +32,33 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MapController extends GameController implements Initializable {
     @FXML
-    public Pane exitPane, errorPane, dicePane, countriesPane, countryLabels, diceChoosePane, fortificationPane;
+    public Pane exitPane, errorPane, dicePane, countriesPane, countryLabels, diceChoosePane, fortificationPane,
+            cardsPane;
     @FXML
-    public Label errorLabel, currentPhase, currentPlayer, stats, showNumberDice, numberDice, fortificationNumber, attackResponseLabel;
+    public Label errorLabel, currentPhase, currentPlayer, stats, armiesLeft, numberDice, fortificationNumber,
+            attackResponseLabel;
     @FXML
-    private ImageView playerDice1, playerDice2, playerDice3, opponentDice1, opponentDice2;
-
+    private ImageView playerDice1, playerDice2, playerDice3, opponentDice1, opponentDice2, card1, card2, card3, card4,
+            card5, cardSelected1, cardSelected2, cardSelected3;
+    private ImageView[] cardsImages = {card1, card2, card3, card4, card5};
+    private ImageView[] selectedCardsImages = {cardSelected1, cardSelected2, cardSelected3};
+    @FXML
+    private HBox cards, selectedCards;
+    @FXML
+    private CheckBox allOut;
     @FXML
     private Circle colorCircle;
 
     private boolean waitingAttackResponse = false;
     private boolean waitingFortifyResponse = false;
-    private Image[] dice = new Image[6];
+    private final Image[] dice = new Image[6];
+    private final Image[] cardType = new Image[3];
+    private int cardIndex, selectedCardIndex;
     private int lastError = -1;
     private int lastInfo = -1;
     private int lastAction = -1;
@@ -109,6 +125,13 @@ public class MapController extends GameController implements Initializable {
         dice[4] = new Image(file.toURI().toString());
         file = new File("Resources/TestingUI/Images/Dice/six.png");
         dice[5] = new Image(file.toURI().toString());
+
+        file = new File("Resources/TestingUI/Images/Drawings/infantry.png");
+        cardType[0] = new Image(file.toURI().toString());
+        file = new File("Resources/TestingUI/Images/Drawings/cavalry.png");
+        cardType[1] = new Image(file.toURI().toString());
+        file = new File("Resources/TestingUI/Images/Drawings/artillery.png");
+        cardType[2] = new Image(file.toURI().toString());
     }
 
     @Override
@@ -151,7 +174,7 @@ public class MapController extends GameController implements Initializable {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    currentPhase.setText(getContainer().getBundle().getString("faseTag") + "\n"
+                    currentPhase.setText(getContainer().getBundle().getString("phaseTag") + "\n"
                             + getContainer().getClientController().getServerBoard().getCurrentPhase().replaceAll("Finish", ""));
                 }
             });
@@ -178,6 +201,16 @@ public class MapController extends GameController implements Initializable {
                     stats.setText(getContainer().getBundle().getString("statsTag") + "\n Occupied countries: "
                             + getContainer().getClientController().getServerBoard().getCountriesPercentage() + " %\n Continents occupied: " +
                             getContainer().getClientController().getServerBoard().getContinentsOccupied());
+                }
+            });
+        }
+
+        // Actualizar las tropas disponibles para desplegar
+        {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    armiesLeft.setText(Integer.toString(getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerArmiesNotDeployed()));
                 }
             });
         }
@@ -219,14 +252,10 @@ public class MapController extends GameController implements Initializable {
                                 errorPane.setVisible(true);
                             } else {
                                 if (!waitingAttackResponse) {
-                                    showNumberDice.setText(getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerName() + ": " +
-                                            getContainer().getBundle().getString("howManyDiceTag"));
                                     numberDice.setText("1");
                                     diceChoosePane.setVisible(true);
                                 }
-
                             }
-
                         }
                     }
                 }
@@ -388,6 +417,9 @@ public class MapController extends GameController implements Initializable {
         imageView.setCacheHint(CacheHint.SPEED);
     }
 
+    /**
+     * Removes one from the number of dice to attack.
+     */
     @FXML
     private void removeArmiesButton() {
         int i = Integer.parseInt(numberDice.getText());
@@ -399,6 +431,9 @@ public class MapController extends GameController implements Initializable {
         }
     }
 
+    /**
+     * Ads one to the number of dice to attack.
+     */
     @FXML
     private void addArmiesButton() {
         int i = Integer.parseInt(numberDice.getText());
@@ -412,20 +447,25 @@ public class MapController extends GameController implements Initializable {
      * Sets the number of attack and defence dice and executes the attack.
      */
     @FXML
+    //TODO configurar la accion de hacer all out correctamente
     private void confirmDiceButton() {
         // Se obtienen los paises
         Country attacker = getContainer().getClientController().getServerBoard().getAttackCountry1();
         Country defender = getContainer().getClientController().getServerBoard().getAttackCountry2();
-        // Se obtienen los dados que tiran cada uno
-        int attackDice = Integer.parseInt(numberDice.getText());
-        int defenceDice = AttackController.setNoOfDice(defender, 'D');
-        // Se mandan los atos al servidor
-        getContainer().getClientController().sendAction(new ClientUpdate.ClientAction("Dice " + attackDice + " A", attacker.getOwner()));
-        getContainer().getClientController().sendAction(new ClientUpdate.ClientAction("Dice " + defenceDice + " D", defender.getOwner()));
+        if (allOut.isSelected()) {
+            getContainer().getClientController().sendAction(new ClientUpdate.ClientAction("Dice -2 A", attacker.getOwner()));
+            getContainer().getClientController().sendAction(new ClientUpdate.ClientAction("Dice -1 D", defender.getOwner()));
+        } else {
+            // Se obtienen los dados que tiran cada uno
+            int attackDice = Integer.parseInt(numberDice.getText());
+            int defenceDice = AttackController.setNoOfDice(defender, 'D');
+            // Se mandan los atos al servidor
+            getContainer().getClientController().sendAction(new ClientUpdate.ClientAction("Dice " + attackDice + " A", attacker.getOwner()));
+            getContainer().getClientController().sendAction(new ClientUpdate.ClientAction("Dice " + defenceDice + " D", defender.getOwner()));
+        }
         waitingAttackResponse = true;
         diceChoosePane.setVisible(false);
     }
-
 
     @FXML
     private void addFortificationButton() {
@@ -445,6 +485,9 @@ public class MapController extends GameController implements Initializable {
         }
     }
 
+    /**
+     * Sends the fortification action with the selected number of dice.
+     */
     @FXML
     private void confirmFortificationButton() {
         int fortificationArmies = Integer.parseInt(fortificationNumber.getText());
@@ -453,17 +496,15 @@ public class MapController extends GameController implements Initializable {
         fortificationPane.setVisible(false);
     }
 
-
-
-
-
+    /**
+     * Sends an action with the country selected by the player.
+     */
     @FXML
     private void mapSelected(MouseEvent event) {
         ImageView country = (ImageView) event.getSource();
         Color color = country.getImage().getPixelReader().getColor((int) event.getX(), (int) event.getY());
         country = colorReference.get(color.toString());
         if (country == null) return;
-
         ClientUpdate.ClientAction action = new ClientUpdate.ClientAction();
         action.setActionCommand(colorCountry.get(color.toString()).getName() + " |5|");
         getContainer().getClientController().sendAction(action);
@@ -476,24 +517,60 @@ public class MapController extends GameController implements Initializable {
         getContainer().getClientController().sendAction(action);
     }
 
+    /**
+     * Shows the number of cards of each type a player owns.
+     */
     @FXML
     private void exchangeCards() {
-        dicePane.setVisible(true);
-
-        File file = new File("Resources/TestingUI/Images/Dice/one.png");
-        Image dice1 = new Image(file.toURI().toString());
-
-        playerDice1.setImage(dice[(int) Math.random() % 6 + 1]);
-        playerDice2.setImage(dice[(int) Math.random() % 6 + 1]);
-        playerDice3.setVisible(false);
-        opponentDice1.setImage(dice[(int) Math.random() % 6 + 1]);
-        opponentDice2.setImage(dice[(int) Math.random() % 6 + 1]);
-
-        System.out.println("Intercambio de cartas");
+        cardsPane.setVisible(true);
+        // Se Limpia la lista de cartas seleccionadas.
+        ImageView selectedCard;
+        for (int i = 0; i < 3; i++) {
+            selectedCard = (ImageView) selectedCards.getChildren().get(i);
+            selectedCard.setImage(null);
+        }
+        selectedCardIndex = 0;
+        // Se pintan las cartas de la mano.
+        cardIndex = 0;
+        List<CardTypes> cardsList = getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerCards();
+        ImageView cardImage;
+        for (CardTypes card : cardsList) {
+            cardImage = (ImageView) cards.getChildren().get(cardIndex);
+            switch (card) {
+                case Infantry:
+                    cardImage.setImage(cardType[0]);
+                    cardIndex++;
+                    break;
+                case Cavalry:
+                    cardImage.setImage(cardType[1]);
+                    cardIndex++;
+                    break;
+                case Artillery:
+                    cardImage.setImage(cardType[2]);
+                    cardIndex++;
+                    break;
+            }
+        }
     }
 
     @FXML
-    private void back(MouseEvent event) {
+    private void cardSelected(MouseEvent event) {
+        ImageView cardImage = (ImageView) event.getSource();
+        ImageView selectedCardImage = (ImageView) selectedCards.getChildren().get(selectedCardIndex);
+        if (cardImage.getImage() != null) {
+            selectedCardImage.setImage(cardImage.getImage());
+            selectedCardIndex++;
+        }
+        cardImage.setImage(null);
+    }
+    @FXML
+    //TODO Implementar la accion de mandar las tres cartas seleccioandas
+    private void confirmCardSelection() {
+
+    }
+
+    @FXML
+    private void back() {
         if (getContainer().getClientController() != null)
             getContainer().getClientController().exit();
         if (getContainer().getServerController() != null)
@@ -573,6 +650,7 @@ public class MapController extends GameController implements Initializable {
         dicePane.setVisible(false);
         diceChoosePane.setVisible(false);
         fortificationPane.setVisible(false);
+        cardsPane.setVisible(false);
     }
 
     private void cancelProcesses() {
@@ -586,12 +664,4 @@ public class MapController extends GameController implements Initializable {
         }
     }
 
-    @FXML
-    private void soundOn(){
-        getContainer().playMusic();
-    }
-    @FXML
-    private void soundOff(){
-        getContainer().stopMusic();
-    }
 }

@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;/**/
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +29,9 @@ public class StartViewController extends GameController{
     private Pane onlinePane, ipPane, rolPane;
     @FXML
     private TextField ipField, nameField;
+    @FXML
+    private CheckBox music;
+    private boolean isMusicOn;
 
     @FXML
     private void exitGame() {
@@ -142,10 +146,10 @@ public class StartViewController extends GameController{
             imageView.setImage(image);
         }
     }
-
     @FXML
-    private void settings(MouseEvent event) {
+    private void settings() {
         loadView("settings-view.fxml");
+        music.setSelected(isMusicOn);
     }
     @FXML
     private void credits(MouseEvent event) {
@@ -174,12 +178,15 @@ public class StartViewController extends GameController{
         getContainer().setLocale(new Locale("es","ES"));
         loadView("settings-view.fxml");
     }
+
     @FXML
-    private void soundOn(){
-        getContainer().playMusic();
+    private void toggleSound() {
+        if (music.isSelected()) {
+            getContainer().playMusic();
+        } else {
+            getContainer().stopMusic();
+        }
+        isMusicOn = music.isSelected();
     }
-    @FXML
-    private void soundOff(){
-        getContainer().stopMusic();
-    }
+
 }

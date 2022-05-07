@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.MapController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.MapController">
    <children>
       <ImageView fx:id="fullMap" fitHeight="720.0" fitWidth="1280.0" onMouseClicked="#mapSelected" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -18,7 +26,7 @@
       <Pane fx:id="countryLabels" mouseTransparent="true" prefHeight="720.0" prefWidth="1280.0" />
       <VBox fx:id="controls" prefHeight="720.0" prefWidth="239.0" style="-fx-background-color: #161A1C;">
          <children>
-            <Label fx:id="currentPhase" alignment="CENTER" prefHeight="67.0" prefWidth="239.0" text="%faseTag" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="currentPhase" alignment="CENTER" prefHeight="67.0" prefWidth="239.0" text="%phaseTag" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
@@ -28,37 +36,56 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <HBox prefHeight="54.0" prefWidth="239.0">
-               <children>
-                  <Separator prefHeight="8.0" prefWidth="90.0" visible="false" />
-                  <Circle fx:id="colorCircle" fill="DODGERBLUE" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
-               </children>
-            </HBox>
+            <Circle fx:id="colorCircle" fill="DODGERBLUE" radius="37.0" stroke="BLACK" strokeType="INSIDE">
+               <VBox.margin>
+                  <Insets left="80.0" />
+               </VBox.margin>
+            </Circle>
             <Label fx:id="stats" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="125.0" prefWidth="246.0" text="%statsTag" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="93.0" prefWidth="152.0" text="%armiesLeftTag" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="armiesLeft" prefHeight="103.0" prefWidth="13.0" text="0" textFill="WHITE" />
+               </children>
+            </HBox>
             <Separator orientation="VERTICAL" prefHeight="123.0" prefWidth="239.0" visible="false" />
-            <Button fx:id="nextFase" mnemonicParsing="false" onAction="#nextPhase" prefHeight="71.0" prefWidth="239.0" style="-fx-background-color: #2D3339;" text="%nextfaseTag" textFill="WHITE">
+            <Button fx:id="nextFase" mnemonicParsing="false" onAction="#nextPhase" prefHeight="71.0" prefWidth="239.0" style="-fx-background-color: #2D3339;" text="%nextPhaseTag" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <Button fx:id="exchangeCards" mnemonicParsing="false" onAction="#exchangeCards" prefHeight="75.0" prefWidth="243.0" style="-fx-background-color: #2D3339;" text="%cardexchangeTag" textFill="WHITE">
+            <Button fx:id="exchangeCards" mnemonicParsing="false" onAction="#exchangeCards" prefHeight="75.0" prefWidth="243.0" style="-fx-background-color: #2D3339;" text="%cardsExchangeTag" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="leaveGame" layoutX="10.0" layoutY="535.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="75.0" prefWidth="243.0" style="-fx-background-color: #2D3339;" text="%surrenderTag" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </VBox>
-      <Pane fx:id="exitPane" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" visible="false">
+      <Pane fx:id="exitPane" prefHeight="720.0" prefWidth="1280.0" visible="false">
          <children>
+            <Pane fx:id="messageBackground5" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" />
             <VBox alignment="CENTER" layoutY="252.0" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
                <children>
                   <Label text="%savegameTag" textFill="WHITE">
@@ -69,17 +96,24 @@
                   <Separator orientation="VERTICAL" prefHeight="20.0" prefWidth="21.0" visible="false" />
                   <HBox alignment="CENTER" prefHeight="62.0" prefWidth="1280.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#saveGameAndExit" prefHeight="106.0" prefWidth="71.0" style="-fx-background-color: #2D3339;" text="%yesTag" textFill="WHITE" />
+                        <Button mnemonicParsing="false" onAction="#saveGameAndExit" prefHeight="106.0" prefWidth="71.0" style="-fx-background-color: #2D3339;" text="%yesTag" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                         <Separator prefHeight="0.0" prefWidth="108.0" visible="false" />
-                        <Button mnemonicParsing="false" onAction="#exitWithoutSave" prefHeight="116.0" prefWidth="68.0" style="-fx-background-color: #2D3339;" text="%noTag" textFill="WHITE" />
+                        <Button mnemonicParsing="false" onAction="#exitWithoutSave" prefHeight="116.0" prefWidth="68.0" style="-fx-background-color: #2D3339;" text="%noTag" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                   </HBox>
                </children>
             </VBox>
          </children>
       </Pane>
-      <Pane fx:id="errorPane" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" visible="false">
+      <Pane fx:id="errorPane" prefHeight="720.0" prefWidth="1280.0" visible="false">
          <children>
+            <Pane fx:id="messageBackground4" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" />
             <VBox alignment="CENTER" layoutY="252.0" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
                <children>
                   <Label fx:id="errorLabel" text="ERROR" textFill="WHITE">
@@ -91,8 +125,9 @@
             </VBox>
          </children>
       </Pane>
-      <Pane fx:id="dicePane" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" visible="false">
+      <Pane fx:id="dicePane" prefHeight="720.0" prefWidth="1280.0" visible="false">
          <children>
+            <Pane fx:id="messageBackground3" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" />
             <VBox layoutY="252.0" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
                <children>
                   <Label fx:id="attackResponseLabel" alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER" textFill="WHITE">
@@ -163,13 +198,14 @@
             </VBox>
          </children>
       </Pane>
-      <Pane fx:id="diceChoosePane" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" visible="false">
+      <Pane fx:id="diceChoosePane" prefHeight="720.0" prefWidth="1280.0" visible="false">
          <children>
+            <Pane fx:id="messageBackground2" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" />
             <VBox layoutY="252.0" prefHeight="200.0" prefWidth="1280.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
                      <children>
-                        <Label fx:id="showNumberDice" alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="400.0" textFill="WHITE">
+                        <Label alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="400.0" text="%howManyDiceTag" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -178,7 +214,10 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#removeArmiesButton" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #2D3339;" text="-" textFill="WHITE" />
+                        <Button mnemonicParsing="false" onMouseClicked="#removeArmiesButton" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #2D3339;" text="-" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                         <Separator prefHeight="12.0" prefWidth="220.0" visible="false" />
                         <Label fx:id="numberDice" text="1" textFill="WHITE">
                            <font>
@@ -190,8 +229,16 @@
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <Separator prefHeight="0.0" prefWidth="165.0" visible="false" />
+                        <CheckBox fx:id="allOut" mnemonicParsing="false" text="%allOutTag" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></CheckBox>
+                        <Separator layoutX="677.0" layoutY="59.0" prefHeight="0.0" prefWidth="165.0" visible="false" />
                         <Button fx:id="confirmDice" mnemonicParsing="false" onAction="#confirmDiceButton" prefHeight="48.0" prefWidth="199.0" style="-fx-background-color: #2D3339;" text="%okTag" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
@@ -199,6 +246,9 @@
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                      </children>
                   </HBox>
@@ -206,8 +256,9 @@
             </VBox>
          </children>
       </Pane>
-      <Pane fx:id="fortificationPane" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" visible="false">
+      <Pane fx:id="fortificationPane" prefHeight="720.0" prefWidth="1280.0" visible="false">
          <children>
+            <Pane fx:id="messageBackground1" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" />
             <VBox layoutY="252.0" prefHeight="200.0" prefWidth="1280.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
@@ -221,7 +272,11 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#removeFortificationButton" onMouseClicked="#removeArmiesButton" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #2D3339;" text="-" textFill="WHITE" />
+                        <Button mnemonicParsing="false" onAction="#removeFortificationButton" onMouseClicked="#removeArmiesButton" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #2D3339;" text="-" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                         <Separator prefHeight="12.0" prefWidth="220.0" visible="false" />
                         <Label fx:id="fortificationNumber" text="1" textFill="WHITE">
                            <font>
@@ -233,6 +288,9 @@
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <Separator prefHeight="0.0" prefWidth="165.0" visible="false" />
                         <Button fx:id="confirmDice1" mnemonicParsing="false" onAction="#confirmFortificationButton" prefHeight="48.0" prefWidth="199.0" style="-fx-background-color: #2D3339;" text="%okTag" textFill="WHITE">
@@ -242,7 +300,84 @@
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane fx:id="cardsPane" prefHeight="720.0" prefWidth="1280.0" visible="false">
+         <children>
+            <Pane fx:id="messageBackground" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" />
+            <VBox layoutY="252.0" prefHeight="216.0" prefWidth="1280.0" style="-fx-background-color: #161A1C;">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="66.0" prefWidth="1265.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="%cardsTag" textAlignment="CENTER" textFill="WHITE">
+                           <padding>
+                              <Insets left="100.0" />
+                           </padding>
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="447.0" layoutY="42.0" prefHeight="0.0" prefWidth="679.0" visible="false" />
+                        <Button mnemonicParsing="false" onAction="#exchangeCards" prefHeight="56.0" prefWidth="73.0" style="-fx-background-color: #2D3339;" text="%cancelTag" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Separator prefHeight="0.0" prefWidth="48.0" visible="false" />
+                        <Button layoutX="1089.0" layoutY="15.0" mnemonicParsing="false" onAction="#confirmCardSelection" prefHeight="56.0" prefWidth="73.0" style="-fx-background-color: #2D3339;" text="%okTag" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <HBox fx:id="cards" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fx:id="card1" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#cardSelected" pickOnBounds="true" preserveRatio="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="card2" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#cardSelected" pickOnBounds="true" preserveRatio="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="card3" fitHeight="150.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#cardSelected" pickOnBounds="true" preserveRatio="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="card4" fitHeight="150.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#cardSelected" pickOnBounds="true" preserveRatio="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="card5" fitHeight="150.0" fitWidth="150.0" layoutX="210.0" layoutY="10.0" onMouseClicked="#cardSelected" pickOnBounds="true" preserveRatio="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <Separator prefHeight="1.0" prefWidth="104.0" visible="false" />
+                        <HBox fx:id="selectedCards" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fx:id="cardSelected1" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="cardSelected2" fitHeight="150.0" fitWidth="150.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="cardSelected3" fitHeight="150.0" fitWidth="150.0" layoutX="210.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                </children>

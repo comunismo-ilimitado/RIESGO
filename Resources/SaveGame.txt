@@ -5,55 +5,118 @@ Finish Reinforcement
 
 ---------------------------------
 Player Playing :- 1
+Currently in Reinforcement Mode
+Attacking.... 
+Attacking.... 
+Attacking.... 
+Attacking.... 
+Currently in Fortification Mode
+---------------------------------
+Player Playing :- 2
+Currently in Reinforcement Mode for Benevolent player
+Currently in Attack Mode for Benevolent player
+Currently in Fortification Mode for Benevolent player
+---------------------------------
+Player Playing :- 1
+Currently in Reinforcement Mode
+Attacking.... 
+Attacking.... 
+Attacking.... 
+Attacking.... 
+Currently in Fortification Mode
+---------------------------------
+Player Playing :- 2
+Currently in Reinforcement Mode for Benevolent player
+Currently in Attack Mode for Benevolent player
+Currently in Fortification Mode for Benevolent player
+---------------------------------
+Player Playing :- 1
+Currently in Reinforcement Mode
+Attacking.... 
+Attacking.... 
+Attacking.... 
+Attacking.... 
+Currently in Fortification Mode
+---------------------------------
+Player Playing :- 2
+Currently in Reinforcement Mode for Benevolent player
+Currently in Attack Mode for Benevolent player
+Currently in Fortification Mode for Benevolent player
+---------------------------------
+Player Playing :- 1
+Currently in Reinforcement Mode
+Attacking.... 
+Attacking.... 
+Currently in Fortification Mode
+---------------------------------
+Player Playing :- 2
+Currently in Reinforcement Mode for Benevolent player
+Currently in Attack Mode for Benevolent player
+Currently in Fortification Mode for Benevolent player
+---------------------------------
+Player Playing :- 1
+Currently in Reinforcement Mode
+Attacking.... 
+Attacking.... 
+Attacking.... 
+Attacking.... 
+Currently in Fortification Mode
+---------------------------------
+Player Playing :- 2
+Currently in Reinforcement Mode for Benevolent player
+Currently in Attack Mode for Benevolent player
+Currently in Fortification Mode for Benevolent player
+---------------------------------
+Player Playing :- 1
 Currently in Reinforcement Mode----PLAYER----
 0
 null
-Western Australia***2
+Central America***14
 Papua New Guinea***2
-Egypt***2
-North Africa***2
-Madagascar***2
-Iceland***2
-Middle East***2
-Yakutsk***2
-China***2
-North West Territory***2
-Siberia***2
-Brazil***2
-Argentina***2
-Northern Europe***2
-Eastern United States***2
-Britain***2
-Western Europe***2
-Venezuela***2
-South Africa***2
-Peru***1
-Indonesia***1
-----CARDS----
-[]
-----PLAYER----
-1
-null
-Ural***2
-Central America***2
 Alberta***2
 Siam***2
 Kazakhstan***2
-Scandinavia***2
+Middle East***2
 Mongolia***2
+China***2
+North West Territory***2
+Siberia***2
+Northern Europe***2
+Eastern United States***23
+Quebec***3
+Ukraine***2
+Britain***2
+Congo***2
+Venezuela***1
+Irkutsk***2
+South Africa***2
+Southern Europe***2
+Western United States***1
+Ontario***2
+Peru***5
+Greenland***2
+East Africa***1
+Indonesia***1
+----CARDS----
+[Artillery, Artillery]
+----PLAYER----
+1
+controller.strategies.BenevolentStrategy@5656554b
+Ural***2
+Western Australia***2
+Egypt***2
+North Africa***2
+Madagascar***2
+Scandinavia***2
+Iceland***2
+Yakutsk***2
+Brazil***2
 Alaska***2
 Kamchatka***2
 Eastern Australia***2
+Argentina***2
 Japan***2
-Quebec***2
-Ukraine***2
-Congo***2
+Western Europe***2
 India***2
-Irkutsk***2
-Southern Europe***2
-Western United States***2
-Ontario***2
-Greenland***1
-East Africa***1
 ----CARDS----
 []

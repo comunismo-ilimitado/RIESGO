@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,29 +11,36 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.StartViewController">
    <children>
-      <Button layoutX="116.0" layoutY="222.0" mnemonicParsing="false" onAction="#setSpanish" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="%spanishTag" />
-      <Button layoutX="116.0" layoutY="172.0" mnemonicParsing="false" onAction="#setEnglish" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="%englishTag" />
-      <Button layoutX="234.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#credits" onMouseEntered="#changeColorEnter2" onMouseExited="#changeColorOut2" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="%creditsTag">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Button>
+      <Button layoutX="116.0" layoutY="222.0" mnemonicParsing="false" onAction="#setSpanish" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="%spanishTag">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button layoutX="116.0" layoutY="172.0" mnemonicParsing="false" onAction="#setEnglish" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="%englishTag">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <ImageView fitHeight="101.0" fitWidth="71.0" layoutX="403.0" layoutY="172.0" onMouseClicked="#howToPlay" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/interrogacion.jpg" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="atras" fitHeight="93.0" fitWidth="179.0" layoutY="602.0" onMouseClicked="#back" onMouseEntered="#imageOut" onMouseExited="#imageIn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Flecha_atras1.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <Label layoutX="122.0" layoutY="104.0" text="%languageTag">
          <font>
             <Font name="Bradley Hand ITC" size="40.0" />
          </font>
       </Label>
-      <Label layoutX="327.0" layoutY="104.0" text="%howtoplayTag">
+      <Label layoutX="327.0" layoutY="104.0" text="%howToPlay">
          <font>
             <Font name="Bradley Hand ITC" size="40.0" />
          </font>
@@ -41,5 +50,23 @@
             <Image url="@Images/Drawings/ajustes.png" />
          </image>
       </ImageView>
+      <CheckBox fx:id="music" layoutX="121.0" layoutY="448.0" mnemonicParsing="false" onAction="#toggleSound" style="-fx-background-color: #ACACAC;" text="%musicTag" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </CheckBox>
+      <Label layoutX="122.0" layoutY="34.0" text="%settingsTag">
+         <font>
+            <Font name="Bradley Hand ITC" size="40.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Button layoutX="122.0" layoutY="492.0" mnemonicParsing="false" onAction="#credits" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #ACACAC;" text="%creditsTag">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

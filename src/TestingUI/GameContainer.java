@@ -80,7 +80,7 @@ public class GameContainer {
     public ServerController getServerController() {
         return serverController;
     }
-       public void setMusic(){
+    public void setMusic(){
     try {
           File file = new File("Resources/musica.wav");
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);

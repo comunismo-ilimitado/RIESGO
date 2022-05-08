@@ -454,7 +454,6 @@ public class MapController extends GameController implements Initializable {
         Country defender = getContainer().getClientController().getServerBoard().getAttackCountry2();
         if (allOut.isSelected()) {
             getContainer().getClientController().sendAction(new ClientUpdate.ClientAction("Dice -2 A", attacker.getOwner()));
-            getContainer().getClientController().sendAction(new ClientUpdate.ClientAction("Dice -1 D", defender.getOwner()));
         } else {
             // Se obtienen los dados que tiran cada uno
             int attackDice = Integer.parseInt(numberDice.getText());

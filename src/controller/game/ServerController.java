@@ -97,6 +97,7 @@ public class ServerController extends Observable{
                 addObserver(frame);
 
                 board = new Board();
+                getBoard().setMapName(ReadingFiles.mapCode);
                 boardFacade = new BoardFacade(this);
                 boardFacade.copyInformation();
 

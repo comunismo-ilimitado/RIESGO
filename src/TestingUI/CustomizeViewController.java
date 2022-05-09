@@ -156,6 +156,7 @@ public class CustomizeViewController extends GameController implements Initializ
 
             ReadingFiles.MapType = 4;
             ReadingFiles.mapName = "Resources/TestingUI/Maps/" + comboMaps.getValue() + ".map";
+            ReadingFiles.mapCode = comboMaps.getValue();
             ReadingFiles.NumberOfPlayers = numberOfPlayers;
 
             try {

@@ -50,6 +50,8 @@ public class ServerController extends Observable{
     private BoardFacade boardFacade;
     int dice1 = -1, dice2 = -1;
     private boolean loaded = false;
+    private boolean finishedGame = false;
+
 
     /**
      *
@@ -353,10 +355,11 @@ public class ServerController extends Observable{
                 }
             } else { //Si solo queda un jugador ha ganado ese jugador
                 frame.error("Player :- " + ((int) ReadingFiles.getPlayerId2().keySet().toArray()[0] + 1) + " Wins");
+                setFinishedGame(true);
                 getBoardFacade().sendErrorMessage("Player :- " + ((int) ReadingFiles.getPlayerId2().keySet().toArray()[0] + 1) + " Wins",
                         playerObjet(getCurrentPlayer()));
-                frame.dispose();
-                System.exit(0);
+                //frame.dispose();
+                //System.exit(0);
 
             }
         } catch (Exception e) {
@@ -424,10 +427,11 @@ public class ServerController extends Observable{
         }
         if (ReadingFiles.getPlayerId2().size() <= 1) { //Si despues de la eliminacion solo queda un jugador ha ganado
             frame.error("Player :- " + ((int) ReadingFiles.getPlayerId2().keySet().toArray()[0] + 1) + " Wins");
+            setFinishedGame(true);
             getBoardFacade().sendErrorMessage("Player :- " + ((int) ReadingFiles.getPlayerId2().keySet().toArray()[0] + 1) + " Wins",
                     playerObjet(getCurrentPlayer()));
-            frame.dispose();
-            System.exit(0);
+            //frame.dispose();
+            //System.exit(0);
 
         }
     }
@@ -443,6 +447,7 @@ public class ServerController extends Observable{
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        if(!isFinishedGame()){
         Player player = playerObjet(getCurrentPlayer());
         System.out.println("---------------------------------");
         System.out.println("Current Player " + (getCurrentPlayer() + 1));
@@ -462,6 +467,7 @@ public class ServerController extends Observable{
             player.getStrategy().fortify(player);
             finishCPU();
         }
+        }
     }
 
     /**
@@ -469,9 +475,11 @@ public class ServerController extends Observable{
      *
      */
     private void finishCPU() {
-        playerUpdate();
-        changed();
-        selectTypeOfPlayer();
+        if(!isFinishedGame()) {
+            playerUpdate();
+            changed();
+            selectTypeOfPlayer();
+        }
     }
 
     /**
@@ -696,6 +704,14 @@ public class ServerController extends Observable{
 
     public void setDice2(int dice2) {
         this.dice2 = dice2;
+    }
+
+    public boolean isFinishedGame() {
+        return finishedGame;
+    }
+
+    public void setFinishedGame(boolean finishedGame) {
+        this.finishedGame = finishedGame;
     }
 
     /*

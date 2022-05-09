@@ -41,10 +41,10 @@ public class MapController extends GameController implements Initializable {
             cardsPane;
     @FXML
     public Label errorLabel, currentPhase, currentPlayer, stats, armiesLeft, numberDice, fortificationNumber,
-            attackResponseLabel;
+            attackResponseLabel,winner;
     @FXML
     private ImageView playerDice1, playerDice2, playerDice3, opponentDice1, opponentDice2, card1, card2, card3, card4,
-            card5, cardSelected1, cardSelected2, cardSelected3;
+            card5, cardSelected1, cardSelected2, cardSelected3,fullMap;
     private ImageView[] cardsImages = {card1, card2, card3, card4, card5};
     private ImageView[] selectedCardsImages = {cardSelected1, cardSelected2, cardSelected3};
     @FXML
@@ -73,6 +73,14 @@ public class MapController extends GameController implements Initializable {
         HashMap<String, Country> countries = getContainer().getClientController().getServerBoard().getCountries();
 
         File file = new File(getContainer().getMapsLocation() + "/" + getContainer().getClientController().getServerBoard().getMapName()
+                + "/" + "ColorMap" + ".png");
+        Image image = new Image(file.toURI().toString());
+        fullMap.setImage(image);
+        if(getContainer().getClientController().getServerBoard().getMapName().equals("Europe")){
+            fullMap.setLayoutX(328);
+        }
+
+        file = new File(getContainer().getMapsLocation() + "/" + getContainer().getClientController().getServerBoard().getMapName()
                 + "/" + "BlackMap" + ".png");
         loadImage(file);
         file = new File(getContainer().getMapsLocation() + "/" + getContainer().getClientController().getServerBoard().getMapName()
@@ -108,6 +116,9 @@ public class MapController extends GameController implements Initializable {
         imageView.setPickOnBounds(true);
         imageView.setPreserveRatio(true);
         countriesPane.getChildren().add(imageView);
+        if(getContainer().getClientController().getServerBoard().getMapName().equals("Europe")){
+            imageView.setLayoutX(328);
+        }
         return (imageView);
     }
 
@@ -167,6 +178,20 @@ public class MapController extends GameController implements Initializable {
                     }
                 }
             }
+        }
+
+        //Comprobacion si ha ganado alguien
+        {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    if(getContainer().getServerController().isFinishedGame()){
+                        loadView("results-view.fxml");
+                        winner.setText(getContainer().getClientController().getServerBoard().getPlayers().toString());
+
+                    }
+                }
+            });
         }
 
         //Actualizar fase

@@ -111,6 +111,14 @@ public class Board extends NetPackages.Package {
         return attackCountry1;
     }
 
+    public void setFortifyCountry1(Country attackCountry1) {
+        this.attackCountry1 = attackCountry1;
+    }
+
+    public Country getFortifyCountry1() {
+        return attackCountry1;
+    }
+
     public void setSelectedCountry2(Country selectedCountry2) {
         this.selectedCountry2 = selectedCountry2;
     }
@@ -133,6 +141,14 @@ public class Board extends NetPackages.Package {
 
     public Country getAttackCountry2() {
         return attackCountry2;
+    }
+
+    public void setFortifyCountry2(Country attackCountry1) {
+        this.attackCountry1 = attackCountry1;
+    }
+
+    public Country getFortifyCountry2() {
+        return attackCountry1;
     }
 
     public void setCardTypesList(List<CardTypes> cardTypesList) {

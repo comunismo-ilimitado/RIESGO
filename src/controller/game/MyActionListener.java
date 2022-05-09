@@ -194,13 +194,14 @@ public class MyActionListener implements ActionListener {
                 case "Finish Fortification":
                     //ERRORES FORTIFICATION
                     try {
+
                         if (getController().getFortifyCountry1() == null) {
                             getController().setFortifyCountry1(country);
 
                             if (!getController().getBoard().getCurrentPlayer().getMyCountries(getController().getBoard().getCurrentPlayer()).contains(getController().getFortifyCountry1())) {
                                 getController().getFrame().ActivateAll();
-                                getController().getFrame().error("You can't fortify a country from other player");
-                                getController().getBoardFacade().sendErrorMessage("fortificationError1Tag", getController().playerObjet(getController().getCurrentPlayer()));
+                                getController().getFrame().error("You can't send armies from a country of other player");
+                                getController().getBoardFacade().sendErrorMessage("fortificationError5Tag", getController().playerObjet(getController().getCurrentPlayer()));
                                 getController().OnlyNeeded(getController().playerObjet(getController().getCurrentPlayer()).getTotalCountriesOccupied());
                                 getController().setFortifyCountry1(null);
                                 getController().setFortifyCountry2(null);
@@ -218,15 +219,23 @@ public class MyActionListener implements ActionListener {
                             }
                         } else if (getController().getFortifyCountry2() == null) {
                             getController().setFortifyCountry2(country);
+                            ArrayList<Country> neighbour = new ArrayList<>();
 
-                            if (getController().getFortifyCountry1().equals(getController().getFortifyCountry2())) {
+                            if (!getController().getBoard().getCurrentPlayer().getMyCountries(getController().getBoard().getCurrentPlayer()).contains(getController().getFortifyCountry2())) {
+                                getController().getFrame().ActivateAll();
+                                getController().getFrame().error("You can't fortify a country from another player");
+                                getController().getBoardFacade().sendErrorMessage("fortificationError1Tag", getController().playerObjet(getController().getCurrentPlayer()));
+                                getController().OnlyNeeded(getController().playerObjet(getController().getCurrentPlayer()).getTotalCountriesOccupied());
+                                getController().setFortifyCountry1(null);
+                                getController().setFortifyCountry2(null);
+                                getController().RefreshButtons();
+                            } else if (getController().getFortifyCountry1().equals(getController().getFortifyCountry2())) {
                                 getController().getFrame().error("Same country selected");
                                 getController().getBoardFacade().sendErrorMessage("fortificationError3Tag",
                                         getController().playerObjet(getController().getCurrentPlayer()));
                                 getController().setFortifyCountry1(null);
                                 getController().setFortifyCountry2(null);
                                 getController().RefreshButtons();
-
                             } else if (!FortificationController.hasPathBFS2(getController().getFortifyCountry1(), getController().getFortifyCountry2())) {
                                 getController().getFrame().error("No path to that country from " + getController().getFortifyCountry1().getName());
                                 getController().getBoardFacade().sendErrorMessage("fortificationError4Tag",

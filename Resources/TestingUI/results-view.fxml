@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.MapController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.MapController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="333.0" layoutY="88.0" prefHeight="80.0" prefWidth="615.0" text="%resultsTag">
          <font>
@@ -18,5 +17,20 @@
             <Image url="@Images/Flecha_adelante1.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="201.0" fitWidth="219.0" layoutX="540.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/ganador.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="winner" layoutX="599.0" layoutY="338.0">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="596.0" layoutY="277.0" text="WINNER">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

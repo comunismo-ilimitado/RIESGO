@@ -31,6 +31,7 @@ public class ReadingFiles {
     public static String Location;
     public static String FileName;  //Si se usa
     public static String mapName = "Resources/OldResources/World.map";
+    public static String mapCode = "World";
     private boolean errors = false;
     public static List<String> playerNames;
     private static List<Integer> players;

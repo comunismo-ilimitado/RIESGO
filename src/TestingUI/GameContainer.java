@@ -12,12 +12,13 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * This is a Parent Class made for including some
+ *  important methods for all the views-controller.
+ */
 public class GameContainer {
 
     private String mapsLocation = "Resources/TestingUI/Images/Map";
-
-
-
     private String ip;
     private Locale locale;
     private ResourceBundle bundle;
@@ -28,6 +29,9 @@ public class GameContainer {
     private ServerController serverController;
 
 
+    /**
+     * Getters and setters
+     */
 
     public void setMapsLocation(String mapsLocation) {
         this.mapsLocation = mapsLocation;
@@ -97,8 +101,6 @@ public class GameContainer {
     public void stopMusic(){
         this.music.stop();
     }
-
-
     public void setServerController(ServerController serverController) {
         this.serverController = serverController;
     }

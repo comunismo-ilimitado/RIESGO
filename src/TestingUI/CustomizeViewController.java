@@ -20,6 +20,9 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * This class is used for controlling the customize-view.fxml
+ */
 public class CustomizeViewController extends GameController implements Initializable {
     @FXML
     private ComboBox<String> comboMaps, one, two, three, four, five, six;
@@ -38,6 +41,13 @@ public class CustomizeViewController extends GameController implements Initializ
     private String[] maps = new String[2];
     private String[] strategies = new String[6];
 
+    /**
+     * Initialize comboBox from the view.fxml
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  {@code null} if the location is not known.
+     * @param resources The ResourceBundle for the translator
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
@@ -141,6 +151,10 @@ public class CustomizeViewController extends GameController implements Initializ
         }else{return;}
     }
 
+    /**
+     * Starts Game.
+     * Control some errors and load the corresponding map and view.
+     */
     @FXML
     private void game() {
         setPlayers();
@@ -179,6 +193,12 @@ public class CustomizeViewController extends GameController implements Initializ
             loadView("map-view.fxml");
         }
     }
+
+    /**
+     * Method for changing the image while mouse is on it (view effect)
+     * @param mouseEvent
+     * @throws FileNotFoundException
+     */
     @FXML
     private void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
         ImageView imageView = (ImageView) mouseEvent.getSource();
@@ -193,6 +213,11 @@ public class CustomizeViewController extends GameController implements Initializ
         }
     }
 
+    /**
+     * Method for changing the image when the mouse is out of it (view effect)
+     * @param mouseEvent
+     * @throws FileNotFoundException
+     */
     @FXML
     private void imageOut(MouseEvent mouseEvent) throws FileNotFoundException {
         ImageView imageView = (ImageView) mouseEvent.getSource();
@@ -207,6 +232,10 @@ public class CustomizeViewController extends GameController implements Initializ
         }
     }
 
+    /**
+     * Method for going back to the start-view.
+     * @param event
+     */
     @FXML
     private void back(MouseEvent event) {
         try{
@@ -217,6 +246,9 @@ public class CustomizeViewController extends GameController implements Initializ
         }
     }
 
+    /**
+     * Method for closing Panes when clicking outside while being in a view.
+     */
     @FXML
     private void returnGame() {
         errorPane.setVisible(false);

@@ -32,25 +32,29 @@ public class StartViewController extends GameController{
     @FXML
     private CheckBox music;
 
+    /**
+     * Close the program
+     */
     @FXML
     private void exitGame() {
         System.exit(0);
     }
-    @FXML
-    private void changeColorEnter2(MouseEvent mouseEvent) {
-        Button button = (Button) mouseEvent.getSource();
-        button.setStyle("-fx-background-color: #E19C1B");
-    }
-    @FXML
-    private void changeColorOut2(MouseEvent mouseEvent) {
-        Button button = (Button) mouseEvent.getSource();
-        button.setStyle("-fx-background-color: #FFFFFF");
-    }
+
+    /**
+     * Shows the onlinePane for selection of
+     * type of game (host it or introduce IP)
+     */
     @FXML
     private void play() {
         onlinePane.setVisible(true);
     }
 
+    /**
+     * This method is called when Local Game button is clicked,
+     * so that the game is started (customize-view is called) and
+     * the IP is set as "localhost"
+     * @param event
+     */
     @FXML
     private void localButtonAction(MouseEvent event){
         onlinePane.setVisible(false);
@@ -58,11 +62,22 @@ public class StartViewController extends GameController{
         getContainer().setIp("localHost");
         loadView("customize-view.fxml");
     }
+
+    /**
+     * This method is called when Online Game button is clicked,
+     * so that the next Pane is now visible.
+     */
     @FXML
     private void onlineButtonAction(){
         onlinePane.setVisible(false);
         rolPane.setVisible(true);
     }
+
+    /**
+     * This method is called when Host Game button is clicked,
+     * so that the game is started (customize-view is called) and
+     * the IP is set as "localhost".
+     */
     @FXML
     private void hostButtonAction(){
         rolPane.setVisible(false);
@@ -70,11 +85,22 @@ public class StartViewController extends GameController{
         getContainer().setIp("localHost");
         loadView("customize-view.fxml");
     }
+
+    /**
+     * Shows the Pane where the IP textfield is shown
+     */
     @FXML
     private void guestButtonAction(){
         rolPane.setVisible(false);
         ipPane.setVisible(true);
     }
+
+    /**
+     * This method is called when the confirm button is clicked.
+     * The IP textfield is read and starts the connection with the server.
+     * Then, the game is started, loading the map-view (the hosting player
+     * should have finish customizing the game).
+     */
     @FXML
     private void sendButtonAction(){
         getContainer().setIp(ipField.getCharacters().toString());
@@ -97,12 +123,21 @@ public class StartViewController extends GameController{
 
         loadView("map.fxml");
     }
+
+    /**
+     * Method for closing Panes when clicking outside while being in a view.
+     */
     @FXML
     private void returnGame() {
         onlinePane.setVisible(false);
         rolPane.setVisible(false);
         ipPane.setVisible(false);
     }
+    /**
+     * Method for changing the image while mouse is on it (view effect)
+     * @param mouseEvent
+     * @throws FileNotFoundException
+     */
     @FXML
     private void imageOut(MouseEvent mouseEvent) {
         ImageView imageView = (ImageView) mouseEvent.getSource();
@@ -124,6 +159,11 @@ public class StartViewController extends GameController{
             imageView.setImage(image);
         }
     }
+    /**
+     * Method for changing the image when the mouse is out of it (view effect)
+     * @param mouseEvent
+     * @throws FileNotFoundException
+     */
     @FXML
     private void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
         ImageView imageView = (ImageView) mouseEvent.getSource();
@@ -161,6 +201,10 @@ public class StartViewController extends GameController{
     private void credits() {
         loadView("credits-view.fxml");
     }
+
+    /**
+     * Open the web of the original instructions of Risk.
+     */
     @FXML
     private void howToPlay() {
         try {
@@ -170,22 +214,38 @@ public class StartViewController extends GameController{
         }
     }
 
+    /**
+     * Method for going back to the start-view.
+     */
     @FXML
     private void back() {
         loadView("start-view.fxml");
     }
+
+    /**
+     * Change the language to English
+     * and reload the view.
+     */
     @FXML
     private void setEnglish() {
         getContainer().setLocale(new Locale("en","UK"));
         loadView("settings-view.fxml");
 
     }
+
+    /**
+     * Change the language to Spanish
+     * and reload the view.
+     */
     @FXML
     private void setSpanish() {
         getContainer().setLocale(new Locale("es","ES"));
         loadView("settings-view.fxml");
     }
 
+    /**
+     * Start playing music when the box is ticked.
+     */
     @FXML
     private void toggleSound() {
         if (music.isSelected()) {

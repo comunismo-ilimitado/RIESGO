@@ -16,11 +16,14 @@ public class GameController {
     public void setContainer(GameContainer container) {
         this.container = container;
     }
-
     public GameContainer getContainer() {
         return container;
     }
 
+    /**
+     * Method for loading the view specified in the parameters.
+     * @param view
+     */
     protected void loadView(String view){
         try {
             getContainer().setBundle(ResourceBundle.getBundle("riesgoBundle", getContainer().getLocale()));

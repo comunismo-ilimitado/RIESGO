@@ -35,6 +35,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
+
+/**
+ * This class is used for controlling the map-view.fxml
+ */
 public class MapController extends GameController implements Initializable {
     @FXML
     public Pane exitPane, errorPane, dicePane, countriesPane, countryLabels, diceChoosePane, fortificationPane,
@@ -106,6 +110,8 @@ public class MapController extends GameController implements Initializable {
     }
 
     /**
+     * Loads the image in the view
+     *
      * @param file where the image is located
      * @return The loaded ImageView
      */
@@ -122,6 +128,13 @@ public class MapController extends GameController implements Initializable {
         return (imageView);
     }
 
+    /**
+     * Initialize cards and dice images.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  {@code null} if the location is not known.
+     * @param resources The ResourceBundle for the translator
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         File file = new File("Resources/TestingUI/Images/Dice/one.png");
@@ -145,6 +158,9 @@ public class MapController extends GameController implements Initializable {
         cardType[2] = new Image(file.toURI().toString());
     }
 
+    /**
+     * Method executed when loading the view
+     */
     @Override
     public void onLoad() {
         getContainer().getClientController().setMapController(this);
@@ -152,6 +168,14 @@ public class MapController extends GameController implements Initializable {
         update();
     }
 
+    /**
+     * Method in which there are updates in thread for:
+     * - Controlling errors
+     * - Check winner
+     * - Update phase, player, armies, stats, color from the
+     *   countries and information about attacks, etc.
+     * - Update selected countries for attack and fortify
+     */
     public void update() {
         ClientController controller = getContainer().getClientController();
         //Gestion de errores
@@ -377,6 +401,12 @@ public class MapController extends GameController implements Initializable {
         }
     }
 
+    /**
+     * Method for showing the corresponding dices Pane.
+     * @param dices1
+     * @param dices2
+     * @param info
+     */
     private void showDiceImages(Integer[] dices1, Integer[] dices2, String info) {
         attackResponseLabel.setText(info);
         dicePane.setVisible(true);
@@ -414,6 +444,11 @@ public class MapController extends GameController implements Initializable {
         }
     }
 
+    /**
+     * This method is used for changing color
+     * @param color
+     * @return
+     */
     public double changeHue(Color color) {
         if (color.getHue() > 180.0) {
             return 360.0 - color.getHue() / 180.0;
@@ -422,6 +457,12 @@ public class MapController extends GameController implements Initializable {
         }
     }
 
+    /**
+     * This method changes the color of the country depending on the player.
+     *
+     * @param country
+     * @param color
+     */
     public void setColorOfCountry(Country country, Color color) {
         ImageView imageView = colorReference.get(country.getColor());
         ColorAdjust blackout = new ColorAdjust();
@@ -432,6 +473,12 @@ public class MapController extends GameController implements Initializable {
         imageView.setCacheHint(CacheHint.SPEED);
     }
 
+    /**
+     * This method changes the color of the country when it is selected for attacking/fortify.
+     *
+     * @param country
+     * @param color
+     */
     public void setShadedColorCountry(Country country, Color color) {
         ImageView imageView = colorReference.get(country.getColor());
         Lighting colorSettings = new Lighting();
@@ -443,7 +490,8 @@ public class MapController extends GameController implements Initializable {
     }
 
     /**
-     * Removes one from the number of dice to attack.
+     * Removes one from the number of armies available to attack.
+     * Indeed, it removes a throwable dice.
      */
     @FXML
     private void removeArmiesButton() {
@@ -457,7 +505,8 @@ public class MapController extends GameController implements Initializable {
     }
 
     /**
-     * Ads one to the number of dice to attack.
+     * Add one from the number of armies available to attack.
+     * Indeed, it adds a throwable dice.
      */
     @FXML
     private void addArmiesButton() {
@@ -469,7 +518,7 @@ public class MapController extends GameController implements Initializable {
     }
 
     /**
-     * Sets the number of attack and defence dice and executes the attack.
+     * Sets the number of attack and defence throwable dices and executes the attack.
      */
     @FXML
     private void confirmDiceButton() {
@@ -491,7 +540,7 @@ public class MapController extends GameController implements Initializable {
     }
 
     /**
-     * Adds one to the counter of armies to fortify.
+     * Adds one to the counter of armies selected to fortify.
      */
     @FXML
     private void addFortificationButton() {
@@ -503,7 +552,7 @@ public class MapController extends GameController implements Initializable {
     }
 
     /**
-     * Removes one from the counter of armies to fortify.
+     * Removes one from the counter of armies selected to fortify.
      */
     @FXML
     private void removeFortificationButton() {
@@ -515,7 +564,7 @@ public class MapController extends GameController implements Initializable {
     }
 
     /**
-     * Sends the fortification action with the selected number of dice.
+     * Sends the fortification action with the selected number of armies.
      */
     @FXML
     private void confirmFortificationButton() {
@@ -635,6 +684,9 @@ public class MapController extends GameController implements Initializable {
         exchangeCards();
     }
 
+    /**
+     * Method for going back to the start-view.
+     */
     @FXML
     private void back() {
         if (getContainer().getClientController() != null)
@@ -645,7 +697,9 @@ public class MapController extends GameController implements Initializable {
     }
 
     /**
-     * Saves the game and returns to menu.
+     * Method for changing the image while mouse is on it (view effect)
+     * @param mouseEvent
+     * @throws FileNotFoundException
      */
     @FXML
     private void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
@@ -662,7 +716,9 @@ public class MapController extends GameController implements Initializable {
     }
 
     /**
-     * Saves the exit pane.
+     * Method for changing the image when the mouse is out of it (view effect)
+     * @param mouseEvent
+     * @throws FileNotFoundException
      */
     @FXML
     private void imageOut(MouseEvent mouseEvent) throws FileNotFoundException {
@@ -678,11 +734,17 @@ public class MapController extends GameController implements Initializable {
         }
     }
 
+    /**
+     * Shows the exit Pane
+     */
     @FXML
     private void exit() {
         exitPane.setVisible(true);
     }
 
+    /**
+     * Save the game and go back to the start-view.
+     */
     @FXML
     private void saveGameAndExit() {
         if (getContainer().getClientController() != null)
@@ -694,7 +756,7 @@ public class MapController extends GameController implements Initializable {
     }
 
     /**
-     * Returns to menu without saving the game.
+     * Returns to the start-view without saving the game.
      */
     @FXML
     private void exitWithoutSave() {
@@ -706,7 +768,7 @@ public class MapController extends GameController implements Initializable {
     }
 
     /**
-     * Hides error panes.
+     * Hides all panes when clicking outside them.
      */
     @FXML
     private void returnGame() {
@@ -719,6 +781,10 @@ public class MapController extends GameController implements Initializable {
         cardsPane.setVisible(false);
     }
 
+    /**
+     * Cancel processes in the server while trying to returnGame in
+     * the middle of an attack or fortification pane.
+     */
     private void cancelProcesses() {
         if (diceChoosePane.isVisible()){
             Country attacker = getContainer().getClientController().getServerBoard().getAttackCountry1();

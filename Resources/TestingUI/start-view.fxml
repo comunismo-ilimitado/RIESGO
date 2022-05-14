@@ -13,17 +13,17 @@
       </ImageView>
       <ImageView fx:id="settings" fitHeight="234.0" fitWidth="219.0" layoutX="71.0" layoutY="446.0" onMouseClicked="#settings" onMouseEntered="#imageOut" onMouseExited="#imageIn" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Images/settingsLogo.jpg" />
+            <Image url="@Images/settings.png" />
          </image>
       </ImageView>
       <ImageView fx:id="exit" fitHeight="150.0" fitWidth="200.0" layoutX="1022.0" layoutY="480.0" onMouseClicked="#exitGame" onMouseEntered="#imageOut" onMouseExited="#imageIn" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Images/exit2.jpg" />
+            <Image url="@Images/exitPressed.png" />
          </image>
       </ImageView>
       <ImageView fx:id="play" fitHeight="150.0" fitWidth="150.0" layoutX="570.0" layoutY="483.0" onMouseClicked="#play" onMouseEntered="#imageOut" onMouseExited="#imageIn" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Images/play.jpg" />
+            <Image url="@Images/next.png" />
          </image>
       </ImageView>
       <Pane fx:id="onlinePane" onMouseClicked="#returnGame" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #161A1C50;" visible="false">

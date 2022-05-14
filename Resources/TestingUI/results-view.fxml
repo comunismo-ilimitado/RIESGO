@@ -14,7 +14,7 @@
       </Label>
       <ImageView fx:id="adelante" fitHeight="89.0" fitWidth="175.0" layoutX="1119.0" layoutY="614.0" onMouseClicked="#exit" onMouseEntered="#imageIn" onMouseExited="#imageOut" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Images/Flecha_adelante1.png" />
+            <Image url="@Images/next.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="201.0" fitWidth="219.0" layoutX="540.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">

@@ -9,7 +9,7 @@
     <children>
       <ImageView fx:id="atras" fitHeight="87.0" fitWidth="153.0" layoutX="-5.0" layoutY="616.0" onMouseClicked="#back" onMouseEntered="#imageOut" onMouseExited="#imageIn" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Images/Flecha_atras1.png" />
+            <Image url="@Images/back.png" />
          </image>
       </ImageView>
       <Label layoutX="561.0" layoutY="72.0" prefHeight="72.0" prefWidth="331.0" text="RIESGO">

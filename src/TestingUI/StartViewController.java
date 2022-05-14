@@ -31,7 +31,6 @@ public class StartViewController extends GameController{
     private TextField ipField, nameField;
     @FXML
     private CheckBox music;
-    private boolean isMusicOn;
 
     @FXML
     private void exitGame() {
@@ -108,19 +107,19 @@ public class StartViewController extends GameController{
     private void imageOut(MouseEvent mouseEvent) {
         ImageView imageView = (ImageView) mouseEvent.getSource();
         if (imageView.getId().equals("settings")) {
-            File file = new File("Resources/TestingUI/Images/settingsLogoOn.jpg");
+            File file = new File("Resources/TestingUI/Images/settingsPressed.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("exit")) {
-            File file = new File("Resources/TestingUI/Images/exit.jpg");
+            File file = new File("Resources/TestingUI/Images/exit.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("play")) {
-            File file = new File("Resources/TestingUI/Images/play2.jpg");
+            File file = new File("Resources/TestingUI/Images/nextPressed.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("atras")) {
-            File file = new File("Resources/TestingUI/Images/Flecha_atras2.png");
+            File file = new File("Resources/TestingUI/Images/backPressed.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         }
@@ -129,30 +128,37 @@ public class StartViewController extends GameController{
     private void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
         ImageView imageView = (ImageView) mouseEvent.getSource();
         if (imageView.getId().equals("settings")) {
-            File file = new File("Resources/TestingUI/Images/settingsLogo.jpg");
+            File file = new File("Resources/TestingUI/Images/settings.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("exit")) {
-            File file = new File("Resources/TestingUI/Images/exit2.jpg");
+            File file = new File("Resources/TestingUI/Images/exitPressed.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("play")) {
-            File file = new File("Resources/TestingUI/Images/play.jpg");
+            File file = new File("Resources/TestingUI/Images/next.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("atras")) {
-            File file = new File("Resources/TestingUI/Images/Flecha_atras1.png");
+            File file = new File("Resources/TestingUI/Images/back.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         }
     }
+
+    /**
+     * Loads the settings screen.
+     */
     @FXML
     private void settings() {
         loadView("settings-view.fxml");
-        music.setSelected(isMusicOn);
     }
+
+    /**
+     * Loads the credits screen.
+     */
     @FXML
-    private void credits(MouseEvent event) {
+    private void credits() {
         loadView("credits-view.fxml");
     }
     @FXML
@@ -163,8 +169,9 @@ public class StartViewController extends GameController{
             System.out.println(ex);
         }
     }
+
     @FXML
-    private void back(MouseEvent event) {
+    private void back() {
         loadView("start-view.fxml");
     }
     @FXML
@@ -186,7 +193,6 @@ public class StartViewController extends GameController{
         } else {
             getContainer().stopMusic();
         }
-        isMusicOn = music.isSelected();
     }
 
 }

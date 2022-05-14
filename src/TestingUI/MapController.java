@@ -43,10 +43,10 @@ public class MapController extends GameController implements Initializable {
     public Label errorLabel, currentPhase, currentPlayer, stats, armiesLeft, numberDice, fortificationNumber,
             attackResponseLabel,winner;
     @FXML
-    private ImageView playerDice1, playerDice2, playerDice3, opponentDice1, opponentDice2, card1, card2, card3, card4,
-            card5, cardSelected1, cardSelected2, cardSelected3,fullMap;
-    private ImageView[] cardsImages = {card1, card2, card3, card4, card5};
-    private ImageView[] selectedCardsImages = {cardSelected1, cardSelected2, cardSelected3};
+    private ImageView playerDice1, playerDice2, playerDice3, opponentDice1, opponentDice2, fullMap;
+    private int infantryCards = 0;
+    private int cavalryCards = 0;
+    private int artilleryCards = 0;
     @FXML
     private HBox cards, selectedCards;
     @FXML
@@ -472,7 +472,6 @@ public class MapController extends GameController implements Initializable {
      * Sets the number of attack and defence dice and executes the attack.
      */
     @FXML
-    //TODO configurar la accion de hacer all out correctamente
     private void confirmDiceButton() {
         // Se obtienen los paises
         Country attacker = getContainer().getClientController().getServerBoard().getAttackCountry1();
@@ -491,6 +490,9 @@ public class MapController extends GameController implements Initializable {
         diceChoosePane.setVisible(false);
     }
 
+    /**
+     * Adds one to the counter of armies to fortify.
+     */
     @FXML
     private void addFortificationButton() {
         int i = Integer.parseInt(fortificationNumber.getText());
@@ -500,6 +502,9 @@ public class MapController extends GameController implements Initializable {
         }
     }
 
+    /**
+     * Removes one from the counter of armies to fortify.
+     */
     @FXML
     private void removeFortificationButton() {
         int i = Integer.parseInt(fortificationNumber.getText());
@@ -534,6 +539,9 @@ public class MapController extends GameController implements Initializable {
         getContainer().getClientController().sendAction(action);
     }
 
+    /**
+     * Send the action to change to the next phase.
+     */
     @FXML
     private void nextPhase() {
         ClientUpdate.ClientAction action = new ClientUpdate.ClientAction();
@@ -542,7 +550,7 @@ public class MapController extends GameController implements Initializable {
     }
 
     /**
-     * Shows the number of cards of each type a player owns.
+     * Shows the cards panel.
      */
     @FXML
     private void exchangeCards() {
@@ -558,39 +566,73 @@ public class MapController extends GameController implements Initializable {
         cardIndex = 0;
         List<CardTypes> cardsList = getContainer().getClientController().getServerBoard().getCurrentPlayer().getPlayerCards();
         ImageView cardImage;
+        infantryCards = 0;
+        cavalryCards = 0;
+        artilleryCards = 0;
         for (CardTypes card : cardsList) {
             cardImage = (ImageView) cards.getChildren().get(cardIndex);
             switch (card) {
                 case Infantry:
                     cardImage.setImage(cardType[0]);
                     cardIndex++;
+                    infantryCards++;
                     break;
                 case Cavalry:
                     cardImage.setImage(cardType[1]);
                     cardIndex++;
+                    cavalryCards++;
                     break;
                 case Artillery:
                     cardImage.setImage(cardType[2]);
                     cardIndex++;
+                    artilleryCards++;
                     break;
             }
         }
     }
 
+    /**
+     * Moves the clicked card to the selected cards section.
+     */
     @FXML
     private void cardSelected(MouseEvent event) {
+        // Se obtiene la imagen clicada
         ImageView cardImage = (ImageView) event.getSource();
+        Image card = cardImage.getImage();
+
+        // Se obtiene el espacio done hay que mover la carta
         ImageView selectedCardImage = (ImageView) selectedCards.getChildren().get(selectedCardIndex);
+        // Si no se ha seleccionado una carta vacia, se mueve la carta al espacio que toque.
         if (cardImage.getImage() != null) {
             selectedCardImage.setImage(cardImage.getImage());
             selectedCardIndex++;
-        }
-        cardImage.setImage(null);
-    }
-    @FXML
-    //TODO Implementar la accion de mandar las tres cartas seleccioandas
-    private void confirmCardSelection() {
 
+            // Se manda la señal de seleccion
+            Player player = getContainer().getClientController().getServerBoard().getCurrentPlayer();
+
+            if (cardType[0].equals(card)) {
+                getContainer().getClientController().sendAction(new ClientUpdate.ClientAction("Infantry " + infantryCards, player));
+                infantryCards--;
+            } else if (cardType[1].equals(card)) {
+                getContainer().getClientController().sendAction(new ClientUpdate.ClientAction("Cavalry " + cavalryCards, player));
+                cavalryCards--;
+            } else if (cardType[2].equals(card)) {
+                getContainer().getClientController().sendAction(new ClientUpdate.ClientAction("Artillery " + artilleryCards, player));
+                artilleryCards--;
+            }
+
+            cardImage.setImage(null);
+        }
+    }
+
+    /**
+     * Manda la señal para intercambiar cartas.
+     */
+    @FXML
+    private void confirmCardSelection() {
+        Player player = getContainer().getClientController().getServerBoard().getCurrentPlayer();
+        getContainer().getClientController().sendAction(new ClientUpdate.ClientAction("Exchange Cards", player));
+        exchangeCards();
     }
 
     @FXML
@@ -609,11 +651,11 @@ public class MapController extends GameController implements Initializable {
     private void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
         ImageView imageView = (ImageView) mouseEvent.getSource();
         if (imageView.getId().equals("atras")) {
-            File file = new File("Resources/TestingUI/Images/Flecha_atras2.png");
+            File file = new File("Resources/TestingUI/Images/backPressed.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("adelante")) {
-            File file = new File("Resources/TestingUI/Images/Flecha_adelante2.png");
+            File file = new File("Resources/TestingUI/Images/nextPressed.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         }
@@ -626,11 +668,11 @@ public class MapController extends GameController implements Initializable {
     private void imageOut(MouseEvent mouseEvent) throws FileNotFoundException {
         ImageView imageView = (ImageView) mouseEvent.getSource();
         if (imageView.getId().equals("atras")) {
-            File file = new File("Resources/TestingUI/Images/Flecha_atras1.png");
+            File file = new File("Resources/TestingUI/Images/back.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("adelante")) {
-            File file = new File("Resources/TestingUI/Images/Flecha_adelante1.png");
+            File file = new File("Resources/TestingUI/Images/next.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         }

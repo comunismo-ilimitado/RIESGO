@@ -183,11 +183,11 @@ public class CustomizeViewController extends GameController implements Initializ
     private void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
         ImageView imageView = (ImageView) mouseEvent.getSource();
         if (imageView.getId().equals("atras")) {
-            File file = new File("Resources/TestingUI/Images/Flecha_atras2.png");
+            File file = new File("Resources/TestingUI/Images/backPressed.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("adelante")) {
-            File file = new File("Resources/TestingUI/Images/Flecha_adelante2.png");
+            File file = new File("Resources/TestingUI/Images/nextPressed.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         }
@@ -197,11 +197,11 @@ public class CustomizeViewController extends GameController implements Initializ
     private void imageOut(MouseEvent mouseEvent) throws FileNotFoundException {
         ImageView imageView = (ImageView) mouseEvent.getSource();
         if (imageView.getId().equals("atras")) {
-            File file = new File("Resources/TestingUI/Images/Flecha_atras1.png");
+            File file = new File("Resources/TestingUI/Images/back.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("adelante")) {
-            File file = new File("Resources/TestingUI/Images/Flecha_adelante1.png");
+            File file = new File("Resources/TestingUI/Images/next.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         }

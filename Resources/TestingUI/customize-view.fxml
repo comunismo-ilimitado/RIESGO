@@ -9,12 +9,12 @@
    <children>
       <ImageView fx:id="atras" fitHeight="89.0" fitWidth="159.0" layoutX="22.0" layoutY="604.0" onMouseClicked="#back" onMouseEntered="#imageIn" onMouseExited="#imageOut" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Images/Flecha_atras1.png" />
+            <Image url="@Images/back.png" />
          </image>
       </ImageView>
       <ImageView fx:id="adelante" fitHeight="89.0" fitWidth="175.0" layoutX="1109.0" layoutY="604.0" onMouseClicked="#game" onMouseEntered="#imageIn" onMouseExited="#imageOut" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Images/Flecha_adelante1.png" />
+            <Image url="@Images/next.png" />
          </image>
       </ImageView>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="333.0" layoutY="70.0" prefHeight="80.0" prefWidth="655.0" text="%configurationTag">

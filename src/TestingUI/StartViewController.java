@@ -150,7 +150,7 @@ public class StartViewController extends GameController{
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("play")) {
-            File file = new File("Resources/TestingUI/Images/nextPressed.png");
+            File file = new File("Resources/TestingUI/Images/playPressed.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("atras")) {
@@ -176,7 +176,7 @@ public class StartViewController extends GameController{
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("play")) {
-            File file = new File("Resources/TestingUI/Images/next.png");
+            File file = new File("Resources/TestingUI/Images/play.png");
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
         } else if (imageView.getId().equals("atras")) {

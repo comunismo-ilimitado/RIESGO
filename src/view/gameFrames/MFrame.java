@@ -21,7 +21,7 @@ import java.util.*;
  * @version 1.0
  */
 @SuppressWarnings("deprecation")
-public class MFrame extends JFrame implements Observer {
+public class MFrame extends JInternalFrame implements Observer {
     private JButton[] button;
     public JTextArea area;
     public JButton buttonCard1, buttonCard2, buttonCard3, buttonCard4;
@@ -181,11 +181,11 @@ public class MFrame extends JFrame implements Observer {
         mainPanel.add(jPanel2);
 
         setTitle("PAZIMs Risk Game");
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(true);
         pack();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
+        /*addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 // Ask for confirmation before terminating the program.
@@ -198,8 +198,8 @@ public class MFrame extends JFrame implements Observer {
                     Exit_Option();
                 }
             }
-        });
-        setVisible(true);
+        });*/
+        //setVisible(true);
     }
 
     /**

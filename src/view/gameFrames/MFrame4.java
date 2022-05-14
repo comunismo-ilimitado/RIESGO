@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  * @author pazim
  * @version 1.0
  */
-public class MFrame4 extends JFrame implements ActionListener {
+public class MFrame4 extends JInternalFrame implements ActionListener {
     JPanel jPanel2;
     JTextField field, field2;
     JButton button, button2;

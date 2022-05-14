@@ -592,6 +592,7 @@ public class ServerController extends Observable{
     public void exit(){
         getServer().end();
         frame.dispose();
+        System.exit(0);
     }
 
     /**

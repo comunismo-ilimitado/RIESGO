@@ -19,4 +19,4 @@ Code needs a working Java JDK installation version 1.16 or higher. The source co
 ![Gameplay](https://i.imgur.com/9aaCjI7.png)
 
 ## Download
-Version one can be downloaded [HERE](https://github.com/Sw-Evolution/22E05/releases/download/untagged-48b389ad931467f78ebd/dist.zip)
+Version one can be downloaded [HERE](https://github.com/Sw-Evolution/22E05/releases/download/v0.0.1/dist.zip)

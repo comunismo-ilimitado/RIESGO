@@ -45,7 +45,7 @@ public class MapController extends GameController implements Initializable {
             cardsPane;
     @FXML
     public Label errorLabel, currentPhase, currentPlayer, stats, armiesLeft, numberDice, fortificationNumber,
-            attackResponseLabel,winner;
+            attackResponseLabel;
     @FXML
     private ImageView playerDice1, playerDice2, playerDice3, opponentDice1, opponentDice2, fullMap;
     private int infantryCards = 0;
@@ -211,8 +211,6 @@ public class MapController extends GameController implements Initializable {
                 public void run() {
                     if(getContainer().getServerController().isFinishedGame()){
                         loadView("results-view.fxml");
-                        winner.setText(getContainer().getClientController().getServerBoard().getPlayers().toString());
-
                     }
                 }
             });
@@ -694,44 +692,6 @@ public class MapController extends GameController implements Initializable {
         if (getContainer().getServerController() != null)
             getContainer().getServerController().exit();
         loadView("start-view.fxml");
-    }
-
-    /**
-     * Method for changing the image while mouse is on it (view effect)
-     * @param mouseEvent
-     * @throws FileNotFoundException
-     */
-    @FXML
-    private void imageIn(MouseEvent mouseEvent) throws FileNotFoundException {
-        ImageView imageView = (ImageView) mouseEvent.getSource();
-        if (imageView.getId().equals("atras")) {
-            File file = new File("Resources/TestingUI/Images/backPressed.png");
-            Image image = new Image(file.toURI().toString());
-            imageView.setImage(image);
-        } else if (imageView.getId().equals("adelante")) {
-            File file = new File("Resources/TestingUI/Images/nextPressed.png");
-            Image image = new Image(file.toURI().toString());
-            imageView.setImage(image);
-        }
-    }
-
-    /**
-     * Method for changing the image when the mouse is out of it (view effect)
-     * @param mouseEvent
-     * @throws FileNotFoundException
-     */
-    @FXML
-    private void imageOut(MouseEvent mouseEvent) throws FileNotFoundException {
-        ImageView imageView = (ImageView) mouseEvent.getSource();
-        if (imageView.getId().equals("atras")) {
-            File file = new File("Resources/TestingUI/Images/back.png");
-            Image image = new Image(file.toURI().toString());
-            imageView.setImage(image);
-        } else if (imageView.getId().equals("adelante")) {
-            File file = new File("Resources/TestingUI/Images/next.png");
-            Image image = new Image(file.toURI().toString());
-            imageView.setImage(image);
-        }
     }
 
     /**

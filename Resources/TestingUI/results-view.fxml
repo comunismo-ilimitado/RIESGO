@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.MapController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TestingUI.resultsViewController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="333.0" layoutY="88.0" prefHeight="80.0" prefWidth="615.0" text="%resultsTag">
          <font>
@@ -22,14 +22,10 @@
             <Image url="@Images/ganador.png" />
          </image>
       </ImageView>
-      <Label fx:id="winner" layoutX="599.0" layoutY="338.0">
+      <Button fx:id="button" layoutX="536.0" layoutY="263.0" mnemonicParsing="false" onAction="#showWinner" prefHeight="80.0" prefWidth="210.0" text="%showWinner" />
+      <Label fx:id="winner" alignment="CENTER" contentDisplay="CENTER" layoutX="540.0" layoutY="263.0" prefHeight="80.0" prefWidth="201.0" visible="false">
          <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
-      <Label layoutX="596.0" layoutY="277.0" text="WINNER">
-         <font>
-            <Font size="24.0" />
+            <Font size="35.0" />
          </font>
       </Label>
    </children>
